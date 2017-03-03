@@ -1,0 +1,73 @@
+CREATE AntaresOpticalGel
+
+DENSITY 1. #boh?
+
+COMPONENTS
+
+G4_O 1.0 #taken from original km3sim
+
+COMPONENTS
+
+CREATE
+
+PROPERTY ABSLENGTH
+OPTION eV
+2.034       975
+2.13        975
+2.18        966
+2.22        935
+2.25        890
+2.3 898
+2.34        876
+2.43        844
+2.53        786
+2.67        727
+2.79        674
+3.1 566
+3.28        485
+3.56        360
+3.77        220
+4.136       220
+
+PROPERTY RINDEX
+OPTION eV
+2   1.404
+4.2 1.404
+
+
+
+CREATE NEMOOpticalGel
+DENSITY 1. #boh?
+
+COMPONENTS
+
+G4_O 1.0 #taken from original km3sim
+
+COMPONENTS
+
+CREATE
+
+
+PROPERTY ABSLENGTH
+OPTION eV
+2.034       516.784
+2.13        516.784
+2.18        512.014
+2.22        495.583
+2.25        471.731
+2.3 475.972
+2.34        464.311
+2.43        447.35
+2.53        416.608
+2.67        385.336
+2.79        357.244
+3.1 300
+3.28        257.067
+3.56        190.813
+3.77        116.608
+4.136       116.608
+
+PROPERTY RINDEX
+OPTION eV
+2   1.5
+4.2 1.5

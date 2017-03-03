@@ -1,0 +1,43 @@
+How to install in Lyon
+======================
+
+The dependencies are already compiled and installed at Lyon, so the process to compile and use it is
+
+  for i in /sps/km3net/users/hugon/sw/env/*sh; do source $i; done
+  cd [your checkout path]/trunk
+  mkdir build
+  cd build
+  cmake .. -DCMAKE_CXX_COMPILER=g++-510 -DCMAKE_C_COMPILER=gcc-510 [-D__NEW_TESTING_ALGO__=d] [-DFULL_OPTIMIZATION=1]
+  make [-j5]
+
+The parameters between [] are optional, they are useful to use the last features (for which the test were not yet fully done) and all the compilation optimization (longer compilation but faster running)
+
+How to install elsewhere
+========================
+you need: gcc >= 4.7, cmake > 3.0.0, libconfig++, geant4.10 and root5.34
+always needed:
+  source [your checkout path]/trunk/resources/geant.sh
+
+Best case:
+you can install at least gcc and libconfig directly in your system (debian wheezy)
+
+  cd [your checkout path]/trunk
+  mkdir build
+  cd build
+  cmake .. [-D__NEW_TESTING_ALGO__=d] [-DFULL_OPTIMIZATION=1]
+  make [-j5]
+
+Other case:
+- you have to specify the path of libconfig++:
+  export LIBCONFIG_ROOT=[the path to your libconfig++ installation]
+  export LD_LIBRARY_PATH=$LIBCONFIG_ROOT/lib:$LD_LIBRARY_PATH
+  export CPLUS_INCLUDE_PATH=/sps/km3net/users/hugon/sw/libconfig-1.5/include/
+then normal compilation
+
+- you have to specify the path of gcc:
+  ln -s [gcc install]/bin/gcc [gcc install]/bin/gcc-[your gcc version]
+  ln -s [gcc install]/bin/g++ [gcc install]/bin/g++-[your gcc version]
+  cd [...]/build
+  cmake .. -DCMAKE_CXX_COMPILER=g++-[your gcc version] -DCMAKE_C_COMPILER=gcc-[your gcc version] [-D__NEW_TESTING_ALGO__=d] [-DFULL_OPTIMIZATION=1]
+
+be sure that  [gcc install]/bin is in your PATH environment variable and  [gcc install]/lib:[gcc install]/lib64 in your LD_LIBRARY_PATH environement variable.

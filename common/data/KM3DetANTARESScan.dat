@@ -1,0 +1,23 @@
+Name = "ANTARESScan"
+
+OM1:
+  {
+        Name = "AntaresOM";
+        ID = 1;
+        X = 0.;
+        Y = 0.;
+        Z = -0.;
+        Theta = 0.;
+        Phi = 0;
+   }
+Volume1:
+{
+        Name = "GenInter";
+        ID=1;
+        X = 0.;
+        Y = 0.;
+        Z = 0.;
+        Theta = 0;
+        Phi = 0.;
+
+}
