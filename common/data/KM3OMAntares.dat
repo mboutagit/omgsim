@@ -1,6 +1,6 @@
 Name = "AntaresOM";
 DetectionUnitType="OM";
-PhotoTubeName = "Spherical10inches";
+PhotoTubeName = "10inches";
 Prefix = "OM11";
 SphereRmax       = 215.9;
 GlassThickness   = 15;

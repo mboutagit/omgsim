@@ -123,3 +123,5 @@ else(ENABLE_TESTING)
     #target_link_libraries(${aprogname} omgsim)
   endforeach ()
 endif(ENABLE_TESTING)
+
+file(COPY ${PROJECT_SOURCE_DIR}/scripts DESTINATION ${PROJECT_BINARY_DIR})
