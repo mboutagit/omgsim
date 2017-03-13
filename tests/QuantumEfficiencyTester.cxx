@@ -53,13 +53,13 @@ int main (int argc, char** argv)
         calibrateQE = true;
       if (sarg == "-PhThick")
         {
-          sarg[++argIt];
+          sarg = argv[++argIt];
           glassThickness = stof (sarg)*mm;
         }
     }
 
   cout << "Create model tester" <<endl;
-  theModelTester.LoadMaterial ("photocathode10inches", "PMTGlass", "Vacuum");
+  theModelTester.LoadMaterial ("photocathode3inches", "PMTGlass", "Vacuum");
   theModelTester.fGlassThickness =glassThickness;
   TerminalHistogram *measuredQE =0;TerminalHistogram *simulatedQE =0;
 
