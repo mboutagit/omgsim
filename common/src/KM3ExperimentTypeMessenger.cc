@@ -56,6 +56,12 @@ using namespace std;
 
 namespace km3net
 {
+  KM3ExperimentTypeMessenger* KM3ExperimentTypeMessenger::fInstance=0;
+  KM3ExperimentTypeMessenger* KM3ExperimentTypeMessenger::GetIt () {
+    if (fInstance == 0)
+      fInstance = new KM3ExperimentTypeMessenger;
+    return fInstance;
+  }
 
   KM3ExperimentTypeMessenger::KM3ExperimentTypeMessenger()
  {
@@ -81,10 +87,17 @@ namespace km3net
     KM3AnalysisManager::getIt ()->Write ();
     if (frunManager != NULL)
       delete frunManager;
+    fInstance = NULL;
   }
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
+  void KM3ExperimentTypeMessenger::SetAnAnalysisMgr   (std::string sname, tActMgrGet AMgr) {
+    fAnalysisMgrCol[sname] = AMgr;
+  }
+  void KM3ExperimentTypeMessenger::SetASteppingAction (std::string sname, KM3SteppingAction* AMgr) {
+    fSteppingActionCol[sname] = AMgr;
+  }
 
   void KM3ExperimentTypeMessenger::SetNewValue(G4UIcommand* command,
                                                G4String newValue) {
@@ -105,6 +118,16 @@ namespace km3net
           frunManager->SetUserAction(new KM3RunAction);
           frunManager->SetUserAction(new KM3EventAction);
 
+          //first checking the new method, then for retro-compality the old one
+          if (fAnalysisMgrCol.count (newValue))
+            {
+              fAnalysisMgrCol[newValue] ();
+            }
+          if (fSteppingActionCol.count(newValue)) {
+            fSteppingAction = fSteppingActionCol[newValue];
+          }
+
+          ////TODO this part should be removed once the concept is validated
           if (newValue == "WProp")
             {
               WPropAnalysisManager::getIt ();
@@ -126,6 +149,10 @@ namespace km3net
             {
               AAAnalysisManager::getIt ();
             }
+          ////TODO
+
+          if (!fSteppingAction)
+            fSteppingAction=new KM3SteppingAction ();
 
           KM3AnalysisManager::getIt ()->Init ();
           KM3PrimaryGeneratorAction* PGA=new KM3PrimaryGeneratorAction;

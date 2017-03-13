@@ -31,11 +31,14 @@
 #include "globals.hh"
 #include "G4UImessenger.hh"
 
+#include <map>
+#include <functional>
 
 class G4UIdirectory;
 class G4UIcmdWithAString;
 class G4UIcmdWithADoubleAndUnit;
 class G4RunManager;
+class G4SteppingAction;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -49,8 +52,16 @@ namespace km3net
 
   class KM3ExperimentTypeMessenger: public G4UImessenger
   {
+  private:
+    typedef std::function<KM3AnalysisManager*()> tActMgrGet;
   public:
+    static KM3ExperimentTypeMessenger* GetIt ();
+    void SetAnAnalysisMgr   (std::string sname, tActMgrGet AMgr);
+    void SetASteppingAction (std::string sname, KM3SteppingAction* AnAction);
+
+  private:
     KM3ExperimentTypeMessenger( );
+  public:
     ~KM3ExperimentTypeMessenger();
 
     void SetNewValue(G4UIcommand*, G4String);
@@ -64,14 +75,11 @@ namespace km3net
     G4UIdirectory*            KM3Dir;
     G4UIdirectory*            XPDir;
     G4UIcmdWithAString*       XPCommand;
-    /*G4UIcmdWithADoubleAndUnit* TargLengthCmd;
-    G4UIcmdWithADoubleAndUnit* GenerationVolumeLengthCmd;
-    G4UIcmdWithADoubleAndUnit* GenerationVolumeRadiusCmd;
-    G4UIcmdWithADoubleAndUnit* StoreyRadiusCmd;
-    G4UIcmdWithADoubleAndUnit* OpticalModuleAngleCmd;
-    G4UIcmdWithADoubleAndUnit* MeanCapRadius;
-    G4UIcmdWithAString*        DontDraw;
-    G4UIcmdWithADoubleAndUnit* WorldLengthCmd;*/
+
+    std::map <std::string, KM3SteppingAction*> fSteppingActionCol;
+    std::map <std::string, tActMgrGet > fAnalysisMgrCol;
+
+    static KM3ExperimentTypeMessenger* fInstance;
 
   };
 }
