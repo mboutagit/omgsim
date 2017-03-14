@@ -126,9 +126,16 @@ namespace km3net
 
     DetectorTypeName = new G4UIcmdWithAString
       ("/KM3/det/DetectorTypeName", this);
-    DontDraw->SetGuidance("new way to create OM dispositions. The name should correspond of one from common/data/KM3Det*.dat.");
-    DontDraw->SetParameterName("choice", false);
-    DontDraw->AvailableForStates(G4State_PreInit);
+    DetectorTypeName->SetGuidance("new way to create OM dispositions. The name should correspond of one from common/data/KM3Det*.dat.");
+    DetectorTypeName->SetParameterName("choice", false);
+    DetectorTypeName->AvailableForStates(G4State_PreInit);
+
+    DataFilesSources = new G4UIcmdWithAString
+      ("/KM3/det/DataFilesSources", this);
+    DataFilesSources->SetGuidance("additionnal folders for data files (as in common/data/KM3Det*.dat). \":\" is the list separator.");
+    DataFilesSources->SetParameterName("choice", false);
+    DataFilesSources->AvailableForStates(G4State_PreInit);
+
   }
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -146,6 +153,7 @@ namespace km3net
     delete detDir;
     delete KM3Dir;
     delete DetectorTypeName;
+    delete DataFilesSources;
   }
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -180,10 +188,12 @@ namespace km3net
     } else if (command == DontDraw) {
       myDetector->DontDraw
         (newValue);
-    }
-    else if (command == DetectorTypeName) {
+    } else if (command == DetectorTypeName) {
       myDetector->SetDetectorTypeName (newValue);
+    } else if (command == DataFilesSources) {
+      myDetector->SetDataFilesSources (newValue);
     }
+
   }
 
 }

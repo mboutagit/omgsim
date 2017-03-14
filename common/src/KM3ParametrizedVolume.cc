@@ -41,6 +41,19 @@ namespace km3net
     delete fFormula;
   }
 
+  void KM3ParametrizedVolume::SetDataFilesSources (string Path) {
+    size_t doubledotPos=Path.find (':');
+    string subPath;
+    while (doubledotPos != string::npos) {
+      subPath=Path.substr (0,doubledotPos);
+      LoadDirectory (subPath);
+      Path.erase (0,doubledotPos+1);
+      doubledotPos=Path.find(':');
+    }
+    if (Path.size ())
+      LoadDirectory (subPath);
+  }
+
   void KM3ParametrizedVolume::LoadDirectory (string DIRNAME)
   {
     struct dirent *de=NULL;

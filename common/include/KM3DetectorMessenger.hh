@@ -68,6 +68,7 @@ namespace km3net
     G4UIcmdWithADoubleAndUnit* MeanCapRadius;
     G4UIcmdWithAString*        DontDraw;
     G4UIcmdWithAString*        DetectorTypeName;
+    G4UIcmdWithAString*        DataFilesSources;
     G4UIcmdWithADoubleAndUnit* WorldLengthCmd;
 
   };

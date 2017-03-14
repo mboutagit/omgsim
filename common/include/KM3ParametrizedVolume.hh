@@ -74,6 +74,7 @@ namespace km3net
 
 
   public:
+    virtual void SetDataFilesSources (std::string Path);
     virtual void LoadDirectory (std::string);
   protected:
     virtual void ReadConfiguration (std::string) =0;

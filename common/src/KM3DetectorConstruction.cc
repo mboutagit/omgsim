@@ -242,6 +242,13 @@ namespace km3net
 
   }
 
+  void KM3DetectorConstruction::SetDataFilesSources (string Path) {
+    KM3ParametrizedVolume::SetDataFilesSources (Path);
+    KM3PassiveVolumeMgr::GetIt () ->SetDataFilesSources (Path);
+    KM3PhotoTubeMgr::GetIt () ->SetDataFilesSources (Path);
+    KM3OpticalModuleMgr::GetIt () ->SetDataFilesSources (Path);
+  }
+
   void KM3DetectorConstruction::ReadThisConfiguration (Config* cfg, string& RootName,
                                                        vector<PositionParameters>&  ConfList)
   {

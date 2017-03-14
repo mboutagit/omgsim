@@ -131,6 +131,8 @@ namespace km3net
 
     static const std::string fOMBasePrefix;
 
+    void SetDataFilesSources (std::string Path);
+
   private:
     void DefineMaterials();
     void ProcessLogicalVolume(G4LogicalVolume* volume);
