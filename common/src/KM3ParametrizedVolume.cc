@@ -43,7 +43,7 @@ namespace km3net
 
   void KM3ParametrizedVolume::SetDataFilesSources (string Path) {
     size_t doubledotPos=Path.find (':');
-    string subPath;
+    string subPath=Path;
     while (doubledotPos != string::npos) {
       subPath=Path.substr (0,doubledotPos);
       LoadDirectory (subPath);

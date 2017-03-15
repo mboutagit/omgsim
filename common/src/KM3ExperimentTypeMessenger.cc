@@ -92,17 +92,21 @@ namespace km3net
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-  void KM3ExperimentTypeMessenger::SetAnAnalysisMgr   (std::string sname, tActMgrGet AMgr) {
+  bool KM3ExperimentTypeMessenger::SetAnAnalysisMgr   (std::string sname, tAnMgrGet AMgr) {
+    cout << "bon la c'est bon anamgr" << sname << endl;
     fAnalysisMgrCol[sname] = AMgr;
+    return true;
   }
-  void KM3ExperimentTypeMessenger::SetASteppingAction (std::string sname, KM3SteppingAction* AMgr) {
+  bool KM3ExperimentTypeMessenger::SetASteppingAction (std::string sname, tStepActGet AMgr) {
     fSteppingActionCol[sname] = AMgr;
+    cout << "bon la c'est bon stepping action" << sname << endl;
+    return true;
   }
 
   void KM3ExperimentTypeMessenger::SetNewValue(G4UIcommand* command,
                                                G4String newValue) {
     if (command == XPCommand) {
-      cout << newValue << " " << fDetector <<endl;
+      cout << newValue << " <- detector name " << fDetector <<endl;
 
       if (fDetector == NULL)
         {
@@ -124,7 +128,8 @@ namespace km3net
               fAnalysisMgrCol[newValue] ();
             }
           if (fSteppingActionCol.count(newValue)) {
-            fSteppingAction = fSteppingActionCol[newValue];
+            cout << "create the stepping "<< newValue << endl;
+            fSteppingAction = fSteppingActionCol[newValue] ();
           }
 
           ////TODO this part should be removed once the concept is validated
@@ -138,7 +143,7 @@ namespace km3net
             {
               AAAnalysisManager::getIt ();
               fSteppingAction=new XPPhSteppingAction ();
-            } else
+            } else if (fSteppingAction == 0)
             fSteppingAction=new KM3SteppingAction ();
 
           if (newValue == "K40")

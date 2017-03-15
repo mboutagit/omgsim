@@ -197,6 +197,19 @@ namespace km3net
     return the_surface;
   }
 
+  void KM3Material::SetDataFilesSources (string Path){
+    size_t doubledotPos=Path.find (':');
+    string subPath=Path;
+    while (doubledotPos != string::npos) {
+      subPath=Path.substr (0,doubledotPos);
+      ScanDirectory (subPath);
+      Path.erase (0,doubledotPos+1);
+      doubledotPos=Path.find(':');
+    }
+    if (Path.size ())
+      ScanDirectory (subPath);
+  }
+
  KM3Material::KM3Material() {
     Material.clear();
     Element.clear();

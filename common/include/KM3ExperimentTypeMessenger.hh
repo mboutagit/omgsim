@@ -53,11 +53,12 @@ namespace km3net
   class KM3ExperimentTypeMessenger: public G4UImessenger
   {
   private:
-    typedef std::function<KM3AnalysisManager*()> tActMgrGet;
+    typedef std::function<KM3AnalysisManager*()> tAnMgrGet;
+    typedef std::function<KM3SteppingAction*()> tStepActGet;
   public:
     static KM3ExperimentTypeMessenger* GetIt ();
-    void SetAnAnalysisMgr   (std::string sname, tActMgrGet AMgr);
-    void SetASteppingAction (std::string sname, KM3SteppingAction* AnAction);
+    bool SetAnAnalysisMgr   (std::string sname, tAnMgrGet AMgr);
+    bool SetASteppingAction (std::string sname, tStepActGet AnAction);
 
   private:
     KM3ExperimentTypeMessenger( );
@@ -68,7 +69,7 @@ namespace km3net
 
   private:
     KM3DetectorConstruction*  fDetector;
-    KM3SteppingAction*        fSteppingAction;
+    KM3SteppingAction*        fSteppingAction = NULL;
 
     G4RunManager*             frunManager = NULL;
 
@@ -76,8 +77,8 @@ namespace km3net
     G4UIdirectory*            XPDir;
     G4UIcmdWithAString*       XPCommand;
 
-    std::map <std::string, KM3SteppingAction*> fSteppingActionCol;
-    std::map <std::string, tActMgrGet > fAnalysisMgrCol;
+    std::map <std::string, tStepActGet> fSteppingActionCol;
+    std::map <std::string, tAnMgrGet > fAnalysisMgrCol;
 
     static KM3ExperimentTypeMessenger* fInstance;
 

@@ -62,7 +62,7 @@ namespace km3net
     ;
 
     void RemoveScattering ();
-
+    void SetDataFilesSources (std::string);
     G4Material* GetMaterial(G4int i) {
       return Material[i];
     }
