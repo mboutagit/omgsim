@@ -259,9 +259,13 @@ namespace km3net
       &sZ     = cfg->lookup((RootName+"/Z").data ()),
       &sTheta = cfg->lookup((RootName+"/Theta").data ()),
       &sPhi   = cfg->lookup((RootName+"/Phi").data ()),
-      &sPsi   = cfg->lookup((RootName+"/Psi").data ()),
       &sName  = cfg->lookup((RootName+"/Name").data ()),
       &sID    = cfg->lookup((RootName+"/ID"  ).data ());
+
+    Setting *sPsi=0;
+    if (cfg->exists((RootName+"/Psi").data ()))
+      sPsi = &(cfg->lookup((RootName+"/Psi").data ()));
+
 
     vector <double>
       vX = GetScalarArrayParameter (sX),
@@ -269,7 +273,9 @@ namespace km3net
       vZ = GetScalarArrayParameter (sZ),
       vTheta = GetScalarArrayParameter (sTheta),
       vPhi  = GetScalarArrayParameter (sPhi),
-      vPsi  = GetScalarArrayParameter (sPsi);
+      vPsi;
+    if (sPsi != 0)
+        vPsi  = GetScalarArrayParameter (*sPsi);
 
     if (!vX.size ())
       thePar.X     =GetFloatingParameter (sX);
@@ -281,8 +287,8 @@ namespace km3net
       thePar.Theta =GetFloatingParameter (sTheta);
     if (!vPhi.size ())
       thePar.Phi   =GetFloatingParameter (sPhi);
-    if (!vPsi.size ())
-      thePar.Psi   =GetFloatingParameter (sPsi);
+    if (!vPsi.size () && sPsi != 0)
+      thePar.Psi   =GetFloatingParameter (*sPsi);
 
     bool Multiplicity = vX.size() | vY.size() | vZ.size() | vTheta.size() | vPhi.size () | vPsi.size ();
 

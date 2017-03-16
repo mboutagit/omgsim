@@ -237,7 +237,8 @@ namespace km3net
 
     if (fFormulaParameters.count(Name))
       {
-        fFormula->Compile (fFormulaParameters[Name].data ());
+        fFormulaParameters[STG.getName ()]=ReadThisFormula (STG);
+        fFormula->Compile (fFormulaParameters[STG.getName ()].data ());
         return fFormula->Eval (x,y,z);
       }
 
@@ -281,7 +282,7 @@ namespace km3net
         if (SubFormula.size ())
           {
             fFormulaParameters[STG.getName ()]=ReadThisFormula (STG);
-            fFormula->Compile (fFormulaParameters[Name].data ());
+            fFormula->Compile (fFormulaParameters[STG.getName ()].data ());
             return fFormula->Eval (x,y,z);
           }
       }
