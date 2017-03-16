@@ -97,13 +97,6 @@ namespace km3net
     StoreyRadiusCmd->SetParameterName("choice", false);
     StoreyRadiusCmd->AvailableForStates(G4State_PreInit);
 
-    OpticalModuleTheta = new G4UIcmdWithADoubleAndUnit(
-                                                       "/KM3/det/setOpticalModuleTheta", this);
-    OpticalModuleTheta->SetGuidance("Set the Optical Module Orientation.");
-    OpticalModuleTheta->SetUnitCategory("Angle");
-    OpticalModuleTheta->SetParameterName("choice", false);
-    OpticalModuleTheta->AvailableForStates(G4State_PreInit);
-
     OpticalModulePhi = new G4UIcmdWithADoubleAndUnit(
                                                      "/KM3/det/setOpticalModulePhi", this);
     OpticalModulePhi->SetGuidance("Set the Optical Module Orientation.");
@@ -111,6 +104,19 @@ namespace km3net
     OpticalModulePhi->SetParameterName("choice", false);
     OpticalModulePhi->AvailableForStates(G4State_PreInit);
 
+    OpticalModuleTheta = new G4UIcmdWithADoubleAndUnit(
+                                                       "/KM3/det/setOpticalModuleTheta", this);
+    OpticalModuleTheta->SetGuidance("Set the Optical Module Orientation.");
+    OpticalModuleTheta->SetUnitCategory("Angle");
+    OpticalModuleTheta->SetParameterName("choice", false);
+    OpticalModuleTheta->AvailableForStates(G4State_PreInit);
+
+    OpticalModulePsi = new G4UIcmdWithADoubleAndUnit(
+                                                     "/KM3/det/setOpticalModulePsi", this);
+    OpticalModulePsi->SetGuidance("Set the Optical Module Orientation.");
+    OpticalModulePsi->SetUnitCategory("Angle");
+    OpticalModulePsi->SetParameterName("choice", false);
+    OpticalModulePsi->AvailableForStates(G4State_PreInit);
 
     MeanCapRadius = new G4UIcmdWithADoubleAndUnit("/KM3/det/setMeanCapRadius", this);
     MeanCapRadius->SetGuidance("for nemo struct. 0 is without cap (antares).");
@@ -149,6 +155,7 @@ namespace km3net
     delete StoreyRadiusCmd;
     delete OpticalModuleTheta;
     delete OpticalModulePhi;
+    delete OpticalModulePsi;
     delete MeanCapRadius;
     delete detDir;
     delete KM3Dir;
@@ -178,10 +185,13 @@ namespace km3net
       myDetector->SetTargetLength(WorldLengthCmd->GetNewDoubleValue(newValue));
     } else if (command == OpticalModuleTheta) {
       myDetector->SetOrientationTheta
-        (MeanCapRadius->GetNewDoubleValue(newValue));
+        (OpticalModuleTheta->GetNewDoubleValue(newValue));
     } else if (command == OpticalModulePhi) {
       myDetector->SetOrientationPhi
-        (MeanCapRadius->GetNewDoubleValue(newValue));
+        (OpticalModulePhi->GetNewDoubleValue(newValue));
+    } else if (command == OpticalModulePsi) {
+      myDetector->SetOrientationPsi
+        (OpticalModulePsi->GetNewDoubleValue(newValue));
     } else if (command == MeanCapRadius) {
       myDetector->SetMeanCapRadius
         (MeanCapRadius->GetNewDoubleValue(newValue));

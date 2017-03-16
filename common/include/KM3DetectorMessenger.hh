@@ -65,6 +65,7 @@ namespace km3net
     G4UIcmdWithADoubleAndUnit* StoreyRadiusCmd;
     G4UIcmdWithADoubleAndUnit* OpticalModuleTheta;
     G4UIcmdWithADoubleAndUnit* OpticalModulePhi;
+    G4UIcmdWithADoubleAndUnit* OpticalModulePsi;
     G4UIcmdWithADoubleAndUnit* MeanCapRadius;
     G4UIcmdWithAString*        DontDraw;
     G4UIcmdWithAString*        DetectorTypeName;

@@ -133,8 +133,7 @@ namespace km3net
         theVolmgr = KM3PassiveVolumeMgr::GetIt ();
       }
     G4RotationMatrix* theRot = new G4RotationMatrix;
-    theRot->setTheta(PosPar.Theta);
-    theRot->setPhi(PosPar.Phi);
+    theRot->set(PosPar.Phi, PosPar.Theta, PosPar.Psi);
     G4ThreeVector thePos(PosPar.X, PosPar.Y, PosPar.Z);
 
     G4LogicalVolume* logicVolume=theVolToPlace->GetLogicalVolume (PosPar.Name);
@@ -199,8 +198,7 @@ namespace km3net
 
     G4RotationMatrix *targetRot=new G4RotationMatrix(0,0,0);
 
-    targetRot->setPhi   (FOrientationPhi);
-    targetRot->setTheta (FOrientationTheta);
+    targetRot->set (FOrientationPhi, FOrientationTheta, FOrientationPsi);
 
     targetRegion = new G4Region("Target");
 
@@ -261,6 +259,7 @@ namespace km3net
       &sZ     = cfg->lookup((RootName+"/Z").data ()),
       &sTheta = cfg->lookup((RootName+"/Theta").data ()),
       &sPhi   = cfg->lookup((RootName+"/Phi").data ()),
+      &sPsi   = cfg->lookup((RootName+"/Psi").data ()),
       &sName  = cfg->lookup((RootName+"/Name").data ()),
       &sID    = cfg->lookup((RootName+"/ID"  ).data ());
 
@@ -269,7 +268,8 @@ namespace km3net
       vY = GetScalarArrayParameter (sY),
       vZ = GetScalarArrayParameter (sZ),
       vTheta = GetScalarArrayParameter (sTheta),
-      vPhi  = GetScalarArrayParameter (sPhi);
+      vPhi  = GetScalarArrayParameter (sPhi),
+      vPsi  = GetScalarArrayParameter (sPsi);
 
     if (!vX.size ())
       thePar.X     =GetFloatingParameter (sX);
@@ -281,8 +281,10 @@ namespace km3net
       thePar.Theta =GetFloatingParameter (sTheta);
     if (!vPhi.size ())
       thePar.Phi   =GetFloatingParameter (sPhi);
+    if (!vPsi.size ())
+      thePar.Psi   =GetFloatingParameter (sPsi);
 
-    bool Multiplicity = vX.size() | vY.size() | vZ.size() | vTheta.size() | vPhi.size ();
+    bool Multiplicity = vX.size() | vY.size() | vZ.size() | vTheta.size() | vPhi.size () | vPsi.size ();
 
     thePar.Name  =GetStringParameter   (sName);
     thePar.ID    =GetIntegerParameter  (sID);
@@ -328,6 +330,11 @@ namespace km3net
             if (counter < vPhi.size ())
               {
                 thePar.Phi   = vPhi[counter];
+                LetsDoIt=true;
+              }
+            if (counter < vPsi.size ())
+              {
+                thePar.Psi   = vPsi[counter];
                 LetsDoIt=true;
               }
 

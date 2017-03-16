@@ -109,6 +109,9 @@ namespace km3net
     void SetOrientationTheta(G4double value) {
       FOrientationTheta = value;
     }
+    void SetOrientationPsi(G4double value) {
+      FOrientationPsi = value;
+    }
     void SetOrientationPhi(G4double value) {
       FOrientationPhi = value;
     }
@@ -146,6 +149,7 @@ namespace km3net
       double Z=0;
       double Theta=0;
       double Phi=0;
+      double Psi=0;
       std::string Name="AntaresOM";
       std::string MotherVolume = "";
       std::string BorderSurfaceMaterial;
@@ -207,6 +211,7 @@ namespace km3net
 
     G4double FOrientationTheta;
     G4double FOrientationPhi=0;
+    G4double FOrientationPsi=0;
     G4double fOMCubicVolume;
 
     G4double fGenerationVolumeLength; // Full length of the generation volume box
