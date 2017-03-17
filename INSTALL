@@ -41,3 +41,17 @@ then normal compilation
   cmake .. -DCMAKE_CXX_COMPILER=g++-[your gcc version] -DCMAKE_C_COMPILER=gcc-[your gcc version] [-D__NEW_TESTING_ALGO__=d] [-DFULL_OPTIMIZATION=1]
 
 be sure that  [gcc install]/bin is in your PATH environment variable and  [gcc install]/lib:[gcc install]/lib64 in your LD_LIBRARY_PATH environement variable.
+
+Documentation 
+========================
+The doxygen documentation is provided in the folder documentation.
+It is easier to use it at your local machine.
+Compile with:
+  cd [your checkout path]/trunk
+  doxygen documentation/config.dox
+  cd documentation/latex
+  make
+Open 
+  firefox documentation/html/index.html
+  gnome-open latex/refman.pdf
+  
