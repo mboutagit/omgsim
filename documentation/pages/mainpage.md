@@ -20,7 +20,7 @@ This simulation will allow you to:
      -...
      
 ##Description
-- KM3NeT DOM Simulation [here](md_documentation_pages_K40.html)
+- KM3NeT DOM Simulation [here](md_documentation_pages_DOM.html)
 
 
 ##Installation
