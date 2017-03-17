@@ -1,9 +1,9 @@
-KM3RTSim documentation {#mainpage}
+OMGsim documentation {#mainpage}
 ----------------------------------
 
 ##Introduction
 
-KM3RTSim software ojective is to provide an easy to use simulation of the neutrino telescopes in general, ANTARES, NEMO and KM3NeT in particular. An important attention as been given to the simulation of the photocathode, using a dedicated thin layer and complex index simulation.
+OMGsim software ojective is to provide an easy to use simulation of the neutrino telescopes in general, ANTARES, NEMO and KM3NeT in particular. An important attention as been given to the simulation of the photocathode, using a dedicated thin layer and complex index simulation.
 
 ##Features
 This simulation will allow you to:
@@ -18,6 +18,10 @@ This simulation will allow you to:
      - Muon Cherenkov effect in the DOM
      - Test of the DOM is a water tank
      -...
+     
+##Description
+- KM3NeT DOM Simulation [here](md_documentation_pages_K40.html)
+
 
 ##Installation
 
@@ -45,8 +49,9 @@ The environment was prepared at Lyon to allow an easy installation. You just to 
 
 This tool can be obtained via svn, using the command
 
-    svn co --username km3net --password Capopassero http://svnserver.ge.infn.it/KM3Sim
-    cd KM3Sim/tags/1.0
+    (Outdated) svn co --username km3net --password Capopassero http://svnserver.ge.infn.it/KM3Sim
+    svn co http://svn.km3net.de/simulation/OMGsim/trunk/    (std login km3net and pwd are available)
+    cd trunk
 
 then to compile it
 
@@ -65,10 +70,16 @@ A quick start howto is given [here](md_documentation_pages_quickstart.html)
 ###Build the documentation
 To build the documentation, in the trunk folder you have to do
 
+    cd trunk
     doxygen resources/config.dox
+Open documentation/html/index.html
 
-then the documentation will be created in the folder documentations in html and latex format.
+For PDF documentation:
 
+    cd documentation/latex
+    make
+Open latex/refman.pdf
+    
 ###Complete the documentation
 To complete the documentation you have to observe some doxygen rules while you are comenting the .h code described [here](http://www.stack.nl/~dimitri/doxygen/manual/docblocks.html).
 
