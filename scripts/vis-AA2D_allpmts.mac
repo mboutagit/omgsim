@@ -1,0 +1,84 @@
+/KM3/XP/Type AA
+#/KM3/det/DetectorTypeName tester
+/KM3/det/DetectorTypeName DOMAlone
+
+/KM3/det/setTargetMaterial IdealWater
+/KM3/det/setTargetLength 10 m
+/KM3/det/DontDraw bento 
+#/KM3/det/setOpticalModuleAngle 0.5 deg
+/KM3/det/setOpticalModuleTheta %theta deg
+/KM3/det/setOpticalModulePhi %phi deg
+
+/KM3/det/setMeanCapRadius 0 cm
+/KM3/GenType 1
+
+/run/verbose 0
+/run/initialize
+/tracking/storeTrajectory 0
+
+/gps/verbose 0
+/gps/number 1
+/gps/particle opticalphoton
+/gps/pos/centre  0 0 40 cm
+
+/gps/pos/type Beam
+/gps/pos/shape Circle
+# Specify style (surface, wireframe, auxiliary edges,...)
+#
+
+
+#/gps/direction 0. 0. -1.
+
+#/gps/pos/type Beam
+#/gps/pos/shape Circle
+
+#/gps/ang/type
+#/gps/ang/rot1 0 1 0
+#/gps/ang/rot2 -1 0 0
+
+/gps/pos/rot1 0 1 0
+/gps/pos/rot2 1 0 0
+
+/gps/direction 0. 0. -1.
+
+#/gps/maxtheta 0.001 deg
+#/gps/ang/mintheta 0 deg
+
+#17'' diameter
+/gps/pos/radius 21.59 cm
+
+/gps/ene/type Gauss
+#cerenkov
+#/gps/ene/mono 3.256296 eV
+#LED 380 nm
+#/gps/ene/mono  3.26274123 eV
+#LED 470 nm
+#/gps/ene/mono  2.637961 eV
+#LED 500 nm
+#/gps/ene/mono   2.47968334 eV
+#test 440 nm
+#/gps/ene/mono  2.82735 eV
+
+/gps/ene/mono   %ene eV
+
+#/gps/ene/sigma 0.03 eV
+
+#/gps/ene/type Pow
+#/gps/ene/min 2.035 eV #2.035 eV
+#/gps/ene/max 4.135 eV #4.135 eV
+#/gps/ene/alpha 0
+
+/tracking/verbose 0
+/event/verbose 0
+
+
+/vis/open HepRepXML
+/vis/scene/create filename.bheprep.zip
+/vis/drawVolume
+/vis/scene/endOfEventAction accumulate 500
+/tracking/storeTrajectory 1
+
+/tracking/verbose 0
+/event/verbose 0
+#/run/beamOn 1000000
+/run/beamOn 100
