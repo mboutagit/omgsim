@@ -35,6 +35,7 @@
 #include "G4SteppingManager.hh"
 #include "G4VTouchable.hh"
 
+#include <KM3PMTOpticalModel.hh>
 #include <G4OpticalSurface.hh>
 #include <G4LogicalBorderSurface.hh>
 #include <G4LogicalSkinSurface.hh>
@@ -79,17 +80,18 @@ namespace km3net
         poststep->SetGlobalTime(poststep->GetLocalTime());
       }
 
-    if ( fTrack->GetDefinition()->GetParticleType() == "opticalphoton" && fStep->GetPostStepPoint()->GetPhysicalVolume() != 0)
+    G4VPhysicalVolume* thePrePV=fStep->GetPreStepPoint()->GetPhysicalVolume();
+    G4VPhysicalVolume* thePostPV=fStep->GetPostStepPoint()->GetPhysicalVolume();
+    G4String prestepName=thePrePV->GetLogicalVolume ()->GetName();
+    G4String poststepName=thePostPV->GetLogicalVolume ()->GetName();
+
+    //TODO check if it is relevent
+    if (KM3PMTOpticalModel::IsAPhotocathode (fStep) && fTrack->GetDefinition()->GetParticleType() == "e-")
       {
 
-        //G4double xlambda = h_Planck*c_light/energy;
-
-        G4VPhysicalVolume* thePrePV=fStep->GetPreStepPoint()->GetPhysicalVolume();
-        G4VPhysicalVolume* thePostPV=fStep->GetPostStepPoint()->GetPhysicalVolume();
-
-        G4String prestepName=thePrePV->GetLogicalVolume ()->GetName();
-        G4String poststepName=thePostPV->GetLogicalVolume ()->GetName();
         G4String OMGlassName=KM3OpticalModuleMgr::fBentoName;
+
+        //G4double xlambda = h_Planck*c_light/energy;
 
         if (  poststepName.rfind (OMGlassName) != string::npos)
           {
@@ -210,7 +212,7 @@ namespace km3net
 
     double eta_E = exp (-thickness/2/fElectronAbsLength);
     //meeting some troubles, the theory should be checkout
-    eta_E=0.5;
+    eta_E=1;
     double teta = localPoint.theta ();//acos(costeta);
 
     double eta_teta=_angular_efficiency->Value(teta/3*2.1);
