@@ -21,6 +21,8 @@ This simulation will allow you to:
      
 ##Description
 - KM3NeT DOM Simulation [here](md_documentation_pages_DOM.html)
+- Calibration [here](md_documentation_pages_calibration.html)
+- Version changes [here](md_documentation_pages_changes.html)
 
 
 ##Installation
