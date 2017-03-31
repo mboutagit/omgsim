@@ -60,7 +60,7 @@ namespace km3net
     TerminalHistogram *hKindex;
     if (!fObjectCol.count ("Kindex") && fObjectCol["Kindex"] == NULL)
       {
-        hKindex = new TerminalHistogram ("Kindex","K index;nm",45,250,700);
+        hKindex = new TerminalHistogram ("Kindex","K index;nm",50,250,750);
         fObjectCol["Kindex"] = hKindex;
       }
     else
@@ -70,7 +70,7 @@ namespace km3net
     TerminalHistogram *hQEmeas;
     if (!fObjectCol.count ("QuantumEfficiencyHisto") && fObjectCol["QuantumEfficiencyHisto"] == NULL)
       {
-        hQEmeas = new TerminalHistogram ("QuantumEfficiencyHisto","Quantum efficiency;nm",45,250,700);
+        hQEmeas = new TerminalHistogram ("QuantumEfficiencyHisto","Quantum efficiency;nm",50,250,750);
         fObjectCol["QuantumEfficiencyHisto"] = hQEmeas;
       }
     else
@@ -82,7 +82,7 @@ namespace km3net
     G4ThreeVector dir(0,0,-1);
     G4ThreeVector pol(0,0,1);
 
-    for (float wavelength = 250; wavelength < 700 ; wavelength+=10)
+    for (float wavelength = 250; wavelength < 750 ; wavelength+=10)
       {
         float energy = twopi*hbarc/wavelength/nm;
 				//cout << "filling " << wavelength << " " << fOpticalModel._kindex_photocathode->Value (energy) << endl;
@@ -147,14 +147,14 @@ namespace km3net
     TerminalHistogram *hQEdata;
     if (!fObjectCol.count ("MaterialEfficiencyHisto") && fObjectCol["MaterialEfficiencyHisto"] == NULL)
       {
-        hQEdata = new TerminalHistogram ("MaterialEfficiencyHisto","Material efficiency;nm",45,250,700);
+        hQEdata = new TerminalHistogram ("MaterialEfficiencyHisto","Material efficiency;nm",50,250,750);
         fObjectCol["MaterialEfficiencyHisto"] = hQEdata;
       }
     else
       hQEdata = (TerminalHistogram *)(fObjectCol["MaterialEfficiencyHisto"]);
 		hQEdata->Reset();
 
-    for (float wavelength = 250; wavelength < 700 ; wavelength+=10)
+    for (float wavelength = 250; wavelength < 750 ; wavelength+=10)
       {
         float energy = twopi*hbarc/wavelength/nm;
         hQEdata->Fill (wavelength,fOpticalModel._efficiency_photocathode->Value( energy ));
