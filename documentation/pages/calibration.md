@@ -10,7 +10,7 @@ Alternative is the measure of the QE from the amplified anode signal. In this ca
 
 In case of ANTARES PMTs the anode signal was used (QE+CE). In case of KM3NeT PMTs the DC is used (QE).
 
-Starting from v3.0 the simulation uses complex refractive index (N=n+ik). Known n, k for every wavelength and the photocathode thickness allows absorption, transmission and reflection calculation for every wavelength and the inclination angle. The "k" index can be deduced from QE measurement if the photocathode thickness is known. 
+Starting from v2.0 the simulation uses complex refractive index (N=n+ik). Known n, k for every wavelength and the photocathode thickness allows absorption, transmission and reflection calculation for every wavelength and the inclination angle. The "k" index can be deduced from QE measurement if the photocathode thickness is known. 
 
 The real thickness is not provided officially by Hamamatsu. Possibilities:
 - 30 nm 3-inch, 26 nm >= 8-inch (gaven to Oleg by unoficial discussion with Hamamatsu)
