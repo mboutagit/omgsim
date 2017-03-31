@@ -22,7 +22,8 @@ void TerminalHistogram::Draw (Option_t* o)
 
   string sreserve(left_reserve,' ');
 
-  float max_horizontal=(w.ws_col-left_reserve*1.2)/TH1D::GetMaximum ();
+	int prec = 5;
+  float max_horizontal=(w.ws_col-left_reserve*1.2-prec-2)/TH1D::GetMaximum ();  //5 digits for number print - Vla
 
   cout << "\r" << setw(w.ws_col) << right << TH1D::GetMaximum () << left << sreserve << "|" << TH1D::GetMinimum () << endl;
   //cout << sreserve << TH1D::GetMinimum () << flush;m
@@ -33,7 +34,8 @@ void TerminalHistogram::Draw (Option_t* o)
       cout << sreserve << "|";
       for (int nbdashes=0; nbdashes<max_horizontal*TH1D::GetBinContent (i); nbdashes++)
         cout << "-";
-      cout << "\r" << flush << setw(left_reserve-1) << right <<TH1D::GetBinCenter (i);
+      //cout << "\r" << flush << setw(left_reserve-1) << right <<TH1D::GetBinCenter (i);
+			cout << setprecision(prec) << TH1D::GetBinContent (i) << "\r" << flush << setw(left_reserve-1) << right << TH1D::GetBinLowEdge (i);
       cout << endl;
 
     }

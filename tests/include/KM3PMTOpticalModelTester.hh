@@ -39,6 +39,8 @@ namespace km3net
     }
 
     TObject* GetTObject (string name) { return fObjectCol[name];}
+		void PutTObject (string name, TObject* object) { fObjectCol[name] = object; return;}
+		bool InTObject (string name) {if (fObjectCol.find(name) != fObjectCol.end()) return true; return false;}
 
     float fGlassThickness = 1*mm;
     int fElPrecision = 10000;

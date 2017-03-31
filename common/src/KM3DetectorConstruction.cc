@@ -133,6 +133,19 @@ namespace km3net
         theVolmgr = KM3PassiveVolumeMgr::GetIt ();
       }
     G4RotationMatrix* theRot = new G4RotationMatrix;
+
+		//PMT1 [0.9824,-1.5708]/
+		//PMT2[1.2713,-3.1416]
+		//PMT13 [1.8703,1.5708]
+		double theta = 1.8703;
+		double phi = 1.5708;
+
+		G4RotationMatrix* theRotPMT3 = new G4RotationMatrix();
+		theRotPMT3->rotateZ(-phi);     //this is done first, counter clockwise, rotates axes too
+		theRotPMT3->rotateY(-theta);   //this will be done second
+		theRotPMT3->invert();
+		cout << "inverted rotation " << theRotPMT3->getPhi() << " " << theRotPMT3->getTheta() << " " << theRotPMT3->getPsi() << endl;
+
     theRot->set(PosPar.Phi, PosPar.Theta, PosPar.Psi);
     G4ThreeVector thePos(PosPar.X, PosPar.Y, PosPar.Z);
 

@@ -157,6 +157,8 @@ namespace km3net
     cfg.lookupValue("GridDinodsSurface", thePTP->GridDinodsSurface);
 
 
+		cfg.lookupValue("GlassMaterial", thePTP->GlassMaterial);  //VLA
+		cout << "Glass Value: " << thePTP->GlassMaterial << endl;
 
     thePTP->CalculateParameters ();
   }

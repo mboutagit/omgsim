@@ -57,15 +57,25 @@ namespace km3net
 
   void KM3PMTOpticalModelTester::QuantumEfficiencyMeasurement ()
   {
-    TerminalHistogram anHisto ("h", "h", 45, 250, 700);
-    TerminalHistogram *theThisto;
-    if (!fObjectCol.count ("QuantumEfficiencyHisto") && fObjectCol["QuantumEfficiencyHisto"] == NULL)
+    TerminalHistogram *hKindex;
+    if (!fObjectCol.count ("Kindex") && fObjectCol["Kindex"] == NULL)
       {
-        theThisto = new TerminalHistogram ("QuantumEfficiencyHisto","Quantum efficiency;nm",45,250,700);
-        fObjectCol["QuantumEfficiencyHisto"] = theThisto;
+        hKindex = new TerminalHistogram ("Kindex","K index;nm",45,250,700);
+        fObjectCol["Kindex"] = hKindex;
       }
     else
-      theThisto = (TerminalHistogram *)(fObjectCol["QuantumEfficiencyHisto"]);
+      hKindex = (TerminalHistogram *)(fObjectCol["Kindex"]);
+    hKindex->Reset();
+
+    TerminalHistogram *hQEmeas;
+    if (!fObjectCol.count ("QuantumEfficiencyHisto") && fObjectCol["QuantumEfficiencyHisto"] == NULL)
+      {
+        hQEmeas = new TerminalHistogram ("QuantumEfficiencyHisto","Quantum efficiency;nm",45,250,700);
+        fObjectCol["QuantumEfficiencyHisto"] = hQEmeas;
+      }
+    else
+      hQEmeas = (TerminalHistogram *)(fObjectCol["QuantumEfficiencyHisto"]);
+		hQEmeas->Reset();
 
     G4ThreeVector pos(0,0,1);
     G4ThreeVector norm(0,0,-1);
@@ -75,11 +85,14 @@ namespace km3net
     for (float wavelength = 250; wavelength < 700 ; wavelength+=10)
       {
         float energy = twopi*hbarc/wavelength/nm;
-        anHisto.Fill (wavelength, fOpticalModel._kindex_photocathode->Value (energy));
-        theThisto->Fill (wavelength, GetQuantumEfficiency (pos,dir,pol,norm,wavelength));
+				//cout << "filling " << wavelength << " " << fOpticalModel._kindex_photocathode->Value (energy) << endl;
+        hKindex->Fill (wavelength, fOpticalModel._kindex_photocathode->Value (energy));
+        hQEmeas->Fill (wavelength, GetQuantumEfficiency (pos,dir,pol,norm,wavelength));
       }
-    theThisto->Draw ();
-    anHisto.Draw ();
+		cout << "current KINDEX" << endl;
+    hKindex->Draw ();
+		cout << "QE calculated from current KINDEX" << endl;
+		hQEmeas->Draw ();
   }
 
   float KM3PMTOpticalModelTester::GetQuantumEfficiency (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, float wavelength)
@@ -95,7 +108,8 @@ namespace km3net
         if (fOpticalModel.fEPD.HasBeenGenerated)
           Elexit1++;
       }
-    Elexit1/=fElPrecision*1.1; //0.9 for collection efficiency
+    //Elexit1/=fElPrecision*1.1; //0.9 for collection efficiency  //NO, it is QE measurement, so this is not needed!
+		Elexit1/=fElPrecision;
 
     Abs1=fOpticalModel.fA_t;
     Ref1=fOpticalModel.fR_t;
@@ -110,36 +124,43 @@ namespace km3net
         if (fOpticalModel.fEPD.HasBeenGenerated)
           Elexit2++;
       }
-    Elexit2/=fElPrecision*1.1; //0.9 for collection efficiency
+    //Elexit2/=fElPrecision*1.1; //0.9 for collection efficiency //NO, it is QE measurement, so this is not needed!
+		Elexit2/=fElPrecision;
     Abs2=fOpticalModel.fA_t;
     Ref2=fOpticalModel.fR_t;
 
     dir=-dir;
 
+		//cout << "Escape probs: " << Elexit1 << " " << Elexit2 << " " << endl;
+		//cout << "glass abs: " << wavelength << " " << GetGlassAbsorption (wavelength, fGlassThickness) << endl;
+
     return (GetGlassAbsorption (wavelength, fGlassThickness)*
-            (Elexit1*Abs1+
-             Elexit2*Ref1*Abs2+
-             Elexit1*Ref1*Abs2*Ref2*Abs1));
+            (Elexit1*Abs1+                                     //direct absorption, forward electron escape
+             Elexit2*Ref1*Abs2+                                //reflection on the back side of the photocathode, absorption on the way back, backward e- escape
+             //Elexit1*Ref1*Abs2*Ref2*Abs1));
+						 Elexit1*Ref1*Ref2*Abs1));                         //second reflection, direct absorption, forward electron escape
 
   }
 
   void KM3PMTOpticalModelTester::PhotoCathodeEfficiencyReader ()
   {
-    TerminalHistogram *theThisto;
+    TerminalHistogram *hQEdata;
     if (!fObjectCol.count ("MaterialEfficiencyHisto") && fObjectCol["MaterialEfficiencyHisto"] == NULL)
       {
-        theThisto = new TerminalHistogram ("MaterialEfficiencyHisto","Material efficiency;nm",45,250,700);
-        fObjectCol["MaterialEfficiencyHisto"] = theThisto;
+        hQEdata = new TerminalHistogram ("MaterialEfficiencyHisto","Material efficiency;nm",45,250,700);
+        fObjectCol["MaterialEfficiencyHisto"] = hQEdata;
       }
     else
-      theThisto = (TerminalHistogram *)(fObjectCol["MaterialEfficiencyHisto"]);
+      hQEdata = (TerminalHistogram *)(fObjectCol["MaterialEfficiencyHisto"]);
+		hQEdata->Reset();
 
     for (float wavelength = 250; wavelength < 700 ; wavelength+=10)
       {
         float energy = twopi*hbarc/wavelength/nm;
-        theThisto->Fill (wavelength,fOpticalModel._efficiency_photocathode->Value( energy ));
+        hQEdata->Fill (wavelength,fOpticalModel._efficiency_photocathode->Value( energy ));
       }
-    theThisto->Draw ();
+		cout << "QE in the data" << endl;
+    hQEdata->Draw ();
 
   }
 
@@ -174,7 +195,7 @@ GoingInside/B");
     fOpticalModel.fNorm = norm;
     if (fOpticalModel.ElectronProductionCalculator (dir, pos))
       fOpticalModel.fEPD.HasBeenGenerated = 10;
-    theTree->Fill ();
+    //theTree->Fill ();
   }
 
   float KM3PMTOpticalModelTester::GetEfficiency (float wavelength)

@@ -17,3 +17,5 @@ DinodsHeight   = 12.;
 CheckOverlaps = false;
 
 PhotoCathodeMaterial = "photocathode3inches";
+//New pmt glass, transparent to UV added by V. Kulikovskiy
+GlassMaterial = "PMTGlass_R12199_02";
