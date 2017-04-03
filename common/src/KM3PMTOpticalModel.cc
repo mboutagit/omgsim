@@ -644,9 +644,14 @@ namespace km3net
     G4VPhysicalVolume* thePostPV =
       STEP->GetPostStepPoint()->GetPhysicalVolume();
 
+    if (!thePrePV || !thePostPV)
+      return false;
+
     G4LogicalSurface* Surface = G4LogicalBorderSurface::GetSurface(thePrePV, thePostPV);
     if (!Surface)
       Surface = G4LogicalBorderSurface::GetSurface(thePostPV, thePrePV);
+    if (!Surface)
+      Surface = G4LogicalBorderSurface::GetSurface(thePrePV, thePostPV);
     if (!Surface)
       Surface = G4LogicalSkinSurface::GetSurface(thePostPV->GetLogicalVolume ());
     if (!Surface)
