@@ -13,11 +13,8 @@ TEMPDIR=`pwd`/temp_${SGE_TASK_ID}
 mkdir ${TEMPDIR}
 cd ${TEMPDIR}
 
-cp  ${PROG_DIR}/KM3Sim ./
 mkdir common
-cp  -r ${PROG_DIR}/../common/data ./common
-cp ${PROG_DIR}/scripts/vis-K40-DOM.mac ./
-./KM3Sim -fa vis-K40-DOM.mac K40_DOM_${SGE_TASK_ID}.root 
+${PROG_DIR}/OMGsim -fa ${PROG_DIR}/scripts/vis-K40-DOM.mac K40_DOM_${SGE_TASK_ID}.root 
 mv K40_DOM_${SGE_TASK_ID}.root ${PROG_DIR}/prod
 cd ../
 rm -r ${TEMPDIR}
