@@ -78,7 +78,7 @@ namespace km3net
     ~WPropAnalysisManager();
 
   public: // Without description
-    virtual void AddDetectedParticule (const G4Step* Step, unsigned char LIM);
+    virtual void AddDetectedParticule (const KM3TrackInformation* INFO, unsigned char LIM);
     virtual void EndOfEvent ();
     virtual void SetOriginOfEvent (const G4Event* EV);
 

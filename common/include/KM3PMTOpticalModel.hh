@@ -146,6 +146,7 @@ namespace km3net
     //public utils
   public:
     static bool IsAPhotocathode (const G4Step *STEP);
+    static bool IsAPhotocathode (const G4VPhysicalVolume* preVol, const G4VPhysicalVolume*  postVol);
 
 #ifdef ENABLE_TESTING
   private:

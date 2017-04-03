@@ -30,6 +30,7 @@
 #include "KM3SteppingAction.hh"
 #include "KM3AnalysisManager.hh"
 #include <KM3OpticalModuleMgr.hh>
+#include <KM3TrackInformation.hh>
 #include "G4Track.hh"
 #include "globals.hh"
 #include "G4SteppingManager.hh"
@@ -68,6 +69,7 @@ namespace km3net
 
   void KM3SteppingAction::UserSteppingAction(const G4Step* fStep)
   {
+    KM3TrackInformation* info = (KM3TrackInformation*)(fStep->GetTrack()->GetUserInformation());
 
     //#ifdef G4ANALYSIS_USE
     G4Track* fTrack = fStep->GetTrack();
@@ -83,49 +85,60 @@ namespace km3net
 
     G4VPhysicalVolume* thePrePV=fStep->GetPreStepPoint()->GetPhysicalVolume();
     G4VPhysicalVolume* thePostPV=fStep->GetPostStepPoint()->GetPhysicalVolume();
-    if (!thePrePV || !thePostPV)
+
+    G4VPhysicalVolume* thePreOriginalPV = info->GetOriginalPrePV ();
+    G4VPhysicalVolume* thePostOriginalPV = info->GetOriginalPostPV ();
+
+    if (!thePrePV || !thePostPV || !thePreOriginalPV || !thePostOriginalPV )
       return;
-    G4String prestepName=thePrePV->GetLogicalVolume ()->GetName();
-    G4String poststepName=thePostPV->GetLogicalVolume ()->GetName();
+    G4String prestepName=thePreOriginalPV->GetLogicalVolume ()->GetName();
+    G4String poststepName=thePostOriginalPV->GetLogicalVolume ()->GetName();
     //TODO check if it is relevent
     if (KM3PMTOpticalModel::IsAPhotocathode (fStep))
       {
         if (fTrack->GetDefinition()->GetParticleType() == "opticalphoton" &&
             fTrack->GetTrackStatus() != fStopAndKill)
           {
+            if (poststepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos)
+              KM3AnalysisManager::getIt()->AddPhotoTubeEntranceInfo (fStep);
+
             if (thePostPV->GetName ()=="NOREFLEXVaccumInPmt")
               {
                 fTrack->SetTrackStatus(fStopAndKill);
                 return;
               }
           }
-        else if (fTrack->GetDefinition()->GetParticleName() != "e-")
-          return;
-
-            G4LogicalSurface* Surface = G4LogicalBorderSurface::GetSurface(thePrePV, thePostPV);
-            if (!Surface)
-              Surface = G4LogicalBorderSurface::GetSurface(thePostPV, thePrePV);
-            if (!Surface)
-              Surface = G4LogicalSkinSurface::GetSurface(thePostPV->GetLogicalVolume ());
-            if (!Surface)
-              Surface = G4LogicalSkinSurface::GetSurface(thePrePV->GetLogicalVolume ());
-
-            if (!Surface ||
-                !LoadMaterialProps (dynamic_cast <G4OpticalSurface*> (Surface->GetSurfaceProperty())
-                                    ->GetMaterialPropertiesTable()) )
-              return;
-
-            KM3AnalysisManager::getIt()->AddPhotoTubeEntranceInfo (fStep);
-            fEnergy = fStep->GetPreStepPoint()->GetKineticEnergy();
-
-            G4ThreeVector globalPoint = fStep->GetPreStepPoint()->GetPosition ();
-            const G4VTouchable*   touch = fStep->GetPostStepPoint()->GetTouchable();
-            unsigned char detectedGamma = CheckDetection (touch->GetHistory()->GetTopTransform().TransformPoint(globalPoint));
-            if (detectedGamma != 0)
-              KM3AnalysisManager::getIt()->AddDetectedParticule (fStep, detectedGamma);
-          }
-
       }
+    if (fTrack->GetDefinition()->GetParticleName() != "e-" ||
+        !info->HasAMother () ||
+        !KM3PMTOpticalModel::IsAPhotocathode (thePreOriginalPV, thePostOriginalPV) ||
+        info->GetOriginalParticle ()->GetParticleType() != "opticalphoton")
+      return;
+
+    G4LogicalSurface* Surface =
+      G4LogicalBorderSurface::GetSurface(thePreOriginalPV, thePostOriginalPV);
+    if (!Surface)
+      Surface = G4LogicalBorderSurface::GetSurface(thePostPV, thePrePV);
+    if (!Surface)
+      Surface = G4LogicalSkinSurface::GetSurface(thePostPV->GetLogicalVolume ());
+    if (!Surface)
+      Surface = G4LogicalSkinSurface::GetSurface(thePrePV->GetLogicalVolume ());
+
+    if (!Surface ||
+        !LoadMaterialProps (dynamic_cast <G4OpticalSurface*> (Surface->GetSurfaceProperty())
+                            ->GetMaterialPropertiesTable()) )
+      return;
+
+    fEnergy = info->GetOriginalEnergy ();
+
+    G4ThreeVector globalPoint = fStep->GetPreStepPoint()->GetPosition ();
+    const G4VTouchable*   touch = fStep->GetPostStepPoint()->GetTouchable();
+    unsigned char detectedGamma = CheckDetection (touch->GetHistory()->GetTopTransform().TransformPoint(globalPoint));
+    if (detectedGamma != 0)
+      KM3AnalysisManager::getIt()->AddDetectedParticule (info, detectedGamma);
+  }
+
+
 
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
@@ -183,7 +196,7 @@ namespace km3net
 
   }
 
-//adding angular efficiency here
+  //adding angular efficiency here
   unsigned char KM3SteppingAction::CheckDetection(const G4ThreeVector& localPoint)
   {
 

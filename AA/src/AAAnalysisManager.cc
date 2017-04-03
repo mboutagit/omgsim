@@ -92,10 +92,10 @@ namespace km3net
     cout << "Analysis file was normaly closed." << endl;
   }
 
-  void AAAnalysisManager::AddDetectedParticule (const G4Step* STEP, unsigned char LIM)
+  void AAAnalysisManager::AddDetectedParticule (const KM3TrackInformation* INFO, unsigned char LIM)
   {
 
-    fEnergy=STEP->GetPreStepPoint()->GetKineticEnergy ();
+    fEnergy=INFO->GetOriginalEnergy ();
     unsigned Erange=(unsigned)((10e-06 - fEnergy)/(10e-06)*100+0.5);
 
     if (Erange > 99
@@ -118,12 +118,10 @@ namespace km3net
     if (fFastAnalysisOnly)
       return;
 
-    const G4Track* TRACK=STEP->GetTrack ();
-
-    fPolarity = TRACK->GetPolarization ().isParallel(TRACK->GetMomentumDirection (),0.1); //perpendicular is ~1.6
+    fPolarity = INFO->GetOriginalPolarization ().isParallel(INFO->GetOriginalMomentum(),0.1);
 
 
-    fTotalTime = TRACK->GetGlobalTime();
+    fTotalTime = INFO->GetOriginalTime ();
 
     fLimit = LIM;
 

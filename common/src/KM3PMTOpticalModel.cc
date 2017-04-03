@@ -644,9 +644,11 @@ namespace km3net
     G4VPhysicalVolume* thePostPV =
       STEP->GetPostStepPoint()->GetPhysicalVolume();
 
-    if (!thePrePV || !thePostPV)
-      return false;
+    return IsAPhotocathode (thePrePV, thePostPV);
+  }
 
+  bool KM3PMTOpticalModel::IsAPhotocathode (const G4VPhysicalVolume* thePrePV, const G4VPhysicalVolume*  thePostPV)
+  {
     G4LogicalSurface* Surface = G4LogicalBorderSurface::GetSurface(thePrePV, thePostPV);
     if (!Surface)
       Surface = G4LogicalBorderSurface::GetSurface(thePostPV, thePrePV);

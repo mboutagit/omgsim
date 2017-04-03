@@ -48,6 +48,7 @@ namespace km3net
   class KM3DetectorConstruction;
   class KM3AnalysisManager;
   class KM3SteppingAction;
+  class KM3TrackingAction;
 
 
   class KM3ExperimentTypeMessenger: public G4UImessenger
@@ -70,7 +71,7 @@ namespace km3net
   private:
     KM3DetectorConstruction*  fDetector;
     KM3SteppingAction*        fSteppingAction = NULL;
-
+    KM3TrackingAction*        fTrackingAction =NULL;
     G4RunManager*             frunManager = NULL;
 
     G4UIdirectory*            KM3Dir;

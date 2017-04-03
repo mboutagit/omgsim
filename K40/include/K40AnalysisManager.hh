@@ -73,7 +73,7 @@ namespace km3net
     ~K40AnalysisManager();
 
   public: // Without description
-    virtual void AddDetectedParticule (const G4Step* Step, unsigned char LIM);
+    virtual void AddDetectedParticule (const KM3TrackInformation* INFO, unsigned char LIM);
     virtual void EndOfEvent ();
     virtual void SetTargetVolume (float V);
 

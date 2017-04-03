@@ -53,7 +53,7 @@ namespace km3net
       {
         int upfloor=Step->GetPostStepPoint()->GetPhysicalVolume()->GetCopyNo ();//atoi (poststepName.substr (0,1).data ());
         int downfloor=Step->GetPreStepPoint()->GetPhysicalVolume()->GetCopyNo ();//atoi (prestepName.substr (0,1).data ());
-        WPropAnalysisManager::getIt ()->AddDetectedParticule (Step, (upfloor > downfloor) ? upfloor : downfloor);
+        WPropAnalysisManager::getIt ()->AddDetectedParticule ((KM3TrackInformation*)Step->GetTrack()->GetUserInformation(), (upfloor > downfloor) ? upfloor : downfloor);
       }
 
     return;

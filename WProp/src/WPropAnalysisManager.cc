@@ -180,10 +180,10 @@ namespace km3net
       }
   }
 
-  void WPropAnalysisManager::AddDetectedParticule (const G4Step* STEP, unsigned char LIM)
+  void WPropAnalysisManager::AddDetectedParticule (const KM3TrackInformation* INFO, unsigned char LIM)
   {
 
-    fEnergy=STEP->GetPreStepPoint()->GetKineticEnergy ();
+    fEnergy=INFO->GetOriginalEnergy ();
     if (fRFile == NULL)
       return;
     if (fFastAnalysisOnly)
@@ -191,13 +191,11 @@ namespace km3net
 
     fFloorNbCross=LIM;
 
-    const G4StepPoint* poststep = STEP->GetPostStepPoint();
-    const G4ThreeVector& globalDir = poststep->GetMomentumDirection ();
-    const G4ThreeVector& globalPoint = poststep->GetPosition();
-    const G4VTouchable*   touch = poststep->GetTouchable();
-    const G4ThreeVector& posVect=touch->GetHistory ()->GetTopTransform().TransformPoint(globalPoint);
+    const G4ThreeVector& globalDir = INFO->GetOriginalMomentum ();
+    const G4ThreeVector& globalPoint = INFO->GetOriginalPosition ();
+    const G4ThreeVector& posVect=INFO->GetOriginalLocalPosition ();
 
-    fTotalTime = poststep->GetGlobalTime ();
+    fTotalTime = INFO->GetOriginalTime ();
 
 
     fFloorCrossPosX = posVect.x (); //\theta_s

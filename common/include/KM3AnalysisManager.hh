@@ -49,7 +49,7 @@
 #include <G4Event.hh>
 #include <time.h>
 #include "KM3DetectorConstruction.hh"
-
+#include <KM3TrackInformation.hh>
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 class TTree;
@@ -76,7 +76,7 @@ namespace km3net
 
   public: // Without description
     virtual void SetOriginOfEvent (const G4Event* EV);
-    virtual void AddDetectedParticule (const G4Step* Step, unsigned char LIM) = 0;
+    virtual void AddDetectedParticule (const KM3TrackInformation* info, unsigned char LIM) = 0;
     virtual void AddPhotoTubeEntranceInfo (const G4Step* fStep);
     virtual void AddOMEntranceInfo (const G4Step* Step);
     virtual void EndOfEvent ();

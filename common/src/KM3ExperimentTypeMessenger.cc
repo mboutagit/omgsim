@@ -47,6 +47,7 @@
 #include <KM3PhysicsList.hh>
 #include <KM3RunAction.hh>
 #include <KM3EventAction.hh>
+#include <KM3TrackingAction.hh>
 
 #include <iostream>
 
@@ -122,7 +123,7 @@ namespace km3net
           frunManager->SetUserAction(new KM3RunAction);
           frunManager->SetUserAction(new KM3EventAction);
 
-          //first checking the new method, then for retro-compality the old one
+          //first checking the new method, then for retro-compality the old ones
           if (fAnalysisMgrCol.count (newValue))
             {
               fAnalysisMgrCol[newValue] ();
@@ -158,6 +159,8 @@ namespace km3net
 
           if (!fSteppingAction)
             fSteppingAction=new KM3SteppingAction ();
+          if (!fTrackingAction)
+            fTrackingAction=new KM3TrackingAction ();
 
           KM3AnalysisManager::getIt ()->Init ();
           KM3PrimaryGeneratorAction* PGA=new KM3PrimaryGeneratorAction;
@@ -165,6 +168,7 @@ namespace km3net
           frunManager->SetUserAction(PGA);
           frunManager->SetUserInitialization(fDetector);
           frunManager->SetUserAction(fSteppingAction);
+          frunManager->SetUserAction(fTrackingAction);
 
 
         } else {

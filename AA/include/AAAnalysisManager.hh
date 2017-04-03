@@ -49,7 +49,7 @@
 #include <time.h>
 #include <KM3AnalysisManager.hh>
 #include "KM3DetectorConstruction.hh"
-
+#include <KM3TrackInformation.hh>
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
@@ -72,7 +72,7 @@ namespace km3net
     ~AAAnalysisManager();
 
   public: // Without description
-    virtual void AddDetectedParticule (const G4Step* Step, unsigned char LIM);
+    virtual void AddDetectedParticule (const KM3TrackInformation* INFO, unsigned char LIM);
     virtual void EndOfEvent ();
     virtual void SetEnergy (double E);
 

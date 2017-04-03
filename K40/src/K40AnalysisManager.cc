@@ -85,9 +85,9 @@ namespace km3net
     AAAnalysisManager::Write ();
   }
 
-  void K40AnalysisManager::AddDetectedParticule (const G4Step* STEP, unsigned char LIM)
+  void K40AnalysisManager::AddDetectedParticule (const KM3TrackInformation* INFO, unsigned char LIM)
   {
-    AAAnalysisManager::AddDetectedParticule (STEP, LIM);
+    AAAnalysisManager::AddDetectedParticule (INFO, LIM);
     fListOfOM.push_back(fOMId);
     if (fSmallestLimit > LIM - 1)
       fSmallestLimit=LIM - 1;
