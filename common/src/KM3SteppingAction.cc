@@ -68,6 +68,7 @@ namespace km3net
 
   void KM3SteppingAction::UserSteppingAction(const G4Step* fStep)
   {
+
     //#ifdef G4ANALYSIS_USE
     G4Track* fTrack = fStep->GetTrack();
     G4StepPoint* prestep = fStep->GetPreStepPoint();
@@ -82,43 +83,24 @@ namespace km3net
 
     G4VPhysicalVolume* thePrePV=fStep->GetPreStepPoint()->GetPhysicalVolume();
     G4VPhysicalVolume* thePostPV=fStep->GetPostStepPoint()->GetPhysicalVolume();
+    if (!thePrePV || !thePostPV)
+      return;
     G4String prestepName=thePrePV->GetLogicalVolume ()->GetName();
     G4String poststepName=thePostPV->GetLogicalVolume ()->GetName();
-
     //TODO check if it is relevent
-    if (KM3PMTOpticalModel::IsAPhotocathode (fStep) && fTrack->GetDefinition()->GetParticleType() == "e-")
+    if (KM3PMTOpticalModel::IsAPhotocathode (fStep))
       {
-
-        G4String OMGlassName=KM3OpticalModuleMgr::fBentoName;
-
-        //G4double xlambda = h_Planck*c_light/energy;
-
-        if (  poststepName.rfind (OMGlassName) != string::npos)
+        if (fTrack->GetDefinition()->GetParticleType() == "opticalphoton" &&
+            fTrack->GetTrackStatus() != fStopAndKill)
           {
-            KM3AnalysisManager::getIt ()->AddOMEntranceInfo (fStep);
-          }
-
-        if (fTrack->GetTrackStatus() != fStopAndKill)
-          {
-            //TEST TO REMOVE !!!
             if (thePostPV->GetName ()=="NOREFLEXVaccumInPmt")
               {
                 fTrack->SetTrackStatus(fStopAndKill);
                 return;
               }
-
-            if (fStep->GetPostStepPoint()->GetStepStatus() == fGeomBoundary &&
-                poststepName.rfind (KM3OpticalModuleMgr::fBentoName) < poststepName.size ())
-              {
-                KM3AnalysisManager::getIt()->AddOMEntranceInfo (fStep);
-              }
           }
-        else
-          {
-            G4bool isOnBoundary =
-              (fStep->GetPostStepPoint()->GetStepStatus() == fGeomBoundary);
-            if (!isOnBoundary)
-              return;
+        else if (fTrack->GetDefinition()->GetParticleName() != "e-")
+          return;
 
             G4LogicalSurface* Surface = G4LogicalBorderSurface::GetSurface(thePrePV, thePostPV);
             if (!Surface)
@@ -141,11 +123,10 @@ namespace km3net
             unsigned char detectedGamma = CheckDetection (touch->GetHistory()->GetTopTransform().TransformPoint(globalPoint));
             if (detectedGamma != 0)
               KM3AnalysisManager::getIt()->AddDetectedParticule (fStep, detectedGamma);
-
           }
 
       }
-  }
+
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
@@ -202,17 +183,13 @@ namespace km3net
 
   }
 
+//adding angular efficiency here
   unsigned char KM3SteppingAction::CheckDetection(const G4ThreeVector& localPoint)
   {
 
     unsigned char detectedGamma = 4;
     //double eta_E = 0.5; //probability that the electron goes in or out the photocathode
     //from the photonis, can be improved. The abs length is ~30nm, the electron is produced at about an half of the photocathode.
-    double thickness=  _thickness_photocathode->Value( localPoint.theta() );
-
-    double eta_E = exp (-thickness/2/fElectronAbsLength);
-    //meeting some troubles, the theory should be checkout
-    eta_E=1;
     double teta = localPoint.theta ();//acos(costeta);
 
     double eta_teta=_angular_efficiency->Value(teta/3*2.1);
@@ -222,18 +199,15 @@ namespace km3net
     //cout << eta_teta  << ' ' << eta_teta_err << ' ' << teta/3*2.1*180/M_PI<<' ' << eta_E << endl;
 
     double rndm = G4UniformRand();
-    //if(rndm < eta_E)
-    //  {
-    //    rndm=G4UniformRand();
-    if(rndm < eta_E*eta_teta*(1.-eta_teta_err))
+    if(rndm < eta_teta*(1.-eta_teta_err))
       {
         detectedGamma = 3;
       }
-    else if(rndm < eta_E*eta_teta)
+    else if(rndm < eta_teta)
       {
         detectedGamma = 2;
       }
-    else if (rndm < eta_E*eta_teta*(1+eta_teta_err))
+    else if (rndm < eta_teta*(1+eta_teta_err))
       {
         detectedGamma = 1;
       }
