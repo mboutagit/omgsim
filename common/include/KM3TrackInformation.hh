@@ -7,6 +7,8 @@
 #include "G4Track.hh"
 #include "G4Allocator.hh"
 #include "G4VUserTrackInformation.hh"
+#include <string>
+
 
 class G4VPhysicalVolume;
 
@@ -15,6 +17,7 @@ class KM3TrackInformation : public G4VUserTrackInformation
 public:
   KM3TrackInformation();
   KM3TrackInformation(const G4Track* aTrack);
+	KM3TrackInformation(const KM3TrackInformation* INFO);
   virtual ~KM3TrackInformation();
 
   inline void *operator new(size_t);
@@ -22,13 +25,14 @@ public:
   inline int operator ==(const KM3TrackInformation& right) const
   {return (this==&right);}
 
-  bool HasAMother () {return particleDefinition !=NULL;}
+  bool HasAMother () {return originalTrackID != 0;}
 
   void Print() const;
 
 private:
   G4int                 originalTrackID;
-  G4ParticleDefinition* particleDefinition=NULL;
+  std::string                originalParticleName;
+	std::string                originalParticleType;
   G4Step                fLastStep;
   G4ThreeVector         originalPosition;
   G4ThreeVector         originalLocalPosition;
@@ -42,7 +46,8 @@ private:
 
 public:
   inline G4int GetOriginalTrackID() const {return originalTrackID;}
-  inline G4ParticleDefinition* GetOriginalParticle() const {return particleDefinition;}
+  inline std::string GetOriginalParticleName() const {return originalParticleName;}
+	inline std::string GetOriginalParticleType() const {return originalParticleType;}
   inline G4ThreeVector GetOriginalPosition() const {return originalPosition;}
   inline G4ThreeVector GetOriginalLocalPosition() const {return originalLocalPosition;}
   inline G4ThreeVector GetOriginalMomentum() const {return originalMomentum;}

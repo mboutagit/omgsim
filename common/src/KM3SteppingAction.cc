@@ -69,12 +69,17 @@ namespace km3net
 
   void KM3SteppingAction::UserSteppingAction(const G4Step* fStep)
   {
+		
+
     KM3TrackInformation* info = (KM3TrackInformation*)(fStep->GetTrack()->GetUserInformation());
+		
+		if (info == 0) return;
 
     //#ifdef G4ANALYSIS_USE
     G4Track* fTrack = fStep->GetTrack();
     G4StepPoint* prestep = fStep->GetPreStepPoint();
     G4StepPoint* poststep = fStep->GetPostStepPoint();
+
 
     if (fTrack->GetGlobalTime ()>1e10)
       {
@@ -88,6 +93,8 @@ namespace km3net
 
     G4VPhysicalVolume* thePreOriginalPV = info->GetOriginalPrePV ();
     G4VPhysicalVolume* thePostOriginalPV = info->GetOriginalPostPV ();
+
+		cout << fTrack->GetDefinition()->GetParticleName() << " " << info->HasAMother ()  << " " << thePreOriginalPV << " " << thePostOriginalPV << " " << info->GetOriginalParticleType() << endl;
 
     if (!thePrePV || !thePostPV || !thePreOriginalPV || !thePostOriginalPV )
       return;
@@ -109,10 +116,12 @@ namespace km3net
               }
           }
       }
+
+		cout << fTrack->GetDefinition()->GetParticleName() << " " << info->HasAMother ()  << " " << thePreOriginalPV << " " << thePostOriginalPV << " " << info->GetOriginalParticleType() << endl;
     if (fTrack->GetDefinition()->GetParticleName() != "e-" ||
-        !info->HasAMother () ||
+        !info->HasAMother () || thePreOriginalPV == 0 || thePostOriginalPV == 0 || 
         !KM3PMTOpticalModel::IsAPhotocathode (thePreOriginalPV, thePostOriginalPV) ||
-        info->GetOriginalParticle ()->GetParticleType() != "opticalphoton")
+        info->GetOriginalParticleType() != "opticalphoton")
       return;
 
     G4LogicalSurface* Surface =
@@ -128,6 +137,8 @@ namespace km3net
         !LoadMaterialProps (dynamic_cast <G4OpticalSurface*> (Surface->GetSurfaceProperty())
                             ->GetMaterialPropertiesTable()) )
       return;
+
+		fTrack->SetTrackStatus(fStopAndKill); // kill e-
 
     fEnergy = info->GetOriginalEnergy ();
 
