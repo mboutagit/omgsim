@@ -94,8 +94,6 @@ namespace km3net
     G4VPhysicalVolume* thePreOriginalPV = info->GetOriginalPrePV ();
     G4VPhysicalVolume* thePostOriginalPV = info->GetOriginalPostPV ();
 
-		cout << fTrack->GetDefinition()->GetParticleName() << " " << info->HasAMother ()  << " " << thePreOriginalPV << " " << thePostOriginalPV << " " << info->GetOriginalParticleType() << endl;
-
     if (!thePrePV || !thePostPV || !thePreOriginalPV || !thePostOriginalPV )
       return;
     G4String prestepName=thePreOriginalPV->GetLogicalVolume ()->GetName();
@@ -117,7 +115,6 @@ namespace km3net
           }
       }
 
-		cout << fTrack->GetDefinition()->GetParticleName() << " " << info->HasAMother ()  << " " << thePreOriginalPV << " " << thePostOriginalPV << " " << info->GetOriginalParticleType() << endl;
     if (fTrack->GetDefinition()->GetParticleName() != "e-" ||
         !info->HasAMother () || thePreOriginalPV == 0 || thePostOriginalPV == 0 || 
         !KM3PMTOpticalModel::IsAPhotocathode (thePreOriginalPV, thePostOriginalPV) ||
