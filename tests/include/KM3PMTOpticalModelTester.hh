@@ -30,6 +30,7 @@ namespace km3net
     void QuantumEfficiencyMeasurement ();
     void PhotoCathodeEfficiencyReader ();
 
+    bool LastElectronIsEscaped () {return fOpticalModel.fEPD.HasGoneInside != 0;}
     float GetEfficiency (float wavelength);
     float GetGlassAbsorption (float wavelength, float thickness);
     G4MaterialPropertyVector GetKIndex () {return *(fOpticalModel._kindex_photocathode);}
@@ -37,6 +38,8 @@ namespace km3net
     void SetKIndex (const G4MaterialPropertyVector& vector) {
       fOpticalModel._kindex_photocathode = new G4MaterialPropertyVector (vector);
     }
+
+    void SetElectronProductionLevel (int level) {fOpticalModel._electronProductionLevel = level;}
 
     TObject* GetTObject (string name) { return fObjectCol[name];}
 		void PutTObject (string name, TObject* object) { fObjectCol[name] = object; return;}

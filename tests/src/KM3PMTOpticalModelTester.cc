@@ -125,7 +125,7 @@ namespace km3net
           Elexit2++;
       }
     //Elexit2/=fElPrecision*1.1; //0.9 for collection efficiency //NO, it is QE measurement, so this is not needed!
-		Elexit2/=fElPrecision;
+    Elexit2/=fElPrecision;
     Abs2=fOpticalModel.fA_t;
     Ref2=fOpticalModel.fR_t;
 
@@ -170,6 +170,7 @@ namespace km3net
     TTree* theTree;
     if (!fObjectCol.count ("ElectrProdTree") && fObjectCol["ElectrProdTree"] == NULL)
       {
+        cout << "create the tree " << endl;
         theTree = new TTree ("ElectrProdTree", "Electron production testing tree");
         fObjectCol["ElectrProdTree"] = theTree;
 
@@ -195,7 +196,7 @@ GoingInside/B");
     fOpticalModel.fNorm = norm;
     if (fOpticalModel.ElectronProductionCalculator (dir, pos))
       fOpticalModel.fEPD.HasBeenGenerated = 10;
-    //theTree->Fill ();
+    theTree->Fill ();
   }
 
   float KM3PMTOpticalModelTester::GetEfficiency (float wavelength)

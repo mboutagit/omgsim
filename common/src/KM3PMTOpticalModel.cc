@@ -386,6 +386,7 @@ namespace km3net
         float ElectronAbsLength = -log (Rand+LocalPhotocathodeThickness-ElectronLengthGeneration)/fElectronAttenuationMu;
 #ifdef ENABLE_TESTING
         fEPD.ElectronAbsLength =             ElectronAbsLength;
+        if(ElectronAbsLength > PhotoCathodeLength) fEPD.HasGoneInside = 10;
 #endif
         return ElectronAbsLength > PhotoCathodeLength;
       }

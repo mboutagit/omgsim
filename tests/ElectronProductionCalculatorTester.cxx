@@ -1,4 +1,4 @@
-#include <TH1I.h>
+#include <TH1F.h>
 
 #include <KM3PMTOpticalModelTester.hh>
 
@@ -12,24 +12,30 @@
 using namespace std;
 using namespace km3net;
 
-TH1I* h=new TH1I("h", "h", 100,0,3.15);
+TH1F* h=new TH1F("h", "h", 90,0,90*deg);
 
 int main  (int argc, char** argv)
 {
   string sOuputTree;
-  float x=0;
-
+  float x=0,z=-1;
+  int level = 1;
   for (int argIt = 1; argIt < argc; argIt++)
     {
       string sarg = argv[argIt];
       if (sOuputTree == "")
         sOuputTree = sarg;
 
-      if (sarg == "-angle")
+      else if (sarg == "-angle")
         {
           sarg = argv[++argIt];
           float angle = stof (sarg)*deg;
-          x= tan (angle);
+          x= sin (angle);
+          z= -cos (angle);
+        }
+      else if (sarg == "-el")
+        {
+          sarg = argv[++argIt];
+          level=stoi(sarg);
         }
     }
 
@@ -43,22 +49,36 @@ int main  (int argc, char** argv)
   cout << "Create model tester" <<endl;
   theModelTester.LoadMaterial ("photocathode10inches", "PMTGlass", "Vacuum");
 
-  G4ThreeVector dir(0,x,-1);
-  G4ThreeVector pos(0,0,-1);
-  G4ThreeVector norm(0,0,1);
 
-  theModelTester.TestCalculateNormalCoefficients (pos, 440*nm);
-  for (int i=0; i<20000;i++)
-    theModelTester.TestElectronProduction (dir, pos, norm);
+  for (int angle=0;angle<90;angle++)
+    {
+      x= sin (angle*deg);
+      z= -cos (angle*deg);
+      G4ThreeVector dir(0,x,z);
+      G4ThreeVector pos(0,0,-1);
+      G4ThreeVector norm(0,0,1);
 
 
-  theModelTester.SaveTreesAndHistograms ("/scratch/hugon/out.root");
+      theModelTester.TestCalculateNormalCoefficients (pos, 440*nm);
+      theModelTester.SetElectronProductionLevel (level);
+      float escaped=0;
+      for (int i=0; i<20000;i++)
+        {
+          theModelTester.TestCalculateCoefficients (pos, dir, dir, norm, 440*nm);
+          theModelTester.TestElectronProduction (dir, pos, norm);
+          if (theModelTester.LastElectronIsEscaped ()) escaped++;
+        }
+      cout << angle+1 << " " <<escaped/20000. << endl;
+      h->SetBinContent (angle+1,escaped/20000.);
+    }
 
+      theModelTester.SaveTreesAndHistograms ("/scratch/hugon/out.root");
+      h->SaveAs ("/scratch/hugon/bah.root");
 
   return 0;
 
-  //this part was to check the angular emission of the electron. Left for history ;p
-  G4DynamicParticle DynPart(G4OpticalPhoton::Definition (), dir, 2*eV);
+  /*/this part was to check the angular emission of the electron. Left for history ;p
+  //G4DynamicParticle DynPart(G4OpticalPhoton::Definition (), dir, 2*eV);
   G4SauterGavrilaAngularDistribution SGAnglular;
 
   for (int i=0; i<10000; i++)
@@ -68,7 +88,7 @@ int main  (int argc, char** argv)
       h->Fill (acos (PEemit.z ()));
     }
 
-  h->SaveAs ("/scratch/hugon/bah.root");
 
-  return 0;
+
+    return 0;*/
 }

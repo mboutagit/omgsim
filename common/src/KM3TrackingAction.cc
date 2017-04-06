@@ -6,17 +6,32 @@
 
 namespace km3net
 {
-  void KM3TrackingAction::PreUserTrackingAction(const G4Track* aTrack) {;}
+  KM3TrackingAction::KM3TrackingAction () {}
+  KM3TrackingAction::~KM3TrackingAction () {}
+
+  void KM3TrackingAction::PreUserTrackingAction(const G4Track* aTrack) {
+    G4Track* theTrack = (G4Track*)aTrack;
+    KM3TrackInformation* info = (KM3TrackInformation*)(theTrack->GetUserInformation());
+
+    if (info == 0)
+      {
+        info = new KM3TrackInformation(aTrack);
+        theTrack ->SetUserInformation(info);
+      }
+    info->SetTrack (aTrack);
+    info->SetStep (aTrack->GetStep ());
+
+  }
   void KM3TrackingAction::PostUserTrackingAction(const G4Track* aTrack)
   {
-		KM3TrackInformation* anInfo = new KM3TrackInformation(aTrack);
-		//G4Track* theTrack = (G4Track*)aTrack;
-		//theTrack->SetUserInformation(anInfo);
+    KM3TrackInformation* anInfo = new KM3TrackInformation(aTrack);
+    //G4Track* theTrack = (G4Track*)aTrack;
+    //theTrack->SetUserInformation(anInfo);
 
     G4TrackVector* secondaries = fpTrackingManager->GimmeSecondaries();
     if(secondaries)
       {
-				
+
         //KM3TrackInformation* info = (KM3TrackInformation*)(aTrack->GetUserInformation());
         size_t nSeco = secondaries->size();
         if(nSeco>0)

@@ -389,7 +389,7 @@ namespace km3net
 	 pmanager->AddProcess(ionIoni,                   -1, 2, 2);
 
 
-         const G4double theFTFMin0 =    0.0*GeV;
+         const G4double theFTFMin0 =    100*GeV;
          //const G4double theFTFMin1 =    4.0*GeV;
          const G4double theFTFMax =   100.0*TeV;
          const G4double theBERTMin0 =   0.0*GeV;
