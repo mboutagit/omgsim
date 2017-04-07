@@ -262,22 +262,22 @@ namespace km3net
 
   }
 
-  void KM3DetectorConstruction::ReadThisConfiguration (Config* cfg, string& RootName,
+  void KM3DetectorConstruction::ReadThisConfiguration (Setting* cfg,
                                                        vector<PositionParameters>&  ConfList)
   {
     PositionParameters thePar;
     Setting
-      &sX     = cfg->lookup((RootName+"/X").data ()),
-      &sY     = cfg->lookup((RootName+"/Y").data ()),
-      &sZ     = cfg->lookup((RootName+"/Z").data ()),
-      &sTheta = cfg->lookup((RootName+"/Theta").data ()),
-      &sPhi   = cfg->lookup((RootName+"/Phi").data ()),
-      &sName  = cfg->lookup((RootName+"/Name").data ()),
-      &sID    = cfg->lookup((RootName+"/ID"  ).data ());
+      &sX     = cfg->lookup("X"),
+      &sY     = cfg->lookup("Y"),
+      &sZ     = cfg->lookup("Z"),
+      &sTheta = cfg->lookup("Theta"),
+      &sPhi   = cfg->lookup("Phi"),
+      &sName  = cfg->lookup("Name"),
+      &sID    = cfg->lookup("ID");
 
     Setting *sPsi=0;
-    if (cfg->exists((RootName+"/Psi").data ()))
-      sPsi = &(cfg->lookup((RootName+"/Psi").data ()));
+    if (cfg->exists("Psi"))
+      sPsi = &(cfg->lookup("Psi"));
 
 
     vector <double>
@@ -308,12 +308,12 @@ namespace km3net
     thePar.Name  =GetStringParameter   (sName);
     thePar.ID    =GetIntegerParameter  (sID);
 
-    if (cfg->exists((RootName+"/MotherVolume"   ).data ()))
-      thePar.MotherVolume=GetStringParameter (cfg->lookup((RootName+"/MotherVolume"   ).data ()));
-    if (cfg->exists((RootName+"/BorderSurfaceWith"   ).data ()))
-      thePar.BorderSurfaceWith=GetStringParameter (cfg->lookup((RootName+"/BorderSurfaceWith"   ).data ()));
-    if (cfg->exists((RootName+"/BorderSurfaceMaterial"   ).data ()))
-      thePar.BorderSurfaceMaterial=GetStringParameter (cfg->lookup((RootName+"/BorderSurfaceMaterial"   ).data ()));
+    if (cfg->exists("MotherVolume"))
+      thePar.MotherVolume=GetStringParameter (cfg->lookup("MotherVolume"));
+    if (cfg->exists("BorderSurfaceWith"))
+      thePar.BorderSurfaceWith=GetStringParameter (cfg->lookup("BorderSurfaceWith"));
+    if (cfg->exists("BorderSurfaceMaterial"))
+      thePar.BorderSurfaceMaterial=GetStringParameter (cfg->lookup("BorderSurfaceMaterial"));
 
     if (Multiplicity)
       {
@@ -377,14 +377,31 @@ namespace km3net
     cfg.readFile (ConfigFile.data ());
     cfg.setAutoConvert (true);
 
+    Setting& rootStg=cfg.getRoot();
+
     string Name;
 
-    if (!cfg.lookupValue ("Name", Name))
+    if (!rootStg.lookupValue ("Name", Name))
       return;
-    {
-      vector <PositionParameters> theList;
-      fOMList[Name]=theList;
-    }
+
+    int configFileSize=rootStg.getLength ();
+    for (int cfIt=0; cfIt < configFileSize; cfIt++)
+      {
+        if (!rootStg[cfIt].isGroup ())
+          continue;
+
+        string currentName=rootStg[cfIt].getName ();
+        if (currentName.find("Volume") != string::npos)
+          ReadThisConfiguration (&rootStg[cfIt], fVolumeList[Name]);
+        else if (currentName.find("OM") != string::npos)
+          ReadThisConfiguration (&rootStg[cfIt], fOMList[Name]);
+        else if (currentName.find("PM") != string::npos)
+          ReadThisConfiguration (&rootStg[cfIt], fPMList[Name]);
+      }
+    return;
+    /*keep the old method for now
+
+
 
 
     int i=1;
@@ -417,7 +434,7 @@ namespace km3net
         oss << ++i;
         RootName = string("OM") + oss.str ();
       }
-
+    */
   }
 
 

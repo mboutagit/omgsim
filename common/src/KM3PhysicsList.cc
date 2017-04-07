@@ -383,46 +383,46 @@ namespace km3net
 
       }
       else if (particleName == "alpha" || particleName == "He3") {
-         pmanager->AddProcess(new G4hMultipleScattering(), ordInActive,1,1);
-	 G4ionIonisation* ionIoni = new G4ionIonisation();
-	 ionIoni->SetStepFunction(0.1, 20*um);
-	 pmanager->AddProcess(ionIoni,                   -1, 2, 2);
+        pmanager->AddProcess(new G4hMultipleScattering(), ordInActive,1,1);
+        G4ionIonisation* ionIoni = new G4ionIonisation();
+        ionIoni->SetStepFunction(0.1, 20*um);
+        pmanager->AddProcess(ionIoni,                   -1, 2, 2);
 
 
-         const G4double theFTFMin0 =    100*GeV;
-         //const G4double theFTFMin1 =    4.0*GeV;
-         const G4double theFTFMax =   100.0*TeV;
-         const G4double theBERTMin0 =   0.0*GeV;
-         //const G4double theBERTMin1 =  19.0*MeV;
-         const G4double theBERTMax =    5.0*GeV;
+        const G4double theFTFMin0 =    100*GeV;
+        //const G4double theFTFMin1 =    4.0*GeV;
+        const G4double theFTFMax =   100.0*TeV;
+        const G4double theBERTMin0 =   0.0*GeV;
+        //const G4double theBERTMin1 =  19.0*MeV;
+        const G4double theBERTMax =    5.0*GeV;
 
-         G4FTFModel * theStringModel = new G4FTFModel;
-         G4ExcitedStringDecay * theStringDecay = new G4ExcitedStringDecay( new G4LundStringFragmentation );
-         theStringModel->SetFragmentationModel( theStringDecay );
-
-
-         G4PreCompoundModel * thePreEquilib = new G4PreCompoundModel( new G4ExcitationHandler );
-         G4GeneratorPrecompoundInterface * theCascade = new G4GeneratorPrecompoundInterface( thePreEquilib );
-
-         G4VCrossSectionDataSet * theGGNuclNuclData = G4CrossSectionDataSetRegistry::Instance()->  GetCrossSectionDataSet(G4GGNuclNuclCrossSection::Default_Name());
-         G4TheoFSGenerator * theFTFModel1 = new G4TheoFSGenerator( "FTFP" );
-         theFTFModel1->SetHighEnergyGenerator( theStringModel );
-         theFTFModel1->SetTransport( theCascade );
-         theFTFModel1->SetMinEnergy( theFTFMin0 );
-         theFTFModel1->SetMaxEnergy( theFTFMax );
-
-         G4CascadeInterface * theBERTModel0 = new G4CascadeInterface;
-         theBERTModel0->SetMinEnergy( theBERTMin0 );
-         theBERTModel0->SetMaxEnergy( theBERTMax );
+        G4FTFModel * theStringModel = new G4FTFModel;
+        G4ExcitedStringDecay * theStringDecay = new G4ExcitedStringDecay( new G4LundStringFragmentation );
+        theStringModel->SetFragmentationModel( theStringDecay );
 
 
-         G4AlphaInelasticProcess* theInelasticProcess =
-           new G4AlphaInelasticProcess("inelastic");
-         theInelasticProcess->AddDataSet( theGGNuclNuclData );
-         theInelasticProcess->RegisterMe( theFTFModel1 );
-         theInelasticProcess->RegisterMe( theBERTModel0 );
-         pmanager->AddDiscreteProcess( theInelasticProcess );
-         pmanager->AddProcess (new G4NuclearStopping, -1, 3, -1);
+        G4PreCompoundModel * thePreEquilib = new G4PreCompoundModel( new G4ExcitationHandler );
+        G4GeneratorPrecompoundInterface * theCascade = new G4GeneratorPrecompoundInterface( thePreEquilib );
+
+        G4VCrossSectionDataSet * theGGNuclNuclData = G4CrossSectionDataSetRegistry::Instance()->  GetCrossSectionDataSet(G4GGNuclNuclCrossSection::Default_Name());
+        G4TheoFSGenerator * theFTFModel1 = new G4TheoFSGenerator( "FTFP" );
+        theFTFModel1->SetHighEnergyGenerator( theStringModel );
+        theFTFModel1->SetTransport( theCascade );
+        theFTFModel1->SetMinEnergy( theFTFMin0 );
+        theFTFModel1->SetMaxEnergy( theFTFMax );
+
+        G4CascadeInterface * theBERTModel0 = new G4CascadeInterface;
+        theBERTModel0->SetMinEnergy( theBERTMin0 );
+        theBERTModel0->SetMaxEnergy( theBERTMax );
+
+
+        G4AlphaInelasticProcess* theInelasticProcess =
+          new G4AlphaInelasticProcess("inelastic");
+        theInelasticProcess->AddDataSet( theGGNuclNuclData );
+        theInelasticProcess->RegisterMe( theFTFModel1 );
+        theInelasticProcess->RegisterMe( theBERTModel0 );
+        pmanager->AddDiscreteProcess( theInelasticProcess );
+        pmanager->AddProcess (new G4NuclearStopping, -1, 3, -1);
       }
       else {
         if ((particle->GetPDGCharge() != 0.0)
@@ -445,7 +445,6 @@ namespace km3net
 
   void KM3PhysicsList::ConstructOp() {
     theCerenkovProcess = new G4Cerenkov("Cerenkov");
-    theScintillationProcess = new G4Scintillation("Scintillation");
     theAbsorptionProcess = new G4OpAbsorption();
     theRayleighScatteringProcess = new G4OpRayleigh();
     theBoundaryProcess = new KM3PMTOpticalModel ();//new G4OpBoundaryProcess();
@@ -455,26 +454,30 @@ namespace km3net
     thePetzoldScattering->SetKopelFactor (fKopelFactor);
     thePetzoldScattering->SetESFactor (fESFactor);
 
-    //  theCerenkovProcess->DumpPhysicsTable();
-    //  theScintillationProcess->DumpPhysicsTable();
-    //  theRayleighScatteringProcess->DumpPhysicsTable();
-
-    //SetVerbose(1);
-
     theCerenkovProcess->SetMaxNumPhotonsPerStep(20);
     theCerenkovProcess->SetMaxBetaChangePerStep(10.0);
     theCerenkovProcess->SetTrackSecondariesFirst(true);
 
-    theScintillationProcess->SetScintillationYieldFactor(1.);
-    theScintillationProcess->SetTrackSecondariesFirst(true);
+    // default scintillation process
+    G4Scintillation* theScintProcessDef = new G4Scintillation("Scintillation");
+    // theScintProcessDef->DumpPhysicsTable();
+    theScintProcessDef->SetTrackSecondariesFirst(true);
+    theScintProcessDef->SetScintillationYieldFactor(1.0); //
+    theScintProcessDef->SetScintillationExcitationRatio(0.0); //
 
-    theWLSProcess->UseTimeProfile("exponential");
+    // scintillation process for alpha:
+    G4Scintillation* theScintProcessAlpha = new G4Scintillation("Scintillation");
+    // theScintProcessNuc->DumpPhysicsTable();
+    theScintProcessAlpha->SetTrackSecondariesFirst(true);
+    theScintProcessAlpha->SetScintillationYieldFactor(1.1);
+    theScintProcessAlpha->SetScintillationExcitationRatio(1.0);
 
-    // Use Birks Correction in the Scintillation process
-
-    G4EmSaturation* emSaturation =
-      G4LossTableManager::Instance()->EmSaturation();
-    theScintillationProcess->AddSaturation(emSaturation);
+    // scintillation process for heavy nuclei
+    G4Scintillation* theScintProcessNuc = new G4Scintillation("Scintillation");
+    // theScintProcessNuc->DumpPhysicsTable();
+    theScintProcessNuc->SetTrackSecondariesFirst(true);
+    theScintProcessNuc->SetScintillationYieldFactor(0.2);
+    theScintProcessNuc->SetScintillationExcitationRatio(1.0);
 
     theParticleIterator->reset();
     while ((*theParticleIterator)()) {
@@ -485,12 +488,22 @@ namespace km3net
         pmanager->AddProcess(theCerenkovProcess);
         pmanager->SetProcessOrdering(theCerenkovProcess, idxPostStep);
       }
-      if (theScintillationProcess->IsApplicable(*particle)) {
-        pmanager->AddProcess(theScintillationProcess);
-        pmanager->SetProcessOrderingToLast(theScintillationProcess,
-                                           idxAtRest);
-        pmanager->SetProcessOrderingToLast(theScintillationProcess,
-                                           idxPostStep);
+      if (theScintProcessDef->IsApplicable(*particle)) {
+        if(particle->GetParticleName() == "GenericIon") {
+	  pmanager->AddProcess(theScintProcessNuc); // AtRestDiscrete
+	  pmanager->SetProcessOrderingToLast(theScintProcessNuc,idxAtRest);
+	  pmanager->SetProcessOrderingToLast(theScintProcessNuc,idxPostStep);
+	}
+	else if(particle->GetParticleName() == "alpha") {
+	  pmanager->AddProcess(theScintProcessAlpha);
+	  pmanager->SetProcessOrderingToLast(theScintProcessAlpha,idxAtRest);
+	  pmanager->SetProcessOrderingToLast(theScintProcessAlpha,idxPostStep);
+	}
+	else {
+	  pmanager->AddProcess(theScintProcessDef);
+	  pmanager->SetProcessOrderingToLast(theScintProcessDef,idxAtRest);
+	  pmanager->SetProcessOrderingToLast(theScintProcessDef,idxPostStep);
+	}
       }
       if (particleName == "opticalphoton") {
         G4cout << " AddDiscreteProcess to OpticalPhoton " << G4endl;

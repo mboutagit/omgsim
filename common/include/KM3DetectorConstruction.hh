@@ -162,7 +162,7 @@ namespace km3net
     std::map<std::string, std::vector<PositionParameters> > fVolumeList;
 
     void ReadConfiguration (std::string);
-    void ReadThisConfiguration (libconfig::Config* cfg, std::string& RootName,
+    void ReadThisConfiguration (libconfig::Setting* cfg,
                                 std::vector<PositionParameters>&  ConfList);
     G4VPhysicalVolume* PlaceThem (KM3ParametrizedVolume*, PositionParameters&);
 

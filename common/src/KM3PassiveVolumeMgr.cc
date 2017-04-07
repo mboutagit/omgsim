@@ -323,6 +323,17 @@ namespace km3net
       (stg->lookup ("RadiusMax"));
     thePTP->RadiusMin = GetFloatingParameter
       (stg->lookup ("RadiusMin"));
+
+    thePTP->SecondRadiusMin=thePTP->RadiusMin;
+    thePTP->SecondRadiusMax=thePTP->RadiusMax;
+    if (stg->exists ("SecondRadiusMax"))
+      thePTP->SecondRadiusMax = GetFloatingParameter
+        (stg->lookup ("SecondRadiusMax"));
+    if (stg->exists ("SecondRadiusMin"))
+      thePTP->SecondRadiusMin = GetFloatingParameter
+        (stg->lookup ("SecondRadiusMin"));
+
+
     thePTP->Z = GetFloatingParameter
       (stg->lookup ("Z"));
     if (stg->exists ("PhiMin"))
@@ -461,9 +472,11 @@ namespace km3net
 
     double r1=thePTP.RadiusMin;
     double r2=thePTP.RadiusMax;
+    double r21=thePTP.SecondRadiusMin;
+    double r22=thePTP.SecondRadiusMax;
 
-    double rmax[2] = {r1,r1};
-    double rmin[2] = {r2,r2};
+    double rmax[2] = {r1,r21};
+    double rmin[2] = {r2,r22};
     return MakeItLogical (
                           new G4Polyhedra
                           (thePTP.Name.data (), thePTP.PhiMin, 6.3, 6, 2, z, rmax, rmin)

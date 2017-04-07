@@ -244,6 +244,7 @@ namespace km3net
         double E_value= t.nval;
         if (constproperty)
           {
+            currentMPT->RemoveProperty (propertyname.data());
             currentMPT->AddConstProperty(propertyname.data(), E_value);
           }
         else if (t.nextToken() == MyTokenizer::TT_NUMBER) {

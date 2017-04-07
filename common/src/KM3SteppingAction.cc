@@ -69,11 +69,10 @@ namespace km3net
 
   void KM3SteppingAction::UserSteppingAction(const G4Step* fStep)
   {
-		
 
     KM3TrackInformation* info = (KM3TrackInformation*)(fStep->GetTrack()->GetUserInformation());
-		
-		if (info == 0) return;
+
+    if (info == 0) return;
 
     //#ifdef G4ANALYSIS_USE
     G4Track* fTrack = fStep->GetTrack();
@@ -116,7 +115,7 @@ namespace km3net
       }
 
     if (fTrack->GetDefinition()->GetParticleName() != "e-" ||
-        !info->HasAMother () || thePreOriginalPV == 0 || thePostOriginalPV == 0 || 
+        !info->HasAMother () || thePreOriginalPV == 0 || thePostOriginalPV == 0 ||
         !KM3PMTOpticalModel::IsAPhotocathode (thePreOriginalPV, thePostOriginalPV) ||
         info->GetOriginalParticleType() != "opticalphoton")
       return;
