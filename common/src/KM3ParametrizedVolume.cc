@@ -5,6 +5,7 @@
 #include <dirent.h>
 #include <iostream>
 #include <libconfig.h++>
+#include <regex>
 
 #include <G4VisAttributes.hh>
 
@@ -39,6 +40,39 @@ namespace km3net
   KM3ParametrizedVolume::~KM3ParametrizedVolume ()
   {
     delete fFormula;
+  }
+
+
+  void KM3ParametrizedVolume::SetParametersListFromMac (string SParList) {
+    size_t doubledotPos=SParList.find (';');
+    string subSParList=SParList;
+    while (doubledotPos != string::npos) {
+      subSParList=SParList.substr (0,doubledotPos);
+      cout << "match to search " << subSParList << endl;
+      ReadAStringParameterFromMac (subSParList);
+      SParList.erase (0,doubledotPos+1);
+      doubledotPos=SParList.find(';');
+    }
+    if (SParList.size ()) {
+      ReadAStringParameterFromMac (SParList);
+      subSParList=SParList.substr (0,doubledotPos);
+    }
+  }
+
+  void KM3ParametrizedVolume::ReadAStringParameterFromMac (std::string SPar) {
+    std::cmatch m;
+    std::regex_match ( SPar.data (), m, std::regex(" *([a-zA-Z_0-9]+) *= *([0-9]+) *") );
+    string Stmp;
+    for (unsigned i=1; i<m.size(); ++i)
+      {
+        if (i%2 == 1){
+          std::cout << "match: adding to parameter list: " << m[i];
+          Stmp = m[i];
+        }else {
+          cout << " with value " << stof(m.str(i)) << endl;
+          fFloatingParameters[Stmp] = stof(m.str(i));
+        }
+      }
   }
 
   void KM3ParametrizedVolume::SetDataFilesSources (string Path) {
@@ -135,19 +169,39 @@ namespace km3net
                 {
                   string SubFormula = isAFormula (CurrentSetting);
                   if (SubFormula.size ())
-                    fFormulaParameters[SettingName]=ReadThisFormula (CurrentSetting);
+                    fFormulaParameters[SettingName]=SubFormula;//ReadThisFormula (CurrentSetting);
                   else
                     fStringParameters[SettingName] = (const char*)CurrentSetting;
                 }
               else if (CurrentSetting.getType () == Setting::TypeArray)
                 fScalarArrayParameters[SettingName]=ReadThisArray (CurrentSetting);
+              //FormulaLooping ();
             }
         }
   }
 
+  void KM3ParametrizedVolume::FormulaLooping ()
+  {
+    for (auto& aStrPair: fStringParameters)
+      {
+        string SubFormula = isAFormula (aStrPair.second);
+        if (SubFormula.size ())
+          {
+            fFormulaParameters[aStrPair.first]=SubFormula;//ReadThisFormula (CurrentSetting);
+            fStringParameters.erase (aStrPair.first);
+          }
+      }
+  }
+
   string KM3ParametrizedVolume::isAFormula (const Setting& STG)
   {
-    string sformula = ReadThisFormula (STG);
+    string aStr = (const char*)STG;
+    return isAFormula (aStr);
+  }
+
+  string KM3ParametrizedVolume::isAFormula (string& STR)
+  {
+    string sformula = ReadThisFormula (STR);
     int isOk = fFormula->Compile (sformula.data ());
     if (isOk == 0)
       return sformula;
@@ -157,7 +211,11 @@ namespace km3net
   string KM3ParametrizedVolume::ReadThisFormula (const Setting& STG)
   {
     string strToTest = (const char*)STG;
+    return ReadThisFormula (strToTest);
+  }
 
+  string KM3ParametrizedVolume::ReadThisFormula (string& strToTest)
+  {
   beginWhileTest:
     if (strToTest.find ("__") != string::npos)
       {
@@ -168,6 +226,7 @@ namespace km3net
             if (posToReplace == string::npos)
               continue;
             string substitute = to_string (parPair.second);
+            cout << strToTest << " " << substitute << " ";
             strToTest.replace (posToReplace, parPair.first.size (), substitute);
             goto beginWhileTest;
           }

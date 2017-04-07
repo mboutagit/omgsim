@@ -102,6 +102,8 @@ namespace km3net
 
 
   KM3DetectorConstruction::KM3DetectorConstruction() {
+    detectorMessenger = new KM3DetectorMessenger(this);
+
     fMaterialsManager = KM3Material::GetIt ();
     KM3PassiveVolumeMgr::GetIt ();
     KM3PhotoTubeMgr::GetIt ();
@@ -119,8 +121,6 @@ namespace km3net
 
     fMaterialsManager->ListMaterial();
     TargetMater = fMaterialsManager->GetMaterial("AntaresWater");
-
-    detectorMessenger = new KM3DetectorMessenger(this);
   }
 
   G4VPhysicalVolume* KM3DetectorConstruction::PlaceThem (KM3ParametrizedVolume* theVolToPlace, PositionParameters& PosPar)
@@ -259,7 +259,6 @@ namespace km3net
     KM3PhotoTubeMgr::GetIt () ->SetDataFilesSources (Path);
     KM3OpticalModuleMgr::GetIt () ->SetDataFilesSources (Path);
     KM3ParametrizedVolume::SetDataFilesSources (Path);
-
   }
 
   void KM3DetectorConstruction::ReadThisConfiguration (Setting* cfg,

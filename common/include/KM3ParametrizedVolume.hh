@@ -74,9 +74,11 @@ namespace km3net
 
 
   public:
+    virtual void SetParametersListFromMac (std::string Path);
     virtual void SetDataFilesSources (std::string Path);
     virtual void LoadDirectory (std::string);
   protected:
+    void ReadAStringParameterFromMac (std::string SPar);
     virtual void ReadConfiguration (std::string) =0;
     bool ReadBaseParameters (libconfig::Config*,  VolumeParameters*);
     bool ReadBaseParameters (libconfig::Setting*,  VolumeParameters*);
@@ -103,9 +105,11 @@ namespace km3net
     virtual KM3Volume* ConstructTheVolume (VolumeParameters*) =0;
 
     std::string isAFormula (const libconfig::Setting& STG);
-
+    std::string isAFormula (std::string& STR);
+    void FormulaLooping ();
     std::vector<double> ReadThisArray (const libconfig::Setting& STG) const;
     std::string ReadThisFormula (const libconfig::Setting& STG);
+    std::string ReadThisFormula (std::string& STR);
 
   protected:
 

@@ -142,6 +142,13 @@ namespace km3net
     DataFilesSources->SetParameterName("choice", false);
     DataFilesSources->AvailableForStates(G4State_PreInit);
 
+    ParametersList = new G4UIcmdWithAString
+      ("/KM3/det/ParametersList", this);
+    ParametersList->SetGuidance("additive parameters for construction, should be in the format \"par1__ = 5;par2__ = 6...");
+    ParametersList->SetParameterName("choice", false);
+    ParametersList->AvailableForStates(G4State_PreInit);
+
+
   }
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -161,6 +168,7 @@ namespace km3net
     delete KM3Dir;
     delete DetectorTypeName;
     delete DataFilesSources;
+    delete ParametersList;
   }
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -170,7 +178,7 @@ namespace km3net
                                          G4String newValue) {
     if (command == TargMatCmd) {
       myDetector->SetTargetMaterial(newValue);
-    } if (command == TargScatCmd) {
+    } else if (command == TargScatCmd) {
       if (!TargScatCmd->GetNewBoolValue(newValue))
         KM3Material::GetIt ()->RemoveScattering ();
     } else if (command == TargLengthCmd) {
@@ -202,7 +210,10 @@ namespace km3net
       myDetector->SetDetectorTypeName (newValue);
     } else if (command == DataFilesSources) {
       myDetector->SetDataFilesSources (newValue);
+    } else if (command == ParametersList) {
+      myDetector->SetParametersListFromMac (newValue);
     }
+
 
   }
 

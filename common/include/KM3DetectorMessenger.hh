@@ -70,6 +70,7 @@ namespace km3net
     G4UIcmdWithAString*        DontDraw;
     G4UIcmdWithAString*        DetectorTypeName;
     G4UIcmdWithAString*        DataFilesSources;
+    G4UIcmdWithAString*        ParametersList;
     G4UIcmdWithADoubleAndUnit* WorldLengthCmd;
 
   };

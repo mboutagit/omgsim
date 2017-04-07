@@ -60,10 +60,9 @@ namespace km3net
   class KM3DetectorMessenger;
   class KM3Material;
 
-  class KM3DetectorConstruction: public G4VUserDetectorConstruction, KM3ParametrizedVolume {
+  class KM3DetectorConstruction: public G4VUserDetectorConstruction, public KM3ParametrizedVolume {
   public:
     static KM3DetectorConstruction* GetIt ();
-
   private:
     KM3DetectorConstruction();
     ~KM3DetectorConstruction();
@@ -188,7 +187,7 @@ namespace km3net
     KM3Material* fMaterialsManager;         // material manager
 
     G4Material* DefaultMater;          // Default material
-    G4Material* TargetMater;           // Target material
+    G4Material* TargetMater = 0;          // Target material
     G4Material* DetectorMater;         // Detector material
 
     G4double fWorldLength;            // Full length the world volume
