@@ -523,7 +523,7 @@ namespace km3net
                         logicVaccum, thePTP.Prefix + "VaccumInPmt",
                         logicPMTContainer,
                         false, 0, !thePTP.CheckOverlaps);
-    /*    new G4PVPlacement(0,
+    new G4PVPlacement(0,
                       G4ThreeVector(0., 0., thePTP.DinodsPos),
                       logicDinods, thePTP.Prefix + "Dinods",
                       logicVaccum,
@@ -538,7 +538,7 @@ namespace km3net
                       logicGridDinods, thePTP.Prefix + "GridDinods",
                       logicVaccum,
                       false, 0, !thePTP.CheckOverlaps);
-    */
+
     new G4LogicalBorderSurface(thePTP.Prefix + "photocathodeGlass", physiPhotocathode, physiVaccum, Photocathode_opsurf);
     new G4LogicalBorderSurface(thePTP.Prefix + "photocathodeGlass", physiVaccum, physiPhotocathode, Photocathode_opsurf);//*/
     new G4LogicalBorderSurface(thePTP.Prefix + "MirrorGlass", physiVaccum, physiGlass, our_Mirror_opsurf);//*/

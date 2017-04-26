@@ -21,7 +21,7 @@ namespace km3net
     ~KM3PMTOpticalModelTester () {};
 
     bool LoadMaterial (std::string PhMaterial, std::string InMaterial, std::string OutMaterial);
-    void TestElectronProduction (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &norm);
+    bool TestElectronProduction (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &norm);
     void SaveTreesAndHistograms (std::string FileName);
     float TestCalculateNormalCoefficients (G4ThreeVector &pos, float _wavelength);
     float TestCalculateCoefficients (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, float wavelength);
@@ -30,7 +30,7 @@ namespace km3net
     void QuantumEfficiencyMeasurement ();
     void PhotoCathodeEfficiencyReader ();
 
-    bool LastElectronIsEscaped () {return fOpticalModel.fEPD.HasGoneInside != 0;}
+    bool LastElectronIsEscaped ();
     float GetEfficiency (float wavelength);
     float GetGlassAbsorption (float wavelength, float thickness);
     G4MaterialPropertyVector GetKIndex () {return *(fOpticalModel._kindex_photocathode);}
@@ -40,6 +40,7 @@ namespace km3net
     }
 
     void SetElectronProductionLevel (int level) {fOpticalModel._electronProductionLevel = level;}
+    void SetElectronAbsorptionLength (float length) {fOpticalModel.fElectronAttenuationMu=1/length;}
 
     TObject* GetTObject (string name) { return fObjectCol[name];}
 		void PutTObject (string name, TObject* object) { fObjectCol[name] = object; return;}

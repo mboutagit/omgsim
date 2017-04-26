@@ -67,7 +67,7 @@ namespace km3net
     virtual void Init (std::string RF = "");
     virtual void Write ();
 
-  private:
+  protected:
 
     K40AnalysisManager();
     ~K40AnalysisManager();

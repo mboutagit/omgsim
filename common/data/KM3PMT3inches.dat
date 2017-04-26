@@ -11,7 +11,7 @@ TubeRadius     = 25.45;
 GlassThickness = 3.;
 TotalPMTHeight = 96.;
 DinodsPos      = 10.;
-DinodsRadius   = 17.;
+DinodsRadius   = 23.; //the radius takes almost all the tube, to be tested
 DinodsHeight   = 12.;
 
 CheckOverlaps = false;

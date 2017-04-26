@@ -9,6 +9,7 @@
     @author Glenn Horton-Smith, March 20, 2001.
     @author Dario Motta, Feb. 23 2005: Formalism light interaction with photocathode.
 */
+#include <TF1.h>
 
 #include "KM3PMTOpticalModel.hh"
 //#include <KM3PhysicsList.hh>
@@ -23,11 +24,14 @@
 #include "Randomize.hh"
 #include "G4UIcommand.hh"
 #include <G4UIcmdWithAnInteger.hh>
+#include <G4UIcmdWithADouble.hh>
 #include "G4UIdirectory.hh"
 #include <CLHEP/Units/SystemOfUnits.h>
 #include "G4FastSimulationManager.hh"
 #include <G4Electron.hh>
 #include <G4DynamicParticle.hh>
+
+
 
 //#include <G4FastSimulationManagerProcess.hh>
 
@@ -52,6 +56,8 @@ namespace km3net
   {
     _luxlevel= 3;
     _verbosity= 0;
+
+    ffMaclaurinSerie = new TF1 ("MaclaurinSerie","TMath::Exp(-[0]*[0]/x)*(1-12304/22680.*[0]*[0]/x+5940/22680.*pow([0],4)/x/x-1380/22680.*pow([0],6)/pow(x,3)+105/22680.*pow([0],8)/pow(x,4))",0.,1e-3);
 
     // add UI commands
     if ( fgCmdDir == NULL ) {
@@ -85,6 +91,12 @@ namespace km3net
                                   );
       fElectrProdCmd->SetParameter(new G4UIparameter("level", 'i', false));
       fVerbosityCmd->AvailableForStates(G4State_PreInit);
+
+
+      fElectrAbsLength= new G4UIcmdWithADouble("/PMTOpticalModel/ElectrAbsLength",this);
+      fElectrAbsLength->SetGuidance("Set electron absorption length in the photocathode. Should be set after \"ElectrProduction level\".");
+      fVerbosityCmd->AvailableForStates(G4State_PreInit);
+
     }
 
   }
@@ -99,13 +111,23 @@ namespace km3net
     }
     if (command == fElectrProdCmd) {
       _electronProductionLevel = fElectrProdCmd->GetNewIntValue (newValue);
+      if (_electronProductionLevel >= 3)
+        fElectronAttenuationMu = 1/(40*nm);
+      else
+        fElectronAttenuationMu = 1/(15*nm);
     }
+    if (command == fElectrAbsLength) {
+      fElectronAttenuationMu = fElectrAbsLength->GetNewDoubleValue (newValue);
+    }
+
   }
   // destructor
   KM3PMTOpticalModel::~KM3PMTOpticalModel ()
   {
     delete fLuxCmd;
     delete fVerbosityCmd;
+    delete fElectrProdCmd;
+    delete fElectrAbsLength;
     // nothing else to delete
     // Note: The "MaterialPropertyVector"s are owned by the material, not us.
   }
@@ -333,7 +355,10 @@ namespace km3net
   bool KM3PMTOpticalModel::ElectronProductionCalculator (G4ThreeVector &dir, G4ThreeVector &pos)
   {
     if (_electronProductionLevel == 0)
-      return G4UniformRand () > 0.6;
+      {
+        float rand=G4UniformRand ();
+        return rand > 0.6;
+      }
     fPhotonAttenuationMu = fA_n/_thickness_photocathode->Value(pos.theta ());
     bool GoingInside                  =dir.dot (fNorm) < 0;
     float LocalPhotocathodeThickness  =_thickness_photocathode->Value(pos.theta());
@@ -366,6 +391,22 @@ namespace km3net
         Rand = G4UniformRand () * (time1+time2);
         HasGoneInside                =((Rand > time1 && GoingInside) ||
                                        (Rand < time2 && !GoingInside));
+      }
+    else if (_electronProductionLevel == 4)
+      {
+        //High precision Brownian motion mechanism from Maclaurin series
+        float distance1=ElectronLengthGeneration;
+        float distance2=LocalPhotocathodeThickness-ElectronLengthGeneration;
+        ffMaclaurinSerie->SetParameter(0,distance1);
+        Rand           = G4UniformRand () * ffMaclaurinSerie->GetMaximum ();
+        float time1 = ffMaclaurinSerie->GetX (Rand);
+        ffMaclaurinSerie->SetParameter(0,distance2);
+        Rand           = G4UniformRand () * ffMaclaurinSerie->GetMaximum ();
+        float time2 = ffMaclaurinSerie->GetX (Rand);
+        Rand = G4UniformRand () * (time1+time2);
+        HasGoneInside                =((Rand > time1 && GoingInside) ||
+                                       (Rand < time2 && !GoingInside));
+
       }
 
 #ifdef ENABLE_TESTING

@@ -49,6 +49,11 @@ int main  (int argc, char** argv)
   cout << "Create model tester" <<endl;
   theModelTester.LoadMaterial ("photocathode10inches", "PMTGlass", "Vacuum");
 
+  theModelTester.TestCalculateNormalCoefficients (pos, 440*nm);
+  theModelTester.SetElectronProductionLevel (level);
+  if (level < 2)
+    theModelTester.SetElectronAbsorptionLength (22*nm);
+
 
   for (int angle=0;angle<90;angle++)
     {
@@ -59,17 +64,17 @@ int main  (int argc, char** argv)
       G4ThreeVector norm(0,0,1);
 
 
-      theModelTester.TestCalculateNormalCoefficients (pos, 440*nm);
-      theModelTester.SetElectronProductionLevel (level);
       float escaped=0;
-      for (int i=0; i<20000;i++)
+      float nb_elect=50000;
+      for (int i=0; i<nb_elect;i++)
         {
           theModelTester.TestCalculateCoefficients (pos, dir, dir, norm, 440*nm);
-          theModelTester.TestElectronProduction (dir, pos, norm);
-          if (theModelTester.LastElectronIsEscaped ()) escaped++;
+          if (theModelTester.TestElectronProduction (dir, pos, norm))
+            escaped++;
         }
-      cout << angle+1 << " " <<escaped/20000. << endl;
-      h->SetBinContent (angle+1,escaped/20000.);
+
+      cout << angle+1 << " " <<escaped/nb_elect << endl;
+      h->SetBinContent (angle+1,escaped/nb_elect);
     }
 
       theModelTester.SaveTreesAndHistograms ("/scratch/hugon/out.root");

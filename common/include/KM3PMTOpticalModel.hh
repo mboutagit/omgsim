@@ -24,6 +24,9 @@ class G4UIcommand;
 class G4UIdirectory;
 
 class G4UIcmdWithAnInteger;
+class G4UIcmdWithADouble;
+
+class TF1;
 
 namespace km3net
 {
@@ -94,6 +97,7 @@ namespace km3net
     G4UIcmdWithAnInteger*      fVerbosityCmd;
     G4UIcmdWithAnInteger*      fLuxCmd;
     G4UIcmdWithAnInteger*      fElectrProdCmd;
+    G4UIcmdWithADouble*        fElectrAbsLength;
 
 
     // "current values" of many parameters, for efficiency
@@ -128,6 +132,8 @@ namespace km3net
     G4double fElectronAttenuationMu = 2.85e4; //1/lambda (nm); lambda~35nm
 
     G4ThreeVector fNorm;
+
+    TF1* ffMaclaurinSerie;
 
     // private methods
     G4VParticleChange* DoPhotocathodeInteraction (const G4Track &aTrack, const G4Step &aStep);

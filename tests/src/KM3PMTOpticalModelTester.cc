@@ -95,6 +95,11 @@ namespace km3net
 		hQEmeas->Draw ();
   }
 
+  bool KM3PMTOpticalModelTester::LastElectronIsEscaped () {
+    cout << (int)(fOpticalModel.fEPD.HasGoneInside) << endl;
+    return fOpticalModel.fEPD.HasGoneInside != 0;
+  }
+
   float KM3PMTOpticalModelTester::GetQuantumEfficiency (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, float wavelength)
   {
     float Abs1,Ref1,Abs2,Ref2,Elexit1=0, Elexit2=0;
@@ -164,7 +169,7 @@ namespace km3net
 
   }
 
-  void KM3PMTOpticalModelTester::TestElectronProduction (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &norm)
+  bool KM3PMTOpticalModelTester::TestElectronProduction (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &norm)
   {
 
     TTree* theTree;
@@ -195,8 +200,12 @@ GoingInside/B");
 
     fOpticalModel.fNorm = norm;
     if (fOpticalModel.ElectronProductionCalculator (dir, pos))
-      fOpticalModel.fEPD.HasBeenGenerated = 10;
+      {
+        fOpticalModel.fEPD.HasBeenGenerated = 10;
+      }
     theTree->Fill ();
+    return (fOpticalModel.fEPD.HasBeenGenerated == 10);
+
   }
 
   float KM3PMTOpticalModelTester::GetEfficiency (float wavelength)
