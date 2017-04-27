@@ -364,6 +364,8 @@ namespace km3net
                                       (thePTP.TotalPMTHeight - thePTP.PhotoHeight - thePTP.BulbHeight - thePTP.ConeHeight)/2,
                                       0, 2 * pi);
 
+		cout << "Tube height is: " << (thePTP.TotalPMTHeight - thePTP.PhotoHeight - thePTP.BulbHeight - thePTP.ConeHeight) << endl;
+
     G4BooleanSolid* solidFullGlass = new G4UnionSolid (thePTP.Prefix + "FullGlassStep1",
                                                        solidPMTEllipsGlassExt, solidConeExt,
                                                        NULL, G4ThreeVector (0,0,-thePTP.BulbHeight/2-thePTP.ConeHeight/2));
@@ -400,6 +402,7 @@ namespace km3net
                  0., thePTP.TubeRadius - thePTP.GlassThickness,
                  (thePTP.TotalPMTHeight - thePTP.PhotoHeight - thePTP.BulbHeight - thePTP.ConeHeight)/2 - thePTP.GlassThickness,
                  0, 2 * pi);
+		
 
     G4BooleanSolid* SolidInternalPMT =
       new G4UnionSolid (thePTP.Prefix + "InternalPMTStep1",
@@ -449,6 +452,7 @@ namespace km3net
     G4LogicalVolume* logicVaccum =
       new G4LogicalVolume(SolidInternalPMT,
                           materialsManager->GetMaterial("Vacuum"), thePTP.Prefix + "VaccumOfPmt");
+													//materialsManager->GetMaterial("Vacuum"), thePTP.Prefix + "NOREFLEXVaccumInPmt");
     G4LogicalVolume* logicDinods =
       new G4LogicalVolume(solidDinods,
                           materialsManager->GetMaterial("AbsorberPVC"), thePTP.Prefix + "Dinods");
@@ -465,7 +469,6 @@ namespace km3net
     logicPhotocathode->SetVisAttributes(fgold);
     logicGlass->SetVisAttributes(fsilver);
     logicDinods->SetVisAttributes(fsilver);
-    logicCapDinods->SetVisAttributes(fgold);
     logicCapDinods->SetVisAttributes(fgold);
 
     //Then create all of the surfaces, reflectives and photocathode
@@ -521,6 +524,7 @@ namespace km3net
       new G4PVPlacement(0,
                         G4ThreeVector(0., 0., 0.),
                         logicVaccum, thePTP.Prefix + "VaccumInPmt",
+												//logicVaccum, thePTP.Prefix + "NOREFLEXVaccumInPmt",
                         logicPMTContainer,
                         false, 0, !thePTP.CheckOverlaps);
     new G4PVPlacement(0,
@@ -529,12 +533,12 @@ namespace km3net
                       logicVaccum,
                       false, 0, !thePTP.CheckOverlaps);
     new G4PVPlacement(0,
-                      G4ThreeVector(0., 0., thePTP.DinodsPos+thePTP.DinodsHeight*3./7), //relative position to the heigth
+                      G4ThreeVector(0., 0., thePTP.DinodsPos+thePTP.DinodsHeight+0.5*mm), //to be on top of the dynode tube (0.5*mm is the cap size)
                       logicCapDinods, thePTP.Prefix + "CapDinods",
                       logicVaccum,
                       false, 0, !thePTP.CheckOverlaps);
     new G4PVPlacement(0,
-                      G4ThreeVector(0., 0., thePTP.DinodsPos+thePTP.DinodsHeight*3./7 + 0.6*mm),
+                      G4ThreeVector(0., 0., thePTP.DinodsPos+thePTP.DinodsHeight+0.5*mm*2 + 0.1*mm), //to be on top of the cap
                       logicGridDinods, thePTP.Prefix + "GridDinods",
                       logicVaccum,
                       false, 0, !thePTP.CheckOverlaps);
