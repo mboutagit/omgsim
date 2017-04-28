@@ -441,6 +441,9 @@ namespace km3net
                                          0.1*mm,
                                          0, 2 * pi);
 
+    G4Tubs* solidBackCapDinods = new G4Tubs(thePTP.Prefix + "BackCapDinods", 0, thePTP.DinodsRadius, 
+                                     0.5*mm, 0, 2 * pi);
+
     //create the three logic volumes and place them
 
     G4LogicalVolume* logicPhotocathode =
@@ -463,6 +466,11 @@ namespace km3net
       new G4LogicalVolume(solidGridDinods,
                           materialsManager->GetMaterial("AbsorberPVC"), thePTP.Prefix + "GridDinods");
 
+    G4LogicalVolume* logicBackCapDinods =
+      new G4LogicalVolume(solidBackCapDinods,
+                          materialsManager->GetMaterial("AbsorberPVC"), thePTP.Prefix + "BackCapDinods");
+
+
     //Set some cool colors
     logicVaccum->SetVisAttributes(ftransparent);
     logicPMTContainer->SetVisAttributes(ftransparent);
@@ -480,6 +488,8 @@ namespace km3net
     G4OpticalSurface* our_CapDinods_opsurf = KM3Material::GetIt ()->GetOpticalSurface (thePTP.CapDinodsSurface);
 
     G4OpticalSurface* our_GridDinods_opsurf = KM3Material::GetIt ()->GetOpticalSurface (thePTP.GridDinodsSurface);
+
+		G4OpticalSurface* our_BackCapDinods_opsurf = KM3Material::GetIt ()->GetOpticalSurface (thePTP.GridDinodsSurface);  //absorbing back cap
 
     G4OpticalSurface* Photocathode_opsurf = new G4OpticalSurface(thePTP.Prefix + "Photocathode_opsurf");
     Photocathode_opsurf->SetType(dielectric_dielectric);
@@ -501,6 +511,10 @@ namespace km3net
     new G4LogicalSkinSurface(thePTP.Prefix + "MirrorGridDinods",
                              logicGridDinods,
                              our_GridDinods_opsurf);
+
+    new G4LogicalSkinSurface(thePTP.Prefix + "MirrorBackCapDinods",
+                             logicBackCapDinods,
+                             our_BackCapDinods_opsurf);
 
 
     G4VPhysicalVolume* physiPhotocathode =
@@ -540,6 +554,11 @@ namespace km3net
     new G4PVPlacement(0,
                       G4ThreeVector(0., 0., thePTP.DinodsPos+thePTP.DinodsHeight+0.5*mm*2 + 0.1*mm), //to be on top of the cap
                       logicGridDinods, thePTP.Prefix + "GridDinods",
+                      logicVaccum,
+                      false, 0, !thePTP.CheckOverlaps);
+    new G4PVPlacement(0,
+                      G4ThreeVector(0., 0., thePTP.DinodsPos-thePTP.DinodsHeight-0.5*mm), //to be on top of the cap
+                      logicBackCapDinods, thePTP.Prefix + "BackCapDinods",
                       logicVaccum,
                       false, 0, !thePTP.CheckOverlaps);
 

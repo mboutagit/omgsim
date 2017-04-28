@@ -49,6 +49,9 @@ int main  (int argc, char** argv)
   cout << "Create model tester" <<endl;
   theModelTester.LoadMaterial ("photocathode10inches", "PMTGlass", "Vacuum");
 
+	//VLA
+	G4ThreeVector pos(0,0,-1);
+
   theModelTester.TestCalculateNormalCoefficients (pos, 440*nm);
   theModelTester.SetElectronProductionLevel (level);
   if (level < 2)
@@ -60,7 +63,7 @@ int main  (int argc, char** argv)
       x= sin (angle*deg);
       z= -cos (angle*deg);
       G4ThreeVector dir(0,x,z);
-      G4ThreeVector pos(0,0,-1);
+      //G4ThreeVector pos(0,0,-1);
       G4ThreeVector norm(0,0,1);
 
 

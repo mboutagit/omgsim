@@ -118,6 +118,7 @@ int main (int argc, char** argv)
   //theModelTester.LoadMaterial ("photocathode3inches", "PMTGlass", "Vacuum");
 	theModelTester.LoadMaterial ("photocathode3inches", "PMTGlass_R12199_02", "Vacuum");
   theModelTester.fGlassThickness =glassThickness;
+	theModelTester.SetElectronProductionLevel(2);
 	
 	theModelTester.fElPrecision = 25./(precision*precision);  //this is the number of simulated e-, precision is aprrox 5~sigma and sigma is sqrt(N_e)
 

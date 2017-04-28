@@ -69,15 +69,45 @@ namespace km3net
 
   void KM3SteppingAction::UserSteppingAction(const G4Step* fStep)
   {
+    //#ifdef G4ANALYSIS_USE
+    G4Track* fTrack = fStep->GetTrack();
+    G4StepPoint* prestep = fStep->GetPreStepPoint();
+    G4StepPoint* poststep = fStep->GetPostStepPoint();
+
+		G4VPhysicalVolume* thePrePV=fStep->GetPreStepPoint()->GetPhysicalVolume();
+		G4VPhysicalVolume* thePostPV=fStep->GetPostStepPoint()->GetPhysicalVolume();
+
+
+		//moved here temporally by Vladimir since it seems that for the photons "info" is not created
+		if (thePostPV != NULL) {
+			//if (KM3PMTOpticalModel::IsAPhotocathode (fStep))   //VLA: It never enters here!!!!
+				{
+					if (fTrack->GetDefinition()->GetParticleType() == "opticalphoton" &&
+							fTrack->GetTrackStatus() != fStopAndKill)
+						{
+							//if (thePostPV->GetName ()=="NOREFLEXVaccumInPmt")
+							string vac = thePostPV->GetName ();
+							if (vac.find("NOREFLEXVaccumInPmt")!=std::string::npos)
+								{
+									fTrack->SetTrackStatus(fStopAndKill);
+									return;
+								}
+						}
+				}
+		}
+
+
 
     KM3TrackInformation* info = (KM3TrackInformation*)(fStep->GetTrack()->GetUserInformation());
 
     if (info == 0) return;
 
     //#ifdef G4ANALYSIS_USE
+/*
     G4Track* fTrack = fStep->GetTrack();
     G4StepPoint* prestep = fStep->GetPreStepPoint();
     G4StepPoint* poststep = fStep->GetPostStepPoint();
+*/
 
 
     if (fTrack->GetGlobalTime ()>1e10)
@@ -87,27 +117,34 @@ namespace km3net
         poststep->SetGlobalTime(poststep->GetLocalTime());
       }
 
-    G4VPhysicalVolume* thePrePV=fStep->GetPreStepPoint()->GetPhysicalVolume();
-    G4VPhysicalVolume* thePostPV=fStep->GetPostStepPoint()->GetPhysicalVolume();
+    //G4VPhysicalVolume* thePrePV=fStep->GetPreStepPoint()->GetPhysicalVolume();
+    //G4VPhysicalVolume* thePostPV=fStep->GetPostStepPoint()->GetPhysicalVolume();
 
     G4VPhysicalVolume* thePreOriginalPV = info->GetOriginalPrePV ();
     G4VPhysicalVolume* thePostOriginalPV = info->GetOriginalPostPV ();
+
 
     if (!thePrePV || !thePostPV || !thePreOriginalPV || !thePostOriginalPV )
       return;
     G4String prestepName=thePreOriginalPV->GetLogicalVolume ()->GetName();
     G4String poststepName=thePostOriginalPV->GetLogicalVolume ()->GetName();
-    //TODO check if it is relevent
+
+    //TODO check if it is relevent   VLA: It never enters here!!!!
     if (KM3PMTOpticalModel::IsAPhotocathode (fStep))
       {
+
         if (fTrack->GetDefinition()->GetParticleType() == "opticalphoton" &&
             fTrack->GetTrackStatus() != fStopAndKill)
           {
             if (poststepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos)
               KM3AnalysisManager::getIt()->AddPhotoTubeEntranceInfo (fStep);
 
-            if (thePostPV->GetName ()=="NOREFLEXVaccumInPmt")
+            //if (thePostPV->GetName ()=="NOREFLEXVaccumInPmt")
+						string vac = thePostPV->GetName ();
+						cout << vac << endl;
+						if (vac.find("NOREFLEXVaccumInPmt")!=std::string::npos)
               {
+								cout << "killed" << endl;
                 fTrack->SetTrackStatus(fStopAndKill);
                 return;
               }

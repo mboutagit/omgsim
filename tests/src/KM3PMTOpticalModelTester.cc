@@ -17,7 +17,6 @@ namespace km3net
 
   bool KM3PMTOpticalModelTester::LoadMaterial (string PhMaterial, string OutMaterial, string InMaterial)
   {
-    fOpticalModel._electronProductionLevel = 2;
     fGlassAbsLength = KM3Material::GetIt ()->GetMaterial(OutMaterial)->GetMaterialPropertiesTable()->GetProperty ("ABSLENGTH");
     if (!(fOpticalModel.LoadMaterialProps(KM3Material::GetIt ()->GetMaterial(PhMaterial)->GetMaterialPropertiesTable()) &&
           fOpticalModel.LoadMaterialIndex(KM3Material::GetIt ()->GetMaterial(OutMaterial)->GetMaterialPropertiesTable()) &&
@@ -136,7 +135,7 @@ namespace km3net
 
     dir=-dir;
 
-		//cout << "Escape probs: " << Elexit1 << " " << Elexit2 << " " << endl;
+		//cout << "Escape probs: " << Elexit1 << " " << Elexit2 << " e_prod_level " << fOpticalModel._electronProductionLevel << endl;
 		//cout << "glass abs: " << wavelength << " " << GetGlassAbsorption (wavelength, fGlassThickness) << endl;
 
     return (GetGlassAbsorption (wavelength, fGlassThickness)*

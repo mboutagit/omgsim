@@ -141,8 +141,8 @@ OPTION constant
 
 PROPERTY REFLECTIVITY
 OPTION eV
-2 0.32
-6 0.43
+2 0.62
+6 0.7
 
 #########################################----
 
