@@ -28,7 +28,9 @@ namespace km3net
     float GetQuantumEfficiency (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, float wavelength);
 
     void QuantumEfficiencyMeasurement ();
+		void QECheck (double wavelength);
     void PhotoCathodeEfficiencyReader ();
+
 
     bool LastElectronIsEscaped ();
     float GetEfficiency (float wavelength);
@@ -38,6 +40,10 @@ namespace km3net
     void SetKIndex (const G4MaterialPropertyVector& vector) {
       fOpticalModel._kindex_photocathode = new G4MaterialPropertyVector (vector);
     }
+
+    void SetCathodeThickness (const G4MaterialPropertyVector& vector) {
+      fOpticalModel._thickness_photocathode = new G4MaterialPropertyVector (vector);
+    } 
 
     void SetElectronProductionLevel (int level) {fOpticalModel._electronProductionLevel = level;}
     void SetElectronAbsorptionLength (float length) {fOpticalModel.fElectronAttenuationMu=1/length;}

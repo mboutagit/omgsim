@@ -87,12 +87,23 @@ namespace km3net
 				//cout << "filling " << wavelength << " " << fOpticalModel._kindex_photocathode->Value (energy) << endl;
         hKindex->Fill (wavelength, fOpticalModel._kindex_photocathode->Value (energy));
         hQEmeas->Fill (wavelength, GetQuantumEfficiency (pos,dir,pol,norm,wavelength));
+
+				if (wavelength == 450) cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,wavelength) << endl;
       }
-		cout << "current KINDEX" << endl;
-    hKindex->Draw ();
-		cout << "QE calculated from current KINDEX" << endl;
-		hQEmeas->Draw ();
+		///cout << "current KINDEX" << endl;
+    //hKindex->Draw ();
+		//cout << "QE calculated from current KINDEX" << endl;
+		//hQEmeas->Draw ();
   }
+
+	void KM3PMTOpticalModelTester::QECheck (double wavelength)
+	{ 
+		G4ThreeVector pos(0,0,1);
+    G4ThreeVector norm(0,0,-1);
+    G4ThreeVector dir(0,0,-1);
+    G4ThreeVector pol(0,0,1);
+		cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,wavelength) << endl;
+	}
 
   bool KM3PMTOpticalModelTester::LastElectronIsEscaped () {
     cout << (int)(fOpticalModel.fEPD.HasGoneInside) << endl;
