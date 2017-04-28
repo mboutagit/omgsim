@@ -87,7 +87,7 @@ namespace km3net
 
     // "luxury level" -- how fancy should the optical model be?
     G4int _luxlevel;
-    G4int _electronProductionLevel = 0;
+    G4int _electronProductionLevel = 3;
 
     // verbose level -- how verbose to be (diagnostics and such)
     G4int _verbosity;
