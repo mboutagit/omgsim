@@ -375,7 +375,7 @@ namespace km3net
     if (_electronProductionLevel == 2)
       {
         //simple mechanism with attenuation length
-        Rand                              =G4UniformRand () * PhotoCathodeLength;
+        Rand                         =G4UniformRand () * PhotoCathodeLength;
 
         HasGoneInside                =((Rand < ElectronLengthGeneration && GoingInside) ||
                                        (Rand > ElectronLengthGeneration && !GoingInside));
@@ -383,10 +383,11 @@ namespace km3net
     else if (_electronProductionLevel == 3)
       {
         //Brownian movment mechanism, more precise at very big angles
-        Rand           = G4UniformRand () * PhotoCathodeLength;
         float distance1=ElectronLengthGeneration;
         float distance2=LocalPhotocathodeThickness-ElectronLengthGeneration;
+        Rand           = G4UniformRand () * PhotoCathodeLength;
         float time1 = distance1*distance1/log(Rand);
+        Rand           = G4UniformRand () * PhotoCathodeLength;
         float time2 = distance2*distance2/log(Rand);
         Rand = G4UniformRand () * (time1+time2);
         HasGoneInside                =((Rand > time1 && GoingInside) ||
