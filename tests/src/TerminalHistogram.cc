@@ -13,6 +13,11 @@ TerminalHistogram::TerminalHistogram (const char *name, const char *title, Int_t
 
 void TerminalHistogram::Draw (Option_t* o)
 {
+  if (o)
+    {
+      //TODO manage some possible options, but remove the warning for now
+      o=o;
+    }
   struct winsize w;
   ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 

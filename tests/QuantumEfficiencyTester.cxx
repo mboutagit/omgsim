@@ -1,11 +1,11 @@
+#include "TGraph.h"
+#include "TFile.h"
 #include <TH1I.h>
 
 #include <KM3PMTOpticalModelTester.hh>
 
 #include <TerminalHistogram.hh>
 #include <iostream>
-#include "TGraph.h"
-#include "TFile.h"
 
 
 
@@ -119,7 +119,7 @@ int main (int argc, char** argv)
 	theModelTester.LoadMaterial ("photocathode3inches", "PMTGlass_R12199_02", "Vacuum");
   theModelTester.fGlassThickness =glassThickness;
 	theModelTester.SetElectronProductionLevel(3);
-	
+
 	theModelTester.fElPrecision = 25./(precision*precision);  //this is the number of simulated e-, precision is aprrox 5~sigma and sigma is sqrt(N_e)
 
   TerminalHistogram *measuredQE =0;TerminalHistogram *simulatedQE =0; TerminalHistogram *ratioQE = 0;
@@ -243,7 +243,7 @@ int main (int argc, char** argv)
 		simulatedQE_prev=(TerminalHistogram*)simulatedQE->Clone();
 
 	}while (continueopt && calibrateQE);
-	if (calibrateQE) cout << "precision " << 5./sqrt(theModelTester.fElPrecision)  << " reached" << endl; 
+	if (calibrateQE) cout << "precision " << 5./sqrt(theModelTester.fElPrecision)  << " reached" << endl;
 	theModelTester.SaveTreesAndHistograms ("testerout.root");
   // ( !PercentTo (0.02,measuredQE, 1, 11, 42) && calibrateQE);
   //}while ( !PercentTo (0.02,measuredQE, 1.1, 11, 42) && calibrateQE);
