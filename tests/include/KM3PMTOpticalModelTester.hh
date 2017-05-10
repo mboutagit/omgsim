@@ -28,7 +28,7 @@ namespace km3net
     float GetQuantumEfficiency (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, float wavelength);
 
     void QuantumEfficiencyMeasurement ();
-		void QECheck (double wavelength);
+		float QECheck (double wavelength);
     void PhotoCathodeEfficiencyReader ();
 
 

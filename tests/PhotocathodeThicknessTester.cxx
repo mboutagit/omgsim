@@ -69,6 +69,7 @@ int main (int argc, char** argv)
 
   float wavelength = 440;
   int level = 5;
+	float precision = 0.005;
   for (int argIt = 1; argIt < argc; argIt++)
     {
       string sarg = argv[argIt];
@@ -83,37 +84,29 @@ int main (int argc, char** argv)
           sarg = argv[++argIt];
           level=stoi(sarg);
         }
+      if (sarg == "-precision")
+        {
+          sarg = argv[++argIt];
+          precision = stof (sarg);
+        }
     }
 
 
+	// automatic (time-based) random seeds and filenames for each run
   CLHEP::HepRandom::setTheEngine(new CLHEP::DualRand);
-  //CLHEP::HepRandom::restoreEngineStatus();
-  //G4int ttime = time(0);
-  //G4cout << "ttime=" << ttime << G4endl;
   timeval tim;
   gettimeofday(&tim, NULL);
   long ttime = tim.tv_sec xor tim.tv_usec;
-  G4cout << "ttime=" << ttime << G4endl;
-
   G4int pid = getpid();
-  G4cout << "pid=" << pid << G4endl;
-
   long Seed = ttime xor (pid << 8);
-  // automatic (time-based) random seeds and filenames for each run
-  G4cout << "******************" << G4endl;
-  G4cout << "*** AUTOSEED ON ***" << G4endl;
-  G4cout << "*******************" << G4endl;
   long seeds[2];
   seeds[0] =  Seed;
   seeds[1] =  (long)(Seed*G4UniformRand());
-  G4cout << "seed1: " << seeds[0] << "; seed2: " << seeds[1] << G4endl;
-
   CLHEP::HepRandom::getTheEngine()->setSeeds(seeds,-1);
   CLHEP::HepRandom::showEngineStatus();
 
   bool calibrateQE = false;
   float glassThickness = 1*mm;
-  float precision = 0.01;
 
   theModelTester.LoadMaterial ("photocathode3inches", "PMTGlass_R12199_02", "Vacuum");
   theModelTester.fGlassThickness =glassThickness;
@@ -126,17 +119,14 @@ int main (int argc, char** argv)
   TerminalHistogram *measuredQE =0;TerminalHistogram *simulatedQE =0; TerminalHistogram *ratioQE = 0;
 
 
-  for (double cathodethick = 15; cathodethick <= 40; cathodethick+=1) {
+	cout << "wavelength cathodethick QE" << endl;
+  for (double cathodethick = 25; cathodethick <= 40; cathodethick+=1) {
     G4MaterialPropertyVector newThicknessVector;
     newThicknessVector.InsertValues (0, cathodethick*1e-6);
     newThicknessVector.InsertValues (188, cathodethick*1e-6);
-
-    cout << "cathodethick: " << cathodethick << endl;
     theModelTester.SetCathodeThickness(newThicknessVector);
-    theModelTester.QECheck(wavelength);
+    cout << wavelength << " " << cathodethick << " " << theModelTester.QECheck(wavelength) << endl;
   }
-
-
 
   return 0;
 }

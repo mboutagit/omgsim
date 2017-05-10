@@ -96,13 +96,14 @@ namespace km3net
 		//hQEmeas->Draw ();
   }
 
-	void KM3PMTOpticalModelTester::QECheck (double wavelength)
+	float KM3PMTOpticalModelTester::QECheck (double wavelength)
 	{ 
 		G4ThreeVector pos(0,0,1);
     G4ThreeVector norm(0,0,-1);
     G4ThreeVector dir(0,0,-1);
     G4ThreeVector pol(0,0,1);
-		cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,wavelength) << endl;
+		//cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,wavelength) << endl;
+		return GetQuantumEfficiency (pos,dir,pol,norm,wavelength);
 	}
 
   bool KM3PMTOpticalModelTester::LastElectronIsEscaped () {
