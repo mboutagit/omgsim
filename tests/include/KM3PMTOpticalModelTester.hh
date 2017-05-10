@@ -43,10 +43,10 @@ namespace km3net
 
     void SetCathodeThickness (const G4MaterialPropertyVector& vector) {
       fOpticalModel._thickness_photocathode = new G4MaterialPropertyVector (vector);
-    } 
+    }
 
     void SetElectronProductionLevel (int level) {fOpticalModel._electronProductionLevel = level;}
-    void SetElectronAbsorptionLength (float length) {fOpticalModel.fElectronAttenuationMu=1/length;}
+    void SetElectronAbsorptionLength (float length) {fOpticalModel.fElectronAttenuationLength=length;}
 
     TObject* GetTObject (string name) { return fObjectCol[name];}
 		void PutTObject (string name, TObject* object) { fObjectCol[name] = object; return;}

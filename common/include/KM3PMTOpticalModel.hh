@@ -129,7 +129,7 @@ namespace km3net
     G4double fA_n;
 
     G4double fPhotonAttenuationMu;
-    G4double fElectronAttenuationMu = 2.85e4; //1/lambda (nm); lambda~35nm
+    G4double fElectronAttenuationLength = 70*nm; //Electron absorption depth (considering brownian motion, the real abs length is longer)
 
     G4ThreeVector fNorm;
 

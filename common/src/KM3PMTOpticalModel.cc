@@ -111,13 +111,9 @@ namespace km3net
     }
     if (command == fElectrProdCmd) {
       _electronProductionLevel = fElectrProdCmd->GetNewIntValue (newValue);
-      if (_electronProductionLevel >= 3)
-        fElectronAttenuationMu = 1/(40*nm);
-      else
-        fElectronAttenuationMu = 1/(15*nm);
     }
     if (command == fElectrAbsLength) {
-      fElectronAttenuationMu = fElectrAbsLength->GetNewDoubleValue (newValue);
+      fElectronAttenuationLength = fElectrAbsLength->GetNewDoubleValue (newValue);
     }
 
   }
@@ -359,78 +355,31 @@ namespace km3net
         float rand=G4UniformRand ();
         return rand > 0.6;
       }
-    fPhotonAttenuationMu = fA_n/_thickness_photocathode->Value(pos.theta ());
+
     bool GoingInside                  =dir.dot (fNorm) < 0;
-    float LocalPhotocathodeThickness  =_thickness_photocathode->Value(pos.theta());
-    float PhotoCathodeLength          =abs(LocalPhotocathodeThickness / cos (dir.angle (fNorm)));
-    float PhotonPenetrationProb       =exp(-PhotoCathodeLength*fPhotonAttenuationMu);
-    float probMax                     =1-PhotonPenetrationProb;
-    float Rand                        =G4UniformRand ()*probMax;
+    float AbsProb                     = (fA_t)/(1-fR_t); //we know it's absorbed, thus no reflection
 
-    float ElectronLengthGeneration    =-log (Rand+PhotonPenetrationProb)/fPhotonAttenuationMu*LocalPhotocathodeThickness/PhotoCathodeLength;
-;
-    bool HasGoneInside = true;
+    //calculating relative (0 to 1) interaction depth of the photon from incoming medium
+    float lambdaPhoton                =-1/log(1-AbsProb);
+    float Rand                        =G4UniformRand ()*(AbsProb)+(1-AbsProb);
+    float PhotonDepth                 =1+lambdaPhoton*log(Rand);
+    float PhotonEscapingProb          = PhotonDepth;
 
+    Rand = G4UniformRand ();
 
-    if (_electronProductionLevel == 2)
-      {
-        //simple mechanism with attenuation length
-        Rand                         =G4UniformRand () * PhotoCathodeLength;
+    bool HasGoneInside = ((Rand < PhotonEscapingProb && GoingInside) ||
+                          (Rand > PhotonEscapingProb && !GoingInside));
 
-        HasGoneInside                =((Rand < ElectronLengthGeneration && GoingInside) ||
-                                       (Rand > ElectronLengthGeneration && !GoingInside));
-      }
-    else if (_electronProductionLevel == 3)
-      {
-        //Brownian movment mechanism, more precise at very big angles
-        float distance1=ElectronLengthGeneration;
-        float distance2=LocalPhotocathodeThickness-ElectronLengthGeneration;
-        Rand           = G4UniformRand () * PhotoCathodeLength;
-        float time1 = distance1*distance1/log(Rand);
-        Rand           = G4UniformRand () * PhotoCathodeLength;
-        float time2 = distance2*distance2/log(Rand);
-        Rand = G4UniformRand () * (time1+time2);
-        HasGoneInside                =((Rand > time1 && GoingInside) ||
-                                       (Rand < time2 && !GoingInside));
-      }
-    else if (_electronProductionLevel == 4)
-      {
-        //High precision Brownian motion mechanism from Maclaurin series
-        float distance1=ElectronLengthGeneration;
-        float distance2=LocalPhotocathodeThickness-ElectronLengthGeneration;
-        ffMaclaurinSerie->SetParameter(0,distance1);
-        Rand           = G4UniformRand () * ffMaclaurinSerie->GetMaximum ();
-        float time1 = ffMaclaurinSerie->GetX (Rand);
-        ffMaclaurinSerie->SetParameter(0,distance2);
-        Rand           = G4UniformRand () * ffMaclaurinSerie->GetMaximum ();
-        float time2 = ffMaclaurinSerie->GetX (Rand);
-        Rand = G4UniformRand () * (time1+time2);
-        HasGoneInside                =((Rand > time1 && GoingInside) ||
-                                       (Rand < time2 && !GoingInside));
-
-      }
-
-#ifdef ENABLE_TESTING
-    fEPD.PhotonAttenuationMu =         fPhotonAttenuationMu;
-    fEPD.GoingInside =                 GoingInside;
-    fEPD.LocalPhotocathodeThickness =  LocalPhotocathodeThickness;
-    fEPD.PhotoCathodeLength =          PhotoCathodeLength;
-    fEPD.PhotonPenetrationProb =     PhotonPenetrationProb;
-    fEPD.probMax =                     probMax;
-    fEPD.Rand =                        Rand;
-    fEPD.ElectronLengthGeneration =    ElectronLengthGeneration;
-    if(HasGoneInside) fEPD.HasGoneInside = 10;
-#endif
+    //considering the survival probability of the photo-electron in the photocathode linked to its distance to the vacuum (exponential distribution)
     if (HasGoneInside)
       {
-        probMax = 1-exp(-PhotoCathodeLength*fElectronAttenuationMu);
-        Rand = G4UniformRand ()*probMax;
-        float ElectronAbsLength = -log (Rand+LocalPhotocathodeThickness-ElectronLengthGeneration)/fElectronAttenuationMu;
-#ifdef ENABLE_TESTING
-        fEPD.ElectronAbsLength =             ElectronAbsLength;
-        if(ElectronAbsLength > PhotoCathodeLength) fEPD.HasGoneInside = 10;
-#endif
-        return ElectronAbsLength > PhotoCathodeLength;
+        float LocalPhotocathodeThickness = _thickness_photocathode->Value(pos.theta());
+        float Electron2Vacuum  = (1-PhotonDepth)*LocalPhotocathodeThickness;
+
+        float probMax = exp(-Electron2Vacuum/fElectronAttenuationLength);
+        Rand = G4UniformRand ();
+
+        return Rand < probMax;
       }
     return false;
 
