@@ -358,11 +358,27 @@ namespace km3net
 
     bool GoingInside                  = dir.dot (fNorm) < 0;
     float AbsProb                     = (fA_t)/(1-fR_t); //we know it's absorbed, thus no reflection
-
     float lambdaPhoton                = -1/log(1-AbsProb);  //relative absorption length 
-    float Rand                        = G4UniformRand ()*(AbsProb)+(1-AbsProb); //survival probability for the photon (no absorbtion probability)
-    float PhotonDepth                 = 1+lambdaPhoton*log(Rand);               //relative (0 to 1) interaction depth of the photon from the destination medium (vacuum in case of the photon coming from the glass)
-    float PhotonEscapingProb          = PhotonDepth;  //in case of the Browninan motion, the escaping probability is simply proportional to the electron distance from the destination medium
+		/*
+		 * survival probability for the photon (no absorbtion probability)
+		 */
+    float Rand                        = G4UniformRand ()*(AbsProb)+(1-AbsProb);
+		/*
+		 * relative (0 to 1) interaction depth of the photon from 
+		 * the destination medium (vacuum in case of the photon coming from the glass)
+		 */
+    float PhotonDepth                 = 1+lambdaPhoton*log(Rand);    
+		/*
+		 * in case of the Browninan motion, the escaping probability is simply proportional 
+		 * to the electron distance from the destination medium
+		 */
+    float PhotonEscapingProb          = PhotonDepth;
+
+#ifdef ENABLE_TESTING
+		//fEPD.PhotonMeanDepth = 
+#endif
+
+
 
     Rand = G4UniformRand ();
 
