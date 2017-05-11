@@ -224,8 +224,8 @@ GoingInside/B");
   }
 
 	float KM3PMTOpticalModelTester::CalcElectronProductionProb (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &insidedir) {
-		cout << "debugel " << fOpticalModel.fEPD.MeanPhotonDepth << " " << fOpticalModel.fEPD.MeanElectronAbsProb << endl;
-		return fOpticalModel.fEPD.MeanPhotonDepth*fOpticalModel.fEPD.MeanElectronAbsProb;
+		cout << "debugel " << fOpticalModel.fEPD.MeanPhotonDepth << " " << fOpticalModel.fEPD.MeanEscapeProb << endl;
+		return fOpticalModel.fEPD.MeanEscapeProb;
 	}
 
   float KM3PMTOpticalModelTester::GetEfficiency (float wavelength)

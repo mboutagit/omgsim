@@ -171,7 +171,8 @@ namespace km3net
       char  GoingInside;
 
 			float MeanPhotonDepth;
-			float MeanElectronAbsProb;
+			//float MeanElectronAbsProb;
+			float MeanEscapeProb;
 };
     ElectrProdData fEPD;
 #endif

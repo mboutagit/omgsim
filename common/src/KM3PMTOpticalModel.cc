@@ -384,9 +384,13 @@ namespace km3net
     float PhotonDepth                 =-lambdaPhoton*log(Rand);
 
 #ifdef ENABLE_TESTING
-		double expl = exp(-1/lambdaPhoton);
+		float expl = exp(-1/lambdaPhoton);
 		fEPD.MeanPhotonDepth = lambdaPhoton-expl/(1-expl);
-		fEPD.MeanElectronAbsProb = exp(-(1-fEPD.MeanPhotonDepth)*_thickness_photocathode->Value(pos.theta())/fElectronAttenuationLength);
+		float r1 = _thickness_photocathode->Value(pos.theta())/fElectronAttenuationLength;
+		float rdiff = r1-1/lambdaPhoton;
+
+		fEPD.MeanEscapeProb = 1./lambdaPhoton/(1.-expl)*exp(-r1)*(exp(rdiff)*(1./rdiff-1./rdiff/rdiff)+1./rdiff/rdiff);
+		//exp(-(1-fEPD.MeanPhotonDepth)*_thickness_photocathode->Value(pos.theta())/fElectronAttenuationLength);
 #endif
 
     /*
