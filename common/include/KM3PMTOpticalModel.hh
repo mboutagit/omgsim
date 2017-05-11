@@ -132,6 +132,7 @@ namespace km3net
     G4double fElectronAttenuationLength = 70*nm; //Electron absorption depth (considering brownian motion, the real abs length is longer)
 
     G4ThreeVector fNorm;
+    G4ThreeVector fInsideDirection;
 
     TF1* ffMaclaurinSerie;
 

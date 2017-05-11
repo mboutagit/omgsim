@@ -47,12 +47,13 @@ bool PercentTo (float percent, TH1* histo, float value, int binmin, int binmax)
 char CompareQuantumEfficiency (float wavelength)
 {
   G4ThreeVector pos(0,0,1);
-  G4ThreeVector norm(0,0,-1);
+  G4ThreeVector norm(0,0,1);
+  G4ThreeVector insideDirection(0,0,-1);
   G4ThreeVector dir(0,0,-1);
   G4ThreeVector pol(0,0,1);
 
   float compareit (theModelTester.GetEfficiency(wavelength) -
-                   theModelTester.GetQuantumEfficiency (pos,dir,pol, norm, wavelength));
+                   theModelTester.GetQuantumEfficiency (pos,dir,pol, norm, insideDirection, wavelength));
 
   cout << "compareit " << compareit << endl;
 

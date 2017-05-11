@@ -21,11 +21,11 @@ namespace km3net
     ~KM3PMTOpticalModelTester () {};
 
     bool LoadMaterial (std::string PhMaterial, std::string InMaterial, std::string OutMaterial);
-    bool TestElectronProduction (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &norm);
+    bool TestElectronProduction (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &insideDirection);
     void SaveTreesAndHistograms (std::string FileName);
     float TestCalculateNormalCoefficients (G4ThreeVector &pos, float _wavelength);
     float TestCalculateCoefficients (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, float wavelength);
-    float GetQuantumEfficiency (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, float wavelength);
+    float GetQuantumEfficiency (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, G4ThreeVector &insideDirection, float wavelength);
 
     void QuantumEfficiencyMeasurement ();
 		float QECheck (double wavelength);

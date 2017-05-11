@@ -402,7 +402,7 @@ namespace km3net
                  0., thePTP.TubeRadius - thePTP.GlassThickness,
                  (thePTP.TotalPMTHeight - thePTP.PhotoHeight - thePTP.BulbHeight - thePTP.ConeHeight)/2 - thePTP.GlassThickness,
                  0, 2 * pi);
-		
+
 
     G4BooleanSolid* SolidInternalPMT =
       new G4UnionSolid (thePTP.Prefix + "InternalPMTStep1",
@@ -441,7 +441,7 @@ namespace km3net
                                          0.1*mm,
                                          0, 2 * pi);
 
-    G4Tubs* solidBackCapDinods = new G4Tubs(thePTP.Prefix + "BackCapDinods", 0, thePTP.DinodsRadius, 
+    G4Tubs* solidBackCapDinods = new G4Tubs(thePTP.Prefix + "BackCapDinods", 0, thePTP.DinodsRadius,
                                      0.5*mm, 0, 2 * pi);
 
     //create the three logic volumes and place them
@@ -454,7 +454,7 @@ namespace km3net
                           materialsManager->GetMaterial(thePTP.GlassMaterial), thePTP.Prefix + thePTP.GlassMaterial);
     G4LogicalVolume* logicVaccum =
       new G4LogicalVolume(SolidInternalPMT,
-                          materialsManager->GetMaterial("Vacuum"), thePTP.Prefix + "VaccumOfPmt");
+                          materialsManager->GetMaterial("PMTVacuum"), thePTP.Prefix + "VaccumOfPmt");
 													//materialsManager->GetMaterial("Vacuum"), thePTP.Prefix + "NOREFLEXVaccumInPmt");
     G4LogicalVolume* logicDinods =
       new G4LogicalVolume(solidDinods,

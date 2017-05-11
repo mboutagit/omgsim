@@ -277,7 +277,23 @@ namespace km3net
     G4ThreeVector pol = GlobalToLocalTransform.TransformAxis(aTrack.GetPolarization());
 
     fNorm = -(aStep.GetPreStepPoint()->GetPhysicalVolume()->GetLogicalVolume ()->GetSolid ()->SurfaceNormal( pos ));
+
     G4ThreeVector norm = fNorm;
+
+    if (aStep.GetPreStepPoint()->
+        GetMaterial()->
+        GetMaterialPropertiesTable ()->
+        ConstPropertyExists("electronSensitive"))
+      fInsideDirection = -norm;
+    else if (aStep.GetPostStepPoint()->
+             GetMaterial()->
+             GetMaterialPropertiesTable ()->
+             ConstPropertyExists("electronSensitive"))
+      fInsideDirection = norm;
+    else
+      fInsideDirection = G4ThreeVector (0,0,0);
+
+
     double energy = aTrack.GetKineticEnergy ();
 
     if ( energy != _photon_energy ) // equal to last energy?
@@ -350,28 +366,21 @@ namespace km3net
 
   bool KM3PMTOpticalModel::ElectronProductionCalculator (G4ThreeVector &dir, G4ThreeVector &pos)
   {
-    if (_electronProductionLevel == 0)
+    if (_electronProductionLevel == 0 || fInsideDirection.r() == 0)
       {
+        if (!fInsideDirection.r ())
+          cerr << "hann! ca marche pas"<< endl;
         float rand=G4UniformRand ();
         return rand > 0.6;
       }
 
-    bool GoingInside                  = dir.dot (fNorm) < 0;
+    bool GoingInside                  = dir.dot (fInsideDirection) > 0;
     float AbsProb                     = (fA_t)/(1-fR_t); //we know it's absorbed, thus no reflection
-    float lambdaPhoton                = -1/log(1-AbsProb);  //relative absorption length 
-		/*
-		 * survival probability for the photon (no absorbtion probability)
-		 */
-    float Rand                        = G4UniformRand ()*(AbsProb)+(1-AbsProb);
-		/*
-		 * relative (0 to 1) interaction depth of the photon from 
-		 * the destination medium (vacuum in case of the photon coming from the glass)
-		 */
-    float PhotonDepth                 = 1+lambdaPhoton*log(Rand);    
-		/*
-		 * in case of the Browninan motion, the escaping probability is simply proportional 
-		 * to the electron distance from the destination medium
-		 */
+
+    //calculating relative (0 to 1) interaction depth of the photon from incoming medium
+    float lambdaPhoton                =-1/log(1-AbsProb);
+    float Rand                        =G4UniformRand ()*(AbsProb)+(1-AbsProb);
+    float PhotonDepth                 =-lambdaPhoton*log(Rand);
     float PhotonEscapingProb          = PhotonDepth;
 
 #ifdef ENABLE_TESTING

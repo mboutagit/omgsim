@@ -48,11 +48,12 @@ char CompareQuantumEfficiency (float wavelength)
 {
   G4ThreeVector pos(0,0,1);
   G4ThreeVector norm(0,0,1);
+  G4ThreeVector insideDirection (0,0,-1);
   G4ThreeVector dir(0,0,-1);
   G4ThreeVector pol(0,0,1);
 
   float compareit (theModelTester.GetEfficiency(wavelength) -
-                   theModelTester.GetQuantumEfficiency (pos,dir,pol, norm, wavelength));
+                   theModelTester.GetQuantumEfficiency (pos,dir,pol, norm, insideDirection, wavelength));
 
   cout << "compareit " << compareit << endl;
 
@@ -107,20 +108,20 @@ int main (int argc, char** argv)
 
   bool calibrateQE = false;
   float glassThickness = 1*mm;
+  float precision = 0.005112314551;
 
   theModelTester.LoadMaterial ("photocathode3inches", "PMTGlass_R12199_02", "Vacuum");
   theModelTester.fGlassThickness =glassThickness;
   theModelTester.SetElectronProductionLevel(level);
   theModelTester.SetElectronAbsorptionLength (1*mm);
-  theModelTester.SetElectronAbsorptionLength (70*nm);
+  theModelTester.SetElectronAbsorptionLength (65*nm);
 
   theModelTester.fElPrecision = 25./(precision*precision);  //this is the number of simulated e-, precision is aprrox 5~sigma and sigma is sqrt(N_e)
 
   TerminalHistogram *measuredQE =0;TerminalHistogram *simulatedQE =0; TerminalHistogram *ratioQE = 0;
 
 
-	cout << "wavelength cathodethick QE" << endl;
-  for (double cathodethick = 25; cathodethick <= 40; cathodethick+=1) {
+  for (double cathodethick = 15; cathodethick <= 500; cathodethick+=5) {
     G4MaterialPropertyVector newThicknessVector;
     newThicknessVector.InsertValues (0, cathodethick*1e-6);
     newThicknessVector.InsertValues (188, cathodethick*1e-6);
