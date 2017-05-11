@@ -108,13 +108,12 @@ int main (int argc, char** argv)
 
   bool calibrateQE = false;
   float glassThickness = 1*mm;
-  float precision = 0.005112314551;
 
   theModelTester.LoadMaterial ("photocathode3inches", "PMTGlass_R12199_02", "Vacuum");
   theModelTester.fGlassThickness =glassThickness;
   theModelTester.SetElectronProductionLevel(level);
   theModelTester.SetElectronAbsorptionLength (1*mm);
-  theModelTester.SetElectronAbsorptionLength (65*nm);
+  theModelTester.SetElectronAbsorptionLength (100*nm);
 
   theModelTester.fElPrecision = 25./(precision*precision);  //this is the number of simulated e-, precision is aprrox 5~sigma and sigma is sqrt(N_e)
 

@@ -77,18 +77,19 @@ namespace km3net
 		hQEmeas->Reset();
 
     G4ThreeVector pos(0,0,1);
-    G4ThreeVector norm(0,0,-1);
-    G4ThreeVector dir(0,0,-1);
-    G4ThreeVector pol(0,0,1);
+		G4ThreeVector dir(0,0,-1);
+		G4ThreeVector pol(0,0,1);
+    G4ThreeVector norm(0,0,1);
+		G4ThreeVector insidedir(0,0,-1);
 
     for (float wavelength = 250; wavelength < 750 ; wavelength+=10)
       {
         float energy = twopi*hbarc/wavelength/nm;
 				//cout << "filling " << wavelength << " " << fOpticalModel._kindex_photocathode->Value (energy) << endl;
         hKindex->Fill (wavelength, fOpticalModel._kindex_photocathode->Value (energy));
-        hQEmeas->Fill (wavelength, GetQuantumEfficiency (pos,dir,pol,norm,wavelength));
+        hQEmeas->Fill (wavelength, GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength));
 
-				if (wavelength == 450) cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,wavelength) << endl;
+				if (wavelength == 450) cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength) << endl;
       }
 		///cout << "current KINDEX" << endl;
     //hKindex->Draw ();
@@ -98,12 +99,13 @@ namespace km3net
 
 	float KM3PMTOpticalModelTester::QECheck (double wavelength)
 	{ 
-		G4ThreeVector pos(0,0,1);
-    G4ThreeVector norm(0,0,-1);
+    G4ThreeVector pos(0,0,1);
     G4ThreeVector dir(0,0,-1);
     G4ThreeVector pol(0,0,1);
+    G4ThreeVector norm(0,0,1);
+    G4ThreeVector insidedir(0,0,-1);
 		//cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,wavelength) << endl;
-		return GetQuantumEfficiency (pos,dir,pol,norm,wavelength);
+		return GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength);
 	}
 
   bool KM3PMTOpticalModelTester::LastElectronIsEscaped () {
@@ -111,7 +113,7 @@ namespace km3net
     return fOpticalModel.fEPD.HasGoneInside != 0;
   }
 
-  float KM3PMTOpticalModelTester::GetQuantumEfficiency (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, float wavelength)
+  float KM3PMTOpticalModelTester::GetQuantumEfficiency (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, G4ThreeVector &insidedir, float wavelength)
   {
     float Abs1,Ref1,Abs2,Ref2,Elexit1=0, Elexit2=0;
     TestCalculateCoefficients (pos, dir, pol, norm, wavelength*nm);
@@ -120,7 +122,7 @@ namespace km3net
     for (int elescape=0; elescape<fElPrecision; elescape++)
       {
         TestCalculateNormalCoefficients (pos, wavelength*nm);
-        TestElectronProduction (dir, pos, norm);
+        TestElectronProduction (dir, pos, insidedir);
         if (fOpticalModel.fEPD.HasBeenGenerated)
           Elexit1++;
       }
@@ -136,7 +138,7 @@ namespace km3net
     for (int elescape=0; elescape<fElPrecision; elescape++)
       {
         TestCalculateNormalCoefficients (pos, wavelength*nm);
-        TestElectronProduction (dir, pos, norm);
+        TestElectronProduction (dir, pos, insidedir);
         if (fOpticalModel.fEPD.HasBeenGenerated)
           Elexit2++;
       }
@@ -180,7 +182,7 @@ namespace km3net
 
   }
 
-  bool KM3PMTOpticalModelTester::TestElectronProduction (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &norm)
+  bool KM3PMTOpticalModelTester::TestElectronProduction (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &insidedir)
   {
 
     TTree* theTree;
@@ -209,7 +211,7 @@ GoingInside/B");
 
     memset(&(fOpticalModel.fEPD),0,sizeof(fOpticalModel.fEPD));
 
-    fOpticalModel.fNorm = norm;
+    fOpticalModel.fInsideDirection = insidedir;
     if (fOpticalModel.ElectronProductionCalculator (dir, pos))
       {
         fOpticalModel.fEPD.HasBeenGenerated = 10;
