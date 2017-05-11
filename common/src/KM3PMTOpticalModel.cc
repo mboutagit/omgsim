@@ -387,10 +387,14 @@ namespace km3net
 		float expl = exp(-1/lambdaPhoton);
 		fEPD.MeanPhotonDepth = lambdaPhoton-expl/(1-expl);
 		float r1 = _thickness_photocathode->Value(pos.theta())/fElectronAttenuationLength;
-		float rdiff = r1-1/lambdaPhoton;
-
-		fEPD.MeanEscapeProb = 1./lambdaPhoton/(1.-expl)*exp(-r1)*(exp(rdiff)*(1./rdiff-1./rdiff/rdiff)+1./rdiff/rdiff);
-		//exp(-(1-fEPD.MeanPhotonDepth)*_thickness_photocathode->Value(pos.theta())/fElectronAttenuationLength);
+		if (GoingInside) {
+			float rdiff = r1-1/lambdaPhoton;
+			fEPD.MeanEscapeProb = 1./lambdaPhoton/(1.-expl)*exp(-r1)*(exp(rdiff)*(1./rdiff-1./rdiff/rdiff)+1./rdiff/rdiff);
+		}
+		else {
+			float rsum = r1+1/lambdaPhoton;
+			fEPD.MeanEscapeProb = 1./lambdaPhoton/(1.-expl)*((exp(-rsum)-1.)/rsum/rsum+1./rsum);
+		}
 #endif
 
     /*
@@ -405,7 +409,9 @@ namespace km3net
     if (HasGoneInside)
       {
         float LocalPhotocathodeThickness = _thickness_photocathode->Value(pos.theta());
-        float Electron2Vacuum  = (1-PhotonDepth)*LocalPhotocathodeThickness;
+				float Electron2Vacuum;
+				if (GoingInside) Electron2Vacuum  = (1-PhotonDepth)*LocalPhotocathodeThickness;
+				else Electron2Vacuum  = PhotonDepth*LocalPhotocathodeThickness;
 
         float probMax = exp(-Electron2Vacuum/fElectronAttenuationLength);
         Rand = G4UniformRand ();
