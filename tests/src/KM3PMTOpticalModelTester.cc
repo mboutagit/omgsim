@@ -97,7 +97,7 @@ namespace km3net
 		//hQEmeas->Draw ();
   }
 
-	float KM3PMTOpticalModelTester::QECheck (double wavelength)
+	float KM3PMTOpticalModelTester::QECheck (double wavelength, bool fastelprod)
 	{ 
     G4ThreeVector pos(0,0,1);
     G4ThreeVector dir(0,0,-1);
@@ -105,32 +105,33 @@ namespace km3net
     G4ThreeVector norm(0,0,1);
     G4ThreeVector insidedir(0,0,-1);
 		//cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,wavelength) << endl;
-		return GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength);
+		return GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength,fastelprod);
 	}
+
 
   bool KM3PMTOpticalModelTester::LastElectronIsEscaped () {
     cout << (int)(fOpticalModel.fEPD.HasGoneInside) << endl;
     return fOpticalModel.fEPD.HasGoneInside != 0;
   }
 
-  float KM3PMTOpticalModelTester::GetQuantumEfficiency (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, G4ThreeVector &insidedir, float wavelength)
+  float KM3PMTOpticalModelTester::GetQuantumEfficiency (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, G4ThreeVector &insidedir, float wavelength, bool fastelprod)
   {
     float Abs1,Ref1,Abs2,Ref2,Elexit1=0, Elexit2=0;
     TestCalculateCoefficients (pos, dir, pol, norm, wavelength*nm);
     TestCalculateNormalCoefficients (pos, wavelength*nm);
 
-    for (int elescape=0; elescape<fElPrecision; elescape++)
-      {
-        TestCalculateNormalCoefficients (pos, wavelength*nm);
-        TestElectronProduction (dir, pos, insidedir);
-        if (fOpticalModel.fEPD.HasBeenGenerated)
-          Elexit1++;
-      }
-    //Elexit1/=fElPrecision*1.1; //0.9 for collection efficiency  //NO, it is QE measurement, so this is not needed!
-		Elexit1/=fElPrecision;
-
-		cout << "compare: " << Elexit1 << " "  << CalcElectronProductionProb(dir, pos, insidedir) << endl;
-	
+		if (!fastelprod) {
+			for (int elescape=0; elescape<fElPrecision; elescape++)
+				{
+					TestCalculateNormalCoefficients (pos, wavelength*nm);
+					TestElectronProduction (dir, pos, insidedir);
+					if (fOpticalModel.fEPD.HasBeenGenerated)
+						Elexit1++;
+				}
+			Elexit1/=fElPrecision;
+		} else {
+			Elexit1 = CalcElectronProductionProb(dir, pos, insidedir);
+		}
 
     Abs1=fOpticalModel.fA_t;
     Ref1=fOpticalModel.fR_t;
@@ -138,15 +139,19 @@ namespace km3net
 
     TestCalculateCoefficients (pos, dir, pol, norm, wavelength*nm);
 
-    for (int elescape=0; elescape<fElPrecision; elescape++)
-      {
-        TestCalculateNormalCoefficients (pos, wavelength*nm);
-        TestElectronProduction (dir, pos, insidedir);
-        if (fOpticalModel.fEPD.HasBeenGenerated)
-          Elexit2++;
-      }
-    //Elexit2/=fElPrecision*1.1; //0.9 for collection efficiency //NO, it is QE measurement, so this is not needed!
-    Elexit2/=fElPrecision;
+
+		if (!fastelprod) {
+			for (int elescape=0; elescape<fElPrecision; elescape++)
+				{
+					TestCalculateNormalCoefficients (pos, wavelength*nm);
+					TestElectronProduction (dir, pos, insidedir);
+					if (fOpticalModel.fEPD.HasBeenGenerated)
+						Elexit2++;
+				}
+			Elexit2/=fElPrecision;
+		} else {
+			Elexit2 = CalcElectronProductionProb(dir, pos, insidedir);
+		}
     Abs2=fOpticalModel.fA_t;
     Ref2=fOpticalModel.fR_t;
 
@@ -224,7 +229,12 @@ GoingInside/B");
   }
 
 	float KM3PMTOpticalModelTester::CalcElectronProductionProb (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &insidedir) {
-		cout << "debugel " << fOpticalModel.fEPD.MeanPhotonDepth << " " << fOpticalModel.fEPD.MeanEscapeProb << endl;
+    memset(&(fOpticalModel.fEPD),0,sizeof(fOpticalModel.fEPD));
+    fOpticalModel.fInsideDirection = insidedir;
+    if (fOpticalModel.ElectronProductionCalculator (dir, pos))
+      { 
+        fOpticalModel.fEPD.HasBeenGenerated = 10;
+      }
 		return fOpticalModel.fEPD.MeanEscapeProb;
 	}
 

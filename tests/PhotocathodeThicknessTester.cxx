@@ -115,7 +115,9 @@ int main (int argc, char** argv)
   theModelTester.SetElectronAbsorptionLength (1*mm);
   theModelTester.SetElectronAbsorptionLength (100*nm);
 
-  theModelTester.fElPrecision = 25./(precision*precision);  //this is the number of simulated e-, precision is aprrox 5~sigma and sigma is sqrt(N_e)
+	bool fastelprod = false;
+  if (precision != 0) theModelTester.fElPrecision = 25./(precision*precision);  //this is the number of simulated e-, precision is aprrox 5~sigma and sigma is sqrt(N_e)
+	else fastelprod = true;
 
   TerminalHistogram *measuredQE =0;TerminalHistogram *simulatedQE =0; TerminalHistogram *ratioQE = 0;
 
@@ -125,7 +127,7 @@ int main (int argc, char** argv)
     newThicknessVector.InsertValues (0, cathodethick*1e-6);
     newThicknessVector.InsertValues (188, cathodethick*1e-6);
     theModelTester.SetCathodeThickness(newThicknessVector);
-    cout << wavelength << " " << cathodethick << " " << theModelTester.QECheck(wavelength) << endl;
+    cout << wavelength << " " << cathodethick << " " << theModelTester.QECheck(wavelength,fastelprod) << endl;
   }
 
   return 0;

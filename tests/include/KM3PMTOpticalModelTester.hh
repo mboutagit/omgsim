@@ -26,10 +26,10 @@ namespace km3net
     void SaveTreesAndHistograms (std::string FileName);
     float TestCalculateNormalCoefficients (G4ThreeVector &pos, float _wavelength);
     float TestCalculateCoefficients (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, float wavelength);
-    float GetQuantumEfficiency (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, G4ThreeVector &insideDirection, float wavelength);
+    float GetQuantumEfficiency (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, G4ThreeVector &insideDirection, float wavelength, bool fastelprod = false);
 
     void QuantumEfficiencyMeasurement ();
-		float QECheck (double wavelength);
+		float QECheck (double wavelength, bool fastelprod = false);
     void PhotoCathodeEfficiencyReader ();
 
 
