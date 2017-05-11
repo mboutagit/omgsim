@@ -129,6 +129,9 @@ namespace km3net
     //Elexit1/=fElPrecision*1.1; //0.9 for collection efficiency  //NO, it is QE measurement, so this is not needed!
 		Elexit1/=fElPrecision;
 
+		cout << "compare: " << Elexit1 << " "  << CalcElectronProductionProb(dir, pos, insidedir) << endl;
+	
+
     Abs1=fOpticalModel.fA_t;
     Ref1=fOpticalModel.fR_t;
     dir=-dir;
@@ -184,7 +187,14 @@ namespace km3net
 
   bool KM3PMTOpticalModelTester::TestElectronProduction (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &insidedir)
   {
+    memset(&(fOpticalModel.fEPD),0,sizeof(fOpticalModel.fEPD));
 
+    fOpticalModel.fInsideDirection = insidedir;
+    if (fOpticalModel.ElectronProductionCalculator (dir, pos))
+      {
+        fOpticalModel.fEPD.HasBeenGenerated = 10;
+      }
+/*
     TTree* theTree;
     if (!fObjectCol.count ("ElectrProdTree") && fObjectCol["ElectrProdTree"] == NULL)
       {
@@ -207,19 +217,16 @@ GoingInside/B");
       }
     else
       theTree = (TTree*)(fObjectCol["ElectrProdTree"]);
-
-
-    memset(&(fOpticalModel.fEPD),0,sizeof(fOpticalModel.fEPD));
-
-    fOpticalModel.fInsideDirection = insidedir;
-    if (fOpticalModel.ElectronProductionCalculator (dir, pos))
-      {
-        fOpticalModel.fEPD.HasBeenGenerated = 10;
-      }
     theTree->Fill ();
+*/
     return (fOpticalModel.fEPD.HasBeenGenerated == 10);
 
   }
+
+	float KM3PMTOpticalModelTester::CalcElectronProductionProb (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &insidedir) {
+		cout << "debugel " << fOpticalModel.fEPD.MeanPhotonDepth << " " << fOpticalModel.fEPD.MeanElectronAbsProb << endl;
+		return fOpticalModel.fEPD.MeanPhotonDepth*fOpticalModel.fEPD.MeanElectronAbsProb;
+	}
 
   float KM3PMTOpticalModelTester::GetEfficiency (float wavelength)
   {

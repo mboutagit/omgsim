@@ -277,7 +277,6 @@ namespace km3net
     G4ThreeVector pol = GlobalToLocalTransform.TransformAxis(aTrack.GetPolarization());
 
     fNorm = -(aStep.GetPreStepPoint()->GetPhysicalVolume()->GetLogicalVolume ()->GetSolid ()->SurfaceNormal( pos ));
-
     G4ThreeVector norm = fNorm;
 
     if (aStep.GetPreStepPoint()->
@@ -377,22 +376,26 @@ namespace km3net
     bool GoingInside                  = dir.dot (fInsideDirection) > 0;
     float AbsProb                     = (fA_t)/(1-fR_t); //we know it's absorbed, thus no reflection
 
-    //calculating relative (0 to 1) interaction depth of the photon from incoming medium
+		//relative absorption length (lambda\l_0)
     float lambdaPhoton                =-1/log(1-AbsProb);
+		//survaval probability (exponentially related to the travelled distance)
     float Rand                        =G4UniformRand ()*(AbsProb)+(1-AbsProb);
+		//relative (0 to 1) interaction length or depth of the photon from the incoming medium
     float PhotonDepth                 =-lambdaPhoton*log(Rand);
-    float PhotonEscapingProb          = PhotonDepth;
 
 #ifdef ENABLE_TESTING
-		//fEPD.PhotonMeanDepth = 
+		double expl = exp(-1/lambdaPhoton);
+		fEPD.MeanPhotonDepth = lambdaPhoton-expl/(1-expl);
+		fEPD.MeanElectronAbsProb = exp(-(1-fEPD.MeanPhotonDepth)*_thickness_photocathode->Value(pos.theta())/fElectronAttenuationLength);
 #endif
 
-
-
+    /*
+     * electron probability to escape in the proper media is proportional to the distance to the wrong media 
+     * (to the glass/incoming medium in case of the photon coming from the glass)
+     */
     Rand = G4UniformRand ();
-
-    bool HasGoneInside = ((Rand < PhotonEscapingProb && GoingInside) ||
-                          (Rand > PhotonEscapingProb && !GoingInside));
+    bool HasGoneInside = ((Rand < PhotonDepth && GoingInside) ||
+                          (Rand > PhotonDepth && !GoingInside));
 
     //considering the survival probability of the photo-electron in the photocathode linked to its distance to the vacuum (exponential distribution)
     if (HasGoneInside)

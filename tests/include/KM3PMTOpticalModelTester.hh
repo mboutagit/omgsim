@@ -22,6 +22,7 @@ namespace km3net
 
     bool LoadMaterial (std::string PhMaterial, std::string InMaterial, std::string OutMaterial);
     bool TestElectronProduction (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &insideDirection);
+		float CalcElectronProductionProb(G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &insideDirection);
     void SaveTreesAndHistograms (std::string FileName);
     float TestCalculateNormalCoefficients (G4ThreeVector &pos, float _wavelength);
     float TestCalculateCoefficients (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, float wavelength);
