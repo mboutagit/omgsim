@@ -157,7 +157,7 @@ namespace km3net
 
     dir=-dir;
 
-		//cout << "Escape probs: " << Elexit1 << " " << Elexit2 << " e_prod_level " << fOpticalModel._electronProductionLevel << endl;
+		cout << "Escape probs: " << Elexit1 << " " << Elexit2 << " e_prod_level " << fOpticalModel._electronProductionLevel << endl;
 		//cout << "glass abs: " << wavelength << " " << GetGlassAbsorption (wavelength, fGlassThickness) << endl;
 
     return (GetGlassAbsorption (wavelength, fGlassThickness)*

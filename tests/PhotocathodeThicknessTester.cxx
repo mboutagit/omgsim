@@ -122,13 +122,31 @@ int main (int argc, char** argv)
   TerminalHistogram *measuredQE =0;TerminalHistogram *simulatedQE =0; TerminalHistogram *ratioQE = 0;
 
 
-  for (double cathodethick = 15; cathodethick <= 500; cathodethick+=5) {
-    G4MaterialPropertyVector newThicknessVector;
-    newThicknessVector.InsertValues (0, cathodethick*1e-6);
-    newThicknessVector.InsertValues (188, cathodethick*1e-6);
-    theModelTester.SetCathodeThickness(newThicknessVector);
-    cout << wavelength << " " << cathodethick << " " << theModelTester.QECheck(wavelength,fastelprod) << endl;
-  }
+	double optcathodethick = 0;
+	double optqe = 0; 
+	double qe;
+
+	for (double wavelength = 400; wavelength <= 800; wavelength+=50) {
+		optcathodethick = 0;
+		optqe = 0;
+		for (double cathodethick = 1; cathodethick <= 1000; cathodethick+=0.1) {
+			G4MaterialPropertyVector newThicknessVector;
+			newThicknessVector.InsertValues (0, cathodethick*1e-6);
+			newThicknessVector.InsertValues (188, cathodethick*1e-6);
+			theModelTester.SetCathodeThickness(newThicknessVector);
+			qe = theModelTester.QECheck(wavelength,fastelprod);
+			if (qe < 0) {
+				cout << "WARNING: " << wavelength << " " << cathodethick << " " << qe << endl;
+
+			}
+			if (qe > optqe) {
+				optqe = qe;
+				optcathodethick = cathodethick;
+			}
+			//cout << wavelength << " " << cathodethick << " " << qe << endl;
+		}
+		cout << wavelength << " " << optcathodethick << " " << optqe << endl;
+	}
 
   return 0;
 }
