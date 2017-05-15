@@ -305,7 +305,6 @@ namespace km3net
     // set _thickness and _cos_theta1
     _thickness=  _thickness_photocathode->Value( pos.theta() );
 
-  gtPropagationInPh:
     _cos_theta1 = dir.cosTheta (norm);
 
     CalculateCoefficients ();
@@ -337,10 +336,9 @@ namespace km3net
         dir.unit ();
         pol.unit ();
 
-        norm=-norm;
         aParticleChange.ProposeMomentumDirection (LocalToGlobalTransform.TransformAxis(dir));
         aParticleChange.ProposePolarization (LocalToGlobalTransform.TransformAxis(pol));
-        goto gtPropagationInPh;
+        return G4VDiscreteProcess::PostStepDoIt(aTrack, aStep);
       }
     else
       {
@@ -369,36 +367,42 @@ namespace km3net
       {
         if (!fInsideDirection.r ())
           cerr << "hann! ca marche pas"<< endl;
-        float rand=G4UniformRand ();
+        double rand=G4UniformRand ();
         return rand > 0.6;
       }
-
     bool GoingInside                  = dir.dot (fInsideDirection) > 0;
-    float AbsProb                     = (fA_t)/(1-fR_t); //we know it's absorbed, thus no reflection
+    double PhotoCathodeLength=fabs(_thickness / (fNorm.dot(dir)));
 
 		//relative absorption length (lambda\l_0)
-    float lambdaPhoton                =-1/log(1-AbsProb);
+    double lambdaPhoton                =_wavelength/(2*twopi*_k2);
 		//survaval probability (exponentially related to the travelled distance)
-    float Rand                        =G4UniformRand ()*(AbsProb)+(1-AbsProb);
-		//relative (0 to 1) interaction length or depth of the photon from the incoming medium
-    float PhotonDepth                 =-lambdaPhoton*log(Rand);
+    double Rand                        =G4UniformRand ();
+		//relative interaction length or depth of the photon from the incoming medium in units of photocathode length
+    double PhotonDepth                 =-lambdaPhoton*log(Rand)/PhotoCathodeLength;
+
+    int   NbReflect = (int)(PhotonDepth);
+
+    GoingInside = ((NbReflect%2 == 1) xor GoingInside); //it's cutier
+
+    PhotonDepth -= (double)NbReflect;
+
 
 #ifdef ENABLE_TESTING
-		float expl = exp(-1/lambdaPhoton);
+		double expl = exp(-1/lambdaPhoton);
 		fEPD.MeanPhotonDepth = lambdaPhoton-expl/(1-expl);
-		float r1 = _thickness_photocathode->Value(pos.theta())/fElectronAttenuationLength;
+		double r1 = _thickness_photocathode->Value(pos.theta())/fElectronAttenuationLength;
 		if (GoingInside) {
-			float rdiff = r1-1/lambdaPhoton;
+			double rdiff = r1-1/lambdaPhoton;
 			fEPD.MeanEscapeProb = 1./lambdaPhoton/(1.-expl)*exp(-r1)*(exp(rdiff)*(1./rdiff-1./rdiff/rdiff)+1./rdiff/rdiff);
 		}
 		else {
-			float rsum = r1+1/lambdaPhoton;
+			double rsum = r1+1/lambdaPhoton;
 			fEPD.MeanEscapeProb = 1./lambdaPhoton/(1.-expl)*((exp(-rsum)-1.)/rsum/rsum+1./rsum);
 		}
 #endif
 
     /*
-     * electron probability to escape in the proper media is proportional to the distance to the wrong media 
+     * electron probability to escape in the proper media is proportional to the distance to the wrong media
      * (to the glass/incoming medium in case of the photon coming from the glass)
      */
     Rand = G4UniformRand ();
@@ -408,12 +412,12 @@ namespace km3net
     //considering the survival probability of the photo-electron in the photocathode linked to its distance to the vacuum (exponential distribution)
     if (HasGoneInside)
       {
-        float LocalPhotocathodeThickness = _thickness_photocathode->Value(pos.theta());
-				float Electron2Vacuum;
+        double LocalPhotocathodeThickness = _thickness_photocathode->Value(pos.theta());
+				double Electron2Vacuum;
 				if (GoingInside) Electron2Vacuum  = (1-PhotonDepth)*LocalPhotocathodeThickness;
 				else Electron2Vacuum  = PhotonDepth*LocalPhotocathodeThickness;
 
-        float probMax = exp(-Electron2Vacuum/fElectronAttenuationLength);
+        double probMax = exp(-Electron2Vacuum/fElectronAttenuationLength);
         Rand = G4UniformRand ();
 
         return Rand < probMax;
@@ -505,6 +509,8 @@ namespace km3net
     fR_s=real(ampr*conj(ampr));
     fT_s=real(gfunc(_n3,_n1,theta3,theta1)*ampt*conj(ampt));
 
+    //complex<double> ampa=t12*exp(-1.*zi*delta)/(1.+r12*r23*exp(-2.*zi*delta)); //try to calculate abs for comparison. Not yet done.
+    //fA_s=real(gfunc(_n2,_n1,theta2,theta1)*ampa*conj(ampa));
     //Calculation for the p-polarization
 
     r12=rfunc(_n1,_n2comp,theta2,theta1);
@@ -519,6 +525,10 @@ namespace km3net
     //And finally...!
     fR_p=real(ampr*conj(ampr));
     fT_p=real(gfunc(_n3,_n1,theta3,theta1)*ampt*conj(ampt));
+    //ampa=t12*exp(-zi*delta)/(1.+r12*r23*exp(-2.*zi*delta));
+    //fA_p=real(gfunc(_n2,_n1,theta2,theta1)*ampa*conj(ampa));
+
+
 
 # ifdef G4DEBUG
     if (_verbosity >= 10) {
