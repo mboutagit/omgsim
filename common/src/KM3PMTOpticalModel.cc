@@ -382,10 +382,12 @@ namespace km3net
 
     int   NbReflect = (int)(PhotonDepth);
 
-    GoingInside = ((NbReflect%2 == 1) xor GoingInside); //it's cutier
+    GoingInside = ((NbReflect%2 == 0) xor GoingInside); //it's cutier
 
     PhotonDepth -= (double)NbReflect;
 
+    cout << "GoingInside" << " " << "PhotoCathodeLength" << " " << "lambdaPhoton/nm" << " " << "Rand" << " " << "PhotonDepth" << " " << "NbReflect" << endl;
+cout << GoingInside << " " << PhotoCathodeLength/nm << " " << lambdaPhoton/nm << " " << Rand << " " << PhotonDepth << " " << NbReflect << endl;
 
 #ifdef ENABLE_TESTING
 		double expl = exp(-1/lambdaPhoton);
