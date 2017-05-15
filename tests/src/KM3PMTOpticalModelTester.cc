@@ -119,12 +119,10 @@ namespace km3net
   {
     float Abs1,Ref1,Abs2,Ref2,Elexit1=0, Elexit2=0;
     TestCalculateCoefficients (pos, dir, pol, norm, wavelength*nm);
-    TestCalculateNormalCoefficients (pos, wavelength*nm);
 
     if (fElPrecision != 0) {
       for (int elescape=0; elescape<fElPrecision; elescape++)
         {
-          TestCalculateNormalCoefficients (pos, wavelength*nm);
           TestElectronProduction (dir, pos, insidedir);
           if (fOpticalModel.fEPD.HasBeenGenerated)
             Elexit1++;
