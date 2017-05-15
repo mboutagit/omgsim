@@ -124,56 +124,83 @@ OPTION wavelength # "Optical properties of bialkali photocathodes" D. Motta, S. 
 650 2.95
 665 2.95
 680 2.96
+1000 1
 
 PROPERTY  KINDEX  #Result of the calibration with (./QuantumEfficiencyTester -precision 0.01 -cal) starting from "motta_KINDEX" (below)
 # UNITS  nm\E 1
 OPTION wavelength
 280 0
-290 0.061594
-300 0.18549
-310 0.42085
-320 0.73516
-330 1.1286
-340 1.4152
-350 1.5541
-360 1.6457
-370 1.8901
-380 2.1683
-390 2.1654
-400 2.0531
-410 1.881
-420 1.7474
-430 1.6717
-440 1.5612
-450 1.3731
-460 1.1945
-470 0.97649
-480 0.83466
-490 0.73765
-500 0.67252
-510 0.60474
-520 0.51648
-530 0.38568
-540 0.27831
-550 0.21523
-560 0.17847
-570 0.15562
-580 0.13702
-590 0.12103
-600 0.10712
-610 0.095318
-620 0.083897
-630 0.073658
-640 0.063215
-650 0.054701
-660 0.049425
-670 0.039306
-680 0.029667
-690 0.0208
-700 0.01852
-710 0.011035
-720 0.0038807
-730 0
+380 1.69
+395 1.69
+410 1.71
+425 1.53
+440 1.50
+455 1.44
+470 1.34
+485 1.11
+500 1.06
+515 1.05
+530 0.86
+545 0.63
+560 0.53
+575 0.46
+590 0.42
+605 0.38
+620 0.37
+635 0.35
+650 0.34
+665 0.34
+680 0.33
+700 0
+
+
+#280 0
+#290 0.061594
+#300 0.18549
+#310 0.42085
+#320 0.73516
+#330 1.1286
+#340 1.4152
+#350 1.5541
+#360 1.6457
+#370 1.8901
+#380 2.1683
+#390 2.1654
+#400 2.0531
+#410 1.881
+#420 1.7474
+#430 1.6717
+#440 1.5612
+#450 1.3731
+#460 1.1945
+#470 0.97649
+#480 0.83466
+#490 0.73765
+#500 0.67252
+#510 0.60474
+#520 0.51648
+#530 0.38568
+#540 0.27831
+#550 0.21523
+#560 0.17847
+#570 0.15562
+#580 0.13702
+#590 0.12103
+#600 0.10712
+#610 0.095318
+#620 0.083897
+#630 0.073658
+#640 0.063215
+#650 0.054701
+#660 0.049425
+#670 0.039306
+#680 0.029667
+#690 0.0208
+#700 0.01852
+#710 0.011035
+#720 0.0038807
+#730 0
+#
 # This came from v2.0... extrapolation and correction from "Optical properties of bialkali photocathodes" D. Motta, S. Schonert. Table 3, KCsSb (motta_KINDEX)
 #280 0
 #380 1.69
@@ -283,14 +310,14 @@ PROPERTY  THICKNESS     # Thickness of photocathode as function of Z position
 #30 nm - 3-inch R12199-02 PMTs (private communication with Hamamatsu through O. Kalekin)
 #The value may vary from PMT to PMT and along PMT surface. The official measurements/technical reports are not provided, 30 nm is chosen as reference
 # UNITS  mm mm
-#188 20e-6                 #20 nm is Motta's best fit
-  188 30e-6               # 26 nm typical of M.D.Lay meas.; Z=188_mm is 20" top
+188 20e-6                 #20 nm is Motta's best fit
+  #188 30e-6               # 26 nm typical of M.D.Lay meas.; Z=188_mm is 20" top
 # 117 26e-6               # Z=116.7_mm is start of 20" torus section
 # 99  26e-6               # Z=99.0_mm is end of 17" active photocathode
 # 75  26e-6               # Z=75.0_mm is 8" PMT top
 # 51  26e-6               # Z=50.8_mm is 5" PMT top
-  0   30e-6               # Z=0 is equator; no data for thickness, assumed same
-#0   20e-6
+  #0   30e-6               # Z=0 is equator; no data for thickness, assumed same
+0   20e-6
 #
 # Note that, at present, all PMTs use same "photocathode" properties;
 # this will have to change if we ever really want to have thickness as a

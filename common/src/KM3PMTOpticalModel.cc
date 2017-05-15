@@ -399,6 +399,7 @@ namespace km3net
 			double rsum = r1+1/lambdaPhoton;
 			fEPD.MeanEscapeProb = 1./lambdaPhoton/(1.-expl)*((exp(-rsum)-1.)/rsum/rsum+1./rsum);
 		}
+		//cout << fA_t << " " << fR_t << " " << AbsProb << " " << log(1-AbsProb) << " " << lambdaPhoton << " " << 1/lambdaPhoton << " " << expl << " " << r1 << endl;
 #endif
 
     /*

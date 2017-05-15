@@ -95,7 +95,8 @@ int main (int argc, char** argv)
 
 
   bool calibrateQE = false;
-  float glassThickness = 1*mm;
+  //float glassThickness = 1*mm;  //for big 
+	float glassThickness = 2*mm;
 	float precision = 0.05;
 
   for (int argIt = 1; argIt < argc; argIt++)
@@ -120,8 +121,10 @@ int main (int argc, char** argv)
 	theModelTester.LoadMaterial ("photocathode3inches", "PMTGlass_R12199_02", "Vacuum");
   theModelTester.fGlassThickness =glassThickness;
 	theModelTester.SetElectronProductionLevel(3);
+	theModelTester.SetElectronAbsorptionLength (1000*nm);
 
-	theModelTester.fElPrecision = 25./(precision*precision);  //this is the number of simulated e-, precision is aprrox 5~sigma and sigma is sqrt(N_e)
+  if (precision != 0) theModelTester.fElPrecision = 25./(precision*precision);  //this is the number of simulated e-, precision is aprrox 5~sigma and sigma is sqrt(N_e)
+  else theModelTester.fElPrecision = 0;
 
   TerminalHistogram *measuredQE =0;TerminalHistogram *simulatedQE =0; TerminalHistogram *ratioQE = 0;
 

@@ -98,7 +98,7 @@ namespace km3net
     //hQEmeas->Draw ();
   }
 
-  float KM3PMTOpticalModelTester::QECheck (double wavelength, bool fastelprod)
+  float KM3PMTOpticalModelTester::QECheck (double wavelength)
   {
     G4ThreeVector pos(0,0,1);
     G4ThreeVector dir(0,0,-1);
@@ -106,7 +106,7 @@ namespace km3net
     G4ThreeVector norm(0,0,1);
     G4ThreeVector insidedir(0,0,-1);
     //cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,wavelength) << endl;
-    return GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength,fastelprod);
+    return GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength);
   }
 
 
@@ -115,13 +115,13 @@ namespace km3net
     return fOpticalModel.fEPD.HasGoneInside != 0;
   }
 
-  float KM3PMTOpticalModelTester::GetQuantumEfficiency (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, G4ThreeVector &insidedir, float wavelength, bool fastelprod)
+  float KM3PMTOpticalModelTester::GetQuantumEfficiency (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, G4ThreeVector &insidedir, float wavelength)
   {
     float Abs1,Ref1,Abs2,Ref2,Elexit1=0, Elexit2=0;
     TestCalculateCoefficients (pos, dir, pol, norm, wavelength*nm);
     TestCalculateNormalCoefficients (pos, wavelength*nm);
 
-    if (!fastelprod) {
+    if (fElPrecision != 0) {
       for (int elescape=0; elescape<fElPrecision; elescape++)
         {
           TestCalculateNormalCoefficients (pos, wavelength*nm);
@@ -135,38 +135,8 @@ namespace km3net
     }
 
     Abs1=fOpticalModel.fA_t;
-    Ref1=fOpticalModel.fR_t;
-    dir=-dir;
 
-    TestCalculateCoefficients (pos, dir, pol, norm, wavelength*nm);
-
-
-    if (!fastelprod) {
-      for (int elescape=0; elescape<fElPrecision; elescape++)
-        {
-          TestCalculateNormalCoefficients (pos, wavelength*nm);
-          TestElectronProduction (dir, pos, insidedir);
-          if (fOpticalModel.fEPD.HasBeenGenerated)
-            Elexit2++;
-        }
-      Elexit2/=fElPrecision;
-    } else {
-      Elexit2 = CalcElectronProductionProb(dir, pos, insidedir);
-    }
-    Abs2=fOpticalModel.fA_t;
-    Ref2=fOpticalModel.fR_t;
-
-    dir=-dir;
-
-    cout << "Escape probs: " << Elexit1 << " " << Elexit2 << " Absorpt probs " << Abs1 << " " << Abs2 << " " << Ref1 << " " << Ref2 << endl;
-    //cout << "glass abs: " << wavelength << " " << GetGlassAbsorption (wavelength, fGlassThickness) << endl;
-
-    return (GetGlassAbsorption (wavelength, fGlassThickness)*
-            (Abs1*Elexit1                                     //direct absorption, forward electron escape
-             //Elexit2*Ref1*Abs2+                                //reflection on the back side of the photocathode, absorption on the way back, backward e- escape
-             //Elexit1*Ref1*Abs2*Ref2*Abs1));
-             //Elexit1*Ref1*Ref2*Abs1)
-             ));                         //second reflection, direct absorption, forward electron escape
+    return (GetGlassAbsorption (wavelength, fGlassThickness)*(Abs1*Elexit1));      //direct absorption, forward electron escape
 
   }
 

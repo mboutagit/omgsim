@@ -68,7 +68,11 @@ char CompareQuantumEfficiency (float wavelength)
 int main (int argc, char** argv)
 {
 
-  float wavelength = 440;
+	float minwavelength = 400;
+	float maxwavelength = 800;
+	float mincathodethick = 1;
+  float maxcathodethick = 100;
+
   int level = 5;
   float precision = 0.005;
   for (int argIt = 1; argIt < argc; argIt++)
@@ -78,14 +82,21 @@ int main (int argc, char** argv)
       if (sarg == "-w")
         {
           sarg = argv[++argIt];
-          wavelength  = stof (sarg);
+          minwavelength  = stof (sarg);
+					maxwavelength  = minwavelength;
         }
       else if (sarg == "-level")
         {
           sarg = argv[++argIt];
           level=stoi(sarg);
         }
-      if (sarg == "-precision")
+      else if (sarg == "-cathode")
+        {
+          sarg = argv[++argIt];
+          mincathodethick=stoi(sarg);
+					maxcathodethick = mincathodethick;
+        }
+      else if (sarg == "-precision")
         {
           sarg = argv[++argIt];
           precision = stof (sarg);
@@ -112,12 +123,10 @@ int main (int argc, char** argv)
   theModelTester.LoadMaterial ("photocathode3inches", "PMTGlass_R12199_02", "Vacuum");
   theModelTester.fGlassThickness =glassThickness;
   theModelTester.SetElectronProductionLevel(level);
-  theModelTester.SetElectronAbsorptionLength (1*mm);
-  theModelTester.SetElectronAbsorptionLength (100*nm);
+  theModelTester.SetElectronAbsorptionLength (1000*nm);
 
-  bool fastelprod = false;
   if (precision != 0) theModelTester.fElPrecision = 25./(precision*precision);  //this is the number of simulated e-, precision is aprrox 5~sigma and sigma is sqrt(N_e)
-  else fastelprod = true;
+  else theModelTester.fElPrecision = 0;
 
   TerminalHistogram *measuredQE =0;TerminalHistogram *simulatedQE =0; TerminalHistogram *ratioQE = 0;
 
@@ -126,18 +135,17 @@ int main (int argc, char** argv)
   double optqe = 0;
   double qe;
 
-  for (double wavelength = 550; wavelength <= 800; wavelength+=50) {
+  for (float wavelength = minwavelength; wavelength <= maxwavelength; wavelength+=50) {
     optcathodethick = 0;
     optqe = 0;
-    for (double cathodethick = 30; cathodethick <= 1000; cathodethick+=0.1) {
+    for (double cathodethick = mincathodethick; cathodethick <= maxcathodethick; cathodethick+=0.1) {
       G4MaterialPropertyVector newThicknessVector;
       newThicknessVector.InsertValues (0, cathodethick*1e-6);
       newThicknessVector.InsertValues (188, cathodethick*1e-6);
       theModelTester.SetCathodeThickness(newThicknessVector);
-      qe = theModelTester.QECheck(wavelength,fastelprod);
+      qe = theModelTester.QECheck(wavelength);
       if (qe < 0) {
         //cout << "WARNING: " << wavelength << " " << cathodethick << " " << qe << endl;
-
       }
       if (qe > optqe) {
         optqe = qe;
