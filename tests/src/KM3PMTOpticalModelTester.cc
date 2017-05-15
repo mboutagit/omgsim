@@ -90,7 +90,7 @@ namespace km3net
         hKindex->Fill (wavelength, fOpticalModel._kindex_photocathode->Value (energy));
         hQEmeas->Fill (wavelength, GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength));
 
-        if (wavelength == 450) cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength) << endl;
+        //if (wavelength == 450) cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength) << endl;
       }
     ///cout << "current KINDEX" << endl;
     //hKindex->Draw ();
