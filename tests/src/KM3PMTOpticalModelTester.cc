@@ -39,6 +39,7 @@ namespace km3net
     fOpticalModel._photon_energy = twopi*hbarc/wavelength;
     fOpticalModel.InitPhotocathodeIndex ();
     fOpticalModel._cos_theta1 = dir.cosTheta (norm);
+    fOpticalModel.fNorm = norm;
     fOpticalModel.CalculateCoefficients ();
     fOpticalModel.CalculateTotalCoefficients (pos, dir, norm);
     return fOpticalModel.fA_t;
@@ -74,39 +75,39 @@ namespace km3net
       }
     else
       hQEmeas = (TerminalHistogram *)(fObjectCol["QuantumEfficiencyHisto"]);
-		hQEmeas->Reset();
+    hQEmeas->Reset();
 
-    G4ThreeVector pos(0,0,1);
-		G4ThreeVector dir(0,0,-1);
-		G4ThreeVector pol(0,0,1);
-    G4ThreeVector norm(0,0,1);
-		G4ThreeVector insidedir(0,0,-1);
-
-    for (float wavelength = 250; wavelength < 750 ; wavelength+=10)
-      {
-        float energy = twopi*hbarc/wavelength/nm;
-				//cout << "filling " << wavelength << " " << fOpticalModel._kindex_photocathode->Value (energy) << endl;
-        hKindex->Fill (wavelength, fOpticalModel._kindex_photocathode->Value (energy));
-        hQEmeas->Fill (wavelength, GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength));
-
-				if (wavelength == 450) cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength) << endl;
-      }
-		///cout << "current KINDEX" << endl;
-    //hKindex->Draw ();
-		//cout << "QE calculated from current KINDEX" << endl;
-		//hQEmeas->Draw ();
-  }
-
-	float KM3PMTOpticalModelTester::QECheck (double wavelength, bool fastelprod)
-	{ 
     G4ThreeVector pos(0,0,1);
     G4ThreeVector dir(0,0,-1);
     G4ThreeVector pol(0,0,1);
     G4ThreeVector norm(0,0,1);
     G4ThreeVector insidedir(0,0,-1);
-		//cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,wavelength) << endl;
-		return GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength,fastelprod);
-	}
+
+    for (float wavelength = 250; wavelength < 750 ; wavelength+=10)
+      {
+        float energy = twopi*hbarc/wavelength/nm;
+        //cout << "filling " << wavelength << " " << fOpticalModel._kindex_photocathode->Value (energy) << endl;
+        hKindex->Fill (wavelength, fOpticalModel._kindex_photocathode->Value (energy));
+        hQEmeas->Fill (wavelength, GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength));
+
+        if (wavelength == 450) cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength) << endl;
+      }
+    ///cout << "current KINDEX" << endl;
+    //hKindex->Draw ();
+    //cout << "QE calculated from current KINDEX" << endl;
+    //hQEmeas->Draw ();
+  }
+
+  float KM3PMTOpticalModelTester::QECheck (double wavelength, bool fastelprod)
+  {
+    G4ThreeVector pos(0,0,1);
+    G4ThreeVector dir(0,0,-1);
+    G4ThreeVector pol(0,0,1);
+    G4ThreeVector norm(0,0,1);
+    G4ThreeVector insidedir(0,0,-1);
+    //cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,wavelength) << endl;
+    return GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength,fastelprod);
+  }
 
 
   bool KM3PMTOpticalModelTester::LastElectronIsEscaped () {
@@ -120,18 +121,18 @@ namespace km3net
     TestCalculateCoefficients (pos, dir, pol, norm, wavelength*nm);
     TestCalculateNormalCoefficients (pos, wavelength*nm);
 
-		if (!fastelprod) {
-			for (int elescape=0; elescape<fElPrecision; elescape++)
-				{
-					TestCalculateNormalCoefficients (pos, wavelength*nm);
-					TestElectronProduction (dir, pos, insidedir);
-					if (fOpticalModel.fEPD.HasBeenGenerated)
-						Elexit1++;
-				}
-			Elexit1/=fElPrecision;
-		} else {
-			Elexit1 = CalcElectronProductionProb(dir, pos, insidedir);
-		}
+    if (!fastelprod) {
+      for (int elescape=0; elescape<fElPrecision; elescape++)
+        {
+          TestCalculateNormalCoefficients (pos, wavelength*nm);
+          TestElectronProduction (dir, pos, insidedir);
+          if (fOpticalModel.fEPD.HasBeenGenerated)
+            Elexit1++;
+        }
+      Elexit1/=fElPrecision;
+    } else {
+      Elexit1 = CalcElectronProductionProb(dir, pos, insidedir);
+    }
 
     Abs1=fOpticalModel.fA_t;
     Ref1=fOpticalModel.fR_t;
@@ -140,31 +141,32 @@ namespace km3net
     TestCalculateCoefficients (pos, dir, pol, norm, wavelength*nm);
 
 
-		if (!fastelprod) {
-			for (int elescape=0; elescape<fElPrecision; elescape++)
-				{
-					TestCalculateNormalCoefficients (pos, wavelength*nm);
-					TestElectronProduction (dir, pos, insidedir);
-					if (fOpticalModel.fEPD.HasBeenGenerated)
-						Elexit2++;
-				}
-			Elexit2/=fElPrecision;
-		} else {
-			Elexit2 = CalcElectronProductionProb(dir, pos, insidedir);
-		}
+    if (!fastelprod) {
+      for (int elescape=0; elescape<fElPrecision; elescape++)
+        {
+          TestCalculateNormalCoefficients (pos, wavelength*nm);
+          TestElectronProduction (dir, pos, insidedir);
+          if (fOpticalModel.fEPD.HasBeenGenerated)
+            Elexit2++;
+        }
+      Elexit2/=fElPrecision;
+    } else {
+      Elexit2 = CalcElectronProductionProb(dir, pos, insidedir);
+    }
     Abs2=fOpticalModel.fA_t;
     Ref2=fOpticalModel.fR_t;
 
     dir=-dir;
 
-		cout << "Escape probs: " << Elexit1 << " " << Elexit2 << " e_prod_level " << fOpticalModel._electronProductionLevel << endl;
-		//cout << "glass abs: " << wavelength << " " << GetGlassAbsorption (wavelength, fGlassThickness) << endl;
+    cout << "Escape probs: " << Elexit1 << " " << Elexit2 << " Absorpt probs " << Abs1 << " " << Abs2 << " " << Ref1 << " " << Ref2 << endl;
+    //cout << "glass abs: " << wavelength << " " << GetGlassAbsorption (wavelength, fGlassThickness) << endl;
 
     return (GetGlassAbsorption (wavelength, fGlassThickness)*
-            (Elexit1*Abs1+                                     //direct absorption, forward electron escape
-             Elexit2*Ref1*Abs2+                                //reflection on the back side of the photocathode, absorption on the way back, backward e- escape
+            (Abs1*Elexit1                                     //direct absorption, forward electron escape
+             //Elexit2*Ref1*Abs2+                                //reflection on the back side of the photocathode, absorption on the way back, backward e- escape
              //Elexit1*Ref1*Abs2*Ref2*Abs1));
-						 Elexit1*Ref1*Ref2*Abs1));                         //second reflection, direct absorption, forward electron escape
+             //Elexit1*Ref1*Ref2*Abs1)
+             ));                         //second reflection, direct absorption, forward electron escape
 
   }
 
@@ -178,14 +180,14 @@ namespace km3net
       }
     else
       hQEdata = (TerminalHistogram *)(fObjectCol["MaterialEfficiencyHisto"]);
-		hQEdata->Reset();
+    hQEdata->Reset();
 
     for (float wavelength = 250; wavelength < 750 ; wavelength+=10)
       {
         float energy = twopi*hbarc/wavelength/nm;
         hQEdata->Fill (wavelength,fOpticalModel._efficiency_photocathode->Value( energy ));
       }
-		cout << "QE in the data" << endl;
+    cout << "QE in the data" << endl;
     hQEdata->Draw ();
 
   }
@@ -199,44 +201,44 @@ namespace km3net
       {
         fOpticalModel.fEPD.HasBeenGenerated = 10;
       }
-/*
-    TTree* theTree;
-    if (!fObjectCol.count ("ElectrProdTree") && fObjectCol["ElectrProdTree"] == NULL)
+    /*
+      TTree* theTree;
+      if (!fObjectCol.count ("ElectrProdTree") && fObjectCol["ElectrProdTree"] == NULL)
       {
-        cout << "create the tree " << endl;
-        theTree = new TTree ("ElectrProdTree", "Electron production testing tree");
-        fObjectCol["ElectrProdTree"] = theTree;
+      cout << "create the tree " << endl;
+      theTree = new TTree ("ElectrProdTree", "Electron production testing tree");
+      fObjectCol["ElectrProdTree"] = theTree;
 
-        theTree->Branch ("data", &(fOpticalModel.fEPD),"\
-PhotonAttenuationMu/F:\
-LocalPhotocathodeThickness/F:\
-PhotoCathodeLength/F:\
-PhotonPenetrationLength/F:\
-probMax/F:\
-Rand/F:\
-ElectronLengthGeneration/F:\
-ElectronAbsLength/F:\
-HasGoneInside/B:\
-HasBeenGenerated/B:\
-GoingInside/B");
+      theTree->Branch ("data", &(fOpticalModel.fEPD),"\
+      PhotonAttenuationMu/F:\
+      LocalPhotocathodeThickness/F:\
+      PhotoCathodeLength/F:\
+      PhotonPenetrationLength/F:\
+      probMax/F:\
+      Rand/F:\
+      ElectronLengthGeneration/F:\
+      ElectronAbsLength/F:\
+      HasGoneInside/B:\
+      HasBeenGenerated/B:\
+      GoingInside/B");
       }
-    else
+      else
       theTree = (TTree*)(fObjectCol["ElectrProdTree"]);
-    theTree->Fill ();
-*/
+      theTree->Fill ();
+    */
     return (fOpticalModel.fEPD.HasBeenGenerated == 10);
 
   }
 
-	float KM3PMTOpticalModelTester::CalcElectronProductionProb (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &insidedir) {
+  float KM3PMTOpticalModelTester::CalcElectronProductionProb (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &insidedir) {
     memset(&(fOpticalModel.fEPD),0,sizeof(fOpticalModel.fEPD));
     fOpticalModel.fInsideDirection = insidedir;
     if (fOpticalModel.ElectronProductionCalculator (dir, pos))
-      { 
+      {
         fOpticalModel.fEPD.HasBeenGenerated = 10;
       }
-		return fOpticalModel.fEPD.MeanEscapeProb;
-	}
+    return fOpticalModel.fEPD.MeanEscapeProb;
+  }
 
   float KM3PMTOpticalModelTester::GetEfficiency (float wavelength)
   {

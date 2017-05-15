@@ -70,7 +70,7 @@ int main (int argc, char** argv)
 
   float wavelength = 440;
   int level = 5;
-	float precision = 0.005;
+  float precision = 0.005;
   for (int argIt = 1; argIt < argc; argIt++)
     {
       string sarg = argv[argIt];
@@ -93,7 +93,7 @@ int main (int argc, char** argv)
     }
 
 
-	// automatic (time-based) random seeds and filenames for each run
+  // automatic (time-based) random seeds and filenames for each run
   CLHEP::HepRandom::setTheEngine(new CLHEP::DualRand);
   timeval tim;
   gettimeofday(&tim, NULL);
@@ -115,38 +115,38 @@ int main (int argc, char** argv)
   theModelTester.SetElectronAbsorptionLength (1*mm);
   theModelTester.SetElectronAbsorptionLength (100*nm);
 
-	bool fastelprod = false;
+  bool fastelprod = false;
   if (precision != 0) theModelTester.fElPrecision = 25./(precision*precision);  //this is the number of simulated e-, precision is aprrox 5~sigma and sigma is sqrt(N_e)
-	else fastelprod = true;
+  else fastelprod = true;
 
   TerminalHistogram *measuredQE =0;TerminalHistogram *simulatedQE =0; TerminalHistogram *ratioQE = 0;
 
 
-	double optcathodethick = 0;
-	double optqe = 0; 
-	double qe;
+  double optcathodethick = 0;
+  double optqe = 0;
+  double qe;
 
-	for (double wavelength = 400; wavelength <= 800; wavelength+=50) {
-		optcathodethick = 0;
-		optqe = 0;
-		for (double cathodethick = 1; cathodethick <= 1000; cathodethick+=0.1) {
-			G4MaterialPropertyVector newThicknessVector;
-			newThicknessVector.InsertValues (0, cathodethick*1e-6);
-			newThicknessVector.InsertValues (188, cathodethick*1e-6);
-			theModelTester.SetCathodeThickness(newThicknessVector);
-			qe = theModelTester.QECheck(wavelength,fastelprod);
-			if (qe < 0) {
-				cout << "WARNING: " << wavelength << " " << cathodethick << " " << qe << endl;
+  for (double wavelength = 550; wavelength <= 800; wavelength+=50) {
+    optcathodethick = 0;
+    optqe = 0;
+    for (double cathodethick = 30; cathodethick <= 1000; cathodethick+=0.1) {
+      G4MaterialPropertyVector newThicknessVector;
+      newThicknessVector.InsertValues (0, cathodethick*1e-6);
+      newThicknessVector.InsertValues (188, cathodethick*1e-6);
+      theModelTester.SetCathodeThickness(newThicknessVector);
+      qe = theModelTester.QECheck(wavelength,fastelprod);
+      if (qe < 0) {
+        //cout << "WARNING: " << wavelength << " " << cathodethick << " " << qe << endl;
 
-			}
-			if (qe > optqe) {
-				optqe = qe;
-				optcathodethick = cathodethick;
-			}
-			//cout << wavelength << " " << cathodethick << " " << qe << endl;
-		}
-		cout << wavelength << " " << optcathodethick << " " << optqe << endl;
-	}
+      }
+      if (qe > optqe) {
+        optqe = qe;
+        optcathodethick = cathodethick;
+      }
+      cout << wavelength << " " << cathodethick << " " << qe << endl;
+    }
+    //cout << wavelength << " " << optcathodethick << " " << optqe << endl;
+  }
 
   return 0;
 }
