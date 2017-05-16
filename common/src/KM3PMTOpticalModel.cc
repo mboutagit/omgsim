@@ -382,14 +382,15 @@ namespace km3net
 
     int   NbReflect = (int)(PhotonDepth);
 
-    GoingInside = ((NbReflect%2 == 0) xor GoingInside); //it's cutier
+    GoingInside = ((NbReflect%2 == 1) xor GoingInside); //it's cutier
 
     PhotonDepth -= (double)NbReflect;
-
-    cout << "GoingInside" << " " << "PhotoCathodeLength" << " " << "lambdaPhoton/nm" << " " << "Rand" << " " << "PhotonDepth" << " " << "NbReflect" << endl;
-cout << GoingInside << " " << PhotoCathodeLength/nm << " " << lambdaPhoton/nm << " " << Rand << " " << PhotonDepth << " " << NbReflect << endl;
+		//cout << "_k2 lambdaPhoton/nm PhotoCathodeLength/nm GoingInside PhotonDepth NbReflect" << endl;
+    //cout << _k2 << " " << lambdaPhoton/nm << " " << PhotoCathodeLength/nm << " " << GoingInside << " " << PhotonDepth << " " << NbReflect << endl;
 
 #ifdef ENABLE_TESTING
+//Does not work anymore since analytical function for photon absorption distance is not anymore exp(-x/lambda), but infinite sum of the pieces...
+/*
 		double expl = exp(-1/lambdaPhoton);
 		fEPD.MeanPhotonDepth = lambdaPhoton-expl/(1-expl);
 		double r1 = _thickness_photocathode->Value(pos.theta())/fElectronAttenuationLength;
@@ -402,6 +403,7 @@ cout << GoingInside << " " << PhotoCathodeLength/nm << " " << lambdaPhoton/nm <<
 			fEPD.MeanEscapeProb = 1./lambdaPhoton/(1.-expl)*((exp(-rsum)-1.)/rsum/rsum+1./rsum);
 		}
 		//cout << fA_t << " " << fR_t << " " << AbsProb << " " << log(1-AbsProb) << " " << lambdaPhoton << " " << 1/lambdaPhoton << " " << expl << " " << r1 << endl;
+*/
 #endif
 
     /*
@@ -515,6 +517,40 @@ cout << GoingInside << " " << PhotoCathodeLength/nm << " " << lambdaPhoton/nm <<
     //complex<double> ampa=t12*exp(-1.*zi*delta)/(1.+r12*r23*exp(-2.*zi*delta)); //try to calculate abs for comparison. Not yet done.
     //fA_s=real(gfunc(_n2,_n1,theta2,theta1)*ampa*conj(ampa));
     //Calculation for the p-polarization
+		double Pentercathode = real(gfunc(_n2,_n1,theta2,theta1)*t12*conj(t12));
+		complex<double> absamp1 = exp(-zi*delta);
+		/*
+		double Preflect = real(r12*conj(r12));
+		cout << "Penter: " << Pentercathode << " Preflect: " << Preflect << " Sum is 1? (yes): " << Pentercathode+Preflect<< endl;
+		*/
+		double ReflectVac = real(r23*conj(r23));
+		double ReflectGlass = real(r12*conj(r12));  //r21 = -r12, r21*=-r12* -> r21r21* = r12r12*
+		/*
+		complex<double>r21 = rfunc(_n2comp,_n1,theta2,theta1);
+		double ReflectGlassCheck = real(r21*conj(r21));
+		cout << "compare reflect " << ReflectGlassCheck << " " << ReflectGlass << endl;
+		*/
+		
+
+		double AbsStep = (1-real(absamp1*conj(absamp1)));
+		double Parrive = Pentercathode;
+		double AbsTot = Parrive*AbsStep; //1 step
+		
+		double Abs2Step = Parrive*(AbsStep+(1-AbsStep)*ReflectVac*AbsStep);
+		cout << "Abs2step: " << Abs2Step << endl;
+		
+		for (int ii = 1; ii < 10; ii++) {
+			cout << "step: " << ii << " abs " << AbsTot << endl;
+			Parrive *= (1-AbsStep);
+			if (ii % 2 == 1) Parrive *= ReflectVac;
+			else Parrive *= ReflectGlass;
+			AbsTot += Parrive*AbsStep;
+
+		}
+
+		cout << " AbsTot: " << AbsTot << " " << 1-fT_s-fR_s << endl;
+
+		
 
     r12=rfunc(_n1,_n2comp,theta2,theta1);
     r23=rfunc(_n2comp,_n3,theta3,theta2);
@@ -560,6 +596,9 @@ cout << GoingInside << " " << PhotoCathodeLength/nm << " " << lambdaPhoton/nm <<
     fT_t= fT_s * E_s2  +  fT_p * (1.0-E_s2);
     fR_t= fR_s * E_s2  +  fR_p * (1.0-E_s2);
     fA_t= 1.0 - (fT_t+fR_t);
+
+
+		cout << "Abs_s tot: " << 1-fT_s-fR_s << endl;
   }
 
   double KM3PMTOpticalModel::CalculateNormalCoefficients ()

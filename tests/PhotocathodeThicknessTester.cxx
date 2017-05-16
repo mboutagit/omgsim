@@ -71,7 +71,7 @@ int main (int argc, char** argv)
 	float minwavelength = 400;
 	float maxwavelength = 800;
 	float mincathodethick = 1;
-  float maxcathodethick = 100;
+  float maxcathodethick = 1000;
 
   int level = 5;
   float precision = 0.005;
@@ -123,7 +123,7 @@ int main (int argc, char** argv)
   theModelTester.LoadMaterial ("photocathode3inches", "PMTGlass_R12199_02", "Vacuum");
   theModelTester.fGlassThickness =glassThickness;
   theModelTester.SetElectronProductionLevel(level);
-  theModelTester.SetElectronAbsorptionLength (100*nm);
+  theModelTester.SetElectronAbsorptionLength (1000*nm);
 
   if (precision != 0) theModelTester.fElPrecision = 25./(precision*precision);  //this is the number of simulated e-, precision is aprrox 5~sigma and sigma is sqrt(N_e)
   else theModelTester.fElPrecision = 0;
@@ -138,7 +138,7 @@ int main (int argc, char** argv)
   for (float wavelength = minwavelength; wavelength <= maxwavelength; wavelength+=50) {
     optcathodethick = 0;
     optqe = 0;
-    for (double cathodethick = mincathodethick; cathodethick <= maxcathodethick; cathodethick+=0.1) {
+    for (double cathodethick = mincathodethick; cathodethick <= maxcathodethick; cathodethick+=1) {
       G4MaterialPropertyVector newThicknessVector;
       newThicknessVector.InsertValues (0, cathodethick*1e-6);
       newThicknessVector.InsertValues (188, cathodethick*1e-6);

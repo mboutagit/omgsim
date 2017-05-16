@@ -134,6 +134,8 @@ namespace km3net
 
     Abs1=fOpticalModel.fA_t;
 
+		//cout << "debug " << GetGlassAbsorption (wavelength, fGlassThickness) << " " << Abs1 << " " << Elexit1 << endl;
+
     return (GetGlassAbsorption (wavelength, fGlassThickness)*(Abs1*Elexit1));      //direct absorption, forward electron escape
 
   }
