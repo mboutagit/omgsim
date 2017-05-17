@@ -156,6 +156,8 @@ namespace km3net
     //km3 petzold process
     thePetzoldScattering = NULL;
     pMessenger=new KM3PhysicsListMessenger (this);
+
+    theBoundaryProcess = new KM3PMTOpticalModel ();//create here for the messenger of opticalmodel
   }
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -447,7 +449,7 @@ namespace km3net
     theCerenkovProcess = new G4Cerenkov("Cerenkov");
     theAbsorptionProcess = new G4OpAbsorption();
     theRayleighScatteringProcess = new G4OpRayleigh();
-    theBoundaryProcess = new KM3PMTOpticalModel ();//new G4OpBoundaryProcess();
+    //theBoundaryProcess = new KM3PMTOpticalModel (); done in the constructor for messenger
     theWLSProcess = new G4OpWLS("OpWLS");
 
     thePetzoldScattering = new KM3PetzoldScattering ();

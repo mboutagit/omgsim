@@ -98,6 +98,7 @@ namespace km3net
     G4UIcmdWithAnInteger*      fLuxCmd;
     G4UIcmdWithAnInteger*      fElectrProdCmd;
     G4UIcmdWithADouble*        fElectrAbsLength;
+    G4UIcmdWithADouble*        fElectronProbLevel0Cmd;
 
 
     // "current values" of many parameters, for efficiency
@@ -130,7 +131,7 @@ namespace km3net
 
     G4double fPhotonAttenuationMu;
     G4double fElectronAttenuationLength = 70*nm; //Electron absorption depth (considering brownian motion, the real abs length is longer)
-
+    double   fElectronProbLevel0 = 0.4;
     G4ThreeVector fNorm;
     G4ThreeVector fInsideDirection;
 

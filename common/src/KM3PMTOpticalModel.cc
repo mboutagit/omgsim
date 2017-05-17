@@ -81,7 +81,7 @@ namespace km3net
                        "The default value is 3."
                        );
       fLuxCmd->SetParameter(new G4UIparameter("level", 'i', false));
-      fVerbosityCmd->AvailableForStates(G4State_PreInit);
+      fLuxCmd->AvailableForStates(G4State_PreInit);
 
 
       fElectrProdCmd= new G4UIcmdWithAnInteger("/PMTOpticalModel/ElectrProdlevel",this);
@@ -90,12 +90,15 @@ namespace km3net
                                   " 1 == uses the thickness and electron abs length to get the prob. to produce a pe\n"
                                   );
       fElectrProdCmd->SetParameter(new G4UIparameter("level", 'i', false));
-      fVerbosityCmd->AvailableForStates(G4State_PreInit);
+      fElectrProdCmd->AvailableForStates(G4State_PreInit);
 
 
       fElectrAbsLength= new G4UIcmdWithADouble("/PMTOpticalModel/ElectrAbsLength",this);
       fElectrAbsLength->SetGuidance("Set electron absorption length in the photocathode. Should be set after \"ElectrProduction level\".");
-      fVerbosityCmd->AvailableForStates(G4State_PreInit);
+      fElectrAbsLength->AvailableForStates(G4State_PreInit);
+
+      fElectronProbLevel0Cmd= new G4UIcmdWithADouble("/PMTOpticalModel/ElectronProbLevel0",this);
+      fElectronProbLevel0Cmd->AvailableForStates(G4State_PreInit);
 
     }
 
@@ -106,15 +109,19 @@ namespace km3net
     if (command == fVerbosityCmd) {
        _verbosity = fVerbosityCmd->GetNewIntValue(newValue);
      }
-    if (command == fLuxCmd) {
+    else if (command == fLuxCmd) {
       _luxlevel=fLuxCmd->GetNewIntValue(newValue);
     }
-    if (command == fElectrProdCmd) {
+    else if (command == fElectrProdCmd) {
       _electronProductionLevel = fElectrProdCmd->GetNewIntValue (newValue);
     }
-    if (command == fElectrAbsLength) {
+    else if (command == fElectrAbsLength) {
       fElectronAttenuationLength = fElectrAbsLength->GetNewDoubleValue (newValue);
     }
+    else if (command == fElectronProbLevel0Cmd) {
+      fElectronProbLevel0 = fElectronProbLevel0Cmd->GetNewDoubleValue (newValue);
+    }
+
 
   }
   // destructor
@@ -124,6 +131,7 @@ namespace km3net
     delete fVerbosityCmd;
     delete fElectrProdCmd;
     delete fElectrAbsLength;
+    delete fElectronProbLevel0Cmd;
     // nothing else to delete
     // Note: The "MaterialPropertyVector"s are owned by the material, not us.
   }
@@ -365,10 +373,8 @@ namespace km3net
   {
     if (_electronProductionLevel == 0 || fInsideDirection.r() == 0)
       {
-        if (!fInsideDirection.r ())
-          cerr << "hann! ca marche pas"<< endl;
         double rand=G4UniformRand ();
-        return rand > 0.6;
+        return (rand < fElectronProbLevel0);
       }
     bool GoingInside                  = dir.dot (fInsideDirection) > 0;
     double PhotoCathodeLength=fabs(_thickness / (fNorm.dot(dir)));
@@ -530,7 +536,7 @@ namespace km3net
 		complex<double>r21 = rfunc(_n2comp,_n1,theta2,theta1);
 		double ReflectGlassCheck = real(r21*conj(r21));
 		cout << "compare reflect " << ReflectGlassCheck << " " << ReflectGlass << endl;
-		
+
 
 		complex<double> absamp1 = exp(-zi*delta);
 		double AbsStep = (1-real(absamp1*conj(absamp1)));
@@ -556,7 +562,7 @@ namespace km3net
 		complex<double> RefTotComplex = r12;
 		complex<double> TranTotComplex = 0;
 		complex<double> AbsTotComplex = PArriveComplex;
-		
+
 		for (int ii = 1; ii < 100; ii++) {
 			cout << "step: " << ii << endl;
 			PArrive *= (1-AbsStep);
@@ -577,7 +583,7 @@ namespace km3net
 			}
 			AbsTot += PArrive*AbsStep;
 			AbsTotComplex += PArriveComplex;
-			
+
 			double fT_step = real(gfunc(_n3,_n1,theta3,theta1)*TranTotComplex*conj(TranTotComplex));
 			double fR_step = real(RefTotComplex*conj(RefTotComplex));
 			double PassedFurther = real(gfunc(_n2,_n1,theta2,theta1)*PArriveComplex*conj(PArriveComplex));
@@ -589,7 +595,7 @@ namespace km3net
 		cout << "fA_t: " << 1-fT_s-fR_s << endl;
 		//cout << "fA_s: " << 1-fT_s-fR_s << " " << real(gfunc(_n2,_n1,theta2,theta1)*AbsTotComplex*conj(AbsTotComplex))*AbsStep << " " << real(gfunc(_n2,_n1,theta2,theta1)*PArriveComplex*conj(PArriveComplex))<< endl;
 
-		
+
 
 		//calculation for p-polarization
 		// In this convention r_p is positive when the incoming and reflected magnetic fields are anti-parallel, and negative when they are parallel. This convention has the convenient advantage that the s and p sign conventions are the same at normal incidence. This convention is used in Motta & Schoenert (but p and s-wave are swapped by typo, probably).
@@ -598,7 +604,7 @@ namespace km3net
 
 		//This is the convention from the https://en.wikipedia.org/wiki/Fresnel_equations and Born&Wolf (cited by Motta and Shoenert). Both conventions bring the same results for fR_p and fT_p. For p polarization, a positive r or t means that the magnetic fields of the waves are parallel, while negative means anti-parallel. r=-r' between two conventions.
 		//r12=rfunc(_n2comp,_n1,theta1,theta2);
-		//r23=rfunc(_n3,_n2comp,theta2,theta3); 
+		//r23=rfunc(_n3,_n2comp,theta2,theta3);
 
     t12=trfunc(_n1,_n2comp,theta1,theta2,theta1);
     t21=trfunc(_n2comp,_n1,theta2,theta1,theta2);

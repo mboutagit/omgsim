@@ -49,12 +49,12 @@ int main  (int argc, char** argv)
 
   KM3PMTOpticalModelTester theModelTester;
   cout << "Create model tester" <<endl;
-  theModelTester.LoadMaterial ("photocathode10inches", "PMTGlass", "Vacuum");
+  theModelTester.LoadMaterial ("photocathode3inches", "PMTGlass", "Vacuum");
 
   //VLA
   G4ThreeVector pos(0,0,-1);
 
-  theModelTester.TestCalculateNormalCoefficients (pos, 440*nm);
+  theModelTester.TestCalculateNormalCoefficients (pos, 400*nm);
   theModelTester.SetElectronProductionLevel (level);
   if (level < 2)
     theModelTester.SetElectronAbsorptionLength (22*nm);
@@ -67,17 +67,17 @@ int main  (int argc, char** argv)
       G4ThreeVector dir(0,x,z);
       //G4ThreeVector pos(0,0,-1);
       G4ThreeVector norm(0,0,1);
-
+      G4ThreeVector insideDirection (0,0,-1);
 
       float escaped=0;
       float nb_elect=50000;
-      theModelTester.TestCalculateCoefficients (pos, dir, dir, norm, 440*nm);
+      theModelTester.TestCalculateCoefficients (pos, dir, dir, norm, 400*nm);
       double Abs,tmp;
       theModelTester.GetTotalProbabilities (Abs, tmp, tmp);
       hPhotonAbs->SetBinContent (angle,Abs);
       for (int i=0; i<nb_elect;i++)
         {
-          if (theModelTester.TestElectronProduction (dir, pos, norm))
+          if (theModelTester.TestElectronProduction (dir, pos, insideDirection))
             escaped++;
         }
 

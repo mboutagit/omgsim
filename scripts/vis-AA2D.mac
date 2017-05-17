@@ -4,7 +4,7 @@
 
 /KM3/det/setTargetMaterial IdealWater
 /KM3/det/setTargetLength 10 m
-/KM3/det/DontDraw bento 
+/KM3/det/DontDraw bento
 #/KM3/det/setOpticalModuleAngle 0.5 deg
 /KM3/det/setOpticalModuleTheta %angle deg
 /KM3/det/setOpticalModulePhi 0 deg
