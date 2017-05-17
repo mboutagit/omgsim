@@ -475,8 +475,10 @@ namespace km3net
 
 
     // declare some useful constants
-    G4complex _n2comp(_n2,-_k2); //complex photocathode refractive index
+    //G4complex _n2comp(_n2,-_k2); //Complex photocathode refractive index. This is from "E=E_0 exp(-i(kz-wt))" notation used by electrical engineers. Phase change is exp(-i*2pi/lambda*n*h*costheta) or exp(-zi*delta) all-over in the code. This convention is used by Motta and Schonert in formulas (2-3) however they introduce n=n+ik by typo.
+		G4complex _n2comp(_n2,_k2); //this is a "physicist" convention. E=E_0 exp(i(kz-wt)). Phase change is exp(i*2pi/lambda*n*h*costheta) or exp(zi*delta) all-over in the code. This convention is used in Born & Wolf. For more details see https://en.wikipedia.org/wiki/Mathematical_descriptions_of_opacity#Complex_conjugate_ambiguity.
     G4complex eta=twopi*_n2comp*_thickness/_wavelength;
+		//convention n = n-ik assumes 
 
     G4complex zi(0.,1.); //imaginary unit
 
@@ -513,18 +515,16 @@ namespace km3net
     t21=trfunc(_n2comp,_n1,theta2,theta2,theta1);
     t23=trfunc(_n2comp,_n3,theta2,theta2,theta3);
 
-    ampr=r12+(t12*t21*r23*exp(-2.*zi*delta))/(1.+r12*r23*exp(-2.*zi*delta));
-    ampt=(t12*t23*exp(-zi*delta))/(1.+r12*r23*exp(-2.*zi*delta));
+    ampr=r12+(t12*t21*r23*exp(2.*zi*delta))/(1.+r12*r23*exp(2.*zi*delta));
+    ampt=(t12*t23*exp(zi*delta))/(1.+r12*r23*exp(2.*zi*delta));
 
     //And finally...!
     fR_s=real(ampr*conj(ampr));
     fT_s=real(gfunc(_n3,_n1,theta3,theta1)*ampt*conj(ampt));
 
-    //complex<double> ampa=t12*exp(-1.*zi*delta)/(1.+r12*r23*exp(-2.*zi*delta)); //try to calculate abs for comparison. Not yet done.
+    //complex<double> ampa=t12*exp(zi*delta)/(1.+r12*r23*exp(2.*zi*delta)); //try to calculate abs for comparison. Not yet done.
     //fA_s=real(gfunc(_n2,_n1,theta2,theta1)*ampa*conj(ampa));
-    //Calculation for the p-polarization
 		double Pentercathode = real(gfunc(_n2comp,_n1,theta2,theta1)*t12*conj(t12));
-
 		double Preflect = real(r12*conj(r12));
 		cout << "Penter: " << Pentercathode << " Preflect: " << Preflect << " Sum is 1?: " << Pentercathode+Preflect << " no gfunc " << real(t12*conj(t12))+Preflect << endl;
 
@@ -538,7 +538,7 @@ namespace km3net
 		cout << "compare reflect " << ReflectGlassCheck << " " << ReflectGlass << endl;
 
 
-		complex<double> absamp1 = exp(-zi*delta);
+		complex<double> absamp1 = exp(zi*delta);
 		double AbsStep = (1-real(absamp1*conj(absamp1)));
 
 	  //double PhotoCathodeLength=fabs(_thickness / (fNorm.dot(dir)));
@@ -566,7 +566,7 @@ namespace km3net
 		for (int ii = 1; ii < 100; ii++) {
 			cout << "step: " << ii << endl;
 			PArrive *= (1-AbsStep);
-			PArriveComplex *= exp(-zi*delta);
+			PArriveComplex *= exp(zi*delta);
 			if (ii % 2 == 1) {
 				TranTot += PArrive*real(gfunc(_n3,_n2,theta3,theta2)*t23*conj(t23));
 				PArrive *= ReflectVac;
@@ -597,12 +597,12 @@ namespace km3net
 
 
 
-		//calculation for p-polarization
+		//Calculation for p-polarization
 		// In this convention r_p is positive when the incoming and reflected magnetic fields are anti-parallel, and negative when they are parallel. This convention has the convenient advantage that the s and p sign conventions are the same at normal incidence. This convention is used in Motta & Schoenert (but p and s-wave are swapped by typo, probably).
     r12=rfunc(_n1,_n2comp,theta2,theta1);
 		r23=rfunc(_n2comp,_n3,theta3,theta2);
 
-		//This is the convention from the https://en.wikipedia.org/wiki/Fresnel_equations and Born&Wolf (cited by Motta and Shoenert). Both conventions bring the same results for fR_p and fT_p. For p polarization, a positive r or t means that the magnetic fields of the waves are parallel, while negative means anti-parallel. r=-r' between two conventions.
+		//This is the convention from the https://en.wikipedia.org/wiki/Fresnel_equations and Born&Wolf 1.5.2 "Fresnel formulae" (cited by Motta and Shoenert). Both conventions bring the same results for fR_p and fT_p. For p polarization, a positive r or t means that the magnetic fields of the waves are parallel, while negative means anti-parallel. r=-r' between two conventions.
 		//r12=rfunc(_n2comp,_n1,theta1,theta2);
 		//r23=rfunc(_n3,_n2comp,theta2,theta3);
 
@@ -610,17 +610,16 @@ namespace km3net
     t21=trfunc(_n2comp,_n1,theta2,theta1,theta2);
     t23=trfunc(_n2comp,_n3,theta2,theta3,theta2);
 
-    ampr=r12+(t12*t21*r23*exp(-2.*zi*delta))/(1.+r12*r23*exp(-2.*zi*delta));
-    ampt=(t12*t23*exp(-zi*delta))/(1.+r12*r23*exp(-2.*zi*delta));
+    ampr=r12+(t12*t21*r23*exp(2.*zi*delta))/(1.+r12*r23*exp(2.*zi*delta));
+    ampt=(t12*t23*exp(zi*delta))/(1.+r12*r23*exp(2.*zi*delta));
 
     //And finally...!
     fR_p=real(ampr*conj(ampr));
     fT_p=real(gfunc(_n3,_n1,theta3,theta1)*ampt*conj(ampt));
-    //ampa=t12*exp(-zi*delta)/(1.+r12*r23*exp(-2.*zi*delta));
+    //ampa=t12*exp(zi*delta)/(1.+r12*r23*exp(2.*zi*delta));
     //fA_p=real(gfunc(_n2,_n1,theta2,theta1)*ampa*conj(ampa));
-		//
 
-		//cout << "fR_p " << fR_p << " " << fT_p << endl;
+		cout << "fR_p " << fR_p << " fT_p " << fT_p << " fR_s " << fR_s << " fT_s " << fT_s << endl;
 
 
 
