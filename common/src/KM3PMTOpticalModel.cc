@@ -517,43 +517,89 @@ namespace km3net
     //complex<double> ampa=t12*exp(-1.*zi*delta)/(1.+r12*r23*exp(-2.*zi*delta)); //try to calculate abs for comparison. Not yet done.
     //fA_s=real(gfunc(_n2,_n1,theta2,theta1)*ampa*conj(ampa));
     //Calculation for the p-polarization
-		double Pentercathode = real(gfunc(_n2,_n1,theta2,theta1)*t12*conj(t12));
-		complex<double> absamp1 = exp(-zi*delta);
-		/*
+		double Pentercathode = real(gfunc(_n2comp,_n1,theta2,theta1)*t12*conj(t12));
+
 		double Preflect = real(r12*conj(r12));
-		cout << "Penter: " << Pentercathode << " Preflect: " << Preflect << " Sum is 1? (yes): " << Pentercathode+Preflect<< endl;
-		*/
+		cout << "Penter: " << Pentercathode << " Preflect: " << Preflect << " Sum is 1?: " << Pentercathode+Preflect << " no gfunc " << real(t12*conj(t12))+Preflect << endl;
+
+		cout << "t12+r12 " << t12+r12 << " mod " << real((t12+r12)*conj(t12+r12))<< endl;
+
 		double ReflectVac = real(r23*conj(r23));
 		double ReflectGlass = real(r12*conj(r12));  //r21 = -r12, r21*=-r12* -> r21r21* = r12r12*
-		/*
+
 		complex<double>r21 = rfunc(_n2comp,_n1,theta2,theta1);
 		double ReflectGlassCheck = real(r21*conj(r21));
 		cout << "compare reflect " << ReflectGlassCheck << " " << ReflectGlass << endl;
-		*/
 		
 
+		complex<double> absamp1 = exp(-zi*delta);
 		double AbsStep = (1-real(absamp1*conj(absamp1)));
-		double Parrive = Pentercathode;
-		double AbsTot = Parrive*AbsStep; //1 step
-		
-		double Abs2Step = Parrive*(AbsStep+(1-AbsStep)*ReflectVac*AbsStep);
-		cout << "Abs2step: " << Abs2Step << endl;
-		
-		for (int ii = 1; ii < 10; ii++) {
-			cout << "step: " << ii << " abs " << AbsTot << endl;
-			Parrive *= (1-AbsStep);
-			if (ii % 2 == 1) Parrive *= ReflectVac;
-			else Parrive *= ReflectGlass;
-			AbsTot += Parrive*AbsStep;
 
+	  //double PhotoCathodeLength=fabs(_thickness / (fNorm.dot(dir)));
+		double PhotoCathodeLength=fabs(_thickness); //normal falling
+		//relative absorption length (lambda\l_0)
+		double lambdaPhoton                =_wavelength/(2*twopi*_k2);
+		double AbsStepCheck = (1.-exp(-PhotoCathodeLength/lambdaPhoton));
+		cout << "Check Abs: " << AbsStep << " " << AbsStepCheck << endl;
+
+		double Abs1Step = Pentercathode*AbsStep;
+		double Abs2Step = Pentercathode*(AbsStep+(1-AbsStep)*ReflectVac*AbsStep);
+		cout << "Abs1Step " << Abs1Step << " Abs2step: " << Abs2Step << endl;
+
+		double PArrive = Pentercathode;
+		double AbsTot = PArrive*AbsStep; //1 step
+
+		double RefTot = Preflect;
+		double TranTot = 0;
+
+		complex<double> PArriveComplex = t12;
+		complex<double> RefTotComplex = r12;
+		complex<double> TranTotComplex = 0;
+		complex<double> AbsTotComplex = PArriveComplex;
+		
+		for (int ii = 1; ii < 100; ii++) {
+			cout << "step: " << ii << endl;
+			PArrive *= (1-AbsStep);
+			PArriveComplex *= exp(-zi*delta);
+			if (ii % 2 == 1) {
+				TranTot += PArrive*real(gfunc(_n3,_n2,theta3,theta2)*t23*conj(t23));
+				PArrive *= ReflectVac;
+
+				TranTotComplex += PArriveComplex*t23;
+				PArriveComplex *= r23;
+			}
+			else {
+				RefTot += PArrive*real(gfunc(_n1,_n2,theta1,theta2)*t21*conj(t21));
+				PArrive *= ReflectGlass;
+
+				RefTotComplex += PArriveComplex*t21;
+				PArriveComplex *= r21;
+			}
+			AbsTot += PArrive*AbsStep;
+			AbsTotComplex += PArriveComplex;
+			
+			double fT_step = real(gfunc(_n3,_n1,theta3,theta1)*TranTotComplex*conj(TranTotComplex));
+			double fR_step = real(RefTotComplex*conj(RefTotComplex));
+			double PassedFurther = real(gfunc(_n2,_n1,theta2,theta1)*PArriveComplex*conj(PArriveComplex));
+			cout << "fA_total: " << 1-fT_s-fR_s << " fT_step " << fT_step << " fR_step " << fR_step << " fA_step " << 1-fT_step-fR_step-PassedFurther << " PassedFurther " << PassedFurther << endl;
 		}
 
-		cout << " AbsTot: " << AbsTot << " " << 1-fT_s-fR_s << endl;
+		cout << "fT_s: " << fT_s << " " << real(gfunc(_n3,_n1,theta3,theta1)*TranTotComplex*conj(TranTotComplex)) << endl;
+		cout << "fR_s: " << fR_s << " " << real(RefTotComplex*conj(RefTotComplex)) << endl;
+		cout << "fA_t: " << 1-fT_s-fR_s << endl;
+		//cout << "fA_s: " << 1-fT_s-fR_s << " " << real(gfunc(_n2,_n1,theta2,theta1)*AbsTotComplex*conj(AbsTotComplex))*AbsStep << " " << real(gfunc(_n2,_n1,theta2,theta1)*PArriveComplex*conj(PArriveComplex))<< endl;
 
 		
 
+		//calculation for p-polarization
+		// In this convention r_p is positive when the incoming and reflected magnetic fields are anti-parallel, and negative when they are parallel. This convention has the convenient advantage that the s and p sign conventions are the same at normal incidence. This convention is used in Motta & Schoenert (but p and s-wave are swapped by typo, probably).
     r12=rfunc(_n1,_n2comp,theta2,theta1);
-    r23=rfunc(_n2comp,_n3,theta3,theta2);
+		r23=rfunc(_n2comp,_n3,theta3,theta2);
+
+		//This is the convention from the https://en.wikipedia.org/wiki/Fresnel_equations and Born&Wolf (cited by Motta and Shoenert). Both conventions bring the same results for fR_p and fT_p. For p polarization, a positive r or t means that the magnetic fields of the waves are parallel, while negative means anti-parallel. r=-r' between two conventions.
+		//r12=rfunc(_n2comp,_n1,theta1,theta2);
+		//r23=rfunc(_n3,_n2comp,theta2,theta3); 
+
     t12=trfunc(_n1,_n2comp,theta1,theta2,theta1);
     t21=trfunc(_n2comp,_n1,theta2,theta1,theta2);
     t23=trfunc(_n2comp,_n3,theta2,theta3,theta2);
@@ -566,6 +612,9 @@ namespace km3net
     fT_p=real(gfunc(_n3,_n1,theta3,theta1)*ampt*conj(ampt));
     //ampa=t12*exp(-zi*delta)/(1.+r12*r23*exp(-2.*zi*delta));
     //fA_p=real(gfunc(_n2,_n1,theta2,theta1)*ampa*conj(ampa));
+		//
+
+		//cout << "fR_p " << fR_p << " " << fT_p << endl;
 
 
 
