@@ -517,85 +517,39 @@ namespace km3net
 
     ampr=r12+(t12*t21*r23*exp(2.*zi*delta))/(1.+r12*r23*exp(2.*zi*delta));
     ampt=(t12*t23*exp(zi*delta))/(1.+r12*r23*exp(2.*zi*delta));
+		//And finally...!
+		//fR_s=real(ampr*conj(ampr));
+		//fT_s=real(gfunc(_n3,_n1,theta3,theta1)*ampt*conj(ampt));
+
+		/*
+		 * Analytical absorption calculation
+		 * Assumptions: 
+		 * n = _n2 + i_k2  (complex index)
+		 * k = k_T + i*2pi/lambda (complex wavenumber)
+		 * E = E0*exp(i(k_T + i*z/2*lambda) - wave propagation (z is always vertical, so lambda is "vertical lambda" = lambda*costheta
+		 * Amplitude = |E|^2/E_0^2 = exp(-z/lambda)  -- amplitude decrease due to the absorption
+		 * dI = -1/lambda * I   (classical decay/absorption derivation)
+		 * p_absorb = 1/lambda * Amplitude   !!!!
+		 * P_absorb_total = int_0^h p_absorb
+		 */
+		//Step 1: amplitudes of two waves (up and down inside the photocathode)
+		complex<double> ampa1=t12/(1.+r12*r23*exp(2.*zi*delta));                      //exp(ikz)      wave (going down)
+		complex<double> ampa2=t12*r23*exp(zi*delta)/(1.+r12*r23*exp(2.*zi*delta));    //exp(-ik(h-z)) wave (going up)
+
+		complex<double> absamp1 = exp(zi*delta);                                      
+		double AbsStep = (1.-real(absamp1*conj(absamp1)));                            // this is integral_0^h exp(-z) 
+		double fA_s=real(gfunc(_n2,_n1,theta2,theta1)*(ampa1*conj(ampa1)+ampa2*conj(ampa2)))*AbsStep;
+		double theta2real = asin((_n1/_n2)*_sin_theta1);
+		cout << "Check if theta2 is the same (real part): " << theta2real << " " << theta2 << endl;
+		double VertLambdaPhoton                =_wavelength/(2*twopi*_k2*cos(theta2real));  //absorption for vertical coordinate 
+		double k_T = twopi/_wavelength*_n2*cos(theta2real);   // exp(i(kz-wt)) real(transmission) part of the k
+		fA_s+=real(gfunc(_n2,_n1,theta2,theta1))*1/VertLambdaPhoton*sqrt(1.-AbsStep)*2.*sin(k_T*fabs(_thickness))/k_T*real(ampa1*conj(ampa2));
+
 
     //And finally...!
     fR_s=real(ampr*conj(ampr));
     fT_s=real(gfunc(_n3,_n1,theta3,theta1)*ampt*conj(ampt));
-
-    //complex<double> ampa=t12*exp(zi*delta)/(1.+r12*r23*exp(2.*zi*delta)); //try to calculate abs for comparison. Not yet done.
-    //fA_s=real(gfunc(_n2,_n1,theta2,theta1)*ampa*conj(ampa));
-		double Pentercathode = real(gfunc(_n2comp,_n1,theta2,theta1)*t12*conj(t12));
-		double Preflect = real(r12*conj(r12));
-		cout << "Penter: " << Pentercathode << " Preflect: " << Preflect << " Sum is 1?: " << Pentercathode+Preflect << " no gfunc " << real(t12*conj(t12))+Preflect << endl;
-
-		cout << "t12+r12 " << t12+r12 << " mod " << real((t12+r12)*conj(t12+r12))<< endl;
-
-		double ReflectVac = real(r23*conj(r23));
-		double ReflectGlass = real(r12*conj(r12));  //r21 = -r12, r21*=-r12* -> r21r21* = r12r12*
-
-		complex<double>r21 = rfunc(_n2comp,_n1,theta2,theta1);
-		double ReflectGlassCheck = real(r21*conj(r21));
-		cout << "compare reflect " << ReflectGlassCheck << " " << ReflectGlass << endl;
-
-
-		complex<double> absamp1 = exp(zi*delta);
-		double AbsStep = (1-real(absamp1*conj(absamp1)));
-
-	  //double PhotoCathodeLength=fabs(_thickness / (fNorm.dot(dir)));
-		double PhotoCathodeLength=fabs(_thickness); //normal falling
-		//relative absorption length (lambda\l_0)
-		double lambdaPhoton                =_wavelength/(2*twopi*_k2);
-		double AbsStepCheck = (1.-exp(-PhotoCathodeLength/lambdaPhoton));
-		cout << "Check Abs: " << AbsStep << " " << AbsStepCheck << endl;
-
-		double Abs1Step = Pentercathode*AbsStep;
-		double Abs2Step = Pentercathode*(AbsStep+(1-AbsStep)*ReflectVac*AbsStep);
-		cout << "Abs1Step " << Abs1Step << " Abs2step: " << Abs2Step << endl;
-
-		double PArrive = Pentercathode;
-		double AbsTot = PArrive*AbsStep; //1 step
-
-		double RefTot = Preflect;
-		double TranTot = 0;
-
-		complex<double> PArriveComplex = t12;
-		complex<double> RefTotComplex = r12;
-		complex<double> TranTotComplex = 0;
-		complex<double> AbsTotComplex = PArriveComplex;
-
-		for (int ii = 1; ii < 100; ii++) {
-			cout << "step: " << ii << endl;
-			PArrive *= (1-AbsStep);
-			PArriveComplex *= exp(zi*delta);
-			if (ii % 2 == 1) {
-				TranTot += PArrive*real(gfunc(_n3,_n2,theta3,theta2)*t23*conj(t23));
-				PArrive *= ReflectVac;
-
-				TranTotComplex += PArriveComplex*t23;
-				PArriveComplex *= r23;
-			}
-			else {
-				RefTot += PArrive*real(gfunc(_n1,_n2,theta1,theta2)*t21*conj(t21));
-				PArrive *= ReflectGlass;
-
-				RefTotComplex += PArriveComplex*t21;
-				PArriveComplex *= r21;
-			}
-			AbsTot += PArrive*AbsStep;
-			AbsTotComplex += PArriveComplex;
-
-			double fT_step = real(gfunc(_n3,_n1,theta3,theta1)*TranTotComplex*conj(TranTotComplex));
-			double fR_step = real(RefTotComplex*conj(RefTotComplex));
-			double PassedFurther = real(gfunc(_n2,_n1,theta2,theta1)*PArriveComplex*conj(PArriveComplex));
-			cout << "fA_total: " << 1-fT_s-fR_s << " fT_step " << fT_step << " fR_step " << fR_step << " fA_step " << 1-fT_step-fR_step-PassedFurther << " PassedFurther " << PassedFurther << endl;
-		}
-
-		cout << "fT_s: " << fT_s << " " << real(gfunc(_n3,_n1,theta3,theta1)*TranTotComplex*conj(TranTotComplex)) << endl;
-		cout << "fR_s: " << fR_s << " " << real(RefTotComplex*conj(RefTotComplex)) << endl;
-		cout << "fA_t: " << 1-fT_s-fR_s << endl;
-		//cout << "fA_s: " << 1-fT_s-fR_s << " " << real(gfunc(_n2,_n1,theta2,theta1)*AbsTotComplex*conj(AbsTotComplex))*AbsStep << " " << real(gfunc(_n2,_n1,theta2,theta1)*PArriveComplex*conj(PArriveComplex))<< endl;
-
-
+		cout << "Yes, the absorption is calculated! " << 1-fR_s-fT_s << " " << fA_s << endl;
 
 		//Calculation for p-polarization
 		// In this convention r_p is positive when the incoming and reflected magnetic fields are anti-parallel, and negative when they are parallel. This convention has the convenient advantage that the s and p sign conventions are the same at normal incidence. This convention is used in Motta & Schoenert (but p and s-wave are swapped by typo, probably).
