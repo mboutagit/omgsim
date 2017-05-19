@@ -545,6 +545,13 @@ namespace km3net
 		double k_T = twopi/_wavelength*_n2*cos(theta2real);   // exp(i(kz-wt)) real(transmission) part of the k
 		fA_s+=real(gfunc(_n2,_n1,theta2,theta1))*1/VertLambdaPhoton*sqrt(1.-AbsStep)*2.*sin(k_T*fabs(_thickness))/k_T*real(ampa1*conj(ampa2));
 
+		double AbsPhi = arg(ampa1*conj(ampa2));
+		double AbsA = abs(ampa1*conj(ampa2));
+		cout << "cumulative absorption prob for z/nm (0, thickness) where 0 is at the border with glass" << endl;
+		for (double z = _thickness; z >= -1e-9; z-= _thickness/10.) {
+			double fA_s_z = real(gfunc(_n2,_n1,theta2,theta1))*(real(ampa1*conj(ampa1))*(1.-exp(-z/VertLambdaPhoton))+real(ampa2*conj(ampa2))*(exp(-(_thickness-z)/VertLambdaPhoton)-exp(-_thickness/VertLambdaPhoton))+sqrt(1.-AbsStep)*AbsA*(sin(k_T*(2.*z-_thickness)+AbsPhi)-sin(-k_T*_thickness+AbsPhi))/k_T/VertLambdaPhoton);
+			cout << z/nm << " " << fA_s_z << endl;
+		}
 
     //And finally...!
     fR_s=real(ampr*conj(ampr));
