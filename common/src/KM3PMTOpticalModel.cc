@@ -542,15 +542,25 @@ namespace km3net
 		double theta2real = asin((_n1/_n2)*_sin_theta1);
 		cout << "Check if theta2 is the same (real part): " << theta2real << " " << theta2 << endl;
 		double VertLambdaPhoton                =_wavelength/(2*twopi*_k2*cos(theta2real));  //absorption for vertical coordinate 
+		cout << "VertLambdaPhoton " << VertLambdaPhoton/nm << endl;
 		double k_T = twopi/_wavelength*_n2*cos(theta2real);   // exp(i(kz-wt)) real(transmission) part of the k
 		fA_s+=real(gfunc(_n2,_n1,theta2,theta1))*1/VertLambdaPhoton*sqrt(1.-AbsStep)*2.*sin(k_T*fabs(_thickness))/k_T*real(ampa1*conj(ampa2));
 
+		// a trial to undertand how the waves create the final distribution
+		/*
+		cout << "two exp amps " << 1./VertLambdaPhoton*real(gfunc(_n2,_n1,theta2,theta1))*real(ampa1*conj(ampa1)) << " " << 1./VertLambdaPhoton*real(gfunc(_n2,_n1,theta2,theta1))*real(ampa2*conj(ampa2)) << endl;
+		complex<double> ampa1_first=t12;                      //exp(ikz)      wave (going down)
+		complex<double> ampa2_first=t12*r23*exp(zi*delta);    //exp(-ik(h-z)) wave (going up)
+		cout << "first wave amps " << 1./VertLambdaPhoton*real(gfunc(_n2,_n1,theta2,theta1))*real(ampa1_first*conj(ampa1_first)) << " " << 1./VertLambdaPhoton*real(gfunc(_n2,_n1,theta2,theta1))*real(ampa2_first*conj(ampa2_first)) << endl;
+		*/
+
 		double AbsPhi = arg(ampa1*conj(ampa2));
 		double AbsA = abs(ampa1*conj(ampa2));
-		cout << "cumulative absorption prob for z/nm (0, thickness) where 0 is at the border with glass" << endl;
-		for (double z = _thickness; z >= -1e-9; z-= _thickness/10.) {
-			double fA_s_z = real(gfunc(_n2,_n1,theta2,theta1))*(real(ampa1*conj(ampa1))*(1.-exp(-z/VertLambdaPhoton))+real(ampa2*conj(ampa2))*(exp(-(_thickness-z)/VertLambdaPhoton)-exp(-_thickness/VertLambdaPhoton))+sqrt(1.-AbsStep)*AbsA*(sin(k_T*(2.*z-_thickness)+AbsPhi)-sin(-k_T*_thickness+AbsPhi))/k_T/VertLambdaPhoton);
-			cout << z/nm << " " << fA_s_z << endl;
+		cout << "z partial_prob cum_prob (absorption prob for z/nm [0, thickness] where 0 is at the border with glass)" << endl;
+		for (double z = _thickness; z >= -1e-9; z-= _thickness/100.) {
+			double fA_s_z = 1./VertLambdaPhoton*real(gfunc(_n2,_n1,theta2,theta1))*(real(ampa1*conj(ampa1))*exp(-z/VertLambdaPhoton)+real(ampa2*conj(ampa2))*exp(-(_thickness-z)/VertLambdaPhoton)+sqrt(1.-AbsStep)*AbsA*2.*cos(k_T*(2.*z-_thickness)+AbsPhi));
+			double fA_s_z_cum = real(gfunc(_n2,_n1,theta2,theta1))*(real(ampa1*conj(ampa1))*(1.-exp(-z/VertLambdaPhoton))+real(ampa2*conj(ampa2))*(exp(-(_thickness-z)/VertLambdaPhoton)-exp(-_thickness/VertLambdaPhoton))+sqrt(1.-AbsStep)*AbsA*(sin(k_T*(2.*z-_thickness)+AbsPhi)-sin(-k_T*_thickness+AbsPhi))/k_T/VertLambdaPhoton);
+			cout << z/nm << " " << fA_s_z << " " << fA_s_z_cum << endl;
 		}
 
     //And finally...!
