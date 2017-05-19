@@ -556,12 +556,23 @@ namespace km3net
 
 		double AbsPhi = arg(ampa1*conj(ampa2));
 		double AbsA = abs(ampa1*conj(ampa2));
+		double MeanDepthNum = 0;
 		cout << "z partial_prob cum_prob (absorption prob for z/nm [0, thickness] where 0 is at the border with glass)" << endl;
-		for (double z = _thickness; z >= -1e-9; z-= _thickness/100.) {
+		double zstep = _thickness/1000.;
+		for (double z = _thickness; z >= -1e-9; z-= zstep) {
 			double fA_s_z = 1./VertLambdaPhoton*real(gfunc(_n2,_n1,theta2,theta1))*(real(ampa1*conj(ampa1))*exp(-z/VertLambdaPhoton)+real(ampa2*conj(ampa2))*exp(-(_thickness-z)/VertLambdaPhoton)+sqrt(1.-AbsStep)*AbsA*2.*cos(k_T*(2.*z-_thickness)+AbsPhi));
 			double fA_s_z_cum = real(gfunc(_n2,_n1,theta2,theta1))*(real(ampa1*conj(ampa1))*(1.-exp(-z/VertLambdaPhoton))+real(ampa2*conj(ampa2))*(exp(-(_thickness-z)/VertLambdaPhoton)-exp(-_thickness/VertLambdaPhoton))+sqrt(1.-AbsStep)*AbsA*(sin(k_T*(2.*z-_thickness)+AbsPhi)-sin(-k_T*_thickness+AbsPhi))/k_T/VertLambdaPhoton);
-			cout << z/nm << " " << fA_s_z << " " << fA_s_z_cum << endl;
+			//cout << z/nm << " " << fA_s_z << " " << fA_s_z_cum << endl;
+			MeanDepthNum += z*fA_s_z*zstep;
 		}
+		MeanDepthNum/=fA_s;
+
+		double XIntegral1 = -VertLambdaPhoton*_thickness*exp(-_thickness/VertLambdaPhoton)+VertLambdaPhoton*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton));
+		double XIntegral2 = _thickness*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton))-XIntegral1;
+		// Int z*cos(k_T*(2.*z-_thickness)+AbsPhi)
+		double XIntegral3 = _thickness/2./k_T*sin(AbsPhi+k_T*_thickness) + 1./4./k_T/k_T*(cos(AbsPhi+k_T*_thickness)-cos(AbsPhi-k_T*_thickness));
+		double MeanDepth =  1./VertLambdaPhoton*real(gfunc(_n2,_n1,theta2,theta1))*(real(ampa1*conj(ampa1))*XIntegral1+real(ampa2*conj(ampa2))*XIntegral2+sqrt(1.-AbsStep)*AbsA*2.*XIntegral3)/fA_s;
+		cout << "MeanDepth: " << MeanDepth/nm << " numeric-> " << MeanDepthNum/nm << endl;
 
     //And finally...!
     fR_s=real(ampr*conj(ampr));
