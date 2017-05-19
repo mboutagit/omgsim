@@ -368,7 +368,41 @@ namespace km3net
   G4complex trfunc(G4complex ni, G4complex nj, G4complex ti, G4complex tj,
                    G4complex tk);
 
+  double KM3PMTOpticalModel::GetMeanPhotonAbsorbtionDepth() {
+    /*
+     * Analytical absorption calculation
+     * Assumptions: 
+     * n = _n2 + i_k2  (complex index)
+     * k = k_T + i*2pi/lambda (complex wavenumber)
+     * E = E0*exp(i(k_T + i*z/2*lambda) - wave propagation (z is always vertical, so lambda is "vertical lambda" = lambda*costheta
+     * Amplitude = |E|^2/E_0^2 = exp(-z/lambda)  -- amplitude decrease due to the absorption
+     * dI = -1/lambda * I   (classical decay/absorption derivation)
+     * p_absorb = 1/lambda * Amplitude   !!!!
+     * P_absorb_total = int_0^h p_absorb
+     */
+    //Step 1: amplitudes of two waves (up and down inside the photocathode)
+    complex<double> ampa1=t12/(1.+r12*r23*exp(2.*zi*delta));                      //exp(ikz)      wave (going down)
+    complex<double> ampa2=t12*r23*exp(zi*delta)/(1.+r12*r23*exp(2.*zi*delta));    //exp(-ik(h-z)) wave (going up)
 
+    complex<double> absamp1 = exp(zi*delta);
+    double AbsStep = (1.-real(absamp1*conj(absamp1)));                            // this is integral_0^h exp(-z) 
+    double theta2real = asin((_n1/_n2)*_sin_theta1);
+    cout << "Check if theta2 is the same (real part): " << theta2real << " " << theta2 << endl;
+    double VertLambdaPhoton                =_wavelength/(2*twopi*_k2*cos(theta2real));  //absorption for vertical coordinate 
+    cout << "VertLambdaPhoton " << VertLambdaPhoton/nm << endl;
+    double k_T = twopi/_wavelength*_n2*cos(theta2real);   // exp(i(kz-wt)) real(transmission) part of the k
+
+    double AbsPhi = arg(ampa1*conj(ampa2));
+    double AbsA = abs(ampa1*conj(ampa2));
+
+    double XIntegral1 = -VertLambdaPhoton*_thickness*exp(-_thickness/VertLambdaPhoton)+VertLambdaPhoton*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton));
+    double XIntegral2 = _thickness*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton))-XIntegral1;
+    // Int z*cos(k_T*(2.*z-_thickness)+AbsPhi)
+    double XIntegral3 = _thickness/2./k_T*sin(AbsPhi+k_T*_thickness) + 1./4./k_T/k_T*(cos(AbsPhi+k_T*_thickness)-cos(AbsPhi-k_T*_thickness));
+    double MeanDepth =  1./VertLambdaPhoton*real(gfunc(_n2,_n1,theta2,theta1))*(real(ampa1*conj(ampa1))*XIntegral1+real(ampa2*conj(ampa2))*XIntegral2+sqrt(1.-AbsStep)*AbsA*2.*XIntegral3)/fA_s;
+    return MeanDepth/_thickness;
+	}
+	
   bool KM3PMTOpticalModel::ElectronProductionCalculator (G4ThreeVector &dir, G4ThreeVector &pos)
   {
     if (_electronProductionLevel == 0 || fInsideDirection.r() == 0)
@@ -517,6 +551,7 @@ namespace km3net
 
     ampr=r12+(t12*t21*r23*exp(2.*zi*delta))/(1.+r12*r23*exp(2.*zi*delta));
     ampt=(t12*t23*exp(zi*delta))/(1.+r12*r23*exp(2.*zi*delta));
+
 		//And finally...!
 		//fR_s=real(ampr*conj(ampr));
 		//fT_s=real(gfunc(_n3,_n1,theta3,theta1)*ampt*conj(ampt));
@@ -558,7 +593,7 @@ namespace km3net
 		double AbsA = abs(ampa1*conj(ampa2));
 		double MeanDepthNum = 0;
 		cout << "z partial_prob cum_prob (absorption prob for z/nm [0, thickness] where 0 is at the border with glass)" << endl;
-		double zstep = _thickness/1000.;
+		double zstep = _thickness/1e6;
 		for (double z = _thickness; z >= -1e-9; z-= zstep) {
 			double fA_s_z = 1./VertLambdaPhoton*real(gfunc(_n2,_n1,theta2,theta1))*(real(ampa1*conj(ampa1))*exp(-z/VertLambdaPhoton)+real(ampa2*conj(ampa2))*exp(-(_thickness-z)/VertLambdaPhoton)+sqrt(1.-AbsStep)*AbsA*2.*cos(k_T*(2.*z-_thickness)+AbsPhi));
 			double fA_s_z_cum = real(gfunc(_n2,_n1,theta2,theta1))*(real(ampa1*conj(ampa1))*(1.-exp(-z/VertLambdaPhoton))+real(ampa2*conj(ampa2))*(exp(-(_thickness-z)/VertLambdaPhoton)-exp(-_thickness/VertLambdaPhoton))+sqrt(1.-AbsStep)*AbsA*(sin(k_T*(2.*z-_thickness)+AbsPhi)-sin(-k_T*_thickness+AbsPhi))/k_T/VertLambdaPhoton);
@@ -579,7 +614,7 @@ namespace km3net
     fT_s=real(gfunc(_n3,_n1,theta3,theta1)*ampt*conj(ampt));
 		cout << "Yes, the absorption is calculated! " << 1-fR_s-fT_s << " " << fA_s << endl;
 
-		//Calculation for p-polarization
+		//Calculation for the p-polarization
 		// In this convention r_p is positive when the incoming and reflected magnetic fields are anti-parallel, and negative when they are parallel. This convention has the convenient advantage that the s and p sign conventions are the same at normal incidence. This convention is used in Motta & Schoenert (but p and s-wave are swapped by typo, probably).
     r12=rfunc(_n1,_n2comp,theta2,theta1);
 		r23=rfunc(_n2comp,_n3,theta3,theta2);
