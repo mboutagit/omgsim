@@ -118,6 +118,24 @@ namespace km3net
     G4double _sin_theta1;    // sine of angle of incidence
     G4double _sin_theta3;    // sine of angle of refraction
     G4double _cos_theta3;    // cosine of angle of refraction
+
+    G4complex fr12_s;        //reflection- and transmission-related terms
+    G4complex fr23_s;
+    G4complex ft12_s;
+    G4complex ft21_s;
+    G4complex ft23_s;
+
+    G4complex fr12_p;
+    G4complex fr23_p;
+    G4complex ft12_p;
+    G4complex ft21_p;
+    G4complex ft23_p;
+
+    G4complex fdelta;
+    G4complex ftheta1;
+    G4complex ftheta2;
+    G4complex ftheta3;//geometric parameters
+
     G4double fR_s;           // reflection coefficient for s-polarized light
     G4double fT_s;           // transmission coefficient for s-polarized light
     G4double fR_p;           // reflection coefficient for p-polarized light
@@ -130,7 +148,7 @@ namespace km3net
     G4double fA_n;
 
     G4double fPhotonAttenuationMu;
-    G4double fElectronAttenuationLength = 70*nm; //Electron absorption depth (considering brownian motion, the real abs length is longer)
+    G4double fElectronAttenuationLength = 7000*nm; //Electron absorption depth (considering brownian motion, the real abs length is longer) to be tested and tuned (or suppressed)
     double   fElectronProbLevel0 = 0.4;
     G4ThreeVector fNorm;
     G4ThreeVector fInsideDirection;
@@ -145,11 +163,13 @@ namespace km3net
 
     void CalculateCoefficients(); // calculate and set fR_s, fR_p, fT_s and fT_p
     void CalculateTotalCoefficients (G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm);
+    double GetMeanPhotonAbsorbtionDepth(G4complex r12,G4complex r23, G4complex t12) const;
+    double GetTotalMeanPhotonAbsorbtionDepth(const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm) const;
     void Reflect(G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm);
     void Refract(G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm);
     unsigned char CheckDetection (const G4ThreeVector&);
 
-    bool ElectronProductionCalculator (G4ThreeVector &dir, G4ThreeVector &pos);
+    bool ElectronProductionCalculator (const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm) const;
 
     //public utils
   public:

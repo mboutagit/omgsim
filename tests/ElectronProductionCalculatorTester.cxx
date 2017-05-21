@@ -49,8 +49,9 @@ int main  (int argc, char** argv)
   cout << "Create model tester" <<endl;
   theModelTester.LoadMaterial ("photocathode10inches", "PMTGlass", "Vacuum");
 
-	//VLA
-	G4ThreeVector pos(0,0,-1);
+  //VLA
+  G4ThreeVector pos(0,0,-1);
+  G4ThreeVector pol(0,0,-1);
 
   theModelTester.TestCalculateNormalCoefficients (pos, 440*nm);
   theModelTester.SetElectronProductionLevel (level);
@@ -65,6 +66,7 @@ int main  (int argc, char** argv)
       G4ThreeVector dir(0,x,z);
       //G4ThreeVector pos(0,0,-1);
       G4ThreeVector norm(0,0,1);
+      G4ThreeVector insidedir = -norm;
 
 
       float escaped=0;
@@ -72,7 +74,7 @@ int main  (int argc, char** argv)
       for (int i=0; i<nb_elect;i++)
         {
           theModelTester.TestCalculateCoefficients (pos, dir, dir, norm, 440*nm);
-          if (theModelTester.TestElectronProduction (dir, pos, norm))
+          if (theModelTester.TestElectronProduction (dir, pol, norm, insidedir))
             escaped++;
         }
 
@@ -80,8 +82,8 @@ int main  (int argc, char** argv)
       h->SetBinContent (angle+1,escaped/nb_elect);
     }
 
-      theModelTester.SaveTreesAndHistograms ("/scratch/hugon/out.root");
-      h->SaveAs ("/scratch/hugon/bah.root");
+  theModelTester.SaveTreesAndHistograms ("/scratch/hugon/out.root");
+  h->SaveAs ("/scratch/hugon/bah.root");
 
   return 0;
 
@@ -90,13 +92,13 @@ int main  (int argc, char** argv)
   G4SauterGavrilaAngularDistribution SGAnglular;
 
   for (int i=0; i<10000; i++)
-    {
-      G4ThreeVector PEemit = SGAnglular.SampleDirection (&DynPart);
-      cout << PEemit.x () << " " << PEemit.y () << " " << PEemit.z () << " " << endl;
-      h->Fill (acos (PEemit.z ()));
-    }
+  {
+  G4ThreeVector PEemit = SGAnglular.SampleDirection (&DynPart);
+  cout << PEemit.x () << " " << PEemit.y () << " " << PEemit.z () << " " << endl;
+  h->Fill (acos (PEemit.z ()));
+  }
 
 
 
-    return 0;*/
+  return 0;*/
 }

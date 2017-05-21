@@ -53,7 +53,7 @@ int main  (int argc, char** argv)
 
   //VLA
   G4ThreeVector pos(0,0,-1);
-
+  G4ThreeVector pol(0,0,-1);
   theModelTester.TestCalculateNormalCoefficients (pos, 400*nm);
   theModelTester.SetElectronProductionLevel (level);
   if (level < 2)
@@ -77,7 +77,7 @@ int main  (int argc, char** argv)
       hPhotonAbs->SetBinContent (angle,Abs);
       for (int i=0; i<nb_elect;i++)
         {
-          if (theModelTester.TestElectronProduction (dir, pos, insideDirection))
+          if (theModelTester.TestElectronProduction (dir, pol, norm, insideDirection))
             escaped++;
         }
 

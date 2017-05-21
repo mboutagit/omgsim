@@ -1,5 +1,5 @@
 /** @file KM3PMTOpticalModel.cc
-    Defines a FastSimulationModel class for handling optical photon
+    Defines a FaStsimulationmodel- class for handling optical photon
     interactions with PMT: partial reflection, transmission, absorption,
     and hit generation.
 
@@ -75,11 +75,11 @@ namespace km3net
 
       fLuxCmd= new G4UIcmdWithAnInteger("/PMTOpticalModel/luxlevel",this);
       fLuxCmd->SetGuidance("Set \"luxury level\" for PMT Optical Model\n"
-                       " 0 == standard \"black bucket\": photons stop in PC, maybe make pe, \n"
-                       " 1 == shiny translucent brown film: photons only stop if they make a PE, otherwise 50/50 chance of reflecting/transmitting\n"
-                       " 2 or greater == full model\n"
-                       "The default value is 3."
-                       );
+                           " 0 == standard \"black bucket\": photons stop in PC, maybe make pe, \n"
+                           " 1 == shiny translucent brown film: photons only stop if they make a PE, otherwise 50/50 chance of reflecting/transmitting\n"
+                           " 2 or greater == full model\n"
+                           "The default value is 3."
+                           );
       fLuxCmd->SetParameter(new G4UIparameter("level", 'i', false));
       fLuxCmd->AvailableForStates(G4State_PreInit);
 
@@ -107,8 +107,8 @@ namespace km3net
   void KM3PMTOpticalModel::SetNewValue (G4UIcommand* command,G4String newValue)
   {
     if (command == fVerbosityCmd) {
-       _verbosity = fVerbosityCmd->GetNewIntValue(newValue);
-     }
+      _verbosity = fVerbosityCmd->GetNewIntValue(newValue);
+    }
     else if (command == fLuxCmd) {
       _luxlevel=fLuxCmd->GetNewIntValue(newValue);
     }
@@ -327,10 +327,10 @@ namespace km3net
       {
         aParticleChange.ProposeLocalEnergyDeposit(_photon_energy);
         aParticleChange.ProposeTrackStatus(fStopAndKill);
-        if(ElectronProductionCalculator (dir, pos))
+        if(ElectronProductionCalculator (dir, pol, norm))
           {
             G4DynamicParticle* anElectron= new G4DynamicParticle ( G4Electron::Electron (),
-                                                                   -fNorm,
+                                                                   fInsideDirection,
                                                                    2*eV      );
             aParticleChange.SetNumberOfSecondaries(1);
             aParticleChange.AddSecondary(anElectron);
@@ -368,10 +368,30 @@ namespace km3net
   G4complex trfunc(G4complex ni, G4complex nj, G4complex ti, G4complex tj,
                    G4complex tk);
 
-  double KM3PMTOpticalModel::GetMeanPhotonAbsorbtionDepth() {
+  double KM3PMTOpticalModel::GetTotalMeanPhotonAbsorbtionDepth (const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm) const
+  {
+    double Mean_s=GetMeanPhotonAbsorbtionDepth(fr12_s,fr23_s,ft12_s);
+    double Mean_p=GetMeanPhotonAbsorbtionDepth(fr12_p,fr23_p,ft12_p);
+
+    G4double E_s2;
+    // Calculate Transmission, Reflection, and Absorption coefficients
+    if ( _sin_theta1 > 0.0 )
+      {
+        E_s2= ( pol * dir.cross( norm ) ) / _sin_theta1;
+        E_s2*= E_s2;
+      }
+    else
+      E_s2= 0.0;
+
+    return Mean_s * E_s2  +  Mean_p * (1.0-E_s2);
+
+  }
+
+  double KM3PMTOpticalModel::GetMeanPhotonAbsorbtionDepth(G4complex r12,G4complex r23, G4complex t12) const
+  {
     /*
      * Analytical absorption calculation
-     * Assumptions: 
+     * Assumptions:
      * n = _n2 + i_k2  (complex index)
      * k = k_T + i*2pi/lambda (complex wavenumber)
      * E = E0*exp(i(k_T + i*z/2*lambda) - wave propagation (z is always vertical, so lambda is "vertical lambda" = lambda*costheta
@@ -381,15 +401,15 @@ namespace km3net
      * P_absorb_total = int_0^h p_absorb
      */
     //Step 1: amplitudes of two waves (up and down inside the photocathode)
-    complex<double> ampa1=t12/(1.+r12*r23*exp(2.*zi*delta));                      //exp(ikz)      wave (going down)
-    complex<double> ampa2=t12*r23*exp(zi*delta)/(1.+r12*r23*exp(2.*zi*delta));    //exp(-ik(h-z)) wave (going up)
+    G4complex zi(0.,1.); //imaginary unit
+    complex<double> ampa1=t12/(1.+r12*r23*exp(2.*zi*fdelta));                      //exp(ikz)      wave (going down)
+    complex<double> ampa2=t12*r23*exp(zi*fdelta)/(1.+r12*r23*exp(2.*zi*fdelta));    //exp(-ik(h-z)) wave (going up)
 
-    complex<double> absamp1 = exp(zi*delta);
-    double AbsStep = (1.-real(absamp1*conj(absamp1)));                            // this is integral_0^h exp(-z) 
+    complex<double> absamp1 = exp(zi*fdelta);
+    double AbsStep = (1.-real(absamp1*conj(absamp1)));                            // this is integral_0^h exp(-z)
+    double fA_s=real(gfunc(_n2,_n1,ftheta2,ftheta1)*(ampa1*conj(ampa1)+ampa2*conj(ampa2)))*AbsStep;
     double theta2real = asin((_n1/_n2)*_sin_theta1);
-    cout << "Check if theta2 is the same (real part): " << theta2real << " " << theta2 << endl;
-    double VertLambdaPhoton                =_wavelength/(2*twopi*_k2*cos(theta2real));  //absorption for vertical coordinate 
-    cout << "VertLambdaPhoton " << VertLambdaPhoton/nm << endl;
+    double VertLambdaPhoton                =_wavelength/(2*twopi*_k2*cos(theta2real));  //absorption for vertical coordinate
     double k_T = twopi/_wavelength*_n2*cos(theta2real);   // exp(i(kz-wt)) real(transmission) part of the k
 
     double AbsPhi = arg(ampa1*conj(ampa2));
@@ -397,70 +417,35 @@ namespace km3net
 
     double XIntegral1 = -VertLambdaPhoton*_thickness*exp(-_thickness/VertLambdaPhoton)+VertLambdaPhoton*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton));
     double XIntegral2 = _thickness*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton))-XIntegral1;
-    // Int z*cos(k_T*(2.*z-_thickness)+AbsPhi)
     double XIntegral3 = _thickness/2./k_T*sin(AbsPhi+k_T*_thickness) + 1./4./k_T/k_T*(cos(AbsPhi+k_T*_thickness)-cos(AbsPhi-k_T*_thickness));
-    double MeanDepth =  1./VertLambdaPhoton*real(gfunc(_n2,_n1,theta2,theta1))*(real(ampa1*conj(ampa1))*XIntegral1+real(ampa2*conj(ampa2))*XIntegral2+sqrt(1.-AbsStep)*AbsA*2.*XIntegral3)/fA_s;
+    double MeanDepth =  1./VertLambdaPhoton*real(gfunc(_n2,_n1,ftheta2,ftheta1))*(real(ampa1*conj(ampa1))*XIntegral1+real(ampa2*conj(ampa2))*XIntegral2+sqrt(1.-AbsStep)*AbsA*2.*XIntegral3)/fA_s;
+
     return MeanDepth/_thickness;
-	}
-	
-  bool KM3PMTOpticalModel::ElectronProductionCalculator (G4ThreeVector &dir, G4ThreeVector &pos)
+  }
+
+  bool KM3PMTOpticalModel::ElectronProductionCalculator (const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm) const
   {
     if (_electronProductionLevel == 0 || fInsideDirection.r() == 0)
       {
         double rand=G4UniformRand ();
         return (rand < fElectronProbLevel0);
       }
-    bool GoingInside                  = dir.dot (fInsideDirection) > 0;
-    double PhotoCathodeLength=fabs(_thickness / (fNorm.dot(dir)));
 
-		//relative absorption length (lambda\l_0)
-    double lambdaPhoton                =_wavelength/(2*twopi*_k2);
-		//survaval probability (exponentially related to the travelled distance)
-    double Rand                        =G4UniformRand ();
-		//relative interaction length or depth of the photon from the incoming medium in units of photocathode length
-    double PhotonDepth                 =-lambdaPhoton*log(Rand)/PhotoCathodeLength;
-
-    int   NbReflect = (int)(PhotonDepth);
-
-    GoingInside = ((NbReflect%2 == 1) xor GoingInside); //it's cutier
-
-    PhotonDepth -= (double)NbReflect;
-		//cout << "_k2 lambdaPhoton/nm PhotoCathodeLength/nm GoingInside PhotonDepth NbReflect" << endl;
-    //cout << _k2 << " " << lambdaPhoton/nm << " " << PhotoCathodeLength/nm << " " << GoingInside << " " << PhotonDepth << " " << NbReflect << endl;
-
-#ifdef ENABLE_TESTING
-//Does not work anymore since analytical function for photon absorption distance is not anymore exp(-x/lambda), but infinite sum of the pieces...
-/*
-		double expl = exp(-1/lambdaPhoton);
-		fEPD.MeanPhotonDepth = lambdaPhoton-expl/(1-expl);
-		double r1 = _thickness_photocathode->Value(pos.theta())/fElectronAttenuationLength;
-		if (GoingInside) {
-			double rdiff = r1-1/lambdaPhoton;
-			fEPD.MeanEscapeProb = 1./lambdaPhoton/(1.-expl)*exp(-r1)*(exp(rdiff)*(1./rdiff-1./rdiff/rdiff)+1./rdiff/rdiff);
-		}
-		else {
-			double rsum = r1+1/lambdaPhoton;
-			fEPD.MeanEscapeProb = 1./lambdaPhoton/(1.-expl)*((exp(-rsum)-1.)/rsum/rsum+1./rsum);
-		}
-		//cout << fA_t << " " << fR_t << " " << AbsProb << " " << log(1-AbsProb) << " " << lambdaPhoton << " " << 1/lambdaPhoton << " " << expl << " " << r1 << endl;
-*/
-#endif
-
+    double PhotonDepth = GetTotalMeanPhotonAbsorbtionDepth (dir, pol, norm);
     /*
      * electron probability to escape in the proper media is proportional to the distance to the wrong media
      * (to the glass/incoming medium in case of the photon coming from the glass)
      */
-    Rand = G4UniformRand ();
-    bool HasGoneInside = ((Rand < PhotonDepth && GoingInside) ||
-                          (Rand > PhotonDepth && !GoingInside));
+    double Rand = G4UniformRand ();
+    bool HasGoneInside = (Rand < PhotonDepth);
 
     //considering the survival probability of the photo-electron in the photocathode linked to its distance to the vacuum (exponential distribution)
     if (HasGoneInside)
       {
-        double LocalPhotocathodeThickness = _thickness_photocathode->Value(pos.theta());
-				double Electron2Vacuum;
-				if (GoingInside) Electron2Vacuum  = (1-PhotonDepth)*LocalPhotocathodeThickness;
-				else Electron2Vacuum  = PhotonDepth*LocalPhotocathodeThickness;
+        double LocalPhotocathodeThickness = _thickness;
+        double Electron2Vacuum;
+        Electron2Vacuum  = (1-PhotonDepth)*LocalPhotocathodeThickness;
+
 
         double probMax = exp(-Electron2Vacuum/fElectronAttenuationLength);
         Rand = G4UniformRand ();
@@ -510,16 +495,16 @@ namespace km3net
 
     // declare some useful constants
     //G4complex _n2comp(_n2,-_k2); //Complex photocathode refractive index. This is from "E=E_0 exp(-i(kz-wt))" notation used by electrical engineers. Phase change is exp(-i*2pi/lambda*n*h*costheta) or exp(-zi*delta) all-over in the code. This convention is used by Motta and Schonert in formulas (2-3) however they introduce n=n+ik by typo.
-		G4complex _n2comp(_n2,_k2); //this is a "physicist" convention. E=E_0 exp(i(kz-wt)). Phase change is exp(i*2pi/lambda*n*h*costheta) or exp(zi*delta) all-over in the code. This convention is used in Born & Wolf. For more details see https://en.wikipedia.org/wiki/Mathematical_descriptions_of_opacity#Complex_conjugate_ambiguity.
+    G4complex _n2comp(_n2,_k2); //this is a "physicist" convention. E=E_0 exp(i(kz-wt)). Phase change is exp(i*2pi/lambda*n*h*costheta) or exp(zi*delta) all-over in the code. This convention is used in Born & Wolf. For more details see https://en.wikipedia.org/wiki/Mathematical_descriptions_of_opacity#Complex_conjugate_ambiguity.
     G4complex eta=twopi*_n2comp*_thickness/_wavelength;
-		//convention n = n-ik assumes 
+    //convention n = n-ik assumes
 
     G4complex zi(0.,1.); //imaginary unit
 
     // declare local variables
 
-    G4complex theta1,theta2,theta3,delta;//geometric parameters
-    G4complex r12,r23,t12,t21,t23;//reflection- and transmission-related terms
+
+    //G4complex r12,r23,t12,t21,t23;//reflection- and transmission-related terms
     G4complex ampr,ampt; //relfection and transmission amplitudes
 
     // first set sines and cosines
@@ -534,117 +519,56 @@ namespace km3net
     _cos_theta3= sqrt(1.0-_sin_theta3*_sin_theta3);
 
     // Determine all angles
-    theta1=asin(_sin_theta1);//incidence angle
-    theta2=carcsin((_n1/_n2comp)*_sin_theta1);//complex angle in the photocathode
-    theta3=carcsin((_n2comp/_n3)*sin(theta2));//angle of refraction into vacuum
-    if (imag(theta3)<0.) theta3=conj(theta3);//needed! (sign ambiguity arcsin)
+    ftheta1=asin(_sin_theta1);//incidence angle
+    ftheta2=carcsin((_n1/_n2comp)*_sin_theta1);//complex angle in the photocathode
+    ftheta3=carcsin((_n2comp/_n3)*sin(ftheta2));//angle of refraction into vacuum
+    if (imag(ftheta3)<0.) ftheta3=conj(ftheta3);//needed! (sign ambiguity arcsin)
 
-    delta=eta*cos(theta2);
+    fdelta=eta*cos(ftheta2);
 
     //Calculation for the s-polarization
 
-    r12=rfunc(_n1,_n2comp,theta1,theta2);
-    r23=rfunc(_n2comp,_n3,theta2,theta3);
-    t12=trfunc(_n1,_n2comp,theta1,theta1,theta2);
-    t21=trfunc(_n2comp,_n1,theta2,theta2,theta1);
-    t23=trfunc(_n2comp,_n3,theta2,theta2,theta3);
+    fr12_s=rfunc(_n1,_n2comp,ftheta1,ftheta2);
+    fr23_s=rfunc(_n2comp,_n3,ftheta2,ftheta3);
+    ft12_s=trfunc(_n1,_n2comp,ftheta1,ftheta1,ftheta2);
+    ft21_s=trfunc(_n2comp,_n1,ftheta2,ftheta2,ftheta1);
+    ft23_s=trfunc(_n2comp,_n3,ftheta2,ftheta2,ftheta3);
 
-    ampr=r12+(t12*t21*r23*exp(2.*zi*delta))/(1.+r12*r23*exp(2.*zi*delta));
-    ampt=(t12*t23*exp(zi*delta))/(1.+r12*r23*exp(2.*zi*delta));
-
-		//And finally...!
-		//fR_s=real(ampr*conj(ampr));
-		//fT_s=real(gfunc(_n3,_n1,theta3,theta1)*ampt*conj(ampt));
-
-		/*
-		 * Analytical absorption calculation
-		 * Assumptions: 
-		 * n = _n2 + i_k2  (complex index)
-		 * k = k_T + i*2pi/lambda (complex wavenumber)
-		 * E = E0*exp(i(k_T + i*z/2*lambda) - wave propagation (z is always vertical, so lambda is "vertical lambda" = lambda*costheta
-		 * Amplitude = |E|^2/E_0^2 = exp(-z/lambda)  -- amplitude decrease due to the absorption
-		 * dI = -1/lambda * I   (classical decay/absorption derivation)
-		 * p_absorb = 1/lambda * Amplitude   !!!!
-		 * P_absorb_total = int_0^h p_absorb
-		 */
-		//Step 1: amplitudes of two waves (up and down inside the photocathode)
-		complex<double> ampa1=t12/(1.+r12*r23*exp(2.*zi*delta));                      //exp(ikz)      wave (going down)
-		complex<double> ampa2=t12*r23*exp(zi*delta)/(1.+r12*r23*exp(2.*zi*delta));    //exp(-ik(h-z)) wave (going up)
-
-		complex<double> absamp1 = exp(zi*delta);                                      
-		double AbsStep = (1.-real(absamp1*conj(absamp1)));                            // this is integral_0^h exp(-z) 
-		double fA_s=real(gfunc(_n2,_n1,theta2,theta1)*(ampa1*conj(ampa1)+ampa2*conj(ampa2)))*AbsStep;
-		double theta2real = asin((_n1/_n2)*_sin_theta1);
-		cout << "Check if theta2 is the same (real part): " << theta2real << " " << theta2 << endl;
-		double VertLambdaPhoton                =_wavelength/(2*twopi*_k2*cos(theta2real));  //absorption for vertical coordinate 
-		cout << "VertLambdaPhoton " << VertLambdaPhoton/nm << endl;
-		double k_T = twopi/_wavelength*_n2*cos(theta2real);   // exp(i(kz-wt)) real(transmission) part of the k
-		fA_s+=real(gfunc(_n2,_n1,theta2,theta1))*1/VertLambdaPhoton*sqrt(1.-AbsStep)*2.*sin(k_T*fabs(_thickness))/k_T*real(ampa1*conj(ampa2));
-
-		// a trial to undertand how the waves create the final distribution
-		/*
-		cout << "two exp amps " << 1./VertLambdaPhoton*real(gfunc(_n2,_n1,theta2,theta1))*real(ampa1*conj(ampa1)) << " " << 1./VertLambdaPhoton*real(gfunc(_n2,_n1,theta2,theta1))*real(ampa2*conj(ampa2)) << endl;
-		complex<double> ampa1_first=t12;                      //exp(ikz)      wave (going down)
-		complex<double> ampa2_first=t12*r23*exp(zi*delta);    //exp(-ik(h-z)) wave (going up)
-		cout << "first wave amps " << 1./VertLambdaPhoton*real(gfunc(_n2,_n1,theta2,theta1))*real(ampa1_first*conj(ampa1_first)) << " " << 1./VertLambdaPhoton*real(gfunc(_n2,_n1,theta2,theta1))*real(ampa2_first*conj(ampa2_first)) << endl;
-		*/
-
-		double AbsPhi = arg(ampa1*conj(ampa2));
-		double AbsA = abs(ampa1*conj(ampa2));
-		double MeanDepthNum = 0;
-		cout << "z partial_prob cum_prob (absorption prob for z/nm [0, thickness] where 0 is at the border with glass)" << endl;
-		double zstep = _thickness/1e6;
-		for (double z = _thickness; z >= -1e-9; z-= zstep) {
-			double fA_s_z = 1./VertLambdaPhoton*real(gfunc(_n2,_n1,theta2,theta1))*(real(ampa1*conj(ampa1))*exp(-z/VertLambdaPhoton)+real(ampa2*conj(ampa2))*exp(-(_thickness-z)/VertLambdaPhoton)+sqrt(1.-AbsStep)*AbsA*2.*cos(k_T*(2.*z-_thickness)+AbsPhi));
-			double fA_s_z_cum = real(gfunc(_n2,_n1,theta2,theta1))*(real(ampa1*conj(ampa1))*(1.-exp(-z/VertLambdaPhoton))+real(ampa2*conj(ampa2))*(exp(-(_thickness-z)/VertLambdaPhoton)-exp(-_thickness/VertLambdaPhoton))+sqrt(1.-AbsStep)*AbsA*(sin(k_T*(2.*z-_thickness)+AbsPhi)-sin(-k_T*_thickness+AbsPhi))/k_T/VertLambdaPhoton);
-			//cout << z/nm << " " << fA_s_z << " " << fA_s_z_cum << endl;
-			MeanDepthNum += z*fA_s_z*zstep;
-		}
-		MeanDepthNum/=fA_s;
-
-		double XIntegral1 = -VertLambdaPhoton*_thickness*exp(-_thickness/VertLambdaPhoton)+VertLambdaPhoton*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton));
-		double XIntegral2 = _thickness*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton))-XIntegral1;
-		// Int z*cos(k_T*(2.*z-_thickness)+AbsPhi)
-		double XIntegral3 = _thickness/2./k_T*sin(AbsPhi+k_T*_thickness) + 1./4./k_T/k_T*(cos(AbsPhi+k_T*_thickness)-cos(AbsPhi-k_T*_thickness));
-		double MeanDepth =  1./VertLambdaPhoton*real(gfunc(_n2,_n1,theta2,theta1))*(real(ampa1*conj(ampa1))*XIntegral1+real(ampa2*conj(ampa2))*XIntegral2+sqrt(1.-AbsStep)*AbsA*2.*XIntegral3)/fA_s;
-		cout << "MeanDepth: " << MeanDepth/nm << " numeric-> " << MeanDepthNum/nm << endl;
+    ampr=fr12_s+(ft12_s*ft21_s*fr23_s*exp(2.*zi*fdelta))/(1.+fr12_s*fr23_s*exp(2.*zi*fdelta));
+    ampt=(ft12_s*ft23_s*exp(zi*fdelta))/(1.+fr12_s*fr23_s*exp(2.*zi*fdelta));
 
     //And finally...!
     fR_s=real(ampr*conj(ampr));
-    fT_s=real(gfunc(_n3,_n1,theta3,theta1)*ampt*conj(ampt));
-		cout << "Yes, the absorption is calculated! " << 1-fR_s-fT_s << " " << fA_s << endl;
+    fT_s=real(gfunc(_n3,_n1,ftheta3,ftheta1)*ampt*conj(ampt));
 
-		//Calculation for the p-polarization
-		// In this convention r_p is positive when the incoming and reflected magnetic fields are anti-parallel, and negative when they are parallel. This convention has the convenient advantage that the s and p sign conventions are the same at normal incidence. This convention is used in Motta & Schoenert (but p and s-wave are swapped by typo, probably).
-    r12=rfunc(_n1,_n2comp,theta2,theta1);
-		r23=rfunc(_n2comp,_n3,theta3,theta2);
+    //Calculation for the p-polarization
+    // In this convention r_p is positive when the incoming and reflected magnetic fields are anti-parallel, and negative when they are parallel. This convention has the convenient advantage that the s and p sign conventions are the same at normal incidence. This convention is used in Motta & Schoenert (but p and s-wave are swapped by typo, probably).
+    fr12_p=rfunc(_n1,_n2comp,ftheta2,ftheta1);
+    fr23_p=rfunc(_n2comp,_n3,ftheta3,ftheta2);
 
-		//This is the convention from the https://en.wikipedia.org/wiki/Fresnel_equations and Born&Wolf 1.5.2 "Fresnel formulae" (cited by Motta and Shoenert). Both conventions bring the same results for fR_p and fT_p. For p polarization, a positive r or t means that the magnetic fields of the waves are parallel, while negative means anti-parallel. r=-r' between two conventions.
-		//r12=rfunc(_n2comp,_n1,theta1,theta2);
-		//r23=rfunc(_n3,_n2comp,theta2,theta3);
+    //This is the convention from the https://en.wikipedia.org/wiki/Fresnel_equations and Born&Wolf 1.5.2 "Fresnel formulae" (cited by Motta and Shoenert). Both conventions bring the same results for fR_p and fT_p. For p polarization, a positive r or t means that the magnetic fields of the waves are parallel, while negative means anti-parallel. r=-r' between two conventions.
+    //fr12_p=rfunc(_n2comp,_n1,theta1,theta2);
+    //fr23_p=rfunc(_n3,_n2comp,theta2,theta3);
 
-    t12=trfunc(_n1,_n2comp,theta1,theta2,theta1);
-    t21=trfunc(_n2comp,_n1,theta2,theta1,theta2);
-    t23=trfunc(_n2comp,_n3,theta2,theta3,theta2);
+    ft12_p=trfunc(_n1,_n2comp,ftheta1,ftheta2,ftheta1);
+    ft21_p=trfunc(_n2comp,_n1,ftheta2,ftheta1,ftheta2);
+    ft23_p=trfunc(_n2comp,_n3,ftheta2,ftheta3,ftheta2);
 
-    ampr=r12+(t12*t21*r23*exp(2.*zi*delta))/(1.+r12*r23*exp(2.*zi*delta));
-    ampt=(t12*t23*exp(zi*delta))/(1.+r12*r23*exp(2.*zi*delta));
+    ampr=fr12_p+(ft12_p*ft21_p*fr23_p*exp(2.*zi*fdelta))/(1.+fr12_p*fr23_p*exp(2.*zi*fdelta));
+    ampt=(ft12_p*ft23_p*exp(zi*fdelta))/(1.+fr12_p*fr23_p*exp(2.*zi*fdelta));
 
     //And finally...!
     fR_p=real(ampr*conj(ampr));
-    fT_p=real(gfunc(_n3,_n1,theta3,theta1)*ampt*conj(ampt));
-    //ampa=t12*exp(zi*delta)/(1.+r12*r23*exp(2.*zi*delta));
-    //fA_p=real(gfunc(_n2,_n1,theta2,theta1)*ampa*conj(ampa));
+    fT_p=real(gfunc(_n3,_n1,ftheta3,ftheta1)*ampt*conj(ampt));
 
-		cout << "fR_p " << fR_p << " fT_p " << fT_p << " fR_s " << fR_s << " fT_s " << fT_s << endl;
 
 
 
 # ifdef G4DEBUG
     if (_verbosity >= 10) {
       cout<<"=> lam, n1, n2: "<<_wavelength/nm<<" "<<_n1<<" "<<_n2comp<<endl;
-      cout<<"=> Angles: "<<real(theta1)/degree<<" "<<theta2/degree<<" "
-	  <<theta3/degree<<endl;
+      cout<<"=> Angles: "<<real(ftheta1)/degree<<" "<<ftheta2/degree<<" "
+	  <<ftheta3/degree<<endl;
       cout<<"Rper, Rpar, Tper, Tpar: "<<fR_s<<" "<<fR_p<<" "<<fT_s<<" "<<fT_p;
       cout<<"\nRn, Tn : "<<fR_n<<" "<<fT_n;
       cout<<"\n-------------------------------------------------------"<<endl;
@@ -669,13 +593,13 @@ namespace km3net
     fA_t= 1.0 - (fT_t+fR_t);
 
 
-		cout << "Abs_s tot: " << 1-fT_s-fR_s << endl;
+    cout << "Abs_s tot: " << 1-fT_s-fR_s << endl;
   }
 
   double KM3PMTOpticalModel::CalculateNormalCoefficients ()
   {
     G4complex _n2comp(_n2,-_k2); //complex photocathode refractive index
-    G4complex delta=twopi*_n2comp*_thickness/_wavelength;
+    fdelta=twopi*_n2comp*_thickness/_wavelength;
     G4complex r12,r23,t12,t21,t23;//reflection- and transmission-related terms
     G4complex ampr,ampt; //relfection and transmission amplitudes
     G4complex zi(0.,1.); //imaginary unit
@@ -687,8 +611,8 @@ namespace km3net
     t21=trfunc(_n2comp,_n1,0.,0.,0.);
     t23=trfunc(_n2comp,_n3,0.,0.,0.);
 
-    ampr=r12+(t12*t21*r23*exp(-2.*zi*delta))/(1.+r12*r23*exp(-2.*zi*delta));
-    ampt=(t12*t23*exp(-zi*delta))/(1.+r12*r23*exp(-2.*zi*delta));
+    ampr=r12+(t12*t21*r23*exp(-2.*zi*fdelta))/(1.+r12*r23*exp(-2.*zi*fdelta));
+    ampt=(t12*t23*exp(-zi*fdelta))/(1.+r12*r23*exp(-2.*zi*fdelta));
 
     //And finally...!
     fR_n=real(ampr*conj(ampr));
@@ -742,48 +666,6 @@ namespace km3net
   {
     dir = (_cos_theta3 - _cos_theta1*_n1/_n3)*norm + (_n1/_n3)*dir;
     pol = (pol-(pol*dir)*dir).unit();
-  }
-
-
-  //deprecated
-  unsigned char KM3PMTOpticalModel::CheckDetection(const G4ThreeVector& localPoint)
-  {
-
-    unsigned char detectedGamma = 0;
-
-    double eta_E = _efficiency/fA_n;
-
-    double teta = localPoint.theta ();//acos(costeta);
-
-    double eta_teta=_angular_efficiency->Value(teta/3*2.1);
-    double eta_teta_err=_angular_efficiency_err->Value(teta/3*2.1);
-
-    //cout << eta_teta << ' ' << teta/3*2.1<<' ' << eta_E << endl;
-
-    double rndm = G4UniformRand();
-    if(rndm < eta_E)
-      {
-        rndm=G4UniformRand();
-        if(rndm < eta_teta*(1.-eta_teta_err))
-          {
-            detectedGamma = 3;
-          }
-        else if(rndm < eta_teta)
-          {
-            detectedGamma = 2;
-          }
-        else if (rndm < eta_teta*(1+eta_teta_err))
-          {
-            detectedGamma = 1;
-          }
-        else
-          {
-            detectedGamma = 4;
-          }
-
-      }
-
-    return detectedGamma;
   }
 
   bool KM3PMTOpticalModel::IsAPhotocathode (const G4Step* STEP)

@@ -123,13 +123,13 @@ namespace km3net
     if (fElPrecision != 0) {
       for (int elescape=0; elescape<fElPrecision; elescape++)
         {
-          TestElectronProduction (dir, pos, insidedir);
+          TestElectronProduction (dir, pol, norm, insidedir);
           if (fOpticalModel.fEPD.HasBeenGenerated)
             Elexit1++;
         }
       Elexit1/=fElPrecision;
     } else {
-      Elexit1 = CalcElectronProductionProb(dir, pos, insidedir);
+      Elexit1 = CalcElectronProductionProb(dir, pol, norm, insidedir);
     }
 
     Abs1=fOpticalModel.fA_t;
@@ -162,12 +162,12 @@ namespace km3net
 
   }
 
-  bool KM3PMTOpticalModelTester::TestElectronProduction (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &insidedir)
+  bool KM3PMTOpticalModelTester::TestElectronProduction (G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, G4ThreeVector &insidedir)
   {
     memset(&(fOpticalModel.fEPD),0,sizeof(fOpticalModel.fEPD));
 
     fOpticalModel.fInsideDirection = insidedir;
-    if (fOpticalModel.ElectronProductionCalculator (dir, pos))
+    if (fOpticalModel.ElectronProductionCalculator (dir, pol, norm))
       {
         fOpticalModel.fEPD.HasBeenGenerated = 10;
       }
@@ -200,10 +200,10 @@ namespace km3net
 
   }
 
-  float KM3PMTOpticalModelTester::CalcElectronProductionProb (G4ThreeVector &dir, G4ThreeVector &pos, G4ThreeVector &insidedir) {
+  float KM3PMTOpticalModelTester::CalcElectronProductionProb (G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, G4ThreeVector &insidedir) {
     memset(&(fOpticalModel.fEPD),0,sizeof(fOpticalModel.fEPD));
     fOpticalModel.fInsideDirection = insidedir;
-    if (fOpticalModel.ElectronProductionCalculator (dir, pos))
+    if (fOpticalModel.ElectronProductionCalculator (dir, pol, norm))
       {
         fOpticalModel.fEPD.HasBeenGenerated = 10;
       }
