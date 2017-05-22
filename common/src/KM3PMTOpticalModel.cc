@@ -407,16 +407,19 @@ namespace km3net
 
     complex<double> absamp1 = exp(zi*fdelta);                                       //free wave amplitude change at one photocathode thickness
     double AbsStep = (1.-real(absamp1*conj(absamp1)));                              //this is integral_0^h exp(-z/lambda) dx
-    double fA=real(gfunc(_n2,_n1,ftheta2,ftheta1)*(ampa1*conj(ampa1)+ampa2*conj(ampa2)))*AbsStep;  //"non interfering wave amplitudes"
+    double fA=real(gfunc(_n2,_n1,ftheta2,ftheta1)*(ampa1*conj(ampa1)+ampa2*conj(ampa2)))*AbsStep;  //total absorption calculation: part1 - "non interfering"
 
     double theta2real = asin((_n1/_n2)*_sin_theta1);
     double VertLambdaPhoton                =_wavelength/(2*twopi*_k2*cos(theta2real));  //absorption for vertical coordinate
     double k_T = twopi/_wavelength*_n2*cos(theta2real);   // exp(i(kz-wt)) real(transmission) part of the k
 
+		//total absorption calculation: part2: "interfering"
+		fA_s+=real(gfunc(_n2,_n1,theta2,theta1))*1/VertLambdaPhoton*sqrt(1.-AbsStep)*2.*sin(k_T*fabs(_thickness))/k_T*real(ampa1*conj(ampa2));
+
     double AbsPhi = arg(ampa1*conj(ampa2));
     double AbsA = abs(ampa1*conj(ampa2));
 
-		//"interference amplitude calculation"
+		//Mean depth calculation: int_0^thickness z * p(z) dz
     double XIntegral1 = -VertLambdaPhoton*_thickness*exp(-_thickness/VertLambdaPhoton)+VertLambdaPhoton*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton));
     double XIntegral2 = _thickness*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton))-XIntegral1;
     double XIntegral3 = _thickness/2./k_T*sin(AbsPhi+k_T*_thickness) + 1./4./k_T/k_T*(cos(AbsPhi+k_T*_thickness)-cos(AbsPhi-k_T*_thickness));
