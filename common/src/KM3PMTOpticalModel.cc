@@ -402,12 +402,13 @@ namespace km3net
      */
     //Step 1: amplitudes of two waves (up and down inside the photocathode)
     G4complex zi(0.,1.); //imaginary unit
-    complex<double> ampa1=t12/(1.+r12*r23*exp(2.*zi*fdelta));                      //exp(ikz)      wave (going down)
-    complex<double> ampa2=t12*r23*exp(zi*fdelta)/(1.+r12*r23*exp(2.*zi*fdelta));    //exp(-ik(h-z)) wave (going up)
+    complex<double> ampa1=t12/(1.+r12*r23*exp(2.*zi*fdelta));                       //exp(ikz)      wave (going from the border with glass to the border with vac)
+    complex<double> ampa2=t12*r23*exp(zi*fdelta)/(1.+r12*r23*exp(2.*zi*fdelta));    //exp(-ik(h-z)) wave (going in opposite direction)
 
-    complex<double> absamp1 = exp(zi*fdelta);
-    double AbsStep = (1.-real(absamp1*conj(absamp1)));                            // this is integral_0^h exp(-z)
-    double fA_s=real(gfunc(_n2,_n1,ftheta2,ftheta1)*(ampa1*conj(ampa1)+ampa2*conj(ampa2)))*AbsStep;
+    complex<double> absamp1 = exp(zi*fdelta);                                       //free wave amplitude change at one photocathode thickness
+    double AbsStep = (1.-real(absamp1*conj(absamp1)));                              //this is integral_0^h exp(-z/lambda) dx
+    double fA=real(gfunc(_n2,_n1,ftheta2,ftheta1)*(ampa1*conj(ampa1)+ampa2*conj(ampa2)))*AbsStep;  //"non interfering wave amplitudes"
+
     double theta2real = asin((_n1/_n2)*_sin_theta1);
     double VertLambdaPhoton                =_wavelength/(2*twopi*_k2*cos(theta2real));  //absorption for vertical coordinate
     double k_T = twopi/_wavelength*_n2*cos(theta2real);   // exp(i(kz-wt)) real(transmission) part of the k
@@ -415,10 +416,11 @@ namespace km3net
     double AbsPhi = arg(ampa1*conj(ampa2));
     double AbsA = abs(ampa1*conj(ampa2));
 
+		//"interference amplitude calculation"
     double XIntegral1 = -VertLambdaPhoton*_thickness*exp(-_thickness/VertLambdaPhoton)+VertLambdaPhoton*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton));
     double XIntegral2 = _thickness*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton))-XIntegral1;
     double XIntegral3 = _thickness/2./k_T*sin(AbsPhi+k_T*_thickness) + 1./4./k_T/k_T*(cos(AbsPhi+k_T*_thickness)-cos(AbsPhi-k_T*_thickness));
-    double MeanDepth =  1./VertLambdaPhoton*real(gfunc(_n2,_n1,ftheta2,ftheta1))*(real(ampa1*conj(ampa1))*XIntegral1+real(ampa2*conj(ampa2))*XIntegral2+sqrt(1.-AbsStep)*AbsA*2.*XIntegral3)/fA_s;
+    double MeanDepth =  1./VertLambdaPhoton*real(gfunc(_n2,_n1,ftheta2,ftheta1))*(real(ampa1*conj(ampa1))*XIntegral1+real(ampa2*conj(ampa2))*XIntegral2+sqrt(1.-AbsStep)*AbsA*2.*XIntegral3)/fA;
 
     return MeanDepth/_thickness;
   }
