@@ -317,11 +317,6 @@ namespace km3net
 
     CalculateCoefficients ();
     CalculateTotalCoefficients (norm, pol, dir);
-    fA_n= CalculateNormalCoefficients ();//1.0 - (fT_n+fR_n); //The absorption at normal incidence
-
-    /*cout << aTrack.GetTrackID () << " " << aStep.GetPreStepPoint()->GetPhysicalVolume()->GetName () << " " <<
-      aStep.GetPostStepPoint()->GetPhysicalVolume()->GetName () << endl;
-      ((G4Track*)((void*)(&aTrack)))->SetTrackID (2);*/
 
     if ( G4UniformRand() < fA_t)
       {
@@ -413,13 +408,13 @@ namespace km3net
     double VertLambdaPhoton                =_wavelength/(2*twopi*_k2*cos(theta2real));  //absorption for vertical coordinate
     double k_T = twopi/_wavelength*_n2*cos(theta2real);   // exp(i(kz-wt)) real(transmission) part of the k
 
-		//total absorption calculation: part2: "interfering"
-		fA_s+=real(gfunc(_n2,_n1,theta2,theta1))*1/VertLambdaPhoton*sqrt(1.-AbsStep)*2.*sin(k_T*fabs(_thickness))/k_T*real(ampa1*conj(ampa2));
+    //total absorption calculation: part2: "interfering"
+    fA+=real(gfunc(_n2,_n1,theta2real,ftheta1))*1/VertLambdaPhoton*sqrt(1.-AbsStep)*2.*sin(k_T*fabs(_thickness))/k_T*real(ampa1*conj(ampa2));
 
     double AbsPhi = arg(ampa1*conj(ampa2));
     double AbsA = abs(ampa1*conj(ampa2));
 
-		//Mean depth calculation: int_0^thickness z * p(z) dz
+    //Mean depth calculation: int_0^thickness z * p(z) dz
     double XIntegral1 = -VertLambdaPhoton*_thickness*exp(-_thickness/VertLambdaPhoton)+VertLambdaPhoton*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton));
     double XIntegral2 = _thickness*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton))-XIntegral1;
     double XIntegral3 = _thickness/2./k_T*sin(AbsPhi+k_T*_thickness) + 1./4./k_T/k_T*(cos(AbsPhi+k_T*_thickness)-cos(AbsPhi-k_T*_thickness));
@@ -435,14 +430,15 @@ namespace km3net
         double rand=G4UniformRand ();
         return (rand < fElectronProbLevel0);
       }
-
+    bool GoingInside                  = dir.dot (fInsideDirection) > 0;
     double PhotonDepth = GetTotalMeanPhotonAbsorbtionDepth (dir, pol, norm);
     /*
      * electron probability to escape in the proper media is proportional to the distance to the wrong media
      * (to the glass/incoming medium in case of the photon coming from the glass)
      */
     double Rand = G4UniformRand ();
-    bool HasGoneInside = (Rand < PhotonDepth);
+    bool HasGoneInside = ((Rand < PhotonDepth && GoingInside) ||
+                          (Rand > PhotonDepth && !GoingInside));
 
     //considering the survival probability of the photo-electron in the photocathode linked to its distance to the vacuum (exponential distribution)
     if (HasGoneInside)
@@ -596,9 +592,6 @@ namespace km3net
     fT_t= fT_s * E_s2  +  fT_p * (1.0-E_s2);
     fR_t= fR_s * E_s2  +  fR_p * (1.0-E_s2);
     fA_t= 1.0 - (fT_t+fR_t);
-
-
-    cout << "Abs_s tot: " << 1-fT_s-fR_s << endl;
   }
 
   double KM3PMTOpticalModel::CalculateNormalCoefficients ()
