@@ -89,13 +89,12 @@ namespace km3net
                                   " 0 == basic, just a probability factor \n"
                                   " 1 == uses the thickness and electron abs length to get the prob. to produce a pe\n"
                                   );
-      fElectrProdCmd->SetParameter(new G4UIparameter("level", 'i', false));
       fElectrProdCmd->AvailableForStates(G4State_PreInit);
 
 
       fElectrAbsLength= new G4UIcmdWithADouble("/PMTOpticalModel/ElectrAbsLength",this);
       fElectrAbsLength->SetGuidance("Set electron absorption length in the photocathode. Should be set after \"ElectrProduction level\".");
-      fElectrAbsLength->AvailableForStates(G4State_PreInit);
+       fElectrAbsLength->AvailableForStates(G4State_PreInit);
 
       fElectronProbLevel0Cmd= new G4UIcmdWithADouble("/PMTOpticalModel/ElectronProbLevel0",this);
       fElectronProbLevel0Cmd->AvailableForStates(G4State_PreInit);

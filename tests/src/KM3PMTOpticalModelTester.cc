@@ -41,7 +41,7 @@ namespace km3net
     fOpticalModel._cos_theta1 = dir.cosTheta (norm);
     fOpticalModel.fNorm = norm;
     fOpticalModel.CalculateCoefficients ();
-    fOpticalModel.CalculateTotalCoefficients (pos, dir, norm);
+    fOpticalModel.CalculateTotalCoefficients (dir, pol, norm);
     return fOpticalModel.fA_t;
   }
 

@@ -62,6 +62,10 @@ COMPONENTS
 
 CREATE
 
+PROPERTY electronSensitive
+OPTION constant
+1
+
 PROPERTY ABSLENGTH
 OPTION wavelength
 250 1e6

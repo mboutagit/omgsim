@@ -1,5 +1,7 @@
 #include <TH1F.h>
 #include <TFile.h>
+#include <TRandom.h>
+
 
 #include <KM3PMTOpticalModelTester.hh>
 
@@ -15,6 +17,15 @@ using namespace km3net;
 
 TH1F* hElectEscape=new TH1F("hElectEscape", "Electron escping probability;deg", 90,0,90*deg);
 TH1F* hPhotonAbs=new TH1F("hPhotonAbs", "Electron absorption probability;deg", 90,0,90*deg);
+
+TRandom TR;
+
+void RandomPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
+{
+  G4ThreeVector test (0,0,1);
+  pol.setRThetaPhi (1, TR.Uniform(0,twopi),TR.Uniform(0,twopi));
+  pol=dir.cross (pol);
+}
 
 int main  (int argc, char** argv)
 {
@@ -65,22 +76,24 @@ int main  (int argc, char** argv)
       x= sin (angle*deg);
       z= -cos (angle*deg);
       G4ThreeVector dir(0,x,z);
+      RandomPolarization (dir, pol);
+      cout << dir.dot (pol) << endl;
       //G4ThreeVector pos(0,0,-1);
       G4ThreeVector norm(0,0,1);
       G4ThreeVector insideDirection (0,0,-1);
 
       float escaped=0;
       float nb_elect=50000;
-      theModelTester.TestCalculateCoefficients (pos, dir, dir, norm, 400*nm);
+      theModelTester.TestCalculateCoefficients (pos, dir, insideDirection, norm, 400*nm);
       double Abs,tmp;
       theModelTester.GetTotalProbabilities (Abs, tmp, tmp);
       hPhotonAbs->SetBinContent (angle,Abs);
-      for (int i=0; i<nb_elect;i++)
+      /*for (int i=0; i<nb_elect;i++)
         {
           if (theModelTester.TestElectronProduction (dir, pol, norm, insideDirection))
             escaped++;
         }
-
+      */
       cout << angle+1 << " " <<escaped/nb_elect << endl;
       hElectEscape->SetBinContent (angle+1,escaped/nb_elect);
     }
