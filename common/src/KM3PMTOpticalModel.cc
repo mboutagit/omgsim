@@ -518,11 +518,26 @@ namespace km3net
     }
     _cos_theta3= sqrt(1.0-_sin_theta3*_sin_theta3);
 
-    // Determine all angles
+    // Determine all angles. Branch selection adjusted accoring to arxiv 1603.02720
     ftheta1=asin(_sin_theta1);//incidence angle
     ftheta2=carcsin((_n1/_n2comp)*_sin_theta1);//complex angle in the photocathode
+		//D.2 case of 1603.02720
+		if (imag(_n2comp*cos(ftheta2)) < 0) {
+			cout << "WARNING: the branch was wrongly chosen for theta2. Adjusting it." << endl;
+			ftheta2 = twopi/2. - ftheta2;
+		}
     ftheta3=carcsin((_n2comp/_n3)*sin(ftheta2));//angle of refraction into vacuum
-    if (imag(ftheta3)<0.) ftheta3=conj(ftheta3);//needed! (sign ambiguity arcsin)
+    //if (imag(ftheta3)<0.) ftheta3=conj(ftheta3);//needed! (sign ambiguity arcsin)
+		/*
+		 * D.3 case of 1603.02720
+		 * n1*sintheta1 > n3  - internal reflection  (check Im(n3*costheta3 > 0)
+		 * n1*sintheta1 = n3  - boundary (costheta = 0, so we don't care)
+		 * n1*sintheta1 < n3  - ordinary ref+trans   (check n3*costheta3 > 0)
+		 */
+		if ((_n1*_sin_theta1 > _n3 && imag(_n3*cos(ftheta3)) < 0) || (_n1*_sin_theta1 < _n3 && _n3*real(cos(ftheta3)) < 0)) {
+			cout << "WARNING: the branch was wrongly chosen for theta3. Adjusting it." << endl;
+			ftheta3 = twopi/2. - ftheta3;
+		}
 
     fdelta=eta*cos(ftheta2);
 
@@ -539,7 +554,9 @@ namespace km3net
 
     //And finally...!
     fR_s=real(ampr*conj(ampr));
-    fT_s=real(gfunc(_n3,_n1,ftheta3,ftheta1)*ampt*conj(ampt));
+    //fT_s=real(gfunc(_n3,_n1,ftheta3,ftheta1)*ampt*conj(ampt));
+		//in reality ftheta1 is real, so in future conj(ftheta1) can be omitted
+		fT_s=real(_n3*cos(ftheta3))/real(_n1*cos(ftheta1))*real(ampt*conj(ampt));
 
     //Calculation for the p-polarization
     // In this convention r_p is positive when the incoming and reflected magnetic fields are anti-parallel, and negative when they are parallel. This convention has the convenient advantage that the s and p sign conventions are the same at normal incidence. This convention is used in Motta & Schoenert (but p and s-wave are swapped by typo, probably).
@@ -559,9 +576,9 @@ namespace km3net
 
     //And finally...!
     fR_p=real(ampr*conj(ampr));
-    fT_p=real(gfunc(_n3,_n1,ftheta3,ftheta1)*ampt*conj(ampt));
-
-
+    //fT_p=real(gfunc(_n3,_n1,ftheta3,ftheta1)*ampt*conj(ampt));
+		//in reality ftheta1 and ftheta3 are real, so in future real and conj(ftheta1) can be omitted
+		fT_p=real(_n3*cos(conj(ftheta3)))/real(_n1*cos(conj(ftheta1)))*real(ampt*conj(ampt));
 
 
 # ifdef G4DEBUG
