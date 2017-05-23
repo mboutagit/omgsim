@@ -1,0 +1,15 @@
+What is simulated?
+==
+This simulation is tuned to reproduce the figure 2 of Motta Schonert NIMA 539(2005) 217
+It uses the material and detector definitions prefixed by Motta in common/data.
+The script is vis-Motta.mac
+
+How to use?
+==
+It works using directly the OMGsim binary (not the test)
+
+./OMGsim -fa ../scripts/vis-Motta.mac
+
+Additional comments
+==
+This repository shows how to use OMGsim in library mode only, including new user analysis and stepping action.
