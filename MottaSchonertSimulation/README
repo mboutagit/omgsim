@@ -9,6 +9,9 @@ How to use?
 It works using directly the OMGsim binary (not the test)
 
 ./OMGsim -fa ../scripts/vis-Motta.mac
+root -l default.root 
+Hit->Draw ("acos(-VertexDirZ)/TMath::Pi()*180.>>h(90,0,90)","100");f = new TF1 ("f","5e6*TMath::Pi()/180.*sin(x*TMath::Pi()/180.)",0,90);h->Divide(f);h->Draw ()
+The plot with absorption (Fig. 2. left) should be reproduced.
 
 Additional comments
 ==
