@@ -1,3 +1,5 @@
+#include <TTree.h>
+
 #include <MottaAnalysisManager.hh>
 #include <KM3ExperimentTypeMessenger.hh>
 
@@ -11,13 +13,43 @@ namespace km3net
   const bool MottaAnalysisManager::tmpMottaAnalysisManagerBuilderUseless
   = km3net::KM3ExperimentTypeMessenger::GetIt()->SetAnAnalysisMgr ("Motta", (km3net::MottaAnalysisManager::getIt));
 
+  MottaAnalysisManager::MottaAnalysisManager ()
+  {
+  }
+
+  MottaAnalysisManager::~MottaAnalysisManager () {}
+
+  void MottaAnalysisManager::Init (string RF)
+  {
+    AAAnalysisManager::Init(RF);
+    fTEvent->Branch ("TransAbsRef",&fTranAbsRef, "TransAbsRef/B");
+  }
+
+  void MottaAnalysisManager::AddDetectedParticule (const KM3TrackInformation* INFO, unsigned char LIM)
+  {
+    fTranAbsRef = 0;
+    AAAnalysisManager::AddDetectedParticule(INFO, LIM);
+  }
+
+  void MottaAnalysisManager::AddReflectedOrTransmittedParticle (char TransRef)
+  {
+    fTranAbsRef = TransRef;
+
+    if (fRFile == NULL)
+      return;
+    if (fFastAnalysisOnly)
+      return;
+
+    fTEvent->Fill ();
+  }
+
   MottaAnalysisManager* MottaAnalysisManager::getIt ()
   {
-    cout << "getting motta analysis" << endl;
     if (!fManager)
       fManager = new MottaAnalysisManager;
     return (MottaAnalysisManager*)fManager;
   }
+
 
 
 }

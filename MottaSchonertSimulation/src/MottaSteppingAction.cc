@@ -31,6 +31,7 @@
 #include "G4Track.hh"
 #include "globals.hh"
 #include <KM3ExperimentTypeMessenger.hh>
+#include <MottaAnalysisManager.hh>
 
 #include <iostream>
 #include <fstream>
@@ -43,8 +44,10 @@ using namespace CLHEP;
 
 namespace km3net
 {
-  bool MottaSteppingAction::tmpMottaSteppingActionBuilder =km3net::KM3ExperimentTypeMessenger::GetIt()->SetASteppingAction ("Motta", (km3net::MottaSteppingAction::GetIt));
   MottaSteppingAction* MottaSteppingAction::fInstance = 0;
+
+  MottaSteppingAction::MottaSteppingAction () {}
+  MottaSteppingAction::~MottaSteppingAction () {}
 
   MottaSteppingAction* MottaSteppingAction::GetIt ()
   {
@@ -52,18 +55,6 @@ namespace km3net
       fInstance = new MottaSteppingAction;
     return fInstance;
   }
-
-  MottaSteppingAction::MottaSteppingAction()
-  {
-
-  }
-
-  //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
-
-  MottaSteppingAction::~MottaSteppingAction()
-  { }
-
-  //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
   void MottaSteppingAction::UserSteppingAction(const G4Step* fStep)
   {
@@ -78,11 +69,19 @@ namespace km3net
     if (fTrack->GetDefinition()->GetParticleType() == "opticalphoton")
       {
         if (poststepName == "Target")
-          fTrack->SetTrackStatus(fStopAndKill);
+          {
+            fTrack->SetTrackStatus(fStopAndKill);
+            char transref=-1;
+            if (poststep->GetPosition ().z() > 0)
+              transref=1;
+            MottaAnalysisManager::getIt ()->AddReflectedOrTransmittedParticle (transref);
+          }
+
       }
 
     return KM3SteppingAction::UserSteppingAction (fStep);
   }
+  bool MottaSteppingAction::tmpMottaSteppingActionBuilder = km3net::KM3ExperimentTypeMessenger::GetIt()->SetASteppingAction ("Motta", (km3net::MottaSteppingAction::GetIt));
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 }

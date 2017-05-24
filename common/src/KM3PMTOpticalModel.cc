@@ -535,7 +535,6 @@ namespace km3net
 		 * n1*sintheta1 < n3  - ordinary ref+trans   (check n3*costheta3 > 0)
 		 */
 		if ((_n1*_sin_theta1 > _n3 && imag(_n3*cos(ftheta3)) < 0) || (_n1*_sin_theta1 < _n3 && _n3*real(cos(ftheta3)) < 0)) {
-			cout << "WARNING: the branch was wrongly chosen for theta3. Adjusting it." << endl;
 			ftheta3 = twopi/2. - ftheta3;
 		}
 
