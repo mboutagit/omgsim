@@ -364,8 +364,8 @@ namespace km3net
 
   double KM3PMTOpticalModel::GetTotalMeanPhotonAbsorbtionDepth (const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm) const
   {
-    double Mean_s=GetMeanPhotonAbsorbtionDepth(fr12_s,fr23_s,ft12_s);
-    double Mean_p=GetMeanPhotonAbsorbtionDepth(fr12_p,fr23_p,ft12_p);
+    double Mean_s=GetMeanPhotonAbsorbtionDepth(fr12_s,fr23_s,ft12_s,true);
+    double Mean_p=GetMeanPhotonAbsorbtionDepth(fr12_p,fr23_p,ft12_p,false);
 
     G4double E_s2;
     // Calculate Transmission, Reflection, and Absorption coefficients
@@ -381,7 +381,7 @@ namespace km3net
 
   }
 
-  double KM3PMTOpticalModel::GetMeanPhotonAbsorbtionDepth(G4complex r12,G4complex r23, G4complex t12) const
+  double KM3PMTOpticalModel::GetMeanPhotonAbsorbtionDepth(G4complex r12,G4complex r23, G4complex t12, bool snotp) const
   {
     /*
      * Analytical absorption calculation
@@ -389,37 +389,74 @@ namespace km3net
      * n = _n2 + i_k2  (complex index)
      * k = k_T + i*2pi/lambda (complex wavenumber)
      * E = E0*exp(i(k_T + i*z/2*lambda) - wave propagation (z is always vertical, so lambda is "vertical lambda" = lambda*costheta
-     * Amplitude = |E|^2/E_0^2 = exp(-z/lambda)  -- amplitude decrease due to the absorption
-     * dI = -1/lambda * I   (classical decay/absorption derivation)
-     * p_absorb = 1/lambda * Amplitude   !!!!
+     * p_absorb = -dS*z/dz (Sz is the power flow), see 1603.02720
      * P_absorb_total = int_0^h p_absorb
      */
     //Step 1: amplitudes of two waves (up and down inside the photocathode)
     G4complex zi(0.,1.); //imaginary unit
-    complex<double> ampa1=t12/(1.+r12*r23*exp(2.*zi*fdelta));                       //exp(ikz)      wave (going from the border with glass to the border with vac)
-    complex<double> ampa2=t12*r23*exp(zi*fdelta)/(1.+r12*r23*exp(2.*zi*fdelta));    //exp(-ik(h-z)) wave (going in opposite direction)
+    complex<double> ampv=t12/(1.+r12*r23*exp(2.*zi*fdelta));                          //Amplitude of exp(ikz) wave (going from the border with glass to the border with vac) at z=0 (border with glass)
+    complex<double> ampw=t12*r23*exp(2.*zi*fdelta)/(1.+r12*r23*exp(2.*zi*fdelta));    //Amplitude of exp(ik(h-z)) wave (going in opposite direction) at z=0
 
-    complex<double> absamp1 = exp(zi*fdelta);                                       //free wave amplitude change at one photocathode thickness
-    double AbsStep = (1.-real(absamp1*conj(absamp1)));                              //this is integral_0^h exp(-z/lambda) dx
-    double fA=real(gfunc(_n2,_n1,ftheta2,ftheta1)*(ampa1*conj(ampa1)+ampa2*conj(ampa2)))*AbsStep;  //total absorption calculation: part1 - "non interfering"
+    /*
+     * k_Z=2*Pi*n*cos(theta)/wavelength=k_Transmission + ik_Absorption    z projection of k vector
+     * in general n and cos(theta) are complex!
+     * absorption length = 1/(2*k_Absorption) as it comes from Amp = E*conj(E)
+     */
+    G4complex _n2comp(_n2,_k2);
+		complex<double> kz = twopi/_wavelength*_n2comp*cos(ftheta2);
+    double VertLambdaPhoton                =_wavelength/(2.*twopi*imag(_n2comp*cos(ftheta2)));
+    double k_T = twopi/_wavelength*real(_n2comp*cos(ftheta2));
+		double A1, A2;
+		complex<double> A3;
+		if (snotp) {
+			A1 = imag(_n2comp*cos(ftheta2)*kz)/real(_n1*cos(ftheta1))*real(ampw*conj(ampw));
+			A2 = imag(_n2comp*cos(ftheta2)*kz)/real(_n1*cos(ftheta1))*real(ampv*conj(ampv));
+			A3 = imag(_n2comp*cos(ftheta2)*kz)/real(_n1*cos(ftheta1))*ampv*conj(ampw);
+		} else {
+			A1 = 2.*imag(kz)*real(_n2comp*cos(conj(ftheta2)))/real(_n1*cos(conj(ftheta1)))*real(ampw*conj(ampw));
+			A2 = 2.*imag(kz)*real(_n2comp*cos(conj(ftheta2)))/real(_n1*cos(conj(ftheta1)))*real(ampv*conj(ampv));
+			A3 = 2.*real(kz)*imag(_n2comp*cos(conj(ftheta2)))/real(_n1*cos(conj(ftheta1)))*ampv*conj(ampw);
+		}
+		double A3_abs = abs(A3);
+		double A3_phase = arg(A3);
 
-    double theta2real = asin((_n1/_n2)*_sin_theta1);
-    double VertLambdaPhoton                =_wavelength/(2*twopi*_k2*cos(theta2real));  //absorption for vertical coordinate
-    double k_T = twopi/_wavelength*_n2*cos(theta2real);   // exp(i(kz-wt)) real(transmission) part of the k
+		/*
+		 * check for fA - not needed in principle since it can be calculated as 1-fT-fR
+		 */
+		double Integral1 = VertLambdaPhoton*(exp(_thickness/VertLambdaPhoton)-1.);
+		double Integral2 = VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton));
+		double Integral3 = (sin(2.*k_T*_thickness+A3_phase)-sin(A3_phase))/2./k_T;
+		double fA = A1*Integral1+A2*Integral2+2.*A3_abs*Integral3;
 
-    //total absorption calculation: part2: "interfering"
-    fA+=real(gfunc(_n2,_n1,theta2real,ftheta1))*1/VertLambdaPhoton*sqrt(1.-AbsStep)*2.*sin(k_T*fabs(_thickness))/k_T*real(ampa1*conj(ampa2));
+		/*
+		 * Probability calculations to check the formulas in 1603.02720.
+		 * Not needed in the final calculation.
+		 */
+		double probtot = 0;
+		double meandepthapprox = 0;
+		double step = _thickness/1e6;
+		for (double z = 0; z <= _thickness; z+=step) {
+			double prob = A1*exp(2.*z*imag(kz))+A2*exp(-2.*z*imag(kz))+2.*A3_abs*cos(2.*z*k_T+A3_phase);
+			//check of formulas (24) in 1603.02720
+			/*
+			complex<double> Ef = ampv*exp(zi*kz*z);
+			complex<double> Eb = ampw*exp(-zi*kz*z);
+			double prob_s = norm(Ef+Eb)*imag(_n2comp*cos(ftheta2)*kz)/real(_n1*cos(conj(ftheta1)));
+			double prob_p = imag(_n2comp*cos(conj(ftheta2))*(kz*norm(Ef+Eb)-conj(kz)*norm(Ef-Eb)))/real(_n1*cos(conj(ftheta1))); //this one is "-" of the (24) for the p-polarisation in 1603.02720
+			cout << "probs: " << prob << " " << prob_s << " " << prob_p << endl;
+			*/
+			probtot+=prob*step;
+			meandepthapprox+=prob*z*step;
+		}
+		//cout << "totp = " << fA << " " << probtot << endl;
 
-    double AbsPhi = arg(ampa1*conj(ampa2));
-    double AbsA = abs(ampa1*conj(ampa2));
+    double XIntegral1 = VertLambdaPhoton*_thickness*exp(_thickness/VertLambdaPhoton)+VertLambdaPhoton*VertLambdaPhoton*(1.-exp(_thickness/VertLambdaPhoton));
+    double XIntegral2 = -VertLambdaPhoton*_thickness*exp(-_thickness/VertLambdaPhoton)+VertLambdaPhoton*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton));
+    double XIntegral3 = _thickness*sin(2*k_T*_thickness + A3_phase)/2./k_T + (cos(2.*k_T*_thickness+A3_phase)-cos(A3_phase))/4./k_T/k_T;
+    double MeanDepth = A1*XIntegral1+A2*XIntegral2+2.*A3_abs*XIntegral3;
+		//cout << "meandepth " << MeanDepth << " " << meandepthapprox << endl;
 
-    //Mean depth calculation: int_0^thickness z * p(z) dz
-    double XIntegral1 = -VertLambdaPhoton*_thickness*exp(-_thickness/VertLambdaPhoton)+VertLambdaPhoton*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton));
-    double XIntegral2 = _thickness*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton))-XIntegral1;
-    double XIntegral3 = _thickness/2./k_T*sin(AbsPhi+k_T*_thickness) + 1./4./k_T/k_T*(cos(AbsPhi+k_T*_thickness)-cos(AbsPhi-k_T*_thickness));
-    double MeanDepth =  1./VertLambdaPhoton*real(gfunc(_n2,_n1,ftheta2,ftheta1))*(real(ampa1*conj(ampa1))*XIntegral1+real(ampa2*conj(ampa2))*XIntegral2+sqrt(1.-AbsStep)*AbsA*2.*XIntegral3)/fA;
-
-    return MeanDepth/_thickness;
+    return MeanDepth/fA/_thickness;
   }
 
   bool KM3PMTOpticalModel::ElectronProductionCalculator (const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm) const
@@ -535,6 +572,7 @@ namespace km3net
 		 * n1*sintheta1 < n3  - ordinary ref+trans   (check n3*costheta3 > 0)
 		 */
 		if ((_n1*_sin_theta1 > _n3 && imag(_n3*cos(ftheta3)) < 0) || (_n1*_sin_theta1 < _n3 && _n3*real(cos(ftheta3)) < 0)) {
+			//cout << "WARNING: the branch was wrongly chosen for theta3. Adjusting it." << endl;
 			ftheta3 = twopi/2. - ftheta3;
 		}
 
@@ -579,6 +617,11 @@ namespace km3net
 		//in reality ftheta1 and ftheta3 are real, so in future real and conj(ftheta1) can be omitted
 		fT_p=real(_n3*cos(conj(ftheta3)))/real(_n1*cos(conj(ftheta1)))*real(ampt*conj(ampt));
 
+		//a proof that for p-wave gfunc is different in case of complex n -- Not needed in the final calc
+		/*
+		cout << real(fr12_s*conj(fr12_s)) + real(ft12_s*conj(ft12_s))*real(_n2comp*cos(ftheta2))/real(_n1*cos(ftheta1)) << endl;
+		cout << real(fr12_p*conj(fr12_p)) + real(ft12_p*conj(ft12_p))*real(_n2comp*cos(conj(ftheta2)))/real(_n1*cos(conj(ftheta1))) << endl;
+		*/
 
 # ifdef G4DEBUG
     if (_verbosity >= 10) {

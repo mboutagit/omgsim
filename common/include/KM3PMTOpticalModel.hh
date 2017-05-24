@@ -163,7 +163,7 @@ namespace km3net
 
     void CalculateCoefficients(); // calculate and set fR_s, fR_p, fT_s and fT_p
     void CalculateTotalCoefficients (G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm);
-    double GetMeanPhotonAbsorbtionDepth(G4complex r12,G4complex r23, G4complex t12) const;
+    double GetMeanPhotonAbsorbtionDepth(G4complex r12,G4complex r23, G4complex t12, bool snotp) const;
     double GetTotalMeanPhotonAbsorbtionDepth(const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm) const;
     void Reflect(G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm);
     void Refract(G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm);

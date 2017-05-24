@@ -129,9 +129,22 @@ OPTION wavelength # "Optical properties of bialkali photocathodes" D. Motta, S. 
 PROPERTY  KINDEX  #Result of the calibration with (./QuantumEfficiencyTester -precision 0.01 -cal) starting from "motta_KINDEX" (below)
 # UNITS  nm\E 1
 OPTION wavelength
+250 0
+260 0
+270 0
 280 0
+290 0.047065
+300 0.1248
+310 0.25397
+320 0.39137
+330 0.56625
+340 0.73449
+350 0.79525
+360 0.85416
+370 1.5621
 380 1.69
-395 1.69
+390 1.69
+400 1.5
 400 26
 410 1.71
 425 1.53
@@ -311,14 +324,14 @@ PROPERTY  THICKNESS     # Thickness of photocathode as function of Z position
 #30 nm - 3-inch R12199-02 PMTs (private communication with Hamamatsu through O. Kalekin)
 #The value may vary from PMT to PMT and along PMT surface. The official measurements/technical reports are not provided, 30 nm is chosen as reference
 # UNITS  mm mm
-188 20e-6                 #20 nm is Motta's best fit
+188 30e-6                 #20 nm is Motta's best fit
   #188 30e-6               # 26 nm typical of M.D.Lay meas.; Z=188_mm is 20" top
 # 117 26e-6               # Z=116.7_mm is start of 20" torus section
 # 99  26e-6               # Z=99.0_mm is end of 17" active photocathode
 # 75  26e-6               # Z=75.0_mm is 8" PMT top
 # 51  26e-6               # Z=50.8_mm is 5" PMT top
   #0   30e-6               # Z=0 is equator; no data for thickness, assumed same
-0   20e-6
+0   30e-6
 #
 # Note that, at present, all PMTs use same "photocathode" properties;
 # this will have to change if we ever really want to have thickness as a
