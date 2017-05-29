@@ -68,20 +68,23 @@ namespace km3net
     G4String poststepName=thePostPV->GetLogicalVolume ()->GetName();
 
     //TODO check if it is relevent
-    if (fTrack->GetDefinition()->GetParticleType() == "opticalphoton" &&
-        fStep->GetPostStepPoint()->GetStepStatus() == fGeomBoundary)
+    if (fTrack->GetDefinition()->GetParticleType() == "opticalphoton")
       {
-        double distanceToTarget = fTrack->GetVolume ()->GetMotherLogical ()->GetSolid ()->DistanceToIn (prestep->GetMomentumDirection ());
-        cout << "distance to target " << fTrack->GetVolume ()->GetMotherLogical ()->GetName () << " " << distanceToTarget << endl;
-        if (poststepName == "Target" || distanceToTarget == 0)
+        if (fStep->GetPostStepPoint()->GetStepStatus() == fGeomBoundary)
           {
-            fTrack->SetTrackStatus(fStopAndKill);
-            char transref=-1;
-            if (poststep->GetPosition ().z() > 0)
-              transref=1;
-            MottaAnalysisManager::getIt ()->AddReflectedOrTransmittedParticle (transref);
-          }
+            if (poststepName == "Target" || fabs (poststep->GetPosition ().z ()) == 3)
+              {
+                cout << poststep->GetPosition ().z () << endl;
+                fTrack->SetTrackStatus(fStopAndKill);
+                char transref=-1;
+                if (poststep->GetPosition ().z() > 0)
+                  transref=1;
+                MottaAnalysisManager::getIt ()->AddReflectedOrTransmittedParticle (transref);
+              }
 
+          }
+        if (prestep->GetPhysicalVolume()->GetLogicalVolume ()->GetName () == "GlassMotta")
+          MottaAnalysisManager::getIt ()->WentToTheGlass ();
       }
 
     return KM3SteppingAction::UserSteppingAction (fStep);

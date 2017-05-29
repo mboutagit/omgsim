@@ -12,9 +12,10 @@ namespace km3net
   public:
     virtual void AddDetectedParticule (const KM3TrackInformation* INFO, unsigned char LIM);
     void AddReflectedOrTransmittedParticle (char TransRef);
-
+    void WentToTheGlass (bool b=true) {fTouched = b;}
     static MottaAnalysisManager* getIt ();
     virtual void Init(std::string RF="");
+    virtual void EndOfEvent ();
   private:
     MottaAnalysisManager();
     ~MottaAnalysisManager();
@@ -23,7 +24,7 @@ namespace km3net
 
   protected:
     char fTranAbsRef = 0;
-
+    bool fTouched = 0;
   };
 
 }

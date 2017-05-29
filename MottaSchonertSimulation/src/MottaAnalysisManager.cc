@@ -22,7 +22,7 @@ namespace km3net
   void MottaAnalysisManager::Init (string RF)
   {
     AAAnalysisManager::Init(RF);
-    fTEvent->Branch ("TransAbsRef",&fTranAbsRef, "TransAbsRef/B");
+    fTEvent->Branch ("TransAbsRef",&fTranAbsRef, "TransAbsRef/B:TouchedThePhotocathode");
   }
 
   void MottaAnalysisManager::AddDetectedParticule (const KM3TrackInformation* INFO, unsigned char LIM)
@@ -30,7 +30,10 @@ namespace km3net
     fTranAbsRef = 0;
     AAAnalysisManager::AddDetectedParticule(INFO, LIM);
   }
-
+  void MottaAnalysisManager::EndOfEvent ()
+  {
+    fTouched = 0;AAAnalysisManager::EndOfEvent ();
+  }
   void MottaAnalysisManager::AddReflectedOrTransmittedParticle (char TransRef)
   {
     fTranAbsRef = TransRef;

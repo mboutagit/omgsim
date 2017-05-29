@@ -157,6 +157,7 @@ namespace km3net
 
     // private methods
     G4VParticleChange* DoPhotocathodeInteraction (const G4Track &aTrack, const G4Step &aStep);
+    void ResetTables ();
     bool LoadMaterialIndex (G4MaterialPropertiesTable* aMaterialPropertiesTable);
     bool LoadMaterialProps (G4MaterialPropertiesTable* aMaterialPropertiesTable);
     void InitPhotocathodeIndex ();

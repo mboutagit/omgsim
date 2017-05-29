@@ -190,6 +190,12 @@ namespace km3net
 
   }
 
+  void KM3PMTOpticalModel::ResetTables ()
+  {
+    _rindexPre = NULL;
+    _rindexPost = NULL;
+  }
+
   void KM3PMTOpticalModel::InitPhotocathodeIndex ()
   {
     _n1= _rindexPre->Value( _photon_energy );
@@ -207,6 +213,9 @@ namespace km3net
     //        invoked after G4ParallelWorldProcess!
 
     // Don't exectute anything if the step is too short
+
+    ResetTables ();
+
     if (aTrack.GetStepLength()<=G4GeometryTolerance::GetInstance()->GetSurfaceTolerance()/2){
       return G4VDiscreteProcess::PostStepDoIt(aTrack, aStep);
     }
@@ -278,7 +287,7 @@ namespace km3net
       aStep.GetPostStepPoint()->GetTouchable()->GetHistory()->GetTopTransform();
     const G4AffineTransform LocalToGlobalTransform=
       GlobalToLocalTransform.Inverse ();
-    G4ThreeVector pos = aStep.GetPreStepPoint ()->GetPosition ();
+    G4ThreeVector pos = aStep.GetPostStepPoint ()->GetPosition ();
     pos = GlobalToLocalTransform.TransformPoint(pos);
     G4ThreeVector dir = GlobalToLocalTransform.TransformAxis(aTrack.GetMomentumDirection());
     G4ThreeVector pol = GlobalToLocalTransform.TransformAxis(aTrack.GetPolarization());
@@ -319,8 +328,6 @@ namespace km3net
 
     if ( G4UniformRand() < fA_t)
       {
-        cout << "ici " << fA_t << endl;
-
         aParticleChange.ProposeLocalEnergyDeposit(_photon_energy);
         aParticleChange.ProposeTrackStatus(fStopAndKill);
         if(ElectronProductionCalculator (dir, pol, norm))
@@ -335,10 +342,10 @@ namespace km3net
       }
     if (G4UniformRand() < fR_t/(fR_t+fT_t))
       {
-        std::swap (_n1,_n3);
+        //std::swap (_n1,_n3);
         Reflect (dir, pol, norm);
-        dir.unit ();
-        pol.unit ();
+        dir/=dir.r ();
+        pol/=pol.r ();
         //test old wrong method
         //norm=-norm;
         //goto reflectphcth;
@@ -453,8 +460,6 @@ namespace km3net
       probtot+=prob*step;
       meandepthapprox+=prob*z*step;
     }
-    cout << "ici totp = " << fA << " " << probtot << endl;
-
     double XIntegral1 = VertLambdaPhoton*_thickness*exp(_thickness/VertLambdaPhoton)+VertLambdaPhoton*VertLambdaPhoton*(1.-exp(_thickness/VertLambdaPhoton));
     double XIntegral2 = -VertLambdaPhoton*_thickness*exp(-_thickness/VertLambdaPhoton)+VertLambdaPhoton*VertLambdaPhoton*(1.-exp(-_thickness/VertLambdaPhoton));
     double XIntegral3 = _thickness*sin(2*k_T*_thickness + A3_phase)/2./k_T + (cos(2.*k_T*_thickness+A3_phase)-cos(A3_phase))/4./k_T/k_T;
@@ -647,7 +652,7 @@ namespace km3net
     // Calculate Transmission, Reflection, and Absorption coefficients
     if ( _sin_theta1 > 0.0 )
       {
-        E_s2= ( pol * dir.cross( norm ) ) / _sin_theta1;
+        E_s2= ( pol.dot( dir.cross( norm )) ) / _sin_theta1;
         E_s2*= E_s2;
       }
     else
@@ -726,7 +731,8 @@ namespace km3net
                               G4ThreeVector &norm)
   {
     dir = (_cos_theta3 - _cos_theta1*_n1/_n3)*norm + (_n1/_n3)*dir;
-    pol = (pol-(pol*dir)*dir).unit();
+    pol = (pol-(pol*dir)*dir);
+    pol/=pol.r ();
   }
 
   bool KM3PMTOpticalModel::IsAPhotocathode (const G4Step* STEP)
