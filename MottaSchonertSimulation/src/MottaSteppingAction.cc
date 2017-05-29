@@ -29,6 +29,7 @@
 #include "MottaSteppingAction.hh"
 #include "KM3AnalysisManager.hh"
 #include "G4Track.hh"
+#include <G4VSolid.hh>
 #include "globals.hh"
 #include <KM3ExperimentTypeMessenger.hh>
 #include <MottaAnalysisManager.hh>
@@ -61,14 +62,18 @@ namespace km3net
     //#ifdef G4ANALYSIS_USE
     G4Track* fTrack = fStep->GetTrack();
     G4StepPoint* poststep = fStep->GetPostStepPoint();
+    G4StepPoint* prestep = fStep->GetPreStepPoint();
 
     G4VPhysicalVolume* thePostPV=poststep->GetPhysicalVolume();
     G4String poststepName=thePostPV->GetLogicalVolume ()->GetName();
 
     //TODO check if it is relevent
-    if (fTrack->GetDefinition()->GetParticleType() == "opticalphoton")
+    if (fTrack->GetDefinition()->GetParticleType() == "opticalphoton" &&
+        fStep->GetPostStepPoint()->GetStepStatus() == fGeomBoundary)
       {
-        if (poststepName == "Target")
+        double distanceToTarget = fTrack->GetVolume ()->GetMotherLogical ()->GetSolid ()->DistanceToIn (prestep->GetMomentumDirection ());
+        cout << "distance to target " << fTrack->GetVolume ()->GetMotherLogical ()->GetName () << " " << distanceToTarget << endl;
+        if (poststepName == "Target" || distanceToTarget == 0)
           {
             fTrack->SetTrackStatus(fStopAndKill);
             char transref=-1;

@@ -32,7 +32,7 @@ namespace km3net
 		float QECheck (double wavelength);
     void PhotoCathodeEfficiencyReader ();
 
-
+    double TestElectronEscapingProbability (const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm) const;
     bool LastElectronIsEscaped ();
     float GetEfficiency (float wavelength);
     float GetGlassAbsorption (float wavelength, float thickness);
@@ -49,9 +49,10 @@ namespace km3net
     void SetElectronProductionLevel (int level) {fOpticalModel._electronProductionLevel = level;}
     void SetElectronAbsorptionLength (float length) {fOpticalModel.fElectronAttenuationLength=length;}
 
+
     TObject* GetTObject (string name) { return fObjectCol[name];}
-		void PutTObject (string name, TObject* object) { fObjectCol[name] = object; return;}
-		bool InTObject (string name) {if (fObjectCol.find(name) != fObjectCol.end()) return true; return false;}
+    void PutTObject (string name, TObject* object) { fObjectCol[name] = object; return;}
+    bool InTObject (string name) {if (fObjectCol.find(name) != fObjectCol.end()) return true; return false;}
     void GetTotalProbabilities (double& Abs, double& Trans, double& Refl) {Abs=fOpticalModel.fA_t; Trans=fOpticalModel.fT_t; Refl=fOpticalModel.fR_t;}
     float fGlassThickness = 1*mm;
     int fElPrecision = 10000;

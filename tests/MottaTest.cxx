@@ -15,8 +15,19 @@
 using namespace std;
 using namespace km3net;
 
-TH1F* hElectEscape=new TH1F("hElectEscape", "Electron escping probability;deg", 90,0,90*deg);
-TH1F* hPhotonAbs=new TH1F("hPhotonAbs", "Electron absorption probability;deg", 90,0,90*deg);
+TH1F* hElectEscape=new TH1F("hElectEscape", "Electron escping probability;deg", 90,0,90);
+TH1F* hPhotonAbs=new TH1F("hPhotonAbs", "Electron absorption probability;deg", 90,0,90);
+TH1F* hPhotonRefl=new TH1F("hPhotonRefl", "Electron absorption probability;deg", 90,0,90);
+TH1F* hPhotonTrans=new TH1F("hPhotonTrans", "Electron absorption probability;deg", 90,0,90);
+
+TH1F* hPhotonAbsP=new TH1F("hPhotonAbsP", "Electron absorption probability;deg", 90,0,90);
+TH1F* hPhotonReflP=new TH1F("hPhotonReflP", "Electron absorption probability;deg", 90,0,90);
+TH1F* hPhotonTransP=new TH1F("hPhotonTransP", "Electron absorption probability;deg", 90,0,90);
+
+TH1F* hPhotonAbsS=new TH1F("hPhotonAbsS", "Electron absorption probability;deg", 90,0,90);
+TH1F* hPhotonReflS=new TH1F("hPhotonReflS", "Electron absorption probability;deg", 90,0,90);
+TH1F* hPhotonTransS=new TH1F("hPhotonTransS", "Electron absorption probability;deg", 90,0,90);
+
 
 TRandom TR;
 
@@ -26,6 +37,24 @@ void RandomPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
   pol.setRThetaPhi (1, TR.Uniform(0,twopi),TR.Uniform(0,twopi));
   pol=dir.cross (pol);
 }
+
+void PPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
+{
+  pol.set (1, 0, 0);
+  pol=dir.cross (pol);
+}
+void SPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
+{
+  pol.set (0, 1, 0);
+  pol=dir.cross (pol);
+}
+
+void TPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
+{
+  pol.set (1, 1, 0);
+  pol=dir.cross (pol);
+}
+
 
 int main  (int argc, char** argv)
 {
@@ -60,15 +89,15 @@ int main  (int argc, char** argv)
 
   KM3PMTOpticalModelTester theModelTester;
   cout << "Create model tester" <<endl;
-  theModelTester.LoadMaterial ("photocathode3inches", "PMTGlass", "Vacuum");
+  theModelTester.LoadMaterial ("PhotoMotta", "PMTGlassMotta", "Vacuum");
 
   //VLA
   G4ThreeVector pos(0,0,-1);
-  G4ThreeVector pol(0,0,-1);
-  theModelTester.TestCalculateNormalCoefficients (pos, 400*nm);
+  G4ThreeVector pol(0,0,1);
+  theModelTester.TestCalculateNormalCoefficients (pos, 442*nm);
   theModelTester.SetElectronProductionLevel (level);
-  if (level < 2)
-    theModelTester.SetElectronAbsorptionLength (22*nm);
+
+  theModelTester.SetElectronAbsorptionLength (220000*nm);
 
 
   for (int angle=0;angle<90;angle++)
@@ -76,32 +105,46 @@ int main  (int argc, char** argv)
       x= sin (angle*deg);
       z= -cos (angle*deg);
       G4ThreeVector dir(0,x,z);
-      RandomPolarization (dir, pol);
-      cout << dir.dot (pol) << endl;
+      SPolarization (dir, pol);
       //G4ThreeVector pos(0,0,-1);
       G4ThreeVector norm(0,0,1);
       G4ThreeVector insideDirection (0,0,-1);
 
       float escaped=0;
       float nb_elect=50000;
-      theModelTester.TestCalculateCoefficients (pos, dir, insideDirection, norm, 400*nm);
-      double Abs,tmp;
-      theModelTester.GetTotalProbabilities (Abs, tmp, tmp);
-      hPhotonAbs->SetBinContent (angle,Abs);
-      /*for (int i=0; i<nb_elect;i++)
-        {
-          if (theModelTester.TestElectronProduction (dir, pol, norm, insideDirection))
-            escaped++;
-        }
-      */
-      cout << angle+1 << " " <<escaped/nb_elect << endl;
-      hElectEscape->SetBinContent (angle+1,escaped/nb_elect);
+      theModelTester.TestCalculateCoefficients (pos, dir, pol, norm, 400*nm);
+      double Abs,Trans,Refl;
+      double AbsT,TransT,ReflT;
+      theModelTester.GetTotalProbabilities (Abs, Refl, Trans);
+
+      hPhotonAbsS->SetBinContent (angle,Abs);
+      hPhotonTransS->SetBinContent (angle,Trans);
+      hPhotonReflS->SetBinContent (angle,Refl);
+
+      AbsT=Abs; TransT=Trans; ReflT=Refl;
+      PPolarization (dir, pol);
+      theModelTester.TestCalculateCoefficients (pos, dir, pol, norm, 400*nm);
+      theModelTester.GetTotalProbabilities (Abs, Refl, Trans);
+
+      hPhotonAbsP->SetBinContent (angle,Abs);
+      hPhotonTransP->SetBinContent (angle,Trans);
+      hPhotonReflP->SetBinContent (angle,Refl);
+
+      AbsT+=Abs; TransT+=Trans; ReflT+=Refl;
+      hPhotonAbs->SetBinContent (angle,AbsT/2);
+      hPhotonTrans->SetBinContent (angle,TransT/2);
+      hPhotonRefl->SetBinContent (angle,ReflT/2);
+      float Pescaped = theModelTester.TestElectronEscapingProbability (dir, pol,norm);
+      cout << angle+1 << " " << Pescaped << endl;
+      hElectEscape->SetBinContent (angle+1,Pescaped);
     }
 
   theModelTester.SaveTreesAndHistograms ("/scratch/hugon/out.root");
   TFile tf("/scratch/hugon/bah.root","recreate");
   tf.Add (hElectEscape);
-  tf.Add (hPhotonAbs);
+  tf.Add (hPhotonAbs);  tf.Add (hPhotonTrans);  tf.Add (hPhotonRefl);
+  tf.Add (hPhotonAbsS);  tf.Add (hPhotonTransS);  tf.Add (hPhotonReflS);
+  tf.Add (hPhotonAbsP);  tf.Add (hPhotonTransP);  tf.Add (hPhotonReflP);
   tf.Write ();
   tf.Close ();
 

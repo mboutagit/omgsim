@@ -162,6 +162,11 @@ namespace km3net
 
   }
 
+  double KM3PMTOpticalModelTester::TestElectronEscapingProbability (const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm) const
+  {
+    return fOpticalModel.GetTotalMeanPhotonAbsorbtionDepth (dir, pol, norm);
+  }
+
   bool KM3PMTOpticalModelTester::TestElectronProduction (G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, G4ThreeVector &insidedir)
   {
     memset(&(fOpticalModel.fEPD),0,sizeof(fOpticalModel.fEPD));
