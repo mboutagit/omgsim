@@ -15,53 +15,51 @@
 using namespace std;
 using namespace km3net;
 
-TH1F* hElectEscape=new TH1F("hElectEscape", "Electron escping probability;deg", 90,0,90);
-TH1F* hPhotonAbs=new TH1F("hPhotonAbs", "Electron absorption probability;deg", 90,0,90);
-TH1F* hPhotonRefl=new TH1F("hPhotonRefl", "Electron absorption probability;deg", 90,0,90);
-TH1F* hPhotonTrans=new TH1F("hPhotonTrans", "Electron absorption probability;deg", 90,0,90);
+int nbins=900;
+TH1F* hElectEscape=new TH1F("hElectEscape", "Electron escping probability;deg", nbins,0,90);
+TH1F* hPhotonAbs=new TH1F("hPhotonAbs", "Electron absorption probability;deg", nbins,0,90);
+TH1F* hPhotonRefl=new TH1F("hPhotonRefl", "Electron absorption probability;deg", nbins,0,90);
+TH1F* hPhotonTrans=new TH1F("hPhotonTrans", "Electron absorption probability;deg", nbins,0,90);
 
-TH1F* hPhotonAbsP=new TH1F("hPhotonAbsP", "Electron absorption probability;deg", 90,0,90);
-TH1F* hPhotonReflP=new TH1F("hPhotonReflP", "Electron absorption probability;deg", 90,0,90);
-TH1F* hPhotonTransP=new TH1F("hPhotonTransP", "Electron absorption probability;deg", 90,0,90);
+TH1F* hPhotonAbsP=new TH1F("hPhotonAbsP", "Electron absorption probability;deg", nbins,0,90);
+TH1F* hPhotonReflP=new TH1F("hPhotonReflP", "Electron absorption probability;deg", nbins,0,90);
+TH1F* hPhotonTransP=new TH1F("hPhotonTransP", "Electron absorption probability;deg", nbins,0,90);
 
-TH1F* hPhotonAbsS=new TH1F("hPhotonAbsS", "Electron absorption probability;deg", 90,0,90);
-TH1F* hPhotonReflS=new TH1F("hPhotonReflS", "Electron absorption probability;deg", 90,0,90);
-TH1F* hPhotonTransS=new TH1F("hPhotonTransS", "Electron absorption probability;deg", 90,0,90);
+TH1F* hPhotonAbsS=new TH1F("hPhotonAbsS", "Electron absorption probability;deg", nbins,0,90);
+TH1F* hPhotonReflS=new TH1F("hPhotonReflS", "Electron absorption probability;deg", nbins,0,90);
+TH1F* hPhotonTransS=new TH1F("hPhotonTransS", "Electron absorption probability;deg", nbins,0,90);
+
+TH1F* hPhotonAbsR=new TH1F("hPhotonAbsR", "Electron absorption probability;deg", nbins,0,90);
+TH1F* hPhotonReflR=new TH1F("hPhotonReflR", "Electron absorption probability;deg", nbins,0,90);
+TH1F* hPhotonTransR=new TH1F("hPhotonTransR", "Electron absorption probability;deg", nbins,0,90);
 
 
 TRandom TR;
 
 void RandomPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
 {
-  G4ThreeVector test (0,0,1);
-  pol.setRThetaPhi (1, TR.Uniform(0,twopi),TR.Uniform(0,twopi));
-  pol=dir.cross (pol);
+  double theta = dir.getTheta();
+	double phi = dir.getPhi();
+	//pol.set(0,1,0);
+	//pol.set(1,0,0);
+	double poltheta = G4UniformRand()*twopi;
+	pol.set(cos(poltheta),sin(poltheta),0);
+	pol.rotateY(theta);
+	pol.rotateZ(phi);
 }
 
 void PPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
 {
   pol.set (0, 1, 0);
   pol=dir.cross (pol);
-	pol.unit();
+	pol = pol.unit();
 }
 void SPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
 {
   pol.set (1, 0, 0);
   pol=dir.cross (pol);
-	cout << "pol not norm " << pol << endl;
-	pol.unit();
-	cout << "pol norm " << pol << endl;
-	cout << "pol abs " << pol.r() << endl;
-	pol/=pol.r();
-	cout << "pol norm finally " << pol << endl;
+	pol = pol.unit();
 }
-
-void TPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
-{
-  pol.set (1, 1, 0);
-  pol=dir.cross (pol);
-}
-
 
 int main  (int argc, char** argv)
 {
@@ -108,19 +106,17 @@ int main  (int argc, char** argv)
 
 
 	double angle;
-  for (int angle1=0;angle1<90;angle1++)
+	bool nofirstref = true;
+	double F;
+  for (double angle1=hPhotonAbsS->GetBinCenter(0);angle1<hPhotonAbsS->GetXaxis()->GetXmax();angle1+=hPhotonAbsS->GetBinWidth(0))
     {
 			angle = sin(angle1*deg)*1.50/1.51;
-			cout << "angle sin " << angle << endl;
 			if (angle < 1) {
 				angle = asin(angle)/deg;
 				x= sin (angle*deg);
 				z= -cos (angle*deg);
 				G4ThreeVector dir(x,0,z);
 				SPolarization (dir, pol);
-				//pol.set(0,1,0);
-				cout << "Spol " << pol << endl;
-				//G4ThreeVector pos(0,0,-1);
 				G4ThreeVector norm(0,0,1);
 				G4ThreeVector insideDirection (0,0,-1);
 
@@ -131,43 +127,57 @@ int main  (int argc, char** argv)
 				double AbsT,TransT,ReflT;
 				theModelTester.GetTotalProbabilities (Abs, Trans, Refl);
 
-				double F = pow(sin(angle1*deg-angle*deg)/sin(angle1*deg+angle*deg),2);
-				cout << "fs " << F << endl;
-				Trans= Trans*(1-F)/(1-F*Refl);
-				Refl = F+Refl*(1.-F)*(1.-F)/(1-F*Refl);
-				Abs = 1-Trans-Refl;
-				Refl -= F;
+
+				if (nofirstref) {
+					F = pow(sin(angle1*deg-angle*deg)/sin(angle1*deg+angle*deg),2);
+					Trans= Trans*(1-F)/(1-F*Refl);
+					Refl = F+Refl*(1.-F)*(1.-F)/(1-F*Refl);
+					Abs = 1-Trans-Refl;
+					Refl -= F;
+				}
 
 
-				hPhotonAbsS->SetBinContent (angle1,Abs);
-				hPhotonTransS->SetBinContent (angle1,Trans);
-				hPhotonReflS->SetBinContent (angle1,Refl);
+				hPhotonAbsS->Fill (angle1,Abs);
+				hPhotonTransS->Fill (angle1,Trans);
+				hPhotonReflS->Fill (angle1,Refl);
 
 
 				AbsT=Abs; TransT=Trans; ReflT=Refl;
 				PPolarization (dir, pol);
-				cout << "Ppol " << pol << endl;
 				theModelTester.TestCalculateCoefficients (pos, dir, pol, norm, 442*nm);
 				theModelTester.GetTotalProbabilities (Abs, Trans, Refl);
 
-				F = pow(tan(angle1*deg-angle*deg)/tan(angle1*deg+angle*deg),2);
-        cout << "fs " << F << endl;
-        Trans= Trans*(1-F)/(1-F*Refl);
-        Refl = F+Refl*(1.-F)*(1.-F)/(1-F*Refl);
-        Abs = 1-Trans-Refl;
-        Refl -= F;
+				if (nofirstref) {
+					F = pow(tan(angle1*deg-angle*deg)/tan(angle1*deg+angle*deg),2);
+					Trans= Trans*(1-F)/(1-F*Refl);
+					Refl = F+Refl*(1.-F)*(1.-F)/(1-F*Refl);
+					Abs = 1-Trans-Refl;
+					Refl -= F;
+				}
 
-				hPhotonAbsP->SetBinContent (angle1,Abs);
-				hPhotonTransP->SetBinContent (angle1,Trans);
-				hPhotonReflP->SetBinContent (angle1,Refl);
+				hPhotonAbsP->Fill (angle1,Abs);
+				hPhotonTransP->Fill (angle1,Trans);
+				hPhotonReflP->Fill (angle1,Refl);
 
 				AbsT+=Abs; TransT+=Trans; ReflT+=Refl;
-				hPhotonAbs->SetBinContent (angle1,AbsT/2);
-				hPhotonTrans->SetBinContent (angle1,TransT/2);
-				hPhotonRefl->SetBinContent (angle1,ReflT/2);
+				hPhotonAbs->Fill (angle1,AbsT/2);
+				hPhotonTrans->Fill (angle1,TransT/2);
+				hPhotonRefl->Fill (angle1,ReflT/2);
+
+				double steps = 100;
+				for (int ii = 0; ii < steps; ii++) {
+					RandomPolarization(dir,pol);
+					theModelTester.TestCalculateCoefficients (pos, dir, pol, norm, 442*nm);
+					theModelTester.GetTotalProbabilities (Abs, Trans, Refl);
+					hPhotonAbsR->Fill(angle1,Abs/steps);
+					hPhotonTransR->Fill(angle1,Trans/steps);
+					hPhotonReflR->Fill(angle1,Refl/steps);
+				}
+
+
 				float Pescaped = theModelTester.TestElectronEscapingProbability (dir, pol,norm);
 				//cout << angle+1 << " " << Pescaped << endl;
-				hElectEscape->SetBinContent (angle+1,Pescaped);
+				hElectEscape->Fill (angle,Pescaped);
 			}
     }
 
@@ -177,6 +187,7 @@ int main  (int argc, char** argv)
   tf.Add (hPhotonAbs);  tf.Add (hPhotonTrans);  tf.Add (hPhotonRefl);
   tf.Add (hPhotonAbsS);  tf.Add (hPhotonTransS);  tf.Add (hPhotonReflS);
   tf.Add (hPhotonAbsP);  tf.Add (hPhotonTransP);  tf.Add (hPhotonReflP);
+	tf.Add (hPhotonAbsR);  tf.Add (hPhotonTransR);  tf.Add (hPhotonReflR);
   tf.Write ();
   tf.Close ();
 
