@@ -29,9 +29,15 @@ TH1F* hPhotonAbsS=new TH1F("hPhotonAbsS", "Electron absorption probability;deg",
 TH1F* hPhotonReflS=new TH1F("hPhotonReflS", "Electron absorption probability;deg", nbins,0,90);
 TH1F* hPhotonTransS=new TH1F("hPhotonTransS", "Electron absorption probability;deg", nbins,0,90);
 
+TH1F* hPhotonAbsM=new TH1F("hPhotonAbsM", "Electron absorption probability;deg", nbins,0,90);
+TH1F* hPhotonReflM=new TH1F("hPhotonReflM", "Electron absorption probability;deg", nbins,0,90);
+TH1F* hPhotonTransM=new TH1F("hPhotonTransM", "Electron absorption probability;deg", nbins,0,90);
+
 TH1F* hPhotonAbsR=new TH1F("hPhotonAbsR", "Electron absorption probability;deg", nbins,0,90);
 TH1F* hPhotonReflR=new TH1F("hPhotonReflR", "Electron absorption probability;deg", nbins,0,90);
 TH1F* hPhotonTransR=new TH1F("hPhotonTransR", "Electron absorption probability;deg", nbins,0,90);
+
+
 
 
 TRandom TR;
@@ -61,17 +67,35 @@ void SPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
 	pol = pol.unit();
 }
 
+void MixedPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
+{
+	/*
+	  pol.set (0.5, 0.5, 0);
+		pol=dir.cross (pol);
+		pol = pol.unit();
+		cout << "pol " << pol << endl;
+		*/
+		G4ThreeVector pols, polp;
+		SPolarization(dir,pols);
+		PPolarization(dir,polp);
+		pol = (pols+polp);
+		pol = pol.unit();
+
+}
+
 int main  (int argc, char** argv)
 {
-  string sOutputTree;
+  string sOutputTree="MottaTest.root";
   float x=0,z=-1;
   int level = 1;
+	bool MottaCalc = true;
   for (int argIt = 1; argIt < argc; argIt++)
     {
       string sarg = argv[argIt];
-      if (sOutputTree == "")
+      if (sarg == "-f") {
+				sarg = argv[++argIt];
         sOutputTree = sarg;
-
+			}
       else if (sarg == "-angle")
         {
           sarg = argv[++argIt];
@@ -84,6 +108,13 @@ int main  (int argc, char** argv)
           sarg = argv[++argIt];
           level=stoi(sarg);
         }
+      else if (sarg == "-Motta")
+        { 
+          sarg = argv[++argIt];
+					cout << "sarg " << sarg << endl;
+					istringstream(sarg) >> std::boolalpha >> MottaCalc;
+        }
+
     }
 
   if (!sOutputTree.size ())
@@ -91,6 +122,9 @@ int main  (int argc, char** argv)
       cerr << "needs a file.root as argument for the output" << endl;
       return 1;
     }
+
+	if (MottaCalc) cout << "Motta calculation with the scintillator (for reflection no first reflection on scintillator)." << endl;
+	else cout << "Calculations for A,R,T for the glass+photocathode+vacuum layer only." << endl;
 
   KM3PMTOpticalModelTester theModelTester;
   cout << "Create model tester" <<endl;
@@ -128,7 +162,7 @@ int main  (int argc, char** argv)
 				theModelTester.GetTotalProbabilities (Abs, Trans, Refl);
 
 
-				if (nofirstref) {
+				if (MottaCalc) {
 					F = pow(sin(angle1*deg-angle*deg)/sin(angle1*deg+angle*deg),2);
 					Trans= Trans*(1-F)/(1-F*Refl);
 					Refl = F+Refl*(1.-F)*(1.-F)/(1-F*Refl);
@@ -147,7 +181,7 @@ int main  (int argc, char** argv)
 				theModelTester.TestCalculateCoefficients (pos, dir, pol, norm, 442*nm);
 				theModelTester.GetTotalProbabilities (Abs, Trans, Refl);
 
-				if (nofirstref) {
+				if (MottaCalc) {
 					F = pow(tan(angle1*deg-angle*deg)/tan(angle1*deg+angle*deg),2);
 					Trans= Trans*(1-F)/(1-F*Refl);
 					Refl = F+Refl*(1.-F)*(1.-F)/(1-F*Refl);
@@ -163,6 +197,14 @@ int main  (int argc, char** argv)
 				hPhotonAbs->Fill (angle1,AbsT/2);
 				hPhotonTrans->Fill (angle1,TransT/2);
 				hPhotonRefl->Fill (angle1,ReflT/2);
+
+
+        MixedPolarization (dir, pol);
+        theModelTester.TestCalculateCoefficients (pos, dir, pol, norm, 442*nm);
+        theModelTester.GetTotalProbabilities (Abs, Trans, Refl);
+        hPhotonAbsM->Fill (angle1,Abs);
+        hPhotonTransM->Fill (angle1,Trans);
+        hPhotonReflM->Fill (angle1,Refl);
 
 				double steps = 100;
 				for (int ii = 0; ii < steps; ii++) {
@@ -187,6 +229,7 @@ int main  (int argc, char** argv)
   tf.Add (hPhotonAbs);  tf.Add (hPhotonTrans);  tf.Add (hPhotonRefl);
   tf.Add (hPhotonAbsS);  tf.Add (hPhotonTransS);  tf.Add (hPhotonReflS);
   tf.Add (hPhotonAbsP);  tf.Add (hPhotonTransP);  tf.Add (hPhotonReflP);
+	tf.Add (hPhotonAbsM);  tf.Add (hPhotonTransM);  tf.Add (hPhotonReflM);
 	tf.Add (hPhotonAbsR);  tf.Add (hPhotonTransR);  tf.Add (hPhotonReflR);
   tf.Write ();
   tf.Close ();
