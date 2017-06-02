@@ -468,7 +468,10 @@ namespace km3net
     return MeanDepth/fA/_thickness;
   }
 
-  bool KM3PMTOpticalModel::ElectronProductionCalculator (const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm) const
+  bool KM3PMTOpticalModel::ElectronProductionCalculator (const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm)
+#ifndef ENABLE_TESTING
+const
+#endif
   {
     if (_electronProductionLevel == 0 || fInsideDirection.r() == 0)
       {
@@ -496,9 +499,8 @@ namespace km3net
       {
         double LocalPhotocathodeThickness = _thickness;
         double Electron2Vacuum;
-				if (GoingInside) Electron2Vacuum  = (1-PhotonDepth)*LocalPhotocathodeThickness;
-				else Electron2Vacuum  = PhotonDepth*LocalPhotocathodeThickness;
-
+        if (GoingInside) Electron2Vacuum  = (1-PhotonDepth)*LocalPhotocathodeThickness;
+        else Electron2Vacuum  = PhotonDepth*LocalPhotocathodeThickness;
 
         double probMax = exp(-Electron2Vacuum/fElectronAttenuationLength);
         Rand = G4UniformRand ();

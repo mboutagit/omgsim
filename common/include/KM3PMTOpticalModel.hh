@@ -170,7 +170,11 @@ namespace km3net
     void Refract(G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm);
     unsigned char CheckDetection (const G4ThreeVector&);
 
-    bool ElectronProductionCalculator (const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm) const;
+    bool ElectronProductionCalculator (const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm)
+#ifndef ENABLE_TESTING
+ const
+#endif
+;
 
     //public utils
   public:
@@ -191,10 +195,9 @@ namespace km3net
       char  HasGoneInside;
       char  HasBeenGenerated;
       char  GoingInside;
-
-			float MeanPhotonDepth;
-			//float MeanElectronAbsProb;
-			float MeanEscapeProb;
+      float MeanPhotonDepth;
+      //float MeanElectronAbsProb;
+      float MeanEscapeProb;
   };
     ElectrProdData fEPD;
 #endif
