@@ -195,7 +195,7 @@ namespace km3net
 			float MeanPhotonDepth;
 			//float MeanElectronAbsProb;
 			float MeanEscapeProb;
-};
+  };
     ElectrProdData fEPD;
 #endif
 

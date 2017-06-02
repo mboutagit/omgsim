@@ -69,12 +69,6 @@ void SPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
 
 void MixedPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
 {
-	/*
-	  pol.set (0.5, 0.5, 0);
-		pol=dir.cross (pol);
-		pol = pol.unit();
-		cout << "pol " << pol << endl;
-		*/
 		G4ThreeVector pols, polp;
 		SPolarization(dir,pols);
 		PPolarization(dir,polp);

@@ -10,6 +10,29 @@ using namespace std;
 
 namespace km3net
 {
+
+	void PPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
+	{
+		pol.set (0, 1, 0);
+		pol=dir.cross (pol);
+		pol = pol.unit();
+	}
+	void SPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
+	{
+		pol.set (1, 0, 0);
+		pol=dir.cross (pol);
+		pol = pol.unit();
+	}
+	void MixedPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
+	{
+			G4ThreeVector pols, polp;
+			SPolarization(dir,pols);
+			PPolarization(dir,polp);
+			pol = (pols+polp);
+			pol = pol.unit();
+
+	}
+
   KM3PMTOpticalModelTester::KM3PMTOpticalModelTester ()
   {
 
@@ -98,11 +121,12 @@ namespace km3net
     //hQEmeas->Draw ();
   }
 
-  float KM3PMTOpticalModelTester::QECheck (double wavelength)
+  float KM3PMTOpticalModelTester::QECheck (double wavelength, double theta)
   {
     G4ThreeVector pos(0,0,1);
-    G4ThreeVector dir(0,0,-1);
+    G4ThreeVector dir(sin(theta/180.*acos(-1)),0,-cos(theta/180.*acos(-1)));
     G4ThreeVector pol(0,0,1);
+		MixedPolarization (dir, pol);
     G4ThreeVector norm(0,0,1);
     G4ThreeVector insidedir(0,0,-1);
     //cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,wavelength) << endl;

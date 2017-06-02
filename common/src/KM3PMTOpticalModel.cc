@@ -408,7 +408,6 @@ namespace km3net
     G4complex zi(0.,1.); //imaginary unit
     complex<double> ampv=t12/(1.+r12*r23*exp(2.*zi*fdelta));                          //Amplitude of exp(ikz) wave (going from the border with glass to the border with vac) at z=0 (border with glass)
     complex<double> ampw=t12*r23*exp(2.*zi*fdelta)/(1.+r12*r23*exp(2.*zi*fdelta));    //Amplitude of exp(ik(h-z)) wave (going in opposite direction) at z=0
-    cout << "reflections " << conj(r23)*r23 << " " << conj(-r12)*(-r12) << endl;
     /*
      * k_Z=2*Pi*n*cos(theta)/wavelength=k_Transmission + ik_Absorption    z projection of k vector
      * in general n and cos(theta) are complex!
@@ -486,12 +485,19 @@ namespace km3net
     bool HasGoneInside = ((Rand < PhotonDepth && GoingInside) ||
                           (Rand > PhotonDepth && !GoingInside));
 
+# ifdef ENABLE_TESTING
+		if (GoingInside) fEPD.MeanEscapeProb  = PhotonDepth;
+		else fEPD.MeanEscapeProb  = 1.-PhotonDepth;
+		cout << "fEPD.MeanEscapeProb " << fEPD.MeanEscapeProb << endl;
+# endif
+
     //considering the survival probability of the photo-electron in the photocathode linked to its distance to the vacuum (exponential distribution)
     if (HasGoneInside)
       {
         double LocalPhotocathodeThickness = _thickness;
         double Electron2Vacuum;
-        Electron2Vacuum  = (1-PhotonDepth)*LocalPhotocathodeThickness;
+				if (GoingInside) Electron2Vacuum  = (1-PhotonDepth)*LocalPhotocathodeThickness;
+				else Electron2Vacuum  = PhotonDepth*LocalPhotocathodeThickness;
 
 
         double probMax = exp(-Electron2Vacuum/fElectronAttenuationLength);

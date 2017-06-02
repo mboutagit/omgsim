@@ -72,6 +72,7 @@ int main (int argc, char** argv)
 	float maxwavelength = 800;
 	float mincathodethick = 1;
   float maxcathodethick = 1000;
+	float theta = 0;
 
   int level = 5;
   float precision = 0.005;
@@ -85,6 +86,11 @@ int main (int argc, char** argv)
           minwavelength  = stof (sarg);
 					maxwavelength  = minwavelength;
         }
+			if (sarg == "-theta")
+			{
+				sarg = argv[++argIt];
+				theta  = stof (sarg);
+			}
       else if (sarg == "-level")
         {
           sarg = argv[++argIt];
@@ -143,7 +149,7 @@ int main (int argc, char** argv)
       newThicknessVector.InsertValues (0, cathodethick*1e-6);
       newThicknessVector.InsertValues (188, cathodethick*1e-6);
       theModelTester.SetCathodeThickness(newThicknessVector);
-      qe = theModelTester.QECheck(wavelength);
+      qe = theModelTester.QECheck(wavelength,theta);
       if (qe < 0) {
         //cout << "WARNING: " << wavelength << " " << cathodethick << " " << qe << endl;
       }
@@ -155,6 +161,6 @@ int main (int argc, char** argv)
     }
     //cout << wavelength << " " << optcathodethick << " " << optqe << endl;
   }
+	return 0;
 
-  return 0;
 }
