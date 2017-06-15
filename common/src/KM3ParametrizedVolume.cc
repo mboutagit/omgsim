@@ -400,7 +400,7 @@ namespace km3net
   {
     if (!fParametersDict.count (NAME))
       {
-        cerr << "KM3ParametrizedVolume::KM3Volume error, cannot create " << NAME <<", it does not exist in the dictionary. return NULL."<< endl;
+        cerr << "KM3ParametrizedVolume::KM3Volume warning, cannot create " << NAME <<", it does not exist in the dictionary. return NULL."<< endl;
         return NULL;
       }
     if (!fVolumeDict.count (NAME))
@@ -414,7 +414,8 @@ namespace km3net
   {
     if (!fVolumeDict.count(NAME))
       {
-        this->GetVolume (NAME);
+        if (this->GetVolume (NAME) == NULL)
+          return NULL;
       }
     G4LogicalVolume* toreturn = fVolumeDict[NAME]->Construct ();
     if (!fLogicalVolDict.count(toreturn))

@@ -1,4 +1,6 @@
 #include <KM3PassiveVolumeMgr.hh>
+#include <KM3PhotoTubeMgr.hh>
+#include <KM3OpticalModuleMgr.hh>
 #include <sys/types.h>
 #include <dirent.h>
 #include <libconfig.h++>
@@ -487,8 +489,31 @@ namespace km3net
   {
     //manage with a rotation axis!
     const PassiveVolumeParameters &thePTP=*((PassiveVolumeParameters*)fTheParameters);
-    G4VSolid* refVol = KM3PassiveVolumeMgr::GetIt ()->GetLogicalVolume (thePTP.RefVolume)->GetSolid ();
-    G4VSolid* opVol  = KM3PassiveVolumeMgr::GetIt ()->GetLogicalVolume (thePTP.OperandVolume)->GetSolid ();
+    G4LogicalVolume* refLvol = KM3PassiveVolumeMgr::GetIt ()->GetLogicalVolume (thePTP.RefVolume);
+    G4LogicalVolume* opLvol = KM3PassiveVolumeMgr::GetIt ()->GetLogicalVolume (thePTP.OperandVolume);
+    if (refLvol == NULL)
+      {
+        clog << "KM3PassiveVolumeMgr::KM3PassiveVolume::ConstructBooleanVolume: warning: trying to get the ref volume among the PMTs and OMs " <<thePTP.RefVolume<< endl;
+        refLvol = KM3PhotoTubeMgr::GetIt ()->GetLogicalVolume (thePTP.RefVolume);
+            cout << "here the refvol is " << refLvol << endl;
+        if (refLvol == NULL)
+          {
+            refLvol = KM3OpticalModuleMgr::GetIt ()->GetLogicalVolume (thePTP.RefVolume);
+          }
+      }
+    if (opLvol == NULL)
+      {
+        clog << "KM3PassiveVolumeMgr::KM3PassiveVolume::ConstructBooleanVolume: warning: trying to get the operand volume among the PMTs and OMs " << thePTP.OperandVolume<< endl;
+        opLvol = KM3PhotoTubeMgr::GetIt ()->GetLogicalVolume (thePTP.OperandVolume);
+        if (opLvol == NULL)
+          {
+            opLvol = KM3OpticalModuleMgr::GetIt ()->GetLogicalVolume (thePTP.OperandVolume);
+          }
+      }
+
+
+    G4VSolid* refVol = refLvol->GetSolid ();
+    G4VSolid* opVol  = opLvol->GetSolid ();
 
 
     G4RotationMatrix* theRot = new G4RotationMatrix;
