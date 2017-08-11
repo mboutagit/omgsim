@@ -473,6 +473,8 @@ namespace km3net
 const
 #endif
   {
+		if (_k2 == 0) return false; //if the photocathode area is not absorbing, no electrons can escape
+
     if (_electronProductionLevel == 0 || fInsideDirection.r() == 0)
       {
         double rand=G4UniformRand ();
@@ -491,10 +493,17 @@ const
 # ifdef ENABLE_TESTING
 		if (GoingInside) fEPD.MeanEscapeProb  = PhotonDepth;
 		else fEPD.MeanEscapeProb  = 1.-PhotonDepth;
-		cout << "fEPD.MeanEscapeProb " << fEPD.MeanEscapeProb << endl;
 # endif
 
     //considering the survival probability of the photo-electron in the photocathode linked to its distance to the vacuum (exponential distribution)
+		/*
+		 * WARNING: Technically this realisation is not correct to use with the previous block where rand is compared with MeanPhotonAbsorbtionDepth.
+		 * Instead, the photon absorption point should be generated following full photon depth distribution.
+		 * This is, however, computationally heave (since no analytical solution was not found 
+		 * for the inverse function of the cumulative distibution of the photon absorption depth.
+		 * We expect, however, the effect of the electron absroption is negligible 
+		 * (we expect, that the absorption lenght >> electron random walk in the photocathode).
+		 */
     if (HasGoneInside)
       {
         double LocalPhotocathodeThickness = _thickness;
