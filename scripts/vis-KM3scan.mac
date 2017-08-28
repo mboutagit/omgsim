@@ -8,10 +8,10 @@
 #Effective diameter ~76mm
 
 #Private communication with O. Kalekin:
-#It was 1 mm diameter optical fiber with ~3 mm black tube at the output to make the beam more collimated. 
+#It was 1 mm diameter optical fiber with ~3 mm black tube at the output to make the beam more collimated.
 #At PMT center, where the distance between optical fiber and PMT was < 1 mm, the diameter of light spot was 1 mm.
-#It should increase to the edge, due to spherical shape of PMT.  
-#Distance from fiber to photocathode at the edge is ~25 mm. 
+#It should increase to the edge, due to spherical shape of PMT.
+#Distance from fiber to photocathode at the edge is ~25 mm.
 #The size of the light spot at this distance can be estimated from the plot you attached due to some sensitivity beyond physical diameter of PMT.
 #My quick estimation: ~5 mm diameter.
 
@@ -23,7 +23,7 @@
 
 /KM3/det/setTargetMaterial IdealWater
 /KM3/det/setTargetLength 10 m
-/KM3/det/DontDraw bento 
+/KM3/det/DontDraw bento
 #/KM3/det/setOpticalModuleAngle 0.5 deg
 /KM3/det/setOpticalModuleTheta 0 deg
 /KM3/det/setOpticalModulePhi 0 deg
@@ -38,7 +38,7 @@
 /gps/verbose 0
 /gps/number 1
 /gps/particle opticalphoton
-/gps/pos/centre  %shift 0 400 mm
+/gps/pos/centre  0 0 400 mm
 
 /gps/pos/type Beam
 /gps/pos/shape Circle
@@ -46,7 +46,7 @@
 /gps/pos/rot2 1 0 0
 
 /gps/direction 0. 0. -1.
-/gps/pos/radius 2.5 mm 
+/gps/pos/radius 1 nm
 
 /gps/ene/type Gauss
 #LED 470 nm
@@ -56,12 +56,12 @@
 /event/verbose 0
 
 
-#/vis/open HepRepXML
-#/vis/scene/create filename.bheprep.zip
-#/vis/drawVolume
-#/vis/scene/endOfEventAction accumulate 500
-#/tracking/storeTrajectory 1
+/vis/open HepRepXML
+/vis/scene/create filename.bheprep.zip
+/vis/drawVolume
+/vis/scene/endOfEventAction accumulate 500
+/tracking/storeTrajectory 1
 
 /tracking/verbose 0
 /event/verbose 0
-/run/beamOn 1000000
+/run/beamOn 1000

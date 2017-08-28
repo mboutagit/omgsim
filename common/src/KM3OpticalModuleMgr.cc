@@ -389,7 +389,6 @@ namespace km3net
 
     if (ThePTP.BentoSurface.size ())
       {
-        cout << "entering here" << endl;
         new G4LogicalSkinSurface("BentoSurface", logicOM, KM3Material::GetIt()->GetOpticalSurface (ThePTP.BentoSurface));
       }
 

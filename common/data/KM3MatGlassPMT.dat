@@ -23,6 +23,9 @@ COMPONENTS
 
 CREATE
 
+
+
+
 PROPERTY ABSLENGTH
 OPTION wavelength
 250 0
@@ -139,3 +142,27 @@ OPTION eV
 3.877 1.50877
 4.002 1.51118
 4.136 1.51384
+
+#ground surface of the PMT
+CREATE PMTSurface
+
+DENSITY 2.230
+
+COMPONENTS
+G4_B   40   #5
+COMPONENTS
+
+CREATE
+
+PROPERTY ground
+OPTION constant
+1
+
+
+PROPERTY unified
+OPTION constant
+1
+
+PROPERTY sigmaalpha
+OPTION constant
+0.50

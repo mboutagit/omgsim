@@ -60,7 +60,7 @@ namespace km3net
       std::string DinodsSurface              = "DinodsSurface"            ;
       std::string CapDinodsSurface           = "CapDinodsSurface"         ;
       std::string GridDinodsSurface          = "GridDinodsSurface"        ;
-
+      std::string PMTSurface                 = ""                         ;
       void CalculateParameters ()
       {
         PhotoAngle     = asin(BulbRadiusMin/(RadiusSphere));

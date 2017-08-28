@@ -155,7 +155,7 @@ namespace km3net
     cfg.lookupValue("DinodsSurface", thePTP->DinodsSurface);
     cfg.lookupValue("CapDinodsSurface", thePTP->CapDinodsSurface);
     cfg.lookupValue("GridDinodsSurface", thePTP->GridDinodsSurface);
-
+    cfg.lookupValue("PMTSurface"       , thePTP->PMTSurface);
 
 		cfg.lookupValue("GlassMaterial", thePTP->GlassMaterial);  //VLA
 		cout << "Glass Value: " << thePTP->GlassMaterial << endl;
@@ -448,7 +448,7 @@ namespace km3net
 
     G4LogicalVolume* logicPhotocathode =
       new G4LogicalVolume(solidPhotocathode,
-                          materialsManager->GetMaterial(thePTP.GlassMaterial), thePTP.Prefix + "PMTPhotocathode");
+                          materialsManager->GetMaterial(thePTP.GlassMaterial), solidPhotocathode->GetName ());
     G4LogicalVolume* logicGlass =
       new G4LogicalVolume(solidGlass,
                           materialsManager->GetMaterial(thePTP.GlassMaterial), thePTP.Prefix + thePTP.GlassMaterial);
@@ -515,12 +515,16 @@ namespace km3net
     new G4LogicalSkinSurface(thePTP.Prefix + "MirrorBackCapDinods",
                              logicBackCapDinods,
                              our_BackCapDinods_opsurf);
+    if (thePTP.PMTSurface.size ())
+      {
+        new G4LogicalSkinSurface("PMTSurface", logicPhotocathode, KM3Material::GetIt()->GetOpticalSurface (thePTP.PMTSurface));
+      }
 
 
     G4VPhysicalVolume* physiPhotocathode =
       new G4PVPlacement(0,
                         G4ThreeVector(0., 0., 0.),
-                        logicPhotocathode, thePTP.Prefix + fPhotoName,
+                        logicPhotocathode, logicPhotocathode->GetName (),
                         logicPMTContainer,
                         false, 0, !thePTP.CheckOverlaps);
 
