@@ -332,113 +332,18 @@ namespace km3net
     _cos_theta1 = -dir.cosTheta (norm);
 
     CalculateCoefficients ();
-    CalculateTotalCoefficients (norm, pol, dir);
 
+		vec_s = dir.cross( norm ) / _sin_theta1;  //unitary vector pointing to the senkrecht/perpendicular polarisation, "q/|q|" in http://geant4.cern.ch/G4UsersDocuments/UsersGuides/PhysicsReferenceManual/html/node66.html
+		E_s = pol.dot(vec_s);  //perpendicular polarisation component amplitude (with sign!) in CalculateTotalCoefficients this can be used as Es2=E_s*E_s
+
+		CalculateTotalCoefficients (norm, pol, dir);
 		//cout << "DEBUG: probs abs " << fA_t << " reflection "  << fR_t << " transmission " << fT_t << endl;
 
-		//WORK IN PROGRESS: trying to implement polarization changes. To split after in the separate blocks
-		if (false) {
-			G4ThreeVector vec_s = dir.cross( norm ) / _sin_theta1;  //unitary vector pointing to the senkrecht/perpendicular polarisation, "q/|q|" in http://geant4.cern.ch/G4UsersDocuments/UsersGuides/PhysicsReferenceManual/html/node66.html
-			G4ThreeVector dir_r = dir - 2.*dir.dot(norm)*norm;                                             //direction of the reflected photon
-			G4ThreeVector dir_t = (-fabs(_cos_theta3) + _cos_theta1*_n1/_n3)*norm + (_n1/_n3)*dir;         //direction of the transmitted photon
-
-			cout << "is there total internal reflection? sin(theta1)*n1/n3 > 1? " << _sin_theta1*_n1/_n3 << endl;
-
-      //p-axis definition in a way that s,p,dir is the left coordinate system
-      G4ThreeVector vec_p_i = dir.cross(vec_s);     //direction of the p-axis for an initial photon 
-      G4ThreeVector vec_p_r = dir_r.cross(vec_s);   //direction of the p-axis for a reflected photon
-      G4ThreeVector vec_p_t = dir_t.cross(vec_s);   //direction of the p-axis for a transmitted photon
-			G4ThreeVector pol_s = pol.dot(vec_s)*vec_s;   //perpendicular polarisation component
-			G4ThreeVector pol_p = pol - pol_s;            //parallel polarisation component... it is actually the same as pol.dot(vec_p_i)*vec_p_i
-			//we need to have ampt_s, ampt_p, ampr_s, ampr_p...
-
-			/*
-			 * The polarization of the photon after reflectino/transmission gets different phase shifts, defined by complex parts of amps. 
-			 * Geant4 keeps no phase tracking. Only polarization vector (assuming it is linear).
-			 * We will simulate elliptical polarisation of transmittted/reflected photon as linear polarisation with random phase.
-			 * This is OK since the next photon interaction where the phase can be important (next interaction with photocathode) happens after big distance travelled so coherence is lost.
-			 */
-
-			G4double samp_t = pol_s.getR()*abs(ampt_s);
-			G4double pamp_t = pol_p.getR()*abs(ampt_p);
-			//Phase difference between p and s wave, on which p wave should be shifted, the absolute phase (phase0) is not accounted.
-			//Es = As*exp(i(kz-wt+phase0))
-			//Ep = Ap*eexp(i(kz-wt+phase0+phaseshift)
-			G4double phaseshift = arg(ampt_p*conj(ampt_s));   //phase difference between p and s wave, on which p wave should be shifted, the absolute phase is not accounted
-
-			/*
-			 * Here linear polarization generator is tested.
-			 * - Electric field in general case is an elliptical polarisation:
-			 * - Ep = Ap*exp(i(kz-wt))
-			 * - Es = As*exp(..+ phaseshift)
-			 * - For a single photon Ep and Es have probability sense (Ep2+Es2=1)
-			 * The idea is to simulate elliptical polarization of the reflected/transmitted photon with a randomly generated linear polarized photon.
-			 * The idea explanation:
-			 * - At generation point we can simulate elliptical polarization as many waves with linear polarizations and all phases phase=(-Pi, Pi). 
-			 * - If each photon has linear polarization with Ep = Ap*exp(i*phase), Es=As*exp(i*phi+phaseshift), then average energy brought by photons is <Ep2+Es2> = Ep2+Es2
-			 * - Simulating wave with Ep = Ap*exp(i*phase), Es=As*exp(i*phi+phaseshift) is equivalent to simulate one photon with probability p=Ep2+Es2 and polarisation in the direction of atan(As*cos(phase)/Ap*cos(phase+phaseshift)).
-			 * - All probabilities at the next interaction point (Transmission, Reflection etc) dependent on the polarization (so Ep2 and Es2) conserves!
-			 * - Simulating many photons for one original photon and averaging the quantities is equivalent to simulating on photon (the averaging will be done by running Geant4 with many original photons).
-			 */
-			G4double rphase, Rand, Prob;
-			do {
-				rphase = G4UniformRand()*twopi;
-				Prob = pow(pamp_t*cos(rphase+phaseshift),2)+pow(samp_t*cos(rphase),2.);  //Ep2+Es2
-				Rand = G4UniformRand();                                                  //Rand in (0,1) and Rand < Prob for the photon means that it's probability is proportional to Ep2+Es2
-			} while (Rand > Prob);
-			G4double theta = atan2(pamp_t*cos(rphase+phaseshift),samp_t*cos(rphase));  //polar angle in (s,p) of the generated polarisation angle
-			G4ThreeVector pol_t = cos(theta)*vec_s+sin(theta)*vec_p_t;               //Polarization of the transmitted photon.
-		}
-
-		//BEGIN: DEBUG set - 2 surface test -----------------------------------------------------------------------
-		if (false) {
-			cout << "set _k2 to 0 before amps calculation (CalculateCoefficients), check here: " << _k2 << endl;
-			G4ThreeVector vec_s = dir.cross( norm ) / _sin_theta1;  //unitary vector pointing to the senkrecht/perpendicular polarisation, "q/|q|" in http://geant4.cern.ch/G4UsersDocuments/UsersGuides/PhysicsReferenceManual/html/node66.html
-			G4ThreeVector dir_r = dir - 2.*dir.dot(norm)*norm;                                             //direction of the reflected photon
-			G4complex _n2comp(_n2,_k2);
-			G4double sqsintheta2 = std::norm((_n1/_n2comp)*_sin_theta1);
-			G4ThreeVector dir_t = (-sqrt(1-sqsintheta2) + _cos_theta1*_n1/_n3)*norm + (_n1/_n3)*dir;         //direction of the transmitted photon
-			cout << "is there total internal reflection? sin(theta1)*n1/n3 > 1? " << _sin_theta1*_n1/_n2 << endl;
-			//p-axis definition in a way that s,p,dir is the left coordinate system
-			G4ThreeVector vec_p_i = dir.cross(vec_s);     //direction of the p-axis for an initial photon 
-			G4ThreeVector vec_p_r = dir_r.cross(vec_s);   //direction of the p-axis for a reflected photon
-			G4ThreeVector vec_p_t = dir_t.cross(vec_s);   //direction of the p-axis for a transmitted photon
-
-			G4ThreeVector pol_s = pol.dot(vec_s)*vec_s;  //perpendicular polarisation component
-			G4ThreeVector pol_p = pol - pol_s;           //parallel polarisation component... it is actually the same as pol.dot(vec_p_i)*vec_p_i
-			cout << "DEBUG pol_p: " << pol_p << " " << pol.dot(vec_p_i)*vec_p_i << endl;
-
-			ampr_s = fr12_s;
-			ampt_s = ft12_s;
-			ampr_p = fr12_p;
-			ampt_p = ft12_p;
-			cout << "DEBUG amps ampr_s, ampt_s, ampr_p, ampr_s: " << ampr_s << " " << ampt_s << " " << ampr_p << " " << ampt_p << endl;
-			cout << "ts-rs=1 (?)       " << ampt_s-ampr_s << endl;
-			cout << "n2/n1*tp+rp=1 (?) " << _n2/_n1*ampt_p+ampr_p << endl;
-
-			/*
-			 * This is from Geant4, but it should be wrong since the direction of the transmitted photon and parallel component changes! 
-			 * new implementation should have direction of the transmitted photon!
-			 */
-			//G4ThreeVector pol_p_t = pol_p*real(ampt_p);
-			//G4ThreeVector pol_p_r = pol_p*real(ampr_p);
-			//cout << "if no abs this should be equal (?) " << _n2/_n1*pol_p_t+pol_p_r << " " << pol_p << endl;
-			G4ThreeVector pol_p_t = pol_p.getR()*real(ampt_p)*vec_p_t;
-			G4ThreeVector pol_p_r = pol_p.getR()*real(ampr_p)*vec_p_r;
-
-			/*
-			 * This should be correct since the direction of the perpendicular component conserves.
-			 */
-			G4ThreeVector pol_s_t = pol_s*real(ampt_s);
-			G4ThreeVector pol_s_r = pol_s*real(ampr_s);
-
-			G4ThreeVector pol_t = pol_s_t+pol_p_t;   //Polarization of the transmitted photon.
-			G4ThreeVector pol_r = pol_s_r+pol_p_r;   //Polarization of the reflected photon.
-		}
-		//END: DEBUG set - 2 surface test -----------------------------------------------------------------------------
-
-
-
+		//The next is not needed for total internal reflection... hover the calculation in the block if faster that the check, probably... and the same calculation for the check is done in "Reflect"
+		//if (_sin_theta1*_n1/_n3>1) { 
+			//p-axis definition in a way that s,p,dir is the left coordinate system, so for incoming photon vec_p = dir.cross(vec_s)
+			E_p = pol.dot(dir.cross(vec_s)); //Parallel polarisation component amplitude (with sign!)
+		//}
 
     if ( G4UniformRand() < fA_t)
       {
@@ -456,23 +361,14 @@ namespace km3net
       }
     if (G4UniformRand() < fR_t/(fR_t+fT_t))
       {
-				//cout << "DEBUG: pol before reflection: " << pol << " " << pol.getR() << endl;
-        //std::swap (_n1,_n3);
         Reflect (dir, pol, norm);
-				//cout << "DEBUG: pol after reflection: " << pol << " " << pol.getR() << endl;
-        //test old wrong method
-        //norm=-norm;
-        //goto reflectphcth;
-
         aParticleChange.ProposeMomentumDirection (LocalToGlobalTransform.TransformAxis(dir));
         aParticleChange.ProposePolarization (LocalToGlobalTransform.TransformAxis(pol));
         return G4VDiscreteProcess::PostStepDoIt(aTrack, aStep);
       }
     else
       {
-				//cout << "DEBUG: pol before refraction: " << pol << " " << pol.getR() << endl;
         Refract (dir, pol, norm);
-				//cout << "DEBUG: pol after refraction: " << pol << " " << pol.getR() << endl;
         aParticleChange.ProposeMomentumDirection (LocalToGlobalTransform.TransformAxis(dir));
         aParticleChange.ProposePolarization (LocalToGlobalTransform.TransformAxis(pol));
         return G4VDiscreteProcess::PostStepDoIt(aTrack, aStep);
@@ -506,8 +402,9 @@ namespace km3net
          * To do unitary vector "/sin(theta1)" is added.
          * Transmissivity, Reflectivity are related to the squared wave amplitudes, so the coefficient is squared.
          */
-        E_s2= ( pol * dir.cross( norm ) ) / _sin_theta1;
-        E_s2*= E_s2;
+        //E_s2= ( pol * dir.cross( norm ) ) / _sin_theta1;
+        //E_s2*= E_s2;
+				E_s2 = E_s*E_s;
       }
     else
       E_s2= 0.0;
@@ -820,8 +717,9 @@ const
 				 * To do unitary vector "/sin(theta1)" is added.
 				 * Transmissivity, Reflectivity are related to squared wave amplitudes, so the coefficient is squared.
 				 */
-        E_s2= ( pol.dot( dir.cross( norm )) ) / _sin_theta1;
-        E_s2*= E_s2;
+        //E_s2= ( pol.dot( dir.cross( norm )) ) / _sin_theta1;
+        //E_s2*= E_s2;
+				E_s2 = E_s*E_s;
       }
     else
       E_s2= 0.0;
@@ -890,24 +788,72 @@ const
   {
     dir -= 2.*(dir*norm)*norm;
 		//WARNING: polarization is wrong like this? we need to split on s and p, and sum with their probabilities
-    pol -= 2.*(pol*norm)*norm;
+		if (_sin_theta1*_n1/_n3>1) { //total internal reflection http://geant4.cern.ch/G4UsersDocuments/UsersGuides/PhysicsReferenceManual/html/node66.html
+			pol = -pol+2.*(pol*norm)*norm;
+		} else {
+      //p-axis definition in a way that s,p,dir is the left coordinate system
+      G4ThreeVector vec_p_r = dir.cross(vec_s);   //direction of the p-axis for a reflected photon
+			G4double theta = GeneratePolarisationTheta(ampr_s,ampr_p);
+			pol = cos(theta)*vec_s+sin(theta)*vec_p_r;               //Polarization of the transmitted photon.
+		}
   }
 
-  // Refract() method, used by DoIt()
+  // Refract() method, used by DoIt() -- Transmission
   void
   KM3PMTOpticalModel::Refract(G4ThreeVector &dir,
                               G4ThreeVector &pol,
                               G4ThreeVector &norm)
   {
-    //dir = (_cos_theta3 - _cos_theta1*_n1/_n3)*norm + (_n1/_n3)*dir;
-		//fixed by Vladimir on 18/09/2017 following https://www.flipcode.com/archives/reflection_transmission.pdf
-		//indeed, the formula in this pdf is wrong!
-		//in (25) dir_parallel = dir - dir_perpendicular = dir - (-cos(theta1)*norm) if the theta1 is the angle between normal and inverted direction
 		dir = (-fabs(_cos_theta3) + _cos_theta1*_n1/_n3)*norm + (_n1/_n3)*dir;
 		//WARNING: polarization is wrong like this? we need to split on s and p, and sum with their probabilities
-    pol = (pol-(pol*dir)*dir);
-    pol/=pol.r ();
+
+		//p-axis definition in a way that s,p,dir is the left coordinate system
+		G4ThreeVector vec_p_t = dir.cross(vec_s);   //direction of the p-axis for a transmitted photon
+		G4double theta = GeneratePolarisationTheta(ampt_s,ampt_p);
+		pol = cos(theta)*vec_s+sin(theta)*vec_p_t;               //Polarization of the transmitted photon.
   }
+
+	/*
+	 * The polarization of the photon after reflectino/transmission gets different phase shifts, defined by complex parts of amps. 
+	 * Geant4 keeps no phase tracking. Only polarization vector (assuming it is linear).
+   *
+	 * Electric field in general case is an elliptical polarisation:
+	 * - Ep = E_p*exp(i(kz-wt))
+	 * - Es = E_s*exp(..+ phaseshift)
+	 * - For a single photon Ep and Es have probability sense (Ep2+Es2=1)
+   *
+	 * The idea is to simulate elliptical polarization of the reflected/transmitted photon with a randomly generated linear polarized photon.
+	 * The idea explanation:
+	 * - At generation point we can simulate elliptical polarization as many waves with linear polarizations and all phases phase=(-Pi, Pi). 
+	 * - If each photon has linear polarization with Ep = Ap*exp(i*phase), Es=As*exp(i*phi+phaseshift), then average energy brought by photons is <Ep2+Es2> = Ep2+Es2
+	 * - Simulating wave with Ep = Ap*exp(i*phase), Es=As*exp(i*phi+phaseshift) is equivalent to simulate one photon with probability p=Ep2+Es2 and polarisation in the direction of atan(As*cos(phase)/Ap*cos(phase+phaseshift)).
+	 * - All probabilities at the next interaction point (Transmission, Reflection etc) dependent on the polarization (so Ep2 and Es2) conserves!
+	 * - Simulating many photons for one original photon and averaging the quantities is equivalent to simulating on photon (the averaging will be done by running Geant4 with many original phot
+	 *   Needed:
+	 *   E_p, E_s  - global
+	 *   amp_s, amp_p - in the func arguments (for transmitter/reflected)
+ons).
+   */
+
+	G4double KM3PMTOpticalModel::GeneratePolarisationTheta(G4complex amp_s, G4complex amp_p)
+  {
+
+      G4double samp = E_s*abs(amp_s); 
+      G4double pamp = E_p*abs(amp_p);
+
+      //Phase difference between p and s wave, on which p wave should be shifted, the absolute phase (phase0) is not accounted.
+      //Es = As*exp(i(kz-wt+phase0))
+      //Ep = Ap*eexp(i(kz-wt+phase0+phaseshift)
+      G4double phaseshift = arg(amp_p*conj(amp_s));   //phase difference between p and s wave, on which p wave should be shifted, the absolute phase is not accounted
+
+      G4double rphase, Rand, Prob;
+      do {
+        rphase = G4UniformRand()*twopi;
+        Prob = pow(pamp*cos(rphase+phaseshift),2)+pow(samp*cos(rphase),2.);  //Ep2+Es2
+        Rand = G4UniformRand();                                                  //Rand in (0,1) and Rand < Prob for the photon means that it's probability is proportional to Ep2+Es2
+      } while (Rand > Prob);
+      return atan2(pamp*cos(rphase+phaseshift),samp*cos(rphase));  //polar angle in (s,p) of the generated polarisation angle
+	}
 
   bool KM3PMTOpticalModel::IsAPhotocathode (const G4Step* STEP)
   {

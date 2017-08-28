@@ -133,7 +133,9 @@ namespace km3net
     G4complex ft21_p;
     G4complex ft23_p;
 
-		G4complex ampr_s, ampr_p, ampt_s, ampt_p;
+		G4ThreeVector vec_s;      ////unitary vector pointing to the senkrecht/perpendicular polarisation, "q/|q|" in http://geant4.cern.ch/G4UsersDocuments/UsersGuides/PhysicsReferenceManual/html/node66.html
+		G4double E_s, E_p;        //polarisation projections on s and p directions
+		G4complex ampr_s, ampr_p, ampt_s, ampt_p;  //Fresnel amplitudes - needed to be global for calling in Reflect/Refract to propagate to polarization calculation
 
     G4complex fdelta;
     G4complex ftheta1;
@@ -172,6 +174,7 @@ namespace km3net
     double GetTotalMeanPhotonAbsorbtionDepth(const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm) const;
     void Reflect(G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm);
     void Refract(G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm);
+		G4double GeneratePolarisationTheta(G4complex amp_s,G4complex amp_p);
     unsigned char CheckDetection (const G4ThreeVector&);
 
     bool ElectronProductionCalculator (const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm)
