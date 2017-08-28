@@ -80,6 +80,7 @@ namespace km3net
     G4MaterialPropertyVector * _thickness_photocathode; // function of Z (mm)
     G4MaterialPropertyVector * _angular_efficiency;
     G4MaterialPropertyVector * _angular_efficiency_err;
+		G4MaterialPropertyVector * _threestepprob_photocathode;
     // interior solid (vacuum), also initialized in constructor,
     // so we don't have to look it up each time DoIt is called.
     // Note it is implicitly assumed everywhere in the code that this solid
@@ -110,6 +111,7 @@ namespace km3net
     G4double _n1;            // index of refraction of curr. medium at wavelength
     G4double _n2, _k2;       // index of refraction of photocathode at wavelength
     G4double _n3;            // index of refraction of far side at wavelength
+		G4double _threestepprob; // missing probability (conversion from valence to conductive band, energy loss, escape probability)
     G4double _efficiency;    // efficiency of photocathode at wavelength (?)
     G4double _thickness;     // thickness of photocathode at current position
     G4double _cos_theta1;    // cosine of angle of incidence
@@ -130,6 +132,8 @@ namespace km3net
     G4complex ft12_p;
     G4complex ft21_p;
     G4complex ft23_p;
+
+		G4complex ampr_s, ampr_p, ampt_s, ampt_p;
 
     G4complex fdelta;
     G4complex ftheta1;

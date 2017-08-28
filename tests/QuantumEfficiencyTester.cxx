@@ -20,6 +20,30 @@ using namespace km3net;
 
 KM3PMTOpticalModelTester theModelTester;
 
+
+void PPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
+{
+  pol.set (0, 1, 0);
+  pol=dir.cross (pol);
+  pol = pol.unit();
+}
+void SPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
+{
+  pol.set (1, 0, 0);
+  pol=dir.cross (pol);
+  pol = pol.unit();
+}
+
+void MixedPolarization (const G4ThreeVector &dir, G4ThreeVector &pol)
+{
+    G4ThreeVector pols, polp;
+    SPolarization(dir,pols);
+    PPolarization(dir,polp);
+    pol = (pols+polp);
+    pol = pol.unit();
+
+}
+
 bool PercentTo (float percent, TH1* histo, float value, int binmin, int binmax)
 {
 	/*
@@ -51,6 +75,7 @@ char CompareQuantumEfficiency (float wavelength)
   G4ThreeVector insideDirection(0,0,-1);
   G4ThreeVector dir(0,0,-1);
   G4ThreeVector pol(0,0,1);
+	MixedPolarization(dir,pol);
 
   float compareit (theModelTester.GetEfficiency(wavelength) -
                    theModelTester.GetQuantumEfficiency (pos,dir,pol, norm, insideDirection, wavelength));
@@ -123,10 +148,17 @@ int main (int argc, char** argv)
 	theModelTester.SetElectronProductionLevel(3);
 	theModelTester.SetElectronAbsorptionLength (1000*nm);
 
-  if (precision != 0) theModelTester.fElPrecision = 25./(precision*precision);  //this is the number of simulated e-, precision is aprrox 5~sigma and sigma is sqrt(N_e)
-  else theModelTester.fElPrecision = 0;
+  if (precision != 0) theModelTester.fElPrecision = 25./(precision*precision);  //this is the number of simulated e-, precision is approx 5~sigma and sigma is sqrt(N_e)
+  else {
+		cout << "setting theModelTester.fElPrecision to 0" << endl;
+		theModelTester.fElPrecision = 0;
+		precision = 0.01;   //calibration precision arbitrary set to 1% 
+	}
+
 
   TerminalHistogram *measuredQE =0;TerminalHistogram *simulatedQE =0; TerminalHistogram *ratioQE = 0;
+
+	TGraph *gratioQE;
 
 
 /*
@@ -164,9 +196,12 @@ int main (int argc, char** argv)
 
 	TerminalHistogram* simulatedQE_prev = NULL;
 
+	cout << "starting calc " << endl;
+
 	bool continueopt;
 
   do {
+		cout << "DEBUG: inside the loop. " << endl;
 		continueopt = false;
 		/*
     if (measuredQE != 0)
@@ -181,10 +216,15 @@ int main (int argc, char** argv)
     measuredQE  = (TerminalHistogram*)(theModelTester.GetTObject ("MaterialEfficiencyHisto"));
     simulatedQE = (TerminalHistogram*)(theModelTester.GetTObject ("QuantumEfficiencyHisto"));
 
+		cout << "DEBUG: Materials are read." << endl;
+
 
 		if (!theModelTester.InTObject("RatioQE")) {
 			ratioQE = new TerminalHistogram ("RatioQE","QE sim / QE meas;nm",measuredQE->GetNbinsX(),measuredQE->GetXaxis()->GetXmin(),measuredQE->GetXaxis()->GetXmax());
 			//ratioQE = (TerminalHistogram*)measuredQE->Clone("RatioQE");
+			gratioQE = new TGraph();
+			gratioQE->SetName("gRatioQE");
+			theModelTester.PutTObject("gRatioQE",gratioQE);
 			theModelTester.PutTObject("RatioQE",ratioQE);
     }
     else
@@ -206,13 +246,15 @@ int main (int argc, char** argv)
         float energy = twopi*hbarc/wavelength/nm;
         float newKindex = 0;
 
+				if (newbin != 0) gratioQE->SetPoint(gratioQE->GetN(),energy/eV,1./newbin);
+
         newKindex = oldKindexVector.Value (energy);
 
         if (wavelength > 250 && newbin != 0)
           {
-            if (newbin < 1-5./sqrt(theModelTester.fElPrecision)){
+            if (newbin < 1-precision){
 							if (simulatedQE_prev!=0) {
-								if (simulatedQE->GetBinContent (bin) / simulatedQE_prev->GetBinContent (bin) <= 1 + 1./sqrt(theModelTester.fGlassThickness)) {    //stop to increase (stays stable at the level of 1 sigma fluctuation)
+								if (simulatedQE->GetBinContent (bin) / simulatedQE_prev->GetBinContent (bin) <= 1. + precision/5.) {    //stop to increase (stays stable at the level of 1 sigma fluctuation)
 									cout << "*";  //means that optimisation stopped since QE started to decrease
 								} else {
 									newKindex*=step;
@@ -225,7 +267,7 @@ int main (int argc, char** argv)
 								continueopt = true;
 							}
 						}
-						if (newbin > 1+5./sqrt(theModelTester.fElPrecision)) {
+						if (newbin > 1+precision) {
 							//cout << "check: " << newKindex << " " << newbin << " " << newKindex*(1/newbin) << endl;
 							cout << "!"; //means that optimisation is going on
               newKindex = newKindex*(1/newbin);
@@ -247,7 +289,7 @@ int main (int argc, char** argv)
 		simulatedQE_prev=(TerminalHistogram*)simulatedQE->Clone();
 
 	}while (continueopt && calibrateQE);
-	if (calibrateQE) cout << "precision " << 5./sqrt(theModelTester.fElPrecision)  << " reached" << endl;
+	if (calibrateQE) cout << "precision " << precision  << " reached" << endl;
 	theModelTester.SaveTreesAndHistograms ("testerout.root");
   // ( !PercentTo (0.02,measuredQE, 1, 11, 42) && calibrateQE);
   //}while ( !PercentTo (0.02,measuredQE, 1.1, 11, 42) && calibrateQE);

@@ -455,7 +455,7 @@ namespace km3net
     G4LogicalVolume* logicVaccum =
       new G4LogicalVolume(SolidInternalPMT,
                           materialsManager->GetMaterial("PMTVacuum"), thePTP.Prefix + "VaccumOfPmt");
-													//materialsManager->GetMaterial("Vacuum"), thePTP.Prefix + "NOREFLEXVaccumInPmt");
+													//materialsManager->GetMaterial("PMTVacuum"), thePTP.Prefix + "NOREFLEXVaccumInPmt");
     G4LogicalVolume* logicDinods =
       new G4LogicalVolume(solidDinods,
                           materialsManager->GetMaterial("AbsorberPVC"), thePTP.Prefix + "Dinods");

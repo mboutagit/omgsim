@@ -109,16 +109,16 @@ namespace km3net
     for (float wavelength = 250; wavelength < 750 ; wavelength+=10)
       {
         float energy = twopi*hbarc/wavelength/nm;
-        //cout << "filling " << wavelength << " " << fOpticalModel._kindex_photocathode->Value (energy) << endl;
+        cout << "filling " << wavelength << " " << fOpticalModel._kindex_photocathode->Value (energy) << endl;
         hKindex->Fill (wavelength, fOpticalModel._kindex_photocathode->Value (energy));
         hQEmeas->Fill (wavelength, GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength));
 
         //if (wavelength == 450) cout << wavelength << " " << GetQuantumEfficiency (pos,dir,pol,norm,insidedir,wavelength) << endl;
       }
-    ///cout << "current KINDEX" << endl;
-    //hKindex->Draw ();
-    //cout << "QE calculated from current KINDEX" << endl;
-    //hQEmeas->Draw ();
+    cout << "current KINDEX" << endl;
+    hKindex->Draw ();
+    cout << "QE calculated from current KINDEX" << endl;
+    hQEmeas->Draw ();
   }
 
   float KM3PMTOpticalModelTester::QECheck (double wavelength, double theta)
@@ -142,11 +142,13 @@ namespace km3net
   float KM3PMTOpticalModelTester::GetQuantumEfficiency (G4ThreeVector &pos, G4ThreeVector &dir, G4ThreeVector &pol, G4ThreeVector &norm, G4ThreeVector &insidedir, float wavelength)
   {
     float Abs1,Ref1,Abs2,Ref2,Elexit1=0, Elexit2=0;
+		cout << "1" << endl;
     TestCalculateCoefficients (pos, dir, pol, norm, wavelength*nm);
-
+		cout << "2" << endl;
     if (fElPrecision != 0) {
       for (int elescape=0; elescape<fElPrecision; elescape++)
         {
+					//cout << "elloop" << endl;
           TestElectronProduction (dir, pol, norm, insidedir);
           if (fOpticalModel.fEPD.HasBeenGenerated)
             Elexit1++;
@@ -155,11 +157,14 @@ namespace km3net
     } else {
       Elexit1 = CalcElectronProductionProb(dir, pol, norm, insidedir);
     }
+		cout << "out" << endl;
 
     Abs1=fOpticalModel.fA_t;
 
-		//cout << "debug " << GetGlassAbsorption (wavelength, fGlassThickness) << " " << Abs1 << " " << Elexit1 << endl;
+		cout << "debug " << GetGlassAbsorption (wavelength, fGlassThickness) << " " << Abs1 << " " << Elexit1 << endl;
 
+		//let's introduce a fixes probability factor QE = Oleg's measurement should be equal to calculated from  K-index Motta and thickness from Hamamatsu (30 nm) @ 450 nm
+	  //*0.83);
     return (GetGlassAbsorption (wavelength, fGlassThickness)*(Abs1*Elexit1));      //direct absorption, forward electron escape
 
   }

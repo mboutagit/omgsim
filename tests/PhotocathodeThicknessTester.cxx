@@ -157,9 +157,9 @@ int main (int argc, char** argv)
         optqe = qe;
         optcathodethick = cathodethick;
       }
-      cout << wavelength << " " << cathodethick << " " << qe << endl;
+      //cout << wavelength << " " << cathodethick << " " << qe << endl;
     }
-    //cout << wavelength << " " << optcathodethick << " " << optqe << endl;
+    cout << wavelength << " " << optcathodethick << " " << optqe << endl;
   }
 	return 0;
 

@@ -89,6 +89,7 @@ namespace km3net
 							string vac = thePostPV->GetName ();
 							if (vac.find("NOREFLEXVaccumInPmt")!=std::string::npos)
 								{
+									cout << "killed in vacuum" << endl;
 									fTrack->SetTrackStatus(fStopAndKill);
 									return;
 								}
@@ -144,7 +145,7 @@ namespace km3net
 						cout << vac << endl;
 						if (vac.find("NOREFLEXVaccumInPmt")!=std::string::npos)
               {
-								cout << "killed" << endl;
+								cout << "killed in vacuum" << endl;
                 fTrack->SetTrackStatus(fStopAndKill);
                 return;
               }
@@ -253,7 +254,7 @@ namespace km3net
 
     double eta_teta_err=_angular_efficiency_err->Value(teta/3*2.1);
 
-    //cout << eta_teta  << ' ' << eta_teta_err << ' ' << teta/3*2.1*180/M_PI<<' ' << eta_E << endl;
+    //cout << "DEBUG: eta_teta " << eta_teta  << " +- " << eta_teta_err << ' ' << teta/3*2.1 <<' ' << endl;
 
     double rndm = G4UniformRand();
     if(rndm < eta_teta*(1.-eta_teta_err))
