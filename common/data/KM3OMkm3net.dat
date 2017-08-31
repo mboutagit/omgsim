@@ -9,8 +9,8 @@ DistSpherePMT    = 2;
 CheckOverlaps = false;
 
 AreThereReflectors = true;
-ReflectorAngle     = 45.;
-ReflectorDistGlass = 3.5;
+ReflectorAngle     = 48.;
+ReflectorDistGlass = 0.;
 ReflectorThickness = 12;
 
 /*GelMaterial = "IdealWater";
