@@ -131,20 +131,14 @@ namespace km3net
     G4String prestepName=thePreOriginalPV->GetLogicalVolume ()->GetName();
     G4String poststepName=thePostOriginalPV->GetLogicalVolume ()->GetName();
 
-    if (KM3PMTOpticalModel::IsAPhotocathode (thePreOriginalPV, thePostOriginalPV))
+    if (KM3PMTOpticalModel::IsAPhotocathode (thePreOriginalPV, thePostOriginalPV) &&
+        fTrack->GetDefinition()->GetParticleName() == "e-" &&
+        info->GetOriginalParticleType () == "opticalphoton" &&
+        poststepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos)
       {
-        if (fTrack->GetDefinition()->GetParticleName() == "e-" &&
-            info->GetOriginalParticleType () == "opticalphoton")
-          {
-            if (poststepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos)
-              KM3AnalysisManager::getIt()->AddPhotoTubeEntranceInfo (fStep);
-          }
+        KM3AnalysisManager::getIt()->AddPhotoTubeEntranceInfo (fStep);
       }
-
-    if (fTrack->GetDefinition()->GetParticleName() != "e-" ||
-        !info->HasAMother () || thePreOriginalPV == 0 || thePostOriginalPV == 0 ||
-        !KM3PMTOpticalModel::IsAPhotocathode (thePreOriginalPV, thePostOriginalPV) ||
-        info->GetOriginalParticleType() != "opticalphoton")
+    else //bravo
       return;
 
     G4LogicalSurface* Surface =

@@ -114,6 +114,10 @@ namespace km3net
       return;
 
     fPMID=STEP->GetPostStepPoint ()->GetTouchable ()->GetCopyNumber (1);
+    int depth = STEP->GetPostStepPoint ()->GetTouchable ()->GetHistoryDepth ();
+    cout << "the used is 1" << STEP->GetPostStepPoint ()->GetTouchable ()->GetVolume (1)->GetName() << " with copy number " << STEP->GetPostStepPoint ()->GetTouchable ()->GetCopyNumber (1) << endl;
+    for (int i=0;i<=depth;i++)
+      cout <<i << " " << STEP->GetPostStepPoint ()->GetTouchable ()->GetVolume (i)->GetName() << " with copy number " << STEP->GetPostStepPoint ()->GetTouchable ()->GetCopyNumber (i) << endl;
 
     const G4StepPoint* prestep = STEP->GetPreStepPoint();
     const G4ThreeVector& globalPoint = prestep->GetPosition();
