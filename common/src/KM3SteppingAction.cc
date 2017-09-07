@@ -74,28 +74,28 @@ namespace km3net
     G4StepPoint* prestep = fStep->GetPreStepPoint();
     G4StepPoint* poststep = fStep->GetPostStepPoint();
 
-		G4VPhysicalVolume* thePrePV=fStep->GetPreStepPoint()->GetPhysicalVolume();
-		G4VPhysicalVolume* thePostPV=fStep->GetPostStepPoint()->GetPhysicalVolume();
+    G4VPhysicalVolume* thePrePV=fStep->GetPreStepPoint()->GetPhysicalVolume();
+    G4VPhysicalVolume* thePostPV=fStep->GetPostStepPoint()->GetPhysicalVolume();
 
 
-		//moved here temporally by Vladimir since it seems that for the photons "info" is not created
-		if (thePostPV != NULL) {
-			//if (KM3PMTOpticalModel::IsAPhotocathode (fStep))   //VLA: It never enters here!!!!
-				{
-					if (fTrack->GetDefinition()->GetParticleType() == "opticalphoton" &&
-							fTrack->GetTrackStatus() != fStopAndKill)
-						{
-							//if (thePostPV->GetName ()=="NOREFLEXVaccumInPmt")
-							string vac = thePostPV->GetName ();
-							if (vac.find("NOREFLEXVaccumInPmt")!=std::string::npos)
-								{
-									cout << "killed in vacuum" << endl;
-									fTrack->SetTrackStatus(fStopAndKill);
-									return;
-								}
-						}
-				}
-		}
+    //moved here temporally by Vladimir since it seems that for the photons "info" is not created
+    if (thePostPV != NULL) {
+      //if (KM3PMTOpticalModel::IsAPhotocathode (fStep))   //VLA: It never enters here!!!!
+      {
+        if (fTrack->GetDefinition()->GetParticleType() == "opticalphoton" &&
+            fTrack->GetTrackStatus() != fStopAndKill)
+          {
+            //if (thePostPV->GetName ()=="NOREFLEXVaccumInPmt")
+            string vac = thePostPV->GetName ();
+            if (vac.find("NOREFLEXVaccumInPmt")!=std::string::npos)
+              {
+                cout << "killed in vacuum" << endl;
+                fTrack->SetTrackStatus(fStopAndKill);
+                return;
+              }
+          }
+      }
+    }
 
 
 
@@ -104,14 +104,14 @@ namespace km3net
     if (info == 0) return;
 
     //#ifdef G4ANALYSIS_USE
-/*
-    G4Track* fTrack = fStep->GetTrack();
-    G4StepPoint* prestep = fStep->GetPreStepPoint();
-    G4StepPoint* poststep = fStep->GetPostStepPoint();
-*/
+    /*
+      G4Track* fTrack = fStep->GetTrack();
+      G4StepPoint* prestep = fStep->GetPreStepPoint();
+      G4StepPoint* poststep = fStep->GetPostStepPoint();
+    */
 
 
-    if (fTrack->GetGlobalTime ()>1e10)
+    if (fTrack->GetGlobalTime ()>1e10) //remove K40 lifetime
       {
         fTrack->SetGlobalTime (fTrack->GetLocalTime ());
         prestep->SetGlobalTime(prestep->GetLocalTime());
@@ -127,28 +127,17 @@ namespace km3net
 
     if (!thePrePV || !thePostPV || !thePreOriginalPV || !thePostOriginalPV )
       return;
+
     G4String prestepName=thePreOriginalPV->GetLogicalVolume ()->GetName();
     G4String poststepName=thePostOriginalPV->GetLogicalVolume ()->GetName();
 
-    //TODO check if it is relevent   VLA: It never enters here!!!!
-    if (KM3PMTOpticalModel::IsAPhotocathode (fStep))
+    if (KM3PMTOpticalModel::IsAPhotocathode (thePreOriginalPV, thePostOriginalPV))
       {
-
-        if (fTrack->GetDefinition()->GetParticleType() == "opticalphoton" &&
-            fTrack->GetTrackStatus() != fStopAndKill)
+        if (fTrack->GetDefinition()->GetParticleName() == "e-" &&
+            info->GetOriginalParticleType () == "opticalphoton")
           {
             if (poststepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos)
               KM3AnalysisManager::getIt()->AddPhotoTubeEntranceInfo (fStep);
-
-            //if (thePostPV->GetName ()=="NOREFLEXVaccumInPmt")
-						string vac = thePostPV->GetName ();
-						cout << vac << endl;
-						if (vac.find("NOREFLEXVaccumInPmt")!=std::string::npos)
-              {
-								cout << "killed in vacuum" << endl;
-                fTrack->SetTrackStatus(fStopAndKill);
-                return;
-              }
           }
       }
 
@@ -172,7 +161,7 @@ namespace km3net
                             ->GetMaterialPropertiesTable()) )
       return;
 
-		fTrack->SetTrackStatus(fStopAndKill); // kill e-
+    fTrack->SetTrackStatus(fStopAndKill); // kill e-
 
     fEnergy = info->GetOriginalEnergy ();
 

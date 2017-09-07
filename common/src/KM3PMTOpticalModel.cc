@@ -186,7 +186,7 @@ namespace km3net
       {
         return false;
       }
-//VLA
+    //VLA
     _threestepprob_photocathode= aMaterialPropertiesTable->GetProperty("THREESTEPPROB");
     if (_threestepprob_photocathode == NULL)
       {
@@ -209,7 +209,7 @@ namespace km3net
     _n2= _rindex_photocathode->Value( _photon_energy );
     _k2= _kindex_photocathode->Value( _photon_energy );
     _n3= _rindexPost->Value(_photon_energy);
-		_threestepprob = _threestepprob_photocathode->Value( _photon_energy );
+    _threestepprob = _threestepprob_photocathode->Value( _photon_energy );
     _efficiency= _efficiency_photocathode->Value( _photon_energy );
     if (_verbosity > 0) cout << "efficienza " << _efficiency << endl;
   }
@@ -328,22 +328,22 @@ namespace km3net
 
     // set _thickness and _cos_theta1
     _thickness=  _thickness_photocathode->Value( pos.theta() );
-		//"-" added below by Vladimir this is a non-critical bug (fixed)
+    //"-" added below by Vladimir this is a non-critical bug (fixed)
     _cos_theta1 = -dir.cosTheta (norm);
 
     CalculateCoefficients ();
 
-		vec_s = dir.cross( norm ) / _sin_theta1;  //unitary vector pointing to the senkrecht/perpendicular polarisation, "q/|q|" in http://geant4.cern.ch/G4UsersDocuments/UsersGuides/PhysicsReferenceManual/html/node66.html
-		E_s = pol.dot(vec_s);  //perpendicular polarisation component amplitude (with sign!) in CalculateTotalCoefficients this can be used as Es2=E_s*E_s
+    vec_s = dir.cross( norm ) / _sin_theta1;  //unitary vector pointing to the senkrecht/perpendicular polarisation, "q/|q|" in http://geant4.cern.ch/G4UsersDocuments/UsersGuides/PhysicsReferenceManual/html/node66.html
+    E_s = pol.dot(vec_s);  //perpendicular polarisation component amplitude (with sign!) in CalculateTotalCoefficients this can be used as Es2=E_s*E_s
 
-		CalculateTotalCoefficients (norm, pol, dir);
-		//cout << "DEBUG: probs abs " << fA_t << " reflection "  << fR_t << " transmission " << fT_t << endl;
+    CalculateTotalCoefficients (norm, pol, dir);
+    //cout << "DEBUG: probs abs " << fA_t << " reflection "  << fR_t << " transmission " << fT_t << endl;
 
-		//The next is not needed for total internal reflection... hover the calculation in the block if faster that the check, probably... and the same calculation for the check is done in "Reflect"
-		//if (_sin_theta1*_n1/_n3>1) { 
-			//p-axis definition in a way that s,p,dir is the left coordinate system, so for incoming photon vec_p = dir.cross(vec_s)
-			E_p = pol.dot(dir.cross(vec_s)); //Parallel polarisation component amplitude (with sign!)
-		//}
+    //The next is not needed for total internal reflection... hover the calculation in the block if faster that the check, probably... and the same calculation for the check is done in "Reflect"
+    //if (_sin_theta1*_n1/_n3>1) {
+    //p-axis definition in a way that s,p,dir is the left coordinate system, so for incoming photon vec_p = dir.cross(vec_s)
+    E_p = pol.dot(dir.cross(vec_s)); //Parallel polarisation component amplitude (with sign!)
+    //}
 
     if ( G4UniformRand() < fA_t)
       {
@@ -404,7 +404,7 @@ namespace km3net
          */
         //E_s2= ( pol * dir.cross( norm ) ) / _sin_theta1;
         //E_s2*= E_s2;
-				E_s2 = E_s*E_s;
+        E_s2 = E_s*E_s;
       }
     else
       E_s2= 0.0;
@@ -490,12 +490,12 @@ namespace km3net
 
   bool KM3PMTOpticalModel::ElectronProductionCalculator (const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm)
 #ifndef ENABLE_TESTING
-const
+    const
 #endif
   {
-		//cout << "DEBUG: trying to produce electron" << endl;
+    //cout << "DEBUG: trying to produce electron" << endl;
 
-		if (_k2 == 0) return false; //if the photocathode area is not absorbing, no electrons can escape
+    if (_k2 == 0) return false; //if the photocathode area is not absorbing, no electrons can escape
 
     if (_electronProductionLevel == 0 || fInsideDirection.r() == 0)
       {
@@ -513,43 +513,43 @@ const
                           (Rand > PhotonDepth && !GoingInside));
 
 # ifdef ENABLE_TESTING
-		if (GoingInside) fEPD.MeanEscapeProb  = PhotonDepth;
-		else fEPD.MeanEscapeProb  = 1.-PhotonDepth;
+    if (GoingInside) fEPD.MeanEscapeProb  = PhotonDepth;
+    else fEPD.MeanEscapeProb  = 1.-PhotonDepth;
 # endif
 
     //considering the survival probability of the photo-electron in the photocathode linked to its distance to the vacuum (exponential distribution)
-		/*
-		 * WARNING: Technically this realisation is not correct to use with the previous block where rand is compared with MeanPhotonAbsorbtionDepth.
-		 * Instead, the photon absorption point should be generated following full photon depth distribution.
-		 * This is, however, computationally heavy (since no analytical solution was not found 
-		 * for the inverse function of the cumulative distibution of the photon absorption depth.
-		 * We expect, however, the effect of the electron absroption is negligible 
-		 * (we expect, that the absorption lenght >> electron random walk in the photocathode).
-		 */
-		//This block was commented out since we adopted spline probability that should include absorption probability and escape probabiliy (3 step model)
-		/*
-    if (HasGoneInside)
+    /*
+     * WARNING: Technically this realisation is not correct to use with the previous block where rand is compared with MeanPhotonAbsorbtionDepth.
+     * Instead, the photon absorption point should be generated following full photon depth distribution.
+     * This is, however, computationally heavy (since no analytical solution was not found
+     * for the inverse function of the cumulative distibution of the photon absorption depth.
+     * We expect, however, the effect of the electron absroption is negligible
+     * (we expect, that the absorption lenght >> electron random walk in the photocathode).
+     */
+    //This block was commented out since we adopted spline probability that should include absorption probability and escape probabiliy (3 step model)
+    /*
+      if (HasGoneInside)
       {
-        double LocalPhotocathodeThickness = _thickness;
-        double Electron2Vacuum;
-        if (GoingInside) Electron2Vacuum  = (1-PhotonDepth)*LocalPhotocathodeThickness;
-        else Electron2Vacuum  = PhotonDepth*LocalPhotocathodeThickness;
+      double LocalPhotocathodeThickness = _thickness;
+      double Electron2Vacuum;
+      if (GoingInside) Electron2Vacuum  = (1-PhotonDepth)*LocalPhotocathodeThickness;
+      else Electron2Vacuum  = PhotonDepth*LocalPhotocathodeThickness;
 
-        double probMax = exp(-Electron2Vacuum/fElectronAttenuationLength);
-        Rand = G4UniformRand ();
+      double probMax = exp(-Electron2Vacuum/fElectronAttenuationLength);
+      Rand = G4UniformRand ();
 
-        return Rand < probMax;
+      return Rand < probMax;
       }
-		*/
+    */
 
-		//Missing probability for the 3 step model. The spline is obtained comparing QE meaurements with the simulation witout this probability
+    //Missing probability for the 3 step model. The spline is obtained comparing QE meaurements with the simulation witout this probability
 # ifdef ENABLE_TESTING
-		fEPD.MeanEscapeProb *= _threestepprob;
+    fEPD.MeanEscapeProb *= _threestepprob;
 # endif
-		if (HasGoneInside) {
-			Rand = G4UniformRand ();
-			return Rand < _threestepprob;
-		}
+    if (HasGoneInside) {
+      Rand = G4UniformRand ();
+      return Rand < _threestepprob;
+    }
 
     return false;
 
@@ -650,9 +650,9 @@ const
 
     ampr=fr12_s+(ft12_s*ft21_s*fr23_s*exp(2.*zi*fdelta))/(1.+fr12_s*fr23_s*exp(2.*zi*fdelta));
     ampt=(ft12_s*ft23_s*exp(zi*fdelta))/(1.+fr12_s*fr23_s*exp(2.*zi*fdelta));
-		//needed for polarisation calc
-		ampr_s = ampr;
-		ampt_s = ampt;
+    //needed for polarisation calc
+    ampr_s = ampr;
+    ampt_s = ampt;
 
     //And finally...!
     fR_s=real(ampr*conj(ampr));
@@ -675,9 +675,9 @@ const
 
     ampr=fr12_p+(ft12_p*ft21_p*fr23_p*exp(2.*zi*fdelta))/(1.+fr12_p*fr23_p*exp(2.*zi*fdelta));
     ampt=(ft12_p*ft23_p*exp(zi*fdelta))/(1.+fr12_p*fr23_p*exp(2.*zi*fdelta));
-		//needed for polarisation calc
-		ampr_p = ampr;
-		ampt_p = ampt;
+    //needed for polarisation calc
+    ampr_p = ampr;
+    ampt_p = ampt;
 
     //And finally...!
     fR_p=real(ampr*conj(ampr));
@@ -710,16 +710,16 @@ const
     // Calculate Transmission, Reflection, and Absorption coefficients
     if ( _sin_theta1 > 0.0 )
       {
-				/*
-				 * Decomposition of the plane wave to s and p polarisations.
-				 * s-polarisation perpendicular to the plane "incident photon (dir), surface normal vector (norm)".
-				 * So, it is parallel to the vector dirXnorm. Normalisation of this vector is sin(theta1) (vectorial multiplication).
-				 * To do unitary vector "/sin(theta1)" is added.
-				 * Transmissivity, Reflectivity are related to squared wave amplitudes, so the coefficient is squared.
-				 */
+        /*
+         * Decomposition of the plane wave to s and p polarisations.
+         * s-polarisation perpendicular to the plane "incident photon (dir), surface normal vector (norm)".
+         * So, it is parallel to the vector dirXnorm. Normalisation of this vector is sin(theta1) (vectorial multiplication).
+         * To do unitary vector "/sin(theta1)" is added.
+         * Transmissivity, Reflectivity are related to squared wave amplitudes, so the coefficient is squared.
+         */
         //E_s2= ( pol.dot( dir.cross( norm )) ) / _sin_theta1;
         //E_s2*= E_s2;
-				E_s2 = E_s*E_s;
+        E_s2 = E_s*E_s;
       }
     else
       E_s2= 0.0;
@@ -787,15 +787,15 @@ const
                               G4ThreeVector &norm)
   {
     dir -= 2.*(dir*norm)*norm;
-		//WARNING: polarization is wrong like this? we need to split on s and p, and sum with their probabilities
-		if (_sin_theta1*_n1/_n3>1) { //total internal reflection http://geant4.cern.ch/G4UsersDocuments/UsersGuides/PhysicsReferenceManual/html/node66.html
-			pol = -pol+2.*(pol*norm)*norm;
-		} else {
+    //WARNING: polarization is wrong like this? we need to split on s and p, and sum with their probabilities
+    if (_sin_theta1*_n1/_n3>1) { //total internal reflection http://geant4.cern.ch/G4UsersDocuments/UsersGuides/PhysicsReferenceManual/html/node66.html
+      pol = -pol+2.*(pol*norm)*norm;
+    } else {
       //p-axis definition in a way that s,p,dir is the left coordinate system
       G4ThreeVector vec_p_r = dir.cross(vec_s);   //direction of the p-axis for a reflected photon
-			G4double theta = GeneratePolarisationTheta(ampr_s,ampr_p);
-			pol = cos(theta)*vec_s+sin(theta)*vec_p_r;               //Polarization of the transmitted photon.
-		}
+      G4double theta = GeneratePolarisationTheta(ampr_s,ampr_p);
+      pol = cos(theta)*vec_s+sin(theta)*vec_p_r;               //Polarization of the transmitted photon.
+    }
   }
 
   // Refract() method, used by DoIt() -- Transmission
@@ -804,56 +804,56 @@ const
                               G4ThreeVector &pol,
                               G4ThreeVector &norm)
   {
-		dir = (-fabs(_cos_theta3) + _cos_theta1*_n1/_n3)*norm + (_n1/_n3)*dir;
-		//WARNING: polarization is wrong like this? we need to split on s and p, and sum with their probabilities
+    dir = (-fabs(_cos_theta3) + _cos_theta1*_n1/_n3)*norm + (_n1/_n3)*dir;
+    //WARNING: polarization is wrong like this? we need to split on s and p, and sum with their probabilities
 
-		//p-axis definition in a way that s,p,dir is the left coordinate system
-		G4ThreeVector vec_p_t = dir.cross(vec_s);   //direction of the p-axis for a transmitted photon
-		G4double theta = GeneratePolarisationTheta(ampt_s,ampt_p);
-		pol = cos(theta)*vec_s+sin(theta)*vec_p_t;               //Polarization of the transmitted photon.
+    //p-axis definition in a way that s,p,dir is the left coordinate system
+    G4ThreeVector vec_p_t = dir.cross(vec_s);   //direction of the p-axis for a transmitted photon
+    G4double theta = GeneratePolarisationTheta(ampt_s,ampt_p);
+    pol = cos(theta)*vec_s+sin(theta)*vec_p_t;               //Polarization of the transmitted photon.
   }
 
-	/*
-	 * The polarization of the photon after reflectino/transmission gets different phase shifts, defined by complex parts of amps. 
-	 * Geant4 keeps no phase tracking. Only polarization vector (assuming it is linear).
+  /*
+   * The polarization of the photon after reflectino/transmission gets different phase shifts, defined by complex parts of amps.
+   * Geant4 keeps no phase tracking. Only polarization vector (assuming it is linear).
    *
-	 * Electric field in general case is an elliptical polarisation:
-	 * - Ep = E_p*exp(i(kz-wt))
-	 * - Es = E_s*exp(..+ phaseshift)
-	 * - For a single photon Ep and Es have probability sense (Ep2+Es2=1)
+   * Electric field in general case is an elliptical polarisation:
+   * - Ep = E_p*exp(i(kz-wt))
+   * - Es = E_s*exp(..+ phaseshift)
+   * - For a single photon Ep and Es have probability sense (Ep2+Es2=1)
    *
-	 * The idea is to simulate elliptical polarization of the reflected/transmitted photon with a randomly generated linear polarized photon.
-	 * The idea explanation:
-	 * - At generation point we can simulate elliptical polarization as many waves with linear polarizations and all phases phase=(-Pi, Pi). 
-	 * - If each photon has linear polarization with Ep = Ap*exp(i*phase), Es=As*exp(i*phi+phaseshift), then average energy brought by photons is <Ep2+Es2> = Ep2+Es2
-	 * - Simulating wave with Ep = Ap*exp(i*phase), Es=As*exp(i*phi+phaseshift) is equivalent to simulate one photon with probability p=Ep2+Es2 and polarisation in the direction of atan(As*cos(phase)/Ap*cos(phase+phaseshift)).
-	 * - All probabilities at the next interaction point (Transmission, Reflection etc) dependent on the polarization (so Ep2 and Es2) conserves!
-	 * - Simulating many photons for one original photon and averaging the quantities is equivalent to simulating on photon (the averaging will be done by running Geant4 with many original phot
-	 *   Needed:
-	 *   E_p, E_s  - global
-	 *   amp_s, amp_p - in the func arguments (for transmitter/reflected)
-ons).
-   */
+   * The idea is to simulate elliptical polarization of the reflected/transmitted photon with a randomly generated linear polarized photon.
+   * The idea explanation:
+   * - At generation point we can simulate elliptical polarization as many waves with linear polarizations and all phases phase=(-Pi, Pi).
+   * - If each photon has linear polarization with Ep = Ap*exp(i*phase), Es=As*exp(i*phi+phaseshift), then average energy brought by photons is <Ep2+Es2> = Ep2+Es2
+   * - Simulating wave with Ep = Ap*exp(i*phase), Es=As*exp(i*phi+phaseshift) is equivalent to simulate one photon with probability p=Ep2+Es2 and polarisation in the direction of atan(As*cos(phase)/Ap*cos(phase+phaseshift)).
+   * - All probabilities at the next interaction point (Transmission, Reflection etc) dependent on the polarization (so Ep2 and Es2) conserves!
+   * - Simulating many photons for one original photon and averaging the quantities is equivalent to simulating on photon (the averaging will be done by running Geant4 with many original phot
+   *   Needed:
+   *   E_p, E_s  - global
+   *   amp_s, amp_p - in the func arguments (for transmitter/reflected)
+   ons).
+  */
 
-	G4double KM3PMTOpticalModel::GeneratePolarisationTheta(G4complex amp_s, G4complex amp_p)
+  G4double KM3PMTOpticalModel::GeneratePolarisationTheta(G4complex amp_s, G4complex amp_p)
   {
 
-      G4double samp = E_s*abs(amp_s); 
-      G4double pamp = E_p*abs(amp_p);
+    G4double samp = E_s*abs(amp_s);
+    G4double pamp = E_p*abs(amp_p);
 
-      //Phase difference between p and s wave, on which p wave should be shifted, the absolute phase (phase0) is not accounted.
-      //Es = As*exp(i(kz-wt+phase0))
-      //Ep = Ap*eexp(i(kz-wt+phase0+phaseshift)
-      G4double phaseshift = arg(amp_p*conj(amp_s));   //phase difference between p and s wave, on which p wave should be shifted, the absolute phase is not accounted
+    //Phase difference between p and s wave, on which p wave should be shifted, the absolute phase (phase0) is not accounted.
+    //Es = As*exp(i(kz-wt+phase0))
+    //Ep = Ap*eexp(i(kz-wt+phase0+phaseshift)
+    G4double phaseshift = arg(amp_p*conj(amp_s));   //phase difference between p and s wave, on which p wave should be shifted, the absolute phase is not accounted
 
-      G4double rphase, Rand, Prob;
-      do {
-        rphase = G4UniformRand()*twopi;
-        Prob = pow(pamp*cos(rphase+phaseshift),2)+pow(samp*cos(rphase),2.);  //Ep2+Es2
-        Rand = G4UniformRand();                                                  //Rand in (0,1) and Rand < Prob for the photon means that it's probability is proportional to Ep2+Es2
-      } while (Rand > Prob);
-      return atan2(pamp*cos(rphase+phaseshift),samp*cos(rphase));  //polar angle in (s,p) of the generated polarisation angle
-	}
+    G4double rphase, Rand, Prob;
+    do {
+      rphase = G4UniformRand()*twopi;
+      Prob = pow(pamp*cos(rphase+phaseshift),2)+pow(samp*cos(rphase),2.);  //Ep2+Es2
+      Rand = G4UniformRand();                                                  //Rand in (0,1) and Rand < Prob for the photon means that it's probability is proportional to Ep2+Es2
+    } while (Rand > Prob);
+    return atan2(pamp*cos(rphase+phaseshift),samp*cos(rphase));  //polar angle in (s,p) of the generated polarisation angle
+  }
 
   bool KM3PMTOpticalModel::IsAPhotocathode (const G4Step* STEP)
   {
@@ -910,7 +910,7 @@ ons).
       {
         return false;
       }
-//VLA
+    //VLA
     if (propTable->GetProperty("THREESTEPPROB") == NULL)
       {
         return false;

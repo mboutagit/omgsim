@@ -372,7 +372,9 @@ namespace km3net
     new G4PVPlacement(0, G4ThreeVector(), logicMushroom, ThePTP.Prefix + "Mushroom", logicPlasticCore, false, 0, ThePTP.CheckOverlaps);
 
     logicGelCore->SetVisAttributes (fsilver);
-    logicPlasticCore->SetVisAttributes (fsilver);
+    G4VisAttributes *att=new G4VisAttributes(logicPlasticCore->GetVisAttributes ());
+    att->SetForceLineSegmentsPerCircle (1);
+    logicPlasticCore->SetVisAttributes (att);
 
 
     G4OpticalSurface* ConeMirror_opsurf = materialsManager->GetOpticalSurface ("MirrorAluminium");
