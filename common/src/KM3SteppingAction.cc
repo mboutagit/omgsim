@@ -89,7 +89,6 @@ namespace km3net
             string vac = thePostPV->GetName ();
             if (vac.find("NOREFLEXVaccumInPmt")!=std::string::npos)
               {
-                cout << "killed in vacuum" << endl;
                 fTrack->SetTrackStatus(fStopAndKill);
                 return;
               }
@@ -134,7 +133,7 @@ namespace km3net
     if (KM3PMTOpticalModel::IsAPhotocathode (thePreOriginalPV, thePostOriginalPV) &&
         fTrack->GetDefinition()->GetParticleName() == "e-" &&
         info->GetOriginalParticleType () == "opticalphoton" &&
-        poststepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos)
+        prestepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos)
       {
         KM3AnalysisManager::getIt()->AddPhotoTubeEntranceInfo (fStep);
       }
@@ -227,7 +226,6 @@ namespace km3net
   //adding angular efficiency here
   unsigned char KM3SteppingAction::CheckDetection(const G4ThreeVector& localPoint)
   {
-
     unsigned char detectedGamma = 4;
     //double eta_E = 0.5; //probability that the electron goes in or out the photocathode
     //from the photonis, can be improved. The abs length is ~30nm, the electron is produced at about an half of the photocathode.

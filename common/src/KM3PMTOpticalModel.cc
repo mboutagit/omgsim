@@ -284,7 +284,6 @@ namespace km3net
 
 
   }
-
   G4VParticleChange* KM3PMTOpticalModel::DoPhotocathodeInteraction (const G4Track &aTrack, const G4Step &aStep)
   {
 
