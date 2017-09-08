@@ -133,7 +133,17 @@ namespace km3net
     if (KM3PMTOpticalModel::IsAPhotocathode (thePreOriginalPV, thePostOriginalPV) &&
         fTrack->GetDefinition()->GetParticleName() == "e-" &&
         info->GetOriginalParticleType () == "opticalphoton" &&
-        prestepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos)
+        //prestepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos) 
+        /*
+         * VK: this does not work for the photons going back from the PMT vacuume (if first they were transmitted inside PMT
+         * So, this should be used:
+         * prestepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos) || prestepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos)  
+         * We decided not to do this check anyway (since it is enough that parent photon was in the photocathode.
+         * Instead, we add below the check that the electron should be in the PMT sensitive area (PMT vacuum).
+         */
+        fStep->GetPreStepPoint()->GetMaterial()->
+                        GetMaterialPropertiesTable ()->ConstPropertyExists("electronSensitive"))
+
       {
         KM3AnalysisManager::getIt()->AddPhotoTubeEntranceInfo (fStep);
       }
