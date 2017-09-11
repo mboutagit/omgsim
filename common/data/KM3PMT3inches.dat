@@ -8,7 +8,11 @@ BulbRadiusMax  = 40.;
 BulbHeight     = 20.;
 ConeHeight     = 10.;
 TubeRadius     = 25.45;
-GlassThickness = 3.;
+
+//According to measurement performed by Carlos Mollo (Naples) the part containg photoacathode has 2.4 mm thickness. 
+//The rest changes from 1.3-1.7m. Also this values change for different PMTs
+GlassThickness = 2.5;
+
 TotalPMTHeight = 96.;
 //TubeExt_Height-TotalPMTHeight/2-DinodsHeight = (25.3494)*2-48-12+2(Vladimir: I've added 2 by eye... it was needed for some reason)
 DinodsPos      = -7.3012;

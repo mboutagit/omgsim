@@ -1,6 +1,4 @@
 #Glass created by Vladimir
-#points from 280-330 were removed from original PMTGlass (so just linear interpolation should be used there)
-#
 CREATE PMTGlass_R12199_02
 
 DENSITY 2.23
@@ -18,6 +16,8 @@ COMPONENTS
 CREATE
 
 PROPERTY ABSLENGTH
+#taken from OM glass from ANTARES OM paper, points from 280-330 were removed from original PMTGlass (so just linear interpolation should be used there)
+#todo - try with icecube borosilicate glass scan (for vitrovex)
 OPTION wavelength
 250 0
 260 0
@@ -58,6 +58,7 @@ OPTION wavelength
 670 530
 680 530
 690 530
+#
 #2.034 530
 #2.068 540
 #2.103 580

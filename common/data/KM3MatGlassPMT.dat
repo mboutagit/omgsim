@@ -165,4 +165,4 @@ OPTION constant
 
 PROPERTY sigmaalpha
 OPTION constant
-0.50
+0.05
