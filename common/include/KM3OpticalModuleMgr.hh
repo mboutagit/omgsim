@@ -62,9 +62,9 @@ namespace km3net
       double AbsorberOvertakeAngle;
       double SphereRmin;
 
-      //The materials to get, "classic" big PM by default
+      //The materials to get, "classic" OM with big PM by default
       std::string GlassMaterial = "AntaresGlass";
-      std::string GelMaterial   = "AntaresOpticalGel";
+      std::string GelMaterial   = "WackerSilGel612_A100B67";
       std::string AbsMaterial   = "AbsorberPVC";
 
 

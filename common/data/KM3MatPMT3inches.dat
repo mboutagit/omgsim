@@ -17,7 +17,7 @@ COMPONENTS
 CREATE
 #WARNING, be sure to do not break it with it, normaly used only for the "old" simulation way
 
-PROPERTY  EFFICIENCY  # data is from Hamamatsu catalog, curve 400K
+PROPERTY  EFFICIENCY  # data is from Erlangen measurements
 # UNITS  nm\E 1
 OPTION wavelength
 #"284 0" & "725.5 0" points are added by V. Kulikovskiy since Geant4 extrapolation uses the last point value

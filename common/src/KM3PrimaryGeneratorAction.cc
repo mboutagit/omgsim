@@ -88,6 +88,7 @@ namespace km3net
     if (fGunType == 1)
       {
         particleGun->GeneratePrimaryVertex(anEvent);
+        //cout << "Event generated at: " << anEvent->GetPrimaryVertex()->GetPosition().mag() << endl;
         return;
       }
 

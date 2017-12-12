@@ -7,7 +7,7 @@ SphereRmax       = 215.9;
 //Nautilus "6500m depth sphere" has 14 mm thinckness
 GlassThickness   = 14;
 DistSpherePMT    = 2;
-GelMaterial = "NEMOOpticalGel";
+GelMaterial = "WackerSilGel612_A100B67";
 
 CheckOverlaps = false;
 

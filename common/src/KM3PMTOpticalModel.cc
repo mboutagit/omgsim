@@ -621,7 +621,7 @@ namespace km3net
     ftheta2=carcsin((_n1/_n2comp)*_sin_theta1);//complex angle in the photocathode
     //D.2 case of 1603.02720
     if (imag(_n2comp*cos(ftheta2)) < 0) {
-      cout << "WARNING: the branch was wrongly chosen for theta2. Adjusting it." << endl;
+      //cout << "WARNING: the branch was wrongly chosen for theta2. Adjusting it." << endl;
       ftheta2 = twopi/2. - ftheta2;
     }
     ftheta3=carcsin((_n2comp/_n3)*sin(ftheta2));//angle of refraction into vacuum
