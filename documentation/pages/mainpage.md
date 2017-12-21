@@ -3,7 +3,9 @@ OMGsim documentation {#mainpage}
 
 ##Introduction
 
-OMGsim software ojective is to provide an easy to use simulation of the neutrino telescopes in general, ANTARES, NEMO and KM3NeT in particular. An important attention as been given to the simulation of the photocathode, using a dedicated thin layer and complex index simulation.
+OMGsim software objective is to provide an easy to use simulation of the neutrino telescopes in general, 
+ANTARES, NEMO and KM3NeT in particular. An important attention as been given to the simulation of the 
+photocathode, using a dedicated thin layer and complex index simulation.
 
 ##Features
 This simulation will allow you to:
@@ -20,19 +22,21 @@ This simulation will allow you to:
      -...
      
 ##Description
-- KM3NeT DOM Simulation [here](md_documentation_pages_DOM.html)
-- Calibration [here](md_documentation_pages_calibration.html)
-- Version changes [here](md_documentation_pages_changes.html)
-- Visualization [here] (md_documentation_pages_visualization.html)
+- KM3NeT DOM Simulation [here](md_documentation_pages_DOM.html).
+- Calibration [here](md_documentation_pages_calibration.html).
+- Version changes [here](md_documentation_pages_changes.html).
+- Visualization [here] (md_documentation_pages_visualization.html).
 
 
 ##Installation
 
-###warning
-This tool use some c++11 great features as auto declaration and in-header attribute initialization. It is strongly advised to have a newer than 4.6 gcc version (even more recent advised).
+###Warning
+This tool use some c++11 great features as auto declaration and in-header attribute initialization. 
+It is strongly advised to have a newer than 4.6 gcc version (even more recent advised).
 
 ###Dependencies
-The dependencies are already satisfied at the CC de Lyon. So, except if you strongly want to install it on your own computer, goes directly to the how to at Lyon.
+The dependencies are already satisfied at the CC de Lyon. 
+So, except if you strongly want to install it on your own computer, goes directly to the how to at Lyon.
 
 - GCC >= 4.7
 - cmake >= 3.2
@@ -98,6 +102,7 @@ On Mac type:
     brew install doxygen  
 
 ###Complete the documentation
-To complete the documentation you have to observe some doxygen rules while you are comenting the .h code described [here](http://www.stack.nl/~dimitri/doxygen/manual/docblocks.html).
+To complete the documentation you have to know some doxygen rules while you are comenting the .h code 
+described [here](http://www.stack.nl/~dimitri/doxygen/manual/docblocks.html).
 
 The easiest way could be to use the [doxymacs](https://github.com/emacsattic/doxymacs) script for emacs.
