@@ -51,7 +51,12 @@ Compile with:
   doxygen documentation/config.dox
   cd documentation/latex
   make
-Open 
+Open (on linux):
   firefox documentation/html/index.html
   gnome-open latex/refman.pdf
-  
+Open (on Mac):
+  open documentation/html/index.html 
+  open latex/refman.pdf
+
+Note that the Doxygen needs to be installed. On MacOS type:
+  brew install doxygen  

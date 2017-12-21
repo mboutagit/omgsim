@@ -23,6 +23,7 @@ This simulation will allow you to:
 - KM3NeT DOM Simulation [here](md_documentation_pages_DOM.html)
 - Calibration [here](md_documentation_pages_calibration.html)
 - Version changes [here](md_documentation_pages_changes.html)
+- Visualization [here] (md_documentation_pages_visualization.html)
 
 
 ##Installation
@@ -70,18 +71,32 @@ A quick start howto is given [here](md_documentation_pages_quickstart.html)
 
 ##Documentation
 ###Build the documentation
-To build the documentation, in the trunk folder you have to do
+The doxygen documentation is provided in the folder documentation.
+It is easier to use it at your local machine.
 
-    cd trunk
-    doxygen resources/config.dox
-Open documentation/html/index.html
+Compile with:
 
-For PDF documentation:
-
+    cd [your checkout path]/trunk
+    doxygen documentation/config.dox
     cd documentation/latex
     make
-Open latex/refman.pdf
-    
+
+Open (on linux):
+
+    firefox documentation/html/index.html
+    gnome-open latex/refman.pdf
+
+Open (on Mac):
+
+    open documentation/html/index.html 
+    open latex/refman.pdf
+
+Note that the Doxygen needs to be installed. 
+
+On Mac type:
+
+    brew install doxygen  
+
 ###Complete the documentation
 To complete the documentation you have to observe some doxygen rules while you are comenting the .h code described [here](http://www.stack.nl/~dimitri/doxygen/manual/docblocks.html).
 
