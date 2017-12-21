@@ -31,7 +31,7 @@ This simulation will allow you to:
 ##Installation
 
 ###Warning
-This tool use some c++11 great features as auto declaration and in-header attribute initialization. 
+This tool uses some c++11 great features as auto declaration and in-header attribute initialization. 
 It is strongly advised to have a newer than 4.6 gcc version (even more recent advised).
 
 ###Dependencies
@@ -71,7 +71,7 @@ Then the binaries from the compilation will be in the folder "build".
 The "programs" folder (might) contains the typical use of the tool, the test one contains some experimental programs.
 
 ##Quick start
-A quick start howto is given [here](md_documentation_pages_quickstart.html)
+A quick start howto is given [here](md_documentation_pages_quickstart.html).
 
 ##Documentation
 ###Build the documentation
@@ -85,7 +85,7 @@ Compile with:
     cd documentation/latex
     make
 
-Open (on linux):
+Open (on Linux):
 
     firefox documentation/html/index.html
     gnome-open latex/refman.pdf
