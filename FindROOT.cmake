@@ -9,6 +9,8 @@
 
 # F.Uhlig@gsi.de (fairroot.gsi.de)
 
+# Corrected by V. Kulikovskiy on 18/01/2018 ROOT_INCLUDE_DIR -> ROOT_INCLUDE_DIRS since on modern installation (ROOT with cmake) the name was changed
+
 
 MESSAGE(STATUS "Looking for Root...")
 
@@ -106,7 +108,7 @@ IF (ROOT_FOUND)
   EXEC_PROGRAM( ${ROOT_CONFIG_EXECUTABLE}
     ARGS "--incdir" 
     OUTPUT_VARIABLE root_headers )
-  SET(ROOT_INCLUDE_DIR ${root_headers})
+  SET(ROOT_INCLUDE_DIRS ${root_headers})
       # CACHE INTERNAL "")
 
   # ask root-config for the library varaibles
@@ -122,10 +124,10 @@ IF (ROOT_FOUND)
   SET(ROOT_LIBRARIES ${root_flags})
 
   # Make variables changeble to the advanced user
-  MARK_AS_ADVANCED( ROOT_LIBRARY_DIR ROOT_INCLUDE_DIR ROOT_DEFINITIONS)
+  MARK_AS_ADVANCED( ROOT_LIBRARY_DIR ROOT_INCLUDE_DIRS ROOT_DEFINITIONS)
 
   # Set ROOT_INCLUDES
-  SET( ROOT_INCLUDES ${ROOT_INCLUDE_DIR})
+  SET( ROOT_INCLUDES ${ROOT_INCLUDE_DIRS})
 
   SET(LD_LIBRARY_PATH ${LD_LIBRARY_PATH} ${ROOT_LIBRARY_DIR})
 

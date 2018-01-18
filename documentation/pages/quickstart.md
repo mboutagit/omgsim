@@ -1,15 +1,15 @@
 Quick start
 -----------
 
-This short tutorial aims to introduce the using of KM3RTSim with some few examples.
+This short tutorial aims to introduce the using of OMGSim with some few examples.
 
 
 ##Make it run! now!
 
 The base installation contains basics script and material/OM/PMT/detector descriptions and can be run immediatly.
-The binary is KM3Sim:
+The binary is OMGsim:
 
-    ./KM3Sim [-s] [-fa] ../script/mac/vis-xpTest.mac [outputfile.root]
+    ./OMGsim [-s] [-fa] ../script/mac/vis-xpTest.mac [outputfile.root]
 
 The -s is to open a GEANT4 session, unavoidable to draw the simulation (to be specified with your favorite way in the .mac file). The -fa is to get a "full analysis", just meaning that the output file will contain the full detected events (vertex, energy, impact point...) instead of the simplified events summary only (typicaly number of detected events)
 

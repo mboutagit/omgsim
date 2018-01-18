@@ -47,9 +47,6 @@ So, except if you strongly want to install it on your own computer, goes directl
 - Doxygen > 1.8
 
 ###Download and compilation
-###Warning
-It is never easy to compile this stuff, we met some unuderstood ld problem under Ubuntu, so we advice you to compile it at lyon
-
 ###Lyon prerequises
 The environment was prepared at Lyon to allow an easy installation. You just to source a couple of files:
 
@@ -67,6 +64,81 @@ then to compile it
     cd build
     cmake .. -DCMAKE_CXX_COMPILER=g++-510 -DCMAKE_C_COMPILER=gcc-510
     make
+
+### Ubuntu installation
+
+#### Geant4 Installation
+Some libraries are needed:
+
+	sudo apt install cmake libexpat1-dev libxerces-c-dev qt4-dev-tools libxmu-dev libmotif-dev
+
+Download and compile. Get geant4.10.01.p03.tar.gz from the Gean4 webside, untar. After:
+	
+	tar xf geant4.10.01.p03.tar.gz
+	mkdir geant4.10.01.p03-build
+	cd geant4.10.01.p03-build
+	cmake -DCMAKE_INSTALL_PREFIX=../geant4.10.01.p03-install ../geant4.10.01.p03 -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_XM=ON
+	make install
+
+To configure in graphical mode
+
+	sudo apt install cmake-curses-gui
+	ccmake  -DCMAKE_INSTALL_PREFIX=../geant4.10.01.p03-install ../geant4.10.01.p03 -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_XM=ON
+
+Add to your ~/.bashrc:
+
+	cd ~/Soft/geant4.10.01.p03-install/bin/
+	. geant4.sh
+	cd -
+	cd ~/Soft/geant4.10.01.p03-build/
+	source geant4make.sh
+	cd -
+
+#### ROOT installation
+
+	sudo apt-get install git dpkg-dev cmake g++ gcc binutils libx11-dev libxpm-dev \
+	libxft-dev libxext-dev
+
+Also install optionally:
+
+	sudo apt-get install gfortran libssl-dev libpcre3-dev \
+	xlibmesa-glu-dev libglew1.5-dev libftgl-dev \
+	libmysqlclient-dev libfftw3-dev libcfitsio-dev \
+	graphviz-dev libavahi-compat-libdnssd-dev \
+	libldap2-dev python-dev libxml2-dev libkrb5-dev \
+	libgsl0-dev libqt4-dev
+
+Download and compile ROOT:
+
+	wget https://root.cern.ch/download/root_v6.10.08.source.tar.gz
+	tar xf root_v6.10.08.source.tar.gz
+	mkdir root_v6.10.08_build
+	cd root_v6.10.08_build
+	cmake ..
+	make -j4
+
+Add to your ~/.bashrc
+
+	cd ~/Soft/root-6.10.08_build
+	. bin/thisroot.sh
+	cd -
+
+#### OMGsim
+OMGsim needs libconfig++
+
+	sudo apt install libconfig++8-dev
+
+Install SVN:
+
+	sudo apt install subversion
+
+Download the code and compile:
+
+	svn co http://svn.km3net.de/simulation/OMGsim/trunk/
+	mkdir build
+	cd build
+	cmake ..
+	make -j4
 
 Then the binaries from the compilation will be in the folder "build".
 The "programs" folder (might) contains the typical use of the tool, the test one contains some experimental programs.
