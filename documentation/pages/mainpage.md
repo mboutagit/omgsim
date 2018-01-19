@@ -86,7 +86,7 @@ then to compile it
     cmake .. -DCMAKE_CXX_COMPILER=g++-510 -DCMAKE_C_COMPILER=gcc-510
     make
 
-### MacOS installation (not fully tested)
+### MacOS installation (WARNING - compillation fails at OMGsim linking).
 Installation of missing packages is faster with HomeBrew packet manager.
 Install it with:
 
@@ -147,6 +147,9 @@ Download the code and compile:
     cd build
     cmake ..
     make -j4
+
+WARNING - compillation fails at OMGsim linking actually. It seems linker search for some Geant4 lib64 libraries 
+and can't find them. Geant4 examples compile well, however... the solution is still not found.
 
 ### Ubuntu installation
 
