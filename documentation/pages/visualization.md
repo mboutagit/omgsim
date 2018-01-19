@@ -78,6 +78,10 @@ On Mac:
 
     brew cask install java
 
+ON Ubuntu:
+
+    sudo apt-get install default-jre default-jdk
+
 Download and run latest JAS3 studio from http://jas.freehep.org/jas3/ -> Download -> jas-assembly-XXX-distribution.zip
 
     wget http://java.freehep.org/maven2/org/freehep/jas-assembly/3.2.7/jas-assembly-3.2.7-distribution.zip

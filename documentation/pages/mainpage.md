@@ -48,15 +48,36 @@ So, except if you strongly want to install it on your own computer, goes directl
 
 ###Download and compilation
 ###Lyon prerequises
-The environment was prepared at Lyon to allow an easy installation. You just to source a couple of files:
+The environment was prepared at Lyon to allow an easy installation. You need to set the following variables in your .bashrc or .zshrc:
 
-    for i in /sps/km3net/users/hugon/sw/env/*sh; do source $i; done
+    #Geant4
+    cd /sps/km3net/users/hugon/sw/geant4.10.01.p01/bin
+    source geant4.sh
+    cd -
 
-This tool can be obtained via svn, using the command
+    #Libconfig
+    export LIBCONFIG_ROOT=/sps/km3net/users/hugon/sw/libconfig-1.5
+    export LD_LIBRARY_PATH=${LIBCONFIG_ROOT}/lib:${LD_LIBRARY_PATH}
+    export CPLUS_INCLUDE_PATH=${LIBCONFIG_ROOT}/include/
 
-    (Outdated) svn co --username km3net --password Capopassero http://svnserver.ge.infn.it/KM3Sim
+    #GCC 5.10
+    export LD_LIBRARY_PATH=/sps/km3net/users/hugon/sw/gcc/gcc-5.1.0/lib:/sps/km3net/users/hugon/sw/gcc/gcc-5.1.0/lib64:${LD_LIBRARY_PATH}
+    export PATH=/sps/km3net/users/hugon/sw/gcc/gcc-5.1.0/bin:${PATH}
+
+    #ROOT
+    export ROOTSYS=/usr/local/root/v5.34.23
+    cd ${ROOTSYS}
+    source bin/thisroot.sh
+    cd -
+
+This OMGsim can be obtained via svn, using the command
+
     svn co http://svn.km3net.de/simulation/OMGsim/trunk/    (std login km3net and pwd are available)
     cd trunk
+
+For the very old versions old SVN can be used 
+
+    (Outdated) svn co --username km3net --password Capopassero http://svnserver.ge.infn.it/KM3Sim
 
 then to compile it
 
@@ -65,80 +86,140 @@ then to compile it
     cmake .. -DCMAKE_CXX_COMPILER=g++-510 -DCMAKE_C_COMPILER=gcc-510
     make
 
+### MacOS installation (not fully tested)
+Installation of missing packages is faster with HomeBrew packet manager.
+Install it with:
+
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+Install Motif libraries:
+
+    brew install motif
+
+If cmake is missing, one could install it with HomeBrew as well:
+
+    brew install cmake
+
+Download and compile geant4.10.01.p03:
+    
+    wget http://geant4.web.cern.ch/geant4/support/source/geant4.10.01.p03.tar.gz
+    tar xf geant4.10.01.p03.tar.gz
+    mkdir geant4.10.01.p03-build
+    cd geant4.10.01.p03-build
+    cmake -DCMAKE_INSTALL_PREFIX=../geant4.10.01.p03-install ../geant4.10.01.p03 -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_XM=ON
+    make -j4 install
+
+Add to your ~/.bashrc  or ~/.zshrc
+
+    cd ~/Soft/geant4.10.01.p03-install/bin/
+    source geant4.sh
+    cd -
+
+#### Root installation
+Download and compile ROOT:
+
+    wget https://root.cern.ch/download/root_v6.10.08.source.tar.gz
+    tar xf root_v6.10.08.source.tar.gz
+    mkdir root_v6.10.08_build
+    cd root_v6.10.08_build
+    cmake ..
+    make -j4
+
+Add to your ~/.bashrc
+
+    cd ~/Soft/root-6.10.08_build
+    souce bin/thisroot.sh
+    cd -
+
+#### OMGsim
+OMGsim needs libconfig++
+
+    brew install libconfig
+
+Install SVN:
+
+    brew install subversion
+
+Download the code and compile:
+
+    svn co http://svn.km3net.de/simulation/OMGsim/trunk/
+    mkdir build
+    cd build
+    cmake ..
+    make -j4
+
 ### Ubuntu installation
 
 #### Geant4 Installation
 Some libraries are needed:
 
-	sudo apt install cmake libexpat1-dev libxerces-c-dev qt4-dev-tools libxmu-dev libmotif-dev
+    sudo apt install cmake libexpat1-dev libxerces-c-dev qt4-dev-tools libxmu-dev libmotif-dev
 
-Download and compile. Get geant4.10.01.p03.tar.gz from the Gean4 webside, untar. After:
-	
-	tar xf geant4.10.01.p03.tar.gz
-	mkdir geant4.10.01.p03-build
-	cd geant4.10.01.p03-build
-	cmake -DCMAKE_INSTALL_PREFIX=../geant4.10.01.p03-install ../geant4.10.01.p03 -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_XM=ON
-	make install
+Download and compile geant4.10.01.p03:
+    
+    wget http://geant4.web.cern.ch/geant4/support/source/geant4.10.01.p03.tar.gz
+    tar xf geant4.10.01.p03.tar.gz
+    mkdir geant4.10.01.p03-build
+    cd geant4.10.01.p03-build
+    cmake -DCMAKE_INSTALL_PREFIX=../geant4.10.01.p03-install ../geant4.10.01.p03 -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_XM=ON
+    make -j4 install
 
 To configure in graphical mode
 
-	sudo apt install cmake-curses-gui
-	ccmake  -DCMAKE_INSTALL_PREFIX=../geant4.10.01.p03-install ../geant4.10.01.p03 -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_XM=ON
+    sudo apt install cmake-curses-gui
+    ccmake  -DCMAKE_INSTALL_PREFIX=../geant4.10.01.p03-install ../geant4.10.01.p03 -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_XM=ON
 
 Add to your ~/.bashrc:
 
-	cd ~/Soft/geant4.10.01.p03-install/bin/
-	. geant4.sh
-	cd -
-	cd ~/Soft/geant4.10.01.p03-build/
-	source geant4make.sh
-	cd -
+    cd ~/Soft/geant4.10.01.p03-install/bin/
+    source geant4.sh
+    cd -
 
 #### ROOT installation
 
-	sudo apt-get install git dpkg-dev cmake g++ gcc binutils libx11-dev libxpm-dev \
-	libxft-dev libxext-dev
+    sudo apt-get install git dpkg-dev cmake g++ gcc binutils libx11-dev libxpm-dev \
+    libxft-dev libxext-dev
 
 Also install optionally:
 
-	sudo apt-get install gfortran libssl-dev libpcre3-dev \
-	xlibmesa-glu-dev libglew1.5-dev libftgl-dev \
-	libmysqlclient-dev libfftw3-dev libcfitsio-dev \
-	graphviz-dev libavahi-compat-libdnssd-dev \
-	libldap2-dev python-dev libxml2-dev libkrb5-dev \
-	libgsl0-dev libqt4-dev
+    sudo apt-get install gfortran libssl-dev libpcre3-dev \
+    xlibmesa-glu-dev libglew1.5-dev libftgl-dev \
+    libmysqlclient-dev libfftw3-dev libcfitsio-dev \
+    graphviz-dev libavahi-compat-libdnssd-dev \
+    libldap2-dev python-dev libxml2-dev libkrb5-dev \
+    libgsl0-dev libqt4-dev
 
 Download and compile ROOT:
 
-	wget https://root.cern.ch/download/root_v6.10.08.source.tar.gz
-	tar xf root_v6.10.08.source.tar.gz
-	mkdir root_v6.10.08_build
-	cd root_v6.10.08_build
-	cmake ..
-	make -j4
+    wget https://root.cern.ch/download/root_v6.10.08.source.tar.gz
+    tar xf root_v6.10.08.source.tar.gz
+    mkdir root_v6.10.08_build
+    cd root_v6.10.08_build
+    cmake ..
+    make -j4
 
 Add to your ~/.bashrc
 
-	cd ~/Soft/root-6.10.08_build
-	. bin/thisroot.sh
-	cd -
+    cd ~/Soft/root-6.10.08_build
+    source bin/thisroot.sh
+    cd -
 
 #### OMGsim
 OMGsim needs libconfig++
 
-	sudo apt install libconfig++8-dev
+    sudo apt install libconfig++8-dev
 
 Install SVN:
 
-	sudo apt install subversion
+    sudo apt install subversion
 
 Download the code and compile:
 
-	svn co http://svn.km3net.de/simulation/OMGsim/trunk/
-	mkdir build
-	cd build
-	cmake ..
-	make -j4
+    svn co http://svn.km3net.de/simulation/OMGsim/trunk/
+    mkdir build
+    cd build
+    cmake ..
+    make -j4
 
 Then the binaries from the compilation will be in the folder "build".
 The "programs" folder (might) contains the typical use of the tool, the test one contains some experimental programs.
