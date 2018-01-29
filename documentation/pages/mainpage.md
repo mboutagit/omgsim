@@ -86,7 +86,7 @@ then to compile it
     cmake .. -DCMAKE_CXX_COMPILER=g++-510 -DCMAKE_C_COMPILER=gcc-510
     make
 
-### MacOS installation (WARNING - compillation fails at OMGsim linking).
+### MacOS installation 
 Installation of missing packages is faster with HomeBrew packet manager.
 Install it with:
 
@@ -139,6 +139,11 @@ OMGsim needs libconfig++
 Install SVN:
 
     brew install subversion
+
+On Mac X11 libraries are installed not in common location. Add to your ~/.bashrc or ~/.zshrc (and reload
+the environment): 
+
+    export X11HEADERS_PATH=/opt/X11/include
 
 Download the code and compile:
 

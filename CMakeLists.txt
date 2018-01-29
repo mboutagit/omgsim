@@ -11,15 +11,20 @@ else()
     set(LIBSUFFIX "")
 endif()
 
-# (2)
-find_package(Geant4 REQUIRED ui_all vis_all)
-#find_package(ROOT REQUIRED)   #this does not work for old ROOT installations on Lyon
-include (FindROOT.cmake)       #We stored locally this file slighly modified to search ROOT
+# (2) ROOT
+find_package(ROOT)   #this does not work for old ROOT installations on Lyon
+if (DEFINED ROOT_FOUND)
+    message("ROOT found using find_package method. Using in cmake ${ROOT_USE_FILE}")
+    include(${ROOT_USE_FILE})
+else (DEFINED ROOT_FOUND)
+    message("ROOT was not found using find_package method... falling back to FindROOT.cmake")
+    include (FindROOT.cmake)       #We stored locally this file slighly modified to search ROOT
+endif(DEFINED ROOT_FOUND)
 message("We use ROOT_INCLUDE_DIRS which is ${ROOT_INCLUDE_DIRS} instead ROOT_INCLUDE_DIR is ${ROOT_INCLUDE_DIR}") 
 
-# (3)
+# (3) Geant4
+find_package(Geant4 REQUIRED ui_all vis_all)
 include(${Geant4_USE_FILE})
-include_directories (${ROOT_INCLUDE_DIRS})
 
 # (4) organize project libraries
 file(GLOB sources */src/[a-zA-Z0-9]*.cc)
@@ -49,6 +54,10 @@ file(GLOB TESTS tests/[a-zA-Z1-9]*.cxx)
 
 #bstr: set include directories, include ROOT
 include_directories (${headers} ${ROOT_INCLUDE_DIRS})
+if (DEFINED ENV{X11HEADERS_PATH})
+    include_directories (/opt/X11/include)
+endif()
+    
 
 #bstr: set the libonfig include dir and create linker command. /usr/local is already included,
 #bstr: so there is no need to include this separately. Otherwise specify below
@@ -92,10 +101,6 @@ endif(${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER "4.8.9")
 
 SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__CXX_MIN_VERSION=${CMAKE_CXX_COMPILER_VERSION}")
 
-
-message (${CMAKE_CXX_FLAGS})
-
-
 # (6) finish with all the binaries
 if(ENABLE_TESTING)
   add_library(omgsim SHARED ${sources} ${test_sources})
@@ -108,11 +113,12 @@ if(ENABLE_TESTING)
     #target_link_libraries(${aprogname} omgsim)
   endforeach ()
 else(ENABLE_TESTING)
-  add_library(omgsim SHARED ${sources})
+  add_library(libOMG SHARED ${sources})
+  target_link_libraries(libOMG ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB})
   foreach(aprog IN LISTS PROGRAMS)
     get_filename_component(aprogname ${aprog} NAME_WE)
     add_executable(${aprogname} ${aprog} ${headers})
-    target_link_libraries(${aprogname} omgsim ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB})
+    target_link_libraries(${aprogname} libOMG ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB})
   endforeach ()
 endif(ENABLE_TESTING)
 
