@@ -153,9 +153,6 @@ Download the code and compile:
     cmake ..
     make -j4
 
-WARNING - compillation fails at OMGsim linking actually. It seems linker search for some Geant4 lib64 libraries 
-and can't find them. Geant4 examples compile well, however... the solution is still not found.
-
 ### Ubuntu installation
 
 #### Geant4 Installation
