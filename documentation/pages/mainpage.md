@@ -47,7 +47,8 @@ So, except if you strongly want to install it on your own computer, goes directl
 - Doxygen > 1.8
 
 ###Download and compilation
-###Lyon prerequises
+###Lyon configuration
+#### SL6
 The environment was prepared at Lyon to allow an easy installation. You need to set the following variables in your .bashrc or .zshrc:
 
     #Geant4
@@ -85,6 +86,48 @@ then to compile it
     cd build
     cmake .. -DCMAKE_CXX_COMPILER=g++-510 -DCMAKE_C_COMPILER=gcc-510
     make
+
+
+#### CentOS7
+A common installation of Geant4 and some libraries was prepared, so the configuration should be the following:
+
+    #Geant4
+    cd $KM3NET_THRONG_DIR/share/geant/v10.01.p03/bin/
+    source geant4.sh
+    cd -
+
+    #Libconfig
+    export LIBCONFIG_ROOT=/sps/km3net/users/hugon/sw/libconfig-1.5
+    export LD_LIBRARY_PATH=${LIBCONFIG_ROOT}/lib:${LD_LIBRARY_PATH}
+    export CPLUS_INCLUDE_PATH=${LIBCONFIG_ROOT}/include
+
+    #GCC 5.10
+    export GCC_ROOT=/pbs/software/x86_64_el7/gcc/5.5.0
+    export LD_LIBRARY_PATH=${GCC_ROOT}/lib:${GCC_ROOT}/lib64:${LD_LIBRARY_PATH}
+    #export PATH=${GCC_ROOT}/bin:/sps/km3net/users/kulikovs/OMGsim/gcc:${PATH} 
+    export PATH=${GCC_ROOT}/bin:${PATH}
+
+    #ROOT
+    export ROOTSYS=/usr/local/root/v5.34.23
+    cd ${ROOTSYS}
+    source bin/thisroot.sh
+    cd -
+
+This OMGsim can be obtained via svn, using the command
+
+    svn co http://svn.km3net.de/simulation/OMGsim/trunk/    (std login km3net and pwd are available)
+    cd trunk
+
+Then to compile it:
+
+    #To force usage GCC 5.5.0 compiler (note that this trick was also used to compile geant4 in $KM3NET_THRONG_DIR/share)
+    export CC=${GCC_ROOT}/bin/gcc     
+    export CXX=${GCC_ROOT}/bin/g++
+    mkdir build
+    cd build
+    cmake .. -DCMAKE_CXX_COMPILER=g++-510 -DCMAKE_C_COMPILER=gcc-510
+    make
+
 
 ### MacOS installation 
 Installation of missing packages is faster with HomeBrew packet manager.
