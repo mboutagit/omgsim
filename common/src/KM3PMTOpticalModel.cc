@@ -80,7 +80,8 @@ namespace km3net
                            " 2 or greater == full model\n"
                            "The default value is 3."
                            );
-      fLuxCmd->SetParameter(new G4UIparameter("level", 'i', false));
+      //fLuxCmd->SetParameter(new G4UIparameter("level", 'i', false));
+      fLuxCmd->SetParameterName("choice", false); 
       fLuxCmd->AvailableForStates(G4State_PreInit);
 
 

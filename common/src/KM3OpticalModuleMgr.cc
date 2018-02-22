@@ -133,6 +133,7 @@ namespace km3net
           cfg.exists("AreThereReflectors") &&
           (!thePTP->AreThereReflectors ||
            (cfg.exists("ReflectorAngle") &&
+            cfg.exists("ReflectorRadiusMin") &&
             cfg.exists("ReflectorDistGlass") &&
             cfg.exists("ReflectorThickness")));
 
@@ -140,6 +141,8 @@ namespace km3net
           {
             thePTP->ReflectorAngle = GetFloatingParameter
               (cfg.lookup ("ReflectorAngle"));
+            thePTP->ReflectorRadiusMin = GetFloatingParameter
+              (cfg.lookup ("ReflectorRadiusMin"));
             thePTP->ReflectorDistGlass = GetFloatingParameter
               (cfg.lookup ("ReflectorDistGlass"));
             thePTP->ReflectorThickness = GetFloatingParameter
@@ -221,7 +224,7 @@ namespace km3net
 
     const OpticalModuleParameters &ThePTP=*((OpticalModuleParameters*)fTheParameters);
 
-    double PMRPosition=ThePTP.SphereRmin - ThePTP.PMTprt->RadiusSphere - ThePTP.PMTprt->GlassThickness - ThePTP.DistSpherePMT;
+    double PMRPosition=ThePTP.SphereRmin - ThePTP.PMTprt->RadiusSphere - ThePTP.DistSpherePMT;
 
     G4LogicalVolume *logicPMT =
       KM3PhotoTubeMgr::GetIt ()->GetLogicalVolume (ThePTP.PhotoTubeName);
@@ -260,12 +263,13 @@ namespace km3net
 
 
     G4VSolid* SolidTubeGel = new G4Tubs(ThePTP.Prefix + "TubeGel",
-                                        0., ThePTP.PMTprt->BulbRadiusMax,         //from article; For the reflector
+                                        0., ThePTP.ReflectorRadiusMin,         //from article; For the reflector
                                         2*ThePTP.SphereRmin - PMRPosition,
                                         0, 2 * pi);
 
-    double ConRadiusMax =
-      ThePTP.PMTprt->BulbRadiusMax
+    //ConRadiusMax --  bigger radius of the reflector ring
+    double ConRadiusMax =                      
+      ThePTP.ReflectorRadiusMin
       + ThePTP.ReflectorThickness*tan(ThePTP.ReflectorAngle);
     G4VSolid* SolidBigTubeGel =
       new G4Tubs(ThePTP.Prefix + "TubeGel",
@@ -276,7 +280,7 @@ namespace km3net
 
     G4Cons* SolidConeSub =
       new G4Cons(ThePTP.Prefix + "reflectorSub",
-                 0, ThePTP.PMTprt->BulbRadiusMax,
+                 0, ThePTP.ReflectorRadiusMin,
                  0, ConRadiusMax,
                  ThePTP.ReflectorThickness/2,
                  0., 2 * pi);
@@ -289,7 +293,7 @@ namespace km3net
 
     G4VSolid* solidConRefl =
       new G4Cons(ThePTP.Prefix + "reflector",
-                 ThePTP.PMTprt->BulbRadiusMax-0.001,ThePTP.PMTprt->BulbRadiusMax,
+                 ThePTP.ReflectorRadiusMin-0.001,ThePTP.ReflectorRadiusMin,
                  ConRadiusMax-0.001, ConRadiusMax,
                  ThePTP.ReflectorThickness/2,
                  0., 2 * pi);
@@ -314,13 +318,22 @@ namespace km3net
         PMPosition.setRThetaPhi (PMRPosition,
                                  PMTsAngles.first,
                                  PMTsAngles.second);
+
+        //The distance from Reflector Ring to the glass is given as a minimal distance.
+        //We need to recalculate it as a horisontal shift.
+        double ReflectorDistGlassHor = sqrt(ThePTP.SphereRmin*ThePTP.SphereRmin-ConRadiusMax*ConRadiusMax)
+            - sqrt((ThePTP.SphereRmin-ThePTP.ReflectorDistGlass)*(ThePTP.SphereRmin-ThePTP.ReflectorDistGlass)-ConRadiusMax*ConRadiusMax);
+        cout << "ReflectorDistGlassHor is " << ReflectorDistGlassHor << endl;
+        cout << "DistAbsorberGlass is " << ThePTP.DistAbsorberGlass << endl;
+                    
+
         ConPosition.setRThetaPhi (ThePTP.SphereRmin*cos(asin(ConRadiusMax/ThePTP.SphereRmin))
-                                  -ThePTP.ReflectorThickness/2-ThePTP.ReflectorDistGlass-ThePTP.DistAbsorberGlass,
+                                  -ThePTP.ReflectorThickness/2-ReflectorDistGlassHor,
                                   PMTsAngles.first,
                                   PMTsAngles.second);
 
         BigTubePosition.setRThetaPhi (ThePTP.SphereRmin*cos(asin(ConRadiusMax/ThePTP.SphereRmin))
-                                      +ThePTP.SphereRmin-ThePTP.ReflectorDistGlass-ThePTP.DistAbsorberGlass,
+                                      +ThePTP.SphereRmin-ReflectorDistGlassHor,
                                       PMTsAngles.first,
                                       PMTsAngles.second);
 
@@ -329,7 +342,7 @@ namespace km3net
                            PMTsAngles.first,0);
 
         SolidTubeGel = new G4Tubs(ThePTP.Prefix + "TubeGel",
-                                  0., ThePTP.PMTprt->BulbRadiusMax,         //from article; For the reflector
+                                  0., ThePTP.ReflectorRadiusMin,         //from article; For the reflector
                                   2*ThePTP.SphereRmin - PMRPosition,
                                   0, 2 * pi);
         number++;

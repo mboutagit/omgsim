@@ -51,6 +51,7 @@ namespace km3net
       //DOM specific values
       bool   AreThereReflectors = true;
       double ReflectorAngle     = 30*deg;
+      double ReflectorRadiusMin = 40.25*mm;
       double ReflectorDistGlass = 1*mm;
       double ReflectorThickness = 12*mm;
       double MushroomAngularSize=0.7; //the mushroom will always be at -180 deg

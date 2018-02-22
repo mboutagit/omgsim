@@ -12,9 +12,10 @@ GelMaterial = "WackerSilGel612_A100B67";
 CheckOverlaps = false;
 
 AreThereReflectors = true;
-ReflectorAngle     = 48.;
-ReflectorDistGlass = 0.;
+ReflectorAngle     = 48.33;
+ReflectorDistGlass = 1.7;
 ReflectorThickness = 12;
+ReflectorRadiusMin = 40.25;
 
 /*GelMaterial = "IdealWater";
 GlassMaterial = "IdealWater";

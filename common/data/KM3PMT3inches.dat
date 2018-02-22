@@ -2,10 +2,10 @@
 Name = "3inches";
 Prefix = "3inches";
 
-RadiusSphere   = 50.;
-BulbRadiusMin  = 36.;
+RadiusSphere   = 52.5; //internal radius is 50 cm from the drawing, external radius is 50 + glass thickness 2.5 cm
+BulbRadiusMin  = 35.95;
 BulbRadiusMax  = 40.;
-BulbHeight     = 20.;
+BulbHeight     = 18.;  //measuring with a ruler Hamamatsu scheme
 ConeHeight     = 10.;
 TubeRadius     = 25.45;
 

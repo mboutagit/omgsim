@@ -1,13 +1,42 @@
 ##KM3NeT Digital Optical modules (DOMs)
 
 ##DOM definition
+
+### PMT description
+File: KM3PMT3inches.dat
+
 PMT shape is defined from the Hamamatsu R12199-02 scheme: Google Drive -> Detector Construction and operation (DET) -> Mechanics (MECH) -> All parts in a DU (drawings, pdfs, prices etc.)->common Arca+Orca -> DOM -> PMT (https://drive.google.com/drive/u/1/folders/0B-oDhZjfBP59V24wSGRsT1RBRWM).   -> R12199-02 Drawing 13.04.03.pdf
 
-The reflector is defined according to file PMT+reflector position.pdf in the same folder.
+There is also a drawing with more details in the Edward Berbeefolder MECH-> All parts in a DU -> DOM -> PMT -> Dimension of R12199-02 Bulb-1-1.pdf
+
+* The front part of the PMT is a sphere with <RadiusSphere> internal radius of the PMT sphere (external is extended by the glass width). Chosen 50 + 2.5 mm.
+* The thickest part of the PMT after the spherical part is approximated with an ellipsoid slice. <BulbRadiusMin>  = 35.95 mm is the radius of the ellispsoid slice adjusted to the sphericel part. The back side of the ellipsoid approximated with the same radius.
+* <BulbRadiusMax>  40 mm is the thickest part of the ellipsoid/PMT.
+* <BulbHeight>     18 mm is the thickness of the ellipsoid slice. It was obtained by measuring with a ruler Hamamatsu scheme "Dimension of R12199-02 Bulb-1-1.pdf
+* <ConeHeight>     10 mm is the back conical shaped side of the PMT bulb.
+
+### Light reflector ring
+File: KM3OMkm3net.dat (or derivatives).
+
+The reflector is defined according to file PMT+reflector position.pdf in the same folder (DOM).
+
+* The ring is obtained by rolling plate (flat ring sector with radial width of 18.05 cm). This width defines the area of the ring, so collected light and should be preserved.
+* <ReflectorThickness> is the rolled reflector ring thickness (height of the cut cone shape) and is taken from the scheme (12 cm). Note, this is not the width of the unrolled ring!
+* The opening angle is set to 48.33 degrees (according to private communication with Ronald Brujin the suggested value is 48 deg, however ReflectorThickness=12 cm can be obtained by this angle and 18.05 plate width). 
+* The ring vertical width 13.5 cm from the scheme fits well 18.05 * cos(48.33) = 13.48.
+
+Note that the reflector ring spacing from the glass is defined as a minimal distance (<ReflectorDistGlass> = 1.7 cm). For placement in Geant4 this distance is recalculated as a horisontal distance (assuming PMT is looking in the horizontal direction).
+
+### PMT placement
+File: KM3OMkm3net.dat (or derivatives).
 
 PMT are placed and numbered according to the table 1 in Definition of DOM coordinate system and PMT map (File KM3NeT_DET_2014_002-PMT_map_v5.pdf in Google Drive -> Detector construction and operation (DET)  https://drive.google.com/drive/u/1/folders/0B6CcXapUNLNLc1hDek1VNTRXemM). PMT numbering is done accorging to the DAQ channel (column 2) and placement is done in spherical coordinates (theta, phi) - columns 4,5.
 
+### DOM creation
+
 The DOM creation is described in GetDOM function of common/src/KM3OpticalModuleMgr.cc. Note that PMTs are placed in polar coordinates (theta, phi) directrly in this function according to PMTPositions entry in common/data/KM3OMkm3net.dat. Their type and sizes are also read from the same file. In future release this may be done in different way (using \"Place them\" method in common/src/KM3DetectorConstruction.cc.
+
+### Detector creation
 
 The detector creation with one DOM is shown in common/data/KM3DetDOMAlone.dat. The DOM orientation is described with Euler angles (Phi, Theta, Psi) in the so-called "x-convention" (http://mathworld.wolfram.com/EulerAngles.html). The Psi entry is arbitrary (default is 0). For more details, please, read CLHEP User Guide (http://proj-clhep.web.cern.ch/proj-clhep/doc/CLHEP_1_7/UserGuide/index.html or http://proj-clhep.web.cern.ch/proj-clhep/doc/CLHEP_1_7/UserGuide/VectorDefs.ps) section CLHEP Vector -> HepRotation. The rotational convention are not obvious. After several tests the following strategy is suggested to obtain predictable results. If polar coordinats of an object main vertex are known and without rotation this vertex has (0,0,1) direction, then the polar coordinated of the final object placement can be obtained with following sequence (placed somewhere in the detector construction, for example):
 
