@@ -2,7 +2,8 @@
 /KM3/det/DetectorTypeName KM3K40
 
 /KM3/det/setTargetScattering 1
-/KM3/det/setTargetMaterial AntaresWater
+#/KM3/det/setTargetMaterial AntaresWater
+/KM3/det/setTargetMaterial NEMOWater
 /KM3/det/DontDraw bento absorber
 /KM3/det/setWorldLength 10 m
 

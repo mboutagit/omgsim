@@ -125,7 +125,7 @@ Then to compile it:
     export CXX=${GCC_ROOT}/bin/g++
     mkdir build
     cd build
-    cmake .. -DCMAKE_CXX_COMPILER=g++-510 -DCMAKE_C_COMPILER=gcc-510
+    cmake ..
     make
 
 
