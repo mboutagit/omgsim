@@ -13,13 +13,13 @@ endif()
 
 # (2) ROOT
 find_package(ROOT)   #this does not work for old ROOT installations on Lyon
-if (DEFINED ROOT_FOUND)
+if (ROOT_FOUND)
     message("ROOT found using find_package method. Using in cmake ${ROOT_USE_FILE}")
     include(${ROOT_USE_FILE})
-else (DEFINED ROOT_FOUND)
+else (ROOT_FOUND)
     message("ROOT was not found using find_package method... falling back to FindROOT.cmake")
     include (FindROOT.cmake)       #We stored locally this file slighly modified to search ROOT
-endif(DEFINED ROOT_FOUND)
+endif(ROOT_FOUND)
 message("We use ROOT_INCLUDE_DIRS which is ${ROOT_INCLUDE_DIRS} instead ROOT_INCLUDE_DIR is ${ROOT_INCLUDE_DIR}") 
 
 # (3) Geant4
