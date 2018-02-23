@@ -158,9 +158,9 @@ To run the whole AA production do the following:
     ./subAA2D.sh
 
 Folder build/prod will be created and filled with output root files.
-The AA table can be produced with makeAAtable.cc in PostAnalysis/scripts (not available in v2.0, but can be taken from trunk).
+The AA table can be produced with makeAAtable.cc in SimplePostAnalysis (not available in v2.0, but can be taken from trunk).
 
-    cd PostAnalysis/scripts/
+    cd SimplePostAnalysis
     root -l makeAAtable.cc
 
 The produced table is listed below for v2.0:
@@ -357,6 +357,37 @@ The produced table is listed below for v2.0:
 
 ###Scans of a DOM with all PMTs installed
 
-The scan with DOMs with all PMTs installed requires slightly different data analysis (which is in progress). For scans of PMTs different from the bottom one, the DOM should be placed in a way that this PMT looks up. This can be realized with three Euler angles. In general, Psi angle is also needed. The Psi angle is not implemented in v2.0 so, this scan can be performed only for the bottom PMT there.
+The scan with DOMs with all PMTs installed requires slightly different data analysis. For scans of PMTs different from the bottom one, the DOM should be placed in a way that this PMT looks up. This can be realized with three Euler angles. In general, Psi angle is also needed. The Psi angle is not implemented in v2.0 so, this scan can be performed only for the bottom PMT there.
 
-To be continued...
+     cd build/scripts
+     source setenv.sh
+     ./subAA2D_allpmts.sh
+
+After files are ready in the prod:
+
+     cd SimplePostAnalysis
+     root -l makeAAfulltable.cc
+
+
+##K40 simulations
+
+To run the K40 simulation on CC lyon, simply run:
+
+    source setenv.sh
+    ./subK40.sh
+
+Note that for the CentOS7 the following option should be present in the qsub command: 
+
+    qsub ... -l os="cl7" ...
+
+After producing 100 files hadd them:
+    
+    cd $PROD_DIR
+    hadd K40_DOMhadd.root K40_DOM_*
+
+And run the analysis:
+
+    cd SimplePostAnalysis
+    ./make.sh
+    ./NoiseCoincidences ../build/prod/K40_DOMhadd.root coinc.root
+    root -l calcK40rates.cc
