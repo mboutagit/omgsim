@@ -30,7 +30,7 @@ void makeAAfulltable(){
 				cout << lambda << " ";
 			} else {
 				ostringstream oss;
-				oss << "../../prod/AAfull_ANTARES_" << angle << "deg-" << setprecision(1) << fixed << e << "eV" << ".root";
+				oss << "../build/prod/AAfull_DOM_" << angle << "deg-" << setprecision(1) << fixed << e << "eV" << ".root";
 				//cout << oss.str().c_str() << endl;
 				//continue;
 				TFile *f1 = new TFile(oss.str().c_str());
