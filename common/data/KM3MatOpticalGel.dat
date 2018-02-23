@@ -153,9 +153,8 @@ CREATE
 
 
 PROPERTY ABSLENGTH
-#scanned from https://drive.google.com/open?id=0B-oDhZjfBP59OWxjYkdYbi1lczg 50B
+#scanned from https://drive.google.com/open?id=0B-oDhZjfBP59OWxjYkdYbi1lczg interpolation between 60 and 70
 OPTION wavelength
-#TODO
 250 29.9306
 260 41.5051
 270 53.0795

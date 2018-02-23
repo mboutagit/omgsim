@@ -108,6 +108,8 @@ scanx_theta.txt stores the conversion between scan x (mm) and angle on the PMT. 
     37 0.636807
     38 0.683043
 
+Due to the reflection on the back side of the PMT the obtained scan curve can stil mismatch the measurement. Angular Efficiency coefficients can be italatively adjusted to match the data. 
+
 Check also SimplePostAnalysis/km3scan folder for this data and the script plotting the scans and calculating Angular Efficiency.
 
 ### Light reflector ring
