@@ -78,7 +78,7 @@ This measurements are scanned and presented below as data points:
     45.129	0.002829
     47.632	0.00052
 
-The simulation reproduces rather well the Quantum Efficiency. The collection efficiency is stored in ANGULAR_EFFICIENCY field of common/data/KM3MatPMT3inches.dat as zenith angle on the PMT surface in rad vs efficiency. At first this was filled with efficency 1 everywhere and then the ratio between the obtained PMT efficiency in the simulation and Detection Efficiency in the simulation was  calculated using the routine below:
+The simulation reproduces rather well the Quantum Efficiency measurements (see below). The collection efficiency is stored in ANGULAR_EFFICIENCY field of common/data/KM3MatPMT3inches.dat as zenith angle on the PMT surface in rad vs efficiency. At first this was filled with efficency 1 everywhere and then the ratio between the obtained PMT efficiency in the simulation and Detection Efficiency in the simulation was  calculated using the routine below:
 
     ifstream ifs_scanx_theta("scanx_theta.txt");                                                          
     double angle_theta, scanx;                                                                            
@@ -111,6 +111,11 @@ scanx_theta.txt stores the conversion between scan x (mm) and angle on the PMT. 
 Due to the reflection on the back side of the PMT the obtained scan curve can stil mismatch the measurement. Angular Efficiency coefficients can be italatively adjusted to match the data. 
 
 Check also SimplePostAnalysis/km3scan folder for this data and the script plotting the scans and calculating Angular Efficiency.
+
+\image html km3scan.png
+\image latex km3scan.png
+Figure. Horizontal scans in the lab and their repoduction in the lab tuning the angular efficiency.
+
 
 ### Light reflector ring
 File: KM3OMkm3net.dat (or derivatives).

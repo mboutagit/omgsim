@@ -1,3 +1,15 @@
+/*
+ * - Ring flat width of 14.5 mm, 45 degrees and 10.5 mm rolled width don’t match (14.5*cos45=10.25). 
+ * So, external radius of 107.5/2 was considered, 45 degrees angle and 10.5 mm thickness). 
+ * The most crucial parameter should be the external radius.
+ *
+ * - PMT shape includes all the data from the scheme. For missing data the guesses were done by scaling 3” data to 59.4/50.
+ *
+ * — For the collection efficiency + PMT photocathode coverage - the same PMT zenith angular efficiency distribution was used. 
+ * This should be OK, since the declared cathode diameter is 81 mm for 3.5” and 72 mm for 3” which scales rather similar to radii ratio (59.4/50.)… 
+ * there is about 7% difference. In other words, for the Photocathode surface 3.5” seems to be a scaled version of 3”.
+*/
+
 Name = "KM3DOM_3andhalf_Test";
 DetectionUnitType="DOM";
 PhotoTubeName = "3andhalfinches";
