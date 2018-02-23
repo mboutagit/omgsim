@@ -349,8 +349,8 @@ double RunInfo::Loop()
     if (ientry < 0) break;
     nb = fChain->GetEntry(jentry);   nbytes += nb;
     // if (Cut(ientry) < 0) continue;
-    //NbTriggTotal+=double(NBTrigg)/TargetVolume; //number of generated events (decays of K40 for example) divided on generated volume (in m^3)
-    NbTriggTotal+=double(NBTrigg);
+    NbTriggTotal+=double(NBTrigg)/TargetVolume; //number of generated events (decays of K40 for example) divided on generated volume (in m^3)
+    //NbTriggTotal+=double(NBTrigg);            //number of generated events for radioactivity in the glass study
     //cout <<"norm ici " << NbTriggTotal << endl;
   }
   return NbTriggTotal;
