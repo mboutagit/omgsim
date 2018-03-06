@@ -1,12 +1,20 @@
-Name = "WLSblock";
+WLSSphere:
+{
+        Name = "WLShere";
 
-Prefix = "";
+        Prefix = "";
 
-Material = "WLSTest";
+        Material = "WLSTest";
 
-VolumeKind = "Box";
-X = 1900;
-Y = 1900;
-Z = 1900;
+        VolumeKind = "Sphere";
 
-CheckOverlaps = false;
+        RadiusMin  = 0 ;
+        RadiusMax  = 433.8. ;
+        PhiMin     = 0.;
+        PhiMax     = 6.3;
+        ThetaMin   = 0.;
+        ThetaMax   = 3.15;
+
+
+        CheckOverlaps = false;
+}
