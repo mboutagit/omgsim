@@ -103,14 +103,13 @@ SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__CXX_MIN_VERSION=${CMAKE_CXX_COMPILE
 
 # (6) finish with all the binaries
 if(ENABLE_TESTING)
-  add_library(omgsim SHARED ${sources} ${test_sources})
+  add_library(libOMG SHARED ${sources})
+  target_link_libraries(libOMG ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB})
   SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DENABLE_TESTING=1")
   foreach(aprog IN LISTS TESTS)
     get_filename_component(aprogname ${aprog} NAME_WE)
-    add_executable(${aprogname} ${aprog} ${headers} ${test_headers})
-    target_link_libraries(${aprogname} omgsim ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB})
-    #target_link_libraries(${aprogname} ${ROOT_LIBRARIES})
-    #target_link_libraries(${aprogname} omgsim)
+    add_executable(${aprogname} ${aprog} ${headers} ${test_headers} ${test_sources})
+    target_link_libraries(${aprogname} libOMG ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB})
   endforeach ()
 else(ENABLE_TESTING)
   add_library(libOMG SHARED ${sources})

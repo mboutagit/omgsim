@@ -1,5 +1,8 @@
 OMGsim documentation {#mainpage}
 ----------------------------------
+Athours:
+- Christophe Hugon - CPPM (CNRS)
+- Vladimir Kulikovskiy - INFN Genova
 
 ##Introduction
 
@@ -22,6 +25,7 @@ This simulation will allow you to:
      -...
      
 ##Description
+- Quick start [here](md_documentation_pages_quickstart.html).
 - KM3NeT DOM Simulation [here](md_documentation_pages_DOM.html).
 - Calibration [here](md_documentation_pages_calibration.html).
 - Version changes [here](md_documentation_pages_changes.html).

@@ -22,12 +22,12 @@ It was also verified that for every photocathode thickness (20,26,30) the measur
 To run the calibration, compile OMGsim with ENABLE_TESTING:
 
     cd build
-    cmake .. -DCMAKE_CXX_COMPILER=g++-510 -DCMAKE_C_COMPILER=gcc-510 -DENABLE_TESTING
+    cmake .. -DENABLE_TESTING=1
     make
 
-Run QuantumEfficiencyTester. Without options, it reads curring K-index in the data, simulates QE with decired precision (5% is the default) and compares it with the measured one. The precision comes from the electron production probability, which is a random Brownian process (this probability depends on the photocathod thickness and light penetration probability which is the function of k-index and wavelength, so it needs to be simulated with many electrons for every k-index). Precision can be changed with "-precision option". To calibrate the K-index, "-cal" option should be used. After several itarations (untill ratio of simulated QE to the measured stays inside the requested precision for every wavelength) the K-index table is printed. The following command was used for 3-inch KM3NeT calibration with 1% precision:
+Run QuantumEfficiencyTester. Without options, it reads curring K-index in the data, simulates QE with decired precision (5% is the default) and compares it with the measured one. The precision comes from the electron production probability, which is a random Brownian process (this probability depends on the photocathod thickness and light penetration probability which is the function of k-index and wavelength, so it needs to be simulated with many electrons for every k-index). Precision can be changed with "-precision option". To calibrate the K-index, "-cal" option should be used. After several itarations (untill ratio of simulated QE to the measured stays inside the requested precision for every wavelength) the K-index table is printed. The following command was used for 3-inch KM3NeT calibration with 1% precision (setting precision 0 uses analytical formulas for electron escape, setting it to some value like 0.05 simulates sufficient number of electrons to reach such precision):
 
-    ./QuantumEfficiencyTester -precision 0.01 -cal
+    ./QuantumEfficiencyTester -precision 0 -cal
 
 ### KM3NeT 3-inch PMT calibration
 
