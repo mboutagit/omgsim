@@ -1,6 +1,6 @@
 OMGsim documentation {#mainpage}
 ----------------------------------
-Athours:
+Authors:
 - Christophe Hugon - CPPM (CNRS)
 - Vladimir Kulikovskiy - INFN Genova
 
