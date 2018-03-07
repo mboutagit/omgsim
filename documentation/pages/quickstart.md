@@ -9,9 +9,11 @@ This short tutorial aims to introduce the using of OMGSim with some few examples
 The base installation contains basics script and material/OM/PMT/detector descriptions and can be run immediatly.
 The binary is OMGsim:
 
-    ./OMGsim [-s] [-fa] ../script/mac/vis-xpTest.mac [outputfile.root]
+    ./OMGsim -s scripts/vis-AA2D_local.mac [outputfile.root]
 
-The -s is to open a GEANT4 session, unavoidable to draw the simulation (to be specified with your favorite way in the .mac file). The -fa is to get a "full analysis", just meaning that the output file will contain the full detected events (vertex, energy, impact point...) instead of the simplified events summary only (typicaly number of detected events)
+The -s is to open a GEANT4 session, unavoidable to draw the simulation (to be specified with your favorite way in the .mac file). 
+
+Also you can use "-fa" option is to get a "full analysis", just meaning that the output file will contain the full detected events (vertex, energy, impact point...) instead of the simplified events summary only (typicaly number of detected events).
 
 ##Custumize it a bit
 
@@ -40,7 +42,7 @@ In the case of the DOM, the position and number of PMTs is not predifined, and i
 ![Caption text](../images/pmpar.svg "Image title")
 
 ###The Detector
-Detector can be composed by several passive volumes described as:
+Detector files are stored as KM3Det<DET_NAME>.dat and they can be composed by several passive volumes described as:
 
     Volume1:                           //incrementing index
     {
@@ -53,7 +55,7 @@ Detector can be composed by several passive volumes described as:
             Phi = 0.;
     };
 
-Optical modules described as:
+And (or only) optical modules which are described as:
 
     OM1:                               //incrementing index
     {
@@ -66,6 +68,7 @@ Optical modules described as:
             Phi = 0.;
             MotherVolume="WLSSphere"   //Optional parameter - you can specify MotherVolume if you want to put OM inside the passive volume
     };
+
 
 ###The Materials
 

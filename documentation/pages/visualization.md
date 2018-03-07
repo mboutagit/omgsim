@@ -61,6 +61,7 @@ After running OMGsim with a mandatory option "-s" the file scene-0.heprep.zip wi
 does not change even if filename.bheprep.zip  was requested).
 
     OMGsim -s your_mac.mac
+    OMGsim -s scripts/vis-AA2D_local.mac #(this one is stored as an example)
 
 If you want later to navigate through each event separately you can run Geant4 event by event placing in the 
 mac file:
