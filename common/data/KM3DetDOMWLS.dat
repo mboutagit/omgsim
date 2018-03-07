@@ -1,15 +1,15 @@
-Name = "DOMWS"
+Name = "WLSDOM"
 
-WLShere:
+Volume1:
 {
-        Name = "WLShere";
+        Name = "WLSSphere";
         ID = 1;
         X = 0.;
         Y = 0.;
         Z = 0.;
         Theta = 0;
         Phi = 0.;
-}
+};
 
 OM1:
 {
@@ -20,5 +20,5 @@ OM1:
         Z = 0.;
         Theta = 3.14159265358979312;
         Phi = 0.;
-        MotherVolume="WLShere"
+        MotherVolume="WLSSphere"
 };

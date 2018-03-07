@@ -34,13 +34,38 @@ To build a DOM or OM, you have a bunch of parameter that allow you to define the
 [The parameters to define a DOM are listed here](structkm3net_1_1KM3OpticalModuleMgr_1_1OpticalModuleParameters.html) and should be implemented in JSON as in this [DOM example](KM3OMkm3net_8dat_source.html) and [OM example](KM3OMAntares_8dat_source.html).
 In the case of the DOM, the position and number of PMTs is not predifined, and is up to the PMTPositions table.
 
-
-
-
 ###The PMT
 
 [The parameters to define a phototube](structkm3net_1_1KM3PhotoTubeMgr_1_1PhotoTubeParameters.html) usage is illustrated in the [3 inches](KM3PMT3inches_8dat_source.html) and [10 inches](KM3PMT10inches_8dat_source.html) PMT files.
 ![Caption text](../images/pmpar.svg "Image title")
+
+###The Detector
+Detector can be composed by several passive volumes described as:
+
+    Volume1:                           //incrementing index
+    {
+            Name = "WLSSphere";        //Name inside its KM3Vol...dat files
+            ID = 1;                    //incrementing index of the passive volume of this type
+            X = 0.;
+            Y = 0.;
+            Z = 0.;
+            Theta = 0;
+            Phi = 0.;
+    };
+
+Optical modules described as:
+
+    OM1:                               //incrementing index
+    {
+            Name = "KM3DOMTest";       //Name inside its KM3OM...dat file
+            ID = 1;
+            X = 0.;
+            Y = 0.;
+            Z = 0.;
+            Theta = 3.14159265358979312;
+            Phi = 0.;
+            MotherVolume="WLSSphere"   //Optional parameter - you can specify MotherVolume if you want to put OM inside the passive volume
+    };
 
 ###The Materials
 

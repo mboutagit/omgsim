@@ -1,6 +1,6 @@
 WLSSphere:
 {
-        Name = "WLShere";
+        Name = "WLSSphere";
 
         Prefix = "";
 
@@ -8,8 +8,8 @@ WLSSphere:
 
         VolumeKind = "Sphere";
 
-        RadiusMin  = 0 ;
-        RadiusMax  = 433.8. ;
+        RadiusMin  = 0;
+        RadiusMax  = 216.9;
         PhiMin     = 0.;
         PhiMax     = 6.3;
         ThetaMin   = 0.;
