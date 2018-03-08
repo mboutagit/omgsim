@@ -31,7 +31,8 @@ OPTION constant
 1.05e-9
 
 PROPERTY WLSABSLENGTH
-OPTION shifter_density 0.0054 #typical 0.0014 for 0.25 mm [Molar]=mol/dm3
+#OPTION shifter_density 0.0054 #typical 0.0014 for 0.25 mm [Molar]=mol/dm3
+OPTION shifter_density 5.34 #this should be in Mol/L units, so rho=1.23 g/cm^3 and mu=230 g/Mol give this value (the values can be found in https://doi.org/10.1016/j.nima.2017.06.050 )
 OPTION wavelength #(nm)  Molar Extinction (cm-1/M)
 219.74	16727
 219.99	16411

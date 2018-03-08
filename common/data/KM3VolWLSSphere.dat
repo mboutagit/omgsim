@@ -9,7 +9,7 @@ WLSSphere:
         VolumeKind = "Sphere";
 
         RadiusMin  = 0;
-        RadiusMax  = 216.9;
+        RadiusMax  = 215.901; #215.9mm+1mum!
         PhiMin     = 0.;
         PhiMax     = 6.3;
         ThetaMin   = 0.;
