@@ -19,6 +19,7 @@
 /gps/pos/type Volume
 /gps/particle ion
 /gps/ion 19 40
+/gps/ene/mono   0 eV
 /gps/pos/confine Target
 
 /tracking/verbose 0

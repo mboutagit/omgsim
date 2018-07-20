@@ -134,7 +134,7 @@ namespace km3net
   KM3PhysicsList::KM3PhysicsList() {
     //G4VModularPhysicsList() {
     //G4LossTableManager::Instance();
-    defaultCutValue = 0.1 * mm;
+    defaultCutValue = 0.001 * mm;   // V. Kulikovskiy - we found that even 1 mum is optimal step for K40 decays simulation
     cutForGamma = defaultCutValue;
     cutForElectron = defaultCutValue;
     cutForPositron = defaultCutValue;
