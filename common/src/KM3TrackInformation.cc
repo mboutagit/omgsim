@@ -52,9 +52,9 @@ namespace km3net {
 
     originalMomentum = aTrack->GetMomentum();
     originalEnergy = aTrack->GetTotalEnergy();
-    originalTime = aTrack->GetGlobalTime();
-
     originalPolarization = aTrack->GetPolarization ();
+
+    originalTime = aTrack->GetGlobalTime();
 
   }
 

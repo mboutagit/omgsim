@@ -111,6 +111,7 @@ namespace km3net
     //here some data to put in the trees
     unsigned long fNbTrigg=0;
 
+    // Information about the photons at production vertex.
     float fVertexX=0;
     float fVertexY=0;
     float fVertexZ=0;
@@ -120,11 +121,13 @@ namespace km3net
     float fVertexDirY=0;
     float fVertexDirZ=0;
     float fVertexEnergy=0;
+    // Information about the photons at arrival to the OpticalModule.
     float fOMHitX=0;
     float fOMHitY=0;
     float fOMHitZ=0;
     float fOMHitT=0;
     float fOMHitP=0;
+    // Information about the photons at arrival to the Photocathode.
     float fPhotoX=0;
     float fPhotoY=0;
     float fPhotoZ=0;

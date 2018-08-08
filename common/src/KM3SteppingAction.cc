@@ -102,27 +102,8 @@ namespace km3net
 
     if (info == 0) return;
 
-    //#ifdef G4ANALYSIS_USE
-    /*
-      G4Track* fTrack = fStep->GetTrack();
-      G4StepPoint* prestep = fStep->GetPreStepPoint();
-      G4StepPoint* poststep = fStep->GetPostStepPoint();
-    */
-
-
-    if (fTrack->GetGlobalTime ()>1e10) //remove K40 lifetime
-      {
-        fTrack->SetGlobalTime (fTrack->GetLocalTime ());
-        prestep->SetGlobalTime(prestep->GetLocalTime());
-        poststep->SetGlobalTime(poststep->GetLocalTime());
-      }
-
-    //G4VPhysicalVolume* thePrePV=fStep->GetPreStepPoint()->GetPhysicalVolume();
-    //G4VPhysicalVolume* thePostPV=fStep->GetPostStepPoint()->GetPhysicalVolume();
-
     G4VPhysicalVolume* thePreOriginalPV = info->GetOriginalPrePV ();
     G4VPhysicalVolume* thePostOriginalPV = info->GetOriginalPostPV ();
-
 
     if (!thePrePV || !thePostPV || !thePreOriginalPV || !thePostOriginalPV )
       return;

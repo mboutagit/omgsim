@@ -83,7 +83,7 @@ namespace km3net
     fTRunInfos = new TTree("RunInfo","Infos about the simulation.");
     fTRunInfos->Branch("NBTrigg",&fNbTrigg,"NbTrigg/l");
     fTEvent = new TTree("Hit","Hits in a TTree");
-    fTEvent->Branch("Vertex",&fVertexX,"VertexX:VertexY:VertexZ:VertexT:VertexP:VertexDirX:VertexDirY:VertexDirZ:VertexEnergy:AbsOMHitX:AbsOMHitY:AbsOMHitZ:OMHitT:OMHitP:PhotoX:PhotoY:PhotoZ:PhotoT:PhotoP:OMID/S:PMID");
+    fTEvent->Branch("Vertex",&fVertexX,"VertexX:VertexY:VertexZ:VertexT:VertexP:VertexDirX:VertexDirY:VertexDirZ:VertexEnergy:OMHitX:OMHitY:OMHitZ:OMHitT:OMHitP:PhotoX:PhotoY:PhotoZ:PhotoT:PhotoP:OMID/S:PMID");
     fTFastAnalysis = new TTree("FastAnalysis","Data used for very fast analysis.");
     fTFastAnalysis->Branch("PhotonReach",&fNbOM,"NbOM/l:NbPhoto");
 
