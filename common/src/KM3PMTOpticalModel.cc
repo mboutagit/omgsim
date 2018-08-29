@@ -1,13 +1,11 @@
 /** @file KM3PMTOpticalModel.cc
-    Defines a FaStsimulationmodel- class for handling optical photon
-    interactions with PMT: partial reflection, transmission, absorption,
-    and hit generation.
+ * Defines a fast model for the photon propagation in the photocathode thin layer model (boundary glass+photocathode, photocathode, boundary photocathode+vacuum).
+ * The photon propagation ends with photon leaving the area or absorping the photon and, eventually, producing the photoelectron leaving to the vacuum.
+ * The implementation is based on Dario Motta formalism initially, hevily rewritten.
+ * In particular, electron production depth is estimated now and electron escape probability accounts for it.
+ * Spicer three step model for electron escape was tested, but its final implementation was used only in effective way concidering experimental probability (theoretical developement did not reached good agreement with data).
+    @authors Vladimir Kulikovskiy and Christophe Hugon.
 
-    This file is part of the GenericLAND software library.
-    $Id: KM3PMTOpticalModel.cc,v 1.7 2005/05/05 20:13:32 KM3sim Exp $
-
-    @author Glenn Horton-Smith, March 20, 2001.
-    @author Dario Motta, Feb. 23 2005: Formalism light interaction with photocathode.
 */
 #include <TF1.h>
 
@@ -285,6 +283,10 @@ namespace km3net
 
 
   }
+  /*
+   * The main function that defined the thin layer optical model.
+   * All calculation is done in the "local coordinates" of the poststep volume (which is for normal case is vacuum, but can be glass for the photon coming back from the vacuum).
+   */
   G4VParticleChange* KM3PMTOpticalModel::DoPhotocathodeInteraction (const G4Track &aTrack, const G4Step &aStep)
   {
 
@@ -352,8 +354,9 @@ namespace km3net
         if(ElectronProductionCalculator (dir, pol, norm))
           {
             G4DynamicParticle* anElectron= new G4DynamicParticle ( G4Electron::Electron (),
-                                                                   fInsideDirection,
+                                                                   LocalToGlobalTransform.TransformAxis(fInsideDirection),  //note that fInsideDirection was in local coordinates, so back transformation is important here
                                                                    2*eV      );
+
             aParticleChange.SetNumberOfSecondaries(1);
             aParticleChange.AddSecondary(anElectron);
           }
