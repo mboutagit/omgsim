@@ -20,8 +20,8 @@ for i in `seq 1 $nsteps`;
 do
 	echo $i $ene
 	sed "s|%angle|${angle}|g;s|%ene|$ene|g" ${PROG_DIR}/scripts/vis-AA2D.mac > vis-AA-${angle}deg-${ene}eV.mac
-	${PROG_DIR}/OMGsim vis-AA-${angle}deg-${ene}eV.mac AA_ANTARES_${angle}deg-${ene}eV.root
-	mv AA_ANTARES_${angle}deg-${ene}eV.root ${PROG_DIR}/prod
+	${PROG_DIR}/OMGsim vis-AA-${angle}deg-${ene}eV.mac AA_DOM_${angle}deg-${ene}eV.root
+	mv AA_DOM_${angle}deg-${ene}eV.root ${PROG_DIR}/prod
 	ene=`echo "$ene+$step" | bc -l`
 done
 

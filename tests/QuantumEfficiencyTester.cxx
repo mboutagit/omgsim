@@ -119,37 +119,38 @@ int main (int argc, char** argv)
 	CLHEP::HepRandom::showEngineStatus();
 
 
-  bool calibrateQE = false;
-  //float glassThickness = 1*mm;  //for big 
-	float glassThickness = 2*mm;
+	bool calibrateQE = false;
+	//float glassThickness = 1*mm;  //for big 
+	float glassThickness = 2.5*mm;
+	//float glassThickness = 2*mm;
 	float precision = 0.05;
 
-  for (int argIt = 1; argIt < argc; argIt++)
-    {
-      string sarg = argv[argIt];
-      if (sarg == "-cal")
-        calibrateQE = true;
-      if (sarg == "-PhThick")
-        {
-          sarg = argv[++argIt];
-          glassThickness = stof (sarg)*mm;
-        }
-      if (sarg == "-precision")
-        {
-          sarg = argv[++argIt];
-          precision = stof (sarg);
-        }
-    }
+	for (int argIt = 1; argIt < argc; argIt++)
+	{
+		string sarg = argv[argIt];
+		if (sarg == "-cal")
+		calibrateQE = true;
+		if (sarg == "-PhThick")
+		{
+		  sarg = argv[++argIt];
+		  glassThickness = stof (sarg)*mm;
+		}
+		if (sarg == "-precision")
+		{
+		  sarg = argv[++argIt];
+		  precision = stof (sarg);
+		}
+	}
 
-  cout << "Create model tester" <<endl;
-  //theModelTester.LoadMaterial ("photocathode3inches", "PMTGlass", "Vacuum");
+	cout << "Create model tester" <<endl;
+	//theModelTester.LoadMaterial ("photocathode3inches", "PMTGlass", "Vacuum");
 	theModelTester.LoadMaterial ("photocathode3inches", "PMTGlass_R12199_02", "Vacuum");
-  theModelTester.fGlassThickness =glassThickness;
+	theModelTester.fGlassThickness =glassThickness;
 	theModelTester.SetElectronProductionLevel(3);
 	theModelTester.SetElectronAbsorptionLength (1000*nm);
 
-  if (precision != 0) theModelTester.fElPrecision = 25./(precision*precision);  //this is the number of simulated e-, precision is approx 5~sigma and sigma is sqrt(N_e)
-  else {
+	if (precision != 0) theModelTester.fElPrecision = 25./(precision*precision);  //this is the number of simulated e-, precision is approx 5~sigma and sigma is sqrt(N_e)
+	else {
 		cout << "setting theModelTester.fElPrecision to 0" << endl;
 		theModelTester.fElPrecision = 0;
 		precision = 0.01;   //calibration precision arbitrary set to 1% 
@@ -161,39 +162,6 @@ int main (int argc, char** argv)
 	TGraph *gratioQE;
 
 
-/*
-//BEGIN VLA
-  double _wavelength = 300;
-	TGraph *g_QE = new TGraph();
-	ostringstream oss;
-	oss << "QE" << _wavelength;
-	g_QE->SetName(oss.str().c_str());
-
-	G4MaterialPropertyVector oldKindexVector = theModelTester.GetKIndex ();
-	G4ThreeVector pos(0,0,1);
-  G4ThreeVector norm(0,0,-1);
-  G4ThreeVector dir(0,0,-1);
-  G4ThreeVector pol(0,0,1);
-	for (double kindex = 0.1; kindex < 10; kindex+=0.01) {
-		G4MaterialPropertyVector newKindexVector;
-		for (double wavelength = 250; wavelength <= 700; wavelength+=10) {
-			float energy = twopi*hbarc/wavelength/nm;
-			float newKindex = 0;
-			if (wavelength != _wavelength) newKindex = oldKindexVector.Value (energy);
-			else newKindex =  kindex;
-			//cout << wavelength << " " << newKindex << endl;
-			newKindexVector.InsertValues (energy, newKindex);
-		}
-		theModelTester.SetKIndex (newKindexVector);
-		g_QE->SetPoint(g_QE->GetN(),kindex, theModelTester.GetQuantumEfficiency (pos,dir,pol, norm, _wavelength));
-	}
-	TFile *fout = new TFile("debug.root","RECREATE");
-	g_QE->Write();
-	fout->Close();
-//END VLA
-*/
-
-
 	TerminalHistogram* simulatedQE_prev = NULL;
 
 	cout << "starting calc " << endl;
@@ -201,27 +169,15 @@ int main (int argc, char** argv)
 	bool continueopt;
 
   do {
-		cout << "DEBUG: inside the loop. " << endl;
 		continueopt = false;
-		/*
-    if (measuredQE != 0)
-      {
-        measuredQE->Reset ();
-        simulatedQE->Reset ();
-      }
-			*/
-    theModelTester.QuantumEfficiencyMeasurement ();
+    theModelTester.QuantumEfficiencyMeasurement ();  //this fills QuantumEfficiencyHisto
     theModelTester.PhotoCathodeEfficiencyReader ();
 
     measuredQE  = (TerminalHistogram*)(theModelTester.GetTObject ("MaterialEfficiencyHisto"));
     simulatedQE = (TerminalHistogram*)(theModelTester.GetTObject ("QuantumEfficiencyHisto"));
 
-		cout << "DEBUG: Materials are read." << endl;
-
-
 		if (!theModelTester.InTObject("RatioQE")) {
 			ratioQE = new TerminalHistogram ("RatioQE","QE sim / QE meas;nm",measuredQE->GetNbinsX(),measuredQE->GetXaxis()->GetXmin(),measuredQE->GetXaxis()->GetXmax());
-			//ratioQE = (TerminalHistogram*)measuredQE->Clone("RatioQE");
 			gratioQE = new TGraph();
 			gratioQE->SetName("gRatioQE");
 			theModelTester.PutTObject("gRatioQE",gratioQE);
@@ -240,39 +196,39 @@ int main (int argc, char** argv)
         float newbin=0;
         if (measuredQE->GetBinContent (bin) != 0)
           newbin=simulatedQE->GetBinContent (bin)/measuredQE->GetBinContent (bin);
-        //cout << newbin << endl;
         ratioQE->SetBinContent (bin, newbin);
         float wavelength = ratioQE->GetBinLowEdge (bin);
         float energy = twopi*hbarc/wavelength/nm;
         float newKindex = 0;
 
-				if (newbin != 0) gratioQE->SetPoint(gratioQE->GetN(),energy/eV,1./newbin);
+	//if (newbin != 0 && wavelength >= 380 && wavelength <= 680 ) 
+	if (newbin != 0 && wavelength >= 380 && wavelength <= 1000) gratioQE->SetPoint(gratioQE->GetN(),energy/eV,1./newbin); //we fill gratio only for wavelength where the Motta measurements exists (tuning is done using kindex from Motta).
 
         newKindex = oldKindexVector.Value (energy);
 
         if (wavelength > 250 && newbin != 0)
           {
             if (newbin < 1-precision){
-							if (simulatedQE_prev!=0) {
-								if (simulatedQE->GetBinContent (bin) / simulatedQE_prev->GetBinContent (bin) <= 1. + precision/5.) {    //stop to increase (stays stable at the level of 1 sigma fluctuation)
-									cout << "*";  //means that optimisation stopped since QE started to decrease
-								} else {
-									newKindex*=step;
-									cout << "!"; //means that optimisation is going on
-									continueopt = true;
-								}
-							} else {
-								newKindex*=step;
-								cout << "!"; //means that optimisation is going on
-								continueopt = true;
-							}
-						}
-						if (newbin > 1+precision) {
-							//cout << "check: " << newKindex << " " << newbin << " " << newKindex*(1/newbin) << endl;
-							cout << "!"; //means that optimisation is going on
-              newKindex = newKindex*(1/newbin);
-							continueopt = true;
-						}
+		if (simulatedQE_prev!=0) {
+			if (newbin <= 1. + precision/5.) {    //stop to increase (stays stable at the level of 1 sigma fluctuation)
+				cout << "*";  //means that optimisation stopped since QE started to decrease
+			} else {
+				newKindex*=step;
+				cout << "!"; //means that optimisation is going on
+				continueopt = true;
+			}
+		} else {
+			newKindex*=step;
+			cout << "!"; //means that optimisation is going on
+			continueopt = true;
+			}
+		}
+		if (newbin > 1+precision) {
+			cout << "!"; //means that optimisation is going on
+			//newKindex = newKindex*(1/newbin);
+			newKindex*=step;
+			continueopt = true;
+		}
           }
 
 

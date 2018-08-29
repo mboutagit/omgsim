@@ -81,7 +81,7 @@ namespace km3net
   void K40AnalysisManager::Write  ()
   {
     float targetlength=KM3DetectorConstruction::GetIt()->GetTargetFullLength ()/m;
-    fTargetVolume=pow(targetlength,3)*M_PI*4./3;
+    fTargetVolume=pow(targetlength,3)*M_PI*4./3; //Actually, DOM Volume should be excluded!!!
     AAAnalysisManager::Write ();
   }
 

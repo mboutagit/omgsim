@@ -118,7 +118,7 @@ namespace km3net
         /*
          * VK: this does not work for the photons going back from the PMT vacuume (if first they were transmitted inside PMT
          * So, this should be used:
-         * prestepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos) || prestepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos)  
+         * prestepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos) || postepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos)  
          * We decided not to do this check anyway (since it is enough that parent photon was in the photocathode.
          * Instead, we add below the check that the electron should be in the PMT sensitive area (PMT vacuum).
          */
@@ -128,8 +128,9 @@ namespace km3net
       {
         KM3AnalysisManager::getIt()->AddPhotoTubeEntranceInfo (fStep);
       }
-    else //bravo
+    else {  //do nothing
       return;
+    }
 
     G4LogicalSurface* Surface =
       G4LogicalBorderSurface::GetSurface(thePreOriginalPV, thePostOriginalPV);
@@ -214,7 +215,15 @@ namespace km3net
 
   }
 
-  //adding angular efficiency here
+  /*
+   * Adding angular efficiency here (this efficiency is the missing collection efficiency).
+   * Note that angle is related to the PMT while thereis an internal rough correction to angle on the OM teta/3*2.1 which was valid only for ANTARES but kept there for consistency.
+   * Output:
+   * 4 - not detected
+   * 3 - detected with angular efficiency - angular efficiency error
+   * 2 - detected with angular efficiency but not with (angular efficiency - angular efficiency error)
+   * 1 - detected with angular efficiency + angular efficiency error but not with angular efficiency
+   */
   unsigned char KM3SteppingAction::CheckDetection(const G4ThreeVector& localPoint)
   {
     unsigned char detectedGamma = 4;
@@ -225,8 +234,6 @@ namespace km3net
     double eta_teta=_angular_efficiency->Value(teta/3*2.1);
 
     double eta_teta_err=_angular_efficiency_err->Value(teta/3*2.1);
-
-    //cout << "DEBUG: eta_teta " << eta_teta  << " +- " << eta_teta_err << ' ' << teta/3*2.1 <<' ' << endl;
 
     double rndm = G4UniformRand();
     if(rndm < eta_teta*(1.-eta_teta_err))
@@ -241,7 +248,6 @@ namespace km3net
       {
         detectedGamma = 1;
       }
-    //}
 
     return detectedGamma;
   }

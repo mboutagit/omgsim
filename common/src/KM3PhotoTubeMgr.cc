@@ -236,6 +236,7 @@ namespace km3net
 
   unsigned char KM3PhotoTubeMgr::KM3PhotoTube::CalculateDetection(const G4Step* STEP)
   {
+    G4cout << "Hey, I am using CalculateDetection in KM3PhotoTubeMgr " << G4endl;
     KM3PMTOpticalModel* theModel = ((KM3PhysicsList*)(G4RunManager::GetRunManager()->GetUserPhysicsList ()))->GetOpticalModel ();
 
     G4ThreeVector globalPoint = STEP->GetPreStepPoint()->GetPosition ();

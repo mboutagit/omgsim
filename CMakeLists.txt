@@ -77,6 +77,8 @@ endif(DEFINED ENV{LIBCONFIG_ROOT})
 SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -pedantic -Wno-non-virtual-dtor -Wno-long-long -Wwrite-strings -Wpointer-arith -Woverloaded-virtual -Wno-variadic-macros -Wshadow -pipe -std=c++11 -DPROJECT_SOURCE_DIR=\\\"${PROJECT_SOURCE_DIR}\\\"")
 
 
+
+
 if(USE_FISSION_NEW)
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -L/${CMAKE_SOURCE_DIR}/FissionLib/fission_v1.9.1/lib -lFission")
   include_directories(${CMAKE_SOURCE_DIR}/FissionLib/fission_v1.9.1/include)

@@ -19,9 +19,13 @@ PROPERTY ABSLENGTH
 #taken from OM glass from ANTARES OM paper, points from 280-330 were removed from original PMTGlass (so just linear interpolation should be used there)
 #todo - try with icecube borosilicate glass scan (for vitrovex)
 OPTION wavelength
-250 0
 260 0
-270 0
+280 0.688
+290 1.31
+300 2.9
+310 7.5
+320 18
+#original PMTGlass from ANTARES (so just linear interpolation should be used there)
 340 150.627
 350 403.931
 360 544.638
@@ -58,40 +62,6 @@ OPTION wavelength
 670 530
 680 530
 690 530
-#
-#2.034 530
-#2.068 540
-#2.103 580
-#2.139 650
-#2.177 750
-#2.216 730
-#2.256 650
-#2.298 630
-#2.341 600
-#2.386 600
-#2.433 580
-#2.481 580
-#2.532 500
-#2.585 420
-#2.640 400
-#2.697 380
-#2.757 350
-#2.820 360
-#2.885 360
-#2.954 350
-#3.026 450
-#3.102 590
-#3.181 610
-#3.265 600
-#3.353 300
-#3.446 550
-#3.545 400
-#3.649 200
-#3.760 100
-#3.877 050
-#4.002 030
-#4.136 010
-#4.180 000
 
 
 PROPERTY RINDEX
