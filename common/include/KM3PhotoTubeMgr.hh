@@ -56,7 +56,7 @@ namespace km3net
       //The materials to get, "classic" big PM by default
       std::string GlassMaterial        = "PMTGlass";
       std::string PhotoCathodeMaterial = "photocathode10inches";
-      std::string InternalReflectorMaterial  = "MirrorAluminium";
+      std::string InternalReflectorMaterial  = "PMTInternalSurface";
       std::string DinodsSurface              = "DinodsSurface"            ;
       std::string CapDinodsSurface           = "CapDinodsSurface"         ;
       std::string GridDinodsSurface          = "GridDinodsSurface"        ;

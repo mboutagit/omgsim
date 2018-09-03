@@ -28,7 +28,7 @@ OPTION eV
 
 #########################################----
 
-CREATE MirrorAluminium #for the reflective cons and PMT internal (considered equivalent)
+CREATE MirrorAluminium #for Reflector Cone 
 
 DENSITY 2.7
 
@@ -52,11 +52,13 @@ OPTION constant
 
 PROPERTY REFLECTIVITY
 OPTION eV
-2 0.92
-6 0.92
+#https://drive.google.com/open?id=0B-oDhZjfBP59Q0pveVQ2NHh3RVU says it is almeco 95100
+#almeco vega 95100 in http://www.almecogroup.com/uploads/438-ALMECO_vegaFormEvolution_ENG_2011.pdf has Reflective properties of unformed sheet >95%
+2 0.95
+6 0.95
 
 ########################################----
-CREATE PMTInternalSurface #for the reflective cons and PMT internal (considered equivalent)
+CREATE PMTInternalSurface #for PMT internal (back side of the PMT bulb)
 DENSITY 2.7
 
 COMPONENTS
@@ -83,11 +85,11 @@ OPTION constant
 
 PROPERTY REFLECTIVITY
 OPTION eV
-2 0.8
-6 0.9
+2 0.95
+6 0.95
 
 ########################################----
-CREATE DinodsSurface #for the reflective cons and PMT internal (considered equivalent)
+CREATE DinodsSurface #for dynode cylinder
 
 DENSITY 2.7
 
@@ -137,12 +139,10 @@ OPTION constant
 
 PROPERTY polish
 OPTION constant
-0.7
+0.8
 
 PROPERTY REFLECTIVITY
 OPTION eV
-#2 0.62
-#6 0.7
 2 0.45
 6 0.51
 
@@ -173,9 +173,6 @@ OPTION constant
 
 PROPERTY REFLECTIVITY
 OPTION eV
-#2 0.005
-#6 0.0060
-2 0.25
-6 0.25
-
+2 0.005
+6 0.0060
 #########################################----

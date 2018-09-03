@@ -13,7 +13,7 @@ let angle=SGE_TASK_ID-1
 emin=1.7
 emax=4.4
 nsteps=27
-step=`echo "scale=3;($emax-$emin)/$nsteps" | bc -l`
+step=`echo "scale=1;($emax-$emin)/$nsteps" | bc -l`
 let nsteps+=1
 ene=$emin
 for i in `seq 1 $nsteps`;
