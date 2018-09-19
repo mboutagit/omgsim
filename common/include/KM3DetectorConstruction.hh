@@ -33,6 +33,7 @@
 
 #include <string>
 #include <map>
+#include <set>
 
 #include <KM3ParametrizedVolume.hh>
 
@@ -131,7 +132,7 @@ namespace km3net
       fDetectorTypeName=NAME;
     }
 
-    static const std::string fOMBasePrefix;
+    static std::set<std::string> fOMNames;
 
     void SetDataFilesSources (std::string Path);
 

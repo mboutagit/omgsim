@@ -146,9 +146,9 @@ namespace km3net
     cout << "Analysis file was normaly closed." << endl;
   }
 
-  void WPropAnalysisManager::SetOriginOfEvent (const G4Event* EV)
+  void WPropAnalysisManager::StartOfEvent (const G4Event* EV)
   {
-    KM3AnalysisManager::SetOriginOfEvent (EV);
+    KM3AnalysisManager::StartOfEvent (EV);
 
     fRealEmmiting = EV->GetPrimaryVertex ()->GetPrimary ()->GetMomentum ();
     fRealEmmiting.setTheta (fRealEmmiting.getTheta ()+5*deg); ///////warning!!!/////////////////

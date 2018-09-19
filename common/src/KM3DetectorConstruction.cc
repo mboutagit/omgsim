@@ -88,7 +88,8 @@ using namespace libconfig;
 namespace km3net
 {
 
-  const string KM3DetectorConstruction::fOMBasePrefix("OM",2);
+  std::set<std::string> KM3DetectorConstruction::fOMNames;
+
   G4double KM3DetectorConstruction::fTargetLength=500*m;
 
   KM3DetectorConstruction* KM3DetectorConstruction::fInstance=0;
@@ -242,6 +243,7 @@ namespace km3net
     for (auto& OMPar: fOMList [fDetectorTypeName])
       {
         PlaceThem ( KM3OpticalModuleMgr::GetIt (), OMPar);
+        fOMNames.insert(OMPar.Name.data());
       }
 
 

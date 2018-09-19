@@ -45,6 +45,7 @@
 #include "globals.hh"
 #include <vector>
 #include <string>
+#include <fstream> //evt output
 #include "G4Track.hh"
 #include <G4Event.hh>
 #include <time.h>
@@ -75,7 +76,7 @@ namespace km3net
     virtual ~KM3AnalysisManager();
 
   public: // Without description
-    virtual void SetOriginOfEvent (const G4Event* EV);
+    virtual void StartOfEvent (const G4Event* EV);
     virtual void AddDetectedParticule (const KM3TrackInformation* info, unsigned char LIM) = 0;
     virtual void AddPhotoTubeEntranceInfo (const G4Step* fStep);
     virtual void AddOMEntranceInfo (const G4Step* Step);
@@ -88,6 +89,7 @@ namespace km3net
 
     static bool fKeepAll;
     static bool fFastAnalysisOnly;
+    static bool fEvtOutput;
     static short fVerbose;
     static std::string fRootFileName;
 
@@ -102,6 +104,9 @@ namespace km3net
     TTree* fTRunInfos;
     TTree* fTEvent;
     TTree* fTFastAnalysis;
+
+    std::ofstream evt_stream;
+    unsigned int fHits=0;  //total number of detected hits
 
 
     unsigned long fNbOM=0;

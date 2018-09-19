@@ -126,6 +126,19 @@ namespace km3net
     fLimit = LIM;
 
     fTEvent->Fill ();
+
+    if (fEvtOutput) {
+        fHits++;
+        /*
+         * id [int] PM-id [int] npe-pure [int] tt-pure (ns) [real] G-id [real] track-id [int]
+         * PMT id in the hit tag is coded as fOMId*100+fPMID - this need to be ported to the detector file.
+         * npe-pure is always 1 (no hit integration is done in OMGsim)
+         * G-id -1 for K40 noise is assumed (can be improved later)
+         * Track ID 1 is always assumed (1 decay)
+         */
+         if (fHits == 1) evt_stream << "start_event: " << fNbTrigg << " 1" << endl;
+         evt_stream << "hit: " << fHits << " " << fOMId*100+fPMID << " 1 " << fTotalTime << " -1 1" << endl;
+    }
   }
 
   void AAAnalysisManager::EndOfEvent ()

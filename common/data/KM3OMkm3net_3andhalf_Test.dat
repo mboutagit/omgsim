@@ -21,7 +21,8 @@ GelMaterial = "WackerSilGel612_A100B67";
 
 CheckOverlaps = false;
 
-AreThereReflectors = true;
+//AreThereReflectors = true;
+AreThereReflectors = false;
 ReflectorAngle     = 45.;
 ReflectorDistGlass = 1.5;
 ReflectorThickness = 10.5;  //acutally with 10.5 thickness and 45 deg the width is not 14.5 but 14.85

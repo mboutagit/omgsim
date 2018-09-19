@@ -68,6 +68,7 @@ int main(int argc_,char** argv_)
   bool bsession = false;
   bool keepall = false;
   bool analyse_all = false;
+  bool evt_output = false;
   int iarg = 1;
   while (iarg < argc_)
     {
@@ -80,21 +81,23 @@ int main(int argc_,char** argv_)
             {
               debug = true;
             }
-          else
-            if ((option == "-s") || (option == "--session"))
-              {
-                bsession = true;
-              }
-            else
-              if ((option == "-ka") || (option == "--keep-all"))
-                {
-                  keepall = true;
-                }
-              else
-                if ((option == "-fa") || (option == "--full-analysis"))
-                  {
-                    analyse_all=true;
-                  }
+          else if ((option == "-s") || (option == "--session"))
+            {
+              bsession = true;
+            }
+          else if ((option == "-ka") || (option == "--keep-all"))
+            {
+              keepall = true;
+            }
+          else if ((option == "-fa") || (option == "--full-analysis"))
+            {
+              analyse_all=true;
+            }
+          else if (option == "-evt")
+            {
+              evt_output=true;
+            }
+           
 
           /* Here you may add more switches...
            * else if (...)
@@ -133,6 +136,7 @@ int main(int argc_,char** argv_)
     //KM3AnalysisManager* analysis = K40AnalysisManager::getIt();
     KM3AnalysisManager::fKeepAll=keepall;
     KM3AnalysisManager::fFastAnalysisOnly=!analyse_all;
+    KM3AnalysisManager::fEvtOutput=evt_output;
     KM3AnalysisManager::fVerbose=(short)debug;
     KM3AnalysisManager::fRootFileName = srf;
 

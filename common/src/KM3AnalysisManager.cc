@@ -36,6 +36,7 @@
 #include "G4VTouchable.hh"
 #include <G4NavigationHistory.hh>
 #include <G4TransportationManager.hh>
+#include <KM3OpticalModuleMgr.hh>  //for PMT name
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
@@ -46,6 +47,7 @@ namespace km3net
   string KM3AnalysisManager::fRootFileName = "default.root";
   bool   KM3AnalysisManager::fKeepAll = false;
   bool   KM3AnalysisManager::fFastAnalysisOnly = true;
+  bool   KM3AnalysisManager::fEvtOutput = true;
   short  KM3AnalysisManager::fVerbose = 0;
 
   KM3AnalysisManager* KM3AnalysisManager::fManager = 0;
@@ -87,6 +89,14 @@ namespace km3net
     fTFastAnalysis = new TTree("FastAnalysis","Data used for very fast analysis.");
     fTFastAnalysis->Branch("PhotonReach",&fNbOM,"NbOM/l:NbPhoto");
 
+    //ANTARES evt-like format output
+    if (fEvtOutput) {
+        evt_stream.open("output.evt");
+        evt_stream << "start_run: 1" << endl;
+        evt_stream << "simul: OMGsim trunk-180919 180919 0000" << endl;
+    }
+    
+
   }
 
 
@@ -113,7 +123,19 @@ namespace km3net
     if (fFastAnalysisOnly)
       return;
 
-    fPMID=STEP->GetPostStepPoint ()->GetTouchable ()->GetCopyNumber (1);
+    /*
+     * More flexible and robust way of PMT number search introduced (scroll through all volumes).
+     * Get OMid here was added here.
+     */
+    const G4VTouchable*   touchpost = STEP->GetPostStepPoint ()->GetTouchable ();
+    for (int ihist = 0; ihist < touchpost->GetHistoryDepth (); ihist++) {
+        G4String volname = touchpost->GetVolume(ihist)->GetName();
+        if (volname.find(KM3PhotoTubeMgr::fPMTContainerName) != std::string::npos) {
+             fPMID=touchpost->GetCopyNumber(ihist);
+        } else if (KM3DetectorConstruction::fOMNames.find(volname) != KM3DetectorConstruction::fOMNames.end()) {
+             fOMId=touchpost->GetCopyNumber(ihist);
+        }
+    }
 
     const G4StepPoint* prestep = STEP->GetPreStepPoint();
     const G4ThreeVector& globalPoint = prestep->GetPosition();
@@ -129,6 +151,7 @@ namespace km3net
 
   }
 
+  //Vladimir: This function is outdated and not used currently. OMid is added at AddPhotoTubeEntranceInfo.
   void KM3AnalysisManager::AddOMEntranceInfo (const G4Step* STEP)
   {
 
@@ -140,9 +163,6 @@ namespace km3net
       {
         return;
       }
-
-    if (fOMBasePrefix.size () == 0)
-      fOMBasePrefix=KM3DetectorConstruction::fOMBasePrefix;
 
     const G4StepPoint* poststep = STEP->GetPostStepPoint();
     G4String poststepName=poststep->GetPhysicalVolume()->GetName();
@@ -162,7 +182,18 @@ namespace km3net
     const G4VTouchable*   touch = poststep->GetTouchable();
     const G4ThreeVector& localpoint=touch->GetHistory ()->GetTopTransform().TransformPoint(globalPoint);
 
-    fOMId = touch->GetVolume ()->GetCopyNo ();
+    /*
+     * G4int copyNo = theTouchable->GetCopyNumber(); 
+     * G4int motherCopyNo = theTouchable->GetCopyNumber(1); 
+     * where Copy here stays for any duplicated instance of a physical volume, 
+     * either if it is a G4PVPlacement (multiple placements of the same logical volume) 
+     * or a G4PVReplica/G4PVParameterised. 
+     * The method GetCopyNo()is meant to return only the serial number of placements not duplicated in the geometry tree. 
+     *
+     * So, it seems, GetCopyNumber should be used instead of GetCopyNo since we do different placements of the same logical volume.
+     */
+    //fOMId = touch->GetVolume ()->GetCopyNo ();
+    fOMId = touch->GetCopyNumber (1);
     fOMHitX=globalPoint.x ();
     fOMHitY=globalPoint.y ();
     fOMHitZ=globalPoint.z ();
@@ -171,8 +202,9 @@ namespace km3net
 
   }
 
-  void KM3AnalysisManager::SetOriginOfEvent (const G4Event* EV)
+  void KM3AnalysisManager::StartOfEvent (const G4Event* EV)
   {
+    fHits = 0;
     if (fRFile == NULL)
       return;
 
@@ -228,6 +260,11 @@ namespace km3net
     fPhotoP=0;
     fOMId=-1;
     fPMID=0;
+
+    if (fEvtOutput && fHits != 0) {
+        evt_stream << "end_event:" << endl;
+    }
+    
   }
 
 }

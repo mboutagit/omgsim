@@ -65,7 +65,7 @@ namespace km3net
 
   void KM3EventAction::BeginOfEventAction(const G4Event* Ev)
   {
-    KM3AnalysisManager::getIt()->SetOriginOfEvent (Ev);//->GetPrimaryVertex ()->GetPosition ());
+    KM3AnalysisManager::getIt()->StartOfEvent (Ev);
   }
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....

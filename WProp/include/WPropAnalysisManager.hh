@@ -80,7 +80,7 @@ namespace km3net
   public: // Without description
     virtual void AddDetectedParticule (const KM3TrackInformation* INFO, unsigned char LIM);
     virtual void EndOfEvent ();
-    virtual void SetOriginOfEvent (const G4Event* EV);
+    virtual void StartOfEvent (const G4Event* EV);
 
     virtual void IncrementProcessWeight (KM3PetzoldScattering::PROCESS PR);
 
