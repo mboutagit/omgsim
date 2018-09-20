@@ -49,6 +49,7 @@ namespace km3net
   bool   KM3AnalysisManager::fFastAnalysisOnly = true;
   bool   KM3AnalysisManager::fEvtOutput = true;
   short  KM3AnalysisManager::fVerbose = 0;
+  std::ofstream KM3AnalysisManager::evt_stream;
 
   KM3AnalysisManager* KM3AnalysisManager::fManager = 0;
 
@@ -77,6 +78,7 @@ namespace km3net
 
   void KM3AnalysisManager::Init (string RFNAME)
   {
+
     if (RFNAME.size ())
       fRootFileName=RFNAME;
 
@@ -93,11 +95,23 @@ namespace km3net
     if (fEvtOutput) {
         evt_stream.open("output.evt");
         evt_stream << "start_run: 1" << endl;
-        evt_stream << "simul: OMGsim trunk-180919 180919 0000" << endl;
+        evt_stream << "simul: OMGsim trunk-180919 " << KM3AnalysisManager::currentDateTime() << endl;
     }
-    
-
   }
+
+// Get current date/time, format is YYYY-MM-DD.HH:mm:ss
+const std::string KM3AnalysisManager::currentDateTime() {
+    time_t     now = time(0);
+    struct tm  tstruct;
+    char       buf[80];
+    tstruct = *localtime(&now);
+    // Visit http://en.cppreference.com/w/cpp/chrono/c/strftime
+    // for more information about date/time format
+    strftime(buf, sizeof(buf), "%y%m%d %H%M", &tstruct);
+
+    return buf;
+}
+
 
 
   bool KM3AnalysisManager::HasBeenInTheOMYet ()
@@ -204,6 +218,7 @@ namespace km3net
 
   void KM3AnalysisManager::StartOfEvent (const G4Event* EV)
   {
+
     fHits = 0;
     if (fRFile == NULL)
       return;

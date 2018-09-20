@@ -44,6 +44,7 @@ namespace km3net
 {
 
   G4UIdirectory* KM3PMTOpticalModel::fgCmdDir = NULL;
+  G4int  KM3PMTOpticalModel::_luxlevel= 3;
 
 
 
@@ -52,7 +53,6 @@ namespace km3net
   //    : G4VFastSimulationModel(modelName, photoregion, false),
   //    G4OpBoundaryProcess ()
   {
-    _luxlevel= 3;
     _verbosity= 0;
 
     ffMaclaurinSerie = new TF1 ("MaclaurinSerie","TMath::Exp(-[0]*[0]/x)*(1-12304/22680.*[0]*[0]/x+5940/22680.*pow([0],4)/x/x-1380/22680.*pow([0],6)/pow(x,3)+105/22680.*pow([0],8)/pow(x,4))",0.,1e-3);
@@ -73,8 +73,8 @@ namespace km3net
 
       fLuxCmd= new G4UIcmdWithAnInteger("/PMTOpticalModel/luxlevel",this);
       fLuxCmd->SetGuidance("Set \"luxury level\" for PMT Optical Model\n"
-                           " 0 == standard \"black bucket\": photons stop in PC, maybe make pe, \n"
-                           " 1 == shiny translucent brown film: photons only stop if they make a PE, otherwise 50/50 chance of reflecting/transmitting\n"
+                           " 0 == standard \"black bucket\": photons stop in PC, make p.e. if with P=QE(lambda), \n"
+                           " 1 == shiny translucent brown film: photons only stop if they make a PE, otherwise 50/50 chance of reflecting/transmitting (not implemented/verified)\n"
                            " 2 or greater == full model\n"
                            "The default value is 3."
                            );
@@ -289,6 +289,7 @@ namespace km3net
    */
   G4VParticleChange* KM3PMTOpticalModel::DoPhotocathodeInteraction (const G4Track &aTrack, const G4Step &aStep)
   {
+	  //G4cout << "DEBUG: DoPhotocathodeInteraction " << G4endl;
 
     aParticleChange.Initialize(aTrack);
     //aParticleChange.ProposeVelocity(aTrack.GetVelocity());
@@ -496,7 +497,10 @@ namespace km3net
     const
 #endif
   {
-    //cout << "DEBUG: trying to produce electron" << endl;
+    if (_luxlevel == 0) {
+	    if (G4UniformRand() < _efficiency) return true;
+	    else return false;
+    }
 
     if (_k2 == 0) return false; //if the photocathode area is not absorbing, no electrons can escape
 
@@ -514,6 +518,7 @@ namespace km3net
     double Rand = G4UniformRand ();
     bool HasGoneInside = ((Rand < PhotonDepth && GoingInside) ||
                           (Rand > PhotonDepth && !GoingInside));
+
 
 # ifdef ENABLE_TESTING
     if (GoingInside) fEPD.MeanEscapeProb  = PhotonDepth;
@@ -545,14 +550,16 @@ namespace km3net
       }
     */
 
-    //Missing probability for the 3 step model. The spline is obtained comparing QE meaurements with the simulation witout this probability
+    //Missing probability for the 3 step model. The spline is obtained comparing QE measurements with the simulation witout this probability
 # ifdef ENABLE_TESTING
     fEPD.MeanEscapeProb *= _threestepprob;
 # endif
+
     if (HasGoneInside) {
       Rand = G4UniformRand ();
       return Rand < _threestepprob;
     }
+
 
     return false;
 
@@ -567,8 +574,6 @@ namespace km3net
       // 100% absorption, and QE will be renormalized later
       fR_s= fR_p= 0.0;
       fT_s= fT_p= 0.0;
-      fR_n= 0.0;
-      fT_n= 0.0;
       return;
     }
     else if (_luxlevel == 1) {

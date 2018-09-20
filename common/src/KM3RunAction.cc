@@ -66,6 +66,10 @@ namespace km3net
         UI->ApplyCommand("/vis/clear/view");
         UI->ApplyCommand("/vis/draw/current");
       }
+
+     if (KM3AnalysisManager::fEvtOutput) {
+	     KM3AnalysisManager::evt_stream << "norma: 0 " << aRun->GetNumberOfEventToBeProcessed() << std::endl;
+     }
   }
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....

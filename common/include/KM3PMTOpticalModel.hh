@@ -87,7 +87,7 @@ namespace km3net
     // is vacuum-filled and placed in the body with no offset or rotation.
 
     // "luxury level" -- how fancy should the optical model be?
-    G4int _luxlevel;
+    static G4int _luxlevel;
     G4int _electronProductionLevel = 3;
 
     // verbose level -- how verbose to be (diagnostics and such)
@@ -187,6 +187,7 @@ namespace km3net
   public:
     static bool IsAPhotocathode (const G4Step *STEP);
     static bool IsAPhotocathode (const G4VPhysicalVolume* preVol, const G4VPhysicalVolume*  postVol);
+    static G4int GetLuxuryLevel() {return _luxlevel;}
 
 #ifdef ENABLE_TESTING
   private:

@@ -116,7 +116,7 @@ namespace km3net
         info->GetOriginalParticleType () == "opticalphoton" &&
         //prestepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos) 
         /*
-         * VK: this does not work for the photons going back from the PMT vacuume (if first they were transmitted inside PMT
+         * VK: this does not work for the photons going back from the PMT vacuum (if first they were transmitted inside PMT
          * So, this should be used:
          * prestepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos) || postepName.find (KM3PhotoTubeMgr::fPhotoName) != string::npos)  
          * We decided not to do this check anyway (since it is enough that parent photon was in the photocathode.
@@ -226,30 +226,39 @@ namespace km3net
    */
   unsigned char KM3SteppingAction::CheckDetection(const G4ThreeVector& localPoint)
   {
-    unsigned char detectedGamma = 4;
-    //double eta_E = 0.5; //probability that the electron goes in or out the photocathode
-    //from the photonis, can be improved. The abs length is ~30nm, the electron is produced at about an half of the photocathode.
-    double teta = localPoint.theta ();//acos(costeta);
+	  unsigned char detectedGamma = 4;
+	  if (KM3PMTOpticalModel::GetLuxuryLevel() == 3) {
+		    //double eta_E = 0.5; //probability that the electron goes in or out the photocathode
+		    //from the photonis, can be improved. The abs length is ~30nm, the electron is produced at about an half of the photocathode.
+		    double teta = localPoint.theta ();//acos(costeta);
 
-    double eta_teta=_angular_efficiency->Value(teta/3*2.1);
+		    double eta_teta=_angular_efficiency->Value(teta/3*2.1);
 
-    double eta_teta_err=_angular_efficiency_err->Value(teta/3*2.1);
+		    double eta_teta_err=_angular_efficiency_err->Value(teta/3*2.1);
 
-    double rndm = G4UniformRand();
-    if(rndm < eta_teta*(1.-eta_teta_err))
-      {
-        detectedGamma = 3;
-      }
-    else if(rndm < eta_teta)
-      {
-        detectedGamma = 2;
-      }
-    else if (rndm < eta_teta*(1+eta_teta_err))
-      {
-        detectedGamma = 1;
-      }
+		    double rndm = G4UniformRand();
+		    if(rndm < eta_teta*(1.-eta_teta_err))
+		      {
+			detectedGamma = 3;
+		      }
+		    else if(rndm < eta_teta)
+		      {
+			detectedGamma = 2;
+		      }
+		    else if (rndm < eta_teta*(1+eta_teta_err))
+		      {
+			detectedGamma = 1;
+		      }
 
-    return detectedGamma;
+	  } else {
+		  double rndm = G4UniformRand();
+		  //G4cout << "DEBUG: converted" << G4endl;
+		  if (rndm < 0.9) {
+			  detectedGamma = 2;
+			  //G4cout << "DEBUG: detected" << G4endl;
+		  }
+	  }
+	  return detectedGamma;
   }
 
 }

@@ -94,6 +94,9 @@ namespace km3net
     static std::string fRootFileName;
 
     std::string fOMBasePrefix;
+    static std::ofstream evt_stream;
+
+    const std::string currentDateTime();
 
   protected:
     // MEMBERS
@@ -105,7 +108,6 @@ namespace km3net
     TTree* fTEvent;
     TTree* fTFastAnalysis;
 
-    std::ofstream evt_stream;
     unsigned int fHits=0;  //total number of detected hits
 
 

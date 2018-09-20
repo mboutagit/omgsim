@@ -78,8 +78,10 @@ namespace km3net
 
   void AAAnalysisManager::Write  ()
   {
-    if (fRFile == NULL)
-      return;
+    if (fRFile == NULL) {
+	    G4cout << "WARNING: fRFile not found." << G4endl;
+      	    return;
+    }
 
     fTRunInfos->Fill ();
     fTFastAnalysis->Fill ();
@@ -125,7 +127,7 @@ namespace km3net
 
     fLimit = LIM;
 
-    fTEvent->Fill ();
+    fTEvent->Fill ();   
 
     if (fEvtOutput) {
         fHits++;
@@ -137,7 +139,7 @@ namespace km3net
          * Track ID 1 is always assumed (1 decay)
          */
          if (fHits == 1) evt_stream << "start_event: " << fNbTrigg << " 1" << endl;
-         evt_stream << "hit: " << fHits << " " << fOMId*100+fPMID << " 1 " << fTotalTime << " -1 1" << endl;
+         if (fLimit == 2 || fLimit == 3) evt_stream << "hit: " << fHits << " " << fOMId*100+fPMID << " 1 " << fTotalTime << " 3 1" << endl;
     }
   }
 
