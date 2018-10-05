@@ -35,6 +35,7 @@ namespace km3net
     double TestElectronEscapingProbability (const G4ThreeVector &dir, const G4ThreeVector &pol, const G4ThreeVector &norm) const;
     bool LastElectronIsEscaped ();
     float GetEfficiency (float wavelength);
+    float GetCorrectedEfficiency (float wavelength);
     float GetGlassAbsorption (float wavelength, float thickness);
     G4MaterialPropertyVector GetKIndex () {return *(fOpticalModel._kindex_photocathode);}
 
@@ -54,6 +55,7 @@ namespace km3net
     void PutTObject (string name, TObject* object) { fObjectCol[name] = object; return;}
     bool InTObject (string name) {if (fObjectCol.find(name) != fObjectCol.end()) return true; return false;}
     void GetTotalProbabilities (double& Abs, double& Trans, double& Refl) {Abs=fOpticalModel.fA_t; Trans=fOpticalModel.fT_t; Refl=fOpticalModel.fR_t;}
+    double GetN1(){return fOpticalModel._n1;}
     float fGlassThickness = 1*mm;
     int fElPrecision = 10000;
 

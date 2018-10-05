@@ -202,7 +202,7 @@ int main (int argc, char** argv)
         float newKindex = 0;
 
 	//if (newbin != 0 && wavelength >= 380 && wavelength <= 680 ) 
-	if (newbin != 0 && wavelength >= 380 && wavelength <= 1000) gratioQE->SetPoint(gratioQE->GetN(),energy/eV,1./newbin); //we fill gratio only for wavelength where the Motta measurements exists (tuning is done using kindex from Motta).
+	if (newbin != 0 && wavelength >= 270 && wavelength <= 1000) gratioQE->SetPoint(gratioQE->GetN(),energy/eV,1./newbin); //we fill gratio only for wavelength where the Motta measurements exists (tuning is done using kindex from Motta).
 
         newKindex = oldKindexVector.Value (energy);
 
@@ -236,6 +236,8 @@ int main (int argc, char** argv)
 				cout << wavelength << " " << newKindex << endl;
 
         //cout <<wavelength << " old " << oldKindexVector.Value (energy) << " " <<  newKindex << endl;
+	//
+	
       }
     theModelTester.SetKIndex (newKindexVector);
 		cout << "Ratio of calculated QE to QE in the data" << endl;
@@ -249,6 +251,13 @@ int main (int argc, char** argv)
 	theModelTester.SaveTreesAndHistograms ("testerout.root");
   // ( !PercentTo (0.02,measuredQE, 1, 11, 42) && calibrateQE);
   //}while ( !PercentTo (0.02,measuredQE, 1.1, 11, 42) && calibrateQE);
+
+  /*
+  cout << "CORRECTED QE" << endl;
+  for (double wavelength = 270; wavelength < 1000; wavelength+=5) {
+	  cout << wavelength << " " << theModelTester.GetCorrectedEfficiency(wavelength) << endl;
+  }
+  */
 
 
 

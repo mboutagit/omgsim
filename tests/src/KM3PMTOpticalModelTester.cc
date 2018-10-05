@@ -159,7 +159,8 @@ namespace km3net
 
     Abs1=fOpticalModel.fA_t;
 
-    return (GetGlassAbsorption (wavelength, fGlassThickness)*(Abs1*Elexit1));
+    //return (GetGlassAbsorption (wavelength, fGlassThickness)*(Abs1*Elexit1));
+    return Abs1*Elexit1;   //We excluded GlassAbsorption and reflection Air/Glass from the measured QE
 
   }
 
@@ -245,6 +246,16 @@ namespace km3net
     float energy = twopi*hbarc/wavelength/nm;
     return fOpticalModel._efficiency_photocathode->Value (energy);
   }
+
+  float KM3PMTOpticalModelTester::GetCorrectedEfficiency (float wavelength)
+  {
+     float energy = twopi*hbarc/wavelength/nm;
+     float _n1= fOpticalModel._rindexPre->Value( energy );
+     cout << "DEBUG: " << wavelength << " " << fOpticalModel._efficiency_photocathode->Value (energy) << " " << 1/((1-pow((_n1-1)/(_n1+1),2))) << " " << GetGlassAbsorption (wavelength, fGlassThickness) << endl;
+     return fOpticalModel._efficiency_photocathode->Value (energy) / (1-pow((_n1-1)/(_n1+1),2)) / GetGlassAbsorption (wavelength, fGlassThickness);
+
+  }
+
 
   float KM3PMTOpticalModelTester::GetGlassAbsorption (float wavelength, float thickness)
   {

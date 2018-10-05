@@ -1,7 +1,7 @@
 /** @file KM3PMTOpticalModel.cc
  * Defines a fast model for the photon propagation in the photocathode thin layer model (boundary glass+photocathode, photocathode, boundary photocathode+vacuum).
  * The photon propagation ends with photon leaving the area or absorping the photon and, eventually, producing the photoelectron leaving to the vacuum.
- * The implementation is based on Dario Motta formalism initially, hevily rewritten.
+ * The implementation is based on Dario Motta formalism initially, heavily rewritten.
  * In particular, electron production depth is estimated now and electron escape probability accounts for it.
  * Spicer three step model for electron escape was tested, but its final implementation was used only in effective way concidering experimental probability (theoretical developement did not reached good agreement with data).
     @authors Vladimir Kulikovskiy and Christophe Hugon.
@@ -204,6 +204,7 @@ namespace km3net
 
   void KM3PMTOpticalModel::InitPhotocathodeIndex ()
   {
+	  G4cout << "InitPhotocathodeIndex" << G4endl;
     _n1= _rindexPre->Value( _photon_energy );
     _n2= _rindex_photocathode->Value( _photon_energy );
     _k2= _kindex_photocathode->Value( _photon_energy );
@@ -239,7 +240,7 @@ namespace km3net
 
     G4bool isOnBoundary =
       (pStep->GetPostStepPoint()->GetStepStatus() == fGeomBoundary);
-
+    
     G4Material* PreMaterial;
     G4Material* PostMaterial;
 
@@ -289,8 +290,6 @@ namespace km3net
    */
   G4VParticleChange* KM3PMTOpticalModel::DoPhotocathodeInteraction (const G4Track &aTrack, const G4Step &aStep)
   {
-	  //G4cout << "DEBUG: DoPhotocathodeInteraction " << G4endl;
-
     aParticleChange.Initialize(aTrack);
     //aParticleChange.ProposeVelocity(aTrack.GetVelocity());
 
@@ -923,6 +922,7 @@ namespace km3net
       {
         return false;
       }
+
 
     return true;
 
