@@ -5,25 +5,27 @@
 #/KM3/det/setTargetMaterial AntaresWater
 /KM3/det/setTargetMaterial NEMOWater
 /KM3/det/DontDraw bento absorber
-/KM3/det/setWorldLength 10 m
+/KM3/det/setWorldLength 1 m
 
 /KM3/GenType 1
-
-/PMTOpticalModel/luxlevel 0
 
 /run/verbose 0
 /run/initialize
 /tracking/storeTrajectory 0
 
 /gps/pos/shape Sphere
-/gps/pos/radius 10 m
+#/gps/pos/radius 10 m
+/gps/pos/radius 21.59 cm
 /gps/pos/centre 0 0 0
 /gps/pos/type Volume
 /gps/particle ion
-/gps/ion 19 40
+/gps/ion 82 212
 /gps/ene/mono   0 eV
-/gps/pos/confine Target
+/gps/pos/confine DOMNoticeableOpticalBentoGlass
+
+#to limit the decay
+/grdm/nucleusLimits 212 212 82 82
 
 /tracking/verbose 0
 /event/verbose 0
-/run/beamOn 10000000
+/run/beamOn 100000

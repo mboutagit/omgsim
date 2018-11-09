@@ -1,5 +1,5 @@
 /KM3/XP/Type K40
-/KM3/det/DetectorTypeName KM3K40
+/KM3/det/DetectorTypeName KM3K40QE2
 
 /KM3/det/setTargetScattering 1
 #/KM3/det/setTargetMaterial AntaresWater
@@ -8,6 +8,8 @@
 /KM3/det/setWorldLength 10 m
 
 /KM3/GenType 1
+
+/PMTOpticalModel/luxlevel 0
 
 /run/verbose 0
 /run/initialize
@@ -19,7 +21,7 @@
 /gps/pos/centre 0 0 0
 /gps/pos/type Volume
 /gps/particle ion
-/gps/ion 92 235
+/gps/ion 92 238
 #/gps/ion 19 40
 /gps/ene/mono   0 eV
 /gps/pos/confine DOMNoticeableOpticalBentoGlass

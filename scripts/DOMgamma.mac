@@ -1,0 +1,35 @@
+/KM3/XP/Type K40
+/KM3/det/DetectorTypeName KM3K40
+
+/KM3/det/setTargetScattering 1
+#/KM3/det/setTargetMaterial AntaresWater
+/KM3/det/setTargetMaterial NEMOWater
+/KM3/det/DontDraw bento absorber
+/KM3/det/setWorldLength 1 m
+
+/KM3/GenType 1
+
+/run/verbose 0
+/run/initialize
+/tracking/storeTrajectory 0
+
+/gps/pos/shape Circle
+/gps/pos/type Beam
+#/gps/pos/radius 10 m
+#/gps/pos/radius 21.59 cm
+/gps/pos/centre 0 0 21.5 cm
+/gps/direction 0. 0. -1.
+/gps/particle gamma
+#/gps/ion 2 4
+#/gps/ion 19 40
+/gps/ene/mono   5 MeV
+
+#/vis/open HepRepXML
+#/vis/scene/create filename.bheprep.zip
+#/vis/drawVolume
+#/vis/scene/endOfEventAction accumulate 500
+#/tracking/storeTrajectory 1
+
+/tracking/verbose 1
+/event/verbose 1
+/run/beamOn 1000
