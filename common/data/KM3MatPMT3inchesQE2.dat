@@ -5,7 +5,7 @@
 # Default "generic" version:  Glenn Horton-Smith, Dec 8, 2004
 #
 
-CREATE photocathode3inches
+CREATE photocathode3inchesQE2
 
 DENSITY 5
 
@@ -125,7 +125,7 @@ OPTION wavelength
 
 PROPERTY  EFFICIENCY_MEAS  # data is from Erlangen measurements 
 #O. Kalekin, E. Leonora, D. Samtleben   KM3NeT_PMT_2013_002-Evaluation Report Hamamatsu_R12199.pdf, https://drive.google.com/open?id=0B-oDhZjfBP59NzJ5TjN0TC1IVFk, 05 June 2013.
-# UNITS  nm\E 1
+#2 UNITS  nm\E 1
 OPTION wavelength
 270.0 0
 275.0 0

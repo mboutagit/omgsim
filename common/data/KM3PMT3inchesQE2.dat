@@ -1,6 +1,6 @@
 
-Name = "3inches";
-Prefix = "3inches";
+Name = "3inchesQE2";
+Prefix = "3inchesQE2";
 
 RadiusSphere   = 52.5; //internal radius is 50 cm from the drawing, external radius is 50 + glass thickness 2.5 cm
 BulbRadiusMin  = 35.95;

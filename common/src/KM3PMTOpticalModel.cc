@@ -204,7 +204,6 @@ namespace km3net
 
   void KM3PMTOpticalModel::InitPhotocathodeIndex ()
   {
-	  G4cout << "InitPhotocathodeIndex" << G4endl;
     _n1= _rindexPre->Value( _photon_energy );
     _n2= _rindex_photocathode->Value( _photon_energy );
     _k2= _kindex_photocathode->Value( _photon_energy );
