@@ -170,7 +170,7 @@ Download and compile ROOT:
     tar xf root_v6.10.08.source.tar.gz
     mkdir root_v6.10.08_build
     cd root_v6.10.08_build
-    cmake ..
+    cmake ../root-6.10.08
     make -j4
 
 Add to your ~/.bashrc
@@ -248,7 +248,7 @@ Download and compile ROOT:
     tar xf root_v6.10.08.source.tar.gz
     mkdir root_v6.10.08_build
     cd root_v6.10.08_build
-    cmake ..
+    cmake ../root-6.10.08
     make -j4
 
 Add to your ~/.bashrc
