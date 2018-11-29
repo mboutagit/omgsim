@@ -38,7 +38,7 @@ before_script:
     - export LD_LIBRARY_PATH=${LIBCONFIG_ROOT}/lib:${LD_LIBRARY_PATH}
     - export CPLUS_INCLUDE_PATH=${LIBCONFIG_ROOT}/include
     # Make Geant4
-    - yum install -y libX11-devel libXmu-devel
+    - yum install -y libX11-devel libXmu-devel modif-devel
     - cd $HOME/OMGsim && wget http://cern.ch/geant4-data/releases/geant4.10.01.p03.tar.gz && tar xf geant4.10.01.p03.tar.gz 
     - mkdir geant4.10.01.p03-build && cd geant4.10.01.p03-build && cmake -DCMAKE_INSTALL_PREFIX=../geant4.10.01.p03-install ../geant4.10.01.p03 -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_XM=ON && make -j4 install
 
