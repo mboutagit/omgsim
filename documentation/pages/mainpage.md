@@ -274,6 +274,70 @@ Download the code and compile:
     cmake ..
     make -j4
 
+### CentOS7 installation (to be ported to the docker container)
+Currently we are installing all needed software that does not come with OMGsim to $HOME/OMGsim
+
+    mkdir $HOME/OMGsim
+
+#### GCC v5 installation
+    
+		sudo yum install devtoolset-4-gcc* devtoolset-4-gcc-gfortran devtoolset-4-binutils
+		. /opt/rh/devtoolset-4/enable
+
+#### Libconfig installation
+
+    cd $HOME/OMGsim
+    wget https://hyperrealm.github.io/libconfig/dist/libconfig-1.7.2.tar.gz
+		tar xf libconfig-1.7.2.tar.gz -C /tmp
+		rm libconfig-1.7.2.tar.gz
+		export LIBCONFIG_ROOT=`pwd`/libconfig-1.7.2
+		cd /tmp/libconfig-1.7.2/
+		./configure --prefix $LIBCONFIG_ROOT
+		make && make install
+		cd -
+		rm -rf /tmp/libconfig-1.7.2/
+		export LD_LIBRARY_PATH=${LIBCONFIG_ROOT}/lib:${LD_LIBRARY_PATH}
+		export CPLUS_INCLUDE_PATH=${LIBCONFIG_ROOT}/include
+
+#### ROOT installation
+
+##### Packets installation (part of them are coming for gcc v5 from GCC v5 installation 
+
+    sudo yum install git cmake gcc-c++ gcc binutils libX11-devel libXpm-devel libXft-devel libXext-devel
+		sudo yum install gcc-gfortran openssl-devel pcre-devel \
+		mesa-libGL-devel mesa-libGLU-devel glew-devel ftgl-devel mysql-devel \
+		fftw-devel cfitsio-devel graphviz-devel \
+		avahi-compat-libdns_sd-devel libldap-dev python-devel \
+		libxml2-devel gsl-static
+
+		cd $HOME/OMGsim
+    curl -L https://root.cern.ch/download/root_v5.34.36.Linux-centos7-x86_64-gcc4.8.tar.gz > root_v5.34.36.tar.gz && tar xvf root_v5.34.36.tar.gz && rm root_v5.34.36.tar.gz
+		RUN sed -i 's/-std=c++11//g' ./root_v5.34.36/bin/root-config
+		source ./root_v5.34.36/bin/thisroot.sh
+
+#### Geant4 installation 
+
+    cd $HOME/OMGsim
+    wget http://geant4.web.cern.ch/geant4/support/source/geant4.10.01.p03.tar.gz
+    tar xf geant4.10.01.p03.tar.gz
+    mkdir geant4.10.01.p03-build
+    cd geant4.10.01.p03-build
+    cmake -DCMAKE_INSTALL_PREFIX=../geant4.10.01.p03-install ../geant4.10.01.p03 -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_XM=ON
+    make -j4 install
+
+
+#### OMGsim installation
+
+    cd $HOME/OMGsim
+    svn co http://svn.km3net.de/simulation/OMGsim/trunk/
+    source setenv.sh
+    mkdir build
+    cd build
+    cmake ..
+    make -j4
+
+
+    
 Then the binaries from the compilation will be in the folder "build".
 The "programs" folder (might) contains the typical use of the tool, the test one contains some experimental programs.
 
