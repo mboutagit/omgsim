@@ -24,7 +24,7 @@ before_script:
     - git submodule sync --recursive
     - git submodule update --init --recursive
     # install GCC v5
-    - sudo yum install devtoolset-4-gcc* devtoolset-4-gcc-gfortran devtoolset-4-binutils
+    - yum install devtoolset-4-gcc* devtoolset-4-gcc-gfortran devtoolset-4-binutils
     - . /opt/rh/devtoolset-4/enable
     # create folder for additional non-standard CentOS7 software
     - mkdir $HOME/OMGsim
