@@ -329,7 +329,7 @@ Currently we are installing all needed software that does not come with OMGsim t
 #### OMGsim installation
 
     cd $HOME/OMGsim
-    svn co http://svn.km3net.de/simulation/OMGsim/trunk/
+		git clone git@git.km3net.de:simulation/omgsim.git OMGsim_trunk
     source setenv.sh
     mkdir build
     cd build

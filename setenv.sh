@@ -2,7 +2,12 @@
 . /opt/rh/devtoolset-4/enable
 
 #local ROOT installation compiled with gcc 5
-. ${HOME}/OMGsim/root/bin/thisroot.sh
+if [ -z $ROOTSYS ]; then
+	echo Sourcing local root installation.
+  . ${HOME}/OMGsim/root/bin/thisroot.sh
+else
+	echo ROOTSYS=$ROOTSYS
+fi
 
 #Geant4 installation compiled with gcc 5
 cd ${HOME}/OMGsim/geant4.10.01.p03-install/bin/

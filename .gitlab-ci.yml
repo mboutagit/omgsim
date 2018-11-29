@@ -1,0 +1,65 @@
+services:
+    - docker:dind
+
+stages:
+    - build
+    - docker
+
+variables:
+    # recursive should work here, but gitlab-runner does not pull the latest remote
+    # for submodules: https://gitlab.com/gitlab-org/gitlab-runner/issues/3011
+    GIT_SUBMODULE_STRATEGY:         none
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+    CONTAINER_TEST_IMAGE: docker.km3net.de/simulation/omgsim:$CI_COMMIT_REF_SLUG
+    CONTAINER_RELEASE_IMAGE: docker.km3net.de/simulation/omgsim:latest
+
+cache:
+    key: "$CI_COMMIT_REF_NAME"
+    untracked: true
+
+before_script:
+    # Make Git submodules work
+    - which git || (apk --no-cache add git)
+    - git submodule sync --recursive
+    - git submodule update --init --recursive
+    # install GCC v5
+    - sudo yum install devtoolset-4-gcc* devtoolset-4-gcc-gfortran devtoolset-4-binutils
+    - . /opt/rh/devtoolset-4/enable
+    # create folder for additional non-standard CentOS7 software
+    - mkdir $HOME/OMGsim
+    # Make libconfig
+    - cd $HOME/OMGsimSoft && wget https://hyperrealm.github.io/libconfig/dist/libconfig-1.7.2.tar.gz && tar xf libconfig-1.7.2.tar.gz -C /tmp && rm libconfig-1.7.2.tar.gz
+    - export LIBCONFIG_ROOT=`pwd`/libconfig-1.7.2 && cd /tmp/libconfig-1.7.2/ && ./configure --prefix $LIBCONFIG_ROOT && make && make install && cd -
+    - rm -rf /tmp/libconfig-1.7.2/
+    - export LD_LIBRARY_PATH=${LIBCONFIG_ROOT}/lib:${LD_LIBRARY_PATH}
+    - export CPLUS_INCLUDE_PATH=${LIBCONFIG_ROOT}/include
+    # Make Geant4
+    - cd $HOME/OMGsim && wget http://geant4.web.cern.ch/geant4/support/source/geant4.10.01.p03.tar.gz && tar xf geant4.10.01.p03.tar.gz && mkdir geant4.10.01.p03-build
+    - cd geant4.10.01.p03-build && cmake -DCMAKE_INSTALL_PREFIX=../geant4.10.01.p03-install ../geant4.10.01.p03 -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_XM=ON && make -j4 install
+
+build:
+    image: docker.km3net.de/base/centos-full:7
+    stage: build
+    script:
+        - . /usr/local/root/bin/thisroot.sh
+        - source setenv.sh
+        - mkdir build
+        - cd build
+        - cmake ..
+        - make
+    cache:
+        untracked: true
+    tags:
+        - docker
+
+docker:
+    image: docker:stable
+    stage: docker
+    script:
+        - docker build --pull -t $CONTAINER_RELEASE_IMAGE .
+        - docker push $CONTAINER_RELEASE_IMAGE
+    tags:
+        - docker
+    only:
+        - master
