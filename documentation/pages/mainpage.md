@@ -150,7 +150,7 @@ If cmake is missing, one could install it with HomeBrew as well:
 
 Download and compile geant4.10.01.p03:
     
-    wget http://geant4.web.cern.ch/geant4/support/source/geant4.10.01.p03.tar.gz
+		wget http://cern.ch/geant4-data/releases/geant4.10.01.p03.tar.gz
     tar xf geant4.10.01.p03.tar.gz
     mkdir geant4.10.01.p03-build
     cd geant4.10.01.p03-build
