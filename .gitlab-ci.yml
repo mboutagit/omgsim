@@ -20,7 +20,6 @@ cache:
 
 before_script:
     # Make Git submodules work
-    - echo "I am here at the beginning of the script: "
     - pwd
     - which git || (apk --no-cache add git)
     - git submodule sync --recursive
