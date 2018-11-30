@@ -20,7 +20,7 @@ cache:
 
 before_script:
     # Make Git submodules work
-    - pwd
+    - export INSTALL_PATH=`pwd`
     - which git || (apk --no-cache add git)
     - git submodule sync --recursive
     - git submodule update --init --recursive
@@ -41,13 +41,13 @@ before_script:
     # Make Geant4
     - yum install -y libX11-devel libXmu-devel motif motif-devel
     - cd $HOME/OMGsim && wget http://cern.ch/geant4-data/releases/geant4.10.01.p03.tar.gz && tar xf geant4.10.01.p03.tar.gz 
-    - mkdir geant4.10.01.p03-build && cd geant4.10.01.p03-build && cmake -DCMAKE_INSTALL_PREFIX=../geant4.10.01.p03-install ../geant4.10.01.p03 -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_XM=ON && make -j4 install
+    - mkdir geant4.10.01.p03-build && cd geant4.10.01.p03-build && cmake -DCMAKE_INSTALL_PREFIX=../geant4.10.01.p03-install ../geant4.10.01.p03 -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_XM=ON && make -j4 install > /dev/null
 
 build:
     image: docker.km3net.de/base/centos-full:7
     stage: build
     script:
-        - cd /omgsim
+        - cd $INSTALL_PATH
         - . /usr/local/root/bin/thisroot.sh
         - source setenv.sh
         - mkdir build
