@@ -76,9 +76,9 @@ The environment was prepared at Lyon to allow an easy installation. You need to 
     source bin/thisroot.sh
     cd -
 
-This OMGsim can be obtained via svn, using the command
+This OMGsim can be obtained via git, using the command
 
-    svn co http://svn.km3net.de/simulation/OMGsim/trunk/    (std login km3net and pwd are available)
+    git clone git@git.km3net.de:simulation/omgsim.git trunk
     cd trunk
 
 For the very old versions old SVN can be used 
@@ -113,14 +113,13 @@ A common installation of Geant4 and some libraries was prepared, so the configur
     export PATH=${GCC_ROOT}/bin:${PATH}
 
     #ROOT
-    export ROOTSYS=/usr/local/root/v5.34.23
-    cd ${ROOTSYS}
+    cd /usr/local/root/*5.34.23
     source bin/thisroot.sh
     cd -
 
-This OMGsim can be obtained via svn, using the command
+This OMGsim can be obtained via git, using the command
 
-    svn co http://svn.km3net.de/simulation/OMGsim/trunk/    (std login km3net and pwd are available)
+    git clone git@git.km3net.de:simulation/omgsim.git trunk
     cd trunk
 
 Then to compile it:
@@ -150,7 +149,7 @@ If cmake is missing, one could install it with HomeBrew as well:
 
 Download and compile geant4.10.01.p03:
     
-		wget http://cern.ch/geant4-data/releases/geant4.10.01.p03.tar.gz
+    wget http://cern.ch/geant4-data/releases/geant4.10.01.p03.tar.gz
     tar xf geant4.10.01.p03.tar.gz
     mkdir geant4.10.01.p03-build
     cd geant4.10.01.p03-build
@@ -195,7 +194,8 @@ the environment):
 
 Download the code and compile:
 
-    svn co http://svn.km3net.de/simulation/OMGsim/trunk/
+    git clone git@git.km3net.de:simulation/omgsim.git trunk
+    cd trunk
     mkdir build
     cd build
     cmake ..
@@ -268,7 +268,8 @@ Install SVN:
 
 Download the code and compile:
 
-    svn co http://svn.km3net.de/simulation/OMGsim/trunk/
+    git clone git@git.km3net.de:simulation/omgsim.git trunk
+    cd trunk
     mkdir build
     cd build
     cmake ..
@@ -310,10 +311,10 @@ Currently we are installing all needed software that does not come with OMGsim t
 		avahi-compat-libdns_sd-devel libldap-dev python-devel \
 		libxml2-devel gsl-static
 
-		cd $HOME/OMGsim
+    cd $HOME/OMGsim
     curl -L https://root.cern.ch/download/root_v5.34.36.Linux-centos7-x86_64-gcc4.8.tar.gz > root_v5.34.36.tar.gz && tar xvf root_v5.34.36.tar.gz && rm root_v5.34.36.tar.gz
-		RUN sed -i 's/-std=c++11//g' ./root_v5.34.36/bin/root-config
-		source ./root_v5.34.36/bin/thisroot.sh
+    RUN sed -i 's/-std=c++11//g' ./root_v5.34.36/bin/root-config
+    source ./root_v5.34.36/bin/thisroot.sh
 
 #### Geant4 installation 
 
@@ -329,7 +330,8 @@ Currently we are installing all needed software that does not come with OMGsim t
 #### OMGsim installation
 
     cd $HOME/OMGsim
-		git clone git@git.km3net.de:simulation/omgsim.git OMGsim_trunk
+    git clone git@git.km3net.de:simulation/omgsim.git trunk
+    cd trunk
     source setenv.sh
     mkdir build
     cd build
