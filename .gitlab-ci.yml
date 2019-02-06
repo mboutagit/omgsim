@@ -50,6 +50,7 @@ build:
         - cd $INSTALL_PATH
         - . /usr/local/root/bin/thisroot.sh
         - source setenv.sh
+        - rm -rf build
         - mkdir build
         - cd build
         - cmake ..
