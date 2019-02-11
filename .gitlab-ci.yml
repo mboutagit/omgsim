@@ -22,29 +22,33 @@ cache:
     untracked: true
 
 before_script:
-    # Make Git submodules work
-    - export INSTALL_PATH=`pwd`
-    - which git || (apk --no-cache add git)
-    - git submodule sync --recursive
-    - git submodule update --init --recursive
-    # install GCC v5
-    # add additional repo
-    - yum install -y centos-release-scl
-    # get devtoolset from this repo
-    - yum install -y devtoolset-4-gcc* devtoolset-4-gcc-gfortran devtoolset-4-binutils
-    - . /opt/rh/devtoolset-4/enable
-    # create folder for additional non-standard CentOS7 software
-    - mkdir $HOME/OMGsim
-    # Make libconfig
-    - cd $HOME/OMGsim && wget https://hyperrealm.github.io/libconfig/dist/libconfig-1.7.2.tar.gz && tar xf libconfig-1.7.2.tar.gz -C /tmp && rm libconfig-1.7.2.tar.gz
-    - export LIBCONFIG_ROOT=`pwd`/libconfig-1.7.2 && cd /tmp/libconfig-1.7.2/ && ./configure --prefix $LIBCONFIG_ROOT && make && make install && cd -
-    - rm -rf /tmp/libconfig-1.7.2/
-    - export LD_LIBRARY_PATH=${LIBCONFIG_ROOT}/lib:${LD_LIBRARY_PATH}
-    - export CPLUS_INCLUDE_PATH=${LIBCONFIG_ROOT}/include
-    # Make Geant4
-    - yum install -y libX11-devel libXmu-devel motif motif-devel
-    - cd $HOME/OMGsim && wget http://cern.ch/geant4-data/releases/geant4.10.01.p03.tar.gz && tar xf geant4.10.01.p03.tar.gz 
-    - mkdir geant4.10.01.p03-build && cd geant4.10.01.p03-build && cmake -DCMAKE_INSTALL_PREFIX=../geant4.10.01.p03-install ../geant4.10.01.p03 -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_XM=ON && make -j4 install > /dev/null
+    cache:
+        key: "$CI_COMMIT_REF_NAME"
+        untracked: true
+    script:
+        # Make Git submodules work
+        - export INSTALL_PATH=`pwd`
+        - which git || (apk --no-cache add git)
+        - git submodule sync --recursive
+        - git submodule update --init --recursive
+        # install GCC v5
+        # add additional repo
+        - yum install -y centos-release-scl
+        # get devtoolset from this repo
+        - yum install -y devtoolset-4-gcc* devtoolset-4-gcc-gfortran devtoolset-4-binutils
+        - . /opt/rh/devtoolset-4/enable
+        # create folder for additional non-standard CentOS7 software
+        - mkdir $HOME/OMGsim
+        # Make libconfig
+        - cd $HOME/OMGsim && wget https://hyperrealm.github.io/libconfig/dist/libconfig-1.7.2.tar.gz && tar xf libconfig-1.7.2.tar.gz -C /tmp && rm libconfig-1.7.2.tar.gz
+        - export LIBCONFIG_ROOT=`pwd`/libconfig-1.7.2 && cd /tmp/libconfig-1.7.2/ && ./configure --prefix $LIBCONFIG_ROOT && make && make install && cd -
+        - rm -rf /tmp/libconfig-1.7.2/
+        - export LD_LIBRARY_PATH=${LIBCONFIG_ROOT}/lib:${LD_LIBRARY_PATH}
+        - export CPLUS_INCLUDE_PATH=${LIBCONFIG_ROOT}/include
+        # Make Geant4
+        - yum install -y libX11-devel libXmu-devel motif motif-devel
+        - cd $HOME/OMGsim && wget http://cern.ch/geant4-data/releases/geant4.10.01.p03.tar.gz && tar xf geant4.10.01.p03.tar.gz 
+        - mkdir geant4.10.01.p03-build && cd geant4.10.01.p03-build && cmake -DCMAKE_INSTALL_PREFIX=../geant4.10.01.p03-install ../geant4.10.01.p03 -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_XM=ON && make -j4 install > /dev/null
 
 build:
     image: docker.km3net.de/base/centos-full:7
@@ -58,8 +62,6 @@ build:
         - cd build
         - cmake ..
         - make
-    cache:
-        untracked: true
     tags:
         - docker
 
