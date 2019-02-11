@@ -4,6 +4,7 @@ services:
 stages:
     - build
     - docker
+    - release
 
 variables:
     # recursive should work here, but gitlab-runner does not pull the latest remote
@@ -12,7 +13,9 @@ variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_DRIVER: overlay2
     CONTAINER_TEST_IMAGE: docker.km3net.de/simulation/omgsim:$CI_COMMIT_REF_SLUG
-    CONTAINER_RELEASE_IMAGE: docker.km3net.de/simulation/omgsim:latest
+    CONTAINER_RELEASE_IMAGE: docker.km3net.de/simulation/omgsim:$CI_COMMIT_TAG
+    CONTAINER_LATEST_IMAGE: docker.km3net.de/simulation/omgsim:latest
+
 
 cache:
     key: "$CI_COMMIT_REF_NAME"
@@ -62,11 +65,30 @@ build:
 
 docker:
     image: docker:stable
+    services:
+        - docker:dind
+
     stage: docker
     script:
-        - docker build --pull -t $CONTAINER_RELEASE_IMAGE .
-        - docker push $CONTAINER_RELEASE_IMAGE
+    - docker build --pull -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
     tags:
         - docker
     only:
-        - master
+        - tags
+        
+release-image:
+  image: docker:stable
+  services:
+    - docker:dind
+  stage: release
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_LATEST_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_LATEST_IMAGE
+  tags:
+    - docker
+  only:
+    - tags
