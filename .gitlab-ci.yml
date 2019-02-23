@@ -20,8 +20,6 @@ build:
     image: docker.km3net.de/base/omgsim:4.10.01
     stage: build
     script:
-        - cd $INSTALL_PATH
-        - . /usr/local/root/bin/thisroot.sh
         - source setenv.sh
         - rm -rf build
         - mkdir build
