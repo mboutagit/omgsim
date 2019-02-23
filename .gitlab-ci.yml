@@ -21,8 +21,9 @@ build:
     stage: build
     script:
         - source /etc/bashrc
-        - ls /root/OMGsim/libconfig-1.7.2
+        - ls /root
         - ls /root/OMGsim/
+        - ls /root/OMGsim/libconfig-1.7.2
         - source setenv.sh
         - rm -rf build
         - mkdir build
