@@ -20,6 +20,8 @@ build:
     image: docker.km3net.de/base/omgsim:4.10.01
     stage: build
     script:
+        - source /etc/bashrc
+        - echo "I am here" `pwd`
         - source setenv.sh
         - rm -rf build
         - mkdir build
