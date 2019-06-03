@@ -35,5 +35,5 @@
 /tracking/verbose 0
 /event/verbose 0
 
-/run/beamOn 100000
+/run/beamOn 1000000
 #/control/loop visloop.mac ii 1 100 1
