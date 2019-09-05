@@ -124,6 +124,7 @@ namespace km3net
     for (double e=1.*eV; e<8*eV; e+=0.025*eV)
       {
         to_return->InsertValues(e, GetTotalLength (CLHEP::c_light*CLHEP::h_Planck/e/1000*m)*m );
+	//G4cout << "DEBUG " << e << " MeV " << CLHEP::c_light*CLHEP::h_Planck/e/1000*m << " mm " << endl;
       }
 
 
@@ -190,7 +191,7 @@ namespace km3net
 
 
   double KM3PetzoldScattering::GetTotalLength(double lambda) { // in meters!
-    //cout << fKopelFactor << ' ' <<  fESFactor << endl;
+    //G4cout << "DEBUG: fKopelFactor fESFactor " << fKopelFactor << ' ' <<  fESfactor << G4endl;
 
     return 1./(GetESVolScat(lambda)+GetKopelevichVolScat(lambda));
   }
@@ -291,6 +292,8 @@ namespace km3net
     double energy = aParticle->GetTotalEnergy ();
 
     double ScatAngle  = GetAngle (CLHEP::c_light*CLHEP::h_Planck/energy/1000*m);
+
+    //G4cout << "DEBUG: " << energy << " MeV " << CLHEP::c_light*CLHEP::h_Planck/energy/1000*m << " mm " << endl;
 
     G4double PhiAngle = twopi*G4UniformRand();
 

@@ -510,10 +510,10 @@ namespace km3net
       if (particleName == "opticalphoton") {
         G4cout << " AddDiscreteProcess to OpticalPhoton " << G4endl;
         pmanager->AddDiscreteProcess(theAbsorptionProcess);
-        pmanager->AddDiscreteProcess(theRayleighScatteringProcess);
+        //pmanager->AddDiscreteProcess(theRayleighScatteringProcess);   //in principle, this is a part of PetzoldScattering (ES scattering)
         pmanager->AddDiscreteProcess(thePetzoldScattering);
         pmanager->AddDiscreteProcess(theBoundaryProcess);
-        pmanager->AddDiscreteProcess(thePetzoldScattering);
+        //pmanager->AddDiscreteProcess(thePetzoldScattering);          //it is not clear why it was repeated twice
         pmanager->AddDiscreteProcess(theWLSProcess);
       }
     }

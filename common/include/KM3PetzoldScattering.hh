@@ -103,7 +103,7 @@ namespace km3net
 
   private:
     double fESfactor = 1;
-    double fKopelFactor = 0.9;
+    double fKopelFactor = 1;
 
 
     PROCESS fLastProcess=NOTHING;
