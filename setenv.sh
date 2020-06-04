@@ -1,4 +1,4 @@
-if [ -f $HOME/OMGsim/geant4.10.01.p03-install/bin/geant4.sh ]; then
+if [ -f /root/OMGsim/geant4.10.01.p03-install/bin/geant4.sh ]; then
     echo "Using installation in $HOME/OMGsim"
     #gcc 5 on CentOS7
     . /opt/rh/devtoolset-4/enable
@@ -7,14 +7,14 @@ if [ -f $HOME/OMGsim/geant4.10.01.p03-install/bin/geant4.sh ]; then
     #. ${HOME}/OMGsim/root/bin/thisroot.sh
     . /usr/local/root/bin/thisroot.sh
 
-    cd ${HOME}/OMGsim/geant4.10.01.p03-install/bin/
+    cd /root/OMGsim/geant4.10.01.p03-install/bin/
     source geant4.sh
     cd -
 
     #libconfig
     export LIBCONFIG_ROOT=${HOME}/OMGsim/libconfig-1.7.2
 
-else
+elif [ -f $KM3NET_THRONG_DIR/share/geant/v10.01.p03/bin/geant4.sh ]; then
     #Geant4
     cd $KM3NET_THRONG_DIR/share/geant/v10.01.p03/bin/
     source geant4.sh
