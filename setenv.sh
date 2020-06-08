@@ -1,18 +1,17 @@
-if [ -f /root/OMGsim/geant4.10.01.p03-install/bin/geant4.sh ]; then
-    echo "Using installation in $HOME/OMGsim"
+if [ -f /opt/geant4.10.01.p03-install/bin/geant4.sh ]; then
     #gcc 5 on CentOS7
-    . /opt/rh/devtoolset-4/enable
+    . /opt/rh/devtoolset-7/enable
 
     #local ROOT installation compiled with gcc 5
     #. ${HOME}/OMGsim/root/bin/thisroot.sh
     . /usr/local/root/bin/thisroot.sh
 
-    cd /root/OMGsim/geant4.10.01.p03-install/bin/
-    source geant4.sh
+    cd /opt/geant4.10.01.p03-install/bin/
+    source ./geant4.sh
     cd -
 
     #libconfig
-    export LIBCONFIG_ROOT=${HOME}/OMGsim/libconfig-1.7.2
+    export LIBCONFIG_ROOT=/opt/libconfig-1.7.2
 
 elif [ -f $KM3NET_THRONG_DIR/share/geant/v10.01.p03/bin/geant4.sh ]; then
     #Geant4
@@ -28,9 +27,7 @@ elif [ -f $KM3NET_THRONG_DIR/share/geant/v10.01.p03/bin/geant4.sh ]; then
     export PATH=${GCC_ROOT}/bin:${PATH}
 
     #ROOT
-    cd /usr/local/root/*5.34.23
-    source bin/thisroot.sh
-    cd -
+    module load root/6.20.04 cmake/3.11.0
 
     #only to compile (comment out after make)
     export CC=${GCC_ROOT}/bin/gcc
