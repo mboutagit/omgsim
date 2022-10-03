@@ -76,6 +76,8 @@ singularity:
     image: docker.km3net.de/base/singularity:3.6.2
     stage: singularity
     script:
+        - export SINGULARITY_DOCKER_USERNAME=$CI_REGISTRY_USER
+        - export SINGULARITY_DOCKER_PASSWORD=$CI_REGISTRY_PASSWORD
         - singularity build $SINGULARITY_RELEASE_IMAGE docker://$CONTAINER_RELEASE_IMAGE
         - mkdir -p ~/.ssh && ssh-keyscan -H -t rsa $KM3NET_SFTP_HOST  >> ~/.ssh/known_hosts
         - apt install -q lftp
