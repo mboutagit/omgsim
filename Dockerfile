@@ -1,13 +1,12 @@
- FROM docker.km3net.de/base/omgsim:4.10.01
+ FROM docker.km3net.de/base_container
   MAINTAINER Vladimir Kulikovskiy <vkulikovskiy@km3net.de>
  
+ RUN yum install -y ca-certificates && yum clean -y all
  RUN mkdir -p /builds/simulation/
- ADD . /builds/simulation/omgsim
+ COPY . /builds/simulation/omgsim
+ RUN rm -rf build &&  cd build &&  cmake .. && make
 
  RUN yum -y install zsh
  SHELL ["/bin/zsh", "-c"]
- RUN echo $'\
-CWD=$(pwd)\n\
-cd /builds/simulation/omgsim && source ./setenv.sh\n\
-cd $CWD' \
-    >> /etc/profile.d/omgsim_env.sh
+
+ ENV PATH /builds/simulation/omgsim/build:${PATH}
