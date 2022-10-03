@@ -4,7 +4,7 @@
  RUN yum install -y ca-certificates && yum clean -y all
  RUN mkdir -p /builds/simulation/
  COPY . /builds/simulation/omgsim
- RUN rm -rf build &&  cd build &&  cmake .. && make
+ RUN rm -rf build && mkdir build && cd build &&  cmake .. && make
 
  RUN yum -y install zsh
  SHELL ["/bin/zsh", "-c"]
