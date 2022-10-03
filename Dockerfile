@@ -1,4 +1,4 @@
- FROM docker.km3net.de/base_container
+ FROM git.km3net.de:4567/simulation/omgsim/base_container
   MAINTAINER Vladimir Kulikovskiy <vkulikovskiy@km3net.de>
  
  RUN yum install -y ca-certificates && yum clean -y all
