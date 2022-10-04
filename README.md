@@ -3,12 +3,21 @@
  - Christophe Hugon - CPPM (CNRS)
  - Vladimir Kulikovskiy - INFN Genova
 
+# Containers and modules
+
+ Docker and singularity containers are build in in the gitlab and stored in sftp (singularity). On Lyon `omgsim` modules are available
+
+```
+module load omgsim
+OMGsim
+```
+
 # Documentation
 
-The doxygen documentation is provided in the folder documentation (including installation guides).
+The doxygen documentation is provided in the folder `documentation` (including installation guides).
 It is easier to use it at your local machine.
 
-##Compile with:
+## Compile with:
 
     cd [your checkout path]/trunk
     doxygen documentation/config.dox

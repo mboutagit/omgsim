@@ -4,7 +4,7 @@ Quick start
 This short tutorial aims to introduce the using of OMGSim with some few examples.
 
 
-##Make it run! now!
+## Make it run! now!
 
 The base installation contains basics script and material/OM/PMT/detector descriptions and can be run immediatly.
 The binary is OMGsim:
@@ -13,9 +13,11 @@ The binary is OMGsim:
 
 The -s is to open a GEANT4 session, unavoidable to draw the simulation (to be specified with your favorite way in the .mac file). 
 
-Also you can use "-fa" option is to get a "full analysis", just meaning that the output file will contain the full detected events (vertex, energy, impact point...) instead of the simplified events summary only (typicaly number of detected events).
+Also you can use "-fa" option is to get a "full analysis", just meaning that the output file will contain the full detected events (vertex, energy, impact point...) instead of the simplified events summary only (typicaly number of detected events). To get the ASCII "evt" output run as following:
 
-##Custumize it a bit
+   ./OMGsim -fa -evt  omgsim/scripts/DOMK40Glass_small.mac
+
+## Custumize it a bit
 
 
 ###The detector data files
