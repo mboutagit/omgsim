@@ -33,7 +33,7 @@ preparebase:
 
 pages:
  image: docker.km3net.de/base/centos7-bundle:2021.03.01
- stage: documentation
+ stage: pages
  script:
     - doxygen documentation/config.dox
     - mkdir -p public
