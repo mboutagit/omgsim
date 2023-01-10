@@ -36,8 +36,6 @@ doc:
  stage: documentation
  script:
     - doxygen documentation/config.dox
-    - cd documentation/latex
-    - make
     - mkdir -p public
     - mv * public/
 
