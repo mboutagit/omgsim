@@ -14,7 +14,9 @@ OMGsim
 
 # Documentation
 
-The doxygen documentation is provided in the folder `documentation` (including installation guides).
+The online documentation can be accessed here: <https://simulation.pages.km3net.de/omgsim/html/>.
+
+Locally, the doxygen documentation is provided in the folder `documentation` (including installation guides).
 It is easier to use it at your local machine.
 
 ## Compile with:
