@@ -38,9 +38,9 @@ doc:
     - doxygen documentation/config.dox
     - mkdir -p public
     - mv documentation/* public/
-artifacts:
-    paths:
-        - public
+ artifacts:
+     paths:
+         - public
 
 
 
