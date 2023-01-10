@@ -1,6 +1,6 @@
 stages:
     - preparebase
-    - documentation
+    - pages
     - build
     - test
     - docker
@@ -31,7 +31,7 @@ preparebase:
         - docker
     when: manual
 
-doc:
+pages:
  image: docker.km3net.de/base/centos7-bundle:2021.03.01
  stage: documentation
  script:
