@@ -1,5 +1,6 @@
 stages:
     - preparebase
+    - documentation
     - build
     - test
     - docker
@@ -29,6 +30,16 @@ preparebase:
     tags:
         - docker
     when: manual
+
+doc:
+ image: docker.km3net.de/base/centos7-bundle:2021.03.01
+ stage: documentation
+ script:
+    - doxygen documentation/config.dox
+    - cd documentation/latex
+    - make
+    - mkdir -p public
+    - mv * public/
 
 
 build:
