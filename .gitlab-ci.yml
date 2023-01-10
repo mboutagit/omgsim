@@ -37,7 +37,11 @@ doc:
  script:
     - doxygen documentation/config.dox
     - mkdir -p public
-    - mv * public/
+    - mv documentation/* public/
+artifacts:
+    paths:
+        - public
+
 
 
 build:
