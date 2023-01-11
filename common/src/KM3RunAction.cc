@@ -69,6 +69,7 @@ namespace km3net
 
      if (KM3AnalysisManager::fEvtOutput) {
 	     KM3AnalysisManager::evt_stream << "norma: 0 " << aRun->GetNumberOfEventToBeProcessed() << std::endl;
+	     KM3AnalysisManager::evt_stream << "end_event:" << std::endl;
      }
   }
 
