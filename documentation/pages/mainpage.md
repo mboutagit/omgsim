@@ -53,46 +53,6 @@ So, except if you strongly want to install it on your own computer, goes directl
 
 ###Download and compilation
 ###Lyon configuration
-#### SL6 (outdated)
-The environment was prepared at Lyon to allow an easy installation. You need to set the following variables in your .bashrc or .zshrc:
-
-    #Geant4
-    cd /sps/km3net/users/hugon/sw/geant4.10.01.p01/bin
-    source geant4.sh
-    cd -
-
-    #Libconfig
-    export LIBCONFIG_ROOT=/sps/km3net/users/hugon/sw/libconfig-1.5
-    export LD_LIBRARY_PATH=${LIBCONFIG_ROOT}/lib:${LD_LIBRARY_PATH}
-    export CPLUS_INCLUDE_PATH=${LIBCONFIG_ROOT}/include/
-
-    #GCC 5.10
-    export LD_LIBRARY_PATH=/sps/km3net/users/hugon/sw/gcc/gcc-5.1.0/lib:/sps/km3net/users/hugon/sw/gcc/gcc-5.1.0/lib64:${LD_LIBRARY_PATH}
-    export PATH=/sps/km3net/users/hugon/sw/gcc/gcc-5.1.0/bin:${PATH}
-
-    #ROOT
-    export ROOTSYS=/usr/local/root/v5.34.23
-    cd ${ROOTSYS}
-    source bin/thisroot.sh
-    cd -
-
-This OMGsim can be obtained via git, using the command
-
-    git clone git@git.km3net.de:simulation/omgsim.git trunk
-    cd trunk
-
-For the very old versions old SVN can be used 
-
-    (Outdated) svn co --username km3net --password Capopassero http://svnserver.ge.infn.it/KM3Sim
-
-then to compile it
-
-    mkdir build
-    cd build
-    cmake .. -DCMAKE_CXX_COMPILER=g++-510 -DCMAKE_C_COMPILER=gcc-510
-    make
-
-
 #### CentOS7
 A common installation of Geant4 and some libraries was prepared, so the configuration should be the following:
 
@@ -104,6 +64,20 @@ A common installation of Geant4 and some libraries was prepared, so the configur
     cmake ..
     make
 
+#### Build and run using singularity container
+
+If the previous way does not work due to the changed software, one can try more robust way working inside the singularity environment and building omsim in his
+ host folder:
+
+    wget https://sftp.km3net.de/singularity/omgsim_v2.1.1.sif
+    git clone git@git.km3net.de:simulation/omgsim.git
+    cd omgsim
+    singularity exec -B $PWD:/omgsim ../omgsim_v2.1.1.sif bash
+    cd /omgsim
+    mkdir build
+    cd build
+    cmake ..
+    make
 
 ### MacOS installation 
 Installation of missing packages is faster with HomeBrew packet manager.
