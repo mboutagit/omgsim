@@ -2,6 +2,33 @@
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 project(OMGsim)
 
+#Git Version
+execute_process(COMMAND git --no-pager describe --tags --always
+               OUTPUT_VARIABLE GIT_VERSION
+               OUTPUT_STRIP_TRAILING_WHITESPACE
+               ERROR_QUIET)
+
+execute_process(COMMAND bash "-c" "git status | grep modified"
+               OUTPUT_VARIABLE GIT_M
+               OUTPUT_STRIP_TRAILING_WHITESPACE
+               ERROR_QUIET)
+
+message(GIT_M="${GIT_M}")
+
+if ("${GIT_M}" STREQUAL "")
+    message("Git repository not modified")
+else()
+    message("WARNING: Git repository modified")
+    set(GIT_VERSION ${GIT_VERSION}-D)
+endif()
+
+execute_process(COMMAND date "+%y%m%d"
+               OUTPUT_VARIABLE BUILD_DATE
+               OUTPUT_STRIP_TRAILING_WHITESPACE
+               ERROR_QUIET)
+
+message(GIT_VERSION="${GIT_VERSION}")
+message(BUILD_DATE="${BUILD_DATE}")
 
 # check for x64 or x86
 get_property(LIB64 GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS)
@@ -74,7 +101,7 @@ endif(DEFINED ENV{LIBCONFIG_ROOT})
 
 
 # (5) set the needed cflags
-SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -pedantic -Wno-non-virtual-dtor -Wno-long-long -Wwrite-strings -Wpointer-arith -Woverloaded-virtual -Wno-variadic-macros -Wshadow -pipe -std=c++11 -DPROJECT_SOURCE_DIR=\\\"${PROJECT_SOURCE_DIR}\\\"")
+SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -pedantic -Wno-non-virtual-dtor -Wno-long-long -Wwrite-strings -Wpointer-arith -Woverloaded-virtual -Wno-variadic-macros -Wshadow -pipe -std=c++11 -DPROJECT_SOURCE_DIR=\\\"${PROJECT_SOURCE_DIR}\\\" -DGIT_VERSION=\\\"${GIT_VERSION}\\\" -DBUILD_DATE=\"${BUILD_DATE}\"")
 
 
 

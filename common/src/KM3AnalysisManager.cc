@@ -95,7 +95,7 @@ namespace km3net
     if (fEvtOutput) {
         evt_stream.open("output.evt");
         evt_stream << "start_run: 1" << endl;
-        evt_stream << "simul: OMGsim trunk-180919 " << KM3AnalysisManager::currentDateTime() << endl;
+        evt_stream << "simul: OMGsim " << GIT_VERSION << "-" << BUILD_DATE << " " << KM3AnalysisManager::currentDateTime() << endl;
     }
   }
 
