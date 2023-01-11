@@ -17,6 +17,12 @@ namespace km3net {
     originalMomentum = G4ThreeVector(0.,0.,0.);
     originalEnergy = 0.;
     originalTime = 0.;
+    
+    sourcePDGid = 999;
+    sourcePosition = G4ThreeVector(0.,0.,0.);
+    sourceMomentum = G4ThreeVector(0.,0.,0.);
+    sourceEnergy = 0.;
+
   }
 
   KM3TrackInformation::KM3TrackInformation(const KM3TrackInformation* INFO){
@@ -31,6 +37,11 @@ namespace km3net {
     originalEnergy = INFO->GetOriginalEnergy();
     originalTime = INFO->GetOriginalTime();
     originalPolarization = INFO->GetOriginalPolarization ();
+
+    sourcePDGid = INFO->GetSourcePDGid();
+    sourcePosition = INFO->GetSourcePosition();
+    sourceMomentum = INFO->GetSourceMomentum();
+    sourceEnergy = INFO->GetSourceEnergy();
   }
 
   KM3TrackInformation::KM3TrackInformation(const G4Track* aTrack)
@@ -55,6 +66,19 @@ namespace km3net {
     originalPolarization = aTrack->GetPolarization ();
 
     originalTime = aTrack->GetGlobalTime();
+
+    KM3TrackInformation* info = (KM3TrackInformation*)(aTrack->GetUserInformation());
+    if (info == 0) {
+	    sourcePDGid = aTrack->GetDefinition()->GetPDGEncoding();
+	    sourcePosition = originalPosition;
+	    sourceMomentum = originalMomentum;
+	    sourceEnergy = originalEnergy;
+   } else {
+            sourcePDGid  = info->GetSourcePDGid(); 
+            sourcePosition = info->GetSourcePosition();
+            sourceMomentum  = info->GetSourceMomentum();
+            sourceEnergy =  info->GetSourceEnergy();
+   }
 
   }
 

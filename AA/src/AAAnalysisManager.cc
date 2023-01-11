@@ -139,7 +139,18 @@ namespace km3net
          */
          if (fLimit == 2 || fLimit == 3) {
 		 fHits++;
-		 if (fHits == 1) evt_stream << "start_event: " << fNbTrigg << " 1" << endl;
+		 if (fHits == 1) {
+                     evt_stream << "start_event: " << fNbTrigg << " 1" << endl;
+                 /* source particle info */
+                     G4ThreeVector momentum = INFO->GetSourceMomentum().unit();
+                     
+                     evt_stream << "track_in: 1 " << 
+                         INFO->GetSourcePosition().x()/meter << " " << INFO->GetSourcePosition().y()/meter << " " << INFO->GetSourcePosition().z()/meter << " " << 
+                         momentum.x() << " " <<  momentum.y() << " " <<  momentum.z() << " " <<
+                         INFO->GetSourceEnergy()/GeV << " " << 0 << " " << INFO->GetSourcePDGid() <<
+                         endl;
+                 /* ------------- */
+                 }
 		 evt_stream << "hit: " << fHits << " " << fOMId*100+fPMID << " 1 " << fTotalTime << " 3 1" << endl;
 		 //G4cout << "DEBUG hit: " << fHits << " " << fOMId*100+fPMID << " 1 " << fTotalTime << " 3 1" << G4endl;
 	 }

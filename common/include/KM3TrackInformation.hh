@@ -31,6 +31,9 @@ namespace km3net{
     void Print() const;
 
   private:
+    /* 
+     * information about previous particle (essentially for photoelectron these are photons)
+     */
     G4int                 originalTrackID;
     std::string           originalParticleName;
     std::string           originalParticleType;
@@ -47,6 +50,14 @@ namespace km3net{
 
     const G4Track*              fTrack=0;
     const G4Step*               fStep=0;
+
+    /*
+     * information about very first (generated) particle
+     */
+    G4int                 sourcePDGid;
+    G4ThreeVector         sourcePosition;
+    G4ThreeVector         sourceMomentum;
+    G4double              sourceEnergy;
 
   public:
     void SetTrack (const G4Track* track) {fTrack=track;}
@@ -66,6 +77,11 @@ namespace km3net{
 
     inline const G4Track* GetTrack () const {return fTrack;};
     inline const G4Step* GetStep () const {return fStep;};
+
+    inline G4int GetSourcePDGid() const {return sourcePDGid;}
+    inline G4ThreeVector GetSourceMomentum() const {return sourceMomentum;}
+    inline G4ThreeVector GetSourcePosition() const {return sourcePosition;}
+    inline G4double GetSourceEnergy() const {return sourceEnergy;}
 
   };
 

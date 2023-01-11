@@ -33,6 +33,7 @@ namespace km3net
      * We create info from the parent track info and pass it to the daughter (so info for each particle is the info of the closest parent, not the original event particle)
      */
     KM3TrackInformation* anInfo = new KM3TrackInformation(aTrack);
+
     size_t nSeco = secondaries->size();
     if(nSeco>0)
       {
