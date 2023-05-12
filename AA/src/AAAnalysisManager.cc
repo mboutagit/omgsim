@@ -151,7 +151,7 @@ namespace km3net
                          endl;
                  /* ------------- */
                  }
-		 evt_stream << "hit: " << fHits << " " << fOMId*100+fPMID << " 1 " << fTotalTime << " 3 1" << endl;
+		 evt_stream << "hit: " << fHits << " " << fOMId*100+fPMID << " 1 " << fixed << setprecision(2) << fTotalTime << " 3 1" << endl;
 		 //G4cout << "DEBUG hit: " << fHits << " " << fOMId*100+fPMID << " 1 " << fTotalTime << " 3 1" << G4endl;
 	 }
     }
