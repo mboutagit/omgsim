@@ -57,8 +57,12 @@ The following complete example should work:
     /event/verbose 0
     /run/beamOn 1
 
-After running OMGsim with a mandatory option "-s" the file scene-0.heprep.zip will be produced (the name
-does not change even if filename.bheprep.zip  was requested).
+
+Then:
+
+ - running OMGsim with a mandatory option "-s"
+ - exiting the G4XmGui by typing "exit" in its propt (closing the window with mouse will produce corrupted output) 
+ - the file scene-0.heprep.zip will be produced (the name does not change even if filename.bheprep.zip  was requested).
 
     OMGsim -s your_mac.mac
     OMGsim -s scripts/vis-AA2D_local.mac #(this one is stored as an example)
