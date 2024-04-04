@@ -61,9 +61,10 @@ The following complete example should work:
 Then:
 
  - running OMGsim with a mandatory option "-s"
- - exiting the G4XmGui by typing "exit" in its propt (closing the window with mouse will produce corrupted output) 
+ - exiting the G4UIXm by typing "exit" in its "session" propt (closing the window with mouse will produce corrupted output) 
  - the file scene-0.heprep.zip will be produced (the name does not change even if filename.bheprep.zip  was requested).
 
+I.e.:
     OMGsim -s your_mac.mac
     OMGsim -s scripts/vis-AA2D_local.mac #(this one is stored as an example)
 
