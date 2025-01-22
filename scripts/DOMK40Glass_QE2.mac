@@ -1,0 +1,41 @@
+/KM3/XP/Type K40
+/KM3/det/DetectorTypeName KM3K40QE2
+#/KM3/det/DetectorTypeName DOMAloneTest
+
+/KM3/det/setTargetScattering 1
+#/KM3/det/setTargetMaterial AntaresWater
+/KM3/det/setTargetMaterial NEMOWater
+/KM3/det/DontDraw bento absorber
+/KM3/det/setWorldLength 1 m
+
+/KM3/GenType 1
+
+/PMTOpticalModel/luxlevel 0
+
+/run/verbose 0
+/run/initialize
+/tracking/storeTrajectory 0
+
+/gps/pos/shape Sphere
+#/gps/pos/radius 10 m
+#17'' diameter
+/gps/pos/radius 21.59 cm
+
+/gps/pos/centre 0 0 0
+/gps/pos/type Volume
+/gps/particle ion
+/gps/ion 19 40
+/gps/ene/mono   0 eV
+/gps/pos/confine DOMNoticeableOpticalBentoGlass
+
+#/vis/open HepRepXML
+#/vis/scene/create filename.bheprep.zip
+#/vis/drawVolume
+#/vis/scene/endOfEventAction accumulate 500
+#/tracking/storeTrajectory 1
+
+/tracking/verbose 0
+/event/verbose 0
+
+/run/beamOn 1000000
+#/control/loop visloop.mac ii 1 100 1
