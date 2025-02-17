@@ -3,6 +3,14 @@
  - Christophe Hugon - CPPM (CNRS)
  - Vladimir Kulikovskiy - INFN Genova
 
+ # Modification
+
+ - Mohammed Bouta - CPPM (CNRS)
+ ## Some traces
+    - Modification in KM3PrimaryGeneratorAction: KM3PrimaryGeneratorAction::InitializeCustumMuonType()
+    - Modification in KM3DetectorConstruction::Construct(): World and target volumes solid.  
+
+
 # Containers and modules
 
  Docker and singularity containers are build in in the gitlab and stored in sftp (singularity). On Lyon `omgsim` modules are available
