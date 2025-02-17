@@ -3,23 +3,25 @@
 
 #include "G4VTrajectory.hh"
 #include "G4Trajectory.hh"
-#include "G4VisManager.hh"
 #include "G4Track.hh"
+#include "G4ThreeVector.hh"
+#include "G4VisAttributes.hh"
 #include "G4Polyline.hh"
 #include "G4Colour.hh"
-#include "G4VisAttributes.hh"
+#include <vector>
 
-using namespace std;
-
-class KM3Trajectory : public G4VTrajectory {
+class KM3Trajectory : public G4Trajectory {
 public:
-    KM3Trajectory(const G4Track*);
-    virtual ~KM3Trajectory();
+    KM3Trajectory(const G4Track* track);
+    ~KM3Trajectory() override;
 
-    virtual void DrawTrajectory() const override;
-
-    // Other necessary methods...
-    virtual G4VTrajectory* Clone() const override;
+    void DrawTrajectory() const override;
+    // Other overridden methods if required...
+    
+private:
+    G4Trajectory* fTrajectory;
+    G4String fParticleName;
+    //std::vector<G4ThreeVector> fTrajectoryPoints; // Store trajectory points
 };
 
 #endif

@@ -231,82 +231,19 @@ CMakeFiles/libOMG.dir/common/src/KM3Trajectory.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/ThreeVector.h \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Utility/defs.h \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/ThreeVector.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisManager.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VVisManager.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Transform3D.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Transform3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Transform3D.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/Rotation.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationInterfaces.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/LorentzVector.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/LorentzVector.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/AxisAngle.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/AxisAngle.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationInterfaces.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationX.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationX.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Units/PhysicalConstants.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Units/SystemOfUnits.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationY.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationY.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationZ.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationZ.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/Rotation.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Point3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/BasicVector3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Vector3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Normal3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4RotationMatrix.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4GraphicsSystemList.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VGraphicsSystem.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VGraphicsSystem.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ModelingParameters.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisExtent.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Point3D.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisAttributes.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Colour.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Color.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisAttributes.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PhysicalVolumeModel.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VModel.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VModel.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VTouchable.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VTouchable.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Plane3D.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Normal3D.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Plane3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ModelingParameters.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4NullModel.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4SceneHandlerList.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VSceneHandler.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VGraphicsScene.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ViewerList.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VViewer.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ViewParameters.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Vector3D.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VMarker.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Visible.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Visible.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VMarker.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ViewParameters.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VViewer.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4THitsMap.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4THitsCollection.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VHitsCollection.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Trajectory.hh \
+ /usr/include/c++/11/stdlib.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/trkgdefs.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VTrajectory.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Allocator.hh \
  /usr/include/c++/11/cstddef \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4AllocatorPool.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VSceneHandler.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4SceneList.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Scene.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Scene.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4TrajectoriesModel.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UImessenger.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UIdirectory.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UIcommand.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UIparameter.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UItokenNum.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ApplicationState.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ParticleDefinition.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Units/PhysicalConstants.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Units/SystemOfUnits.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PDefSplitter.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/pwdefs.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4AutoLock.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Threading.hh \
  /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
  /usr/include/x86_64-linux-gnu/bits/environments.h \
@@ -316,31 +253,44 @@ CMakeFiles/libOMG.dir/common/src/KM3Trajectory.cc.o: \
  /usr/include/x86_64-linux-gnu/bits/unistd.h \
  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
  /usr/include/linux/close_range.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisManager.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ParticleDefinition.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4TrajectoryPoint.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VTrajectoryPoint.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Track.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/trkdefs.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolume.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Region.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4GeomSplitter.hh \
- /usr/include/c++/11/stdlib.h \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/geomwdefs.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4AutoLock.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Region.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VPhysicalVolume.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/geomdefs.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4RotationMatrix.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/Rotation.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationInterfaces.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/LorentzVector.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/LorentzVector.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/AxisAngle.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/AxisAngle.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationInterfaces.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationX.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationX.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationY.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationY.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationZ.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationZ.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/Rotation.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VPhysicalVolume.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolume.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4DynamicParticle.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ParticleDefinition.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PDefSplitter.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/pwdefs.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ParticleDefinition.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LorentzVector.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ParticleMomentum.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ElectronOccupancy.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4DynamicParticle.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4TrackStatus.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4TouchableHandle.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VTouchable.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VTouchable.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ReferenceCountedHandle.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VUserTrackInformation.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PhysicsModelCatalog.hh \
@@ -388,7 +338,64 @@ CMakeFiles/libOMG.dir/common/src/KM3Trajectory.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4TrackVector.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Step.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Track.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Polyline.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Point3DList.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ThreeVector.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisAttributes.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Colour.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisAttributes.hh
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Color.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisAttributes.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Polyline.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Visible.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Visible.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Point3DList.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Point3D.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Point3D.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/BasicVector3D.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Transform3D.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Transform3D.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Transform3D.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Vector3D.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Normal3D.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Colour.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisManager.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VVisManager.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4GraphicsSystemList.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VGraphicsSystem.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VGraphicsSystem.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ModelingParameters.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisExtent.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisAttributes.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PhysicalVolumeModel.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VModel.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VModel.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Plane3D.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Normal3D.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Plane3D.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ModelingParameters.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4NullModel.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4SceneHandlerList.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VSceneHandler.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VGraphicsScene.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ViewerList.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VViewer.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ViewParameters.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Vector3D.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VMarker.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VMarker.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ViewParameters.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VViewer.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4THitsMap.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4THitsCollection.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VHitsCollection.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VSceneHandler.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4SceneList.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Scene.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Scene.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4TrajectoriesModel.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UImessenger.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UIdirectory.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UIcommand.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UIparameter.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UItokenNum.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ApplicationState.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisManager.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4SystemOfUnits.hh

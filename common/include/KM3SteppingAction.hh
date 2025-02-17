@@ -33,8 +33,15 @@
 #include <G4ThreeVector.hh>
 #include <G4MaterialPropertyVector.hh>
 
+#include <G4VVisManager.hh>
+#include <G4Polyline.hh>
+#include <G4Colour.hh>
+#include <G4VisAttributes.hh>
+#include "G4String.hh"
+
 
 #include <vector>
+#include <map>
 
 class G4MaterialPropertiesTable;
 
@@ -42,6 +49,8 @@ class G4MaterialPropertiesTable;
 
 namespace km3net
 {
+  using namespace std;
+
   class KM3SteppingAction : public G4UserSteppingAction
   {
   public:
@@ -49,6 +58,8 @@ namespace km3net
     virtual ~KM3SteppingAction();
 
     virtual void UserSteppingAction(const G4Step*);
+
+    void myCostumTrackColor(const G4Step* step);
 
   protected:
     unsigned char CheckDetection(const G4ThreeVector& localPoint);
@@ -61,6 +72,8 @@ namespace km3net
 
     double fEnergy=0;
     double fElectronAbsLength = 25e-6;
+
+    std::map <G4String, G4Colour> fParticleColour;
   };
 }
 #endif

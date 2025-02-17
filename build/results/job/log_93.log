@@ -1,0 +1,157 @@
+bon la c'est bon anamgrMotta
+bon la c'est bon stepping actionMotta
+ttime=1739486070
+pid=132746
+******************
+*** AUTOSEED ON ***
+*******************
+seed1: 1705572726; seed2: 398438292
+
+-------- DualRand engine status ---------
+Initial seed          = 1705572726
+Tausworthe generator  = 
+ Tausworthe-begin 1705748047 1928431234 1700057479 962055690 3 Tausworthe-end 
+
+IntegerCong generator = 
+ IntegerCong-begin 2975356223 65504413 12341 IntegerCong-end 
+
+-----------------------------------------
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Current available graphics systems are:
+  ASCIITree (ATree)
+  DAWNFILE (DAWNFILE)
+  G4HepRep (HepRepXML)
+  G4HepRepFile (HepRepFile)
+  OpenGLImmediateX (OGLIX)
+  OpenGLImmediateXm (OGLI, OGLIXm)
+  OpenGLStoredX (OGLSX)
+  OpenGLStoredXm (OGL, OGLS, OGLSXm)
+  RayTracer (RayTracer)
+  RayTracerX (RayTracerX)
+  VRML1FILE (VRML1FILE)
+  VRML2FILE (VRML2FILE)
+  gMocrenFile (gMocrenFile)
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  generic
+  drawByCharge
+  drawByParticleID
+  drawByOriginVolume
+  drawByAttribute
+
+Registered filter factories:
+  chargeFilter
+  particleFilter
+  originVolumeFilter
+  attributeFilter
+
+You have successfully registered the following user vis actions.
+Run Duration User Vis Actions: none
+End of Event User Vis Actions: none
+End of Run User Vis Actions: none
+
+Some /vis commands (optionally) take a string to specify colour.
+Available colours:
+  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
+
+and here ? !! 
+Session NOT OK! ...
+AA <- detector name 0
+Glass Value: PMTGlass_R12199_02
+Glass Value: PMTGlass
+Glass Value: PMTGlass_R12199_02
+Glass Value: PMTGlass_R12199_02
+creating it 3inches
+creating it 3inchesQE2
+creating it REFLEX
+creating it 3andhalfinches
+ There are  0 materials defined.
+
+
+*************************************************************
+ Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+------------- Using AA as new value!! -------------
+I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
+Usage of Lactel as detetor initialization
+[30C ---- Before: 0
+---> IdealWater
+
+----> The target as been changed to 500 cm of IdealWater
+World length has been set to: 3 m
+Target length has been set to 1.01 m
+creating it LACTEL
+doing the skinAbsorberSurf
+[10C --> Creating the surface: AbsorberSurf
+[10C --> Specifiying the reflect for: AbsorberSurf
+3 1 0 1
+creating it OM11
+Tube height is: 69.4597
+Logical vaccum created: REFLEXVaccumOfPmt
+[10C --> Creating the surface: PMTInternalSurface
+[10C --> Specifiying the reflect for: PMTInternalSurface
+3 0.95 0 0
+[10C --> Creating the surface: DinodsSurface
+[10C --> Specifiying the reflect for: DinodsSurface
+4 0.7 0 0
+[10C --> Creating the surface: CapDinodsSurface
+[10C --> Specifiying the reflect for: CapDinodsSurface
+4 0.8 0 0
+[10C --> Creating the surface: GridDinodsSurface
+[10C --> Specifiying the reflect for: GridDinodsSurface
+4 0.3 0 0
+     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
+Checking overlaps for volume OM11OMAir ... OK! 
+Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
+Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
+[10C --> Creating the surface: AbsorberPVC
+[10C --> Specifiying the reflect for: AbsorberPVC
+4 1 0 1
+ ------  >>> List of constructed logical volumes:
+PV Name: World | Mother LV: No Mother | Material: G4_AIR
+PV Name: LactelCell | Mother LV: Target | Material: IdealWater
+PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
+PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
+PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
+PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
+PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
+PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
+PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
+PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
+PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
+PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
+PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
+PV Name: genPhysic | Mother LV: World | Material: G4_AIR
+PV Name: Target | Mother LV: World | Material: IdealWater
+ AddDiscreteProcess to OpticalPhoton 
+You are setting a new verbose level for neutron HP package.
+the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
+You are setting a new verbose level for neutron HP package.
+the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
+You are setting a new verbose level for neutron HP package.
+the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
+world cuts are set
+Visualization verbosity changed to quiet (0)
+
+Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
+
+
+Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
+
+
+Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
+
+
+### - Run : 0
+[20CStart of event: 1

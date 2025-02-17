@@ -177,16 +177,13 @@ int main(int argc_,char** argv_)
     CLHEP::HepRandom::showEngineStatus();
 
     KM3ExperimentTypeMessenger* ketm=KM3ExperimentTypeMessenger::GetIt ();
-
-    G4cout << "Here 1 ..." << G4endl;
-
+  
     G4UIsession* session=0;
     G4UIsession* win32session=0;
     G4UIsession* sessionQt=0;
     G4VisManager* visManager=NULL;
     if (bsession)
       {
-        cout << " also from here !! " << endl; // Bouta
         //session = new G4UIQt(0, argv_); // by Bouta it was: new G4UIXm(0,argv_);//new G4UIterminal();
         //session = new G4UIXm(0,argv_);//new G4UIterminal()
         //sessionQt = new G4UIQt(0, argv_);

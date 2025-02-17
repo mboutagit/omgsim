@@ -532,6 +532,9 @@ CMakeFiles/libOMG.dir/common/src/KM3EventAction.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4BooleanSolid.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4DisplacedSolid.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4BooleanSolid.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolumeStore.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VStoreNotifier.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VNotifier.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4NistManager.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4NistElementBuilder.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4NistMaterialBuilder.hh \

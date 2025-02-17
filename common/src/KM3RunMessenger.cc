@@ -55,11 +55,11 @@ namespace km3net
     TargLengthCmd->SetParameterName("choice", false);
     TargLengthCmd->AvailableForStates(G4State_PreInit);
 
-    fGenType = new G4UIcmdWithAnInteger
-      ("/KM3/GenType", this);
-    fGenType->SetGuidance("1 for normal emission, 2 for ion emission.");
+    fGenType = new G4UIcmdWithAnInteger("/KM3/GenType", this);
+    fGenType->SetGuidance("1 for normal emission, 2 for ion emission and 3 for custum muons generation.");
     fGenType->SetParameterName("choice", false);
     fGenType->AvailableForStates(G4State_PreInit);
+
   }
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -74,9 +74,12 @@ namespace km3net
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 
-  void KM3RunMessenger::SetNewValue(G4UIcommand* command,
-                                         G4String newValue) {
-    KM3PrimaryGeneratorAction* the_UPGA=(KM3PrimaryGeneratorAction*)((void *)(myRun->GetUserPrimaryGeneratorAction ()));
+  void KM3RunMessenger::SetNewValue(G4UIcommand* command, G4String newValue) 
+  {
+    //KM3PrimaryGeneratorAction* the_UPGA = (KM3PrimaryGeneratorAction*)((void *)(myRun->GetUserPrimaryGeneratorAction ()));
+    KM3PrimaryGeneratorAction* the_UPGA = (KM3PrimaryGeneratorAction*) myRun->GetUserPrimaryGeneratorAction ();
+    
+    //KM3PrimaryGeneratorAction* the_UPGA = dynamic_cast<KM3PrimaryGeneratorAction*>(myRun->GetUserPrimaryGeneratorAction ());
 
     if (command == TargLengthCmd) {
       the_UPGA->fTargetRadius=TargLengthCmd->GetNewDoubleValue(newValue);
@@ -86,6 +89,8 @@ namespace km3net
         the_UPGA->InitializeNormalType ();
       else if (thetype == 2)
         the_UPGA->InitializeDecayType ();
+      else if (thetype == 3)
+       the_UPGA->initMuons ();
     }
   }
 }

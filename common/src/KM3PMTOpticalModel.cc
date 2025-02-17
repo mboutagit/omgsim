@@ -108,7 +108,7 @@ namespace km3net
       _verbosity = fVerbosityCmd->GetNewIntValue(newValue);
     }
     else if (command == fLuxCmd) {
-      _luxlevel=fLuxCmd->GetNewIntValue(newValue);
+      _luxlevel = fLuxCmd->GetNewIntValue(newValue);
     }
     else if (command == fElectrProdCmd) {
       _electronProductionLevel = fElectrProdCmd->GetNewIntValue (newValue);
@@ -119,9 +119,7 @@ namespace km3net
     else if (command == fElectronProbLevel0Cmd) {
       fElectronProbLevel0 = fElectronProbLevel0Cmd->GetNewDoubleValue (newValue);
     }
-
-
-  }
+ }
   // destructor
   KM3PMTOpticalModel::~KM3PMTOpticalModel ()
   {
@@ -876,6 +874,9 @@ namespace km3net
 
   bool KM3PMTOpticalModel::IsAPhotocathode (const G4VPhysicalVolume* thePrePV, const G4VPhysicalVolume*  thePostPV)
   {
+
+  //  cout << "\r\033[50C" << " --- IsAPhotocathode invoked!" << endl;
+
     G4LogicalSurface* Surface = G4LogicalBorderSurface::GetSurface(thePrePV, thePostPV);
     if (!Surface)
       Surface = G4LogicalBorderSurface::GetSurface(thePostPV, thePrePV);
@@ -896,14 +897,14 @@ namespace km3net
 
     if (!propTable)
       {
-        // G4cout << "  ------------------- #### No tablePro " << G4endl;
+        // G4cout << "  IsAPhotocathode ------------------- #### No tablePro " << G4endl;
         return false;
         
       }
 
     if (propTable->GetProperty("EFFICIENCY") == NULL )
       {
-        // G4cout << "  ------------------- #### No EFFICIENCY " << G4endl;
+      //   G4cout << "  IsAPhotocathode ------------------- #### No EFFICIENCY " << Surface->GetName() << G4endl;
         return false;
       }
 

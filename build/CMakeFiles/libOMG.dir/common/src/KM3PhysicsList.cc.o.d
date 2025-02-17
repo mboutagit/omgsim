@@ -942,4 +942,7 @@ CMakeFiles/libOMG.dir/common/src/KM3PhysicsList.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UIparameter.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UItokenNum.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ApplicationState.hh \
- /home/mbouta/work/cppm/lactel/trunk/common/include/KM3PhysicsListMessenger.hh
+ /home/mbouta/work/cppm/lactel/trunk/common/include/KM3PhysicsListMessenger.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4HadronicProcessStore.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4EmStandardPhysics.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4EmProcessOptions.hh

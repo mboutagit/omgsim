@@ -167,10 +167,24 @@ CMakeFiles/libOMG.dir/WProp/src/WPropSteppingAction.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libOMG.dir/WProp/src/WPropSteppingAction.cc.s"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mbouta/work/cppm/lactel/trunk/WProp/src/WPropSteppingAction.cc -o CMakeFiles/libOMG.dir/WProp/src/WPropSteppingAction.cc.s
 
+CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.o: CMakeFiles/libOMG.dir/flags.make
+CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.o: ../common/src/KM3ActionInitialization.cc
+CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.o"
+	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3ActionInitialization.cc
+
+CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.i"
+	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mbouta/work/cppm/lactel/trunk/common/src/KM3ActionInitialization.cc > CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.i
+
+CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.s"
+	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mbouta/work/cppm/lactel/trunk/common/src/KM3ActionInitialization.cc -o CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.s
+
 CMakeFiles/libOMG.dir/common/src/KM3AnalysisManager.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3AnalysisManager.cc.o: ../common/src/KM3AnalysisManager.cc
 CMakeFiles/libOMG.dir/common/src/KM3AnalysisManager.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3AnalysisManager.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3AnalysisManager.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3AnalysisManager.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3AnalysisManager.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3AnalysisManager.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3AnalysisManager.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3AnalysisManager.cc.i: cmake_force
@@ -184,7 +198,7 @@ CMakeFiles/libOMG.dir/common/src/KM3AnalysisManager.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.o: ../common/src/KM3DetectorConstruction.cc
 CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3DetectorConstruction.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.i: cmake_force
@@ -198,7 +212,7 @@ CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3DetectorMessenger.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3DetectorMessenger.cc.o: ../common/src/KM3DetectorMessenger.cc
 CMakeFiles/libOMG.dir/common/src/KM3DetectorMessenger.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3DetectorMessenger.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3DetectorMessenger.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3DetectorMessenger.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3DetectorMessenger.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3DetectorMessenger.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3DetectorMessenger.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3DetectorMessenger.cc.i: cmake_force
@@ -212,7 +226,7 @@ CMakeFiles/libOMG.dir/common/src/KM3DetectorMessenger.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3EventAction.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3EventAction.cc.o: ../common/src/KM3EventAction.cc
 CMakeFiles/libOMG.dir/common/src/KM3EventAction.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3EventAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3EventAction.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3EventAction.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3EventAction.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3EventAction.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3EventAction.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3EventAction.cc.i: cmake_force
@@ -226,7 +240,7 @@ CMakeFiles/libOMG.dir/common/src/KM3EventAction.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3ExperimentTypeMessenger.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3ExperimentTypeMessenger.cc.o: ../common/src/KM3ExperimentTypeMessenger.cc
 CMakeFiles/libOMG.dir/common/src/KM3ExperimentTypeMessenger.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3ExperimentTypeMessenger.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3ExperimentTypeMessenger.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3ExperimentTypeMessenger.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3ExperimentTypeMessenger.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3ExperimentTypeMessenger.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3ExperimentTypeMessenger.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3ExperimentTypeMessenger.cc.i: cmake_force
@@ -240,7 +254,7 @@ CMakeFiles/libOMG.dir/common/src/KM3ExperimentTypeMessenger.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3InputDataReader.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3InputDataReader.cc.o: ../common/src/KM3InputDataReader.cc
 CMakeFiles/libOMG.dir/common/src/KM3InputDataReader.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3InputDataReader.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3InputDataReader.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3InputDataReader.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3InputDataReader.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3InputDataReader.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3InputDataReader.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3InputDataReader.cc.i: cmake_force
@@ -254,7 +268,7 @@ CMakeFiles/libOMG.dir/common/src/KM3InputDataReader.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3Material.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3Material.cc.o: ../common/src/KM3Material.cc
 CMakeFiles/libOMG.dir/common/src/KM3Material.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3Material.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3Material.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3Material.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3Material.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3Material.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3Material.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3Material.cc.i: cmake_force
@@ -268,7 +282,7 @@ CMakeFiles/libOMG.dir/common/src/KM3Material.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3MaterialMessenger.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3MaterialMessenger.cc.o: ../common/src/KM3MaterialMessenger.cc
 CMakeFiles/libOMG.dir/common/src/KM3MaterialMessenger.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3MaterialMessenger.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3MaterialMessenger.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3MaterialMessenger.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3MaterialMessenger.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3MaterialMessenger.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3MaterialMessenger.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3MaterialMessenger.cc.i: cmake_force
@@ -282,7 +296,7 @@ CMakeFiles/libOMG.dir/common/src/KM3MaterialMessenger.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3OpticalModuleMgr.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3OpticalModuleMgr.cc.o: ../common/src/KM3OpticalModuleMgr.cc
 CMakeFiles/libOMG.dir/common/src/KM3OpticalModuleMgr.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3OpticalModuleMgr.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3OpticalModuleMgr.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3OpticalModuleMgr.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3OpticalModuleMgr.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3OpticalModuleMgr.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3OpticalModuleMgr.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3OpticalModuleMgr.cc.i: cmake_force
@@ -296,7 +310,7 @@ CMakeFiles/libOMG.dir/common/src/KM3OpticalModuleMgr.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3PMTOpticalModel.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3PMTOpticalModel.cc.o: ../common/src/KM3PMTOpticalModel.cc
 CMakeFiles/libOMG.dir/common/src/KM3PMTOpticalModel.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3PMTOpticalModel.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3PMTOpticalModel.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3PMTOpticalModel.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3PMTOpticalModel.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3PMTOpticalModel.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3PMTOpticalModel.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3PMTOpticalModel.cc.i: cmake_force
@@ -310,7 +324,7 @@ CMakeFiles/libOMG.dir/common/src/KM3PMTOpticalModel.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3ParametrisedScattering.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3ParametrisedScattering.cc.o: ../common/src/KM3ParametrisedScattering.cc
 CMakeFiles/libOMG.dir/common/src/KM3ParametrisedScattering.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3ParametrisedScattering.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3ParametrisedScattering.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3ParametrisedScattering.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3ParametrisedScattering.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3ParametrisedScattering.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3ParametrisedScattering.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3ParametrisedScattering.cc.i: cmake_force
@@ -324,7 +338,7 @@ CMakeFiles/libOMG.dir/common/src/KM3ParametrisedScattering.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3ParametrizedVolume.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3ParametrizedVolume.cc.o: ../common/src/KM3ParametrizedVolume.cc
 CMakeFiles/libOMG.dir/common/src/KM3ParametrizedVolume.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3ParametrizedVolume.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3ParametrizedVolume.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3ParametrizedVolume.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3ParametrizedVolume.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3ParametrizedVolume.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3ParametrizedVolume.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3ParametrizedVolume.cc.i: cmake_force
@@ -338,7 +352,7 @@ CMakeFiles/libOMG.dir/common/src/KM3ParametrizedVolume.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3PassiveVolumeMgr.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3PassiveVolumeMgr.cc.o: ../common/src/KM3PassiveVolumeMgr.cc
 CMakeFiles/libOMG.dir/common/src/KM3PassiveVolumeMgr.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3PassiveVolumeMgr.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3PassiveVolumeMgr.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3PassiveVolumeMgr.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3PassiveVolumeMgr.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3PassiveVolumeMgr.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3PassiveVolumeMgr.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3PassiveVolumeMgr.cc.i: cmake_force
@@ -352,7 +366,7 @@ CMakeFiles/libOMG.dir/common/src/KM3PassiveVolumeMgr.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3PetzoldScattering.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3PetzoldScattering.cc.o: ../common/src/KM3PetzoldScattering.cc
 CMakeFiles/libOMG.dir/common/src/KM3PetzoldScattering.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3PetzoldScattering.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3PetzoldScattering.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3PetzoldScattering.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3PetzoldScattering.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3PetzoldScattering.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3PetzoldScattering.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3PetzoldScattering.cc.i: cmake_force
@@ -366,7 +380,7 @@ CMakeFiles/libOMG.dir/common/src/KM3PetzoldScattering.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3PhotoTubeMgr.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3PhotoTubeMgr.cc.o: ../common/src/KM3PhotoTubeMgr.cc
 CMakeFiles/libOMG.dir/common/src/KM3PhotoTubeMgr.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3PhotoTubeMgr.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3PhotoTubeMgr.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3PhotoTubeMgr.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3PhotoTubeMgr.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3PhotoTubeMgr.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3PhotoTubeMgr.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3PhotoTubeMgr.cc.i: cmake_force
@@ -380,7 +394,7 @@ CMakeFiles/libOMG.dir/common/src/KM3PhotoTubeMgr.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3PhysicsList.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3PhysicsList.cc.o: ../common/src/KM3PhysicsList.cc
 CMakeFiles/libOMG.dir/common/src/KM3PhysicsList.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3PhysicsList.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3PhysicsList.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3PhysicsList.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3PhysicsList.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3PhysicsList.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3PhysicsList.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3PhysicsList.cc.i: cmake_force
@@ -394,7 +408,7 @@ CMakeFiles/libOMG.dir/common/src/KM3PhysicsList.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3PhysicsListMessenger.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3PhysicsListMessenger.cc.o: ../common/src/KM3PhysicsListMessenger.cc
 CMakeFiles/libOMG.dir/common/src/KM3PhysicsListMessenger.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3PhysicsListMessenger.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3PhysicsListMessenger.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3PhysicsListMessenger.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3PhysicsListMessenger.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3PhysicsListMessenger.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3PhysicsListMessenger.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3PhysicsListMessenger.cc.i: cmake_force
@@ -408,7 +422,7 @@ CMakeFiles/libOMG.dir/common/src/KM3PhysicsListMessenger.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3PrimaryGeneratorAction.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3PrimaryGeneratorAction.cc.o: ../common/src/KM3PrimaryGeneratorAction.cc
 CMakeFiles/libOMG.dir/common/src/KM3PrimaryGeneratorAction.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3PrimaryGeneratorAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3PrimaryGeneratorAction.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3PrimaryGeneratorAction.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3PrimaryGeneratorAction.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3PrimaryGeneratorAction.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3PrimaryGeneratorAction.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3PrimaryGeneratorAction.cc.i: cmake_force
@@ -422,7 +436,7 @@ CMakeFiles/libOMG.dir/common/src/KM3PrimaryGeneratorAction.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3RunAction.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3RunAction.cc.o: ../common/src/KM3RunAction.cc
 CMakeFiles/libOMG.dir/common/src/KM3RunAction.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3RunAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3RunAction.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3RunAction.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3RunAction.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3RunAction.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3RunAction.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3RunAction.cc.i: cmake_force
@@ -436,7 +450,7 @@ CMakeFiles/libOMG.dir/common/src/KM3RunAction.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3RunManager.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3RunManager.cc.o: ../common/src/KM3RunManager.cc
 CMakeFiles/libOMG.dir/common/src/KM3RunManager.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3RunManager.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3RunManager.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3RunManager.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3RunManager.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3RunManager.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3RunManager.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3RunManager.cc.i: cmake_force
@@ -450,7 +464,7 @@ CMakeFiles/libOMG.dir/common/src/KM3RunManager.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3RunMessenger.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3RunMessenger.cc.o: ../common/src/KM3RunMessenger.cc
 CMakeFiles/libOMG.dir/common/src/KM3RunMessenger.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3RunMessenger.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3RunMessenger.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3RunMessenger.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3RunMessenger.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3RunMessenger.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3RunMessenger.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3RunMessenger.cc.i: cmake_force
@@ -464,7 +478,7 @@ CMakeFiles/libOMG.dir/common/src/KM3RunMessenger.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3SteppingAction.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3SteppingAction.cc.o: ../common/src/KM3SteppingAction.cc
 CMakeFiles/libOMG.dir/common/src/KM3SteppingAction.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3SteppingAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3SteppingAction.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3SteppingAction.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3SteppingAction.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3SteppingAction.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3SteppingAction.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3SteppingAction.cc.i: cmake_force
@@ -478,7 +492,7 @@ CMakeFiles/libOMG.dir/common/src/KM3SteppingAction.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3TrackInformation.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3TrackInformation.cc.o: ../common/src/KM3TrackInformation.cc
 CMakeFiles/libOMG.dir/common/src/KM3TrackInformation.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3TrackInformation.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3TrackInformation.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3TrackInformation.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3TrackInformation.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3TrackInformation.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3TrackInformation.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3TrackInformation.cc.i: cmake_force
@@ -492,7 +506,7 @@ CMakeFiles/libOMG.dir/common/src/KM3TrackInformation.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3TrackingAction.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3TrackingAction.cc.o: ../common/src/KM3TrackingAction.cc
 CMakeFiles/libOMG.dir/common/src/KM3TrackingAction.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3TrackingAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3TrackingAction.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3TrackingAction.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3TrackingAction.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3TrackingAction.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3TrackingAction.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3TrackingAction.cc.i: cmake_force
@@ -506,7 +520,7 @@ CMakeFiles/libOMG.dir/common/src/KM3TrackingAction.cc.s: cmake_force
 CMakeFiles/libOMG.dir/common/src/KM3Trajectory.cc.o: CMakeFiles/libOMG.dir/flags.make
 CMakeFiles/libOMG.dir/common/src/KM3Trajectory.cc.o: ../common/src/KM3Trajectory.cc
 CMakeFiles/libOMG.dir/common/src/KM3Trajectory.cc.o: CMakeFiles/libOMG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3Trajectory.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/libOMG.dir/common/src/KM3Trajectory.cc.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libOMG.dir/common/src/KM3Trajectory.cc.o -MF CMakeFiles/libOMG.dir/common/src/KM3Trajectory.cc.o.d -o CMakeFiles/libOMG.dir/common/src/KM3Trajectory.cc.o -c /home/mbouta/work/cppm/lactel/trunk/common/src/KM3Trajectory.cc
 
 CMakeFiles/libOMG.dir/common/src/KM3Trajectory.cc.i: cmake_force
@@ -526,6 +540,7 @@ libOMG_OBJECTS = \
 "CMakeFiles/libOMG.dir/MottaSchonertSimulation/src/MottaSteppingAction.cc.o" \
 "CMakeFiles/libOMG.dir/WProp/src/WPropAnalysisManager.cc.o" \
 "CMakeFiles/libOMG.dir/WProp/src/WPropSteppingAction.cc.o" \
+"CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.o" \
 "CMakeFiles/libOMG.dir/common/src/KM3AnalysisManager.cc.o" \
 "CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.o" \
 "CMakeFiles/libOMG.dir/common/src/KM3DetectorMessenger.cc.o" \
@@ -562,6 +577,7 @@ liblibOMG.so: CMakeFiles/libOMG.dir/MottaSchonertSimulation/src/MottaAnalysisMan
 liblibOMG.so: CMakeFiles/libOMG.dir/MottaSchonertSimulation/src/MottaSteppingAction.cc.o
 liblibOMG.so: CMakeFiles/libOMG.dir/WProp/src/WPropAnalysisManager.cc.o
 liblibOMG.so: CMakeFiles/libOMG.dir/WProp/src/WPropSteppingAction.cc.o
+liblibOMG.so: CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.o
 liblibOMG.so: CMakeFiles/libOMG.dir/common/src/KM3AnalysisManager.cc.o
 liblibOMG.so: CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.o
 liblibOMG.so: CMakeFiles/libOMG.dir/common/src/KM3DetectorMessenger.cc.o
@@ -649,7 +665,7 @@ liblibOMG.so: /home/mbouta/src/geant4.10.01.p03-install/lib/libG4intercoms.so
 liblibOMG.so: /home/mbouta/src/geant4.10.01.p03-install/lib/libG4global.so
 liblibOMG.so: /home/mbouta/src/geant4.10.01.p03-install/lib/libG4clhep.so
 liblibOMG.so: CMakeFiles/libOMG.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Linking CXX shared library liblibOMG.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Linking CXX shared library liblibOMG.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/libOMG.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -263,11 +263,33 @@ CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4AffineTransform.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4AffineTransform.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4BooleanSolid.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4NistManager.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Material.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolumeStore.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolume.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Region.hh \
  /usr/include/c++/11/map /usr/include/c++/11/bits/stl_tree.h \
  /usr/include/c++/11/bits/stl_map.h \
  /usr/include/c++/11/bits/stl_multimap.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4GeomSplitter.hh \
+ /usr/include/c++/11/stdlib.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/geomwdefs.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4AutoLock.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Threading.hh \
+ /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Region.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VPhysicalVolume.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VPhysicalVolume.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolume.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VStoreNotifier.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VNotifier.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4NistManager.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Material.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Element.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Isotope.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4IonisParamElm.hh \
@@ -327,29 +349,9 @@ CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Box.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Box.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolume.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Region.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4GeomSplitter.hh \
- /usr/include/c++/11/stdlib.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/geomwdefs.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4AutoLock.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Threading.hh \
- /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
- /usr/include/x86_64-linux-gnu/bits/environments.h \
- /usr/include/x86_64-linux-gnu/bits/confname.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
- /usr/include/x86_64-linux-gnu/bits/unistd.h \
- /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
- /usr/include/linux/close_range.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Region.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VPhysicalVolume.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VPhysicalVolume.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolume.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PVPlacement.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Region.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4RegionStore.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VStoreNotifier.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VNotifier.hh \
  /home/mbouta/work/cppm/lactel/trunk/common/include/KM3Material.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Material.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PhysicalConstants.hh \
@@ -475,7 +477,6 @@ CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VTouchable.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VTouchable.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ReferenceCountedHandle.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolume.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4StepPoint.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4TrackVector.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Step.icc \
@@ -572,4 +573,5 @@ CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UnitsTable.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UnitsTable.icc \
  /home/mbouta/work/cppm/lactel/trunk/common/include/KM3PassiveVolumeMgr.hh \
- /home/mbouta/work/cppm/lactel/trunk/common/include/KM3OpticalModuleMgr.hh
+ /home/mbouta/work/cppm/lactel/trunk/common/include/KM3OpticalModuleMgr.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PhysicalVolumeStore.hh

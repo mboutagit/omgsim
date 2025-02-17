@@ -32,6 +32,7 @@
 #include "G4UImessenger.hh"
 
 class G4UIcmdWithADouble;
+class G4UIcmdWithAnInteger;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -55,6 +56,7 @@ namespace km3net
     G4UIdirectory*             fPhysicsListDir;
     G4UIcmdWithADouble*        fKopelLengthFactorCmd;
     G4UIcmdWithADouble*        fESLengthFactorCmd;
+    G4UIcmdWithAnInteger*      fVerboseCmd;
 
 
 

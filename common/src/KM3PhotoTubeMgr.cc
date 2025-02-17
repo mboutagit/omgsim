@@ -346,6 +346,7 @@ namespace km3net
     G4Ellipsoid* solidPMTEllipsPhotoExt =
       new G4Ellipsoid(thePTP.Prefix + "PhotoEllipseExt", thePTP.BulbRadiusMax, thePTP.BulbRadiusMax,
                       thePTP.Bulbr, 0, thePTP.BulbHeight/2); //hack to draw in geant4.6.3. The G4Union avoid overlaps.
+   
     G4BooleanSolid* solidFullPhotocathode =
       new G4UnionSolid(thePTP.Prefix + fPhotoRegionName,
                        solidPMTPhotocathodeExt, solidPMTEllipsPhotoExt,
@@ -355,6 +356,7 @@ namespace km3net
     G4Ellipsoid* solidPMTEllipsGlassExt =
       new G4Ellipsoid(thePTP.Prefix + "GlassEllipseExt", thePTP.BulbRadiusMax, thePTP.BulbRadiusMax,
                       thePTP.Bulbr, -thePTP.BulbHeight/2, 0.);
+   
     G4Cons* solidConeExt = new G4Cons(thePTP.Prefix + "ConeExt",
                                       0., thePTP.TubeRadius,
                                       0., thePTP.BulbRadiusMin,
@@ -518,9 +520,9 @@ namespace km3net
 
     //G4MaterialPropertiesTable* mpt = G4Material::GetMaterial(thePTP.PhotoCathodeMaterial)->GetMaterialPropertiesTable();
 
-    for(const auto& ele : *G4Material::GetMaterialTable()){
-      cout << "\r\033[10C" << "Mat: " << ele->GetName() << endl;
-    }
+    // for(const auto& ele : *G4Material::GetMaterialTable()){
+    //   cout << "\r\033[10C" << "Mat: " << ele->GetName() << endl;
+    // }
 
     //Apply to the reflective, photcathode and dinods elements
 

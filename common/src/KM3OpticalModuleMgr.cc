@@ -422,6 +422,7 @@ namespace km3net
     //PMtube first
     G4LogicalVolume *logicPMT =
       KM3PhotoTubeMgr::GetIt ()->GetLogicalVolume (ThePTP.PhotoTubeName);
+    //  cout << "\r\033[40C" << "The logical volume is: " << logicPMT->GetName() << endl;
 
     //solids makings for the outer module, absober and optical gel
     G4Sphere* solidOM = new G4Sphere(ThePTP.Prefix + fBentoName, 0, ThePTP.SphereRmax, 0, twopi, 0,
@@ -440,6 +441,7 @@ namespace km3net
                                       ThePTP.SphereRmax,
                                       ThePTP.SphereRmax,
                                      2*ThePTP.SphereRmax-ThePTP.SphereRmin-ThePTP.DistSpherePMT-ThePTP.PMTprt->PhotoHeight-ThePTP.PMTprt->BulbHeight/2-ThePTP.GelOvertake);
+                                     //ThePTP.SphereRmax/3);
 
 
     /*//substraction to remove overlaps
@@ -448,19 +450,26 @@ namespace km3net
       solidAbsorber, logicPMT->GetSolid(),
       0, G4ThreeVector(0,0,ThePTP.SphereRmin-ThePTP.PMTprt->RadiusSphere-ThePTP.DistSpherePMT));
     */
+   
+
     G4SubtractionSolid* Gelsubtraction =
       new G4SubtractionSolid(ThePTP.Prefix + "GelSub1",
                              solidGel, solidGelCutter,
                              0, G4ThreeVector(0,0,0));
+
     Gelsubtraction =
       new G4SubtractionSolid(ThePTP.Prefix + "GelSub",
                              Gelsubtraction, logicPMT->GetSolid(),
                              0, 
-                             //G4ThreeVector(0,0,50));            
-                             G4ThreeVector(0,0,ThePTP.SphereRmin-ThePTP.PMTprt->RadiusSphere-ThePTP.DistSpherePMT - 60 )); // Bouta: Not understandable -60 added to make it work
+                             //G4ThreeVector(0,0,10));            
+                             G4ThreeVector(0,0,ThePTP.SphereRmin-ThePTP.PMTprt->RadiusSphere-ThePTP.DistSpherePMT)); // Bouta: Not understandable -60 added to make it work
     
     G4ThreeVector* vec = new G4ThreeVector(0,0,ThePTP.SphereRmin-ThePTP.PMTprt->RadiusSphere-ThePTP.DistSpherePMT);
-    G4cout << "      ----Problem: " << Gelsubtraction->GetName() << " with " << logicPMT->GetName() << " : vec: " << *vec << " --> " << ThePTP.PMTprt->RadiusSphere << G4endl;
+    G4cout  << "     ----Problem: " << Gelsubtraction->GetName() 
+            << " with " << logicPMT->GetName() << " : vec: " << *vec 
+            << " -->>> " << ThePTP.PMTprt->RadiusSphere 
+            << " Z --> " << ThePTP.SphereRmin-ThePTP.PMTprt->RadiusSphere-ThePTP.DistSpherePMT
+            << G4endl;
 
 
     //logical and placements of everything
@@ -493,9 +502,9 @@ namespace km3net
                       logicAbsorber, ThePTP.Prefix + fAbsorberName, logicOMAir, false, 0, ThePTP.CheckOverlaps);
 
 
-    G4VPhysicalVolume *physiGel=
-      new G4PVPlacement(0, G4ThreeVector(0,0,0),
-                        logicGel, ThePTP.Prefix + "Gel", logicOMAir, false, 0, ThePTP.CheckOverlaps);
+    // G4VPhysicalVolume *physiGel=
+    //   new G4PVPlacement(0, G4ThreeVector(0,0,0),
+    //                     logicGel, ThePTP.Prefix + "Gel", logicOMAir, false, 0, ThePTP.CheckOverlaps);
 
 
 
@@ -523,8 +532,8 @@ namespace km3net
 
     GelSurf->SetMaterialPropertiesTable(PropGel);
 
-    new G4LogicalBorderSurface(ThePTP.Prefix + "GelAirSurf", physiOMAir, physiGel, GelSurf);
-    new G4LogicalBorderSurface(ThePTP.Prefix + "AirGelSurf", physiGel, physiOMAir, GelSurf);
+    // new G4LogicalBorderSurface(ThePTP.Prefix + "GelAirSurf", physiOMAir, physiGel, GelSurf);
+    // new G4LogicalBorderSurface(ThePTP.Prefix + "AirGelSurf", physiGel, physiOMAir, GelSurf);
 
     G4VisAttributes* testBouta = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, 0.2));
     G4VisAttributes* logCol = new G4VisAttributes(G4Colour(0.0, 0.0, 0., 0.2));

@@ -52,6 +52,11 @@ namespace km3net
     detDir = new G4UIdirectory("/KM3/det/");
     detDir->SetGuidance("detector control.");
 
+    DetInitCmd = new G4UIcmdWithAString("/KM3/det/DetInit", this);
+    DetInitCmd->SetGuidance("Initialize the detector (used to adapt for Lactel, values are Lactel, Omgsim).");
+    DetInitCmd->SetParameterName("choice", false);
+    DetInitCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
+
     TargMatCmd = new G4UIcmdWithAString("/KM3/det/setTargetMaterial", this);
     TargMatCmd->SetGuidance("Select Material of the Target.");
     TargMatCmd->SetParameterName("choice", false);
@@ -154,6 +159,7 @@ namespace km3net
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
   KM3DetectorMessenger::~KM3DetectorMessenger() {
+    delete DetInitCmd;
     delete TargMatCmd;
     delete TargScatCmd;
     delete TargLengthCmd;
@@ -176,7 +182,9 @@ namespace km3net
 
   void KM3DetectorMessenger::SetNewValue(G4UIcommand* command,
                                          G4String newValue) {
-    if (command == TargMatCmd) {
+    if (command == DetInitCmd) {
+      myDetector->SetDetectorInitialization(newValue);
+    } else if (command == TargMatCmd) {
       myDetector->SetTargetMaterial(newValue);
     } else if (command == TargScatCmd) {
       if (!TargScatCmd->GetNewBoolValue(newValue))

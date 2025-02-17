@@ -36,6 +36,12 @@
 
 #include <G4SystemOfUnits.hh>
 
+#include "G4ParticleTable.hh"
+#include "G4VSolid.hh"
+#include "G4Sphere.hh"
+#include "KM3AnalysisManager.hh"
+#include "TTree.h"
+
 #include <vector>
 
 class G4GeneralParticleSource;
@@ -59,12 +65,16 @@ namespace km3net
 
   public:
     void GeneratePrimaries(G4Event* anEvent);
-
     void SetProducingVolumeRadius (double RAD) {fTargetRadius=RAD;}
+   
+    G4ThreeVector GenerateMuonDirection(std::string);
+    G4double GenerateMuonEnergy(double, double, float);
 
   private:
     void InitializeNormalType ();
     void InitializeDecayType ();
+    void InitializeCustumMuonType();
+    void initMuons();
     G4int PrevTime;
 
   private:
@@ -73,6 +83,7 @@ namespace km3net
     G4int randcount;
     G4Navigator* Navigator;
     G4double fTargetRadius = 500.*m;
+    G4double fGenVolumeRaduis = 5.0 * m;
     unsigned char fGunType=0;//1 for normal, 2 for decay
 
     std::vector <float>         fLEDAngle;

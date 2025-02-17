@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../geant4.10.01.p03-install"
+		},
+		{
+			"path": "../root_source/install"
+		},
+		{
+			"path": "../root"
+		},
+		{
+			"path": "../clhep-install"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.mac": "shellscript",
+			"*.icc": "cpp",
+			"new": "cpp",
+			"iostream": "cpp",
+			"numbers": "cpp"
+		}
+	}
+}

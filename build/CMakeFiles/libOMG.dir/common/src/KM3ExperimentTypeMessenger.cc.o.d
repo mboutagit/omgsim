@@ -273,6 +273,28 @@ CMakeFiles/libOMG.dir/common/src/KM3ExperimentTypeMessenger.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4AffineTransform.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4AffineTransform.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4BooleanSolid.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolumeStore.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolume.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Region.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4GeomSplitter.hh \
+ /usr/include/c++/11/stdlib.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/geomwdefs.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4AutoLock.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Threading.hh \
+ /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Region.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VPhysicalVolume.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VPhysicalVolume.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolume.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VStoreNotifier.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VNotifier.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4NistManager.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Material.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Element.hh \
@@ -318,25 +340,6 @@ CMakeFiles/libOMG.dir/common/src/KM3ExperimentTypeMessenger.cc.o: \
  /usr/include/c++/11/bits/list.tcc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Track.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/trkdefs.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolume.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Region.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4GeomSplitter.hh \
- /usr/include/c++/11/stdlib.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/geomwdefs.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4AutoLock.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Threading.hh \
- /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
- /usr/include/x86_64-linux-gnu/bits/environments.h \
- /usr/include/x86_64-linux-gnu/bits/confname.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
- /usr/include/x86_64-linux-gnu/bits/unistd.h \
- /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
- /usr/include/linux/close_range.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Region.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VPhysicalVolume.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VPhysicalVolume.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolume.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Allocator.hh \
  /usr/include/c++/11/cstddef \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4AllocatorPool.hh \
@@ -490,6 +493,18 @@ CMakeFiles/libOMG.dir/common/src/KM3ExperimentTypeMessenger.cc.o: \
  /home/mbouta/work/cppm/lactel/trunk/WProp/include/WPropSteppingAction.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UserSteppingAction.hh \
  /home/mbouta/work/cppm/lactel/trunk/common/include/KM3SteppingAction.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VVisManager.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Polyline.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Visible.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Visible.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Point3DList.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Point3D.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Colour.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisAttributes.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Colour.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Color.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisAttributes.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4String.hh \
  /home/mbouta/work/cppm/lactel/trunk/K40/include/K40AnalysisManager.hh \
  /home/mbouta/work/cppm/lactel/trunk/AA/include/AAAnalysisManager.hh \
  /home/mbouta/work/cppm/lactel/trunk/AA/include/XPPhSteppingAction.hh \
@@ -565,6 +580,75 @@ CMakeFiles/libOMG.dir/common/src/KM3ExperimentTypeMessenger.cc.o: \
  /home/mbouta/work/cppm/lactel/trunk/common/include/KM3RunMessenger.hh \
  /home/mbouta/work/cppm/lactel/trunk/common/include/KM3PrimaryGeneratorAction.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VUserPrimaryGeneratorAction.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ParticleTable.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VSolid.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Sphere.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4CSGSolid.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Polyhedron.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/HepPolyhedron.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Normal3D.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Sphere.icc \
+ /home/mbouta/work/cppm/lactel/trunk/common/include/KM3AnalysisManager.hh \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TTree.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/Compression.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/RtypesCore.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/ROOT/RConfig.hxx \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/ROOT/../RVersion.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/ROOT/../ROOT/RVersion.hxx \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/RConfigure.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/DllImport.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/ROOT/TIOFeatures.hxx \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/Rtypes.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/strtok.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/strlcpy.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/snprintf.h \
+ /usr/include/c++/11/atomic \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TGenericClassInfo.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TSchemaHelper.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TIsAProxy.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TVirtualIsAProxy.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TArrayD.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TArray.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/Rtypes.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TArrayI.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TAttFill.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TAttLine.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TAttMarker.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TClass.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TDictionary.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TNamed.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TObject.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TStorage.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TVersionCheck.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/RVersion.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TString.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TMathBase.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/ROOT/TypeTraits.hxx \
+ /usr/include/c++/11/cstdarg \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/ESTLType.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TObjArray.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TSeqCollection.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TCollection.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TIterator.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TVirtualRWMutex.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TVirtualMutex.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/ROOT/RRangeCast.hxx \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/ROOT/RSpan.hxx \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/ROOT/span.hxx \
+ /usr/include/c++/11/iterator /usr/include/c++/11/bits/stream_iterator.h \
+ /usr/include/c++/11/unordered_set \
+ /usr/include/c++/11/bits/unordered_set.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TDataType.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TDirectory.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TUUID.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TList.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TBuffer.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/Bytes.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/Byteswap.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TVirtualTreePlayer.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TBranch.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TBranchCacheInfo.h \
+ /home/mbouta/work/cppm/lactel/root_source/install/include/TBits.h \
  /home/mbouta/work/cppm/lactel/trunk/common/include/KM3PhysicsList.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VUserPhysicsList.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/rundefs.hh \

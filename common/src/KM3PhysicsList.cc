@@ -121,6 +121,13 @@
 #include <KM3PMTOpticalModel.hh>
 #include <KM3PhysicsListMessenger.hh>
 
+#include <G4HadronicProcessStore.hh>
+#include <G4EmStandardPhysics.hh>
+#include "G4EmProcessOptions.hh"
+
+
+
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -142,7 +149,9 @@ namespace km3net
     DetectorCuts = 0;
     TargetCuts = 0;
 
-    //SetVerboseLevel(1);
+    SetVerboseLevel(0);
+
+    //SetVerbose(0);
 
     theCerenkovProcess = NULL;
     theScintillationProcess = NULL;
@@ -238,6 +247,14 @@ namespace km3net
     ConstructOp();
     ConstructNeutronPhysics ();
 
+    G4HadronicProcessStore::Instance()->SetVerbose(0);
+
+    // G4EmStandardPhysics* emPhysics = new G4EmStandardPhysics();
+    // emPhysics->ConstructProcess();  // Initialize EM physics
+
+    // Suppress EM physics output
+    G4EmProcessOptions emOptions;
+    emOptions.SetVerbose(0);  // Set verbosity level to 0
 
   }
 
@@ -324,23 +341,23 @@ namespace km3net
     theFissionProcess->AddDataSet(dataSet4);
     //
     // models
-#ifdef USE_FISSION_NEW
-#ifdef FISSION_NEW
-    // pass the random number generator to class fissionEvent
-    fissionEvent::setRNGd(rng4llnlfisslib);
-#ifdef USEFREYA
-    G4cout << "NeutronHPphysics: using new version of LLNL Fission Library (overriding built-in version) with FREYA turned on\n";
-    fissionEvent::setCorrelationOption(3);
-#else
-    G4cout << "NeutronHPphysics: using new version of LLNL Fission Library (overriding built-in version) without FREYA\n";
-#endif
-    G4FissLib_new* theFissionModel = new G4FissLib_new;
-#else
-    G4cout <<"NeutronHPphysics: using built-in version of LLNL Fission Library\n";
-    G4FissLib* theFissionModel = new G4FissLib;
-#endif
-    theFissionProcess->RegisterMe(theFissionModel);
-#endif
+    #ifdef USE_FISSION_NEW
+    #ifdef FISSION_NEW
+        // pass the random number generator to class fissionEvent
+        fissionEvent::setRNGd(rng4llnlfisslib);
+    #ifdef USEFREYA
+        G4cout << "NeutronHPphysics: using new version of LLNL Fission Library (overriding built-in version) with FREYA turned on\n";
+        fissionEvent::setCorrelationOption(3);
+    #else
+        G4cout << "NeutronHPphysics: using new version of LLNL Fission Library (overriding built-in version) without FREYA\n";
+    #endif
+        G4FissLib_new* theFissionModel = new G4FissLib_new;
+    #else
+        G4cout <<"NeutronHPphysics: using built-in version of LLNL Fission Library\n";
+        G4FissLib* theFissionModel = new G4FissLib;
+    #endif
+        theFissionProcess->RegisterMe(theFissionModel);
+    #endif
 
   }
 
@@ -490,22 +507,25 @@ namespace km3net
         pmanager->AddProcess(theCerenkovProcess);
         pmanager->SetProcessOrdering(theCerenkovProcess, idxPostStep);
       }
-      if (theScintProcessDef->IsApplicable(*particle)) {
+      if (theScintProcessDef->IsApplicable(*particle)) 
+      {
         if(particle->GetParticleName() == "GenericIon") {
-	  pmanager->AddProcess(theScintProcessNuc); // AtRestDiscrete
-	  pmanager->SetProcessOrderingToLast(theScintProcessNuc,idxAtRest);
-	  pmanager->SetProcessOrderingToLast(theScintProcessNuc,idxPostStep);
-	}
-	else if(particle->GetParticleName() == "alpha") {
-	  pmanager->AddProcess(theScintProcessAlpha);
-	  pmanager->SetProcessOrderingToLast(theScintProcessAlpha,idxAtRest);
-	  pmanager->SetProcessOrderingToLast(theScintProcessAlpha,idxPostStep);
-	}
-	else {
-	  pmanager->AddProcess(theScintProcessDef);
-	  pmanager->SetProcessOrderingToLast(theScintProcessDef,idxAtRest);
-	  pmanager->SetProcessOrderingToLast(theScintProcessDef,idxPostStep);
-	}
+          pmanager->AddProcess(theScintProcessNuc); // AtRestDiscrete
+          pmanager->SetProcessOrderingToLast(theScintProcessNuc,idxAtRest);
+          pmanager->SetProcessOrderingToLast(theScintProcessNuc,idxPostStep);
+        }
+        else if(particle->GetParticleName() == "alpha") 
+        {
+          pmanager->AddProcess(theScintProcessAlpha);
+          pmanager->SetProcessOrderingToLast(theScintProcessAlpha,idxAtRest);
+          pmanager->SetProcessOrderingToLast(theScintProcessAlpha,idxPostStep);
+        }
+        else 
+        {
+          pmanager->AddProcess(theScintProcessDef);
+          pmanager->SetProcessOrderingToLast(theScintProcessDef,idxAtRest);
+          pmanager->SetProcessOrderingToLast(theScintProcessDef,idxPostStep);
+        }
       }
       if (particleName == "opticalphoton") {
         G4cout << " AddDiscreteProcess to OpticalPhoton " << G4endl;
@@ -528,6 +548,7 @@ namespace km3net
     theRayleighScatteringProcess->SetVerboseLevel(verbose);
     theBoundaryProcess->SetVerboseLevel(verbose);
     theWLSProcess->SetVerboseLevel (verbose);
+    
   }
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

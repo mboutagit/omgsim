@@ -91,6 +91,9 @@ namespace km3net
     fTFastAnalysis = new TTree("FastAnalysis","Data used for very fast analysis.");
     fTFastAnalysis->Branch("PhotonReach",&fNbOM,"NbOM/l:NbPhoto");
 
+    fGenEventTree = new TTree("fGenEventTree","Data used for event generation.");
+    fGenEventTree->Branch("Gen",&fGenPPDGID,"fGenPPDGID/i:fGenXPos/F:fGenYPos:fGenZPos:fGenXDir:fGenYDir:fGenZDir:fGenTheta:fGenPhi:fGenEnergy");
+
     //ANTARES evt-like format output
     if (fEvtOutput) {
         evt_stream.open("output.evt");
@@ -128,8 +131,8 @@ const std::string KM3AnalysisManager::currentDateTime() {
   {
     if (fNbPhoto ) //% 1000 ==0)
       {
-        cout << "\r\033[20C" << fNbPhoto << " in pmt ";
-        cout.flush ();
+       // cout << "\r\033[20C" << fNbPhoto << " in pmt ";
+       // cout.flush ();
       }
     fNbPhoto++;
     if (fRFile == NULL)
@@ -227,7 +230,7 @@ const std::string KM3AnalysisManager::currentDateTime() {
 
     //G4cout << "start of event: " << EV->GetEventID() << G4endl;
 
-    if ((fNbTrigg % 10) == 0)
+    if ((fNbTrigg % 1000) == 0)
       G4cout<< "start of event: " << EV->GetEventID() << " || trigg: " << fNbTrigg << G4endl;
      // cout  <<"\r"<<fNbTrigg << " trigg" << flush;
 

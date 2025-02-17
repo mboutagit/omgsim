@@ -57,6 +57,7 @@ namespace km3net
 
     G4UIdirectory*             KM3Dir;
     G4UIdirectory*             detDir;
+    G4UIcmdWithAString*        DetInitCmd;
     G4UIcmdWithAString*        TargMatCmd;
     G4UIcmdWithABool*          TargScatCmd;
     G4UIcmdWithADoubleAndUnit* TargLengthCmd;

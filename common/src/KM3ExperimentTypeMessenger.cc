@@ -112,12 +112,11 @@ namespace km3net
       if (fDetector == NULL)
         {
 
-          G4cout << "####### Starting: XP command found #######" << G4endl;
+          //G4cout << "####### Starting: XP command found #######" << G4endl;
           fDetector = KM3DetectorConstruction::GetIt ();
           frunManager = new KM3RunManager;
 
           // set mandatory initialization classes
-
           frunManager->SetUserInitialization(new KM3PhysicsList);
 
           // set mandatory user action class
@@ -170,9 +169,9 @@ namespace km3net
           PGA->SetProducingVolumeRadius((fDetector)->GetTargetFullLength ());
           frunManager->SetUserAction(PGA);
           frunManager->SetUserInitialization(fDetector);
-          G4cout << "####### Starting Stepping Action #######" << G4endl;
+          //G4cout << "####### Starting Stepping Action #######" << G4endl;
           frunManager->SetUserAction(fSteppingAction);
-          G4cout << "####### Starting Tracking Action #######" << G4endl;
+          //G4cout << "####### Starting Tracking Action #######" << G4endl;
           frunManager->SetUserAction(fTrackingAction);
 
 

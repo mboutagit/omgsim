@@ -52,6 +52,8 @@
 #include "KM3DetectorConstruction.hh"
 #include <KM3TrackInformation.hh>
 
+#include "G4ThreeVector.hh"
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 class TTree;
 class TFile;
@@ -107,6 +109,8 @@ namespace km3net
     TTree* fTRunInfos;
     TTree* fTEvent;
     TTree* fTFastAnalysis;
+    TTree* fGenEventTree;
+
 
     unsigned int fHits=0;  //total number of detected hits
 
@@ -142,6 +146,43 @@ namespace km3net
     float fPhotoP=0;
     short fOMId=-1;
     short fPMID=0;
+    // information about generated events 
+    unsigned int fGenPPDGID;
+    float fGenXPos;
+    float fGenYPos;
+    float fGenZPos;
+    float fGenXDir;
+    float fGenYDir;
+    float fGenZDir;
+    float fGenTheta;
+    float fGenPhi;
+    float fGenEnergy;
+
+    public:
+
+      TTree* getGenEventTree(){
+        return fGenEventTree;
+      }
+
+      void setGenEnergy(float par){fGenEnergy = par;}
+      void setPPDGID(unsigned int par){fGenPPDGID = par;}
+
+      void setAngles(G4ThreeVector vec){
+        fGenTheta = vec.getTheta();
+        fGenPhi = vec.getPhi();
+      }
+
+      void setGenPosition(G4ThreeVector vec){
+        fGenXPos = vec.getX();
+        fGenYPos = vec.getY();
+        fGenZPos = vec.getZ();  
+      }
+
+      void setGenDirection(G4ThreeVector vec){
+        fGenXDir = vec.getX();
+        fGenYDir = vec.getY();
+        fGenZDir = vec.getZ();  
+      }
 
   };
 

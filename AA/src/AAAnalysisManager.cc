@@ -86,6 +86,7 @@ namespace km3net
 
     fTRunInfos->Fill ();
     fTFastAnalysis->Fill ();
+    fGenEventTree->Fill ();
 
 
     fRFile->Write ();

@@ -241,36 +241,10 @@ CMakeFiles/libOMG.dir/WProp/src/WPropSteppingAction.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Log.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PhysicsVector.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PhysicsOrderedFreeVector.icc \
- /home/mbouta/work/cppm/lactel/trunk/WProp/include/WPropAnalysisManager.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/globals.hh \
- /usr/include/c++/11/list /usr/include/c++/11/bits/stl_list.h \
- /usr/include/c++/11/bits/allocated_ptr.h \
- /usr/include/c++/11/bits/list.tcc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Track.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/trkdefs.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ThreeVector.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolume.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Region.hh \
- /usr/include/c++/11/map /usr/include/c++/11/bits/stl_tree.h \
- /usr/include/c++/11/bits/stl_map.h \
- /usr/include/c++/11/bits/stl_multimap.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4GeomSplitter.hh \
- /usr/include/c++/11/stdlib.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/geomwdefs.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4AutoLock.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Threading.hh \
- /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
- /usr/include/x86_64-linux-gnu/bits/environments.h \
- /usr/include/x86_64-linux-gnu/bits/confname.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
- /usr/include/x86_64-linux-gnu/bits/unistd.h \
- /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
- /usr/include/linux/close_range.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Region.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VPhysicalVolume.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/geomdefs.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4RotationMatrix.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VVisManager.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Transform3D.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Transform3D.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Transform3D.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/Rotation.h \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationInterfaces.h \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/LorentzVector.h \
@@ -287,6 +261,51 @@ CMakeFiles/libOMG.dir/WProp/src/WPropSteppingAction.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationZ.h \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/RotationZ.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Vector/Rotation.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Point3D.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/BasicVector3D.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Vector3D.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Normal3D.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ThreeVector.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4RotationMatrix.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Polyline.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Visible.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Visible.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Point3DList.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Point3D.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Colour.hh \
+ /usr/include/c++/11/map /usr/include/c++/11/bits/stl_tree.h \
+ /usr/include/c++/11/bits/stl_map.h \
+ /usr/include/c++/11/bits/stl_multimap.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisAttributes.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Colour.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Color.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisAttributes.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4String.hh \
+ /home/mbouta/work/cppm/lactel/trunk/WProp/include/WPropAnalysisManager.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/globals.hh \
+ /usr/include/c++/11/list /usr/include/c++/11/bits/stl_list.h \
+ /usr/include/c++/11/bits/allocated_ptr.h \
+ /usr/include/c++/11/bits/list.tcc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Track.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/trkdefs.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolume.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Region.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4GeomSplitter.hh \
+ /usr/include/c++/11/stdlib.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/geomwdefs.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4AutoLock.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Threading.hh \
+ /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Region.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VPhysicalVolume.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/geomdefs.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VPhysicalVolume.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolume.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Allocator.hh \
@@ -361,16 +380,12 @@ CMakeFiles/libOMG.dir/WProp/src/WPropSteppingAction.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4DisplacedSolid.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VSolid.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VSolid.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Transform3D.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Transform3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Transform3D.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Point3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/BasicVector3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Vector3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Normal3D.h \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4AffineTransform.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4AffineTransform.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4BooleanSolid.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4LogicalVolumeStore.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VStoreNotifier.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VNotifier.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4NistManager.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4NistElementBuilder.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4NistMaterialBuilder.hh \

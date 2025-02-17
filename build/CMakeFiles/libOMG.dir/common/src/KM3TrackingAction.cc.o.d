@@ -492,56 +492,20 @@ CMakeFiles/libOMG.dir/common/src/KM3TrackingAction.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/trkgdefs.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4TrajectoryPoint.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VTrajectoryPoint.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisManager.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VVisManager.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Transform3D.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Transform3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Transform3D.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Point3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/BasicVector3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Vector3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Normal3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4GraphicsSystemList.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VGraphicsSystem.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VGraphicsSystem.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ModelingParameters.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisExtent.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Point3D.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisAttributes.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Colour.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Color.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisAttributes.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PhysicalVolumeModel.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VModel.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VModel.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Plane3D.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Normal3D.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Plane3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ModelingParameters.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4NullModel.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4SceneHandlerList.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VSceneHandler.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VGraphicsScene.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ViewerList.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VViewer.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ViewParameters.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Vector3D.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VMarker.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Polyline.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Visible.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Visible.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VMarker.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ViewParameters.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VViewer.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4THitsMap.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4THitsCollection.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VHitsCollection.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VSceneHandler.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4SceneList.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Scene.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Scene.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4TrajectoriesModel.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisManager.icc \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Polyline.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Point3DList.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Colour.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VisAttributes.hh
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Point3D.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Point3D.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/BasicVector3D.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Transform3D.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Transform3D.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Transform3D.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Vector3D.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Normal3D.h \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Colour.hh

@@ -31,6 +31,8 @@
 #include "G4ThreeVector.hh"
 #include "G4UnionSolid.hh"
 
+#include "G4LogicalVolumeStore.hh"
+
 #include "G4NistManager.hh"
 #include <string>
 #include <map>
@@ -99,6 +101,7 @@ namespace km3net
 
     void SetMeanCapRadius (G4double R);
     void DontDraw (G4String DD);
+    void SetDetectorInitialization(G4String);
     void SetTargetMaterial(G4String);
 
     void SetTargetLength(G4double value);
@@ -171,6 +174,7 @@ namespace km3net
   protected:
 
     //     G4Tubs*             solidWorld;    // pointer to the solid envelope
+   
     G4Sphere* solidWorld;    // pointer to the solid envelope
     G4LogicalVolume* logicWorld;    // pointer to the logical envelope
     G4VPhysicalVolume* physiWorld;    // pointer to the physical envelope
@@ -180,6 +184,12 @@ namespace km3net
     G4VSolid* solidTarget;   // pointer to the solid Target
     G4LogicalVolume* logicTarget;   // pointer to the logical Target
     G4VPhysicalVolume* physiTarget;   // pointer to the physical Target
+    
+    G4VSolid* genSolid           = nullptr;   // generation volume/surface.
+    G4LogicalVolume* genLogic    = nullptr;   
+    G4VPhysicalVolume* genPhysic = nullptr;
+
+
   protected:
 
     G4Sphere* solidDetector;  // pointer to the solid Detector
@@ -193,6 +203,8 @@ namespace km3net
     G4Material* TargetMater = 0;          // Target material
     G4Material* DetectorMater;         // Detector material
     G4Material* AtmMat = G4NistManager::Instance()->FindOrBuildMaterial("G4_AIR");
+
+    G4String fDetInit;
 
     G4double fWorldLength;            // Full length the world volume
     static G4double fTargetLength;           // Full length of the target

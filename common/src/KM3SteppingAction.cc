@@ -43,6 +43,7 @@
 
 #include <G4TransportationManager.hh>
 
+#include "KM3Material.hh"
 #include <iostream>
 #include <fstream>
 
@@ -57,6 +58,23 @@ namespace km3net
 
   KM3SteppingAction::KM3SteppingAction()
   {
+    //test.push_back(1);
+    fParticleColour["gamma"]       = G4Colour(0., 1., 0., 0.4); // green
+    fParticleColour["e-"]          = G4Colour(1., 0., 0., 0.4); // red
+    fParticleColour["e+"]          = G4Colour(0., 0., 1., 0.4); // blue
+    fParticleColour["mu-"]         = G4Colour(1., 1., 0., 0.4); // yellow
+    fParticleColour["mu+"]         = G4Colour(1., 0., 1., 0.4);
+    fParticleColour["proton"]      = G4Colour(0.5, 0.5, 0., 0.4);
+    fParticleColour["neutron"]     = G4Colour(0.5, 0., 0.5, 0.4);
+
+    fParticleColour["opticalphoton"]     = G4Colour(0.9,0.5,0.1, 0.4);
+
+    fParticleColour["nu_e"]        = G4Colour(.0, 0., 0.3, 0.2);
+    fParticleColour["anti_nu_e"]   = G4Colour(.2, 0., 0.3, 0.2);
+    fParticleColour["nu_mu"]       = G4Colour(.4, 0., 0.3, 0.2);
+    fParticleColour["anti_nu_mu"]  = G4Colour(.6, 0., 0.3, 0.2);
+    fParticleColour["nu_tau"]      = G4Colour(.8, 0., 0.3, 0.2);
+    fParticleColour["anti_nu_tau"] = G4Colour(.1, 0., 0.3, 0.2);
 
   }
 
@@ -67,9 +85,44 @@ namespace km3net
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
+
+  void KM3SteppingAction::myCostumTrackColor(const G4Step* fStep){
+    G4VVisManager* pVVisManager = G4VVisManager::GetConcreteInstance();
+    if (!pVVisManager)
+      return;
+
+      G4ThreeVector preStepPoint = fStep->GetPreStepPoint()->GetPosition();
+      G4ThreeVector postStepPoint = fStep->GetPostStepPoint()->GetPosition();
+      G4double charge = fStep->GetTrack()->GetDynamicParticle()->GetCharge();
+      G4String particleName = fStep->GetTrack()->GetParticleDefinition()->GetParticleName();
+
+      G4Polyline polyline;
+      G4Colour colour;
+
+      if(fParticleColour.find(particleName) != fParticleColour.end())
+        colour = fParticleColour[particleName];
+      else{
+        colour = G4Colour(0.5, 0., 0., 0.5);
+        //G4cout << "Particle Name: " << particleName << G4endl;
+      }
+        
+
+      G4VisAttributes attribs(colour);
+      attribs.SetForceSolid(true);  // Force solid rendering mode
+      attribs.SetVisibility(true); 
+
+      polyline.SetVisAttributes(attribs);
+      polyline.push_back(preStepPoint);
+      polyline.push_back(postStepPoint);
+  
+
+      //----- Call a drawing method for G4Polyline
+      pVVisManager -> Draw(polyline);
+  }
+
   void KM3SteppingAction::UserSteppingAction(const G4Step* fStep)
   {
-        
+    myCostumTrackColor(fStep);
     //#ifdef G4ANALYSIS_USE
     G4Track* fTrack = fStep->GetTrack();
     G4StepPoint* prestep = fStep->GetPreStepPoint();
@@ -79,6 +132,13 @@ namespace km3net
     G4VPhysicalVolume* thePostPV=fStep->GetPostStepPoint()->GetPhysicalVolume();
 
 
+    // cout  << "\r\033[20C" << "Material, electronSensitive: " 
+    //       << mat->GetMaterialPropertiesTable ()->ConstPropertyExists("electronSensitive")
+    //       << endl;
+
+  // cout << " --- volumes: "  << thePrePV->GetName() << " - " << thePrePV->GetLogicalVolume()->GetName() << " -|- " 
+  //                           << thePostPV->GetName() << " - " << thePostPV->GetLogicalVolume()->GetName() 
+  //                           << endl;
     //moved here temporally by Vladimir since it seems that for the photons "info" is not created
     if (thePostPV != NULL) {
       //if (KM3PMTOpticalModel::IsAPhotocathode (fStep))   //VLA: It never enters here!!!!
@@ -89,8 +149,9 @@ namespace km3net
          //   G4cout << " ----------- Optical photon detected " << G4endl;
             //if (thePostPV->GetName ()=="NOREFLEXVaccumInPmt")
             string vac = thePostPV->GetName ();
+           // cout << "\r\033[40C" << "Name -----> pre: " << thePrePV->GetName () << " -- post: " << thePostPV->GetName() << endl;
             if (vac.find("NOREFLEXVaccumInPmt")!=std::string::npos)
-            //VaccumOfPmt is was NOREFLEXVaccumInPmt
+            //VaccumOfPmt  was NOREFLEXVaccumInPmt
               {
                 G4cout << "   ----------- Potontial Detection " << G4endl;
                 fTrack->SetTrackStatus(fStopAndKill);
@@ -103,27 +164,59 @@ namespace km3net
 
 
     KM3TrackInformation* info = (KM3TrackInformation*)(fStep->GetTrack()->GetUserInformation());
-
-    if (info == 0) return;
+    if (info == 0) 
+      return;
 
     G4VPhysicalVolume* thePreOriginalPV = info->GetOriginalPrePV ();
     G4VPhysicalVolume* thePostOriginalPV = info->GetOriginalPostPV ();
 
-    if (!thePrePV || !thePostPV || !thePreOriginalPV || !thePostOriginalPV )
-      return;
+
+  // if(!thePrePV) cout << " The thePrePV not found" << endl;
+  // else cout << " The thePrePV name: " << thePrePV->GetName() << endl;
+  // if(!thePostPV) cout << " The thePostPV not found" << endl;
+  // else cout << " The thePostPV name: " << thePostPV->GetName() << endl;
+  // if(!thePreOriginalPV) cout << " The thePreOriginalPV not found" << endl;
+  // if(!thePostOriginalPV) cout << " The thePostOriginalPV not found" << endl;
+
+  // cout << " --- volumes: "  << thePrePV->GetName() << " - " << thePostPV->GetName() << " -|- " 
+  //                           << thePreOriginalPV->GetName() << " - " << thePostOriginalPV->GetName() 
+  //                           << endl;
+
+    if (!thePrePV || !thePostPV || !thePreOriginalPV || !thePostOriginalPV ){
+     // cout << "A volume is messing !!" << endl;
+       return;
+    }
+     
+    // else
+    
+    // cout << " --- volumes: "  << thePrePV->GetName()          << " - " << thePrePV->GetLogicalVolume()->GetName()          << " -|- " 
+    //                           << thePostPV->GetName()         << " - " << thePostPV->GetLogicalVolume()->GetName()         << " -|- "
+    //                           << thePreOriginalPV->GetName()  << " - " << thePreOriginalPV->GetLogicalVolume()->GetName()  << " -|- "
+    //                           << thePostOriginalPV->GetName() << " - " << thePostOriginalPV->GetLogicalVolume()->GetName() 
+    //                           << endl;
 
     G4String prestepName=thePreOriginalPV->GetLogicalVolume ()->GetName();
     G4String poststepName=thePostOriginalPV->GetLogicalVolume ()->GetName();
+      
 
-    //if(true)
-    if(KM3PMTOpticalModel::IsAPhotocathode (thePreOriginalPV, thePostOriginalPV))
-      G4cout << "Condition: IsAPhotocathode -> "
-                          << KM3PMTOpticalModel::IsAPhotocathode (thePreOriginalPV, thePostOriginalPV)
-                          << " ## GetParticleName (" << prestepName << "," << poststepName << ") -> "
-                          << fTrack->GetDefinition()->GetParticleName() 
-                          << " ## GetOriginalParticleType () -> "
-                          << info->GetOriginalParticleType ()
-                          << G4endl;
+  // if(fTrack->GetParticleDefinition()->GetParticleName() == "opticalphoton"){
+  //    //cout << "\r\033[10C" << " --- opticalphoton energy in eV: "  << fTrack->GetTotalEnergy() / eV << endl; 
+     
+  // }
+  // cout << "\r\033[10C" << " --- After: "  << fTrack->GetParticleDefinition()->GetParticleName() << " -- "
+  //                                         << "fTrack->GetUserInformation()->Print()"
+  //                                         << endl;
+    if(false)
+    //if(info->GetOriginalParticleType () == "opticalphoton")
+    //if(fTrack->GetDefinition()->GetParticleName() == "opticalphoton"
+    //    && KM3PMTOpticalModel::IsAPhotocathode (thePreOriginalPV, thePostOriginalPV))
+    cout  << "Cond: IsPho: "    << KM3PMTOpticalModel::IsAPhotocathode (thePreOriginalPV, thePostOriginalPV)
+          << " / preSN: "       << prestepName 
+          << " / PosS: "        << poststepName 
+          << " / Particle: "    << fTrack->GetDefinition()->GetParticleName() 
+          << " / Original: "    << info->GetOriginalParticleType ()
+          << " / Prop: " << fStep->GetPreStepPoint()->GetMaterial()->GetMaterialPropertiesTable ()->ConstPropertyExists("electronSensitive")
+          << endl;
 
     if (KM3PMTOpticalModel::IsAPhotocathode (thePreOriginalPV, thePostOriginalPV) &&
         fTrack->GetDefinition()->GetParticleName() == "e-" &&
@@ -141,7 +234,7 @@ namespace km3net
 
       {
         KM3AnalysisManager::getIt()->AddPhotoTubeEntranceInfo (fStep);
-        G4cout << "  ------ PhototubeEntrance hit. From KM3SteppingAction::UserSteppingAction" << G4endl;
+        //G4cout << "  ------ PhototubeEntrance hit. From KM3SteppingAction::UserSteppingAction" << G4endl;
       }
     else {  //do nothing
       return;
@@ -170,7 +263,7 @@ namespace km3net
     unsigned char detectedGamma = CheckDetection (touch->GetHistory()->GetTopTransform().TransformPoint(globalPoint));
     if (detectedGamma != 0){
       KM3AnalysisManager::getIt()->AddDetectedParticule (info, detectedGamma);
-      G4cout << "Detected particle. From KM3SteppingAction::UserSteppingAction" << G4endl;
+      //G4cout << " -------- Detected particle. From KM3SteppingAction::UserSteppingAction" << G4endl;
     }
       
   }
@@ -257,15 +350,15 @@ namespace km3net
 		    double rndm = G4UniformRand();
 		    if(rndm < eta_teta*(1.-eta_teta_err))
 		      {
-			detectedGamma = 3;
+			      detectedGamma = 3;
 		      }
 		    else if(rndm < eta_teta)
 		      {
-			detectedGamma = 2;
+			      detectedGamma = 2;
 		      }
 		    else if (rndm < eta_teta*(1+eta_teta_err))
 		      {
-			detectedGamma = 1;
+			      detectedGamma = 1;
 		      }
 
 	  } else {
@@ -278,7 +371,7 @@ namespace km3net
 	  }
 
     KM3AnalysisManager* AAam = KM3AnalysisManager::getIt();
-    G4cout << "fKeepAll " << AAam->fKeepAll << G4endl; 
+    //G4cout << "fKeepAll " << AAam->fKeepAll << G4endl; 
 
 	  return detectedGamma;
 

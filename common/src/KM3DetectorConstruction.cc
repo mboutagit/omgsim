@@ -84,6 +84,10 @@
 #include <KM3PassiveVolumeMgr.hh>
 #include <KM3OpticalModuleMgr.hh>
 
+//#include "G4GDMLParser.hh"
+
+#include "G4PhysicalVolumeStore.hh"
+
 using namespace std;
 using namespace libconfig;
 
@@ -106,7 +110,8 @@ namespace km3net
   }
 
 
-  KM3DetectorConstruction::KM3DetectorConstruction() {
+  KM3DetectorConstruction::KM3DetectorConstruction() 
+  {
     detectorMessenger = new KM3DetectorMessenger(this);
 
     fMaterialsManager = KM3Material::GetIt ();
@@ -149,7 +154,7 @@ namespace km3net
 		theRotPMT3->rotateZ(-phi);     //this is done first, counter clockwise, rotates axes too
 		theRotPMT3->rotateY(-theta);   //this will be done second
 		theRotPMT3->invert();
-		cout << "inverted rotation " << theRotPMT3->getPhi() << " " << theRotPMT3->getTheta() << " " << theRotPMT3->getPsi() << endl;
+		//cout<< "inverted rotation " << theRotPMT3->getPhi() << " " << theRotPMT3->getTheta() << " " << theRotPMT3->getPsi() << endl;
 
     theRot->set(PosPar.Phi, PosPar.Theta, PosPar.Psi);
     G4ThreeVector thePos(PosPar.X, PosPar.Y, PosPar.Z);
@@ -174,7 +179,7 @@ namespace km3net
         cerr << "ERROR:KM3DetectorConstruction, volume "<< PosPar.MotherVolume<< " can't be found"<< endl;
         return NULL;
       }
-    cout << "Placing " << logicVolume->GetName () << " |" << logicVolume << "| in " << WhereToPlace->GetName () << " |" << WhereToPlace <<  "| at " << thePos.x() << " " << thePos.y() << ' ' << thePos.z () << endl;
+    //cout << "Placing " << logicVolume->GetName () << " |" << logicVolume << "| in " << WhereToPlace->GetName () << " |" << WhereToPlace <<  "| at " << thePos.x() << " " << thePos.y() << ' ' << thePos.z () << endl;
     const G4String LACTELCELL = "LactelCell";
     if(logicVolume->GetName() == LACTELCELL){
       G4VisAttributes* cellCol = new G4VisAttributes(G4Colour(0.0, 0.0, 1.0, 0.2));
@@ -192,19 +197,25 @@ namespace km3net
   }
   G4VPhysicalVolume* KM3DetectorConstruction::Construct ()
   {
+    G4double z = 1.;  // Atomic number (Hydrogen)
+    G4double a = 1.01 * g/mole;  // Atomic mass
+    G4double density = 1.0e-25 * g/cm3;  // Extremely low density
+    G4double temperature = 2.73 * kelvin;  // Space temperature
+    G4double pressure = 3.0e-18 * pascal;  // Very low pressure
 
+    G4Material* myVacuum = new G4Material("CustomVacuum", z, a, density, kStateGas, temperature, pressure);
     //------------------------------
     // World
     //------------------------------
-    // solidWorld = new G4Box("world", fTargetLength * 1.5,
+    // if(fDetInit != "Lactel")
+    //   solidWorld = new G4Box("world", fTargetLength * 1.5,
     //                        fTargetLength * 1.5 , fTargetLength * 1.5);
-
-    //cout << "\r\033[20C" << " fWorldLength: " << fWorldLength << endl;
+    // else
     solidWorld = new G4Sphere("world", 0, fWorldLength, 0, twopi, 0, pi);
     //G4cout << " \r\033[40C"
     
     logicWorld = new G4LogicalVolume(solidWorld,
-                                     AtmMat, 
+                                     myVacuum, 
                                      "World", 0, 0, 0);
                                      
                                      //TargetMater, "World", 0, 0, 0);
@@ -212,9 +223,6 @@ namespace km3net
     logicWorld->SetVisAttributes(G4VisAttributes::Invisible);
     //  Must place the World Physical volume unrotated at (0,0,0).
     //
-
-    G4RotationMatrix* rotZtoUp = new G4RotationMatrix();
-    rotZtoUp->rotateX(45 * deg);  // Rotate 90 degrees about the X-axis
 
     //G4Rotate3D rotationBouta(G4ThreeVector(1, 0, 0), 45 * deg);
     physiWorld = new G4PVPlacement(0,               // no rotation
@@ -227,25 +235,39 @@ namespace km3net
     //------------------------------
     // Target
     //------------------------------
-    // solidTarget =  new G4Sphere("Target", 0, fTargetLength,
+    
+    // if(fDetInit != "Lactel")
+    //   solidTarget =  new G4Sphere("Target", 0, fTargetLength,
     //                             0, twopi, 0,
     //                             pi);
-
-    solidTarget = new G4Box("Target", fTargetLength,
+    // else
+      solidTarget = new G4Box("Target", fTargetLength,
                             fTargetLength, fTargetLength);
 
     /*new G4Box("Target", fTargetLength / 2., fTargetLength / 2.,
       fTargetLength / 2.);*/
-    G4cout << "create logic target" << G4endl;
-    logicTarget = new G4LogicalVolume(solidTarget,
-                                      TargetMater, "Target", 0, 0, 0);
+   // G4cout << "create logic target" << G4endl;
 
+    logicTarget = new G4LogicalVolume(solidTarget,
+      myVacuum, "Target", 0, 0, 0);
+
+  
+    genSolid = new G4Sphere("genSolid", 0, fWorldLength, 0, twopi, 0, pi/2);
+    genLogic = new G4LogicalVolume(genSolid,
+                                     myVacuum, 
+                                     "genLogic", 0, 0, 0);
                                       
-    G4VisAttributes* worldCol = new G4VisAttributes(G4Colour(0.0, 0.0, 0.7, 0.4));
-    G4VisAttributes* second = new G4VisAttributes(G4Colour(1.0, 1.0, 0.0, 0.4));
-    //logicTarget->SetVisAttributes(second);
-    second->SetVisibility(true);  // Make the volume visible
-    second->SetForceSolid(true);  // Force solid rendering mode
+    G4VisAttributes* worldCol = new G4VisAttributes(G4Colour(0.2, 1, 0, 0.1));
+    G4VisAttributes* genAttributes = new G4VisAttributes(G4Colour(6.0, 0.0, 3.0, 0.2));
+    G4VisAttributes* targetColor = new G4VisAttributes(G4Colour(3.0, 6.0, 3.0, 0.4));
+
+    targetColor->SetVisibility(true);  // Make the volume visible
+    targetColor->SetForceSolid(true);  // Force solid rendering mode  
+    logicTarget->SetVisAttributes(targetColor);
+    
+    genAttributes->SetVisibility(true);  // Make the volume visible
+    genAttributes->SetForceSolid(true);  // Force solid rendering mode
+    genLogic->SetVisAttributes(genAttributes);
 
     worldCol->SetVisibility(true);  // Make the volume visible
     worldCol->SetForceSolid(true);  // Force solid rendering mode
@@ -257,7 +279,10 @@ namespace km3net
 
     targetRot->set (FOrientationPhi, FOrientationTheta, FOrientationPsi);
 
-    targetRegion = new G4Region("Target");
+    //targetRegion = new G4Region("Target");
+    // if(!G4RegionStore::GetInstance()->GetRegion(targetRegion->GetName()))
+    //   G4RegionStore::GetInstance()->Register(targetRegion);
+
 
 
     for (auto& VolPar: fVolumeList [fDetectorTypeName])
@@ -302,15 +327,46 @@ namespace km3net
         // for (const auto& [key, value] : fOMList) {
         //   G4cout << key << ": \n" ;
         //   for(auto &i : value){
-        //     if(key == fDetectorTypeName)
+        //     if(key == fDetectorTypeName)   
         //       G4cout << "name: "<<  i.Name << " # BSMat: " << i.BorderSurfaceMaterial << " # (X,Y,Z): (" << i.X << "," << i.Y <<"," << i.Z <<")" << G4endl;
         //   }
         //   G4cout<<G4endl;
         // }
 
+    
+    genPhysic = new G4PVPlacement(0,                // no rotation
+                                   G4ThreeVector(), // at (0,0,0)
+                                   genLogic,        // its logical volume
+                                   "genPhysic",     // its name
+                                   logicWorld,      // its mother  volume
+                                   false,           // no boolean operations
+                                   0);              // no field specific to volume
 
-    physiTarget = new G4PVPlacement(targetRot, G4ThreeVector(), logicTarget, "Target",
-                                    logicWorld, false, 0);
+
+    physiTarget = new G4PVPlacement(targetRot, 
+                                    G4ThreeVector(), 
+                                    logicTarget, 
+                                    "Target",
+                                    logicWorld, 
+                                    false, 
+                                    0);
+
+
+    G4RotationMatrix* rotZtoUp = new G4RotationMatrix();
+    rotZtoUp->rotateX(90 * deg);  // Rotate 90 degrees about the X-axis
+
+    G4PhysicalVolumeStore * lvs =  G4PhysicalVolumeStore::GetInstance(); 
+    G4cout << " ------  >>> List of constructed logical volumes:" << G4endl;
+    for (auto lv : *lvs) {
+
+        G4String MV = lv->GetMotherLogical() ? lv->GetMotherLogical()->GetName() : "No Mother";
+        G4cout << "PV Name: " << lv->GetName() << " | Mother LV: " 
+        << MV
+        << " | Material: " << lv->GetLogicalVolume()->GetMaterial()->GetName() 
+        << G4endl;
+      // if(lv->GetName() != "World")
+      //   lv->SetRotation(rotZtoUp);
+    }
 
     return physiWorld;
 
@@ -506,6 +562,12 @@ namespace km3net
     G4cout << "Target length has been set to " << value/m << " m" << G4endl;
     fTargetLength = value;
   }
+  void KM3DetectorConstruction::SetDetectorInitialization(G4String value)
+  {
+    G4cout << "Usage of " << value << " as detetor initialization" << G4endl;
+    fDetInit = value;
+  }
+
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 

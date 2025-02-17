@@ -5,14 +5,22 @@
 #include <G4TrackVector.hh>
 #include <KM3Trajectory.hh>
 
+using namespace std;
 namespace km3net
 {
   KM3TrackingAction::KM3TrackingAction () {}
   KM3TrackingAction::~KM3TrackingAction () {}
 
   void KM3TrackingAction::PreUserTrackingAction(const G4Track* aTrack) {
-      G4VTrajectory* trajectory = new KM3Trajectory(aTrack);
-      fpTrackingManager->SetTrajectory(trajectory);
+ 
+    G4TrackingManager* tman = new G4TrackingManager();
+    G4Trajectory* trajectory = new KM3Trajectory(aTrack);
+    // G4cout << " tr : :: ::: ::::: ::::: :::: >>> " << trajectory << G4endl;
+      tman->SetTrajectory(trajectory);
+    // G4cout << " tr : :: ::: ::::: ::::: :::: <<< " << trajectory << G4endl;
+
+  // G4cout << " Track: " << aTrack->GetKineticEnergy() << G4endl;
+
     G4Track* theTrack = (G4Track*)aTrack;
     KM3TrackInformation* info = (KM3TrackInformation*)(theTrack->GetUserInformation());
 
@@ -27,6 +35,8 @@ namespace km3net
   }
   void KM3TrackingAction::PostUserTrackingAction(const G4Track* aTrack)
   {
+
+    //cout << "\r\033[10C" << " Event____: " << aTrack->GetTrackID() << endl;
 
     G4TrackVector* secondaries = fpTrackingManager->GimmeSecondaries();
     if(!secondaries)

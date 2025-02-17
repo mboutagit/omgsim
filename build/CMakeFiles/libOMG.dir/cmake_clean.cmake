@@ -13,6 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/libOMG.dir/WProp/src/WPropAnalysisManager.cc.o.d"
   "CMakeFiles/libOMG.dir/WProp/src/WPropSteppingAction.cc.o"
   "CMakeFiles/libOMG.dir/WProp/src/WPropSteppingAction.cc.o.d"
+  "CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.o"
+  "CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.o.d"
   "CMakeFiles/libOMG.dir/common/src/KM3AnalysisManager.cc.o"
   "CMakeFiles/libOMG.dir/common/src/KM3AnalysisManager.cc.o.d"
   "CMakeFiles/libOMG.dir/common/src/KM3DetectorConstruction.cc.o"

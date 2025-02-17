@@ -31,6 +31,7 @@
 #include <KM3PetzoldScattering.hh>
 #include "G4UIdirectory.hh"
 #include "G4UIcmdWithADouble.hh"
+#include "G4UIcmdWithAnInteger.hh"
 #include "globals.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -58,6 +59,13 @@ namespace km3net
     fESLengthFactorCmd->SetGuidance("Set the ES scattering Length factor.");
     fESLengthFactorCmd->SetParameterName("choice", false);
     fESLengthFactorCmd->AvailableForStates(G4State_PreInit);
+
+    fVerboseCmd = new G4UIcmdWithAnInteger ("/KM3/PhysicsList/Verbose", this);
+    fVerboseCmd->SetGuidance("Set Verbosity.");
+    fVerboseCmd->SetParameterName("choice", false);
+    fVerboseCmd->AvailableForStates(G4State_PreInit);
+
+   // myPhysicsList->KM3PhysicsList::SetVerbose(0);
   }
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -65,6 +73,7 @@ namespace km3net
   KM3PhysicsListMessenger::~KM3PhysicsListMessenger() {
     delete fKopelLengthFactorCmd;
     delete fESLengthFactorCmd;
+    delete fVerboseCmd;
     delete fPhysicsListDir;
     delete KM3Dir;
   }
@@ -79,6 +88,11 @@ namespace km3net
      }
     else if (command == fESLengthFactorCmd) {
       myPhysicsList->fESFactor=fESLengthFactorCmd->GetNewDoubleValue(newValue);
+    }
+    else if (command == fVerboseCmd) {
+       cout << "\r\033[30C ---- Before: " << fVerboseCmd->GetNewIntValue(newValue) << endl;
+      // myPhysicsList->SetVerbose(fVerboseCmd->GetNewIntValue(newValue));
+      // cout << "\r\033[30C ---- After: " << fVerboseCmd->GetNewIntValue(newValue) << endl;
     }
 
   }

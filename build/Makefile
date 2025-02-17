@@ -310,6 +310,30 @@ WProp/src/WPropSteppingAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/WProp/src/WPropSteppingAction.cc.s
 .PHONY : WProp/src/WPropSteppingAction.cc.s
 
+common/src/KM3ActionInitialization.o: common/src/KM3ActionInitialization.cc.o
+.PHONY : common/src/KM3ActionInitialization.o
+
+# target to build an object file
+common/src/KM3ActionInitialization.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.o
+.PHONY : common/src/KM3ActionInitialization.cc.o
+
+common/src/KM3ActionInitialization.i: common/src/KM3ActionInitialization.cc.i
+.PHONY : common/src/KM3ActionInitialization.i
+
+# target to preprocess a source file
+common/src/KM3ActionInitialization.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.i
+.PHONY : common/src/KM3ActionInitialization.cc.i
+
+common/src/KM3ActionInitialization.s: common/src/KM3ActionInitialization.cc.s
+.PHONY : common/src/KM3ActionInitialization.s
+
+# target to generate assembly for a file
+common/src/KM3ActionInitialization.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/common/src/KM3ActionInitialization.cc.s
+.PHONY : common/src/KM3ActionInitialization.cc.s
+
 common/src/KM3AnalysisManager.o: common/src/KM3AnalysisManager.cc.o
 .PHONY : common/src/KM3AnalysisManager.o
 
@@ -965,6 +989,9 @@ help:
 	@echo "... WProp/src/WPropSteppingAction.o"
 	@echo "... WProp/src/WPropSteppingAction.i"
 	@echo "... WProp/src/WPropSteppingAction.s"
+	@echo "... common/src/KM3ActionInitialization.o"
+	@echo "... common/src/KM3ActionInitialization.i"
+	@echo "... common/src/KM3ActionInitialization.s"
 	@echo "... common/src/KM3AnalysisManager.o"
 	@echo "... common/src/KM3AnalysisManager.i"
 	@echo "... common/src/KM3AnalysisManager.s"

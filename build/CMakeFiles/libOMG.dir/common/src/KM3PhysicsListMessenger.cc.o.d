@@ -449,4 +449,5 @@ CMakeFiles/libOMG.dir/common/src/KM3PhysicsListMessenger.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PhysicsTable.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PhysicsOrderedFreeVector.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UIdirectory.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UIcmdWithADouble.hh
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UIcmdWithADouble.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UIcmdWithAnInteger.hh

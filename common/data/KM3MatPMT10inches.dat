@@ -5,8 +5,6 @@
 # Default "generic" version:  Glenn Horton-Smith, Dec 8, 2004
 #
 
-
-
 CREATE photocathode10inches
 
 DENSITY 5
@@ -215,15 +213,15 @@ PROPERTY  THICKNESS     # Thickness of photocathode as function of theta positio
 PROPERTY  ANGULAR_EFFICIENCY  # data is from scans best fit
 0 1
 1 1
-#.012217304 0.7755460
-#.024434609 0.8219338
-#.036651914 0.8683680
-#.048869219 0.9164099
-#.061086523 0.9611203
-#.073303828 0.9638412
-#.085521133 0.9765568
-#.097738438 0.9919360
-#.109955742 1
+# .012217304 0.7755460
+# .024434609 0.8219338
+# .036651914 0.8683680
+# .048869219 0.9164099
+# .061086523 0.9611203
+# .073303828 0.9638412
+# .085521133 0.9765568
+# .097738438 0.9919360
+# .109955742 1
 
 
 PROPERTY  ANGULAR_EFFICIENCY_ERROR
@@ -332,7 +330,14 @@ PROPERTY  ANGULAR_EFFICIENCY_ERROR
 #
 #
 #
-
+## Added by Bouta to make the detection work. 
+## check: 
+##      KM3PMTOpticalModel::LoadMaterialProps() 
+##      KM3PMTOpticalModel::IsPhotocathode()
+PROPERTY  THREESTEPPROB
+OPTION wavelength
+200 1
+1000 1
 
 
 

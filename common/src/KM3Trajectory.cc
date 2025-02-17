@@ -1,50 +1,47 @@
 #include "KM3Trajectory.hh"
+#include "G4VisManager.hh"
+#include "G4Track.hh"
+#include "G4Colour.hh"
+#include "G4SystemOfUnits.hh"
 
-  //Constructor (initialize based on the track)
-KM3Trajectory::KM3Trajectory(const G4Track* track) {
-   // Initialization logic if needed
+KM3Trajectory::KM3Trajectory(const G4Track* track)
+    : fTrajectory(new G4Trajectory()), fParticleName (track->GetParticleDefinition()->GetParticleName()) {
+    // Store initial point of the trajectory
+    //fTrajectoryPoints.push_back(track->GetPosition());
 }
 
 KM3Trajectory::~KM3Trajectory() {}
 
-void KM3Trajectory::DrawTrajectory() const
-{
-    cout << "\r\033[50C" << " Hello from KM3Trajectory" << endl;
-    // Access the visualization manager
-    G4VisManager* visManager = static_cast<G4VisManager*>(G4VisManager::GetConcreteInstance());
+void KM3Trajectory::DrawTrajectory() const {
+    G4cout << " ---------------------- test" << G4endl;
+    //Check if visualization manager exists
+    G4VisManager* visManager = (G4VisManager*)G4VisManager::GetConcreteInstance();
     if (!visManager) return;
 
-    // Create a polyline to represent the trajectory
+    // Create a polyline for trajectory visualization
     G4Polyline polyline;
 
-    // Customize attributes
+    // Set color based on particle type
     G4VisAttributes visAttributes;
-    visAttributes.SetLineWidth(2);
-
-    const G4String particleName = "gamma"; // Replace with logic to get the particle name
-
-    // Assign color based on particle type
-    if (particleName == "gamma") {
-        visAttributes.SetColour(G4Colour(0.0, 1.0, 0.0)); // Green for gamma
-    } else if (particleName == "e-") {
-        visAttributes.SetColour(G4Colour(0.0, 1.0, 0.0)); // Blue for electrons
-    } else if (particleName == "proton") {
-        visAttributes.SetColour(G4Colour(0.0, 1.0, 0.0)); // Red for protons
+    if (fParticleName == "gamma") {
+        visAttributes.SetColour(G4Colour(1.0, 1.0, 0.0)); // Green for gamma
+    } else if (fParticleName == "e-") {
+        visAttributes.SetColour(G4Colour(0.0, 0.0, 1.0)); // Blue for electrons
+    } else if (fParticleName == "proton") {
+        visAttributes.SetColour(G4Colour(1.0, 0.0, 0.0)); // Red for protons
     } else {
         visAttributes.SetColour(G4Colour(0.5, 0.5, 0.5)); // Gray for others
     }
+    visAttributes.SetLineWidth(2.0);
 
-    // Apply attributes
+    // Apply visualization attributes to the polyline
     polyline.SetVisAttributes(&visAttributes);
 
-    // Add trajectory points (example; populate with actual data)
-    // For each point, add to the polyline:
-    // polyline.push_back(G4Point3D(x, y, z));
+    // Add points to the polyline
+    // for (const auto& point : fTrajectoryPoints) {
+    //     polyline.push_back(G4Point3D(point));
+    // }
 
-    // Draw the trajectory
+    // Draw the polyline
     visManager->Draw(polyline);
 }
-
-    // G4VTrajectory* Clone() const {
-    //     return new KM3Trajectory(*this);
-    // }
