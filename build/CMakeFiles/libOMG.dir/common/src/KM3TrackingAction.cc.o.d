@@ -508,4 +508,5 @@ CMakeFiles/libOMG.dir/common/src/KM3TrackingAction.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Transform3D.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Vector3D.h \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/CLHEP/Geometry/Normal3D.h \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Colour.hh
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Colour.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4OpticalPhoton.hh

@@ -514,6 +514,9 @@ CMakeFiles/libOMG.dir/common/src/KM3PrimaryGeneratorAction.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Visible.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Visible.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Sphere.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Box.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Box.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4String.hh \
  /home/mbouta/work/cppm/lactel/trunk/common/include/KM3AnalysisManager.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Track.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/trkdefs.hh \
@@ -597,4 +600,41 @@ CMakeFiles/libOMG.dir/common/src/KM3PrimaryGeneratorAction.cc.o: \
  /home/mbouta/work/cppm/lactel/root_source/install/include/TBranch.h \
  /home/mbouta/work/cppm/lactel/root_source/install/include/TBranchCacheInfo.h \
  /home/mbouta/work/cppm/lactel/root_source/install/include/TBits.h \
- /home/mbouta/work/cppm/lactel/trunk/common/include/KM3DetectorConstruction.hh
+ /home/mbouta/work/cppm/lactel/trunk/common/include/KM3DetectorConstruction.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4EventManager.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/evmandefs.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/trajectoryControl.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4StackManager.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UserStackingAction.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ClassificationOfNewTrack.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4StackedTrack.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4TrackStack.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4SmartTrackStack.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PrimaryTransformer.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ParticleTable.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4TrackingManager.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4SteppingManager.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/Randomize.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ProcessManager.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VProcess.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PhysicsTable.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PhysicsTable.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VParticleChange.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4TrackFastVector.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4FastVector.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VParticleChange.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ForceCondition.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4GPILSelection.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ParticleChange.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ParticleChange.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ProcessType.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ProcessVector.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ProcessVector.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ProcessManager.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UserSteppingAction.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VSteppingVerbose.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4TrackingMessenger.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4UserTrackingAction.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PhysicalVolumeStore.hh \
+ /home/mbouta/work/cppm/lactel/trunk/common/include/ParametrizedGenerator.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4PrimaryParticle.hh

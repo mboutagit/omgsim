@@ -550,4 +550,5 @@ CMakeFiles/libOMG.dir/common/src/KM3EventAction.cc.o: \
  /home/mbouta/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4ParticleDefinition.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Allocator.hh \
- /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VUserTrackInformation.hh
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4VUserTrackInformation.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4MemStat.hh

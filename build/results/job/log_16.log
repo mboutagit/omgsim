@@ -1,19 +1,19 @@
 bon la c'est bon anamgrMotta
 bon la c'est bon stepping actionMotta
-ttime=1739279546
-pid=134578
+ttime=1739705860
+pid=497290
 ******************
 *** AUTOSEED ON ***
 *******************
-seed1: 1705443002; seed2: 398407987
+seed1: 1613186052; seed2: 376855871
 
 -------- DualRand engine status ---------
-Initial seed          = 1705443002
+Initial seed          = 1613186052
 Tausworthe generator  = 
- Tausworthe-begin 1705618323 1488667358 1287859339 3762629286 3 Tausworthe-end 
+ Tausworthe-begin 1613361373 735256228 150017589 1208875276 3 Tausworthe-end 
 
 IntegerCong generator = 
- IntegerCong-begin 2526022147 65504413 12341 IntegerCong-end 
+ IntegerCong-begin 3477094925 65504413 12341 IntegerCong-end 
 
 -----------------------------------------
 Visualization Manager instantiating with verbosity "warnings (3)"...
@@ -89,34 +89,22 @@ Usage of Lactel as detetor initialization
 ---> IdealWater
 
 ----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Target length has been set to 1.01 m
+World length has been set to: 6 m
+Target length has been set to 2.01 m
 creating it LACTEL
 doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
 3 1 0 1
 creating it OM11
 Tube height is: 69.4597
 Logical vaccum created: REFLEXVaccumOfPmt
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Specifiying the reflect for: PMTInternalSurface
 3 0.95 0 0
-[10C --> Creating the surface: DinodsSurface
-[10C --> Specifiying the reflect for: DinodsSurface
 4 0.7 0 0
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
 4 0.8 0 0
-[10C --> Creating the surface: GridDinodsSurface
-[10C --> Specifiying the reflect for: GridDinodsSurface
 4 0.3 0 0
      ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
 Checking overlaps for volume OM11OMAir ... OK! 
 Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
 Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
 4 1 0 1
  ------  >>> List of constructed logical volumes:
 PV Name: World | Mother LV: No Mother | Material: CustomVacuum
@@ -154,7 +142,26 @@ Neutron HP Thermal Scattering Data: Following material-element pairs and/or elem
 
 
 ### - Run : 0
-[60C1 [65C detected lim-Erange 3-20[60C1 [65C detected lim-Erange 3-30[60C1 [65C detected lim-Erange 3-32[60C1 [65C detected lim-Erange 3-27[60C1 [65C detected lim-Erange 3-34[60C1 [65C detected lim-Erange 3-28[60C1 [65C detected lim-Erange 3-22[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-33[60C1 [65C detected lim-Erange 3-25[60C1 [65C detected lim-Erange 3-36[60C1 [65C detected lim-Erange 3-38[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-39[60C1 [65C detected lim-Erange 3-21[60C1 [65C detected lim-Erange 3-31[20CStart of event: 1[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-26[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-37
+Run: 0
+
+[40C0 in OM  replica: 0
+ replica: 0
+[20CStart of event: 1Run: 0
+Run: 0
+ replica: 0
+Run: 0
+[60C1 [65C detected lim-Erange 3-33[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-30Run: 0
+Run: 0
+ replica: 0
+Run: 0
+[60C1 [65C detected lim-Erange 3-31 replica: 0
+Run: 0
+ replica: 0
+Run: 0
+ replica: 0
+ replica: 0
+Run: 0
+
 End of Run 0
 Deleting visManager !! 
 Analysis file was normaly closed.

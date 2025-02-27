@@ -65,6 +65,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/libOMG.dir/common/src/KM3TrackingAction.cc.o.d"
   "CMakeFiles/libOMG.dir/common/src/KM3Trajectory.cc.o"
   "CMakeFiles/libOMG.dir/common/src/KM3Trajectory.cc.o.d"
+  "CMakeFiles/libOMG.dir/common/src/ParametrizedGenerator.cc.o"
+  "CMakeFiles/libOMG.dir/common/src/ParametrizedGenerator.cc.o.d"
   "liblibOMG.pdb"
   "liblibOMG.so"
 )

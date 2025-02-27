@@ -23,6 +23,6 @@ fi
 
 
 for run in $(seq 1 $runNb); do
-#nohup ./OMGsim -s -evt -fa -ka scripts/DOMgamma.mac "${resDir}/res_$run.root"  > ${jobDir}/log_$run.log 2>&1 &
-./OMGsim -s -evt -fa -ka scripts/DOMgamma.mac "${resDir}/res_$run.root"  > ${jobDir}/log_$run.log 2>&1
+#nohup ./OMGsim -s -evt -fa -ka scripts/lactel.mac "${resDir}/res_$run.root"  > ${jobDir}/log_$run.log 2>&1 &
+./OMGsim -s -evt -fa -ka scripts/lactel.mac "${resDir}/res_$run.root"  > ${jobDir}/log_$run.log 2>&1
 done

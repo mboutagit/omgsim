@@ -549,6 +549,9 @@ CMakeFiles/libOMG.dir/common/src/KM3RunMessenger.cc.o: \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Visible.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Visible.icc \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Sphere.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Box.hh \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Box.icc \
+ /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4String.hh \
  /home/mbouta/work/cppm/lactel/trunk/common/include/KM3AnalysisManager.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Track.hh \
  /home/mbouta/src/geant4.10.01.p03-install/include/Geant4/G4Event.hh \

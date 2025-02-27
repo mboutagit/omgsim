@@ -934,6 +934,30 @@ common/src/KM3Trajectory.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/common/src/KM3Trajectory.cc.s
 .PHONY : common/src/KM3Trajectory.cc.s
 
+common/src/ParametrizedGenerator.o: common/src/ParametrizedGenerator.cc.o
+.PHONY : common/src/ParametrizedGenerator.o
+
+# target to build an object file
+common/src/ParametrizedGenerator.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/common/src/ParametrizedGenerator.cc.o
+.PHONY : common/src/ParametrizedGenerator.cc.o
+
+common/src/ParametrizedGenerator.i: common/src/ParametrizedGenerator.cc.i
+.PHONY : common/src/ParametrizedGenerator.i
+
+# target to preprocess a source file
+common/src/ParametrizedGenerator.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/common/src/ParametrizedGenerator.cc.i
+.PHONY : common/src/ParametrizedGenerator.cc.i
+
+common/src/ParametrizedGenerator.s: common/src/ParametrizedGenerator.cc.s
+.PHONY : common/src/ParametrizedGenerator.s
+
+# target to generate assembly for a file
+common/src/ParametrizedGenerator.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/common/src/ParametrizedGenerator.cc.s
+.PHONY : common/src/ParametrizedGenerator.cc.s
+
 programs/OMGsim.o: programs/OMGsim.cxx.o
 .PHONY : programs/OMGsim.o
 
@@ -1067,6 +1091,9 @@ help:
 	@echo "... common/src/KM3Trajectory.o"
 	@echo "... common/src/KM3Trajectory.i"
 	@echo "... common/src/KM3Trajectory.s"
+	@echo "... common/src/ParametrizedGenerator.o"
+	@echo "... common/src/ParametrizedGenerator.i"
+	@echo "... common/src/ParametrizedGenerator.s"
 	@echo "... programs/OMGsim.o"
 	@echo "... programs/OMGsim.i"
 	@echo "... programs/OMGsim.s"
