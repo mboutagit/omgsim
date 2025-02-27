@@ -208,10 +208,10 @@ namespace km3net
     // World
     //------------------------------
     // if(fDetInit != "Lactel")
-    //   solidWorld = new G4Box("world", fTargetLength * 1.5,
-    //                        fTargetLength * 1.5 , fTargetLength * 1.5);
+      solidWorld = new G4Box("world", fWorldLength,
+                           fWorldLength , fWorldLength);
     // else
-    solidWorld = new G4Sphere("world", 0, fWorldLength, 0, twopi, 0, pi);
+    //solidWorld = new G4Sphere("world", 0, fWorldLength, 0, twopi, 0, pi);
     //G4cout << " \r\033[40C"
     
     logicWorld = new G4LogicalVolume(solidWorld,
@@ -251,15 +251,16 @@ namespace km3net
     logicTarget = new G4LogicalVolume(solidTarget,
       myVacuum, "Target", 0, 0, 0);
 
-  
-    genSolid = new G4Sphere("genSolid", 0, fWorldLength, 0, twopi, 0, pi/2);
+    
+    //genSolid = new G4Sphere("genSolid", 0, fWorldLength, 0, twopi, 0, pi/2);
+    genSolid = new G4Box("Target", fWorldLength, fWorldLength, fWorldLength/2);
     genLogic = new G4LogicalVolume(genSolid,
                                      myVacuum, 
                                      "genLogic", 0, 0, 0);
                                       
-    G4VisAttributes* worldCol = new G4VisAttributes(G4Colour(0.2, 1, 0, 0.1));
-    G4VisAttributes* genAttributes = new G4VisAttributes(G4Colour(6.0, 0.0, 3.0, 0.2));
-    G4VisAttributes* targetColor = new G4VisAttributes(G4Colour(3.0, 6.0, 3.0, 0.4));
+    G4VisAttributes* worldCol = new G4VisAttributes(G4Colour(0.1, 0.1, 0.9, 0.1));
+    G4VisAttributes* genAttributes = new G4VisAttributes(G4Colour(.1, 0.0, 0.7, 0.1));
+    G4VisAttributes* targetColor = new G4VisAttributes(G4Colour(0.1, 0.4, 0.0, 0.1));
 
     targetColor->SetVisibility(true);  // Make the volume visible
     targetColor->SetForceSolid(true);  // Force solid rendering mode  
@@ -333,18 +334,37 @@ namespace km3net
         //   G4cout<<G4endl;
         // }
 
-    
-    genPhysic = new G4PVPlacement(0,                // no rotation
-                                   G4ThreeVector(), // at (0,0,0)
+        // G4String targetLogName = "AntaresOM";  // Replace with your logical volume name
+        // G4ThreeVector targetPosition = G4ThreeVector(0,0,0);
+
+
+        // G4PhysicalVolumeStore* physStore = G4PhysicalVolumeStore::GetInstance();
+        // for (auto physVol : *physStore) {
+        //     if (physVol->GetName() == targetLogName) {
+        //         targetPosition = physVol->GetTranslation();
+        //         cout << "\r\033[20C" << "Found Physical Volume: " << physVol->GetName() 
+        //               << " with Logical Volume: " << targetLogName
+        //               << " at Position: " << targetPosition << G4endl;
+        //     }
+        //     else{
+        //       cout << "\r\033[20C" << "Volume " << targetLogName << " not found! " << endl;
+        //     }
+        // }
+
+        G4ThreeVector genPosition = G4ThreeVector(0, 0, -fWorldLength/2);
+        G4ThreeVector targetPosition = G4ThreeVector(0, 0, -fTargetLength);
+        genPhysic = new G4PVPlacement(0,                // no rotation
+                                   genPosition, // at (0,0,0)
                                    genLogic,        // its logical volume
                                    "genPhysic",     // its name
                                    logicWorld,      // its mother  volume
                                    false,           // no boolean operations
                                    0);              // no field specific to volume
-
+    
+    
 
     physiTarget = new G4PVPlacement(targetRot, 
-                                    G4ThreeVector(), 
+                                    targetPosition, 
                                     logicTarget, 
                                     "Target",
                                     logicWorld, 

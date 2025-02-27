@@ -39,6 +39,13 @@
 #include "KM3PrimaryGeneratorAction.hh"
 #include <KM3DetectorConstruction.hh>
 
+#include "G4EventManager.hh"
+#include "G4PhysicalVolumeStore.hh"
+#include "ParametrizedGenerator.hh"
+
+//#include "G4Box.hh"
+
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
@@ -83,11 +90,11 @@ namespace km3net
     fGunType = 2;
   }
 
-/**
- * Custom fucntion for using muons for GPS. It should 
- * contain the generation geometry and random generation 
- * memuntum and energy based on PDG
- */
+  /**
+   * Custom fucntion for using muons for GPS. It should 
+   * contain the generation geometry and random generation 
+   * memuntum and energy based on PDG
+   */
 
   void KM3PrimaryGeneratorAction::initMuons ()
     {
@@ -98,100 +105,6 @@ namespace km3net
       fGunType = 3;
     }
 
-  void KM3PrimaryGeneratorAction::InitializeCustumMuonType()
-  {
-   // cout << "\r\033[30C" << "From function -- Using custom muons generation!" << endl;
-    // if (fGunType)
-    //   throw ("Two guntype init in the mac file !!");
-    // Create the particle gun
-    KM3DetectorConstruction* det = KM3DetectorConstruction::GetIt();
-
-    // G4VPhysicalVolume* detPhysic;
-    // if(!detPhysic){
-    //     G4VPhysicalVolume* (KM3DetectorConstruction::*physConstruct)() = &KM3DetectorConstruction::Construct;
-    //     detPhysic = (det->*physConstruct)();
-    // }
-      
-    // G4VPhysicalVolume* detPhysic = det->Construct();
-     G4Sphere* genVolume = dynamic_cast<G4Sphere*> (det->genSolid);
-    if(!genVolume){
-      throw("KM3PrimaryGeneratorAction::InitializeCustumMuonType: Generation volume is not defined");
-    }
-  
-    fTargetRadius = det->GetTargetFullLength();
-    fGenVolumeRaduis = det->GetWorldFullLength();
-    Navigator = G4TransportationManager::GetTransportationManager()->GetNavigatorForTracking();
-    fGunType = 3;
-
-    particleGun = new G4ParticleGun(); 
-
-   // G4Sphere* sphere = dynamic_cast<G4Sphere*> (det->genSolid);  
-    G4ThreeVector surfPoints = genVolume->GetPointOnSurface();
-
-    while(surfPoints.getTheta() > CLHEP::pi/8) // only event with 60 deg at most
-      surfPoints = genVolume->GetPointOnSurface();
-
-    // G4ThreeVector surfPointNormals = surfPoints.unit();
-    // surfPointNormals.setZ(- surfPointNormals.getZ());
-
-    //cout << "\r\033[25C" << "----- GPS: thetta " << surfPoints.getTheta() << endl;
-
-    // Set default particle type to muon-
-    G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-
-    G4String particleName;
-    if(G4UniformRand() > 0.5)
-      particleName = "mu+";
-    else
-      particleName = "mu-";
-
-    //particleName = "mu-";
-   // surfPoints = G4ThreeVector(0., 0., -300.);
-    G4double energy = GenerateMuonEnergy(2 * GeV, 6 * GeV, 2.7);
-    G4ThreeVector direction = GenerateMuonDirection("vertical");
-    if(direction.getZ() > 0)
-        direction.setZ(- direction.getZ());
-    G4ThreeVector polarization(G4UniformRand(), G4UniformRand(), 0.0); 
-    ((G4ParticleGun*)particleGun)->SetParticlePolarization(polarization);
-
-
-
-    G4ParticleDefinition* particle = particleTable->FindParticle(particleName);
-    if(!particle)
-      return;
-
-    ((G4ParticleGun*)particleGun)->SetParticleDefinition(particle);
-    ((G4ParticleGun*)particleGun)->SetParticlePosition(surfPoints);
-
-     ((G4ParticleGun*)particleGun)->SetParticleEnergy(energy);
-     ((G4ParticleGun*)particleGun)->SetParticleMomentumDirection(direction); // Toward the ground
-
-    // Generate the particle
-   // particleGun->GeneratePrimaryVertex(anEvent);
-
-    //  cout << "\r\033[20C" << "GPS: generated particle name: " << particleName << endl; 
-    // cout << "\r\033[20C" << "GPS: generated particle energy: " << energy << endl; 
-    // cout << "\r\033[20C" << "GPS: generated particle Direction: " << direction << endl; 
-    //  cout << "\r\033[20C" << "GPS: generated particle position: " << surfPoints << endl; 
-    //  cout << "\r\033[20C" << "GPS: generated particle momentum: " << surfPointNormals << endl; 
-
-
-    KM3AnalysisManager* amgr = KM3AnalysisManager::getIt();
-
-    if(!amgr)
-      return;
-
-    amgr->setGenEnergy(energy);
-    amgr->setPPDGID(particle->GetPDGEncoding());
-
-    amgr->setGenPosition(surfPoints);
-    amgr->setAngles(direction);
-    amgr->setGenDirection(direction);
-
-    //cout << "\r\033[25C" << "Filling info: " << surfPoints.getTheta() << endl;
-    amgr->getGenEventTree()->Fill();
-  }
-  
 
   void KM3PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   {
@@ -234,9 +147,15 @@ namespace km3net
       }
 
       if(fGunType == 3){
-        //cout << "\r\033[20C" << "GeneratePrimaryVertix: Event ID = " << anEvent->GetEventID() << endl; 
-        InitializeCustumMuonType();
-        ((G4ParticleGun*)particleGun)->GeneratePrimaryVertex(anEvent);
+        //InitializeCustumMuonType();
+        ParametrizedGenerator* pg = ParametrizedGenerator::getInstance();
+        if(!pg)
+          return;
+        pg->setEventID(anEvent->GetEventID());
+        //pg->writeGenData(true);
+        pg->init(ParametrizedGenerator::gen_mode::GEANT4);
+        ((G4ParticleGun*)pg->getPGA()->particleGun)->GeneratePrimaryVertex(anEvent);
+
         return;
       }
 
@@ -246,28 +165,5 @@ namespace km3net
     throw (tosend.data ());
 
   }
-
- G4ThreeVector KM3PrimaryGeneratorAction::GenerateMuonDirection(std::string mode) {
-  G4double theta = std::acos(std::pow(G4UniformRand(), 1.));  // cos²(θ) distribution
-  G4double  phi = 2 * CLHEP::pi * G4UniformRand(); // Uniform in azimuth
-  
-  if(mode == "vertical"){
-    theta = CLHEP::pi;  // vertiacal -z
-    phi = 2 * CLHEP::pi * G4UniformRand(); // Uniform in azimuth 
-  }
-
-  G4double ux = std::sin(theta) * std::cos(phi);
-  G4double uy = std::sin(theta) * std::sin(phi);
-  G4double uz = std::cos(theta);
-
-  G4ThreeVector vect = G4ThreeVector(ux, uy, uz);
-  return vect;
-}
-
-G4double KM3PrimaryGeneratorAction::GenerateMuonEnergy(double min, double max, float _alpha = 2.7) {
-    return std::pow((std::pow(max, 1-_alpha) - std::pow(min, 1-_alpha)) 
-           * G4UniformRand() 
-           + std::pow(min, 1-_alpha), 1/(1-_alpha));
-}
 
 }

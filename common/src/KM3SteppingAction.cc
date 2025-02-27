@@ -153,7 +153,7 @@ namespace km3net
             if (vac.find("NOREFLEXVaccumInPmt")!=std::string::npos)
             //VaccumOfPmt  was NOREFLEXVaccumInPmt
               {
-                G4cout << "   ----------- Potontial Detection " << G4endl;
+                //G4cout << "   ----------- Potontial Detection " << G4endl;
                 fTrack->SetTrackStatus(fStopAndKill);
                 return;
               }
@@ -197,6 +197,8 @@ namespace km3net
 
     G4String prestepName=thePreOriginalPV->GetLogicalVolume ()->GetName();
     G4String poststepName=thePostOriginalPV->GetLogicalVolume ()->GetName();
+
+    //KM3AnalysisManager::getIt()->AddOMEntranceInfo (fStep);
       
 
   // if(fTrack->GetParticleDefinition()->GetParticleName() == "opticalphoton"){
@@ -370,7 +372,7 @@ namespace km3net
 		  }
 	  }
 
-    KM3AnalysisManager* AAam = KM3AnalysisManager::getIt();
+    //KM3AnalysisManager* AAam = KM3AnalysisManager::getIt();
     //G4cout << "fKeepAll " << AAam->fKeepAll << G4endl; 
 
 	  return detectedGamma;

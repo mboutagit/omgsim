@@ -39,6 +39,9 @@
 #include <KM3AnalysisManager.hh>
 
 #include <G4SystemOfUnits.hh>
+#include "G4MemStat.hh"
+#include <cstdlib>
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
@@ -93,6 +96,7 @@ namespace km3net
         }
       }
     }
+    //system("ps -o pid,rss,vsz,command -p $(pgrep OMGsim)");
   }
 }
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....

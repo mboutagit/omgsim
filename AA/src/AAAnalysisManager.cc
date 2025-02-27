@@ -64,7 +64,6 @@ namespace km3net
 
   void AAAnalysisManager::Init (string RFNAME)
   {
-    G4cout << "I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: " << RFNAME << G4endl;
     KM3AnalysisManager::Init (RFNAME);
     fTFastAnalysis->Branch ("Detection" ,fNbDetected,"NbDetected[4][100]/i");
     fTEvent->Branch        ("Hit"       ,&fTotalTime,"TotalTime:Energy:Polarity/O:Limit/b");
@@ -86,7 +85,8 @@ namespace km3net
 
     fTRunInfos->Fill ();
     fTFastAnalysis->Fill ();
-    fGenEventTree->Fill ();
+   // fTEvent->Fill();
+
 
 
     fRFile->Write ();
@@ -129,7 +129,16 @@ namespace km3net
 
     fLimit = LIM;
 
-    fTEvent->Fill ();   
+    // AAAnalysisManager::hitCollection hit;
+    // hit.time = INFO->GetOriginalTime ();
+    // hit.energy = INFO->GetOriginalEnergy ();
+    // hit.polarity = fPolarity;
+    // hit.limit = fLimit;
+
+    // addHitCollection(hit);
+
+    fTEvent->Fill (); 
+
 
     if (fEvtOutput) {
         /*
@@ -176,6 +185,7 @@ namespace km3net
     //   fTEvent->Fill ();
     // }
 
+    fGenEventTree->Fill();
     KM3AnalysisManager::EndOfEvent ();
     fTotalTime=.0;
     fEnergy=0;

@@ -1,3202 +1,0 @@
-bon la c'est bon anamgrMotta
-bon la c'est bon stepping actionMotta
-ttime=1739508067
-pid=130641
-******************
-*** AUTOSEED ON ***
-*******************
-seed1: 1716557923; seed2: 401004540
-
--------- DualRand engine status ---------
-Initial seed          = 1716557923
-Tausworthe generator  = 
- Tausworthe-begin 1716733244 2070860125 2963354148 92876469 3 Tausworthe-end 
-
-IntegerCong generator = 
- IntegerCong-begin 926651532 65504413 12341 IntegerCong-end 
-
------------------------------------------
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager initialising...
-Registering graphics systems...
-
-You have successfully registered the following graphics systems.
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-Registering model factories...
-
-You have successfully registered the following model factories.
-Registered model factories:
-  generic
-  drawByCharge
-  drawByParticleID
-  drawByOriginVolume
-bon la c'est bon anamgrMotta
-  drawByAttribute
-
-Registered filter factories:
-  chargeFilter
-  particleFilter
-  originVolumeFilter
-  attributeFilter
-
-You have successfully registered the following user vis actions.
-Run Duration User Vis Actions: none
-End of Event User Vis Actions: none
-End of Run User Vis Actions: none
-
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-
-and here ? !! 
-Session NOT OK! ...
-bon la c'est bon stepping actionMotta
-AA <- detector name 0
-ttime=1739517808
-pid=130645
-******************
-*** AUTOSEED ON ***
-*******************
-seed1: 1716566640; seed2: 401006577
-
--------- DualRand engine status ---------
-Initial seed          = 1716566640
-Tausworthe generator  = 
- Tausworthe-begin 1716741961 2677624344 1291957217 1240814400 3 Tausworthe-end 
-
-IntegerCong generator = 
- IntegerCong-begin 1870639865 65504413 12341 IntegerCong-end 
-
------------------------------------------
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager initialising...
-Registering graphics systems...
-bon la c'est bon anamgrMotta
-bon la c'est bon stepping actionMotta
-ttime=1739516718
-pid=130643
-******************
-*** AUTOSEED ON ***
-
-You have successfully registered the following graphics systems.
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-*******************
-seed1: 1716566062; seed2: 401006442
-
--------- DualRand engine status ---------
-Initial seed          = 1716566062
-Tausworthe generator  = 
- Tausworthe-begin 1716741383 2637391498 1122922687 3464675730 3 Tausworthe-end 
-
-IntegerCong generator = 
- IntegerCong-begin 3269922039 65504413 12341 IntegerCong-end 
-
------------------------------------------
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager initialising...
-Registering graphics systems...
-Registering model factories...
-
-You have successfully registered the following model factories.
-Registered model factories:
-  generic
-  drawByCharge
-  drawByParticleID
-  drawByOriginVolume
-  drawByAttribute
-
-Registered filter factories:
-  chargeFilter
-  particleFilter
-  originVolumeFilter
-  attributeFilter
-
-You have successfully registered the following user vis actions.
-Run Duration User Vis Actions: none
-End of Event User Vis Actions: none
-End of Run User Vis Actions: none
-
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-
-and here ? !! 
-Session NOT OK! ...
-AA <- detector name 0
-
-You have successfully registered the following graphics systems.
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-Registering model factories...
-
-You have successfully registered the following model factories.
-Registered model factories:
-  generic
-  drawByCharge
-  drawByParticleID
-  drawByOriginVolume
-  drawByAttribute
-
-Registered filter factories:
-  chargeFilter
-  particleFilter
-  originVolumeFilter
-  attributeFilter
-
-You have successfully registered the following user vis actions.
-Run Duration User Vis Actions: none
-End of Event User Vis Actions: none
-End of Run User Vis Actions: none
-
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-
-and here ? !! 
-Session NOT OK! ...
-AA <- detector name 0
-bon la c'est bon anamgrMotta
-bon la c'est bon stepping actionMotta
-ttime=1739528416
-pid=130640
-******************
-*** AUTOSEED ON ***
-*******************
-seed1: 1716603104; seed2: 401015095
-
--------- DualRand engine status ---------
-Initial seed          = 1716603104
-Tausworthe generator  = 
- Tausworthe-begin 1716778425 920806696 794784593 3392446800 3 Tausworthe-end 
-
-IntegerCong generator = 
- IntegerCong-begin 742527849 65504413 12341 IntegerCong-end 
-
------------------------------------------
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager initialising...
-Registering graphics systems...
-
-You have successfully registered the following graphics systems.
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-Registering model factories...
-
-You have successfully registered the following model factories.
-Registered model factories:
-  generic
-  drawByCharge
-  drawByParticleID
-  drawByOriginVolume
-  drawByAttribute
-
-Registered filter factories:
-  chargeFilter
-  particleFilter
-  originVolumeFilter
-  attributeFilter
-
-You have successfully registered the following user vis actions.
-Run Duration User Vis Actions: none
-End of Event User Vis Actions: none
-End of Run User Vis Actions: none
-
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-
-and here ? !! 
-Session NOT OK! ...
-AA <- detector name 0
-bon la c'est bon anamgrMotta
-bon la c'est bon stepping actionMotta
-ttime=1739525901
-pid=130642
-******************
-*** AUTOSEED ON ***
-*******************
-seed1: 1716608269; seed2: 401016302
-
--------- DualRand engine status ---------
-Initial seed          = 1716608269
-Tausworthe generator  = 
- Tausworthe-begin 1716783590 1280326851 3434747182 3092619963 3 Tausworthe-end 
-
-IntegerCong generator = 
- IntegerCong-begin 4236943350 65504413 12341 IntegerCong-end 
-
------------------------------------------
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager initialising...
-Registering graphics systems...
-
-You have successfully registered the following graphics systems.
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-Registering model factories...
-
-You have successfully registered the following model factories.
-Registered model factories:
-  generic
-  drawByCharge
-  drawByParticleID
-  drawByOriginVolume
-  drawByAttribute
-
-Registered filter factories:
-  chargeFilter
-  particleFilter
-  originVolumeFilter
-  attributeFilter
-
-You have successfully registered the following user vis actions.
-Run Duration User Vis Actions: none
-End of Event User Vis Actions: none
-End of Run User Vis Actions: none
-
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-
-and here ? !! 
-Session NOT OK! ...
-AA <- detector name 0
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-creating it 3inches
-creating it 3inchesQE2
-creating it REFLEX
-creating it 3andhalfinches
- There are  0 materials defined.
-
-Glass Value: PMTGlass_R12199_02
-bon la c'est bon anamgrMotta
-bon la c'est bon stepping actionMotta
-Glass Value: PMTGlass
-ttime=1739531193
-pid=130647
-******************
-*** AUTOSEED ON ***
-*******************
-seed1: 1716614329; seed2: 401017717
-
-Glass Value: PMTGlass_R12199_02
--------- DualRand engine status ---------
-Initial seed          = 1716614329
-Tausworthe generator  = 
- Tausworthe-begin 1716789650 1702145271 258105370 92344751 3 Tausworthe-end 
-
-IntegerCong generator = 
- IntegerCong-begin 2570062370 65504413 12341 IntegerCong-end 
-
------------------------------------------
-Glass Value: PMTGlass_R12199_02
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager initialising...
-creating it 3inches
-Registering graphics systems...
-creating it 3inchesQE2
-creating it REFLEX
-
-You have successfully registered the following graphics systems.
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-creating it 3andhalfinches
-Registering model factories...
-
-You have successfully registered the following model factories.
-Registered model factories:
-  generic
-  drawByCharge
-  drawByParticleID
-  drawByOriginVolume
-  drawByAttribute
-
-Registered filter factories:
-  chargeFilter
-  particleFilter
-  originVolumeFilter
-  attributeFilter
-
-You have successfully registered the following user vis actions.
-Run Duration User Vis Actions: none
-End of Event User Vis Actions: none
-End of Run User Vis Actions: none
-
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-
-and here ? !! 
-Session NOT OK! ...
-AA <- detector name 0
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
- There are  0 materials defined.
-
-creating it 3inches
-creating it 3inchesQE2
-creating it REFLEX
-creating it 3andhalfinches
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-creating it 3inches
-
- There are  0 materials defined.
-
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
-creating it 3inchesQE2
-creating it REFLEX
-creating it 3andhalfinches
-
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
- There are  0 materials defined.
-
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass
-Glass Value: PMTGlass_R12199_02
-
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
-Glass Value: PMTGlass_R12199_02
-creating it 3inches
-creating it 3inchesQE2
-creating it REFLEX
-
-*************************************************************
-creating it 3andhalfinches
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
- There are  0 materials defined.
-
-bon la c'est bon anamgrMotta
-bon la c'est bon stepping actionMotta
-ttime=1739550037
-pid=130644
-******************
-*** AUTOSEED ON ***
-*******************
-seed1: 1716599125; seed2: 401014166
-
--------- DualRand engine status ---------
-Initial seed          = 1716599125
-Tausworthe generator  = 
- Tausworthe-begin 1716774446 643840443 2113003766 2993110067 3 Tausworthe-end 
-bon la c'est bon anamgrMotta
-bon la c'est bon stepping actionMotta
-
-IntegerCong generator = 
-ttime=1739550549
-pid=130638
-******************
-*** AUTOSEED ON ***
-*******************
- IntegerCong-begin 1138893630 65504413 12341 IntegerCong-end 
-seed1: 1716592981; seed2: 401012730
-
--------- DualRand engine status ---------
-Initial seed          = 1716592981
-Tausworthe generator  = 
- Tausworthe-begin 1716768302 216175035 2025277686 4087354419 3 Tausworthe-end 
-
-IntegerCong generator = 
- IntegerCong-begin 1255476030 65504413 12341 IntegerCong-end 
-
------------------------------------------
-
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager initialising...
-Registering graphics systems...
------------------------------------------
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager initialising...
-
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
-Registering graphics systems...
-
-You have successfully registered the following graphics systems.
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-
-You have successfully registered the following graphics systems.
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-Registering model factories...
-
-You have successfully registered the following model factories.
-Registered model factories:
-  generic
-  drawByCharge
-  drawByParticleID
-  drawByOriginVolume
-  drawByAttribute
-
-Registered filter factories:
-  chargeFilter
-  particleFilter
-  originVolumeFilter
-  attributeFilter
-
-You have successfully registered the following user vis actions.
-Run Duration User Vis Actions: none
-bon la c'est bon anamgrMotta
-bon la c'est bon stepping actionMotta
-End of Event User Vis Actions: none
-ttime=1739560495
-pid=130639
-******************
-*** AUTOSEED ON ***
-*******************
-End of Run User Vis Actions: none
-seed1: 1716640047; seed2: 401023725
-
--------- DualRand engine status ---------
-Initial seed          = 1716640047
-Tausworthe generator  = 
- Tausworthe-begin 1716815368 3492298097 1834673200 3834874761 3 Tausworthe-end 
-
-IntegerCong generator = 
- IntegerCong-begin 1910096856 65504413 12341 IntegerCong-end 
-
------------------------------------------
-Glass Value: PMTGlass_R12199_02
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager initialising...
-Registering graphics systems...
-
-Glass Value: PMTGlass
-Glass Value: PMTGlass_R12199_02
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-Glass Value: PMTGlass_R12199_02
-
-and here ? !! 
-Session NOT OK! ...
-creating it 3inches
-AA <- detector name 0
-
-You have successfully registered the following graphics systems.
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-Registering model factories...
-
-You have successfully registered the following model factories.
-Registered model factories:
-  generic
-  drawByCharge
-  drawByParticleID
-  drawByOriginVolume
-  drawByAttribute
-
-Registered filter factories:
-  chargeFilter
-  particleFilter
-  originVolumeFilter
-  attributeFilter
-
-You have successfully registered the following user vis actions.
-Run Duration User Vis Actions: none
-End of Event User Vis Actions: none
-End of Run User Vis Actions: none
-
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-
-and here ? !! 
-Session NOT OK! ...
-Registering model factories...
-AA <- detector name 0
-
-You have successfully registered the following model factories.
-Registered model factories:
-  generic
-  drawByCharge
-  drawByParticleID
-  drawByOriginVolume
-  drawByAttribute
-
-Registered filter factories:
-  chargeFilter
-  particleFilter
-  originVolumeFilter
-  attributeFilter
-
-You have successfully registered the following user vis actions.
-Run Duration User Vis Actions: none
-End of Event User Vis Actions: none
-End of Run User Vis Actions: none
-
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-
-and here ? !! 
-Session NOT OK! ...
-AA <- detector name 0
-bon la c'est bon anamgrMotta
-bon la c'est bon stepping actionMotta
-creating it 3inchesQE2
-ttime=1739561427
-pid=130646
-******************
-*** AUTOSEED ON ***
-*******************
-seed1: 1716637651; seed2: 401023166
-
-creating it REFLEX
--------- DualRand engine status ---------
-Initial seed          = 1716637651
-Tausworthe generator  = 
- Tausworthe-begin 1716812972 3325519725 2189134484 2234354629 3 Tausworthe-end 
-
-IntegerCong generator = 
- IntegerCong-begin 1661959676 65504413 12341 IntegerCong-end 
-
------------------------------------------
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager initialising...
-Registering graphics systems...
-creating it 3andhalfinches
-
-You have successfully registered the following graphics systems.
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-Registering model factories...
-
-You have successfully registered the following model factories.
-Registered model factories:
-  generic
-  drawByCharge
-  drawByParticleID
-  drawByOriginVolume
-  drawByAttribute
-
-Registered filter factories:
-  chargeFilter
-  particleFilter
-  originVolumeFilter
-  attributeFilter
-
-You have successfully registered the following user vis actions.
-Run Duration User Vis Actions: none
-End of Event User Vis Actions: none
-End of Run User Vis Actions: none
-
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-
-and here ? !! 
-Session NOT OK! ...
-AA <- detector name 0
- There are  0 materials defined.
-
-
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-creating it 3inches
-Glass Value: PMTGlass
-Glass Value: PMTGlass_R12199_02
-creating it 3inchesQE2
-Glass Value: PMTGlass
-creating it REFLEX
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-creating it 3andhalfinches
-creating it 3inches
-creating it 3inchesQE2
-creating it REFLEX
-Glass Value: PMTGlass_R12199_02
-creating it 3andhalfinches
-Glass Value: PMTGlass
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-creating it 3inches
-creating it 3inches
-creating it 3inchesQE2
-creating it REFLEX
-creating it 3inchesQE2
-creating it REFLEX
-creating it 3andhalfinches
-creating it 3andhalfinches
- There are  0 materials defined.
-
- There are  0 materials defined.
-
- There are  0 materials defined.
-
-
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
- There are  0 materials defined.
-
-
-
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
-
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-------------- Using AA as new value!! -------------
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-Usage of Lactel as detetor initialization
-[30C ---- Before: 0
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Usage of Lactel as detetor initialization
-Target length has been set to 1.01 m
-[30C ---- Before: 0
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Target length has been set to 1.01 m
-creating it LACTEL
-creating it LACTEL
-doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-3 1 0 1
-3 1 0 1
-creating it OM11
-creating it OM11
-Tube height is: 69.4597
-Tube height is: 69.4597
-Logical vaccum created: REFLEXVaccumOfPmt
-Logical vaccum created: REFLEXVaccumOfPmt
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Specifiying the reflect for: PMTInternalSurface
-[10C --> Specifiying the reflect for: PMTInternalSurface
-3 0.95 0 0
-3 0.95 0 0
-[10C --> Creating the surface: DinodsSurface
-[10C --> Creating the surface: DinodsSurface
-[10C --> Specifiying the reflect for: DinodsSurface
-[10C --> Specifiying the reflect for: DinodsSurface
-4 0.7 0 0
-4 0.7 0 0
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
-4 0.8 0 0
-4 0.8 0 0
-[10C --> Creating the surface: GridDinodsSurface
-[10C --> Creating the surface: GridDinodsSurface
-[10C --> Specifiying the reflect for: GridDinodsSurface
-[10C --> Specifiying the reflect for: GridDinodsSurface
-4 0.3 0 0
-4 0.3 0 0
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-Usage of Lactel as detetor initialization
-[30C ---- Before: 0
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Target length has been set to 1.01 m
-creating it LACTEL
-doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-3 1 0 1
-creating it OM11
-Tube height is: 69.4597
-Logical vaccum created: REFLEXVaccumOfPmt
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Specifiying the reflect for: PMTInternalSurface
-3 0.95 0 0
-[10C --> Creating the surface: DinodsSurface
-[10C --> Specifiying the reflect for: DinodsSurface
-4 0.7 0 0
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
-4 0.8 0 0
-[10C --> Creating the surface: GridDinodsSurface
-[10C --> Specifiying the reflect for: GridDinodsSurface
-4 0.3 0 0
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-Usage of Lactel as detetor initialization
-[30C ---- Before: 0
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Target length has been set to 1.01 m
-creating it LACTEL
-doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-3 1 0 1
-creating it OM11
-Tube height is: 69.4597
-Logical vaccum created: REFLEXVaccumOfPmt
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Specifiying the reflect for: PMTInternalSurface
-3 0.95 0 0
-[10C --> Creating the surface: DinodsSurface
-[10C --> Specifiying the reflect for: DinodsSurface
-4 0.7 0 0
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
-4 0.8 0 0
-[10C --> Creating the surface: GridDinodsSurface
-[10C --> Specifiying the reflect for: GridDinodsSurface
-4 0.3 0 0
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-Usage of Lactel as detetor initialization
-[30C ---- Before: 0
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Target length has been set to 1.01 m
-creating it LACTEL
-doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-3 1 0 1
-creating it OM11
-Tube height is: 69.4597
-Logical vaccum created: REFLEXVaccumOfPmt
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Specifiying the reflect for: PMTInternalSurface
-3 0.95 0 0
-[10C --> Creating the surface: DinodsSurface
-[10C --> Specifiying the reflect for: DinodsSurface
-4 0.7 0 0
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
-4 0.8 0 0
-[10C --> Creating the surface: GridDinodsSurface
-[10C --> Specifiying the reflect for: GridDinodsSurface
-4 0.3 0 0
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-Usage of Lactel as detetor initialization
-[30C ---- Before: 0
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Target length has been set to 1.01 m
-creating it LACTEL
-doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-3 1 0 1
-creating it OM11
-Tube height is: 69.4597
-Logical vaccum created: REFLEXVaccumOfPmt
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Specifiying the reflect for: PMTInternalSurface
-3 0.95 0 0
-[10C --> Creating the surface: DinodsSurface
-[10C --> Specifiying the reflect for: DinodsSurface
-4 0.7 0 0
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
-4 0.8 0 0
-[10C --> Creating the surface: GridDinodsSurface
-[10C --> Specifiying the reflect for: GridDinodsSurface
-4 0.3 0 0
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-Usage of Lactel as detetor initialization
-[30C ---- Before: 0
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Target length has been set to 1.01 m
-creating it LACTEL
-doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-3 1 0 1
-creating it OM11
-Tube height is: 69.4597
-Logical vaccum created: REFLEXVaccumOfPmt
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Specifiying the reflect for: PMTInternalSurface
-3 0.95 0 0
-[10C --> Creating the surface: DinodsSurface
-[10C --> Specifiying the reflect for: DinodsSurface
-4 0.7 0 0
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
-4 0.8 0 0
-[10C --> Creating the surface: GridDinodsSurface
-[10C --> Specifiying the reflect for: GridDinodsSurface
-4 0.3 0 0
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-Usage of Lactel as detetor initialization
-[30C ---- Before: 0
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Target length has been set to 1.01 m
-creating it LACTEL
-doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-3 1 0 1
-creating it OM11
-Tube height is: 69.4597
-Logical vaccum created: REFLEXVaccumOfPmt
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Specifiying the reflect for: PMTInternalSurface
-3 0.95 0 0
-[10C --> Creating the surface: DinodsSurface
-[10C --> Specifiying the reflect for: DinodsSurface
-4 0.7 0 0
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
-4 0.8 0 0
-[10C --> Creating the surface: GridDinodsSurface
-[10C --> Specifiying the reflect for: GridDinodsSurface
-4 0.3 0 0
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-Usage of Lactel as detetor initialization
-[30C ---- Before: 0
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Target length has been set to 1.01 m
-creating it LACTEL
-doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-3 1 0 1
-creating it OM11
-Tube height is: 69.4597
-Logical vaccum created: REFLEXVaccumOfPmt
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Specifiying the reflect for: PMTInternalSurface
-3 0.95 0 0
-[10C --> Creating the surface: DinodsSurface
-[10C --> Specifiying the reflect for: DinodsSurface
-4 0.7 0 0
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
-4 0.8 0 0
-[10C --> Creating the surface: GridDinodsSurface
-[10C --> Specifiying the reflect for: GridDinodsSurface
-4 0.3 0 0
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-Usage of Lactel as detetor initialization
-[30C ---- Before: 0
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Target length has been set to 1.01 m
-creating it LACTEL
-doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-3 1 0 1
-creating it OM11
-Tube height is: 69.4597
-Logical vaccum created: REFLEXVaccumOfPmt
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Specifiying the reflect for: PMTInternalSurface
-3 0.95 0 0
-[10C --> Creating the surface: DinodsSurface
-[10C --> Specifiying the reflect for: DinodsSurface
-4 0.7 0 0
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
-4 0.8 0 0
-[10C --> Creating the surface: GridDinodsSurface
-[10C --> Specifiying the reflect for: GridDinodsSurface
-4 0.3 0 0
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-### - Run : 0
-[20CStart of event: 1
-### - Run : 0
-[20CStart of event: 1
-### - Run : 0
-[20CStart of event: 1[60C1 [65C detected lim-Erange 3-37[60C1 [65C detected lim-Erange 3-28[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-34[60C1 [65C detected lim-Erange 3-38[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-31[60C1 [65C detected lim-Erange 3-25[60C1 [65C detected lim-Erange 3-27
-### - Run : 0
-[20CStart of event: 1[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-32[60C1 [65C detected lim-Erange 3-21[60C1 [65C detected lim-Erange 3-26
-### - Run : 0
-[20CStart of event: 1[60C1 [65C detected lim-Erange 3-30
-### - Run : 0
-
-### - Run : 0
-[20CStart of event: 1[60C1 [65C detected lim-Erange 3-36[60C1 [65C detected lim-Erange 3-33[60C1 [65C detected lim-Erange 3-39
-### - Run : 0
-[60C1 [65C detected lim-Erange 3-22[20CStart of event: 1
-### - Run : 0
-[20CStart of event: 1
-### - Run : 0
-[20CStart of event: 1[60C1 [65C detected lim-Erange 3-27[60C1 [65C detected lim-Erange 3-34[60C1 [65C detected lim-Erange 3-31[60C1 [65C detected lim-Erange 3-34[20CStart of event: 1[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-26[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-26[60C1 [65C detected lim-Erange 3-30[60C1 [65C detected lim-Erange 3-25[60C1 [65C detected lim-Erange 3-26[60C1 [65C detected lim-Erange 3-34[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-37[60C1 [65C detected lim-Erange 3-39[60C1 [65C detected lim-Erange 3-36[60C1 [65C detected lim-Erange 3-28[60C1 [65C detected lim-Erange 3-31[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-26[60C1 [65C detected lim-Erange 3-38[60C1 [65C detected lim-Erange 3-25[60C1 [65C detected lim-Erange 3-27[60C1 [65C detected lim-Erange 3-36[60C1 [65C detected lim-Erange 3-22[60C1 [65C detected lim-Erange 3-34[60C1 [65C detected lim-Erange 3-28[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-27[60C1 [65C detected lim-Erange 3-20[60C1 [65C detected lim-Erange 3-32[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-37[60C1 [65C detected lim-Erange 3-21[60C1 [65C detected lim-Erange 3-33[60C1 [65C detected lim-Erange 3-28[60C1 [65C detected lim-Erange 3-37[60C1 [65C detected lim-Erange 3-26[60C1 [65C detected lim-Erange 3-30[60C1 [65C detected lim-Erange 3-32[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-28[60C1 [65C detected lim-Erange 3-40[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-33[60C1 [65C detected lim-Erange 3-33[60C1 [65C detected lim-Erange 3-25[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-38[60C1 [65C detected lim-Erange 3-31[60C1 [65C detected lim-Erange 3-30[60C1 [65C detected lim-Erange 3-32[60C1 [65C detected lim-Erange 3-22[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-39[60C1 [65C detected lim-Erange 3-27[60C1 [65C detected lim-Erange 3-21[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-26[60C1 [65C detected lim-Erange 3-37[60C1 [65C detected lim-Erange 3-28
--------- WWWW ------- G4Exception-START -------- WWWW -------
-*** G4Exception : GeomNav0003
-      issued by : G4NormalNavigation::ComputeStep()
-============================================================
- WARNING>  Current Point appears to be Outside mother volume !! 
-   Response of DistanceToOut was negative or kInfinity when called in G4NormalNavigation::ComputeStep()
-   Current physical volume = genPhysic
-   Position (loc)  = (998.4452267,2711.737963,-8.16999858e-07)
-   Direction (dir) = (-0.6579823874,0.7023394405,-0.2716219583)
- For confirmation:
-   Response of DistanceToOut (loc, +dir)= -3.007856445e-06
-   Response of DistanceToOut (loc, -dir)= 2732.89337
-   Inside responds = 1 , ie:  Surface -- unexpected / inconsistent response ! 
-   Obtain safety(ToIn) = 8.169997838e-07
-   Obtain safety(ToOut) = 0
- Response of DistanceToIn (loc, +dir)= 9e+99
- Response of DistanceToIn (loc, -dir)= 0
- Exit Normal at loc = (2.115685231e-17,5.74611787e-17,-1)
-     Dir . Normal   = 0.2716219583
- Checking points moved from position by distance/dir.  Solid responses: 
-  +eps in direction :    kSurface  +eps in Normal  :    kOutside
-  -eps in direction :    kSurface  -eps in Normal  :    kSurface
- Parameters of solid:     
------------------------------------------------------------
-    *** Dump for solid - genSolid ***
-    ===================================================
- Solid type: G4Sphere
- Parameters: 
-    inner radius: 0 mm 
-    outer radius: 3000 mm 
-    starting phi of segment  : 0 degrees 
-    delta phi of segment     : 360 degrees 
-    starting theta of segment: 0 degrees 
-    delta theta of segment   : 90 degrees 
------------------------------------------------------------
-============================================================
-*** This is just a warning message. ***
--------- WWWW -------- G4Exception-END --------- WWWW -------
-
-[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-39[60C1 [65C detected lim-Erange 3-36[60C1 [65C detected lim-Erange 3-20[60C1 [65C detected lim-Erange 3-40[60C1 [65C detected lim-Erange 3-30[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-34[60C1 [65C detected lim-Erange 3-40[60C1 [65C detected lim-Erange 3-20
-End of Run 0
-Deleting visManager !! 
-[60C1 [65C detected lim-Erange 3-27[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-32[60C1 [65C detected lim-Erange 3-28[60C1 [65C detected lim-Erange 3-31[60C1 [65C detected lim-Erange 3-27[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-30[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-22[60C1 [65C detected lim-Erange 3-33[60C1 [65C detected lim-Erange 3-26[60C1 [65C detected lim-Erange 3-36[60C1 [65C detected lim-Erange 3-32[60C1 [65C detected lim-Erange 3-39[60C1 [65C detected lim-Erange 3-38[60C1 [65C detected lim-Erange 3-37[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-22[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-31[60C1 [65C detected lim-Erange 3-26[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-36[60C1 [65C detected lim-Erange 3-20[60C1 [65C detected lim-Erange 3-38[60C1 [65C detected lim-Erange 3-40[60C1 [65C detected lim-Erange 3-25[60C1 [65C detected lim-Erange 3-21[60C1 [65C detected lim-Erange 3-33[60C1 [65C detected lim-Erange 3-25[60C1 [65C detected lim-Erange 3-34[60C1 [65C detected lim-Erange 3-32[60C1 [65C detected lim-Erange 3-27[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-21Analysis file was normaly closed.
-KM3DetectorConstruction: the Optical Module orientation angle was 0 deg
-detectorMessenger deleted correctly
-[60C1 [65C detected lim-Erange 3-38
-End of Run 0
-Deleting visManager !! 
-Analysis file was normaly closed.
-KM3DetectorConstruction: the Optical Module orientation angle was 0 deg
-detectorMessenger deleted correctly
-
-End of Run 0
-Deleting visManager !! 
-Analysis file was normaly closed.
-KM3DetectorConstruction: the Optical Module orientation angle was 0 deg
-detectorMessenger deleted correctly
-
-End of Run 0
-Deleting visManager !! 
-Analysis file was normaly closed.
-KM3DetectorConstruction: the Optical Module orientation angle was 0 deg
-detectorMessenger deleted correctly
-bon la c'est bon anamgrMotta
-bon la c'est bon anamgrMotta
-bon la c'est bon stepping actionMotta
-bon la c'est bon stepping actionMotta
-bon la c'est bon anamgrMotta
-bon la c'est bon anamgrMotta
-bon la c'est bon stepping actionMotta
-bon la c'est bon anamgrMotta
-ttime=1738819363
-ttime=1738819363
-bon la c'est bon stepping actionMotta
-pid=131642
-******************
-*** AUTOSEED ON ***
-bon la c'est bon anamgrMotta
-*******************
-bon la c'est bon stepping actionMotta
-ttime=1738819312
-pid=131646
-******************
-*** AUTOSEED ON ***
-bon la c'est bon stepping actionMotta
-ttime=1738819229
-pid=131644
-*******************
-******************
-*** AUTOSEED ON ***
-*******************
-pid=131638
-seed1: 1705409827; seed2: 398400237
-ttime=1738819237
-******************
-pid=131637
-
-*** AUTOSEED ON ***
-******************
-*******************
--------- DualRand engine status ---------
-ttime=1738819154
-pid=131639
-*** AUTOSEED ON ***
-Initial seed          = 1705409827
-******************
-seed1: 1705408752; seed2: 398399986
-*** AUTOSEED ON ***
-*******************
-
-*******************
-seed1: 1705409181; seed2: 398400086
-Tausworthe generator  = 
--------- DualRand engine status ---------
-
-Initial seed          = 1705408752
--------- DualRand engine status ---------
-seed1: 1705406755; seed2: 398399520
-Tausworthe generator  = 
- Tausworthe-begin 1705585148 3474422429 3103566564 1692820469 3 Tausworthe-end 
-Initial seed          = 1705409181
-
-
-IntegerCong generator = 
-bon la c'est bon anamgrMotta
-Tausworthe generator  = 
- IntegerCong-begin 4021641548 65504413 12341 IntegerCong-end 
- Tausworthe-begin 1705584502 3429456307 4177871294 1146570923 3 Tausworthe-end 
-
-
-IntegerCong generator = 
--------- DualRand engine status ---------
------------------------------------------
- IntegerCong-begin 279997318 65504413 12341 IntegerCong-end 
-bon la c'est bon stepping actionMotta
-Initial seed          = 1705406755
-
- Tausworthe-begin 1705584073 3399594904 84396641 3376750784 3 Tausworthe-end 
-Tausworthe generator  = 
------------------------------------------
-seed1: 1705407397; seed2: 398399670
-
-IntegerCong generator = 
- Tausworthe-begin 1705582076 3260589725 912219876 92458997 3 Tausworthe-end 
-
- IntegerCong-begin 3406602617 65504413 12341 IntegerCong-end 
-
-IntegerCong generator = 
--------- DualRand engine status ---------
-
- IntegerCong-begin 1932449100 65504413 12341 IntegerCong-end 
-Initial seed          = 1705407397
------------------------------------------
-
-Tausworthe generator  = 
------------------------------------------
- Tausworthe-begin 1705582718 3305277419 1932213830 3002212195 3 Tausworthe-end 
-seed1: 1705406802; seed2: 398399531
-
-IntegerCong generator = 
- IntegerCong-begin 3350524814 65504413 12341 IntegerCong-end 
-
-ttime=1738832276
--------- DualRand engine status ---------
-
-pid=131645
------------------------------------------
-******************
-Initial seed          = 1705406802
-*** AUTOSEED ON ***
-*******************
-Tausworthe generator  = 
-bon la c'est bon anamgrMotta
- Tausworthe-begin 1705582123 3263861254 1000272291 238578510 3 Tausworthe-end 
-
-IntegerCong generator = 
- IntegerCong-begin 2390833563 65504413 12341 IntegerCong-end 
-
------------------------------------------
-bon la c'est bon anamgrMotta
-bon la c'est bon stepping actionMotta
-seed1: 1705395348; seed2: 398396855
-
--------- DualRand engine status ---------
-bon la c'est bon anamgrMotta
-Initial seed          = 1705395348
-Tausworthe generator  = 
-bon la c'est bon stepping actionMotta
- Tausworthe-begin 1705570669 2466582676 102725061 3557794812 3 Tausworthe-end 
-
-IntegerCong generator = 
- IntegerCong-begin 3904213149 65504413 12341 IntegerCong-end 
-
-bon la c'est bon stepping actionMotta
------------------------------------------
-ttime=1738832185
-pid=131640
-******************
-*** AUTOSEED ON ***
-*******************
-ttime=1738832174
-pid=131641
-******************
-*** AUTOSEED ON ***
-*******************
-ttime=1738832095
-pid=131643
-******************
-*** AUTOSEED ON ***
-*******************
-seed1: 1705394489; seed2: 398396654
-
--------- DualRand engine status ---------
-seed1: 1705395167; seed2: 398396813
-Initial seed          = 1705394489
-seed1: 1705394222; seed2: 398396592
-Tausworthe generator  = 
-
-
--------- DualRand engine status ---------
--------- DualRand engine status ---------
- Tausworthe-begin 1705569810 2406790263 4250510490 2166579503 3 Tausworthe-end 
-Initial seed          = 1705395167
-Initial seed          = 1705394222
-
-IntegerCong generator = 
-Tausworthe generator  = 
-Tausworthe generator  = 
- IntegerCong-begin 4207822498 65504413 12341 IntegerCong-end 
-
- Tausworthe-begin 1705569543 2388205194 3384768703 3164141970 3 Tausworthe-end 
- Tausworthe-begin 1705570488 2453983809 3601685472 984669017 3 Tausworthe-end 
------------------------------------------
-
-IntegerCong generator = 
-
-IntegerCong generator = 
- IntegerCong-begin 507221239 65504413 12341 IntegerCong-end 
- IntegerCong-begin 768211080 65504413 12341 IntegerCong-end 
-
-
------------------------------------------
------------------------------------------
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager initialising...
-Visualization Manager initialising...
-Visualization Manager initialising...
-Visualization Manager initialising...
-Visualization Manager initialising...
-Registering graphics systems...
-Registering graphics systems...
-Registering graphics systems...
-Visualization Manager initialising...
-Registering graphics systems...
-Registering graphics systems...
-Visualization Manager initialising...
-Registering graphics systems...
-Registering graphics systems...
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager initialising...
-Registering graphics systems...
-
-You have successfully registered the following graphics systems.
-
-You have successfully registered the following graphics systems.
-
-You have successfully registered the following graphics systems.
-
-You have successfully registered the following graphics systems.
-
-You have successfully registered the following graphics systems.
-
-You have successfully registered the following graphics systems.
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-
-
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-
-You have successfully registered the following graphics systems.
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-
-You have successfully registered the following graphics systems.
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager initialising...
-Registering graphics systems...
-Visualization Manager initialising...
-Registering graphics systems...
-
-You have successfully registered the following graphics systems.
-
-You have successfully registered the following graphics systems.
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRep (HepRepXML)
-  G4HepRepFile (HepRepFile)
-  OpenGLImmediateX (OGLIX)
-  OpenGLImmediateXm (OGLI, OGLIXm)
-  OpenGLStoredX (OGLSX)
-  OpenGLStoredXm (OGL, OGLS, OGLSXm)
-  RayTracer (RayTracer)
-  RayTracerX (RayTracerX)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-
-Registering model factories...
-Registering model factories...
-Registering model factories...
-Registering model factories...
-Registering model factories...
-Registering model factories...
-Registering model factories...
-Registering model factories...
-Registering model factories...
-Registering model factories...
-
-You have successfully registered the following model factories.
-Registered model factories:
-  generic
-  drawByCharge
-  drawByParticleID
-  drawByOriginVolume
-
-You have successfully registered the following model factories.
-  drawByAttribute
-
-You have successfully registered the following model factories.
-
-Registered model factories:
-
-You have successfully registered the following model factories.
-Registered filter factories:
-Registered model factories:
-
-You have successfully registered the following model factories.
-  generic
-  chargeFilter
-Registered model factories:
-Registered model factories:
-  generic
-  drawByCharge
-  particleFilter
-  generic
-  generic
-  drawByCharge
-  drawByCharge
-  drawByCharge
-
-You have successfully registered the following model factories.
-  drawByParticleID
-
-You have successfully registered the following model factories.
-  originVolumeFilter
-  drawByParticleID
-  drawByParticleID
-  drawByParticleID
-Registered model factories:
-  drawByOriginVolume
-Registered model factories:
-  drawByAttribute
-  attributeFilter
-  drawByOriginVolume
-  drawByOriginVolume
-  drawByOriginVolume
-  generic
-  generic
-
-
-  drawByAttribute
-  drawByAttribute
-  drawByAttribute
-  drawByCharge
-  drawByCharge
-Registered filter factories:
-You have successfully registered the following user vis actions.
-
-
-Registered filter factories:
-
-  drawByParticleID
-  drawByParticleID
-  chargeFilter
-Run Duration User Vis Actions: none
-Registered filter factories:
-  chargeFilter
-Registered filter factories:
-  drawByOriginVolume
-  drawByOriginVolume
-  particleFilter
-End of Event User Vis Actions: none
-  chargeFilter
-End of Run User Vis Actions: none
-  particleFilter
-  particleFilter
-  chargeFilter
-  drawByAttribute
-  drawByAttribute
-  originVolumeFilter
-
-  originVolumeFilter
-  originVolumeFilter
-  particleFilter
-
-
-  attributeFilter
-  attributeFilter
-  attributeFilter
-  originVolumeFilter
-Registered filter factories:
-Registered filter factories:
-  chargeFilter
-
-
-
-  attributeFilter
-  chargeFilter
-  particleFilter
-You have successfully registered the following user vis actions.
-You have successfully registered the following user vis actions.
-You have successfully registered the following user vis actions.
-
-Run Duration User Vis Actions: none
-  particleFilter
-You have successfully registered the following user vis actions.
-  originVolumeFilter
-Run Duration User Vis Actions: none
-Run Duration User Vis Actions: none
-End of Event User Vis Actions: none
-  originVolumeFilter
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-Run Duration User Vis Actions: none
-  attributeFilter
-End of Event User Vis Actions: none
-End of Event User Vis Actions: none
-End of Event User Vis Actions: none
-End of Run User Vis Actions: none
-End of Run User Vis Actions: none
-  attributeFilter
-
-
-End of Run User Vis Actions: none
-End of Run User Vis Actions: none
-
-
-
-and here ? !! 
-
-You have successfully registered the following user vis actions.
-
-Run Duration User Vis Actions: none
-You have successfully registered the following user vis actions.
-Session NOT OK! ...
-End of Event User Vis Actions: none
-Run Duration User Vis Actions: none
-End of Run User Vis Actions: none
-End of Event User Vis Actions: none
-
-End of Run User Vis Actions: none
-
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-
-
-
-and here ? !! 
-and here ? !! 
-and here ? !! 
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-Session NOT OK! ...
-
-Session NOT OK! ...
-Session NOT OK! ...
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-and here ? !! 
-
-
-Session NOT OK! ...
-and here ? !! 
-and here ? !! 
-Session NOT OK! ...
-Session NOT OK! ...
-
-You have successfully registered the following model factories.
-Registered model factories:
-
-You have successfully registered the following model factories.
-  generic
-
-You have successfully registered the following model factories.
-  drawByCharge
-Registered model factories:
-  drawByParticleID
-  generic
-  drawByOriginVolume
-Registered model factories:
-  drawByCharge
-  generic
-  drawByAttribute
-  drawByParticleID
-  drawByCharge
-
-  drawByOriginVolume
-  drawByParticleID
-Registered filter factories:
-  drawByAttribute
-  drawByOriginVolume
-  chargeFilter
-
-  drawByAttribute
-Registered filter factories:
-  particleFilter
-
-  chargeFilter
-  originVolumeFilter
-Registered filter factories:
-  particleFilter
-  attributeFilter
-  chargeFilter
-  originVolumeFilter
-
-  particleFilter
-  attributeFilter
-You have successfully registered the following user vis actions.
-  originVolumeFilter
-
-Run Duration User Vis Actions: none
-  attributeFilter
-You have successfully registered the following user vis actions.
-End of Event User Vis Actions: none
-
-Run Duration User Vis Actions: none
-End of Run User Vis Actions: none
-End of Event User Vis Actions: none
-You have successfully registered the following user vis actions.
-
-Run Duration User Vis Actions: none
-End of Run User Vis Actions: none
-End of Event User Vis Actions: none
-
-End of Run User Vis Actions: none
-
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-
-and here ? !! 
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-Session NOT OK! ...
-Some /vis commands (optionally) take a string to specify colour.
-Available colours:
-  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
-
-
-and here ? !! 
-and here ? !! 
-Session NOT OK! ...
-Session NOT OK! ...
-AA <- detector name 0
-AA <- detector name 0
-AA <- detector name 0
-AA <- detector name 0
-AA <- detector name 0
-AA <- detector name 0
-AA <- detector name 0
-AA <- detector name 0
-AA <- detector name 0
-AA <- detector name 0
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass
-Glass Value: PMTGlass
-Glass Value: PMTGlass
-Glass Value: PMTGlass
-Glass Value: PMTGlass
-Glass Value: PMTGlass
-Glass Value: PMTGlass
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass
-Glass Value: PMTGlass
-Glass Value: PMTGlass
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-Glass Value: PMTGlass_R12199_02
-creating it 3inches
-creating it 3inches
-creating it 3inches
-creating it 3inches
-creating it 3inches
-creating it 3inches
-creating it 3inches
-creating it 3inches
-creating it 3inches
-creating it 3inches
-creating it 3inchesQE2
-creating it 3inchesQE2
-creating it 3inchesQE2
-creating it 3inchesQE2
-creating it 3inchesQE2
-creating it 3inchesQE2
-creating it 3inchesQE2
-creating it 3inchesQE2
-creating it 3inchesQE2
-creating it REFLEX
-creating it REFLEX
-creating it REFLEX
-creating it REFLEX
-creating it REFLEX
-creating it 3inchesQE2
-creating it REFLEX
-creating it REFLEX
-creating it REFLEX
-creating it REFLEX
-creating it REFLEX
-creating it 3andhalfinches
-creating it 3andhalfinches
-creating it 3andhalfinches
-creating it 3andhalfinches
-creating it 3andhalfinches
-creating it 3andhalfinches
-creating it 3andhalfinches
-creating it 3andhalfinches
-creating it 3andhalfinches
-creating it 3andhalfinches
- There are  0 materials defined.
- There are  0 materials defined.
-
-
- There are  0 materials defined.
-
- There are  0 materials defined.
-
- There are  0 materials defined.
-
- There are  0 materials defined.
-
- There are  0 materials defined.
-
- There are  0 materials defined.
- There are  0 materials defined.
-
-
- There are  0 materials defined.
-
-
-
-
-
-
-
-*************************************************************
-
-*************************************************************
-*************************************************************
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                      Reference : NIM A 506 (2003), 250-303
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                      Copyright : Geant4 Collaboration
-                            WWW : http://cern.ch/geant4
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-                            WWW : http://cern.ch/geant4
-*************************************************************
-                            WWW : http://cern.ch/geant4
-*************************************************************
-                            WWW : http://cern.ch/geant4
-*************************************************************
-*************************************************************
-*************************************************************
-
-*************************************************************
-
-*************************************************************
-
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-
-
-
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-*************************************************************
-
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
-
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
-
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-03 [MT]   (5-February-2016)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-------------- Using AA as new value!! -------------
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-------------- Using AA as new value!! -------------
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-------------- Using AA as new value!! -------------
-I am called from AAAnalysisMananer::Init(RFNNAME); RFNAME is: 
-Usage of Lactel as detetor initialization
-Usage of Lactel as detetor initialization
-Usage of Lactel as detetor initialization
-[30C ---- Before: 0
-Usage of Lactel as detetor initialization
----> IdealWater
-[30C ---- Before: 0
-
-----> The target as been changed to 500 cm of IdealWater
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-[30C ---- Before: 0
-World length has been set to: 3 m
-World length has been set to: 3 m
----> IdealWater
-Target length has been set to 1.01 m
-Usage of Lactel as detetor initialization
-
-----> The target as been changed to 500 cm of IdealWater
-Target length has been set to 1.01 m
-World length has been set to: 3 m
-Target length has been set to 1.01 m
-[30C ---- Before: 0
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Target length has been set to 1.01 m
-[30C ---- Before: 0
-Usage of Lactel as detetor initialization
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Target length has been set to 1.01 m
-[30C ---- Before: 0
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Target length has been set to 1.01 m
-Usage of Lactel as detetor initialization
-Usage of Lactel as detetor initialization
-[30C ---- Before: 0
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-[30C ---- Before: 0
-Target length has been set to 1.01 m
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Usage of Lactel as detetor initialization
-Target length has been set to 1.01 m
-[30C ---- Before: 0
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Target length has been set to 1.01 m
-creating it LACTEL
-creating it LACTEL
-creating it LACTEL
-creating it LACTEL
-doing the skinAbsorberSurf
-doing the skinAbsorberSurf
-doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-creating it LACTEL
-[10C --> Creating the surface: AbsorberSurf
-doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-doing the skinAbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-3 1 0 1
-3 1 0 1
-3 1 0 1
-3 1 0 1
-[10C --> Specifiying the reflect for: AbsorberSurf
-3 1 0 1
-creating it OM11
-creating it OM11
-creating it OM11
-creating it OM11
-creating it OM11
-creating it LACTEL
-creating it LACTEL
-doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-3 1 0 1
-doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-creating it OM11
-[10C --> Specifiying the reflect for: AbsorberSurf
-3 1 0 1
-creating it OM11
-creating it LACTEL
-doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-3 1 0 1
-creating it OM11
-Usage of Lactel as detetor initialization
-[30C ---- Before: 0
----> IdealWater
-
-----> The target as been changed to 500 cm of IdealWater
-World length has been set to: 3 m
-Target length has been set to 1.01 m
-creating it LACTEL
-doing the skinAbsorberSurf
-[10C --> Creating the surface: AbsorberSurf
-[10C --> Specifiying the reflect for: AbsorberSurf
-3 1 0 1
-creating it OM11
-Tube height is: 69.4597
-Tube height is: 69.4597
-Tube height is: 69.4597
-Tube height is: 69.4597
-Logical vaccum created: REFLEXVaccumOfPmt
-Logical vaccum created: REFLEXVaccumOfPmt
-Tube height is: 69.4597
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Specifiying the reflect for: PMTInternalSurface
-[10C --> Specifiying the reflect for: PMTInternalSurface
-Tube height is: 69.4597
-3 0.95 0 0
-3 0.95 0 0
-[10C --> Creating the surface: DinodsSurface
-[10C --> Creating the surface: DinodsSurface
-[10C --> Specifiying the reflect for: DinodsSurface
-Logical vaccum created: REFLEXVaccumOfPmt
-[10C --> Specifiying the reflect for: DinodsSurface
-4 0.7 0 0
-[10C --> Creating the surface: PMTInternalSurface
-Logical vaccum created: REFLEXVaccumOfPmt
-[10C --> Creating the surface: CapDinodsSurface
-4 0.7 0 0
-Logical vaccum created: REFLEXVaccumOfPmt
-[10C --> Specifiying the reflect for: PMTInternalSurface
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Creating the surface: PMTInternalSurface
-Logical vaccum created: REFLEXVaccumOfPmt
-3 0.95 0 0
-[10C --> Specifiying the reflect for: PMTInternalSurface
-4 0.8 0 0
-[10C --> Specifiying the reflect for: CapDinodsSurface
-[10C --> Specifiying the reflect for: PMTInternalSurface
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Creating the surface: DinodsSurface
-[10C --> Creating the surface: GridDinodsSurface
-3 0.95 0 0
-4 0.8 0 0
-[10C --> Specifiying the reflect for: PMTInternalSurface
-3 0.95 0 0
-[10C --> Specifiying the reflect for: DinodsSurface
-[10C --> Specifiying the reflect for: GridDinodsSurface
-[10C --> Creating the surface: DinodsSurface
-[10C --> Creating the surface: GridDinodsSurface
-[10C --> Creating the surface: DinodsSurface
-3 0.95 0 0
-[10C --> Specifiying the reflect for: GridDinodsSurface
-4 0.7 0 0
-4 0.3 0 0
-[10C --> Specifiying the reflect for: DinodsSurface
-[10C --> Specifiying the reflect for: DinodsSurface
-[10C --> Creating the surface: DinodsSurface
-4 0.3 0 0
-[10C --> Creating the surface: CapDinodsSurface
-4 0.7 0 0
-4 0.7 0 0
-[10C --> Specifiying the reflect for: DinodsSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Creating the surface: CapDinodsSurface
-4 0.7 0 0
-4 0.8 0 0
-[10C --> Specifiying the reflect for: CapDinodsSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Creating the surface: GridDinodsSurface
-4 0.8 0 0
-4 0.8 0 0
-[10C --> Specifiying the reflect for: CapDinodsSurface
-[10C --> Specifiying the reflect for: GridDinodsSurface
-[10C --> Creating the surface: GridDinodsSurface
-[10C --> Creating the surface: GridDinodsSurface
-4 0.8 0 0
-4 0.3 0 0
-[10C --> Specifiying the reflect for: GridDinodsSurface
-[10C --> Specifiying the reflect for: GridDinodsSurface
-[10C --> Creating the surface: GridDinodsSurface
-4 0.3 0 0
-4 0.3 0 0
-[10C --> Specifiying the reflect for: GridDinodsSurface
-4 0.3 0 0
-Tube height is: 69.4597
-Tube height is: 69.4597
-Logical vaccum created: REFLEXVaccumOfPmt
-[10C --> Creating the surface: PMTInternalSurface
-Tube height is: 69.4597
-[10C --> Specifiying the reflect for: PMTInternalSurface
-3 0.95 0 0
-[10C --> Creating the surface: DinodsSurface
-creating it LACTEL
-[10C --> Specifiying the reflect for: DinodsSurface
-4 0.7 0 0
-[10C --> Creating the surface: CapDinodsSurface
-Logical vaccum created: REFLEXVaccumOfPmt
-[10C --> Specifiying the reflect for: CapDinodsSurface
-doing the skinAbsorberSurf
-[10C --> Creating the surface: PMTInternalSurface
-Logical vaccum created: REFLEXVaccumOfPmt
-4 0.8 0 0
-[10C --> Creating the surface: AbsorberSurf
-[10C --> Specifiying the reflect for: PMTInternalSurface
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Creating the surface: GridDinodsSurface
-3 0.95 0 0
-[10C --> Specifiying the reflect for: GridDinodsSurface
-[10C --> Creating the surface: DinodsSurface
-[10C --> Specifiying the reflect for: PMTInternalSurface
-[10C --> Specifiying the reflect for: AbsorberSurf
-4 0.3 0 0
-[10C --> Specifiying the reflect for: DinodsSurface
-3 0.95 0 0
-3 1 0 1
-4 0.7 0 0
-[10C --> Creating the surface: DinodsSurface
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Specifiying the reflect for: DinodsSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
-4 0.7 0 0
-4 0.8 0 0
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Creating the surface: GridDinodsSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
-creating it OM11
-4 0.8 0 0
-[10C --> Specifiying the reflect for: GridDinodsSurface
-[10C --> Creating the surface: GridDinodsSurface
-[10C --> Specifiying the reflect for: GridDinodsSurface
-4 0.3 0 0
-4 0.3 0 0
-Tube height is: 69.4597
-Logical vaccum created: REFLEXVaccumOfPmt
-[10C --> Creating the surface: PMTInternalSurface
-[10C --> Specifiying the reflect for: PMTInternalSurface
-3 0.95 0 0
-[10C --> Creating the surface: DinodsSurface
-[10C --> Specifiying the reflect for: DinodsSurface
-4 0.7 0 0
-[10C --> Creating the surface: CapDinodsSurface
-[10C --> Specifiying the reflect for: CapDinodsSurface
-4 0.8 0 0
-[10C --> Creating the surface: GridDinodsSurface
-[10C --> Specifiying the reflect for: GridDinodsSurface
-4 0.3 0 0
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-     ----Problem: OM11GelSub with REFLEXNoticeablePMTContainer : vec: (0,0,59.2) -->>> 136.7 Z --> 59.2
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11OMAir ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-Checking overlaps for volume OM11NoticeableOpticalModuleAbsorber ... OK! 
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-Checking overlaps for volume OM11NoticeablePMTContainer ... OK! 
-[10C --> Creating the surface: AbsorberPVC
-[10C --> Specifiying the reflect for: AbsorberPVC
-4 1 0 1
- ------  >>> List of constructed logical volumes:
-PV Name: World | Mother LV: No Mother | Material: G4_AIR
-PV Name: LactelCell | Mother LV: Target | Material: IdealWater
-PV Name: REFLEXNoticeablePhotoCathode | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXGlass | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTGlass
-PV Name: REFLEXVaccumInPmt | Mother LV: REFLEXNoticeablePMTContainer | Material: PMTVacuum
-PV Name: REFLEXDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXGridDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: REFLEXBackCapDinods | Mother LV: REFLEXVaccumOfPmt | Material: AbsorberPVC
-PV Name: OM11OMAir | Mother LV: OM11NoticeableOpticalBentoGlass | Material: Air
-PV Name: OM11NoticeableOpticalModuleAbsorber | Mother LV: OM11OM | Material: AbsorberPVC
-PV Name: OM11NoticeablePMTContainer | Mother LV: OM11OM | Material: Air
-PV Name: AntaresOM | Mother LV: LactelCell | Material: AntaresGlass
-PV Name: genPhysic | Mother LV: World | Material: G4_AIR
-PV Name: Target | Mother LV: World | Material: IdealWater
- AddDiscreteProcess to OpticalPhoton 
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-You are setting a new verbose level for neutron HP package.
-the new value will be used in whole of the neutron HP package, i.e., models and cross sections for Capture, Elastic, Fission and Inelastic interaction.
-world cuts are set
-Visualization verbosity changed to quiet (0)
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-Neutron HP Thermal Scattering: Following material-element pairs or elements are registered.
-
-
-Neutron HP Thermal Scattering Data: Following material-element pairs and/or elements are registered.
-
-
-### - Run : 0
-
-### - Run : 0
-[20CStart of event: 1
-### - Run : 0
-[20CStart of event: 1[20CStart of event: 1
-### - Run : 0
-[20CStart of event: 1
-### - Run : 0
-[20CStart of event: 1[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-26
-### - Run : 0
-[60C1 [65C detected lim-Erange 3-28[20CStart of event: 1[60C1 [65C detected lim-Erange 3-32
-### - Run : 0
-
-### - Run : 0
-[20CStart of event: 1[20CStart of event: 1[60C1 [65C detected lim-Erange 3-37
-### - Run : 0
-[60C1 [65C detected lim-Erange 3-27[20CStart of event: 1
-### - Run : 0
-[20CStart of event: 1[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-36[60C1 [65C detected lim-Erange 3-38[60C1 [65C detected lim-Erange 3-30[60C1 [65C detected lim-Erange 3-26[60C1 [65C detected lim-Erange 3-34[60C1 [65C detected lim-Erange 3-30[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-33[60C1 [65C detected lim-Erange 3-27[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-31[60C1 [65C detected lim-Erange 3-31[60C1 [65C detected lim-Erange 3-33[60C1 [65C detected lim-Erange 3-39[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-21[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-31[60C1 [65C detected lim-Erange 3-34[60C1 [65C detected lim-Erange 3-31[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-21[60C1 [65C detected lim-Erange 3-26[60C1 [65C detected lim-Erange 3-30[60C1 [65C detected lim-Erange 3-27[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-22[60C1 [65C detected lim-Erange 3-22[60C1 [65C detected lim-Erange 3-37[60C1 [65C detected lim-Erange 3-32[60C1 [65C detected lim-Erange 3-34[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-36[60C1 [65C detected lim-Erange 3-37[60C1 [65C detected lim-Erange 3-25[60C1 [65C detected lim-Erange 3-21[60C1 [65C detected lim-Erange 3-31[60C1 [65C detected lim-Erange 3-32[60C1 [65C detected lim-Erange 3-27[60C1 [65C detected lim-Erange 3-30[60C1 [65C detected lim-Erange 3-28[60C1 [65C detected lim-Erange 3-33[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-27[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-26[60C1 [65C detected lim-Erange 3-33[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-34[60C1 [65C detected lim-Erange 3-28[60C1 [65C detected lim-Erange 3-22[60C1 [65C detected lim-Erange 3-36[60C1 [65C detected lim-Erange 3-40[60C1 [65C detected lim-Erange 3-37[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-25[60C1 [65C detected lim-Erange 3-28[60C1 [65C detected lim-Erange 3-32[60C1 [65C detected lim-Erange 3-39[60C1 [65C detected lim-Erange 3-25[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-36[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-38[60C1 [65C detected lim-Erange 3-37[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-22[60C1 [65C detected lim-Erange 3-28[60C1 [65C detected lim-Erange 3-33[60C1 [65C detected lim-Erange 3-26[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-32[60C1 [65C detected lim-Erange 3-37[60C1 [65C detected lim-Erange 3-34[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-21[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-30[60C1 [65C detected lim-Erange 3-36[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-31[60C1 [65C detected lim-Erange 3-25[60C1 [65C detected lim-Erange 3-25[60C1 [65C detected lim-Erange 3-31[60C1 [65C detected lim-Erange 3-25[60C1 [65C detected lim-Erange 3-32[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-30[60C1 [65C detected lim-Erange 3-33[60C1 [65C detected lim-Erange 3-21[60C1 [65C detected lim-Erange 3-27[60C1 [65C detected lim-Erange 3-22[60C1 [65C detected lim-Erange 3-26[60C1 [65C detected lim-Erange 3-36[60C1 [65C detected lim-Erange 3-28[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-20[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-27[60C1 [65C detected lim-Erange 3-28[60C1 [65C detected lim-Erange 3-21[60C1 [65C detected lim-Erange 3-34[60C1 [65C detected lim-Erange 3-28[60C1 [65C detected lim-Erange 3-31[60C1 [65C detected lim-Erange 3-35[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-27[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-37[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-32[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-38[60C1 [65C detected lim-Erange 3-26[60C1 [65C detected lim-Erange 3-38[60C1 [65C detected lim-Erange 3-32[60C1 [65C detected lim-Erange 3-39[60C1 [65C detected lim-Erange 3-25[60C1 [65C detected lim-Erange 3-34[60C1 [65C detected lim-Erange 3-22[60C1 [65C detected lim-Erange 3-36[60C1 [65C detected lim-Erange 3-30[60C1 [65C detected lim-Erange 3-38[60C1 [65C detected lim-Erange 3-20[60C1 [65C detected lim-Erange 3-40[60C1 [65C detected lim-Erange 3-34[60C1 [65C detected lim-Erange 3-23[60C1 [65C detected lim-Erange 3-37[60C1 [65C detected lim-Erange 3-22[60C1 [65C detected lim-Erange 3-29[60C1 [65C detected lim-Erange 3-33[60C1 [65C detected lim-Erange 3-38[60C1 [65C detected lim-Erange 3-26[60C1 [65C detected lim-Erange 3-36[60C1 [65C detected lim-Erange 3-32[60C1 [65C detected lim-Erange 3-21[60C1 [65C detected lim-Erange 3-25[60C1 [65C detected lim-Erange 3-31[60C1 [65C detected lim-Erange 3-30[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-39[60C1 [65C detected lim-Erange 3-24[60C1 [65C detected lim-Erange 3-37[60C1 [65C detected lim-Erange 3-39[60C1 [65C detected lim-Erange 3-38
-End of Run 0
-Deleting visManager !! 
-[60C1 [65C detected lim-Erange 3-20[60C1 [65C detected lim-Erange 3-19[60C1 [65C detected lim-Erange 3-40[60C1 [65C detected lim-Erange 3-41Analysis file was normaly closed.
-KM3DetectorConstruction: the Optical Module orientation angle was 0 deg
-detectorMessenger deleted correctly
-
-End of Run 0
-Deleting visManager !! 
-Analysis file was normaly closed.
-KM3DetectorConstruction: the Optical Module orientation angle was 0 deg
-detectorMessenger deleted correctly
-
-End of Run 0
-Deleting visManager !! 
-Analysis file was normaly closed.
-KM3DetectorConstruction: the Optical Module orientation angle was 0 deg
-detectorMessenger deleted correctly

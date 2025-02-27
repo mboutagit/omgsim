@@ -1,4 +1,0 @@
-/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles/libOMG.dir
-/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles/OMGsim.dir
-/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles/edit_cache.dir
-/home/mbouta/work/cppm/lactel/trunk/build/CMakeFiles/rebuild_cache.dir

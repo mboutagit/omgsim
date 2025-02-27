@@ -175,7 +175,7 @@ namespace km3net
 
     //     G4Tubs*             solidWorld;    // pointer to the solid envelope
    
-    G4Sphere* solidWorld;    // pointer to the solid envelope
+    G4Box* solidWorld;    // pointer to the solid envelope
     G4LogicalVolume* logicWorld;    // pointer to the logical envelope
     G4VPhysicalVolume* physiWorld;    // pointer to the physical envelope
 

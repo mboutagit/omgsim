@@ -126,7 +126,7 @@ namespace km3net
   {
     if (fOpticalSurfaceDict.count (name))
       return fOpticalSurfaceDict [name];
-    cout << "\r\033[10C --> " << "Creating the surface: " << name << endl;
+   // cout << "\r\033[10C --> " << "Creating the surface: " << name << endl;
     G4OpticalSurface* the_surface =new G4OpticalSurface(name + "_surface");
     G4MaterialPropertiesTable* thePropTable = G4Material::GetMaterial(name)->GetMaterialPropertiesTable();
     //thePropTable->DumpTable ();
@@ -142,7 +142,7 @@ namespace km3net
           the_surface->SetType(dielectric_dielectric);
 
 
-        cout << "\r\033[10C --> " << "Specifiying the reflect for: " << name << endl;
+       // cout << "\r\033[10C --> " << "Specifiying the reflect for: " << name << endl;
         if (thePropTable->ConstPropertyExists ("polishedfrontpainted")) the_surface->SetFinish (polishedfrontpainted);
         else if (thePropTable->ConstPropertyExists ("polished")) the_surface->SetFinish (polished);
         else if (thePropTable->ConstPropertyExists ("polishedbackpainted")) the_surface->SetFinish (polishedbackpainted);

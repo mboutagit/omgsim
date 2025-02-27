@@ -37,6 +37,9 @@
 #include <G4NavigationHistory.hh>
 #include <G4TransportationManager.hh>
 #include <KM3OpticalModuleMgr.hh>  //for PMT name
+#include <G4RunManager.hh>
+#include <G4Run.hh>
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
@@ -87,12 +90,12 @@ namespace km3net
     fTRunInfos = new TTree("RunInfo","Infos about the simulation.");
     fTRunInfos->Branch("NBTrigg",&fNbTrigg,"NbTrigg/l");
     fTEvent = new TTree("Hit","Hits in a TTree");
-    fTEvent->Branch("Vertex",&fVertexX,"VertexX:VertexY:VertexZ:VertexT:VertexP:VertexDirX:VertexDirY:VertexDirZ:VertexEnergy:OMHitX:OMHitY:OMHitZ:OMHitT:OMHitP:PhotoX:PhotoY:PhotoZ:PhotoT:PhotoP:OMID/S:PMID");
+    fTEvent->Branch("Vertex",&run_id,"run_id/i:evt_id:VertexX/f:VertexY:VertexZ:VertexT:VertexP:VertexDirX:VertexDirY:VertexDirZ:VertexEnergy:OMHitX:OMHitY:OMHitZ:OMHitT:OMHitP:PhotoX:PhotoY:PhotoZ:PhotoT:PhotoP:OMID/S:PMID");
     fTFastAnalysis = new TTree("FastAnalysis","Data used for very fast analysis.");
     fTFastAnalysis->Branch("PhotonReach",&fNbOM,"NbOM/l:NbPhoto");
 
     fGenEventTree = new TTree("fGenEventTree","Data used for event generation.");
-    fGenEventTree->Branch("Gen",&fGenPPDGID,"fGenPPDGID/i:fGenXPos/F:fGenYPos:fGenZPos:fGenXDir:fGenYDir:fGenZDir:fGenTheta:fGenPhi:fGenEnergy");
+    fGenEventTree->Branch("Gen",&fGenPPDGID,"GenPPDGID/I:GenEvtID/i:GenXPos/F:GenYPos:GenZPos:GenXDir:GenYDir:GenZDir:GenTheta:GenPhi:GenEnergy");
 
     //ANTARES evt-like format output
     if (fEvtOutput) {
@@ -186,6 +189,7 @@ const std::string KM3AnalysisManager::currentDateTime() {
 
     if (fNbOM % 1000 ==0)
       {
+        cout << endl;
         cout << "\r\033[40C" << fNbOM << " in OM ";
         cout.flush ();
       }
@@ -209,14 +213,16 @@ const std::string KM3AnalysisManager::currentDateTime() {
      *
      * So, it seems, GetCopyNumber should be used instead of GetCopyNo since we do different placements of the same logical volume.
      */
-    //fOMId = touch->GetVolume ()->GetCopyNo ();
-    fOMId = touch->GetCopyNumber (1);
-    fOMHitX=globalPoint.x ();
-    fOMHitY=globalPoint.y ();
-    fOMHitZ=globalPoint.z ();
+   // cout <<" replica: " << touch->GetVolume ()->GetCopyNo () << endl;
+    fOMId = touch->GetVolume ()->GetCopyNo ();
+    //fOMId = touch->GetCopyNumber (2);
+
+    fOMHitX = globalPoint.x ();
+    fOMHitY = globalPoint.y ();
+    fOMHitZ = globalPoint.z ();
     fOMHitT = localpoint.theta ();
     fOMHitP = localpoint.phi ();
-
+    
   }
 
   void KM3AnalysisManager::StartOfEvent (const G4Event* EV)
@@ -230,8 +236,11 @@ const std::string KM3AnalysisManager::currentDateTime() {
 
     //G4cout << "start of event: " << EV->GetEventID() << G4endl;
 
-    if ((fNbTrigg % 1000) == 0)
+    if ((fNbTrigg % 1000) == 0){
+      cout << endl;
       G4cout<< "start of event: " << EV->GetEventID() << " || trigg: " << fNbTrigg << G4endl;
+    }
+
      // cout  <<"\r"<<fNbTrigg << " trigg" << flush;
 
     if (fFastAnalysisOnly)
@@ -239,7 +248,13 @@ const std::string KM3AnalysisManager::currentDateTime() {
 
     const G4ThreeVector& vertexVect= EV->GetPrimaryVertex ()->GetPosition ();
     const G4ThreeVector& vertexDir = EV->GetPrimaryVertex ()->GetPrimary ()->GetMomentumDirection ();
-
+    
+    // fGenEvtID  = EV->GetEventID();    
+    // fGenEvtID  = 
+    
+    //cout << "Run: " << G4RunManager::GetRunManager()->GetCurrentRun()->GetRunID() << endl;
+    run_id = G4RunManager::GetRunManager()->GetCurrentRun()->GetRunID();
+    evt_id = EV->GetEventID();
     fVertexX = vertexVect.x ();
     fVertexY = vertexVect.y ();
     fVertexZ = vertexVect.z ();
@@ -251,6 +266,21 @@ const std::string KM3AnalysisManager::currentDateTime() {
     fVertexDirZ = vertexDir.z ();
 
     fVertexEnergy = EV->GetPrimaryVertex ()->GetPrimary ()->GetKineticEnergy ();
+
+    G4PrimaryParticle*  particle = EV->GetPrimaryVertex ()->GetPrimary ();
+    
+    fGenPPDGID = particle->GetPDGcode();
+    fGenEvtID  = EV->GetEventID();    
+    fGenXPos   = EV->GetPrimaryVertex ()->GetPosition().getX() / mm;
+    fGenYPos   = EV->GetPrimaryVertex ()->GetPosition().getY() / mm;
+    fGenZPos   = EV->GetPrimaryVertex ()->GetPosition().getZ() / mm;
+    fGenXDir   = particle->GetMomentum().unit().getX() / mm;
+    fGenYDir   = particle->GetMomentum().unit().getY() / mm;
+    fGenZDir   = particle->GetMomentum().unit().getZ() / mm;
+    fGenTheta  = particle->GetMomentum().theta() / deg;
+    fGenPhi    = particle->GetMomentum().phi() /deg;
+    fGenEnergy = particle->GetTotalEnergy() / MeV;
+
   }
 
   void KM3AnalysisManager::SetEnergy (double E)

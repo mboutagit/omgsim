@@ -1,0 +1,13 @@
+Name = "LACTEL_Cell_Outer";
+
+Prefix = "LACTELCellOuter";
+
+Material = "G4_POLYETHYLENE";
+
+VolumeKind = "Box";
+X = 1005; // 2X2X2 m 
+Y = 1005;
+Z = 1005;
+
+CheckOverlaps = false;
+SkinMaterial="AbsorberSurf";

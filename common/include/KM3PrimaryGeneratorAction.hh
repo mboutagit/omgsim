@@ -39,10 +39,14 @@
 #include "G4ParticleTable.hh"
 #include "G4VSolid.hh"
 #include "G4Sphere.hh"
+#include "G4Box.hh"
+#include "G4String.hh"
 #include "KM3AnalysisManager.hh"
 #include "TTree.h"
 
 #include <vector>
+
+// #include "ParametrizedGenerator.hh"
 
 class G4GeneralParticleSource;
 class G4ParticleGun;
@@ -52,47 +56,49 @@ class G4VPhysicalVolume;
 class G4VPrimaryGenerator;
 class TH1F;
 
+class ParametrizedGenerator;
+
 namespace km3net
 {
 
   class KM3PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   {
-    friend class KM3RunMessenger;
-  public:
-    KM3PrimaryGeneratorAction();
-    ~KM3PrimaryGeneratorAction();
+      friend class KM3RunMessenger;
+    public:
+      KM3PrimaryGeneratorAction();
+      ~KM3PrimaryGeneratorAction();
 
 
-  public:
-    void GeneratePrimaries(G4Event* anEvent);
-    void SetProducingVolumeRadius (double RAD) {fTargetRadius=RAD;}
-   
-    G4ThreeVector GenerateMuonDirection(std::string);
-    G4double GenerateMuonEnergy(double, double, float);
+    public:
+      void GeneratePrimaries(G4Event* anEvent);
+      void SetProducingVolumeRadius (double RAD) {fTargetRadius=RAD;}
 
-  private:
-    void InitializeNormalType ();
-    void InitializeDecayType ();
-    void InitializeCustumMuonType();
-    void initMuons();
-    G4int PrevTime;
 
-  private:
-    G4VPrimaryGenerator* particleGun;
-    //  G4ParticleGun* particleGun;
-    G4int randcount;
-    G4Navigator* Navigator;
-    G4double fTargetRadius = 500.*m;
-    G4double fGenVolumeRaduis = 5.0 * m;
-    unsigned char fGunType=0;//1 for normal, 2 for decay
+    private:
+      void InitializeNormalType ();
+      void InitializeDecayType ();
+     // void InitializeCustumMuonType();
+      void initMuons();
+      G4int PrevTime;
 
-    std::vector <float>         fLEDAngle;
+    private:
+      G4VPrimaryGenerator* particleGun;
+      //  G4ParticleGun* particleGun;
+      G4int randcount;
+      G4Navigator* Navigator;
+      G4double fTargetRadius = 500.*m;
+      G4double fGenVolumeRaduis = 5.0 * m;
+      unsigned char fGunType=0;//1 for normal, 2 for decay
 
-#if __GNUC__>=5
-    ::TH1F* fhLED;
-#else
-    TH1F* fhLED;
-#endif
+      std::vector <float>         fLEDAngle;
+
+      friend class ParametrizedGenerator;
+
+    #if __GNUC__>=5
+        ::TH1F* fhLED;
+    #else
+        TH1F* fhLED;
+    #endif
   };
 }
 #endif

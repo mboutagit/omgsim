@@ -58,7 +58,8 @@ namespace km3net
 
   class AAAnalysisManager : public KM3AnalysisManager
   {
-
+  // protected:
+  //   class hitCollection;
   public:
     // With description
 
@@ -76,11 +77,28 @@ namespace km3net
     virtual void EndOfEvent ();
     virtual void SetEnergy (double E);
 
+    // void addHitCollection(hitCollection collection){
+    //   hitColl.push_back(collection);
+    // }
+
   protected:
     size_t fcounter=0;
     size_t funcounter=0;
     size_t fomcounter=0;
 
+    // class hitCollection
+    // {
+    // public:
+    //   float time;
+    //   float energy;
+    //   bool polarity;
+    //   short limit;
+    
+    //   hitCollection(): time(0), energy(0), polarity(0), limit(0){};
+    //   ~hitCollection(){};
+    // };
+    
+    // std::vector<hitCollection> hitColl;
     // MEMBERS
 
     unsigned fNbDetected[4][100]; //[limit][energies] energies in [1-5] eV

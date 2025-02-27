@@ -123,6 +123,8 @@ namespace km3net
     unsigned long fNbTrigg=0;
 
     // Information about the photons at production vertex.
+    unsigned int run_id;
+    unsigned int evt_id;
     float fVertexX=0;
     float fVertexY=0;
     float fVertexZ=0;
@@ -147,7 +149,8 @@ namespace km3net
     short fOMId=-1;
     short fPMID=0;
     // information about generated events 
-    unsigned int fGenPPDGID;
+    int fGenPPDGID;
+    unsigned int fGenEvtID;
     float fGenXPos;
     float fGenYPos;
     float fGenZPos;
@@ -158,31 +161,31 @@ namespace km3net
     float fGenPhi;
     float fGenEnergy;
 
-    public:
+    // public:
 
-      TTree* getGenEventTree(){
-        return fGenEventTree;
-      }
+    //   TTree* getGenEventTree(){
+    //     return fGenEventTree;
+    //   }
 
-      void setGenEnergy(float par){fGenEnergy = par;}
-      void setPPDGID(unsigned int par){fGenPPDGID = par;}
+    //   void setGenEnergy(float par){fGenEnergy = par;}
+    //   void setPPDGID(unsigned int par){fGenPPDGID = par;}
 
-      void setAngles(G4ThreeVector vec){
-        fGenTheta = vec.getTheta();
-        fGenPhi = vec.getPhi();
-      }
+    //   void setAngles(G4ThreeVector vec){
+    //     fGenTheta = vec.getTheta();
+    //     fGenPhi = vec.getPhi();
+    //   }
 
-      void setGenPosition(G4ThreeVector vec){
-        fGenXPos = vec.getX();
-        fGenYPos = vec.getY();
-        fGenZPos = vec.getZ();  
-      }
+    //   void setGenPosition(G4ThreeVector vec){
+    //     fGenXPos = vec.getX();
+    //     fGenYPos = vec.getY();
+    //     fGenZPos = vec.getZ();  
+    //   }
 
-      void setGenDirection(G4ThreeVector vec){
-        fGenXDir = vec.getX();
-        fGenYDir = vec.getY();
-        fGenZDir = vec.getZ();  
-      }
+    //   void setGenDirection(G4ThreeVector vec){
+    //     fGenXDir = vec.getX();
+    //     fGenYDir = vec.getY();
+    //     fGenZDir = vec.getZ();  
+    //   }
 
   };
 
