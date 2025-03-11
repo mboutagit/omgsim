@@ -117,6 +117,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named G__Dict
+
+# Build rule for target.
+G__Dict: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 G__Dict
+.PHONY : G__Dict
+
+# fast build rule for target.
+G__Dict/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/G__Dict.dir/build.make CMakeFiles/G__Dict.dir/build
+.PHONY : G__Dict/fast
+
+#=============================================================================
 # Target rules for targets named libOMG
 
 # Build rule for target.
@@ -128,6 +141,19 @@ libOMG: cmake_check_build_system
 libOMG/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/build
 .PHONY : libOMG/fast
+
+#=============================================================================
+# Target rules for targets named BAnalysis
+
+# Build rule for target.
+BAnalysis: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BAnalysis
+.PHONY : BAnalysis
+
+# fast build rule for target.
+BAnalysis/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/build
+.PHONY : BAnalysis/fast
 
 #=============================================================================
 # Target rules for targets named OMGsim
@@ -189,6 +215,30 @@ AA/src/XPPhSteppingAction.s: AA/src/XPPhSteppingAction.cc.s
 AA/src/XPPhSteppingAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/AA/src/XPPhSteppingAction.cc.s
 .PHONY : AA/src/XPPhSteppingAction.cc.s
+
+G__Dict.o: G__Dict.cxx.o
+.PHONY : G__Dict.o
+
+# target to build an object file
+G__Dict.cxx.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/G__Dict.cxx.o
+.PHONY : G__Dict.cxx.o
+
+G__Dict.i: G__Dict.cxx.i
+.PHONY : G__Dict.i
+
+# target to preprocess a source file
+G__Dict.cxx.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/G__Dict.cxx.i
+.PHONY : G__Dict.cxx.i
+
+G__Dict.s: G__Dict.cxx.s
+.PHONY : G__Dict.s
+
+# target to generate assembly for a file
+G__Dict.cxx.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/G__Dict.cxx.s
+.PHONY : G__Dict.cxx.s
 
 K40/src/K40AnalysisManager.o: K40/src/K40AnalysisManager.cc.o
 .PHONY : K40/src/K40AnalysisManager.o
@@ -309,6 +359,114 @@ WProp/src/WPropSteppingAction.s: WProp/src/WPropSteppingAction.cc.s
 WProp/src/WPropSteppingAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/WProp/src/WPropSteppingAction.cc.s
 .PHONY : WProp/src/WPropSteppingAction.cc.s
+
+analysis/src/BAnalysis.o: analysis/src/BAnalysis.cc.o
+.PHONY : analysis/src/BAnalysis.o
+
+# target to build an object file
+analysis/src/BAnalysis.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BAnalysis.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BAnalysis.cc.o
+.PHONY : analysis/src/BAnalysis.cc.o
+
+analysis/src/BAnalysis.i: analysis/src/BAnalysis.cc.i
+.PHONY : analysis/src/BAnalysis.i
+
+# target to preprocess a source file
+analysis/src/BAnalysis.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BAnalysis.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BAnalysis.cc.i
+.PHONY : analysis/src/BAnalysis.cc.i
+
+analysis/src/BAnalysis.s: analysis/src/BAnalysis.cc.s
+.PHONY : analysis/src/BAnalysis.s
+
+# target to generate assembly for a file
+analysis/src/BAnalysis.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BAnalysis.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BAnalysis.cc.s
+.PHONY : analysis/src/BAnalysis.cc.s
+
+analysis/src/BDetectorConstruction.o: analysis/src/BDetectorConstruction.cc.o
+.PHONY : analysis/src/BDetectorConstruction.o
+
+# target to build an object file
+analysis/src/BDetectorConstruction.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BDetectorConstruction.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BDetectorConstruction.cc.o
+.PHONY : analysis/src/BDetectorConstruction.cc.o
+
+analysis/src/BDetectorConstruction.i: analysis/src/BDetectorConstruction.cc.i
+.PHONY : analysis/src/BDetectorConstruction.i
+
+# target to preprocess a source file
+analysis/src/BDetectorConstruction.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BDetectorConstruction.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BDetectorConstruction.cc.i
+.PHONY : analysis/src/BDetectorConstruction.cc.i
+
+analysis/src/BDetectorConstruction.s: analysis/src/BDetectorConstruction.cc.s
+.PHONY : analysis/src/BDetectorConstruction.s
+
+# target to generate assembly for a file
+analysis/src/BDetectorConstruction.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BDetectorConstruction.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BDetectorConstruction.cc.s
+.PHONY : analysis/src/BDetectorConstruction.cc.s
+
+analysis/src/BDetectorMessenger.o: analysis/src/BDetectorMessenger.cc.o
+.PHONY : analysis/src/BDetectorMessenger.o
+
+# target to build an object file
+analysis/src/BDetectorMessenger.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BDetectorMessenger.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BDetectorMessenger.cc.o
+.PHONY : analysis/src/BDetectorMessenger.cc.o
+
+analysis/src/BDetectorMessenger.i: analysis/src/BDetectorMessenger.cc.i
+.PHONY : analysis/src/BDetectorMessenger.i
+
+# target to preprocess a source file
+analysis/src/BDetectorMessenger.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BDetectorMessenger.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BDetectorMessenger.cc.i
+.PHONY : analysis/src/BDetectorMessenger.cc.i
+
+analysis/src/BDetectorMessenger.s: analysis/src/BDetectorMessenger.cc.s
+.PHONY : analysis/src/BDetectorMessenger.s
+
+# target to generate assembly for a file
+analysis/src/BDetectorMessenger.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BDetectorMessenger.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BDetectorMessenger.cc.s
+.PHONY : analysis/src/BDetectorMessenger.cc.s
+
+analysis/src/BPrimaryGeneratorAction.o: analysis/src/BPrimaryGeneratorAction.cc.o
+.PHONY : analysis/src/BPrimaryGeneratorAction.o
+
+# target to build an object file
+analysis/src/BPrimaryGeneratorAction.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BPrimaryGeneratorAction.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BPrimaryGeneratorAction.cc.o
+.PHONY : analysis/src/BPrimaryGeneratorAction.cc.o
+
+analysis/src/BPrimaryGeneratorAction.i: analysis/src/BPrimaryGeneratorAction.cc.i
+.PHONY : analysis/src/BPrimaryGeneratorAction.i
+
+# target to preprocess a source file
+analysis/src/BPrimaryGeneratorAction.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BPrimaryGeneratorAction.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BPrimaryGeneratorAction.cc.i
+.PHONY : analysis/src/BPrimaryGeneratorAction.cc.i
+
+analysis/src/BPrimaryGeneratorAction.s: analysis/src/BPrimaryGeneratorAction.cc.s
+.PHONY : analysis/src/BPrimaryGeneratorAction.s
+
+# target to generate assembly for a file
+analysis/src/BPrimaryGeneratorAction.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BPrimaryGeneratorAction.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BPrimaryGeneratorAction.cc.s
+.PHONY : analysis/src/BPrimaryGeneratorAction.cc.s
 
 common/src/KM3ActionInitialization.o: common/src/KM3ActionInitialization.cc.o
 .PHONY : common/src/KM3ActionInitialization.o
@@ -990,6 +1148,8 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... G__Dict"
+	@echo "... BAnalysis"
 	@echo "... OMGsim"
 	@echo "... libOMG"
 	@echo "... AA/src/AAAnalysisManager.o"
@@ -998,6 +1158,9 @@ help:
 	@echo "... AA/src/XPPhSteppingAction.o"
 	@echo "... AA/src/XPPhSteppingAction.i"
 	@echo "... AA/src/XPPhSteppingAction.s"
+	@echo "... G__Dict.o"
+	@echo "... G__Dict.i"
+	@echo "... G__Dict.s"
 	@echo "... K40/src/K40AnalysisManager.o"
 	@echo "... K40/src/K40AnalysisManager.i"
 	@echo "... K40/src/K40AnalysisManager.s"
@@ -1013,6 +1176,18 @@ help:
 	@echo "... WProp/src/WPropSteppingAction.o"
 	@echo "... WProp/src/WPropSteppingAction.i"
 	@echo "... WProp/src/WPropSteppingAction.s"
+	@echo "... analysis/src/BAnalysis.o"
+	@echo "... analysis/src/BAnalysis.i"
+	@echo "... analysis/src/BAnalysis.s"
+	@echo "... analysis/src/BDetectorConstruction.o"
+	@echo "... analysis/src/BDetectorConstruction.i"
+	@echo "... analysis/src/BDetectorConstruction.s"
+	@echo "... analysis/src/BDetectorMessenger.o"
+	@echo "... analysis/src/BDetectorMessenger.i"
+	@echo "... analysis/src/BDetectorMessenger.s"
+	@echo "... analysis/src/BPrimaryGeneratorAction.o"
+	@echo "... analysis/src/BPrimaryGeneratorAction.i"
+	@echo "... analysis/src/BPrimaryGeneratorAction.s"
 	@echo "... common/src/KM3ActionInitialization.o"
 	@echo "... common/src/KM3ActionInitialization.i"
 	@echo "... common/src/KM3ActionInitialization.s"
