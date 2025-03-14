@@ -27,6 +27,7 @@
 
 #include "KM3RunAction.hh"
 #include "KM3AnalysisManager.hh"
+#include "BAnalysis.hh"
 
 #include "G4Run.hh"
 #include "G4UImanager.hh"
@@ -86,6 +87,18 @@ namespace km3net
       G4cout << G4endl;
       G4cout << "End of Run " << r->GetRunID() << G4endl;
     //  G4UImanager::GetUIpointer()->ApplyCommand("/vis/show/view");
+
+    // BAnalysis* ba = BAnalysis::getIt();
+    // if(ba){
+    //   for(auto& pair : ba->eventMeasure_map){
+    //     cout << "\r\033[20C"  << " Event: " << pair.first 
+    //                           << "  --  time: " << pair.second.getEnergy()  
+    //                           << "  --  id: " << pair.second.getID()
+    //                           << endl;
+    //   }
+    // }
+
+
   }
 }
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....

@@ -37,7 +37,6 @@
 #include <G4TransportationManager.hh>
 #include <KM3DetectorConstruction.hh>
 
-
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 using namespace std;
@@ -185,7 +184,6 @@ namespace km3net
     //   fTEvent->Fill ();
     // }
 
-    fGenEventTree->Fill();
     KM3AnalysisManager::EndOfEvent ();
     fTotalTime=.0;
     fEnergy=0;

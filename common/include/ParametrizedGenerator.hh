@@ -19,11 +19,11 @@ namespace km3net
 
    // const std::string generator[] = {"GEANT4", "CORSIKA", "PYTHIA", "OTHER"};
 
-    class ParametrizedGenerator
+    class ParametrizedGenerator : public KM3PrimaryGeneratorAction
     {    
         
     public:
-        enum class gen_mode {GEANT4, CORSIKA, PYTHIA, FILE, OTHER};
+        enum class gen_mode {GEANT4, GAISSER, CORSIKA, PYTHIA, FILE, OTHER};
         ~ParametrizedGenerator();
 
         void init(const gen_mode generator);
@@ -32,13 +32,9 @@ namespace km3net
             particle_name = p_name;
         }
 
-        void setGenerator(gen_mode gen){
-            generator = gen;
-        }
+        void setGenerator(gen_mode gen){ generator = gen;}
 
-        gen_mode getGenerator(){
-            return generator;
-        }
+        gen_mode getGenerator(){ return generator; }
 
         std::string getGeneratorName();
 
@@ -58,7 +54,10 @@ namespace km3net
 
         G4ThreeVector GenerateMuonDirection(std::string);
         G4double GenerateMuonEnergy(double, double, float);
+        static double MuonFlux(double*, double*);
         G4ThreeVector GetRandomPointOnBoxFace(G4VPhysicalVolume*, G4String);
+
+        void GeneratePrimaries(G4Event* event);
 
 
     private:

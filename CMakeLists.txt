@@ -2,9 +2,8 @@
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 project(OMGsim)
 
-
 # By Bouta basically for Qt5
-
+#set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -94,6 +93,16 @@ include_directories (${headers} ${ROOT_INCLUDE_DIRS} ${Geant4_INCLUDE_DIRS})
 if (DEFINED ENV{X11HEADERS_PATH})
     include_directories (/opt/X11/include)
 endif()
+
+
+set(LINKDEF analysis/include/LinkDef.hh)
+
+file(GLOB ba_sources analysis/src/[a-zA-Z0-9]*.cc)
+file(GLOB ba_headers analysis/include/*.hh)
+
+ROOT_GENERATE_DICTIONARY(G__Dict ${ba_headers} LINKDEF)
+
+
     
 
 #bstr: set the libonfig include dir and create linker command. /usr/local is already included,
@@ -111,7 +120,7 @@ endif(DEFINED ENV{LIBCONFIG_ROOT})
 
 
 # (5) set the needed cflags
-SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -pedantic -Wno-non-virtual-dtor -Wno-long-long -Wwrite-strings -Wpointer-arith -Woverloaded-virtual -Wno-variadic-macros -Wshadow -pipe -std=c++17 -DPROJECT_SOURCE_DIR=\\\"${PROJECT_SOURCE_DIR}\\\" -DGIT_VERSION=\\\"${GIT_VERSION}\\\" -DBUILD_DATE=\"${BUILD_DATE}\"")
+SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -W -Wall -pedantic -Wno-non-virtual-dtor -Wno-long-long -Wwrite-strings -Wpointer-arith -Woverloaded-virtual -Wno-variadic-macros -Wshadow -pipe -std=c++17 -DPROJECT_SOURCE_DIR=\\\"${PROJECT_SOURCE_DIR}\\\" -DGIT_VERSION=\\\"${GIT_VERSION}\\\" -DBUILD_DATE=\"${BUILD_DATE}\"")
 
 
 
@@ -143,21 +152,24 @@ SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__CXX_MIN_VERSION=${CMAKE_CXX_COMPILE
 # (6) finish with all the binaries
 if(ENABLE_TESTING)
   add_library(libOMG SHARED ${sources})
-  target_link_libraries(libOMG ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB})
+  add_library(BAnalysis SHARED ${ba_sources} G__Dict.cxx)
+  target_link_libraries(libOMG BAnalysis  ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB})
   SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DENABLE_TESTING=1")
   foreach(aprog IN LISTS TESTS)
     get_filename_component(aprogname ${aprog} NAME_WE)
     add_executable(${aprogname} ${aprog} ${headers} ${test_headers} ${test_sources})
-    target_link_libraries(${aprogname} libOMG ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB})
+    target_link_libraries(${aprogname} libOMG BAnalysis ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB})
   endforeach ()
 else(ENABLE_TESTING)
   add_library(libOMG SHARED ${sources})
-  target_link_libraries(libOMG ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB})
+  add_library(BAnalysis SHARED ${ba_sources} G__Dict.cxx)
+  target_link_libraries(libOMG BAnalysis ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB})
   foreach(aprog IN LISTS PROGRAMS)
     get_filename_component(aprogname ${aprog} NAME_WE)
     add_executable(${aprogname} ${aprog} ${headers})
-    target_link_libraries(${aprogname} libOMG ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB})
+    target_link_libraries(${aprogname} libOMG BAnalysis ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB})
   endforeach ()
 endif(ENABLE_TESTING)
 
 file(COPY ${PROJECT_SOURCE_DIR}/scripts DESTINATION ${PROJECT_BINARY_DIR})
+message("libBAnalysis: ${BAnalysis}")

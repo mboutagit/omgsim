@@ -108,6 +108,8 @@ namespace km3net
     bool fPolarity =0;
     unsigned char fLimit=0;
 
+    friend class BAnalysis;
+
   };
 
 }

@@ -98,7 +98,7 @@
 # /vis/sceneHandler/attach
 
 #/event/verbose 1
-/run/beamOn 2500
+/run/beamOn 1
 #/run/beamOn 5000
 # /run/beamOn 5000
 # /run/beamOn 5000
