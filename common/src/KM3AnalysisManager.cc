@@ -94,9 +94,6 @@ namespace km3net
     fTFastAnalysis = new TTree("FastAnalysis","Data used for very fast analysis.");
     fTFastAnalysis->Branch("PhotonReach",&fNbOM,"NbOM/l:NbPhoto");
 
-    fGenEventTree = new TTree("fGenEventTree","Data used for event generation.");
-    fGenEventTree->Branch("Gen",&fGenPPDGID,"GenPPDGID/I:GenEvtID/i:GenXPos/F:GenYPos:GenZPos:GenXDir:GenYDir:GenZDir:GenTheta:GenPhi:GenEnergy");
-
     //ANTARES evt-like format output
     if (fEvtOutput) {
         evt_stream.open("output.evt");
@@ -266,21 +263,6 @@ const std::string KM3AnalysisManager::currentDateTime() {
     fVertexDirZ = vertexDir.z ();
 
     fVertexEnergy = EV->GetPrimaryVertex ()->GetPrimary ()->GetKineticEnergy ();
-
-    G4PrimaryParticle*  particle = EV->GetPrimaryVertex ()->GetPrimary ();
-    
-    fGenPPDGID = particle->GetPDGcode();
-    fGenEvtID  = EV->GetEventID();    
-    fGenXPos   = EV->GetPrimaryVertex ()->GetPosition().getX() / mm;
-    fGenYPos   = EV->GetPrimaryVertex ()->GetPosition().getY() / mm;
-    fGenZPos   = EV->GetPrimaryVertex ()->GetPosition().getZ() / mm;
-    fGenXDir   = particle->GetMomentum().unit().getX() / mm;
-    fGenYDir   = particle->GetMomentum().unit().getY() / mm;
-    fGenZDir   = particle->GetMomentum().unit().getZ() / mm;
-    fGenTheta  = particle->GetMomentum().theta() / deg;
-    fGenPhi    = particle->GetMomentum().phi() /deg;
-    fGenEnergy = particle->GetTotalEnergy() / MeV;
-
   }
 
   void KM3AnalysisManager::SetEnergy (double E)

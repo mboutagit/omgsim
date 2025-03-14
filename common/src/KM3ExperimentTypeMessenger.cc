@@ -28,6 +28,7 @@
 
 #include <KM3ExperimentTypeMessenger.hh>
 #include <KM3DetectorConstruction.hh>
+#include <BDetectorConstruction.hh>
 
 #include "WPropAnalysisManager.hh"
 #include "WPropSteppingAction.hh"
@@ -48,6 +49,10 @@
 #include <KM3RunAction.hh>
 #include <KM3EventAction.hh>
 #include <KM3TrackingAction.hh>
+
+#include "BAnalysis.hh"
+#include "ParametrizedGenerator.hh"
+#include "BPrimaryGeneratorAction.hh"
 
 #include <iostream>
 
@@ -113,7 +118,11 @@ namespace km3net
         {
 
           //G4cout << "####### Starting: XP command found #######" << G4endl;
-          fDetector = KM3DetectorConstruction::GetIt ();
+          if (newValue == "BA")
+            fDetector = BDetectorConstruction::GetIt();
+          else
+            fDetector = KM3DetectorConstruction::GetIt ();
+          
           frunManager = new KM3RunManager;
 
           // set mandatory initialization classes
@@ -157,6 +166,11 @@ namespace km3net
               G4cout << "------------- Using AA as new value!! -------------" << G4endl;
               AAAnalysisManager::getIt ();
             }
+
+            else if (newValue.substr (0,2) == "BA"){
+              BAnalysis::getIt();
+            }
+
           ////TODO
 
           if (!fSteppingAction)
@@ -165,7 +179,11 @@ namespace km3net
             fTrackingAction=new KM3TrackingAction ();
 
           KM3AnalysisManager::getIt ()->Init ();
-          KM3PrimaryGeneratorAction* PGA=new KM3PrimaryGeneratorAction;
+          //KM3PrimaryGeneratorAction* PGA = new KM3PrimaryGeneratorAction;
+         // if(newValue == "BA"){
+            BPrimaryGeneratorAction* PGA = BPrimaryGeneratorAction::getInstance();
+          //}
+          //KM3PrimaryGeneratorAction* PGA = new KM3PrimaryGeneratorAction;
           PGA->SetProducingVolumeRadius((fDetector)->GetTargetFullLength ());
           frunManager->SetUserAction(PGA);
           frunManager->SetUserInitialization(fDetector);

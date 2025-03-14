@@ -40,7 +40,11 @@
 
 #include <KM3ParametrizedVolume.hh>
 
+//#include "BDetectorConstruction.hh"
+
 //#include "KM3MagneticField.hh"
+
+class BDetectorConstruction;
 
 namespace libconfig
 {
@@ -64,6 +68,8 @@ namespace km3net
   class KM3DetectorMessenger;
   class KM3Material;
 
+  class BDetectorConstruction;
+
   class KM3DetectorConstruction: public G4VUserDetectorConstruction, public KM3ParametrizedVolume {
   public:
     static KM3DetectorConstruction* GetIt ();
@@ -72,9 +78,10 @@ namespace km3net
     ~KM3DetectorConstruction();
 
     static KM3DetectorConstruction *fInstance;
+    friend class BDetectorConstruction;
 
     //exeption in the KM3ParametrizedVolume familly, no ConstructTheVolume and no construct.
-    virtual G4LogicalVolume* Construct (const VolumeParameters* = NULL) {return 0;}
+    virtual G4LogicalVolume* Construct_ (const VolumeParameters* = NULL) {return 0;}
     virtual KM3Volume* ConstructTheVolume (VolumeParameters*) {return 0;}
 
   public:
@@ -189,6 +196,8 @@ namespace km3net
     G4LogicalVolume* genLogic    = nullptr;   
     G4VPhysicalVolume* genPhysic = nullptr;
 
+    G4ThreeVector targetPos;
+
 
   protected:
 
@@ -212,6 +221,7 @@ namespace km3net
     G4double fTargetRadius;           // Radius of the target
     G4double fDetectorThickness;      // Thickness of the Detector
     G4ThreeVector globpos; // vector that shifts storey with PMT to center of the target
+    
 
     G4Region* targetRegion;
     G4Region* detectorRegion;
@@ -238,6 +248,8 @@ namespace km3net
 
     std::map <std::string, G4VPhysicalVolume*>  fPlacedVolumeDict;
     std::map <std::string, std::string>         fBorderSurfaceList;
+
+    friend class BDetectorConstruction;
 
   };
 }

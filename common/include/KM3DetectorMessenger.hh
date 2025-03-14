@@ -31,18 +31,22 @@
 #include "globals.hh"
 #include "G4UImessenger.hh"
 
+//#include "BDetectorConstruction.hh"
+
 
 class G4UIdirectory;
 class G4UIcmdWithAString;
 class G4UIcmdWithABool;
 class G4UIcmdWithADoubleAndUnit;
 
+//class BDetectorConstruction;
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 namespace km3net
 {
 
   class KM3DetectorConstruction;
+  class BDetectorConstruction;
 
   class KM3DetectorMessenger: public G4UImessenger
   {
@@ -73,6 +77,8 @@ namespace km3net
     G4UIcmdWithAString*        DataFilesSources;
     G4UIcmdWithAString*        ParametersList;
     G4UIcmdWithADoubleAndUnit* WorldLengthCmd;
+
+    friend class BDetectorMessenger;
 
   };
 }

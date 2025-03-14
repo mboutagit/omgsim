@@ -6,7 +6,6 @@
 /KM3/det/DetectorTypeName LactelOneCell #KM3K40
 /KM3/det/DetInit Lactel
 /KM3/det/setMeanCapRadius 5 cm
-/KM3/PhysicsList/Verbose 0
 
 #/PMTOpticalModel/luxlevel 0
 
@@ -28,8 +27,6 @@
 /process/verbose 0 
 /run/verbose 0
 # /gps/verbose 0
-/vis/verbose 0
-
 # /gps/pos/type Volume
 # /gps/pos/shape Sphere
 # /gps/pos/radius 3 m   # Must fit inside the confining volume
@@ -59,16 +56,20 @@
 #/gps/ene/mono  5 MeV
 #LED 470 nm
 
-    # /vis/open OGL #HepRepXML
-    # /vis/verbose 0
-    # /vis/viewer/set/style wireframe
-    # /vis/drawVolume
-    # /vis/viewer/set/background 1.0 1.0 1.0 0.2
-    # /vis/viewer/zoom 1
-    # /vis/scene/add/axes 0 0 0 1 m
-    # /vis/viewer/set/viewpointThetaPhi 90 0
-    # /vis/viewer/set/upVector 0 0 1
-    # /vis/viewer/set/targetPoint 0 0 -50 cm
+/run/initialize
+
+    /vis/open OGL 600x600-0+0 #HepRepXML
+    /vis/viewer/set/style wireframe
+    /vis/drawVolume
+    /vis/viewer/set/background 1.0 1.0 1.0 0.2
+    /vis/viewer/zoom 1
+    /vis/scene/add/axes 0 0 0 1 m
+    /vis/viewer/set/viewpointThetaPhi 90 0 deg
+    /vis/viewer/set/upVector 0 0 1
+    /vis/viewer/set/targetPoint 0 0 -50 cm
+
+    /vis/viewer/set/autoRefresh false
+    /vis/verbose errors
    
 
 # #/vis/viewer/set/viewpointThetaPhi 60 45
@@ -98,7 +99,7 @@
 # /vis/sceneHandler/attach
 
 #/event/verbose 1
-/run/beamOn 2500
+/run/beamOn 1
 #/run/beamOn 5000
 # /run/beamOn 5000
 # /run/beamOn 5000

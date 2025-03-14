@@ -176,7 +176,7 @@ int main(int argc_,char** argv_)
     CLHEP::HepRandom::getTheEngine()->setSeeds(seeds,-1);
     CLHEP::HepRandom::showEngineStatus();
 
-    KM3ExperimentTypeMessenger* ketm=KM3ExperimentTypeMessenger::GetIt ();
+    KM3ExperimentTypeMessenger* ketm = KM3ExperimentTypeMessenger::GetIt ();
   
     G4UIsession* session=0;
     G4UIsession* win32session=0;

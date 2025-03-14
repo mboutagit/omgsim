@@ -106,7 +106,13 @@
 			"cfenv": "cpp",
 			"typeinfo": "cpp",
 			"valarray": "cpp",
-			"variant": "cpp"
-		}
+			"variant": "cpp",
+			"collection_proxies.C": "cpp",
+			"columns": "cpp"
+		},
+		"C_Cpp.default.includePath": [
+			"/home/mbouta/work/cppm/lactel/trunk/build/include",
+			"/home/mbouta/work/cppm/lactel/trunk/analysis/include"
+		]
 	}
 }

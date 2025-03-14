@@ -249,7 +249,7 @@ namespace km3net
    // G4cout << "create logic target" << G4endl;
 
     logicTarget = new G4LogicalVolume(solidTarget,
-      myVacuum, "Target", 0, 0, 0);
+      TargetMater, "Target", 0, 0, 0);
 
     
     //genSolid = new G4Sphere("genSolid", 0, fWorldLength, 0, twopi, 0, pi/2);
@@ -364,7 +364,7 @@ namespace km3net
     
 
     physiTarget = new G4PVPlacement(targetRot, 
-                                    targetPosition, 
+                                    targetPos, 
                                     logicTarget, 
                                     "Target",
                                     logicWorld, 

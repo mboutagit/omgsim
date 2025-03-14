@@ -26,7 +26,7 @@ namespace km3net
         if (!instance) {  // Only create if not already created
             instance = new ParametrizedGenerator();
         }
-        return instance;
+        return (ParametrizedGenerator*) instance;
     }
 
     ParametrizedGenerator::ParametrizedGenerator() : generator(ParametrizedGenerator::gen_mode::GEANT4), particle_name("muons") {
@@ -102,13 +102,16 @@ namespace km3net
                     myPhysicVolume = physVol;  // Found the volume
                 }
             }
-            if(!myPhysicVolume)
-              return;
-            
-            G4Box* genVolume = dynamic_cast<G4Box*> (det->genSolid);
-            if(!genVolume){
-              throw("KM3PrimaryGeneratorAction::InitializeCustumMuonType: Generation volume is not defined");
+            if(!myPhysicVolume){
+                throw("KM3PrimaryGeneratorAction::InitializeCustumMuonType: Generation physical volume is not defined");
+                return;
             }
+              
+            
+            // G4Box* genVolume = dynamic_cast<G4Box*> (det->genSolid);
+            // if(!genVolume){
+            //   throw("KM3PrimaryGeneratorAction::InitializeCustumMuonType: Generation volume is not defined");
+            // }
           
             pga->fTargetRadius = det->GetTargetFullLength();
             pga->fGenVolumeRaduis = det->GetWorldFullLength();
@@ -269,6 +272,48 @@ namespace km3net
 
         // Apply the box's translation (convert to global coordinates)
         return G4ThreeVector(x, y, z) + boxPos;
+    }
+
+
+    // Gaisser's formula modified for altitude
+    double ParametrizedGenerator::MuonFlux(double *x, double *par) 
+    {
+        const double epsilon_pi = 115.0; 
+        const double epsilon_K  = 850.0; 
+        const double H = 6.3;            
+        const double norm = 0.14;        
+    
+        double E_mu = x[0];   // Muon energy (GeV)
+        double theta = par[0]; // Zenith angle (radians)
+        double h = par[1];    // Altitude (km)
+
+        double flux = norm * pow(E_mu, -2.7) *
+                    (1.0 / (1.1 + (E_mu * cos(theta) / epsilon_pi)) +
+                   0.054 / (1.1 + (E_mu * cos(theta) / epsilon_K)));
+
+        flux *= exp(-h / H);  // Apply altitude correction
+
+        return flux;
+    }
+
+    void ParametrizedGenerator::GeneratePrimaries(G4Event* event){
+
+        if(fGunType == 3){
+            //InitializeCustumMuonType();
+            ParametrizedGenerator* pg = ParametrizedGenerator::getInstance();
+            if(!pg)
+              return;
+            pg->setEventID(event->GetEventID());
+            //pg->writeGenData(true);
+            pg->init(ParametrizedGenerator::gen_mode::GEANT4);
+            ((G4ParticleGun*)pg->getPGA()->particleGun)->GeneratePrimaryVertex(event);
+    
+            return;
+          }
+          else{
+            std::cerr << "ParametrizedGenerator::GeneratePrimaries: fGunType not set!" << endl;
+            exit(-1);
+          }
     }
 
 } // namespace genPar

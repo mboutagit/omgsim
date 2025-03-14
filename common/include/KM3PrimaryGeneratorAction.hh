@@ -46,7 +46,6 @@
 
 #include <vector>
 
-// #include "ParametrizedGenerator.hh"
 
 class G4GeneralParticleSource;
 class G4ParticleGun;
@@ -57,6 +56,7 @@ class G4VPrimaryGenerator;
 class TH1F;
 
 class ParametrizedGenerator;
+class BPrimaryGeneratorAction;
 
 namespace km3net
 {
@@ -93,6 +93,7 @@ namespace km3net
       std::vector <float>         fLEDAngle;
 
       friend class ParametrizedGenerator;
+      friend class BPrimaryGeneratorAction;
 
     #if __GNUC__>=5
         ::TH1F* fhLED;
