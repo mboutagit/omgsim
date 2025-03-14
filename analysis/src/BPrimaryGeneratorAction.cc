@@ -259,6 +259,13 @@ namespace km3net
 
 
 
+<<<<<<< HEAD
+=======
+    // Physical constants
+// const double pi = M_PI;
+// const double g = 9.81;          // Gravity (m/s²)
+
+>>>>>>> lactel/master
 // Muon flux parameterization (Gaisser's formula)
 double BPrimaryGeneratorAction::muon_flux(double E, double theta, double altitude) {
     double cos_theta = cos(theta);
