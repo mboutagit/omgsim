@@ -130,7 +130,14 @@ namespace km3net
 
           // set mandatory user action class
 
-          frunManager->SetUserAction(new KM3RunAction);
+          if(newValue == "BA"){
+            frunManager->SetUserAction(BAnalysis::getIt());
+          }
+          else{
+            frunManager->SetUserAction(new KM3RunAction);
+          }
+
+
           frunManager->SetUserAction(new KM3EventAction);
 
           //first checking the new method, then for retro-compality the old ones

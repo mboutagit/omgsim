@@ -2,6 +2,8 @@
 #include "AAAnalysisManager.hh"
 #include "globals.hh"
 #include "CLHEP/Units/PhysicalConstants.h"
+#include "G4Run.hh"
+#include "KM3RunAction.hh"
 
 #include "TF1.h"
 #include "TGraph.h"
@@ -10,7 +12,7 @@ using namespace std;
 namespace km3net
 {
     
-    class BAnalysis : public AAAnalysisManager
+    class BAnalysis : public AAAnalysisManager, public KM3RunAction
     {
         public:
 
@@ -75,16 +77,29 @@ namespace km3net
                 ClassDef(Measure, 1);
             };
 
-            class Event
-            {
-                private:
-                    unsigned int event_ID;
-                    float event_energy;
+            struct Event
+            {                    
+                    // unsigned int event_ID;
+                    // float event_energy;
+                    int  event_id = -1;
+                    int runNb = -1;
+                    uint nhit=0;
+                    float tota=0.;
+                    float tmin=0.;
+                    float tmax=0.;
 
-                    friend class BAnalysis;
-                public:
-                    Event(){};
-                    ~Event(){};
+                    bool isDetected=false; // mainly used for Run managing
+
+                //     friend class BAnalysis;
+                // public:
+                //     Event(){};
+                //     ~Event(){};
+            };
+
+            struct Run {
+                int runNb = -1;
+                uint nGenEvent = 0;
+                uint nDetEvent = 0;
             };
               
             MeasureParameters fMeasure_parameters;
@@ -92,8 +107,10 @@ namespace km3net
             std::map<unsigned int, Event> fEvent_map;
             std::multimap<unsigned int, Measure> eventMeasure_map;
 
-            MeasureParameters getMeasurePars();
+            MeasureParameters getMeasurePars(); 
             Measure getMeasure();
+            Event fEvent;
+            Run fRun;
             
         protected:
             BAnalysis();
@@ -106,13 +123,30 @@ namespace km3net
             virtual void Init(std::string FR = "");
             virtual void AddDetectedParticule(const KM3TrackInformation* info, unsigned char LIM);
 
+            void BeginOfRunAction(const G4Run*);
+            void EndOfRunAction(const G4Run*);
+
             TTree* genTree;
+            TTree* runTree;
+            TTree* bEventTree;
             GenerationParameters genPars;
 
         public:
             static BAnalysis* getIt();
 
         ClassDef(BAnalysis, 1);
+
+        
     };
+
+    // struct Event
+    // {
+    //     uint event_id=0;
+    //     uint nhit=0;
+    //     float tota=0.;
+    //     float tmin=0.;
+    //     float tmax=0.;
+    // };
+    
     
 } // namespace km3net

@@ -60,7 +60,7 @@ namespace km3net
     G4int RunN = aRun->GetRunID();
     //if ( RunN % 1000 == 0 )
       G4cout << G4endl;
-      G4cout << "### - Run : " << RunN << G4endl;
+      cout << endl << "### - Run : " << RunN << endl;
 
     if (G4VVisManager::GetConcreteInstance())
       {
@@ -82,6 +82,7 @@ namespace km3net
     // Get the analysis manager
     //KM3AnalysisManager* analysis = KM3AnalysisManager::getInstance();
     //analysis->EndOfRun();
+    G4cout << "End of Run ------ " << r->GetRunID() << G4endl;
 
     if (G4VVisManager::GetConcreteInstance())
       G4cout << G4endl;

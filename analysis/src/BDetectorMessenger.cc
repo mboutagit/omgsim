@@ -51,7 +51,7 @@ namespace km3net
             myDetector->SetTargetLength(targetLength_cmd->GetNewDoubleValue(value));
         }
         else if(cmd == targetType_cmd){
-            cout << "\r\033[20C" << "Value set: " << targetLength_cmd->GetNewDoubleValue(value) << endl;
+            cout << "\r\033[20C" << "Target type set to: " << value << endl;
             BDetector->setTargetType(value);
         }
     }

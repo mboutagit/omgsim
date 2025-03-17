@@ -68,8 +68,8 @@ namespace km3net
 
   void KM3EventAction::BeginOfEventAction(const G4Event* Ev)
   {
-    if(Ev->GetEventID() % 100 == 1)
-      cout << "\r\033[20C" << "Start of event: "<< Ev->GetEventID();
+    if(Ev->GetEventID() % 100 == 0)
+      cout << "\r\033[15C" << "Start of event: "<< Ev->GetEventID() << endl;
       cout.flush ();
     KM3AnalysisManager::getIt()->StartOfEvent (Ev);
   }

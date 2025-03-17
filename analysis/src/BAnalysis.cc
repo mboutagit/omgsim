@@ -138,8 +138,32 @@ namespace km3net
     void BAnalysis::Init(std::string rf){
         AAAnalysisManager::Init(rf);
         genTree = new TTree("Gen", "generation parameters");
+        runTree = new TTree("Run", "Run parameters");
+        bEventTree = new TTree("BEvent", "BEvent parameters");
+        
         genTree->Branch("gen", &genPars);
+        
         fTEvent->Branch("measure", &fMeasure);
+
+        bEventTree->Branch("Event", &fEvent);
+        
+        runTree->Branch("Run", &fRun);
+    }
+
+    void BAnalysis::BeginOfRunAction(const G4Run* run){
+        fRun.runNb = run->GetRunID();
+        cout << endl << "\r\033[10C" << "Begin of run: " << run->GetRunID() << endl;
+    }
+
+    void BAnalysis::EndOfRunAction(const G4Run* run){
+       // fRun.runNb = run->GetRunID();
+        runTree->Fill();
+
+        fRun.nDetEvent = 0;
+        fRun.nGenEvent = 0;
+        fRun.runNb = -1;
+
+        cout << endl << "\r\033[10C" << "End of run: " << run->GetRunID() << endl;
     }
 
 
@@ -160,14 +184,31 @@ namespace km3net
         genPars.fGenEnergy = particle->GetTotalEnergy() / MeV;
 
         genTree->Fill();
+
+        fEvent.event_id = EV->GetEventID();
     }
     void BAnalysis::EndOfEvent() {
+
+        fRun.nGenEvent += 1; // add the event to the run 
+        if(fEvent.isDetected == true)
+            fRun.nDetEvent += 1; // add the event is detected
 
     //    genTree->Fill();
         AAAnalysisManager::EndOfEvent();
         // for(auto& key : eventMeasure_map){
         //  //   cout << "\r\033[20C" << "Event ID: " << key.first << "  Hit Energy: " << key.second.fEnergy << endl;
         // }
+
+        
+
+        bEventTree->Fill();
+
+        fEvent.event_id = 0;
+        fEvent.isDetected = false;
+        fEvent.nhit = 0;
+        fEvent.tmax = 0;
+        fEvent.tmin = 0;
+        fEvent.tota = 0;
     }
 
     BAnalysis::MeasureParameters BAnalysis::getMeasurePars(){
@@ -199,6 +240,20 @@ namespace km3net
 
         fMeasure.fId += 1;
         measure.fId += 1;
+
+        fEvent.nhit+=1;
+        if(fEvent.tmin > info->GetOriginalTime())
+            fEvent.tmin = info->GetOriginalTime();
+        
+        if(fEvent.tmax < info->GetOriginalTime())
+            fEvent.tmax = info->GetOriginalTime();
+
+        fEvent.tota += info->GetOriginalEnergy() / CLHEP::eV;
+        
+        if(fEvent.isDetected == false)
+            fEvent.isDetected = true;
+
+         fEvent.runNb = fRun.runNb; // OK as fRun.runNb is set in the start of the run
     } 
 
     void BAnalysis::Write(){
@@ -206,6 +261,9 @@ namespace km3net
         fMeasure_parameters.getQEVsLambda()->Write();
        if(fMeasure_parameters.getMuonFlux())
            fMeasure_parameters.getMuonFlux()->Write();
+
+        // genTree->Write();
+        // runTree->Write();
         AAAnalysisManager::Write();
     }
 

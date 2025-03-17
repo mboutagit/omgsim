@@ -25,6 +25,9 @@
 //
 #include "KM3RunManager.hh"
 #include "G4UImanager.hh"
+#include "G4UIExecutive.hh"
+
+
 #ifdef G4UI_USE_GAG
 #include "G4UIGAG.hh"
 #endif
@@ -41,6 +44,13 @@
 #ifdef G4UI_USE_Qt
 #include "G4UIQt.hh" // by Bouta
 #endif
+
+#ifdef G4MULTITHREADED
+#include "G4MTRunManager.hh"
+#else
+#include "G4RunManager.hh"
+#endif
+//#include "G4RunManager.hh"
 
 
 #include "KM3PhysicsList.hh"
@@ -73,7 +83,7 @@ int main(int argc_,char** argv_)
 
 
   bool debug = false;
-  bool bsession = false;
+  bool session = false;
   bool keepall = false;
   bool analyse_all = false;
   bool evt_output = false;
@@ -91,7 +101,7 @@ int main(int argc_,char** argv_)
             }
           else if ((option == "-s") || (option == "--session"))
             {
-              bsession = true;
+              session = true;
             }
           else if ((option == "-ka") || (option == "--keep-all"))
             {
@@ -178,21 +188,23 @@ int main(int argc_,char** argv_)
 
     KM3ExperimentTypeMessenger* ketm = KM3ExperimentTypeMessenger::GetIt ();
   
-    G4UIsession* session=0;
-    G4UIsession* win32session=0;
-    G4UIsession* sessionQt=0;
-    G4VisManager* visManager=NULL;
-    if (bsession)
+    //G4UIsession* session=0;
+    // G4UIsession* win32session=0;
+    // G4UIsession* sessionQt=0;
+     G4VisManager* visManager=NULL;
+    if (true)
       {
         //session = new G4UIQt(0, argv_); // by Bouta it was: new G4UIXm(0,argv_);//new G4UIterminal();
         //session = new G4UIXm(0,argv_);//new G4UIterminal()
         //sessionQt = new G4UIQt(0, argv_);
         //win32session = new G4UIWin32(0, argv_);
         // visualization manager
+
         visManager = new G4VisExecutive;
         visManager->Initialize();
       //  visManager->SessionStart();
       }
+
 
     // Initialize G4 kernel
     // do this at run time so the geometry/physics can be changed
@@ -201,24 +213,48 @@ int main(int argc_,char** argv_)
     // get the pointer to the User Interface manager
     G4UImanager* UI = G4UImanager::GetUIpointer();
     G4String command = "/control/execute ";
-    cout << "and here ? !! " << endl; // Bouta
 
-    if (session)   // Define UI session for interactive mode.
-      {
-        cout << "Session OK! ..." << endl;
-        UI->ApplyCommand(command+MacFileName);
-        cout << "Starting session " << endl;
-         session->SessionStart();
-        // sessionQt->SessionStart();
-        cout << "toward deleting session " << endl;
-        delete session;
-      }
-    else           // Batch mode
-      {
-        cout << "Session NOT OK! ..." << endl;
-        UI->ApplyCommand(command+MacFileName);
-        //session->SessionStart ();
-      }
+  ///////////////////////////////////////////////////////////////////////////////////
+
+    G4UIExecutive* ui = 0;
+    if ( argc_ >= 1 ) {
+      ui = new G4UIExecutive(argc_, argv_);
+    }
+
+
+    if ( ! session ) { 
+      // batch mode
+      //G4String fileName = argv_[1];
+      cout << "\r\033[20C" << "Without session" << endl;
+      UI->ApplyCommand(command+MacFileName);
+    }
+    else { 
+      // interactive mode
+      cout << "\r\033[20C" << "With session -- " << endl;
+      UI->ApplyCommand(command+MacFileName);
+      ui->SessionStart();
+      delete ui;
+    }
+/////////////------------------------/////////////////////////////////
+
+    // if (session)   // Define UI session for interactive mode.
+    //   {
+    //     cout << "Session OK! ..." << endl;
+    //     UI->ApplyCommand(command+MacFileName);
+    //     cout << "Starting session " << endl;
+    //      session->SessionStart();
+    //     // sessionQt->SessionStart();
+    //     cout << "toward deleting session " << endl;
+    //     delete session;
+    //   }
+    // else           // Batch mode
+    //   {
+    //     cout << "Session NOT OK! ..." << endl;
+    //     UI->ApplyCommand(command+MacFileName);
+    //     //session->SessionStart ();
+    //   }
+
+ /////////////////////////////////////////////////////////////////////////////////////////////////////
     //analysis->Write ();
     //CLHEP::HepRandom::showEngineStatus();
     //CLHEP::HepRandom::getTheTableSeeds(table, 0);
@@ -231,8 +267,13 @@ int main(int argc_,char** argv_)
         cout << "Deleting visManager !! " << endl;
         delete visManager;
       }
+      if(ui){
+        delete ui;
+      }
+
+
     std::default_random_engine generator;
-    std::uniform_real_distribution<double> distribution(-17*2.54/2,17*2.54/2);
+    std::uniform_real_distribution<double> distribution(-17*2.54/2, 17*2.54/2);
 
     //delete ger;
     delete ketm;

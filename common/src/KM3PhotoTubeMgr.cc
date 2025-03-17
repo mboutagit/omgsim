@@ -166,7 +166,7 @@ namespace km3net
 
   KM3PhotoTubeMgr::KM3PhotoTube::KM3PhotoTube (PhotoTubeParameters* PTP): KM3ParametrizedVolume::KM3Volume(PTP)
   {
-    cout << "creating it " << PTP->Prefix << endl;
+    cout << "KM3PhotoTubeMgr::KM3PhotoTube::KM3PhotoTube: creating it " << PTP->Prefix << endl;
   }
 
   KM3PhotoTubeMgr::KM3PhotoTube::~KM3PhotoTube ()
