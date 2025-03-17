@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "WSL",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/g++",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/include",
+                "/usr/local/include",
+                "/home/mbouta/work/cppm/lactel/geant4.10.01.p03-install/include/Geant4",
+                "/home/mbouta/work/cppm/lactel/root_source/install/include"
+            ],
+            "cStandard": "c17",
+            "cppStandard": "c++17"
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": []
+        }
+    ],
+    "version": 4
+}

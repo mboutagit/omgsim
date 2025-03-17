@@ -1,0 +1,104 @@
+stages:
+    - preparebase
+    - pages
+    - build
+    - test
+    - docker
+    - singularity
+
+variables:
+    # recursive should work here, but gitlab-runner does not pull the latest remote
+    # for submodules: https://gitlab.com/gitlab-org/gitlab-runner/issues/3011
+    GIT_SUBMODULE_STRATEGY:         recursive
+    DOCKER_DRIVER: overlay2
+
+    BASE_IMAGE: git.km3net.de:4567/simulation/omgsim/base_container
+    CONTAINER_TEST_IMAGE: git.km3net.de:4567/simulation/omgsim:$CI_COMMIT_REF_SLUG
+    CONTAINER_RELEASE_IMAGE: git.km3net.de:4567/simulation/omgsim:$CI_COMMIT_TAG
+    CONTAINER_LATEST_IMAGE: git.km3net.de:4567/simulation/omgsim:latest
+    SINGULARITY_RELEASE_IMAGE: omgsim_${CI_COMMIT_TAG}.sif
+
+preparebase:
+    image: docker:stable
+    stage: preparebase
+    services:
+        - docker:dind
+    script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build --pull -t $BASE_IMAGE -f DockerfileBase .
+    - docker push $BASE_IMAGE
+    tags:
+        - docker
+    when: manual
+
+pages:
+ image: docker.km3net.de/base/centos7-bundle:2021.03.01
+ stage: pages
+ script:
+    - doxygen documentation/config.dox
+    - mkdir -p public
+    - mv documentation/* public/
+ artifacts:
+     paths:
+         - public
+
+
+
+build:
+    image: ${BASE_IMAGE}
+    stage: build
+    script:
+        - rm -rf build
+        - mkdir build
+        - cd build
+        - cmake ..
+        - make
+    cache:
+        untracked: true
+    artifacts:
+      paths:
+          - build
+      expire_in: 1 week
+
+
+test:
+    image: ${BASE_IMAGE}
+    stage: test
+    script:
+        - PATH=`pwd`/build:${PATH}
+        - ./scripts/test.sh
+    dependencies:
+        - build
+
+
+docker:
+    image: docker:stable
+    services:
+        - docker:dind
+    stage: docker
+    script:
+         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+         - docker build --pull -t $CONTAINER_RELEASE_IMAGE .
+         - docker push $CONTAINER_RELEASE_IMAGE
+    tags:
+        - docker
+    only:
+        - tags
+        
+singularity:
+    image: docker.km3net.de/base/singularity:3.6.2
+    stage: singularity
+    script:
+        - export SINGULARITY_DOCKER_USERNAME=$CI_REGISTRY_USER
+        - export SINGULARITY_DOCKER_PASSWORD=$CI_REGISTRY_PASSWORD
+        - singularity build $SINGULARITY_RELEASE_IMAGE docker://$CONTAINER_RELEASE_IMAGE
+        - mkdir -p ~/.ssh && ssh-keyscan -H -t rsa $KM3NET_SFTP_HOST  >> ~/.ssh/known_hosts
+        - apt install -q lftp
+        - md5sum $SINGULARITY_RELEASE_IMAGE > ${SINGULARITY_RELEASE_IMAGE}.md5
+        - lftp -u $KM3NET_SFTP_USER,$KM3NET_SFTP_PASSWORD sftp://$KM3NET_SFTP_HOST -e "set ssl:verify-certificate no; cd singularity/; put $SINGULARITY_RELEASE_IMAGE ${SINGULARITY_RELEASE_IMAGE}.md5; bye"
+    tags:
+        - docker
+    only:
+        - tags
+    dependencies:
+        - docker
