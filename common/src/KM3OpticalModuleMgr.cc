@@ -198,6 +198,7 @@ namespace km3net
 
   G4LogicalVolume* KM3OpticalModuleMgr::KM3OpticalModule::Construct(const VolumeParameters* PTP)
   {
+    cout << "\r\033[20C" << "OM construction" << endl;
     if (fTheLogicalVolume)
       return fTheLogicalVolume;
 
@@ -470,6 +471,8 @@ namespace km3net
             << " -->>> " << ThePTP.PMTprt->RadiusSphere 
             << " Z --> " << ThePTP.SphereRmin-ThePTP.PMTprt->RadiusSphere-ThePTP.DistSpherePMT
             << G4endl;
+
+    G4cout << " Tessssssting ...." << G4endl;
 
 
     //logical and placements of everything

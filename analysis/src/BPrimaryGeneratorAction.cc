@@ -165,7 +165,7 @@ namespace km3net
             if(!particle)
               return;
             
-            G4double energy = GenerateMuonEnergy(2 * GeV, 10000 * GeV, direction.getTheta());
+            G4double energy = GenerateMuonEnergy(500 * GeV, 100 * TeV, direction.getTheta());
 
             ((G4ParticleGun*)particleGun)->SetParticleDefinition(particle);
             ((G4ParticleGun*)particleGun)->SetParticlePosition(surfPoints);

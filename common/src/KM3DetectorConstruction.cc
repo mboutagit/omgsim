@@ -135,6 +135,7 @@ namespace km3net
 
   G4VPhysicalVolume* KM3DetectorConstruction::PlaceThem (KM3ParametrizedVolume* theVolToPlace, PositionParameters& PosPar)
   {
+    cout << "\r\033[20C" << "Placing the detector components" << endl;
     G4LogicalVolume* WhereToPlace=0;
 
     KM3PassiveVolumeMgr* theVolmgr = 0;
@@ -375,19 +376,20 @@ namespace km3net
     G4RotationMatrix* rotZtoUp = new G4RotationMatrix();
     rotZtoUp->rotateX(90 * deg);  // Rotate 90 degrees about the X-axis
 
-    G4PhysicalVolumeStore * lvs =  G4PhysicalVolumeStore::GetInstance(); 
-    G4cout << " ------  >>> List of constructed logical volumes:" << G4endl;
-    for (auto lv : *lvs) {
+    // G4PhysicalVolumeStore * lvs =  G4PhysicalVolumeStore::GetInstance(); 
+    // G4cout << " ------  >>> List of constructed logical volumes:" << G4endl;
+    // for (auto lv : *lvs) {
 
-        G4String MV = lv->GetMotherLogical() ? lv->GetMotherLogical()->GetName() : "No Mother";
-        G4cout << "PV Name: " << lv->GetName() << " | Mother LV: " 
-        << MV
-        << " | Material: " << lv->GetLogicalVolume()->GetMaterial()->GetName() 
-        << G4endl;
+        // G4String MV = lv->GetMotherLogical() ? lv->GetMotherLogical()->GetName() : "No Mother";
+        // G4cout << "PV Name: " << lv->GetName() << " | Mother LV: " 
+        // << MV
+        // << " | Material: " << lv->GetLogicalVolume()->GetMaterial()->GetName() 
+        // << G4endl;
       // if(lv->GetName() != "World")
       //   lv->SetRotation(rotZtoUp);
-    }
+    // }
 
+    cout << "\r\033[20C" << "detector constructed .." << endl;
     return physiWorld;
 
   }

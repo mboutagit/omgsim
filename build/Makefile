@@ -156,6 +156,19 @@ BAnalysis/fast:
 .PHONY : BAnalysis/fast
 
 #=============================================================================
+# Target rules for targets named PostAna
+
+# Build rule for target.
+PostAna: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 PostAna
+.PHONY : PostAna
+
+# fast build rule for target.
+PostAna/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PostAna.dir/build.make CMakeFiles/PostAna.dir/build
+.PHONY : PostAna/fast
+
+#=============================================================================
 # Target rules for targets named OMGsim
 
 # Build rule for target.
@@ -215,6 +228,54 @@ AA/src/XPPhSteppingAction.s: AA/src/XPPhSteppingAction.cc.s
 AA/src/XPPhSteppingAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/AA/src/XPPhSteppingAction.cc.s
 .PHONY : AA/src/XPPhSteppingAction.cc.s
+
+BPostAnalysis/programs/PostAna.o: BPostAnalysis/programs/PostAna.cxx.o
+.PHONY : BPostAnalysis/programs/PostAna.o
+
+# target to build an object file
+BPostAnalysis/programs/PostAna.cxx.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PostAna.dir/build.make CMakeFiles/PostAna.dir/BPostAnalysis/programs/PostAna.cxx.o
+.PHONY : BPostAnalysis/programs/PostAna.cxx.o
+
+BPostAnalysis/programs/PostAna.i: BPostAnalysis/programs/PostAna.cxx.i
+.PHONY : BPostAnalysis/programs/PostAna.i
+
+# target to preprocess a source file
+BPostAnalysis/programs/PostAna.cxx.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PostAna.dir/build.make CMakeFiles/PostAna.dir/BPostAnalysis/programs/PostAna.cxx.i
+.PHONY : BPostAnalysis/programs/PostAna.cxx.i
+
+BPostAnalysis/programs/PostAna.s: BPostAnalysis/programs/PostAna.cxx.s
+.PHONY : BPostAnalysis/programs/PostAna.s
+
+# target to generate assembly for a file
+BPostAnalysis/programs/PostAna.cxx.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PostAna.dir/build.make CMakeFiles/PostAna.dir/BPostAnalysis/programs/PostAna.cxx.s
+.PHONY : BPostAnalysis/programs/PostAna.cxx.s
+
+BPostAnalysis/src/BPostAnalysis.o: BPostAnalysis/src/BPostAnalysis.cc.o
+.PHONY : BPostAnalysis/src/BPostAnalysis.o
+
+# target to build an object file
+BPostAnalysis/src/BPostAnalysis.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/BPostAnalysis/src/BPostAnalysis.cc.o
+.PHONY : BPostAnalysis/src/BPostAnalysis.cc.o
+
+BPostAnalysis/src/BPostAnalysis.i: BPostAnalysis/src/BPostAnalysis.cc.i
+.PHONY : BPostAnalysis/src/BPostAnalysis.i
+
+# target to preprocess a source file
+BPostAnalysis/src/BPostAnalysis.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/BPostAnalysis/src/BPostAnalysis.cc.i
+.PHONY : BPostAnalysis/src/BPostAnalysis.cc.i
+
+BPostAnalysis/src/BPostAnalysis.s: BPostAnalysis/src/BPostAnalysis.cc.s
+.PHONY : BPostAnalysis/src/BPostAnalysis.s
+
+# target to generate assembly for a file
+BPostAnalysis/src/BPostAnalysis.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/BPostAnalysis/src/BPostAnalysis.cc.s
+.PHONY : BPostAnalysis/src/BPostAnalysis.cc.s
 
 G__Dict.o: G__Dict.cxx.o
 .PHONY : G__Dict.o
@@ -1151,6 +1212,7 @@ help:
 	@echo "... G__Dict"
 	@echo "... BAnalysis"
 	@echo "... OMGsim"
+	@echo "... PostAna"
 	@echo "... libOMG"
 	@echo "... AA/src/AAAnalysisManager.o"
 	@echo "... AA/src/AAAnalysisManager.i"
@@ -1158,6 +1220,12 @@ help:
 	@echo "... AA/src/XPPhSteppingAction.o"
 	@echo "... AA/src/XPPhSteppingAction.i"
 	@echo "... AA/src/XPPhSteppingAction.s"
+	@echo "... BPostAnalysis/programs/PostAna.o"
+	@echo "... BPostAnalysis/programs/PostAna.i"
+	@echo "... BPostAnalysis/programs/PostAna.s"
+	@echo "... BPostAnalysis/src/BPostAnalysis.o"
+	@echo "... BPostAnalysis/src/BPostAnalysis.i"
+	@echo "... BPostAnalysis/src/BPostAnalysis.s"
 	@echo "... G__Dict.o"
 	@echo "... G__Dict.i"
 	@echo "... G__Dict.s"

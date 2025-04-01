@@ -201,6 +201,7 @@ int main(int argc_,char** argv_)
         // visualization manager
 
         visManager = new G4VisExecutive;
+        visManager->SetVerboseLevel(0); 
         visManager->Initialize();
       //  visManager->SessionStart();
       }

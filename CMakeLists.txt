@@ -63,8 +63,19 @@ find_package(Geant4 REQUIRED ui_all vis_all)
 include(${Geant4_USE_FILE})
 
 # (4) organize project libraries
-file(GLOB sources */src/[a-zA-Z0-9]*.cc)
-file(GLOB headers */include/)
+file(GLOB sources */src/[a-zA-Z0-9]*.cc
+                  ./PostAnalysis/src/*.cc
+    )
+file(GLOB headers */include/
+                  ./PostAnalysis/include/
+    )
+
+    message("\nheader files: ${headers}")
+    message("\nsource files: ${sources}\n")
+
+# file(GLOB_RECURSE PROJECT_INCLUDES LIST_DIRECTORIES true ${CMAKE_SOURCE_DIR}/*/include)
+# include_directories(${PROJECT_INCLUDES})
+
 
 # get rid of test dirs
 foreach(adir IN LISTS sources)
@@ -85,8 +96,12 @@ file(GLOB test_headers tests/include/)
 #message (${sources})
 #message (${test_sources})
 
-file(GLOB PROGRAMS programs/[a-zA-Z1-9]*.cxx)
+file(GLOB PROGRAMS programs/[a-zA-Z1-9]*.cxx
+                  ./BPostAnalysis/programs/[a-zA-Z1-9]*.cxx
+    )
 file(GLOB TESTS tests/[a-zA-Z1-9]*.cxx)
+
+message("programs: ${PROGRAMS}")
 
 #bstr: set include directories, include ROOT
 include_directories (${headers} ${ROOT_INCLUDE_DIRS} ${Geant4_INCLUDE_DIRS})

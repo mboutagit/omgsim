@@ -145,7 +145,7 @@ namespace km3net
         
         fTEvent->Branch("measure", &fMeasure);
 
-        bEventTree->Branch("Event", &fEvent);
+        genTree->Branch("Event", &fEvent);
         
         runTree->Branch("Run", &fRun);
     }
@@ -183,7 +183,7 @@ namespace km3net
         genPars.fGenPhi    = particle->GetMomentum().phi() /deg;
         genPars.fGenEnergy = particle->GetTotalEnergy() / MeV;
 
-        genTree->Fill();
+        
 
         fEvent.event_id = EV->GetEventID();
     }
@@ -199,7 +199,7 @@ namespace km3net
         //  //   cout << "\r\033[20C" << "Event ID: " << key.first << "  Hit Energy: " << key.second.fEnergy << endl;
         // }
 
-        
+        genTree->Fill();
 
         bEventTree->Fill();
 
