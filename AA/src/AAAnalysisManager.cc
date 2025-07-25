@@ -82,8 +82,8 @@ namespace km3net
       	    return;
     }
 
-    fTRunInfos->Fill ();
-    fTFastAnalysis->Fill ();
+    //fTRunInfos->Fill ();
+    //fTFastAnalysis->Fill ();
    // fTEvent->Fill();
 
 
@@ -116,6 +116,7 @@ namespace km3net
       }
 
 
+
     if (fRFile == NULL)
       return;
     if (fFastAnalysisOnly)
@@ -135,7 +136,6 @@ namespace km3net
     // hit.limit = fLimit;
 
     // addHitCollection(hit);
-
     fTEvent->Fill (); 
 
 

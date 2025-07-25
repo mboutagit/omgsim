@@ -1,6 +1,6 @@
 /KM3/XP/Type BA
-/KM3/det/DetectorTypeName LactelOneCell #KM3K40
 /KM3/det/DetInit Lactel
+/KM3/det/DetectorTypeName LactelOneCell #KM3K40
 /KM3/det/setMeanCapRadius 5 cm
 
 #/PMTOpticalModel/luxlevel 0
@@ -10,8 +10,11 @@
 #/KM3/det/setTargetMaterial NEMOWater
 #/KM3/det/DontDraw bento absorber
 /KM3/det/setWorldLength 11.0 m # max det half width (5 m) + 6 m for 60° zenith angles incidence 
-/KM3/det/setTargetLength  1.00 m
+/KM3/det/setTargetLength  .5 m
 /KM3/BDet/targetType M2
+/KM3/BDet/acceptanceAngle 60 deg
+# /KM3/BDet/OMPosition 0 0 -0.5 m
+
 
 /KM3/GenType 3
 /run/initialize
@@ -54,11 +57,10 @@
 #/gps/ene/mono  5 MeV
 #LED 470 nm
 
-# /run/initialize
-# /vis/open OGL #HepRepXML
-# /vis/viewer/set/style wireframe
-# /vis/drawVolume
-# /vis/viewer/set/background 1.0 1.0 1.0 0.2
+/vis/open OGL #HepRepXML
+/vis/viewer/set/style wireframe
+/vis/drawVolume
+/vis/viewer/set/background 1.0 1.0 1.0 0.2
 # /vis/viewer/zoom 1
 # /vis/scene/add/axes 0 0 0 1 m
 # /vis/viewer/set/viewpointThetaPhi 90 0 deg
@@ -215,7 +217,14 @@
 # /vis/sceneHandler/attach
 
 #/event/verbose 1
-/run/beamOn 5000
+# /run/beamOn 1
+# /run/beamOn 200
+# /run/beamOn 10
+# /run/beamOn 1000
+# /run/beamOn 1000
+# /run/beamOn 1000
+# /run/beamOn 1000
+# /run/beamOn 1000
 # /run/beamOn 1000
 # /run/beamOn 1000
 # /run/beamOn 1000

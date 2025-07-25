@@ -58,6 +58,8 @@ class TH1F;
 class ParametrizedGenerator;
 class BPrimaryGeneratorAction;
 
+namespace lactel{ class BPrimaryGeneratorAction; }
+
 namespace km3net
 {
 
@@ -88,12 +90,12 @@ namespace km3net
       G4Navigator* Navigator;
       G4double fTargetRadius = 500.*m;
       G4double fGenVolumeRaduis = 5.0 * m;
-      unsigned char fGunType=0;//1 for normal, 2 for decay
+      unsigned char fGunType=0;//1 for normal, 2 for decay, 3 for muons
 
       std::vector <float>         fLEDAngle;
 
       friend class ParametrizedGenerator;
-      friend class BPrimaryGeneratorAction;
+      friend class lactel::BPrimaryGeneratorAction;
 
     #if __GNUC__>=5
         ::TH1F* fhLED;

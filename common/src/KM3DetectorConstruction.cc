@@ -173,7 +173,8 @@ namespace km3net
       }
     else
       {
-        WhereToPlace = logicTarget;
+        // WhereToPlace = logicTarget;
+        WhereToPlace = logicWorld;
       }
     if (!WhereToPlace)
       {
@@ -216,7 +217,7 @@ namespace km3net
     //G4cout << " \r\033[40C"
     
     logicWorld = new G4LogicalVolume(solidWorld,
-                                     myVacuum, 
+                                      TargetMater,  // ideal water
                                      "World", 0, 0, 0);
                                      
                                      //TargetMater, "World", 0, 0, 0);
@@ -242,19 +243,19 @@ namespace km3net
     //                             0, twopi, 0,
     //                             pi);
     // else
-      solidTarget = new G4Box("Target", fTargetLength,
-                            fTargetLength, fTargetLength);
+      // solidTarget = new G4Box("Target", fTargetLength,
+      //                       fTargetLength, fTargetLength);
 
     /*new G4Box("Target", fTargetLength / 2., fTargetLength / 2.,
       fTargetLength / 2.);*/
    // G4cout << "create logic target" << G4endl;
 
-    logicTarget = new G4LogicalVolume(solidTarget,
-      TargetMater, "Target", 0, 0, 0);
+    // logicTarget = new G4LogicalVolume(solidTarget,
+    //   TargetMater, "Target", 0, 0, 0);
 
     
     //genSolid = new G4Sphere("genSolid", 0, fWorldLength, 0, twopi, 0, pi/2);
-    genSolid = new G4Box("Target", fWorldLength, fWorldLength, fWorldLength/2);
+    genSolid = new G4Box("genSolid", fWorldLength, fWorldLength, fWorldLength/2);
     genLogic = new G4LogicalVolume(genSolid,
                                      myVacuum, 
                                      "genLogic", 0, 0, 0);
@@ -262,19 +263,24 @@ namespace km3net
     G4VisAttributes* worldCol = new G4VisAttributes(G4Colour(0.1, 0.1, 0.9, 0.1));
     G4VisAttributes* genAttributes = new G4VisAttributes(G4Colour(.1, 0.0, 0.7, 0.1));
     G4VisAttributes* targetColor = new G4VisAttributes(G4Colour(0.1, 0.4, 0.0, 0.1));
+    G4VisAttributes* genColor = new G4VisAttributes(G4Colour(0.5, 0.1, 0.1, 0.3));
 
     targetColor->SetVisibility(true);  // Make the volume visible
     targetColor->SetForceSolid(true);  // Force solid rendering mode  
-    logicTarget->SetVisAttributes(targetColor);
+    // logicTarget->SetVisAttributes(targetColor);
     
     genAttributes->SetVisibility(true);  // Make the volume visible
     genAttributes->SetForceSolid(true);  // Force solid rendering mode
-    genLogic->SetVisAttributes(genAttributes);
+   // genLogic->SetVisAttributes(genAttributes);
 
     worldCol->SetVisibility(true);  // Make the volume visible
     worldCol->SetForceSolid(true);  // Force solid rendering mode
     //worldCol->SetForceWireframe(true); 
     logicWorld->SetVisAttributes(worldCol);
+
+    genColor->SetVisibility(true);  // Make the volume visible
+    genColor->SetForceSolid(true);  // Force solid rendering mode
+    genLogic->SetVisAttributes(genColor);
 
 
     G4RotationMatrix *targetRot=new G4RotationMatrix(0,0,0);
@@ -352,7 +358,7 @@ namespace km3net
         //     }
         // }
 
-        G4ThreeVector genPosition = G4ThreeVector(0, 0, -fWorldLength/2);
+        G4ThreeVector genPosition = G4ThreeVector(0., 0., 0.);
         G4ThreeVector targetPosition = G4ThreeVector(0, 0, -fTargetLength);
         genPhysic = new G4PVPlacement(0,                // no rotation
                                    genPosition, // at (0,0,0)
@@ -364,13 +370,13 @@ namespace km3net
     
     
 
-    physiTarget = new G4PVPlacement(targetRot, 
-                                    targetPos, 
-                                    logicTarget, 
-                                    "Target",
-                                    logicWorld, 
-                                    false, 
-                                    0);
+    // physiTarget = new G4PVPlacement(targetRot, 
+    //                                 targetPos, 
+    //                                 logicTarget, 
+    //                                 "Target",
+    //                                 logicWorld, 
+    //                                 false, 
+    //                                 0);
 
 
     G4RotationMatrix* rotZtoUp = new G4RotationMatrix();

@@ -41,9 +41,9 @@
 #include "G4UIWin32.hh"
 #endif
 
-#ifdef G4UI_USE_Qt
-#include "G4UIQt.hh" // by Bouta
-#endif
+// #ifdef G4UI_USE_Qt
+// #include "G4UIQt.hh" // by Bouta
+// #endif
 
 #ifdef G4MULTITHREADED
 #include "G4MTRunManager.hh"
@@ -192,7 +192,7 @@ int main(int argc_,char** argv_)
     // G4UIsession* win32session=0;
     // G4UIsession* sessionQt=0;
      G4VisManager* visManager=NULL;
-    if (true)
+    if (session)
       {
         //session = new G4UIQt(0, argv_); // by Bouta it was: new G4UIXm(0,argv_);//new G4UIterminal();
         //session = new G4UIXm(0,argv_);//new G4UIterminal()
@@ -218,20 +218,19 @@ int main(int argc_,char** argv_)
   ///////////////////////////////////////////////////////////////////////////////////
 
     G4UIExecutive* ui = 0;
-    if ( argc_ >= 1 ) {
-      ui = new G4UIExecutive(argc_, argv_);
-    }
-
 
     if ( ! session ) { 
       // batch mode
       //G4String fileName = argv_[1];
       cout << "\r\033[20C" << "Without session" << endl;
       UI->ApplyCommand(command+MacFileName);
+      //UI->ApplyCommand("run/beanOn ");
+
     }
     else { 
       // interactive mode
       cout << "\r\033[20C" << "With session -- " << endl;
+      ui = new G4UIExecutive(argc_, argv_);
       UI->ApplyCommand(command+MacFileName);
       ui->SessionStart();
       delete ui;

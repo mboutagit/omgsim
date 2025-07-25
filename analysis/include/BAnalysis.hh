@@ -1,48 +1,54 @@
 
+#ifndef BAnalysis_h 
+#define BAnalysis_h 
+
 #include "AAAnalysisManager.hh"
 #include "globals.hh"
 #include "CLHEP/Units/PhysicalConstants.h"
 #include "G4Run.hh"
-#include "KM3RunAction.hh"
 
 #include "TF1.h"
 #include "TGraph.h"
 
 using namespace std;
-namespace km3net
+using namespace km3net;
+
+namespace lactel
 {
-    
-    class BAnalysis : public AAAnalysisManager, public KM3RunAction
+    class BRunAction;
+
+    class BAnalysis : public AAAnalysisManager
     {
         public:
 
             struct GenerationParameters
             {
-                int fGenPPDGID;
-                unsigned int fGenEvtID;
-                float fGenXPos;
-                float fGenYPos;
-                float fGenZPos;
-                float fGenXDir;
-                float fGenYDir;
-                float fGenZDir;
-                float fGenTheta;
-                float fGenPhi;
-                float fGenEnergy;
+                int fGenPPDGID = -1;
+                unsigned int fGenEvtID = -1;
+                float fGenXPos = -1;
+                float fGenYPos = -1;
+                float fGenZPos = -1;
+                float fGenXDir = -1;
+                float fGenYDir = -1;
+                float fGenZDir = -1;
+                float fGenTheta = -1;
+                float fGenPhi = -1;
+                float fGenEnergy = -1;
+                bool isDetected = false;
             };
             
             class MeasureParameters
             {
                 private:
-                    static float HV;
-                    static std::map<float, float> quantum_efficiency;
+                    // static float HV;
+                    // static std::map<float, float> quantum_efficiency;
                     TF1* gain_vs_highVoltage = nullptr;
-                   TF1* muon_flux = nullptr;
+                    TF1* muon_flux = nullptr;
                     TGraph* QEVsLambda_graph = nullptr;
 
                 public:
                     MeasureParameters();
-                    ~MeasureParameters();
+                    virtual ~MeasureParameters();
 
                     inline float getGain(float hv){return exp(-0.93 + 0.01*hv);}
                     static inline double getGainROOT(double* x, double* params) {
@@ -50,7 +56,7 @@ namespace km3net
                     }
                     float getQE(float lambda);
                     TF1* getGainVsHV();
-                   TF1* getMuonFlux();
+                    TF1* getMuonFlux();
                     TGraph* getQEVsLambda();    
                     
                     ClassDef(MeasureParameters, 1); 
@@ -69,7 +75,7 @@ namespace km3net
                 public:
                     Measure();
                     Measure(float);
-                    ~Measure();
+                    virtual ~Measure();
                     void print(std::ostream&);
                     float getEnergy() const{ return fEnergy;}
                     unsigned int getID() const{return fId;}
@@ -77,23 +83,32 @@ namespace km3net
                 ClassDef(Measure, 1);
             };
 
-            struct Event
+            struct Hit;
+            struct DetectedEvent
             {                    
                     // unsigned int event_ID;
-                    // float event_energy;
+                    float event_energy;
+                    std::vector<Hit> hits;
                     int  event_id = -1;
                     int runNb = -1;
                     uint nhit=0;
-                    float tota=0.;
+                    float tota=0.; // cumulative charge
+                   //float a = 0; // hit charge
                     float tmin=0.;
                     float tmax=0.;
 
-                    bool isDetected=false; // mainly used for Run managing
+                   // bool isDetected=false; // mainly used for Run managing
 
                 //     friend class BAnalysis;
                 // public:
                 //     Event(){};
                 //     ~Event(){};
+            };
+
+            struct Hit{
+                long id = 0;
+                float time = 0;
+                float charge = 0;
             };
 
             struct Run {
@@ -104,35 +119,37 @@ namespace km3net
               
             MeasureParameters fMeasure_parameters;
             Measure fMeasure;
-            std::map<unsigned int, Event> fEvent_map;
-            std::multimap<unsigned int, Measure> eventMeasure_map;
+            // std::map<unsigned int, Event> fEvent_map;
+            // std::multimap<unsigned int, Measure> eventMeasure_map;
 
             MeasureParameters getMeasurePars(); 
             Measure getMeasure();
-            Event fEvent;
+            DetectedEvent fDetectedEvent;
             Run fRun;
             
         protected:
             BAnalysis();
             ~BAnalysis();
 
-
-            virtual void EndOfEvent();
-            virtual void StartOfEvent(const G4Event*);
             virtual void Write();
-            virtual void Init(std::string FR = "");
             virtual void AddDetectedParticule(const KM3TrackInformation* info, unsigned char LIM);
-
-            void BeginOfRunAction(const G4Run*);
-            void EndOfRunAction(const G4Run*);
+            // virtual void AddPhotoTubeEntranceInfo (const G4Step* fStep);
+            // virtual void AddOMEntranceInfo (const G4Step* Step);
 
             TTree* genTree;
             TTree* runTree;
-            TTree* bEventTree;
+            TTree* detectedEventTree;
             GenerationParameters genPars;
+
+            friend class BRunAction;
 
         public:
             static BAnalysis* getIt();
+            virtual void EndOfEvent(const G4Event* evt);
+            virtual void StartOfEvent(const G4Event*);
+            virtual void Init(std::string rfn = "");
+
+
 
         ClassDef(BAnalysis, 1);
 
@@ -149,4 +166,6 @@ namespace km3net
     // };
     
     
-} // namespace km3net
+} // namespace lactel
+
+#endif

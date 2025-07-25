@@ -2,7 +2,6 @@
 #define BDetectorMessenger_hh
 
 #include "KM3DetectorMessenger.hh"
-//#include "BDetectorConstruction.hh"
 
 #include "globals.hh"
 #include "G4UImessenger.hh"
@@ -12,10 +11,14 @@
 #include "G4UIcmdWithAString.hh"
 
 
+
+
 class G4UIdirectory;
 class BDetetcorConstruction;
 
-namespace km3net
+using namespace km3net;
+
+namespace lactel
 {
     class BDetectorConstruction;
 
@@ -24,7 +27,9 @@ namespace km3net
         private:
             G4UIdirectory* BDet;
             G4UIcmdWith3VectorAndUnit* targetPos_cmd;
+            G4UIcmdWith3VectorAndUnit* OMPosition_cmd;
             G4UIcmdWithADoubleAndUnit* targetLength_cmd;
+            G4UIcmdWithADoubleAndUnit* acceptanceAngle_cmd;
             G4UIcmdWithAString* targetType_cmd;
 
             BDetectorConstruction* BDetector;
@@ -38,7 +43,7 @@ namespace km3net
 
 
     
-} // namespace km3net
+} // namespace lactel
 
 
 #endif

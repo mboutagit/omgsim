@@ -466,13 +466,13 @@ namespace km3net
                              G4ThreeVector(0,0,ThePTP.SphereRmin-ThePTP.PMTprt->RadiusSphere-ThePTP.DistSpherePMT)); // Bouta: Not understandable -60 added to make it work
     
     G4ThreeVector* vec = new G4ThreeVector(0,0,ThePTP.SphereRmin-ThePTP.PMTprt->RadiusSphere-ThePTP.DistSpherePMT);
-    G4cout  << "     ----Problem: " << Gelsubtraction->GetName() 
-            << " with " << logicPMT->GetName() << " : vec: " << *vec 
-            << " -->>> " << ThePTP.PMTprt->RadiusSphere 
-            << " Z --> " << ThePTP.SphereRmin-ThePTP.PMTprt->RadiusSphere-ThePTP.DistSpherePMT
-            << G4endl;
+    // G4cout  << "     ----Problem: " << Gelsubtraction->GetName() 
+    //         << " with " << logicPMT->GetName() << " : vec: " << *vec 
+    //         << " -->>> " << ThePTP.PMTprt->RadiusSphere 
+    //         << " Z --> " << ThePTP.SphereRmin-ThePTP.PMTprt->RadiusSphere-ThePTP.DistSpherePMT
+    //         << G4endl;
 
-    G4cout << " Tessssssting ...." << G4endl;
+    //G4cout << " Tessssssting ...." << G4endl;
 
 
     //logical and placements of everything

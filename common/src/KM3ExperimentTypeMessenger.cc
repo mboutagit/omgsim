@@ -53,10 +53,13 @@
 #include "BAnalysis.hh"
 #include "ParametrizedGenerator.hh"
 #include "BPrimaryGeneratorAction.hh"
+#include "BEventAction.hh"
+#include "BRunAction.hh"
 
 #include <iostream>
 
 using namespace std;
+using namespace lactel;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -119,7 +122,7 @@ namespace km3net
 
           //G4cout << "####### Starting: XP command found #######" << G4endl;
           if (newValue == "BA")
-            fDetector = BDetectorConstruction::GetIt();
+            fDetector = lactel::BDetectorConstruction::GetIt();
           else
             fDetector = KM3DetectorConstruction::GetIt ();
           
@@ -131,14 +134,17 @@ namespace km3net
           // set mandatory user action class
 
           if(newValue == "BA"){
-            frunManager->SetUserAction(BAnalysis::getIt());
+            frunManager->SetUserAction(new BRunAction);
+            std::cout << "\r\033[10C" << "BAnalysis Start .. " << std::endl;
           }
           else{
             frunManager->SetUserAction(new KM3RunAction);
           }
 
-
-          frunManager->SetUserAction(new KM3EventAction);
+          if(newValue == "BA")
+            frunManager->SetUserAction(new BEventAction);
+          else  
+            frunManager->SetUserAction(new KM3EventAction);
 
           //first checking the new method, then for retro-compality the old ones
           if (fAnalysisMgrCol.count (newValue))
@@ -185,10 +191,15 @@ namespace km3net
           if (!fTrackingAction)
             fTrackingAction=new KM3TrackingAction ();
 
-          KM3AnalysisManager::getIt ()->Init ();
+          if(newValue == "BA")
+            BAnalysis::getIt()->Init();          
+          else  
+            KM3AnalysisManager::getIt()->Init();
+
+          
           //KM3PrimaryGeneratorAction* PGA = new KM3PrimaryGeneratorAction;
          // if(newValue == "BA"){
-            BPrimaryGeneratorAction* PGA = BPrimaryGeneratorAction::getInstance();
+            lactel::BPrimaryGeneratorAction* PGA = lactel::BPrimaryGeneratorAction::getInstance();
           //}
           //KM3PrimaryGeneratorAction* PGA = new KM3PrimaryGeneratorAction;
           PGA->SetProducingVolumeRadius((fDetector)->GetTargetFullLength ());

@@ -40,7 +40,7 @@
 
 #include <KM3ParametrizedVolume.hh>
 
-//#include "BDetectorConstruction.hh"
+// #include "BDetectorConstruction.hh"
 
 //#include "KM3MagneticField.hh"
 
@@ -62,13 +62,13 @@ class G4Region;
 class G4UserLimits;
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
+namespace lactel{ class BDetectorConstruction; } // 
+
 namespace km3net
 {
   class OpticalModuleMaker;
   class KM3DetectorMessenger;
   class KM3Material;
-
-  class BDetectorConstruction;
 
   class KM3DetectorConstruction: public G4VUserDetectorConstruction, public KM3ParametrizedVolume {
   public:
@@ -78,7 +78,7 @@ namespace km3net
     ~KM3DetectorConstruction();
 
     static KM3DetectorConstruction *fInstance;
-    friend class BDetectorConstruction;
+    friend class lactel::BDetectorConstruction;
 
     //exeption in the KM3ParametrizedVolume familly, no ConstructTheVolume and no construct.
     virtual G4LogicalVolume* Construct_ (const VolumeParameters* = NULL) {return 0;}

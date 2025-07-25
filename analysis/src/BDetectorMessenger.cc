@@ -4,10 +4,13 @@
 
 #include <iostream>
 
+#include "G4UImanager.hh"
+
+
 
 using namespace std;
 
-namespace km3net
+namespace lactel
 {
   //  BDetectorMessenger::BDetectorMessenger(BDetectorConstruction* detConst) : KM3DetectorMessenger(detConst){};
     BDetectorMessenger::BDetectorMessenger(BDetectorConstruction* detConst) : KM3DetectorMessenger(detConst){
@@ -29,6 +32,16 @@ namespace km3net
         targetType_cmd->SetParameterName("targetType", false);
         targetType_cmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
+        OMPosition_cmd = new G4UIcmdWith3VectorAndUnit("/KM3/BDet/OMPosition", this);
+        OMPosition_cmd->SetGuidance("Set the OM position w.r.t to the inner_lactel_cell volume");
+        OMPosition_cmd->SetParameterName("OM_x", "OM_y", "OM_z", false);
+        OMPosition_cmd->AvailableForStates(G4State_PreInit, G4State_Idle);
+
+        acceptanceAngle_cmd = new G4UIcmdWithADoubleAndUnit("/KM3/BDet/acceptanceAngle", this);
+        acceptanceAngle_cmd->SetGuidance("Set acceptance angle for events comming to the det.");
+        acceptanceAngle_cmd->SetParameterName("Angle with unit", false);
+        acceptanceAngle_cmd->AvailableForStates(G4State_PreInit, G4State_Idle);
+
 
         cout << "\r\033[20C" << "---- Calling det Messenger" << endl;
 
@@ -40,23 +53,43 @@ namespace km3net
         delete targetPos_cmd;
         delete targetLength_cmd;
         delete targetType_cmd;
+        delete OMPosition_cmd;
     };
 
     void BDetectorMessenger::SetNewValue(G4UIcommand* cmd, G4String value){
         KM3DetectorMessenger::SetNewValue(cmd, value);
         if(cmd == targetPos_cmd){
-            myDetector->targetPos = targetPos_cmd->GetNew3VectorValue(value);
+            BDetector->targetPos = targetPos_cmd->GetNew3VectorValue(value);
         } 
         else if(cmd == targetLength_cmd){
-            myDetector->SetTargetLength(targetLength_cmd->GetNewDoubleValue(value));
+            BDetector->SetTargetLength(targetLength_cmd->GetNewDoubleValue(value));
         }
         else if(cmd == targetType_cmd){
             cout << "\r\033[20C" << "Target type set to: " << value << endl;
             BDetector->setTargetType(value);
+        }
+        else if(cmd == OMPosition_cmd){
+            BDetector->OMPosition = OMPosition_cmd->GetNew3VectorValue(value);
+
+            for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
+                //place the OM 50 cm above the target volume
+                if(pv->GetName() == "AntaresOM"){
+                    pv->SetTranslation(BDetector->OMPosition);
+                    std::cout << "\r\033[10C" << "PV: " << pv->GetName() << " Found! " << std::endl;
+                    // G4UImanager::GetUIpointer()->ApplyCommand("/run/initialize");
+                    G4UImanager::GetUIpointer()->ApplyCommand("/vis/drawVolume");
+                }
+            }
+            std::cout << "\r\033[10C" << "Set new OM Position: " << BDetector->OMPosition << std::endl;
+        }
+        else if (cmd == acceptanceAngle_cmd){
+            BDetector->acceptanceAngle = targetLength_cmd->GetNewDoubleValue(value);
+            std::cout << "\r\033[20C" << "Set new acceptance angle (deg): " << BDetector->acceptanceAngle/deg << std::endl;
+
         }
     }
 
 
 
     
-} // namespace km3net
+} // namespace lactel

@@ -85,6 +85,7 @@ namespace km3net
     if (RFNAME.size ())
       fRootFileName=RFNAME;
 
+    std::cout << "\r\033[20C" << "Creating an Analysis root files: " << fRootFileName << std::endl;
     fRFile = new TFile (fRootFileName.data (), "RECREATE");
 
     fTRunInfos = new TTree("RunInfo","Infos about the simulation.");
@@ -176,18 +177,19 @@ const std::string KM3AnalysisManager::currentDateTime() {
     const G4StepPoint* prestep = STEP->GetPreStepPoint();
     G4String prestepName=prestep->GetPhysicalVolume()->GetName();
 
-    if (prestepName != "Target")
-      {
-        return;
-      }
+    // if (prestepName != "Target")
+    //   {
+    //     return;
+    //   }
 
     const G4StepPoint* poststep = STEP->GetPostStepPoint();
     G4String poststepName=poststep->GetPhysicalVolume()->GetName();
 
-    if (fNbOM % 1000 ==0)
+    if (fNbOM % 1000 == 0)
       {
         cout << endl;
         cout << "\r\033[40C" << fNbOM << " in OM ";
+        cout << endl;
         cout.flush ();
       }
     fNbOM++;

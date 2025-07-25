@@ -1,5 +1,6 @@
 #include <KM3RunManager.hh>
 #include <KM3RunMessenger.hh>
+#include <G4VUserDetectorConstruction.hh>
 
 #include <iostream>
 

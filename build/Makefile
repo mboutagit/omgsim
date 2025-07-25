@@ -502,6 +502,33 @@ analysis/src/BDetectorMessenger.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BDetectorMessenger.cc.s
 .PHONY : analysis/src/BDetectorMessenger.cc.s
 
+analysis/src/BEventAction.o: analysis/src/BEventAction.cc.o
+.PHONY : analysis/src/BEventAction.o
+
+# target to build an object file
+analysis/src/BEventAction.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BEventAction.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BEventAction.cc.o
+.PHONY : analysis/src/BEventAction.cc.o
+
+analysis/src/BEventAction.i: analysis/src/BEventAction.cc.i
+.PHONY : analysis/src/BEventAction.i
+
+# target to preprocess a source file
+analysis/src/BEventAction.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BEventAction.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BEventAction.cc.i
+.PHONY : analysis/src/BEventAction.cc.i
+
+analysis/src/BEventAction.s: analysis/src/BEventAction.cc.s
+.PHONY : analysis/src/BEventAction.s
+
+# target to generate assembly for a file
+analysis/src/BEventAction.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BEventAction.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BEventAction.cc.s
+.PHONY : analysis/src/BEventAction.cc.s
+
 analysis/src/BPrimaryGeneratorAction.o: analysis/src/BPrimaryGeneratorAction.cc.o
 .PHONY : analysis/src/BPrimaryGeneratorAction.o
 
@@ -528,6 +555,60 @@ analysis/src/BPrimaryGeneratorAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BPrimaryGeneratorAction.cc.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BPrimaryGeneratorAction.cc.s
 .PHONY : analysis/src/BPrimaryGeneratorAction.cc.s
+
+analysis/src/BRunAction.o: analysis/src/BRunAction.cc.o
+.PHONY : analysis/src/BRunAction.o
+
+# target to build an object file
+analysis/src/BRunAction.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BRunAction.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BRunAction.cc.o
+.PHONY : analysis/src/BRunAction.cc.o
+
+analysis/src/BRunAction.i: analysis/src/BRunAction.cc.i
+.PHONY : analysis/src/BRunAction.i
+
+# target to preprocess a source file
+analysis/src/BRunAction.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BRunAction.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BRunAction.cc.i
+.PHONY : analysis/src/BRunAction.cc.i
+
+analysis/src/BRunAction.s: analysis/src/BRunAction.cc.s
+.PHONY : analysis/src/BRunAction.s
+
+# target to generate assembly for a file
+analysis/src/BRunAction.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BRunAction.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BRunAction.cc.s
+.PHONY : analysis/src/BRunAction.cc.s
+
+analysis/src/BSteppingAction.o: analysis/src/BSteppingAction.cc.o
+.PHONY : analysis/src/BSteppingAction.o
+
+# target to build an object file
+analysis/src/BSteppingAction.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BSteppingAction.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BSteppingAction.cc.o
+.PHONY : analysis/src/BSteppingAction.cc.o
+
+analysis/src/BSteppingAction.i: analysis/src/BSteppingAction.cc.i
+.PHONY : analysis/src/BSteppingAction.i
+
+# target to preprocess a source file
+analysis/src/BSteppingAction.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BSteppingAction.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BSteppingAction.cc.i
+.PHONY : analysis/src/BSteppingAction.cc.i
+
+analysis/src/BSteppingAction.s: analysis/src/BSteppingAction.cc.s
+.PHONY : analysis/src/BSteppingAction.s
+
+# target to generate assembly for a file
+analysis/src/BSteppingAction.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BSteppingAction.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BSteppingAction.cc.s
+.PHONY : analysis/src/BSteppingAction.cc.s
 
 common/src/KM3ActionInitialization.o: common/src/KM3ActionInitialization.cc.o
 .PHONY : common/src/KM3ActionInitialization.o
@@ -1253,9 +1334,18 @@ help:
 	@echo "... analysis/src/BDetectorMessenger.o"
 	@echo "... analysis/src/BDetectorMessenger.i"
 	@echo "... analysis/src/BDetectorMessenger.s"
+	@echo "... analysis/src/BEventAction.o"
+	@echo "... analysis/src/BEventAction.i"
+	@echo "... analysis/src/BEventAction.s"
 	@echo "... analysis/src/BPrimaryGeneratorAction.o"
 	@echo "... analysis/src/BPrimaryGeneratorAction.i"
 	@echo "... analysis/src/BPrimaryGeneratorAction.s"
+	@echo "... analysis/src/BRunAction.o"
+	@echo "... analysis/src/BRunAction.i"
+	@echo "... analysis/src/BRunAction.s"
+	@echo "... analysis/src/BSteppingAction.o"
+	@echo "... analysis/src/BSteppingAction.i"
+	@echo "... analysis/src/BSteppingAction.s"
 	@echo "... common/src/KM3ActionInitialization.o"
 	@echo "... common/src/KM3ActionInitialization.i"
 	@echo "... common/src/KM3ActionInitialization.s"

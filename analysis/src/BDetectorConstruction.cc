@@ -6,10 +6,14 @@
 #include "BPrimaryGeneratorAction.hh"
 
 
-namespace km3net
+namespace lactel
 {
 
-    std::string BDetectorConstruction::className = "BDetectorConstruction";
+
+    float BDetectorConstruction::worldSizeOffset = 20*cm;
+    float BDetectorConstruction::acceptanceAngle = 10*deg;
+
+    // std::string BDetectorConstruction::className = "BDetectorConstruction";
     BDetectorConstruction* BDetectorConstruction::GetIt(){
         if(!fInstance){
             fInstance = new BDetectorConstruction();
@@ -19,7 +23,7 @@ namespace km3net
 
     BDetectorConstruction::BDetectorConstruction(){
         detectorMessenger = new BDetectorMessenger(this);
-        cout << "\r\033[20C" << "---- Construction the Det" << endl;
+        cout << "\r\033[20C" << "---- Construct the Det" << endl;
     }
 
     BDetectorConstruction::~BDetectorConstruction(){
@@ -30,48 +34,120 @@ namespace km3net
         targetPosition = vect;
     }
 
+    void BDetectorConstruction::setOMPosition(G4ThreeVector vect){
+        OMPosition = vect;
+    }
+
+    void BDetectorConstruction::setAcceptanceAngle(float angle){
+        acceptanceAngle = angle;
+    }
+
+    void BDetectorConstruction::autoWorldSize(){
+        float zmin, zmax;
+        zmin = (*G4PhysicalVolumeStore::GetInstance())[0]->GetTranslation().getZ();
+        zmax = (*G4PhysicalVolumeStore::GetInstance())[0]->GetTranslation().getZ();
+
+        for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
+                        
+            if(pv != physiWorld && dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid())){
+                if(abs(pv->GetTranslation().getZ()) > zmax){
+                    zmax = abs(pv->GetTranslation().getZ()) + 
+                            dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->GetZHalfLength();
+                     
+                }
+
+                std::cout << "\r\033[10C" << "Check Volume: " << pv->GetName() << "  -- zpos: " << pv->GetTranslation().getZ()
+                            << " -- halfZ size: " << dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->GetZHalfLength()
+                            << std::endl;
+
+                    
+            }
+        }
+
+        float autoZ = (abs(zmin) > abs(zmax)) ? (abs(zmin) + worldSizeOffset) : (abs(zmax) + worldSizeOffset);
+        dynamic_cast<G4Box*> (solidWorld)->SetZHalfLength(autoZ);
+
+
+        std::cout << "\r\033[10C" << "zmin: " << zmin << " -- zmax: " << zmax << " -- worldsizeOffSet " 
+                    << worldSizeOffset << " -- val: " << autoZ << std::endl;
+    }
+
    // G4LogicalVolume* BDetectorConstruction::Construct(const VolumeParameters* = NULL) {return 0;}
     
     G4VPhysicalVolume* BDetectorConstruction::Construct(){
 
         G4VPhysicalVolume* pv = KM3DetectorConstruction::Construct();
-        dynamic_cast<G4Box*> (solidTarget)->SetXHalfLength(target_half_length);
-        dynamic_cast<G4Box*> (solidTarget)->SetYHalfLength(target_half_length);
-        dynamic_cast<G4Box*> (solidTarget)->SetZHalfLength(target_half_length);
 
-        double length = target_half_length + 2*target_half_length * tan(CLHEP::pi /3.);
+        //recalculate the size for the world and generation valume based on the target length (accept 60° events that would hit the target)
+        double gen_half_length = 2*target_half_length * tan(acceptanceAngle/rad) + target_half_length; // (c+d)*tg(theta) + d/2
+
+
+        // for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
+        //     if(pv->GetName() == "LACTEL_Cell_Outer"){
+        //         gen_half_length = 2*dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->GetXHalfLength() * tan(acceptanceAngle/rad)
+        //                             + dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->GetXHalfLength();
+        //     }
+        // } 
+
+        BPrimaryGeneratorAction::getInstance()->genArea = (2*gen_half_length) * (2*gen_half_length); // generation area in mm2
+
+        //recalculate the 
+        dynamic_cast<G4Box*> (solidWorld)->SetXHalfLength(gen_half_length);
+        dynamic_cast<G4Box*> (solidWorld)->SetYHalfLength(gen_half_length);
+        dynamic_cast<G4Box*> (solidWorld)->SetZHalfLength(target_half_length);
+
+        dynamic_cast<G4Box*> (genSolid)->SetXHalfLength(gen_half_length);
+        dynamic_cast<G4Box*> (genSolid)->SetYHalfLength(gen_half_length);
+        dynamic_cast<G4Box*> (genSolid)->SetZHalfLength(0.1*mm);
+
+        // dynamic_cast<G4Box*> (solidTarget)->SetXHalfLength(target_half_length);
+        // dynamic_cast<G4Box*> (solidTarget)->SetYHalfLength(target_half_length);
+        // dynamic_cast<G4Box*> (solidTarget)->SetZHalfLength(target_half_length);
+
+        // physiTarget->SetTranslation(G4ThreeVector(0, 0, -target_half_length));
         
-        // cout << "\r\033[20C" << "New generation surface for a detector of volume " 
-        //                         << 2*target_half_length/m * 2*target_half_length/m * 2*target_half_length/m 
-        //                         << " m^3 is: " 
-        //                         << length/m * length/m << " m²"
-        //                         << "\n rho_air: " << BUnits::rho_air
-        //                         << "\n H_0: " << BUnits::H_0
-        //                         << "\n theta_max: " << BUnits::theta_max
-        //                         << endl;
+        G4VisAttributes* inner_vol = new G4VisAttributes(G4Colour(0.1, 0.1, 0.9, 0.1));
+        G4VisAttributes* outer_vol = new G4VisAttributes(G4Colour(.1, 0.8, 0.2, 0.1));
+     
+        inner_vol->SetVisibility(true); 
+        inner_vol->SetForceSolid(true); 
 
-        // double ene[]={10*GeV};
-        // double pars[]={60, 372};
-        // cout << "\r\033[20C" << "Flux expected: " 
-        //     << BPrimaryGeneratorAction::integrate_flux(372*m, 1*GeV, 100*GeV, 100, 100) * m/cm * m/cm * 60 * 60 * 19.9282
-        //     << endl;
-
-        dynamic_cast<G4Box*> (genSolid)->SetXHalfLength(length);
-        dynamic_cast<G4Box*> (genSolid)->SetYHalfLength(length);
-        dynamic_cast<G4Box*> (genSolid)->SetZHalfLength(target_half_length);
-
-        dynamic_cast<G4Box*> (solidWorld)->SetXHalfLength(length);
-        dynamic_cast<G4Box*> (solidWorld)->SetYHalfLength(length);
-        dynamic_cast<G4Box*> (solidWorld)->SetZHalfLength(target_half_length*2);
-
-        physiTarget->SetTranslation(G4ThreeVector(0, 0, -target_half_length));
-        genPhysic->SetTranslation(G4ThreeVector(0, 0, -target_half_length));
+        outer_vol->SetVisibility(true); 
+        outer_vol->SetForceSolid(true);     
         
         for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
-            if(pv->GetName() == "AntaresOM")
+            //place the OM 50 cm above the target volume
+            if(pv->GetName() == "AntaresOM"){
                 pv->SetTranslation(G4ThreeVector(0, 0, - target_half_length + 50 *cm));
+            }
+                
+            if(pv->GetName() == "LACTEL_Cell_Outer"){
+                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetXHalfLength(target_half_length);
+                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetYHalfLength(target_half_length);
+                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(target_half_length);
+                pv->SetTranslation(G4ThreeVector(0, 0, - target_half_length));
+                pv->GetLogicalVolume()->SetVisAttributes(outer_vol);
+            }
+
+            if(pv->GetName() == "LACTEL_Cell_Inner"){
+                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetXHalfLength(target_half_length - 5*mm ); // 
+                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetYHalfLength(target_half_length - 5*mm );
+                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(target_half_length - 5*mm );
+                pv->GetLogicalVolume()->SetVisAttributes(inner_vol);
+            }
         } 
-        return pv;
+
+        autoWorldSize();
+
+        cout << "\r\033[20C" << "New generation surface for a detector of volume " 
+                                << 2*target_half_length/m * 2*target_half_length/m * 2*target_half_length/m 
+                                << " m^3 is: "  
+                                <<" length = " << 2*gen_half_length/m << " m - s = "
+                                << 2*gen_half_length/m * 2*gen_half_length/m << " m² - s = "
+                                << 2*gen_half_length/cm * 2*gen_half_length/cm << " cm²"
+                                << "\nAcceptance angle in deg: " << acceptanceAngle/deg
+                                << endl;
+        return pv; 
     }
 
     void BDetectorConstruction::setTargetType(G4String type){
@@ -100,5 +176,5 @@ namespace km3net
     }
 
 
-} // namespace km3net
+} // namespace lactel
 

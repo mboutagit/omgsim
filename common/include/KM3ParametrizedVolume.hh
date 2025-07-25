@@ -49,7 +49,7 @@ namespace km3net
       {
         std::string Prefix = "";
         //overlaps checking
-        bool CheckOverlaps = false;
+        bool CheckOverlaps = true;
 
         bool IsOk = false;
 

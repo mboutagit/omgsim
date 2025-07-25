@@ -287,7 +287,7 @@ namespace km3net
     G4ProcessManager* pManager = G4Neutron::Neutron()->GetProcessManager();
 
     // process: elastic
-    //
+    
     G4HadronElasticProcess* theElasticProcess = new G4HadronElasticProcess();
     pManager->AddDiscreteProcess(theElasticProcess);
     //
@@ -313,10 +313,10 @@ namespace km3net
     // cross section data set
     G4NeutronHPInelasticData* dataSet2 = new G4NeutronHPInelasticData();
     theInelasticProcess->AddDataSet(dataSet2);
-    //
-    // models
-    G4NeutronHPInelastic* model2 = new G4NeutronHPInelastic();
-    theInelasticProcess->RegisterMe(model2);
+    
+    // // models
+    // G4NeutronHPInelastic* model2 = new G4NeutronHPInelastic();
+    // theInelasticProcess->RegisterMe(model2);
 
     // process: nCapture
     //
@@ -328,18 +328,17 @@ namespace km3net
     theCaptureProcess->AddDataSet(dataSet3);
     //
     // models
-    G4NeutronHPCapture* model3 = new G4NeutronHPCapture();
-    theCaptureProcess->RegisterMe(model3);
+    // G4NeutronHPCapture* model3 = new G4NeutronHPCapture();
+    // theCaptureProcess->RegisterMe(model3);
 
     // process: nFission
-    //
     G4HadronFissionProcess* theFissionProcess = new G4HadronFissionProcess();
     pManager->AddDiscreteProcess(theFissionProcess);
     //
     // cross section data set
     G4NeutronHPFissionData* dataSet4 = new G4NeutronHPFissionData();
     theFissionProcess->AddDataSet(dataSet4);
-    //
+    
     // models
     #ifdef USE_FISSION_NEW
     #ifdef FISSION_NEW

@@ -110,6 +110,7 @@ namespace km3net
       G4VisAttributes attribs(colour);
       attribs.SetForceSolid(true);  // Force solid rendering mode
       attribs.SetVisibility(true); 
+      // attribs.SetLineWidth(3); // set visual width in pixels
 
       polyline.SetVisAttributes(attribs);
       polyline.push_back(preStepPoint);
@@ -153,8 +154,9 @@ namespace km3net
             if (vac.find("NOREFLEXVaccumInPmt")!=std::string::npos)
             //VaccumOfPmt  was NOREFLEXVaccumInPmt
               {
-                //G4cout << "   ----------- Potontial Detection " << G4endl;
+                //G4cout << "   ----------- Potential Detection " << G4endl;
                 fTrack->SetTrackStatus(fStopAndKill);
+                cout << "\r\033[10C" << "--- M3SteppingAction::UserSteppingAction: Stop and killed!!" << endl;
                 return;
               }
           }
@@ -183,9 +185,20 @@ namespace km3net
   //                           << endl;
 
     if (!thePrePV || !thePostPV || !thePreOriginalPV || !thePostOriginalPV ){
-     // cout << "A volume is messing !!" << endl;
+      // cout << "A volume is messing !!" << endl;
+      // if(thePrePV) cout << "\r\033[10C" << "prePV name: " << thePrePV->GetLogicalVolume ()->GetName();
+      // if(thePostPV) cout << " - postPV name: " << thePostPV->GetLogicalVolume ()->GetName();
+      // if(thePreOriginalPV) cout << " - preOPV name: " << thePreOriginalPV->GetLogicalVolume ()->GetName();
+      // if(thePostOriginalPV) cout << " - postOPV name: " << thePostOriginalPV->GetLogicalVolume ()->GetName();
+      // std:: cout<<endl;
        return;
     }
+
+    // cout << "\r\033[10C" << "prePV name: " << thePrePV->GetLogicalVolume ()->GetName() 
+    // << " - postPV name: " << thePostPV->GetLogicalVolume ()->GetName()
+    // << " - preOPV name: " << thePreOriginalPV->GetLogicalVolume ()->GetName()
+    // << " - postOPV name: " << thePostOriginalPV->GetLogicalVolume ()->GetName()
+    // << std::endl;
      
     // else
     
@@ -346,7 +359,7 @@ namespace km3net
 		    double teta = localPoint.theta ();//acos(costeta);
 
 		    double eta_teta=_angular_efficiency->Value(teta/3*2.1);
-
+        
 		    double eta_teta_err=_angular_efficiency_err->Value(teta/3*2.1);
 
 		    double rndm = G4UniformRand();
