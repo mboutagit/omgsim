@@ -1,0 +1,15 @@
+/KM3/XP/Type BA
+/KM3/det/DetInit Lactel
+/KM3/det/DetectorTypeName LactelOneCell
+/KM3/det/setMeanCapRadius 5 cm
+/KM3/det/setTargetScattering 1
+/KM3/det/setTargetMaterial IdealWater
+/KM3/det/setWorldLength 11.0 m 
+/KM3/det/setTargetLength  .5 m
+/KM3/BDet/targetType M2
+/KM3/BDet/acceptanceAngle 45 deg
+/KM3/GenType 3
+/run/initialize
+
+#Number of event to simulate: 3
+/run/beamOn 3

@@ -82,11 +82,11 @@ namespace km3net
     // Get the analysis manager
     //KM3AnalysisManager* analysis = KM3AnalysisManager::getInstance();
     //analysis->EndOfRun();
-    G4cout << "End of Run ------ " << r->GetRunID() << G4endl;
+    G4cout << "\nEnd of Run ------ " << r->GetRunID() << G4endl;
 
-    if (G4VVisManager::GetConcreteInstance())
-      G4cout << G4endl;
-      G4cout << "End of Run " << r->GetRunID() << G4endl;
+    // if (G4VVisManager::GetConcreteInstance())
+      // G4cout << G4endl;
+      // G4cout << "End of Run " << r->GetRunID() << G4endl;
     //  G4UImanager::GetUIpointer()->ApplyCommand("/vis/show/view");
 
     // BAnalysis* ba = BAnalysis::getIt();

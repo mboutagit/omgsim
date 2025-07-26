@@ -184,10 +184,6 @@ namespace lactel
 
     void BAnalysis::StartOfEvent(const G4Event* EV){
         AAAnalysisManager::StartOfEvent(EV); // call the base class function first
-        
-        BPrimaryGeneratorAction::getInstance()->nGen += 1;
-        if(fDetectedEvent.nhit > 0)
-            BPrimaryGeneratorAction::getInstance()->nDet += 1;
 
         fDetectedEvent.event_id = 0;
         fDetectedEvent.nhit = 0;
@@ -202,7 +198,18 @@ namespace lactel
             std::cout << "\r\033[10C" << "From : BAnalysis::EndOfEvent(const G4Event* EV)" << std::endl;
         #endif
 
-        fRun.nGenEvent += 1; // add the event to the run 
+        fRun.nGenEvent += 1; 
+        
+        BPrimaryGeneratorAction::getInstance()->nGen += 1;
+        
+        if(fDetectedEvent.nhit > 0){
+            BPrimaryGeneratorAction::getInstance()->nDet += 1;
+            fRun.nDetEvent += 1; 
+        }
+            
+
+
+        // add the event to the run 
         // if(fEvent.isDetected == true)
         //     fRun.nDetEvent += 1; // add the event is detected
 
@@ -221,33 +228,20 @@ namespace lactel
         genPars.fGenPhi    = particle->GetMomentum().phi() /deg;
         genPars.fGenEnergy = particle->GetTotalEnergy() / MeV;      
 
-        // fDetectedEvent.event_id = EV->GetEventID();
-        // fDetectedEvent.event_id = 0;
-        // fDetectedEvent.nhit = 0;
-        // fDetectedEvent.tmax = 0;
-        // fDetectedEvent.tmin = 0;
-        // fDetectedEvent.tota = 0;
-        // fDetectedEvent.hits.clear();
-
-        // fDetectedEvent.Hit.id = -1;
-        // fDetectedEvent.Hit.time = 0;
-        // fDetectedEvent.Hit.charge = 0;
-
         fDetectedEvent.event_id = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
         fDetectedEvent.runNb = fRun.runNb; // OK as fRun.runNb is set in the start of the run
-
-        
 
         if(fDetectedEvent.nhit > 0){    // only detected events
             detectedEventTree->Fill();
             genPars.isDetected = true;
+            ndet+=1;
             // std::cout << "\r\033[10C" << "-- Detected event: nhit=" << fDetectedEvent.nhit << std::endl;  
         }
         
         genTree->Fill();
-            
-
         // std::cout << "\r\033[10C" << "End of Event: " << EV->GetEventID() << std::endl;
+        nsim+=1;
+        nhit = 0;
     }
 
     BAnalysis::MeasureParameters BAnalysis::getMeasurePars(){
@@ -281,7 +275,7 @@ namespace lactel
         measure.fId += 1;
 
         Hit ahit;
-        ahit.id += 1;
+        ahit.id = nhit;
         ahit.time = info->GetOriginalTime();
         ahit.charge = info->GetOriginalEnergy() / CLHEP::eV;
 
@@ -297,9 +291,10 @@ namespace lactel
         if(fDetectedEvent.tmax < info->GetOriginalTime())
             fDetectedEvent.tmax = info->GetOriginalTime();
 
-        fDetectedEvent.tota += info->GetOriginalEnergy() / CLHEP::eV;
+        fDetectedEvent.tota += info->GetOriginalEnergy() /eV;
            //fDetectedEvent.a = info->GetOriginalEnergy() / CLHEP::eV;
         //fDetectedEvent.runNb = fRun.runNb; // OK as fRun.runNb is set in the start of the run
+        nhit+=1;
     } 
 
     void BAnalysis::Write(){

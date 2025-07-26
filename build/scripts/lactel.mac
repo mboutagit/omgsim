@@ -19,6 +19,7 @@
 /KM3/GenType 3
 /run/initialize
 
+/run/beamOn 30
 
 #/vis/verbose errors
 
@@ -57,10 +58,10 @@
 #/gps/ene/mono  5 MeV
 #LED 470 nm
 
-/vis/open OGL #HepRepXML
-/vis/viewer/set/style wireframe
-/vis/drawVolume
-/vis/viewer/set/background 1.0 1.0 1.0 0.2
+# /vis/open OGL #HepRepXML
+# /vis/viewer/set/style wireframe
+# /vis/drawVolume
+# /vis/viewer/set/background 1.0 1.0 1.0 0.2
 # /vis/viewer/zoom 1
 # /vis/scene/add/axes 0 0 0 1 m
 # /vis/viewer/set/viewpointThetaPhi 90 0 deg

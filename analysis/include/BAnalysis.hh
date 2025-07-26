@@ -141,6 +141,10 @@ namespace lactel
             TTree* detectedEventTree;
             GenerationParameters genPars;
 
+            int ndet = 0;
+            int nsim = 0;
+            int nhit = 0;
+
             friend class BRunAction;
 
         public:

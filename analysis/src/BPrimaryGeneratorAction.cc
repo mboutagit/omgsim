@@ -83,11 +83,29 @@ namespace lactel
         muonsFlux = nMuons * genArea/cm2 * tExposure/s;
     }
 
+    G4ThreeVector BPrimaryGeneratorAction::GenerateDirThetaCos2(double theta_min, double theta_max) {
+        double theta, y;
+        double ymax = std::pow(std::cos(theta_min), 2); // peak value of cos²(theta) in the range
+        double  phi = 2 * CLHEP::pi * G4UniformRand(); // Uniform in azimuth
+    
+        do {
+            theta = G4UniformRand() * (theta_max - theta_min) + theta_min;
+            y = G4UniformRand() * ymax;
+        } while (y > std::pow(std::cos(theta), 2));
+
+        double ux = std::sin(theta) * std::cos(phi);
+        double uy = std::sin(theta) * std::sin(phi);
+        double uz = std::cos(theta);
+
+        G4ThreeVector vect = G4ThreeVector(ux, uy, uz);
+        return vect;
+    }
+
     G4ThreeVector BPrimaryGeneratorAction::GenerateMuonDirection(std::string mode) 
     {
-        G4double u = G4UniformRand();
-        G4double theta = std::acos(std::pow(u, 1/2));  // cos²(θ) distribution
-        G4double  phi = 2 * CLHEP::pi * G4UniformRand(); // Uniform in azimuth
+        double u = G4UniformRand();
+        double theta = std::acos(std::pow(u, 1/2));  // cos²(θ) distribution
+        double  phi = 2 * CLHEP::pi * G4UniformRand(); // Uniform in azimuth
         
         if(mode == "vertical"){
             theta = CLHEP::pi;  // vertiacal -z
@@ -98,6 +116,9 @@ namespace lactel
         else if(mode == "down-going_cos2"){
             theta = - acos(pow(u, 3/2)) - CLHEP::pi/2;
         }
+        else if(mode == "angle"){
+            theta = thetaMax;
+        }
 
         G4double ux = std::sin(theta) * std::cos(phi);
         G4double uy = std::sin(theta) * std::sin(phi);
@@ -105,6 +126,8 @@ namespace lactel
 
         G4ThreeVector vect = G4ThreeVector(ux, uy, uz);
         return vect;
+
+
     }
 
     G4double BPrimaryGeneratorAction::GenerateMuonEnergy(double min, double max, float theta) {
@@ -155,48 +178,9 @@ namespace lactel
                 throw("KM3PrimaryGeneratorAction::InitializeCustumMuonType: -- Generation physical volume is not defined");
             }
 
-            // fTargetRadius = det->GetTargetFullLength();
-            // fGenVolumeRaduis = det->GetWorldFullLength();
-            //Navigator = G4TransportationManager::GetTransportationManager()->GetNavigatorForTracking();
             fGunType = 3;
-        
             particleGun = new G4ParticleGun(); 
-            // double zenith = generateZenithAngle();
-            // double Ene = generateMuonEnergy(Emin, Emax); // 1 GeV to 10 TeV
-            // double nMuons = IntegrateMuonFlux(Emin, Emax, area, texpo); // 1 m², 1 s
-            // double n1Muons = integrate_gaisser_flux(1*GeV, 1000*GeV, 1000);
-            // double n2Muons = integrate_gaisser_flux(1*GeV, 100*TeV, 1000);
-
-        
-            //G4ThreeVector surfPoints = GetRandomPointOnBoxFace(det->genPhysic, "+Z"); //genVolume->GetPointOnSurface()
             G4ThreeVector surfPoints = GetRandomPointOnBoxFace(det->genPhysic, "+Z"); //genVolume->GetPointOnSurface()
-
-            ///////////////////////////////////
-
-            // G4LogicalVolume* logTargetVol = det->physiTarget->GetLogicalVolume();
-            // G4VSolid* solidTarget = logTargetVol->GetSolid();
-
-            // G4Box* box = dynamic_cast<G4Box*>(solidTarget);
-            // if (!box) {
-            //     G4cerr << "Error: The given physical volume is not a G4Box!" << G4endl;
-            // }
-
-            // G4double halfTargetX = box->GetXHalfLength();
-            // G4double halfTargetY = box->GetYHalfLength();
-            // G4double halfTargetZ = box->GetZHalfLength();
-
-            // while( std::abs(surfPoints.x()) < halfTargetX &&
-            //         std::abs(surfPoints.y()) < halfTargetY && 
-            //         std::abs(surfPoints.z()) < halfTargetZ
-            //      )
-            //     {
-            //         G4ThreeVector surfPoints = GetRandomPointOnBoxFace(det->genPhysic, "+Z");
-            //     }
-
-            // cout << "\r\033[10C" << "event pos: " << surfPoints << endl;
-            
-
-            //////////////////////////////////
 
             G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
         
@@ -229,25 +213,6 @@ namespace lactel
             particle_direction = direction;
             particle_energy = energy;
             altitude = 372.;
-            // double ene[]={energy};
-            // double pars[]={direction.getTheta(), altitude};
-            // double flux = BPrimaryGeneratorAction::MuonFlux(ene, pars);
-            // double flux_ = BPrimaryGeneratorAction::muon_flux(energy, direction.getTheta(), 372 * m);
-
-            //cout << "\r\033[10C" << "Computed flux: " << flux << endl;
-           // cout << "\r\033[10C" << "Computed flux_: " << flux_ << endl;
-           // cout << "\r\033[10C" << "Integrated muons flux: " << integrate_flux(372 * m, 10 * GeV, 1 * TeV, 1 * GeV, 0.5 * deg) << endl;
-            // double pars__[]={1 * GeV, 1* TeV, 0.1 * GeV, 0.1 * deg, 372 * m};
-            // cout << "\r\033[10C" << "Integrated muons flux with array: " << integrate_flux(pars__) * 1e4 << endl;
-
-            // cout << "\r\033[20C" << "Flux expected for theta = " << pars[0] << 
-            //                         " and altitude of " << pars[1] << 
-            //                         " and Energy of " << energy << 
-            //                         " is : " << flux <<
-            //                         endl;
-
-            // std::cout << "Estimated muon count n1 per " << area << " m² per " << texpo << " seconds: " << n1Muons << std::endl;
-            // std::cout << "Estimated muon count n2 per " << area << " m² per " << texpo << " seconds: " << n2Muons << std::endl;
 
             if(write_generation_data)
                 print(gen_data);

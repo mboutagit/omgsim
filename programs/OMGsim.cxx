@@ -115,6 +115,11 @@ int main(int argc_,char** argv_)
             {
               evt_output=true;
             }
+          else if ( (option == "-of") && (iarg+1 <= argc_) )
+            {
+              srf=argv_[iarg+1];
+              //std::cout << "\r\033[20C" << "token: " << token << " ---- value: " << argv_[iarg+1] << std::endl;
+            }
            
 
           /* Here you may add more switches...

@@ -45,7 +45,9 @@ public:
     G4ThreeVector GetRandomPointOnBoxFace(G4VPhysicalVolume* physVol, G4String face);
     static double muon_flux(double E, double theta, double altitude);
     //static double integrate_flux(double altitude, double E_min, double E_max, int E_steps, int theta_steps);
-    double integrate_muon_flux(double alt = 327, double Emin = 1*GeV, double Emax = 10*TeV, double Esteps = 1*GeV, double theta_min = 0.*deg, double theta_max=60.*deg, double theta_steps = 1*deg);
+    double integrate_muon_flux(double alt = 327, double Emin = 1*GeV, double Emax = 10*TeV, double Esteps = 1*GeV, 
+                                double theta_min = 0.*deg, double theta_max=60.*deg, double theta_steps = 1*deg);
+    G4ThreeVector GenerateDirThetaCos2(double theta_min, double theta_max);
 
     static double integrate_flux(double* pars);
 
