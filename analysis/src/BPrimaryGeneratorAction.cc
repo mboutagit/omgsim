@@ -6,6 +6,7 @@
 #include "Randomize.hh"
 #include "G4StateManager.hh"
 
+#include "BPrimaryGeneratorMessenger.hh"
 
 namespace lactel
 {   
@@ -13,6 +14,8 @@ namespace lactel
     BPrimaryGeneratorAction* BPrimaryGeneratorAction::instance = 0;
     
     bool BPrimaryGeneratorAction::write_generation_data = false;
+
+    BPrimaryGeneratorAction::GenParsMode BPrimaryGeneratorAction::genParsMode=GenParsMode::integral;
 
     float BPrimaryGeneratorAction::EMin = 1 *GeV; // maximum energy
     float BPrimaryGeneratorAction::EMax = 1 *TeV; // minimum energy
@@ -43,6 +46,8 @@ namespace lactel
                 gen_data = ofstream(output_file_name);
             }
         }
+
+        fMessenger = new BPrimaryGeneratorMessenger(this);
     }
 
     BPrimaryGeneratorAction::~BPrimaryGeneratorAction(){
@@ -56,6 +61,29 @@ namespace lactel
             nMuonsGr->Write();
     
         gen_data.close();
+    }
+
+    void BPrimaryGeneratorAction::SetGenParsMode(std::string mode){
+        if(mode == "fixed"){
+            genParsMode = GenParsMode::fixed;
+            std::cout << "\r\033[10C" << ">>>> GenParsMode is: " << "fixed" << std::endl;
+        }
+        else if(mode == "integral"){
+            genParsMode = GenParsMode::integral;        
+            std::cout << "\r\033[10C" << ">>>> GenParsMode is: " << "integral" << std::endl;
+        }
+        else if(mode == "random"){
+            genParsMode = GenParsMode::random;
+            std::cout << "\r\033[10C" << ">>>> GenParsMode is: " << "random" << std::endl;
+        }
+        else if(mode == "cos2"){
+            genParsMode = GenParsMode::cos2;
+            std::cout << "\r\033[10C" << ">>>> GenParsMode is: " << "cos2" << std::endl;
+        }
+        else{
+            std::cerr << "\r\033[10C" << "Unkown generation parameter mode " << mode << std::endl;
+        }
+
     }
 
     void BPrimaryGeneratorAction::GeneratePrimaries(G4Event* event){
@@ -130,6 +158,14 @@ namespace lactel
 
     }
 
+    G4ThreeVector BPrimaryGeneratorAction::FixedThetaDirection(double theta){
+        double  phi = 2 * CLHEP::pi * G4UniformRand(); // Uniform in azimuth
+        return G4ThreeVector(std::sin(theta) * std::cos(phi), 
+                                std::sin(theta) * std::sin(phi),
+                                std::cos(theta)
+                            );
+    }
+
     G4double BPrimaryGeneratorAction::GenerateMuonEnergy(double min, double max, float theta) {
         float _alpha = 2.7 + (theta < 120 ? 1. : 0.);  
         //float A, B, a, b;
@@ -190,7 +226,23 @@ namespace lactel
             else
               particleName = "mu-";
 
-            G4ThreeVector direction = GenerateMuonDirection("down-going_cos2");
+            double Emin = 1.0;     // GeV
+            double Emax = 1e4;     // GeV (10 TeV)
+            G4ThreeVector direction;
+            G4double energy;
+
+
+            if(genParsMode == GenParsMode::cos2){
+                direction = GenerateMuonDirection("down-going_cos2");
+                energy = GenerateMuonEnergy(Emin * GeV, Emax * GeV, direction.getTheta());
+            }
+            else if(genParsMode == GenParsMode::fixed){
+                energy = EGen;
+                direction = FixedThetaDirection(thetaGen);
+            }
+                
+            
+
             if(direction.getZ() > 0)
                 direction.setZ(- direction.getZ());
             G4ThreeVector polarization(G4UniformRand(), G4UniformRand(), 0.0); 
@@ -200,9 +252,7 @@ namespace lactel
             if(!particle)
               return;
             
-            double Emin = 1.0;     // GeV
-            double Emax = 1e4;     // GeV (10 TeV)
-            G4double energy = GenerateMuonEnergy(Emin * GeV, Emax * GeV, direction.getTheta());
+            
 
             ((G4ParticleGun*)particleGun)->SetParticleDefinition(particle);
             ((G4ParticleGun*)particleGun)->SetParticlePosition(surfPoints);

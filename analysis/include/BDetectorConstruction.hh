@@ -49,7 +49,7 @@ namespace lactel
         G4ThreeVector OMPosition; // w.r.t the INNER_LACTEL_VOLUME
 
         static float worldSizeOffset;
-        static float acceptanceAngle;
+        static float acceptanceAngle; // angle used to compute the generation surface
 
         DetGeoConf detGeoConf;
     };

@@ -556,6 +556,33 @@ analysis/src/BPrimaryGeneratorAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BPrimaryGeneratorAction.cc.s
 .PHONY : analysis/src/BPrimaryGeneratorAction.cc.s
 
+analysis/src/BPrimaryGeneratorMessenger.o: analysis/src/BPrimaryGeneratorMessenger.cc.o
+.PHONY : analysis/src/BPrimaryGeneratorMessenger.o
+
+# target to build an object file
+analysis/src/BPrimaryGeneratorMessenger.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BPrimaryGeneratorMessenger.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BPrimaryGeneratorMessenger.cc.o
+.PHONY : analysis/src/BPrimaryGeneratorMessenger.cc.o
+
+analysis/src/BPrimaryGeneratorMessenger.i: analysis/src/BPrimaryGeneratorMessenger.cc.i
+.PHONY : analysis/src/BPrimaryGeneratorMessenger.i
+
+# target to preprocess a source file
+analysis/src/BPrimaryGeneratorMessenger.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BPrimaryGeneratorMessenger.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BPrimaryGeneratorMessenger.cc.i
+.PHONY : analysis/src/BPrimaryGeneratorMessenger.cc.i
+
+analysis/src/BPrimaryGeneratorMessenger.s: analysis/src/BPrimaryGeneratorMessenger.cc.s
+.PHONY : analysis/src/BPrimaryGeneratorMessenger.s
+
+# target to generate assembly for a file
+analysis/src/BPrimaryGeneratorMessenger.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BPrimaryGeneratorMessenger.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BPrimaryGeneratorMessenger.cc.s
+.PHONY : analysis/src/BPrimaryGeneratorMessenger.cc.s
+
 analysis/src/BRunAction.o: analysis/src/BRunAction.cc.o
 .PHONY : analysis/src/BRunAction.o
 
@@ -1340,6 +1367,9 @@ help:
 	@echo "... analysis/src/BPrimaryGeneratorAction.o"
 	@echo "... analysis/src/BPrimaryGeneratorAction.i"
 	@echo "... analysis/src/BPrimaryGeneratorAction.s"
+	@echo "... analysis/src/BPrimaryGeneratorMessenger.o"
+	@echo "... analysis/src/BPrimaryGeneratorMessenger.i"
+	@echo "... analysis/src/BPrimaryGeneratorMessenger.s"
 	@echo "... analysis/src/BRunAction.o"
 	@echo "... analysis/src/BRunAction.i"
 	@echo "... analysis/src/BRunAction.s"
