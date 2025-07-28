@@ -67,9 +67,12 @@
 #include <random>
 #include <iostream>
 
-#ifdef G4VIS_USE
+#include "G4VisManager.hh"
+#include "G4VVisManager.hh"
+
+//#ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
-#endif
+//#endif
 
 using namespace std;
 using namespace km3net;

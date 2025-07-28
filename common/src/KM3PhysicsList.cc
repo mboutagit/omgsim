@@ -25,7 +25,7 @@
 //
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#include <G4HadronFissionProcess.hh>
+#include <G4NeutronFissionProcess.hh>
 #ifdef USE_FISSION_NEW
 #include <G4FissLib_new.hh>
 #endif
@@ -43,15 +43,15 @@
 #include "G4NeutronHPElastic.hh"
 #include "G4NeutronHPThermalScattering.hh"
 
-#include "G4NeutronInelasticProcess.hh"
+#include "G4HadronInelasticProcess.hh"
 #include "G4NeutronHPInelasticData.hh"
 #include "G4NeutronHPInelastic.hh"
 
-#include "G4HadronCaptureProcess.hh"
+#include "G4NeutronCaptureProcess.hh"
 #include "G4NeutronHPCaptureData.hh"
 #include "G4NeutronHPCapture.hh"
 
-#include "G4HadronFissionProcess.hh"
+#include "G4NeutronFissionProcess.hh"
 #include "G4NeutronHPFissionData.hh"
 #include "G4NeutronHPFission.hh"
 
@@ -107,8 +107,7 @@
 #include <G4CrossSectionDataSetRegistry.hh>
 #include <G4TheoFSGenerator.hh>
 #include <G4CascadeInterface.hh>
-#include <G4AlphaInelasticProcess.hh>
-#include <G4GGNuclNuclCrossSection.hh>
+#include <G4ComponentGGNuclNuclXsc.hh>
 #include <G4FTFModel.hh>
 #include <G4ExcitedStringDecay.hh>
 #include <G4LundStringFragmentation.hh>
@@ -123,10 +122,16 @@
 
 #include <G4HadronicProcessStore.hh>
 #include <G4EmStandardPhysics.hh>
-#include "G4EmProcessOptions.hh"
 
 
+#include "G4HadronPhysicsQGSP_BERT.hh"
 
+#include "G4IonPhysics.hh"
+
+#include "G4VCrossSectionDataSet.hh"
+
+//#include "G4TripathiCrossSection.hh"
+#include "G4IonsShenCrossSection.hh"
 
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -167,6 +172,8 @@ namespace km3net
     pMessenger=new KM3PhysicsListMessenger (this);
 
     theBoundaryProcess = new KM3PMTOpticalModel ();//create here for the messenger of opticalmodel
+	//  Hadronic physics with Glauber-Gribov model
+//    RegisterPhysics(new G4HadronPhysicsQGSP_BERT());
   }
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -247,20 +254,18 @@ namespace km3net
     ConstructOp();
     ConstructNeutronPhysics ();
 
-    G4HadronicProcessStore::Instance()->SetVerbose(0);
+ //   G4HadronicProcessStore::Instance()->SetVerbose(0);
+
 
     // G4EmStandardPhysics* emPhysics = new G4EmStandardPhysics();
     // emPhysics->ConstructProcess();  // Initialize EM physics
-
-    // Suppress EM physics output
-    G4EmProcessOptions emOptions;
-    emOptions.SetVerbose(0);  // Set verbosity level to 0
 
   }
 
   void KM3PhysicsList::ConstructGeneral() {
     /*// Add Decay Process
       G4Decay* theDecayProcess = new G4Decay();
+      auto theParticleIterator = GetParticleIterator();
       theParticleIterator->reset();
       while ((*theParticleIterator)()) {
       G4ParticleDefinition* particle = theParticleIterator->value();
@@ -287,7 +292,7 @@ namespace km3net
     G4ProcessManager* pManager = G4Neutron::Neutron()->GetProcessManager();
 
     // process: elastic
-    
+    //
     G4HadronElasticProcess* theElasticProcess = new G4HadronElasticProcess();
     pManager->AddDiscreteProcess(theElasticProcess);
     //
@@ -307,20 +312,20 @@ namespace km3net
 
     // process: inelastic
     //
-    G4NeutronInelasticProcess* theInelasticProcess = new G4NeutronInelasticProcess();
+    G4HadronInelasticProcess* theInelasticProcess = new G4HadronInelasticProcess("neutron",G4Neutron::Definition());
     pManager->AddDiscreteProcess(theInelasticProcess);
     //
     // cross section data set
     G4NeutronHPInelasticData* dataSet2 = new G4NeutronHPInelasticData();
     theInelasticProcess->AddDataSet(dataSet2);
-    
-    // // models
-    // G4NeutronHPInelastic* model2 = new G4NeutronHPInelastic();
-    // theInelasticProcess->RegisterMe(model2);
+    //
+    // models
+    G4NeutronHPInelastic* model2 = new G4NeutronHPInelastic();
+    theInelasticProcess->RegisterMe(model2);
 
     // process: nCapture
     //
-    G4HadronCaptureProcess* theCaptureProcess = new G4HadronCaptureProcess();
+    G4NeutronCaptureProcess* theCaptureProcess = new G4NeutronCaptureProcess();
     pManager->AddDiscreteProcess(theCaptureProcess);
     //
     // cross section data set
@@ -328,17 +333,18 @@ namespace km3net
     theCaptureProcess->AddDataSet(dataSet3);
     //
     // models
-    // G4NeutronHPCapture* model3 = new G4NeutronHPCapture();
-    // theCaptureProcess->RegisterMe(model3);
+    G4NeutronHPCapture* model3 = new G4NeutronHPCapture();
+    theCaptureProcess->RegisterMe(model3);
 
     // process: nFission
-    G4HadronFissionProcess* theFissionProcess = new G4HadronFissionProcess();
+    //
+    G4NeutronFissionProcess* theFissionProcess = new G4NeutronFissionProcess();
     pManager->AddDiscreteProcess(theFissionProcess);
     //
     // cross section data set
     G4NeutronHPFissionData* dataSet4 = new G4NeutronHPFissionData();
     theFissionProcess->AddDataSet(dataSet4);
-    
+    //
     // models
     #ifdef USE_FISSION_NEW
     #ifdef FISSION_NEW
@@ -363,6 +369,7 @@ namespace km3net
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
   void KM3PhysicsList::ConstructEM() {
+    auto theParticleIterator = GetParticleIterator();
     theParticleIterator->reset();
     while ((*theParticleIterator)()) {
       G4ParticleDefinition* particle = theParticleIterator->value();
@@ -422,7 +429,14 @@ namespace km3net
         G4PreCompoundModel * thePreEquilib = new G4PreCompoundModel( new G4ExcitationHandler );
         G4GeneratorPrecompoundInterface * theCascade = new G4GeneratorPrecompoundInterface( thePreEquilib );
 
-        G4VCrossSectionDataSet * theGGNuclNuclData = G4CrossSectionDataSetRegistry::Instance()->  GetCrossSectionDataSet(G4GGNuclNuclCrossSection::Default_Name());
+	G4VCrossSectionDataSet * theGGNuclNuclData = G4CrossSectionDataSetRegistry::Instance()->  GetCrossSectionDataSet("Glauber-Gribov nucleus nucleus");
+//	if (!theGGNuclNuclData) {
+//	    G4Exception("YourPhysicsList::ConstructProcess",
+  //              "CrossSection003",
+    //            JustWarning,
+      //          "Cross section factory with name: Glauber-Gribov nucleus nucleus not found. It is deactivated in KM3PhysicsList::ConstructEM()");
+	//}
+
         G4TheoFSGenerator * theFTFModel1 = new G4TheoFSGenerator( "FTFP" );
         theFTFModel1->SetHighEnergyGenerator( theStringModel );
         theFTFModel1->SetTransport( theCascade );
@@ -434,10 +448,24 @@ namespace km3net
         theBERTModel0->SetMaxEnergy( theBERTMax );
 
 
-        G4AlphaInelasticProcess* theInelasticProcess =
-          new G4AlphaInelasticProcess("inelastic");
-        theInelasticProcess->AddDataSet( theGGNuclNuclData );
-        theInelasticProcess->RegisterMe( theFTFModel1 );
+        G4HadronInelasticProcess* theInelasticProcess =
+          new G4HadronInelasticProcess("alpha",G4Alpha::Definition());
+	if(theGGNuclNuclData)
+		 theInelasticProcess->AddDataSet( theGGNuclNuclData );
+        else
+		{cout << "Hadronic processus are messing !!" << endl;}
+	// Then instantiate and register like this:
+//auto tripathiXS = new G4TripathiCrossSection();
+auto shenXS = new G4IonsShenCrossSection();
+
+auto inelProcess = new G4HadronInelasticProcess("ionInelastic", G4GenericIon::GenericIon());
+
+//theInelasticProcess->AddDataSet(tripathiXS);
+theInelasticProcess->AddDataSet(shenXS);	
+
+
+
+	theInelasticProcess->RegisterMe( theFTFModel1 );
         theInelasticProcess->RegisterMe( theBERTModel0 );
         pmanager->AddDiscreteProcess( theInelasticProcess );
         pmanager->AddProcess (new G4NuclearStopping, -1, 3, -1);
@@ -480,22 +508,8 @@ namespace km3net
     G4Scintillation* theScintProcessDef = new G4Scintillation("Scintillation");
     // theScintProcessDef->DumpPhysicsTable();
     theScintProcessDef->SetTrackSecondariesFirst(true);
-    theScintProcessDef->SetScintillationYieldFactor(1.0); //
-    theScintProcessDef->SetScintillationExcitationRatio(0.0); //
 
-    // scintillation process for alpha:
-    G4Scintillation* theScintProcessAlpha = new G4Scintillation("Scintillation");
-    // theScintProcessNuc->DumpPhysicsTable();
-    theScintProcessAlpha->SetTrackSecondariesFirst(true);
-    theScintProcessAlpha->SetScintillationYieldFactor(1.1);
-    theScintProcessAlpha->SetScintillationExcitationRatio(1.0);
-
-    // scintillation process for heavy nuclei
-    G4Scintillation* theScintProcessNuc = new G4Scintillation("Scintillation");
-    // theScintProcessNuc->DumpPhysicsTable();
-    theScintProcessNuc->SetTrackSecondariesFirst(true);
-    theScintProcessNuc->SetScintillationYieldFactor(0.2);
-    theScintProcessNuc->SetScintillationExcitationRatio(1.0);
+    auto theParticleIterator = GetParticleIterator();
 
     theParticleIterator->reset();
     while ((*theParticleIterator)()) {
@@ -507,24 +521,10 @@ namespace km3net
         pmanager->SetProcessOrdering(theCerenkovProcess, idxPostStep);
       }
       if (theScintProcessDef->IsApplicable(*particle)) 
-      {
-        if(particle->GetParticleName() == "GenericIon") {
-          pmanager->AddProcess(theScintProcessNuc); // AtRestDiscrete
-          pmanager->SetProcessOrderingToLast(theScintProcessNuc,idxAtRest);
-          pmanager->SetProcessOrderingToLast(theScintProcessNuc,idxPostStep);
-        }
-        else if(particle->GetParticleName() == "alpha") 
-        {
-          pmanager->AddProcess(theScintProcessAlpha);
-          pmanager->SetProcessOrderingToLast(theScintProcessAlpha,idxAtRest);
-          pmanager->SetProcessOrderingToLast(theScintProcessAlpha,idxPostStep);
-        }
-        else 
-        {
-          pmanager->AddProcess(theScintProcessDef);
-          pmanager->SetProcessOrderingToLast(theScintProcessDef,idxAtRest);
-          pmanager->SetProcessOrderingToLast(theScintProcessDef,idxPostStep);
-        }
+      { 
+        pmanager->AddProcess(theScintProcessDef); // AtRestDiscrete
+        pmanager->SetProcessOrderingToLast(theScintProcessDef,idxAtRest);
+        pmanager->SetProcessOrderingToLast(theScintProcessDef,idxPostStep);
       }
       if (particleName == "opticalphoton") {
         G4cout << " AddDiscreteProcess to OpticalPhoton " << G4endl;
@@ -621,6 +621,7 @@ namespace km3net
   void KM3PhysicsList::AddParameterisation() {
     G4FastSimulationManagerProcess* theFastSimulationManagerProcess=
       new G4FastSimulationManagerProcess("OpticalPhotocathodeProcess");
+    auto theParticleIterator = GetParticleIterator();
     theParticleIterator->reset();
     while ((*theParticleIterator)()) {
       G4ParticleDefinition* particle = theParticleIterator->value();

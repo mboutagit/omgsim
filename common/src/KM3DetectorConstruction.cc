@@ -222,7 +222,7 @@ namespace km3net
                                      
                                      //TargetMater, "World", 0, 0, 0);
    // G4cout << "     --- the tarfget material is the: " << logicWorld->GetMaterial() << G4endl;
-    logicWorld->SetVisAttributes(G4VisAttributes::Invisible);
+    logicWorld->SetVisAttributes(G4VisAttributes::GetInvisible);
     //  Must place the World Physical volume unrotated at (0,0,0).
     //
 

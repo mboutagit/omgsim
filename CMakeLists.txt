@@ -1,12 +1,17 @@
 # (1)
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
-project(OMGsim)
+#project(OMGsim)
 
 # By Bouta basically for Qt5
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+
+project(OMGsim)
+
+find_package(CLHEP REQUIRED)
+include_directories(${CLHEP_INCLUDE_DIRS})
 
 find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
 
@@ -61,6 +66,8 @@ message("We use ROOT_INCLUDE_DIRS which is: ${ROOT_INCLUDE_DIRS} instead ROOT_IN
 # (3) Geant4
 find_package(Geant4 REQUIRED ui_all vis_all)
 include(${Geant4_USE_FILE})
+
+message (the c++ standars are : ${CMAKE_CXX_STANDARD})
 
 # (4) organize project libraries
 file(GLOB sources */src/[a-zA-Z0-9]*.cc

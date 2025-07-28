@@ -57,7 +57,7 @@ namespace km3net
   class KM3PMTOpticalModel;
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-  class KM3PhysicsList: public G4VUserPhysicsList {//G4VModularPhysicsList {
+  class KM3PhysicsList: public G4VUserPhysicsList {//, public G4VModularPhysicsList {//G4VModularPhysicsList {
   public:
     friend class KM3PhysicsListMessenger;
     friend class KM3PMTOpticalModel;
@@ -98,6 +98,8 @@ namespace km3net
     void ConstructOp();
     void ConstructNeutronPhysics ();
     void SetVerbose(G4int);
+
+
 
     // hide assignment operator
     KM3PhysicsList & operator=(const KM3PhysicsList &right);

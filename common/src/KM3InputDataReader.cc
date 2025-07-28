@@ -177,6 +177,7 @@ namespace km3net
           }
         }
         else if (t.sval == "PROPERTY") {
+	          std::cout << "\r\033[10C" << "adding prop: " << t.sval << std::endl;
           wavelength_opt= 0;
           errorCount=0;
           shifter_density = 0;
@@ -189,9 +190,10 @@ namespace km3net
               currentPV =
                 currentMPT->GetProperty((char *)(const char *)(t.sval));
               if (currentPV == NULL) {
+                std::cout << "\r\033[10C" << "adding this prop: " << t.sval << std::endl;
                 currentPV= new G4MaterialPropertyVector();
                 currentMPT->AddProperty((char *)(const char *)(t.sval),
-                                          currentPV);
+                                          currentPV, true);
               }
             }
           }
@@ -245,7 +247,7 @@ namespace km3net
         if (constproperty)
           {
             currentMPT->RemoveProperty (propertyname.data());
-            currentMPT->AddConstProperty(propertyname.data(), E_value);
+            currentMPT->AddConstProperty(propertyname.data(), E_value, true);
           }
         else if (t.nextToken() == MyTokenizer::TT_NUMBER) {
           double p_value= t.nval;
@@ -363,12 +365,12 @@ namespace km3net
         i= isptr->get();
         while (i=='\\') {
           i= isptr->get();
-          sval.append((char)i);
+          sval.append(1, static_cast<char>(i));
           i= isptr->get();
         }
         if (i==EOF || i=='"')
           break;
-        sval.append((char)i);
+        sval.append(1, static_cast<char>(i));
       }
       return (ttype=TT_STRING);
     }

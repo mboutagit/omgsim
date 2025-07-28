@@ -29,6 +29,8 @@
 #include <G4Electron.hh>
 #include <G4DynamicParticle.hh>
 
+#include "G4LogicalSkinSurface.hh"
+
 
 
 //#include <G4FastSimulationManagerProcess.hh>
