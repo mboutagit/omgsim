@@ -7,9 +7,9 @@
 /KM3/det/setWorldLength 11.0 m 
 /KM3/det/setTargetLength  .5 m
 /KM3/BDet/targetType M2
-/KM3/BDet/acceptanceAngle 10 deg
+/KM3/BDet/acceptanceAngle 5 deg
 /KM3/GenType 3
 /run/initialize
 
-#Number of event to simulate: 3
-/run/beamOn 3
+#Number of event to simulate: 10
+/run/beamOn 10

@@ -19,7 +19,7 @@
 /KM3/GenType 3
 /run/initialize
 
-/run/beamOn 30
+/run/beamOn 1
 
 #/vis/verbose errors
 
