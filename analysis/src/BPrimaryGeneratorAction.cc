@@ -236,6 +236,10 @@ namespace lactel
                 direction = GenerateMuonDirection("down-going_cos2");
                 energy = GenerateMuonEnergy(Emin * GeV, Emax * GeV, direction.getTheta());
             }
+            else if(genParsMode == GenParsMode::integral){
+                direction = GenerateMuonDirection("down-going_cos2");
+                energy = GenerateMuonEnergy(Emin * GeV, Emax * GeV, direction.getTheta());
+            }
             else if(genParsMode == GenParsMode::fixed){
                 energy = EGen;
                 direction = FixedThetaDirection(thetaGen);
