@@ -80,6 +80,7 @@ namespace lactel
 
         //recalculate the size for the world and generation valume based on the target length (accept 60° events that would hit the target)
         double gen_half_length = 2*target_half_length * tan(acceptanceAngle/rad) + target_half_length; // (c+d)*tg(theta) + d/2
+        AGen = 2*gen_half_length/cm * 2*gen_half_length/cm; // generation volume above the cell cm²
 
 
         // for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
@@ -144,7 +145,7 @@ namespace lactel
                                 << " m^3 is: "  
                                 <<" length = " << 2*gen_half_length/m << " m - s = "
                                 << 2*gen_half_length/m * 2*gen_half_length/m << " m² - s = "
-                                << 2*gen_half_length/cm * 2*gen_half_length/cm << " cm²"
+                                << AGen << " cm²"
                                 << "\nAcceptance angle in deg: " << acceptanceAngle/deg
                                 << endl;
         return pv; 
@@ -152,6 +153,8 @@ namespace lactel
 
     void BDetectorConstruction::setTargetType(G4String type){
         std::string functionName="BDetectorConstruction::setTargetType: ";
+        GetIt()->detName = type;
+
         if(type.length() <= 3){
             if(type.substr(0, 1) == "M"){
                 try

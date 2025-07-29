@@ -50,6 +50,8 @@ namespace lactel
 
         static float worldSizeOffset;
         static float acceptanceAngle; // angle used to compute the generation surface
+        float AGen = 0; // generation surface above the cell in cm²
+        std::string detName;
 
         DetGeoConf detGeoConf;
     };

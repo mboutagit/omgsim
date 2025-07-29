@@ -115,6 +115,10 @@ namespace lactel
                 int runNb = -1;
                 uint nGenEvent = 0;
                 uint nDetEvent = 0;
+                float expectedRate = 0;
+                float generationSurface = 0; // in cm²
+                float acceptanceAngle = -999; // in deg
+                std::string detName ="";
             };
               
             MeasureParameters fMeasure_parameters;
@@ -130,12 +134,6 @@ namespace lactel
         protected:
             BAnalysis();
             ~BAnalysis();
-
-            virtual void Write();
-            virtual void AddDetectedParticule(const KM3TrackInformation* info, unsigned char LIM);
-            // virtual void AddPhotoTubeEntranceInfo (const G4Step* fStep);
-            // virtual void AddOMEntranceInfo (const G4Step* Step);
-
             TTree* genTree;
             TTree* runTree;
             TTree* detectedEventTree;
@@ -149,11 +147,13 @@ namespace lactel
 
         public:
             static BAnalysis* getIt();
+            virtual void Write();
+            virtual void AddDetectedParticule(const KM3TrackInformation* info, unsigned char LIM);
+            virtual void AddPhotoTubeEntranceInfo (const G4Step* fStep);
+            // virtual void AddOMEntranceInfo (const G4Step* Step);
             virtual void EndOfEvent(const G4Event* evt);
             virtual void StartOfEvent(const G4Event*);
             virtual void Init(std::string rfn = "");
-
-
 
         ClassDef(BAnalysis, 1);
 

@@ -136,7 +136,7 @@ namespace km3net
     // hit.limit = fLimit;
 
     // addHitCollection(hit);
-    fTEvent->Fill (); 
+    // fTEvent->Fill (); 
 
 
     if (fEvtOutput) {

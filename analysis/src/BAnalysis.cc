@@ -191,6 +191,20 @@ namespace lactel
         fDetectedEvent.tmin = 0;
         fDetectedEvent.tota = 0;
         fDetectedEvent.hits.clear();
+
+        genPars.fGenPPDGID = -99.0;
+        genPars.fGenEvtID  = -99.0;
+        genPars.fGenXPos   = -99.0;
+        genPars.fGenYPos   = -99.0;
+        genPars.fGenZPos   = -99.0;
+        genPars.fGenXDir   = -99.0;
+        genPars.fGenYDir   = -99.0;
+        genPars.fGenZDir   = -99.0;
+        genPars.fGenTheta  = -99.0;
+        genPars.fGenPhi    = -99.0;
+        genPars.fGenEnergy = -99.0;
+        genPars.isDetected = false;
+
     }
 
     void BAnalysis::EndOfEvent(const G4Event* EV) {
@@ -205,6 +219,9 @@ namespace lactel
         if(fDetectedEvent.nhit > 0){
             BPrimaryGeneratorAction::getInstance()->nDet += 1;
             fRun.nDetEvent += 1; 
+
+        
+        
         }
             
 
@@ -261,11 +278,12 @@ namespace lactel
     }
 
     void BAnalysis::AddDetectedParticule(const KM3TrackInformation* info, unsigned char LIM){
+        
+        AAAnalysisManager::AddDetectedParticule(info, LIM);
+
         fMeasure.fEnergy = info->GetOriginalEnergy ();
         fMeasure.fNpe = info->GetOriginalEnergy () /2; 
         fMeasure.fTime = info->GetOriginalEnergy () / 4;
-       
-        AAAnalysisManager::AddDetectedParticule(info, LIM);
         
         Measure measure;
         measure.fEnergy = info->GetOriginalEnergy ();
@@ -295,7 +313,13 @@ namespace lactel
            //fDetectedEvent.a = info->GetOriginalEnergy() / CLHEP::eV;
         //fDetectedEvent.runNb = fRun.runNb; // OK as fRun.runNb is set in the start of the run
         nhit+=1;
+        //fTEvent->Fill();    
     } 
+
+    void BAnalysis::AddPhotoTubeEntranceInfo (const G4Step* fStep){
+        AAAnalysisManager::AddPhotoTubeEntranceInfo(fStep);
+        fTEvent->Fill();        
+    }
 
     void BAnalysis::Write(){
     //     fMeasure_parameters.getGainVsHV()->Write();

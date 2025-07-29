@@ -1,4 +1,5 @@
 #include "BSteppingAction.hh"
+#include "BAnalysis.hh"
 
 
 namespace lactel
@@ -53,7 +54,8 @@ namespace lactel
                     GetMaterialPropertiesTable ()->ConstPropertyExists("electronSensitive"))
 
             {
-                KM3AnalysisManager::getIt()->AddOMEntranceInfo (step);
+                // KM3AnalysisManager::getIt()->AddPhotoTubeEntranceInfo (step);
+                BAnalysis::getIt() -> AddPhotoTubeEntranceInfo(step);
             }
             else { 
                 return;
