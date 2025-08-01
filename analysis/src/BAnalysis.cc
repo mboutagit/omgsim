@@ -316,10 +316,11 @@ namespace lactel
         //fTEvent->Fill();    
     } 
 
-    void BAnalysis::AddPhotoTubeEntranceInfo (const G4Step* fStep){
-        AAAnalysisManager::AddPhotoTubeEntranceInfo(fStep);
-        fTEvent->Fill();        
-    }
+    // void BAnalysis::AddPhotoTubeEntranceInfo (const G4Step* fStep){
+    //     AAAnalysisManager::AddOMEntranceInfo(fStep);
+    //     AAAnalysisManager::AddPhotoTubeEntranceInfo(fStep);
+    //     fTEvent->Fill();        
+    // }
 
     void BAnalysis::Write(){
     //     fMeasure_parameters.getGainVsHV()->Write();

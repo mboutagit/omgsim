@@ -118,15 +118,15 @@ namespace lactel
         
         for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
             //place the OM 50 cm above the target volume
-            if(pv->GetName() == "AntaresOM"){
-                pv->SetTranslation(G4ThreeVector(0, 0, - target_half_length + 50 *cm));
-            }
+            // if(pv->GetName() == "AntaresOM"){
+            //     pv->SetTranslation(G4ThreeVector(0, 0, - target_half_length + 50 *cm));
+            // }
                 
             if(pv->GetName() == "LACTEL_Cell_Outer"){
-                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetXHalfLength(target_half_length);
-                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetYHalfLength(target_half_length);
-                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(target_half_length);
-                pv->SetTranslation(G4ThreeVector(0, 0, - target_half_length));
+                // dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetXHalfLength(target_half_length);
+                // dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetYHalfLength(target_half_length);
+                // dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(target_half_length);
+                // pv->SetTranslation(G4ThreeVector(0, 0, - target_half_length));
                 pv->GetLogicalVolume()->SetVisAttributes(outer_vol);
             }
 

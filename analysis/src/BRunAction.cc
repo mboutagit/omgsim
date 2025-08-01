@@ -1,5 +1,8 @@
 #include "BRunAction.hh"
 
+#include "G4DigiManager.hh"
+#include "BDigitizerModule.hh"
+
 
 namespace lactel
 {
@@ -27,6 +30,14 @@ namespace lactel
         
         BPrimaryGeneratorAction::getInstance()->thetaMax = BDetectorConstruction::GetIt()->acceptanceAngle;
         BPrimaryGeneratorAction::getInstance()->getExpectedFlux();
+
+        //Digi
+         static bool first = true;
+        if (first) {
+            G4DigiManager* digiMan = G4DigiManager::GetDMpointer();
+            digiMan->AddNewModule(new BDigitizerModule("DigitizerModule"));
+            first = false;
+        }
     }
 
     void BRunAction::EndOfRunAction(const G4Run* run){

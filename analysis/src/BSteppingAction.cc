@@ -55,7 +55,7 @@ namespace lactel
 
             {
                 // KM3AnalysisManager::getIt()->AddPhotoTubeEntranceInfo (step);
-                BAnalysis::getIt() -> AddPhotoTubeEntranceInfo(step);
+                KM3AnalysisManager::getIt()->AddOMEntranceInfo(step);
             }
             else { 
                 return;

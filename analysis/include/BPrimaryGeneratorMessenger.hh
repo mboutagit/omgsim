@@ -1,8 +1,6 @@
 #ifndef BPrimaryGeneratorMessenger_hh
 #define BPrimaryGeneratorMessenger_hh
 
-#include "BPrimaryGeneratorAction.hh"
-
 #include "globals.hh"
 
 #include "G4UImessenger.hh"
@@ -15,7 +13,7 @@
 class G4UIdirectory;
 class BDetetcorConstruction;
 
-using namespace km3net;
+// using namespace km3net;
 
 namespace lactel
 {

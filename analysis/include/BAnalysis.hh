@@ -149,7 +149,7 @@ namespace lactel
             static BAnalysis* getIt();
             virtual void Write();
             virtual void AddDetectedParticule(const KM3TrackInformation* info, unsigned char LIM);
-            virtual void AddPhotoTubeEntranceInfo (const G4Step* fStep);
+           // virtual void AddPhotoTubeEntranceInfo (const G4Step* fStep);
             // virtual void AddOMEntranceInfo (const G4Step* Step);
             virtual void EndOfEvent(const G4Event* evt);
             virtual void StartOfEvent(const G4Event*);

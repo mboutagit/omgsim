@@ -1,7 +1,8 @@
 /KM3/XP/Type BA
 /KM3/det/DetInit Lactel
-/KM3/det/DetectorTypeName LactelOneCell #KM3K40
+/KM3/det/DetectorTypeName LactelOneModule #KM3K40
 /KM3/det/setMeanCapRadius 5 cm
+
 #/PMTOpticalModel/luxlevel 0
 
 /KM3/det/setTargetScattering 1
@@ -11,16 +12,24 @@
 /KM3/det/setWorldLength 11.0 m # max det half width (5 m) + 6 m for 60° zenith angles incidence 
 /KM3/det/setTargetLength  .5 m
 /KM3/BDet/targetType M2
-/KM3/BDet/acceptanceAngle 60 deg
+/KM3/BDet/acceptanceAngle 5 deg
 
-# /KM3/BDet/OMPosition 0 0 -0.5 m
 /LACTEL/BPG/genParsMode integral
 
 
 /KM3/GenType 3
 /run/initialize
 
- /run/beamOn 30
+
+# /vis/open OGL #HepRepXML
+# /vis/viewer/set/style wireframe
+# /vis/drawVolume
+# /vis/viewer/set/background 1.0 1.0 1.0 0.2
+
+/run/beamOn 3
+
+
+
 
 #/vis/verbose errors
 
