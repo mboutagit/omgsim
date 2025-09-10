@@ -16,20 +16,20 @@ namespace lactel
         LACTELDir = new G4UIdirectory("/LACTEL/");
         LACTELDir->SetGuidance("UI commands specific to this example.");
 
-        BPGDir = new G4UIdirectory("/LACTEL/BPG/");
+        BPGDir = new G4UIdirectory("/LACTEL/BPGA/");
         BPGDir->SetGuidance("BPrimaryGeneratorAction settings");
 
-        thetaGen_cmd = new G4UIcmdWithADoubleAndUnit("/LACTEL/BPG/theta", this);
+        thetaGen_cmd = new G4UIcmdWithADoubleAndUnit("/LACTEL/BPGA/theta", this);
         thetaGen_cmd->SetGuidance("Set generation zenith angle (for fixed zenith simulation)");
         thetaGen_cmd->SetParameterName("thetaGen", false);
         thetaGen_cmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
-        EGen_cmd = new G4UIcmdWithADoubleAndUnit("/LACTEL/BPG/E", this);
+        EGen_cmd = new G4UIcmdWithADoubleAndUnit("/LACTEL/BPGA/E", this);
         EGen_cmd->SetGuidance("Set generation Energy (for fixed Energy simulation)");
         EGen_cmd->SetParameterName("EGen", false);
         EGen_cmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
-        genParsMode_cmd = new G4UIcmdWithAString("/LACTEL/BPG/genParsMode", this);
+        genParsMode_cmd = new G4UIcmdWithAString("/LACTEL/BPGA/genParsMode", this);
         genParsMode_cmd->SetGuidance("Set the BPGA generation parameters mode (fixed, integral, random and cos2)");
         genParsMode_cmd->SetParameterName("genPars", false);
         genParsMode_cmd->AvailableForStates(G4State_PreInit, G4State_Idle);

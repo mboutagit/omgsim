@@ -78,9 +78,7 @@ public:
     void SetGenParsMode(std::string mode);
     G4ThreeVector FixedThetaDirection(double theta);
 
-    
-
-
+    bool couldHitCube(G4ThreeVector origin, G4ThreeVector direction, G4Box box);
 
     ofstream gen_data;
     gen_mode generator;
@@ -108,7 +106,7 @@ public:
     static float dPhi; // phi steps
     static float genArea; // generation area time
     static float tExposure; // exposure time
-    static float altitude; // capture altitude
+    static float genAltitude; // capture altitude
 
     double thetaGen;
     double EGen;

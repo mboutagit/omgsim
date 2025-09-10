@@ -20,6 +20,15 @@ namespace lactel
     class BAnalysis : public AAAnalysisManager
     {
         public:
+            struct HitInfos
+            {
+                int hit_id;
+                double px; // pos. X
+                double py;
+                double pz;
+                double dt; // dir. Theta 
+                double dp; // dir. Phi 
+            };
 
             struct GenerationParameters
             {
@@ -35,6 +44,9 @@ namespace lactel
                 float fGenPhi = -1;
                 float fGenEnergy = -1;
                 bool isDetected = false;
+
+                // std::vector<HitInfos> omHits;
+                // std::vector<HitInfos> pmHits;
             };
             
             class MeasureParameters
@@ -87,8 +99,10 @@ namespace lactel
             struct DetectedEvent
             {                    
                     // unsigned int event_ID;
-                    float event_energy;
                     std::vector<Hit> hits;
+                    // std::vector<HitInfos> pmHits;
+                    // std::vector<HitInfos> hits;
+                    float event_energy;
                     int  event_id = -1;
                     int runNb = -1;
                     uint nhit=0;
@@ -109,6 +123,18 @@ namespace lactel
                 long id = 0;
                 float time = 0;
                 float charge = 0;
+                
+                float pm_x; 
+                float pm_y; 
+                float pm_z; 
+                float pm_t; 
+                float pm_p; 
+
+                float om_x; 
+                float om_y; 
+                float om_z; 
+                float om_t; 
+                float om_p; 
             };
 
             struct Run {
@@ -143,12 +169,17 @@ namespace lactel
             int nsim = 0;
             int nhit = 0;
 
+            Hit fHits;
+
             friend class BRunAction;
 
         public:
             static BAnalysis* getIt();
             virtual void Write();
             virtual void AddDetectedParticule(const KM3TrackInformation* info, unsigned char LIM);
+            void AddPhotoTubeEntranceInfo (const G4Step* STEP);
+            void AddOMEntranceInfo (const G4Step* STEP);
+
            // virtual void AddPhotoTubeEntranceInfo (const G4Step* fStep);
             // virtual void AddOMEntranceInfo (const G4Step* Step);
             virtual void EndOfEvent(const G4Event* evt);

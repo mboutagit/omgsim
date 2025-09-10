@@ -69,7 +69,7 @@ namespace km3net
       void CalculateParameters ()
       {
         PhotoAngle     = asin(BulbRadiusMin/(RadiusSphere));
-        PhotoAngleIn   = asin((BulbRadiusMin-GlassThickness/sin (PhotoAngle))/(RadiusSphere-GlassThickness));
+        PhotoAngleIn   = asin((BulbRadiusMin-GlassThickness/sin(PhotoAngle))/(RadiusSphere-GlassThickness));
         PhotoHeight    = RadiusSphere - cos (PhotoAngle) * RadiusSphere;
         Bulbr          = sqrt (BulbHeight*BulbHeight/4/(1-BulbRadiusMin*BulbRadiusMin/BulbRadiusMax/BulbRadiusMax));
 

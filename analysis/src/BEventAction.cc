@@ -12,6 +12,7 @@ namespace lactel
     void BEventAction::BeginOfEventAction(const G4Event* anEvent){
         KM3EventAction::BeginOfEventAction(anEvent);
         BAnalysis::getIt()->StartOfEvent(anEvent);
+    
     }
     
     void BEventAction::EndOfEventAction(const G4Event* anEvent){
@@ -20,8 +21,8 @@ namespace lactel
         KM3EventAction::EndOfEventAction (anEvent);
         BAnalysis::getIt()->EndOfEvent(anEvent);  
         //Digi
-        G4DigiManager* digiMan = G4DigiManager::GetDMpointer();
-        digiMan->Digitize("DigitizerModule");  
+        // G4DigiManager* digiMan = G4DigiManager::GetDMpointer();
+        // digiMan->Digitize("DigitizerModule");  
         }
 
 

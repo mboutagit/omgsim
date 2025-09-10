@@ -583,6 +583,33 @@ analysis/src/BEventAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BEventAction.cc.s
 .PHONY : analysis/src/BEventAction.cc.s
 
+analysis/src/BHit.o: analysis/src/BHit.cc.o
+.PHONY : analysis/src/BHit.o
+
+# target to build an object file
+analysis/src/BHit.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BHit.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BHit.cc.o
+.PHONY : analysis/src/BHit.cc.o
+
+analysis/src/BHit.i: analysis/src/BHit.cc.i
+.PHONY : analysis/src/BHit.i
+
+# target to preprocess a source file
+analysis/src/BHit.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BHit.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BHit.cc.i
+.PHONY : analysis/src/BHit.cc.i
+
+analysis/src/BHit.s: analysis/src/BHit.cc.s
+.PHONY : analysis/src/BHit.s
+
+# target to generate assembly for a file
+analysis/src/BHit.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BHit.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BHit.cc.s
+.PHONY : analysis/src/BHit.cc.s
+
 analysis/src/BPrimaryGeneratorAction.o: analysis/src/BPrimaryGeneratorAction.cc.o
 .PHONY : analysis/src/BPrimaryGeneratorAction.o
 
@@ -1424,6 +1451,9 @@ help:
 	@echo "... analysis/src/BEventAction.o"
 	@echo "... analysis/src/BEventAction.i"
 	@echo "... analysis/src/BEventAction.s"
+	@echo "... analysis/src/BHit.o"
+	@echo "... analysis/src/BHit.i"
+	@echo "... analysis/src/BHit.s"
 	@echo "... analysis/src/BPrimaryGeneratorAction.o"
 	@echo "... analysis/src/BPrimaryGeneratorAction.i"
 	@echo "... analysis/src/BPrimaryGeneratorAction.s"

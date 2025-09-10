@@ -40,9 +40,6 @@ namespace lactel
             void SetNewValue(G4UIcommand*, G4String);
 
     };
-
-
-    
 } // namespace lactel
 
 

@@ -12,6 +12,8 @@ namespace lactel
 
     float BDetectorConstruction::worldSizeOffset = 20*cm;
     float BDetectorConstruction::acceptanceAngle = 10*deg;
+    double BDetectorConstruction::omPos = 44*deg;
+    G4ThreeVector BDetectorConstruction::OMPosition = G4ThreeVector(0, 0, .6*m); // set default OM position 
 
     // std::string BDetectorConstruction::className = "BDetectorConstruction";
     BDetectorConstruction* BDetectorConstruction::GetIt(){
@@ -23,7 +25,10 @@ namespace lactel
 
     BDetectorConstruction::BDetectorConstruction(){
         detectorMessenger = new BDetectorMessenger(this);
-        cout << "\r\033[20C" << "---- Construct the Det" << endl;
+
+        std::cout << "\r\033[30C" << "OMPostion: " << getOMPosition() << std::endl;
+
+        std::cout << "\r\033[30C" << "---- Construct the Det" << std::endl;        
     }
 
     BDetectorConstruction::~BDetectorConstruction(){
@@ -35,7 +40,12 @@ namespace lactel
     }
 
     void BDetectorConstruction::setOMPosition(G4ThreeVector vect){
-        OMPosition = vect;
+        omPos =  5.1; //vect;
+    }    
+    
+    // G4ThreeVector BDetectorConstruction::getOMPosition(){
+    double BDetectorConstruction::getOMPosition(){
+        return omPos;
     }
 
     void BDetectorConstruction::setAcceptanceAngle(float angle){

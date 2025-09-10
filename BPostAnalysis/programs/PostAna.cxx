@@ -60,6 +60,7 @@ int main(int argc, char* argv[]){
     TTree* genTree = (TTree*)file->Get("Gen");
     TTree* hitTree = (TTree*)file->Get("Hit");
     TTree* runTree = (TTree*)file->Get("Run");
+    TTree* detEvtTree = (TTree*)file->Get("DetectedEvent");
 
     BAnalysis::GenerationParameters* gps = nullptr;
     BAnalysis::DetectedEvent* evt = nullptr;
@@ -68,15 +69,16 @@ int main(int argc, char* argv[]){
     BAnalysis::Run run;
 
     genTree->SetBranchAddress("gen", &gps);
-    genTree->SetBranchAddress("Event", &evt);
     hitTree->SetBranchAddress("Hit", &hit);
     runTree->SetBranchAddress("Run", &run);
+    detEvtTree->SetBranchAddress("DetectedEvent", &evt);
 
     // TCanvas *c = new TCanvas("c", "Arrow Example", 800, 600);
 
     TH3F *dir = new TH3F("dir","Dir; X; Y; Z",  300, -8000, 8000,
                                                 300, -8000, 8000,
-                                                300, -3000, 3000);
+                                                300, -3000, 3000
+                          );
                                                 
     // TH3F *dirDet = new TH3F("dirDet","Dir; X; Y; Z",  300, -8000, 8000,
     //                                             300, -8000, 8000,
@@ -105,7 +107,7 @@ int main(int argc, char* argv[]){
 
 
     std::vector<TPolyLine3D*> DetectedTracks;
-    std::vector<TPolyLine3D*> NonDetectedTracks;
+    std::vector<TPolyLine3D*> UnDetectedTracks;
    
    
     int nDetected = 0;
@@ -178,6 +180,13 @@ int main(int argc, char* argv[]){
 
     // dir->Draw("p");
 
+    // for(long i = 0; i < detEvtTree->GetEntries(); i++){
+    //     TPolyLine3D *aTrack = new TPolyLine3D(2);
+    //     aTrack->SetPoint(0, x, y, z);
+    //     aTrack->SetPoint(1, x + dl*xd, y + dl*yd, z + dl*zd);
+    //     DetectedTracks.push_back(aTrack);
+    // }
+
     const Double_t x[8] = {-1000, 1000., 1000., -1000, -1000, 1000., 1000., -1000};
     const Double_t y[8] = {-1000, -1000, 1000., 1000., -1000, -1000, 1000., 1000.};
     const Double_t z[8] = {-2000, -2000, -2000, -2000, 0., 0., 0., 0.};
@@ -188,15 +197,17 @@ int main(int argc, char* argv[]){
       {0,4}, {1,5}, {2,6}, {3,7}  // sides
     };
   
-    for(auto& track : NonDetectedTracks){
-      track->SetLineColorAlpha(7, 0.4);
-      track->SetLineWidth(1);
-      track->Draw();
-    }
+    // for(auto& track : NonDetectedTracks){
+    //   track->SetLineColorAlpha(7, 0.4);
+    //   track->SetLineWidth(1);
+    //   track->SetLineColor(1);
+    //   track->Draw();
+    // }
 
     for(auto& track : DetectedTracks){
       track->SetLineColorAlpha(2, 0.4);
       track->SetLineWidth(1);
+      track->SetLineColor(5);
       track->Draw("same");
     }
 
