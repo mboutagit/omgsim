@@ -1,0 +1,7 @@
+build/results
+build/CMakeFiles
+build/*.*
+build/*.root
+simOutputs
+*.log
+*.root
