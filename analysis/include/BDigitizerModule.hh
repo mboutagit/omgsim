@@ -20,6 +20,7 @@ namespace lactel
         //G4DigiCollection* digiCollection;
         G4TDigiCollection<BDigi>* digiCollection;
     };
+    
 
 } // namespace lactel
 #endif

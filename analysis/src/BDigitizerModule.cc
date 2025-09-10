@@ -25,7 +25,7 @@ namespace lactel
         if (!hitsCollection) return;
 
         G4double totalEdep = 0.0;
-
+c
         for (size_t i = 0; i < hitsCollection->entries(); ++i) {
             totalEdep += (*hitsCollection)[i]->GetEdep();
         }
@@ -33,6 +33,7 @@ namespace lactel
         BDigi* digi = new BDigi();
         digi->SetEdep(totalEdep);
         digiCollection->insert(digi);
+
 
         StoreDigiCollection(digiCollection);
     }
