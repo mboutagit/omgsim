@@ -59,21 +59,26 @@ int main(int argc, char* argv[]){
 
     TTree* genTree = (TTree*)file->Get("Gen");
     TTree* hitTree = (TTree*)file->Get("Hit");
+    TTree* runTree = (TTree*)file->Get("Run");
+    TTree* detEvtTree = (TTree*)file->Get("DetectedEvent");
 
     BAnalysis::GenerationParameters* gps = nullptr;
     BAnalysis::DetectedEvent* evt = nullptr;
     PhotonProduction pp;
     Hit hit;
+    BAnalysis::Run run;
 
     genTree->SetBranchAddress("gen", &gps);
-    genTree->SetBranchAddress("Event", &evt);
     hitTree->SetBranchAddress("Hit", &hit);
+    runTree->SetBranchAddress("Run", &run);
+    detEvtTree->SetBranchAddress("DetectedEvent", &evt);
 
     // TCanvas *c = new TCanvas("c", "Arrow Example", 800, 600);
 
     TH3F *dir = new TH3F("dir","Dir; X; Y; Z",  300, -8000, 8000,
                                                 300, -8000, 8000,
-                                                300, -3000, 3000);
+                                                300, -3000, 3000
+                          );
                                                 
     // TH3F *dirDet = new TH3F("dirDet","Dir; X; Y; Z",  300, -8000, 8000,
     //                                             300, -8000, 8000,
@@ -81,7 +86,8 @@ int main(int argc, char* argv[]){
 
     std::vector<TH2F*> EvsTheta;
     std::vector<TH1F*> E_theta;
-    std::vector<float> angles = {90, 100, 110, 120, 130, 140, 150, 160, 170, 180};
+    std::vector<float> angles = {10, 20, 30, 40, 50, 60};
+    std::vector<std::string> detCong = {"M2", "M4", "M6", "M8", "M10"};
 
     TH2F* his_all_events = new TH2F("his_all_events","Pos; X (mm); Y (mm)", 
                                     500, -5000, 5000,
@@ -101,7 +107,7 @@ int main(int argc, char* argv[]){
 
 
     std::vector<TPolyLine3D*> DetectedTracks;
-    std::vector<TPolyLine3D*> NonDetectedTracks;
+    std::vector<TPolyLine3D*> UnDetectedTracks;
    
    
     int nDetected = 0;
@@ -174,6 +180,13 @@ int main(int argc, char* argv[]){
 
     // dir->Draw("p");
 
+    // for(long i = 0; i < detEvtTree->GetEntries(); i++){
+    //     TPolyLine3D *aTrack = new TPolyLine3D(2);
+    //     aTrack->SetPoint(0, x, y, z);
+    //     aTrack->SetPoint(1, x + dl*xd, y + dl*yd, z + dl*zd);
+    //     DetectedTracks.push_back(aTrack);
+    // }
+
     const Double_t x[8] = {-1000, 1000., 1000., -1000, -1000, 1000., 1000., -1000};
     const Double_t y[8] = {-1000, -1000, 1000., 1000., -1000, -1000, 1000., 1000.};
     const Double_t z[8] = {-2000, -2000, -2000, -2000, 0., 0., 0., 0.};
@@ -184,15 +197,17 @@ int main(int argc, char* argv[]){
       {0,4}, {1,5}, {2,6}, {3,7}  // sides
     };
   
-    for(auto& track : NonDetectedTracks){
-      track->SetLineColorAlpha(7, 0.4);
-      track->SetLineWidth(1);
-      track->Draw();
-    }
+    // for(auto& track : NonDetectedTracks){
+    //   track->SetLineColorAlpha(7, 0.4);
+    //   track->SetLineWidth(1);
+    //   track->SetLineColor(1);
+    //   track->Draw();
+    // }
 
     for(auto& track : DetectedTracks){
       track->SetLineColorAlpha(2, 0.4);
       track->SetLineWidth(1);
+      track->SetLineColor(5);
       track->Draw("same");
     }
 
@@ -223,6 +238,43 @@ int main(int argc, char* argv[]){
 
     his_all_events->Draw("scat");
     his_det_events->Draw("scat same");
+
+
+    std::vector<uint> nGenEvent;
+    std::vector<uint> nDetEvent;
+    std::vector<float> expectedRate;
+    std::vector<float> generationSurface;
+    std::vector<float> acceptanceAngle;
+    std::vector<std::string> detname;
+
+    std::vector< pair<std::string, pair<float, TGraph*>>> detAccaGraph;
+
+    for(int i = 0; i < detCong.size(); i++){
+      for (int j = 0; j < angles.size(); j++)
+      {
+          TGraph* graph;
+          detAccaGraph.emplace_back(detCong[i], make_pair(angles[j], graph));
+      }
+      
+    }
+    
+    for(long long i = 0; i < runTree->GetEntries(); i++){
+        genTree->GetEntry(i);
+
+        if(run.acceptanceAngle == 60){
+          nGenEvent        .push_back(run.nGenEvent);
+          nDetEvent        .push_back(run.nDetEvent);
+          expectedRate     .push_back(run.expectedRate);
+          generationSurface.push_back(run.generationSurface);
+          acceptanceAngle  .push_back(run.acceptanceAngle);
+          detname          .push_back(run.detName);
+        }
+    }
+
+    TCanvas c3;
+
+
+
 
     cout << "Info: Waiting for user action! ..." << endl;
     app.Run();

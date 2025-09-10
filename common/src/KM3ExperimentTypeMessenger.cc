@@ -94,6 +94,7 @@ namespace km3net
   KM3ExperimentTypeMessenger::~KM3ExperimentTypeMessenger() {
     delete XPCommand;
     KM3AnalysisManager::getIt ()->Write ();
+    BAnalysis::getIt() -> Write();
     if (frunManager != NULL)
       delete frunManager;
     fInstance = NULL;

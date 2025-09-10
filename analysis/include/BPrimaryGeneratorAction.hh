@@ -25,13 +25,19 @@ namespace BUnits
 namespace lactel
 {
 
+class BPrimaryGeneratorMessenger;
+
 class BPrimaryGeneratorAction : public KM3PrimaryGeneratorAction
 {
 private:
     static BPrimaryGeneratorAction* instance;
     enum class gen_mode {GEANT4, GAISSER, CORSIKA, PYTHIA, FILE, OTHER};
-    BPrimaryGeneratorAction();
+    enum class GenParsMode{fixed, integral, random, cos2};
 
+    BPrimaryGeneratorAction();
+    BPrimaryGeneratorMessenger* fMessenger;
+
+    
 public:
 
     static BPrimaryGeneratorAction* getInstance();
@@ -69,9 +75,10 @@ public:
 
     static bool output_info;
 
-    
+    void SetGenParsMode(std::string mode);
+    G4ThreeVector FixedThetaDirection(double theta);
 
-
+    bool couldHitCube(G4ThreeVector origin, G4ThreeVector direction, G4Box box);
 
     ofstream gen_data;
     gen_mode generator;
@@ -99,7 +106,13 @@ public:
     static float dPhi; // phi steps
     static float genArea; // generation area time
     static float tExposure; // exposure time
-    static float altitude; // capture altitude
+    static float genAltitude; // capture altitude
+
+    double thetaGen;
+    double EGen;
+    static GenParsMode genParsMode;
+
+
 
     int nGen = 0; // number of generated events
     int nDet = 0; // ,number of detected event (at least one hit in the detector)

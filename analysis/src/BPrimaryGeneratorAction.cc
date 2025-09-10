@@ -6,6 +6,7 @@
 #include "Randomize.hh"
 #include "G4StateManager.hh"
 
+#include "BPrimaryGeneratorMessenger.hh"
 
 namespace lactel
 {   
@@ -14,18 +15,20 @@ namespace lactel
     
     bool BPrimaryGeneratorAction::write_generation_data = false;
 
-    float BPrimaryGeneratorAction::EMin = 1 *GeV; // maximum energy
-    float BPrimaryGeneratorAction::EMax = 1 *TeV; // minimum energy
-    float BPrimaryGeneratorAction::dE = .1 *GeV; // energy step
-    float BPrimaryGeneratorAction::thetaMin = 0.*deg; // minimum theta
-    float BPrimaryGeneratorAction::thetaMax = 60 *deg; //60. *deg;; // maximum theta
-    float BPrimaryGeneratorAction::phiMin = 0. *deg; // minumum phi
-    float BPrimaryGeneratorAction::phiMax = 360. *deg; // maximum phi
-    float BPrimaryGeneratorAction::dTheta = .5 *deg; // theta steps
-    float BPrimaryGeneratorAction::dPhi = .5 *deg; // phi steps
-    float BPrimaryGeneratorAction::genArea = 1 *m2; // generation area time
-    float BPrimaryGeneratorAction::tExposure = 1 *s; // exposure time
-    float BPrimaryGeneratorAction::altitude = 372 *meter; // capture altitude
+    BPrimaryGeneratorAction::GenParsMode BPrimaryGeneratorAction::genParsMode=GenParsMode::integral;
+
+    float BPrimaryGeneratorAction::EMin        = 1 *GeV; // maximum energy
+    float BPrimaryGeneratorAction::EMax        = 1 *TeV; // minimum energy
+    float BPrimaryGeneratorAction::dE          = .1 *GeV; // energy step
+    float BPrimaryGeneratorAction::thetaMin    = 0.*deg; // minimum theta
+    float BPrimaryGeneratorAction::thetaMax    = 60 *deg; //60. *deg;; // maximum theta
+    float BPrimaryGeneratorAction::phiMin      = 0. *deg; // minumum phi
+    float BPrimaryGeneratorAction::phiMax      = 360. *deg; // maximum phi
+    float BPrimaryGeneratorAction::dTheta      = .5 *deg; // theta steps
+    float BPrimaryGeneratorAction::dPhi        = .5 *deg; // phi steps
+    float BPrimaryGeneratorAction::genArea     = 1 *m2; // generation area time
+    float BPrimaryGeneratorAction::tExposure   = 1 *s; // exposure time
+    float BPrimaryGeneratorAction::genAltitude = 372. *meter; // generation altitude for the primaries
 
     BPrimaryGeneratorAction* BPrimaryGeneratorAction::getInstance(){
         if(!instance){
@@ -43,11 +46,13 @@ namespace lactel
                 gen_data = ofstream(output_file_name);
             }
         }
+
+        fMessenger = new BPrimaryGeneratorMessenger(this);
     }
 
     BPrimaryGeneratorAction::~BPrimaryGeneratorAction(){
-        if(integrate_flux_hist && gFile && gFile->IsWritable())
-            integrate_flux_hist->Write();
+        // if(integrate_flu_hist && gFile && gFile->IsWritable())
+        //     integrate_flux_hist->Write();
             
         if(nMuons && gFile && gFile->IsWritable())
             nMuons->Write();
@@ -56,6 +61,29 @@ namespace lactel
             nMuonsGr->Write();
     
         gen_data.close();
+    }
+
+    void BPrimaryGeneratorAction::SetGenParsMode(std::string mode){
+        if(mode == "fixed"){
+            genParsMode = GenParsMode::fixed;
+            std::cout << "\r\033[10C" << ">>>> GenParsMode is: " << "fixed" << std::endl;
+        }
+        else if(mode == "integral"){
+            genParsMode = GenParsMode::integral;        
+            std::cout << "\r\033[10C" << ">>>> GenParsMode is: " << "integral" << std::endl;
+        }
+        else if(mode == "random"){
+            genParsMode = GenParsMode::random;
+            std::cout << "\r\033[10C" << ">>>> GenParsMode is: " << "random" << std::endl;
+        }
+        else if(mode == "cos2"){
+            genParsMode = GenParsMode::cos2;
+            std::cout << "\r\033[10C" << ">>>> GenParsMode is: " << "cos2" << std::endl;
+        }
+        else{
+            std::cerr << "\r\033[10C" << "Unkown generation parameter mode " << mode << std::endl;
+        }
+
     }
 
     void BPrimaryGeneratorAction::GeneratePrimaries(G4Event* event){
@@ -72,7 +100,7 @@ namespace lactel
     }
 
     void BPrimaryGeneratorAction::getExpectedFlux(){
-        double nMuons = integrate_muon_flux(altitude, EMin, EMax, dE, thetaMin, thetaMax, dTheta); // muon/second/cm^2
+        double nMuons = integrate_muon_flux(genAltitude, EMin, EMax, dE, thetaMin, thetaMax, dTheta); // muon/second/cm^2
         std::cout << "Estimated muon rate per " << genArea/cm2 << " cm2 per " << tExposure/s << " seconds: " 
                     << std::setprecision(4) << nMuons * genArea/cm2 * tExposure/s
                     <<  "\nExpected muons /cm2: "
@@ -130,6 +158,14 @@ namespace lactel
 
     }
 
+    G4ThreeVector BPrimaryGeneratorAction::FixedThetaDirection(double theta){
+        double  phi = 2 * CLHEP::pi * G4UniformRand(); // Uniform in azimuth
+        return G4ThreeVector(std::sin(theta) * std::cos(phi), 
+                                std::sin(theta) * std::sin(phi),
+                                std::cos(theta)
+                            );
+    }
+
     G4double BPrimaryGeneratorAction::GenerateMuonEnergy(double min, double max, float theta) {
         float _alpha = 2.7 + (theta < 120 ? 1. : 0.);  
         //float A, B, a, b;
@@ -164,6 +200,43 @@ namespace lactel
         }
     }
 
+
+    bool BPrimaryGeneratorAction::couldHitCube(G4ThreeVector origin, G4ThreeVector direction, G4Box box){
+        double hx = box.GetXHalfLength();
+        double hy = box.GetYHalfLength();
+        double hz = box.GetZHalfLength();
+
+        // Define min/max bounds for each axis
+        double xmin = -hx, xmax = hx;
+        double ymin = -hy, ymax = hy;
+        double zmin = -hz, zmax = hz;
+
+        // Compute intersections on X-axis
+        double t1x = (xmin - origin.x()) / direction.x();
+        double t2x = (xmax - origin.x()) / direction.x();
+        double tnear_x = std::min(t1x, t2x);
+        double tfar_x = std::max(t1x, t2x);
+
+        // Compute for Y-axis
+        double t1y = (ymin - origin.y()) / direction.y();
+        double t2y = (ymax - origin.y()) / direction.y();
+        double tnear_y = std::min(t1y, t2y);
+        double tfar_y = std::max(t1y, t2y);
+
+        // Compute for Z-axis
+        double t1z = (zmin - origin.z()) / direction.z();
+        double t2z = (zmax - origin.z()) / direction.z();
+        double tnear_z = std::min(t1z, t2z);
+        double tfar_z = std::max(t1z, t2z);
+
+        // Determine the entry/exit points
+        double t_entry = std::max({tnear_x, tnear_y, tnear_z});
+        double t_exit  = std::min({tfar_x, tfar_y, tfar_z});
+
+        // Intersection condition
+        return (t_entry <= t_exit) && (t_exit >= 0);    
+    }
+
     void BPrimaryGeneratorAction::init(const gen_mode gen){
         if(particle_name == ""){
             throw "ParametrizedGenerator::init: Particle name is not set.";
@@ -190,7 +263,27 @@ namespace lactel
             else
               particleName = "mu-";
 
-            G4ThreeVector direction = GenerateMuonDirection("down-going_cos2");
+            double Emin = 1.0;     // GeV
+            double Emax = 1e4;     // GeV (10 TeV)
+            G4ThreeVector direction;
+            G4double energy;
+
+
+            if(genParsMode == GenParsMode::cos2){
+                direction = GenerateMuonDirection("down-going_cos2");
+                energy = GenerateMuonEnergy(Emin * GeV, Emax * GeV, direction.getTheta());
+            }
+            else if(genParsMode == GenParsMode::integral){
+                direction = GenerateMuonDirection("down-going_cos2");
+                energy = GenerateMuonEnergy(Emin * GeV, Emax * GeV, direction.getTheta());
+            }
+            else if(genParsMode == GenParsMode::fixed){
+                energy = EGen;
+                direction = FixedThetaDirection(thetaGen);
+            }
+                
+            
+
             if(direction.getZ() > 0)
                 direction.setZ(- direction.getZ());
             G4ThreeVector polarization(G4UniformRand(), G4UniformRand(), 0.0); 
@@ -200,9 +293,7 @@ namespace lactel
             if(!particle)
               return;
             
-            double Emin = 1.0;     // GeV
-            double Emax = 1e4;     // GeV (10 TeV)
-            G4double energy = GenerateMuonEnergy(Emin * GeV, Emax * GeV, direction.getTheta());
+            
 
             ((G4ParticleGun*)particleGun)->SetParticleDefinition(particle);
             ((G4ParticleGun*)particleGun)->SetParticlePosition(surfPoints);
@@ -212,7 +303,6 @@ namespace lactel
             particle_position = surfPoints;
             particle_direction = direction;
             particle_energy = energy;
-            altitude = 372.;
 
             if(write_generation_data)
                 print(gen_data);

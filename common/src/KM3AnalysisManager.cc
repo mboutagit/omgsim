@@ -130,10 +130,10 @@ const std::string KM3AnalysisManager::currentDateTime() {
 
   void KM3AnalysisManager::AddPhotoTubeEntranceInfo (const G4Step* STEP)
   {
-    if (fNbPhoto ) //% 1000 ==0)
+    if (fNbPhoto % 500 ==0)
       {
-       // cout << "\r\033[20C" << fNbPhoto << " in pmt ";
-       // cout.flush ();
+       cout << "\r\033[20C" << fNbPhoto << " in pmt ";
+       cout.flush ();
       }
     fNbPhoto++;
     if (fRFile == NULL)
@@ -161,19 +161,18 @@ const std::string KM3AnalysisManager::currentDateTime() {
     const G4ThreeVector& localpoint=touch->GetHistory ()->GetTopTransform().TransformPoint(globalPoint);
     const G4ThreeVector norm=prestep->GetPhysicalVolume()->GetLogicalVolume ()->GetSolid ()->SurfaceNormal( localpoint );
 
+    std::cout << "\r\033[33C" << "Fill PMThits" << std::endl;
     fPhotoX=localpoint.x ();
     fPhotoY=localpoint.y ();
     fPhotoZ=localpoint.z ();
     fPhotoT=localpoint.theta ();
     fPhotoP=localpoint.phi ();
-
+    
   }
 
   //Vladimir: This function is outdated and not used currently. OMid is added at AddPhotoTubeEntranceInfo.
   void KM3AnalysisManager::AddOMEntranceInfo (const G4Step* STEP)
   {
-
-
     const G4StepPoint* prestep = STEP->GetPreStepPoint();
     G4String prestepName=prestep->GetPhysicalVolume()->GetName();
 
@@ -212,6 +211,8 @@ const std::string KM3AnalysisManager::currentDateTime() {
      *
      * So, it seems, GetCopyNumber should be used instead of GetCopyNo since we do different placements of the same logical volume.
      */
+
+    std::cout << "\r\033[33C" << "Fill omhits" << std::endl;
    // cout <<" replica: " << touch->GetVolume ()->GetCopyNo () << endl;
     fOMId = touch->GetVolume ()->GetCopyNo ();
     //fOMId = touch->GetCopyNumber (2);

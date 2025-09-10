@@ -1,5 +1,8 @@
 #include "BRunAction.hh"
 
+#include "G4DigiManager.hh"
+#include "BDigitizerModule.hh"
+
 
 namespace lactel
 {
@@ -15,10 +18,26 @@ namespace lactel
 
         BAnalysis * ana = BAnalysis::getIt();
         ana->fRun.runNb = run->GetRunID();
+
+        ana->fRun.acceptanceAngle = BDetectorConstruction::GetIt()->acceptanceAngle /deg;
+        ana->fRun.generationSurface = BDetectorConstruction::GetIt()->AGen;
+        
+        BPrimaryGeneratorAction::getInstance()->getExpectedFlux(); // just to set up BPrimaryGeneratorAction::muonsFlux first;
+        ana->fRun.expectedRate = BPrimaryGeneratorAction::getInstance()->muonsFlux;
+        ana->fRun.detName = BDetectorConstruction::GetIt()->detName;
+
         cout << endl << "\r\033[10C" << "Begin of run: " << run->GetRunID() << endl;
         
         BPrimaryGeneratorAction::getInstance()->thetaMax = BDetectorConstruction::GetIt()->acceptanceAngle;
         BPrimaryGeneratorAction::getInstance()->getExpectedFlux();
+
+        //Digi
+         static bool first = true;
+        if (first) {
+            G4DigiManager* digiMan = G4DigiManager::GetDMpointer();
+            digiMan->AddNewModule(new BDigitizerModule("DigitizerModule"));
+            first = false;
+        }
     }
 
     void BRunAction::EndOfRunAction(const G4Run* run){
@@ -29,6 +48,7 @@ namespace lactel
         ana->runTree->Fill();
         ana->fTRunInfos->Fill();
 
+        //reset values
         ana->fRun.nDetEvent = 0;
         ana->fRun.nGenEvent = 0;
         ana->fRun.runNb = -1;

@@ -31,13 +31,14 @@ namespace lactel
         G4ThreeVector targetPosition;
         void setTargetPosition(G4ThreeVector);
         void setOMPosition(G4ThreeVector);
+        double getOMPosition();
 
         G4VPhysicalVolume* Construct() override;
         void setTargetType(G4String);
         void setAcceptanceAngle(float angle);
-      //  virtual G4LogicalVolume* Construct(const VolumeParameters* = NULL) override;
+        // virtual G4LogicalVolume* Construct(const VolumeParameters* = NULL) override;
 
-      void autoWorldSize();
+        void autoWorldSize();
 
 
         static BDetectorConstruction* GetIt();
@@ -46,10 +47,14 @@ namespace lactel
         G4double detSize;
         G4ThreeVector my_target_pos;
         G4double target_half_length;
-        G4ThreeVector OMPosition; // w.r.t the INNER_LACTEL_VOLUME
+        static double omPos;// w.r.t the INNER_LACTEL_VOLUME
+        // G4ThreeVector omPos = G4ThreeVector(0, 0, -50 * cm); // w.r.t the INNER_LACTEL_VOLUME
 
         static float worldSizeOffset;
-        static float acceptanceAngle;
+        static float acceptanceAngle; // angle used to compute the generation surface
+        static G4ThreeVector OMPosition;
+        float AGen = 0; // generation surface above the cell in cm²
+        std::string detName;
 
         DetGeoConf detGeoConf;
     };

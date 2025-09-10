@@ -3,6 +3,7 @@
 #include "BPrimaryGeneratorAction.hh"
 
 #include "KM3EventAction.hh"
+#include "KM3PhotoTubeMgr.hh"
 
 #include "G4RunManager.hh"
 
@@ -191,6 +192,33 @@ namespace lactel
         fDetectedEvent.tmin = 0;
         fDetectedEvent.tota = 0;
         fDetectedEvent.hits.clear();
+
+        genPars.fGenPPDGID = -99.0;
+        genPars.fGenEvtID  = -99.0;
+        genPars.fGenXPos   = -99.0;
+        genPars.fGenYPos   = -99.0;
+        genPars.fGenZPos   = -99.0;
+        genPars.fGenXDir   = -99.0;
+        genPars.fGenYDir   = -99.0;
+        genPars.fGenZDir   = -99.0;
+        genPars.fGenTheta  = -99.0;
+        genPars.fGenPhi    = -99.0;
+        genPars.fGenEnergy = -99.0;
+        genPars.isDetected = false;
+
+        nsim+=1;
+        nhit = 0;
+
+        fVertexX=0;
+        fVertexY=0;
+        fVertexZ=0;
+        fVertexT=0;
+        fVertexP=0;
+        fVertexDirX = 0;
+        fVertexDirY = 0;
+        fVertexDirZ = 0;
+        fOMId=-1;
+        fPMID=0;
     }
 
     void BAnalysis::EndOfEvent(const G4Event* EV) {
@@ -206,15 +234,11 @@ namespace lactel
             BPrimaryGeneratorAction::getInstance()->nDet += 1;
             fRun.nDetEvent += 1; 
         }
-            
-
 
         // add the event to the run 
         // if(fEvent.isDetected == true)
         //     fRun.nDetEvent += 1; // add the event is detected
 
-        AAAnalysisManager::EndOfEvent();
-  
         G4PrimaryParticle*  particle = EV->GetPrimaryVertex ()->GetPrimary ();
         genPars.fGenPPDGID = particle->GetPDGcode();
         genPars.fGenEvtID  = EV->GetEventID();    
@@ -226,7 +250,28 @@ namespace lactel
         genPars.fGenZDir   = particle->GetMomentum().unit().getZ() / mm;
         genPars.fGenTheta  = particle->GetMomentum().theta() / deg;
         genPars.fGenPhi    = particle->GetMomentum().phi() /deg;
-        genPars.fGenEnergy = particle->GetTotalEnergy() / MeV;      
+        genPars.fGenEnergy = particle->GetTotalEnergy() / MeV; 
+        
+        /////////////////////////////////
+        
+        const G4ThreeVector& vertexVect= EV->GetPrimaryVertex ()->GetPosition ();
+        const G4ThreeVector& vertexDir = EV->GetPrimaryVertex ()->GetPrimary ()->GetMomentumDirection ();
+        
+        run_id = G4RunManager::GetRunManager()->GetCurrentRun()->GetRunID();
+        evt_id = EV->GetEventID();
+        fVertexX = vertexVect.x ();
+        fVertexY = vertexVect.y ();
+        fVertexZ = vertexVect.z ();
+        fVertexT = vertexVect.theta ();
+        fVertexP = vertexVect.phi ();
+
+        fVertexDirX = vertexDir.x ();
+        fVertexDirY = vertexDir.y ();
+        fVertexDirZ = vertexDir.z ();
+
+        fVertexEnergy = EV->GetPrimaryVertex ()->GetPrimary ()->GetKineticEnergy ();
+
+        /////////////////////////////////
 
         fDetectedEvent.event_id = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
         fDetectedEvent.runNb = fRun.runNb; // OK as fRun.runNb is set in the start of the run
@@ -239,9 +284,11 @@ namespace lactel
         }
         
         genTree->Fill();
+        // std::cout << "\r\033[55C" << "Fill TEvent tree." << std::endl;
+        //fTEvent->Fill(); used in BAnalysis::AddPhotoTubeEntranceInfo  to include PMT hit infos
+
+        // AAAnalysisManager::EndOfEvent();
         // std::cout << "\r\033[10C" << "End of Event: " << EV->GetEventID() << std::endl;
-        nsim+=1;
-        nhit = 0;
     }
 
     BAnalysis::MeasureParameters BAnalysis::getMeasurePars(){
@@ -261,11 +308,12 @@ namespace lactel
     }
 
     void BAnalysis::AddDetectedParticule(const KM3TrackInformation* info, unsigned char LIM){
+        
+        AAAnalysisManager::AddDetectedParticule(info, LIM);
+
         fMeasure.fEnergy = info->GetOriginalEnergy ();
         fMeasure.fNpe = info->GetOriginalEnergy () /2; 
         fMeasure.fTime = info->GetOriginalEnergy () / 4;
-       
-        AAAnalysisManager::AddDetectedParticule(info, LIM);
         
         Measure measure;
         measure.fEnergy = info->GetOriginalEnergy ();
@@ -274,12 +322,11 @@ namespace lactel
         fMeasure.fId += 1;
         measure.fId += 1;
 
-        Hit ahit;
-        ahit.id = nhit;
-        ahit.time = info->GetOriginalTime();
-        ahit.charge = info->GetOriginalEnergy() / CLHEP::eV;
+        fHits.id = nhit;
+        fHits.time = info->GetOriginalTime();
+        fHits.charge = info->GetOriginalEnergy() / CLHEP::eV;
 
-        fDetectedEvent.hits.push_back(ahit);
+        fDetectedEvent.hits.push_back(fHits);
 
         //fDetectedEvent.event_id = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
         fDetectedEvent.event_energy += info->GetOriginalEnergy() / CLHEP::eV; 
@@ -295,7 +342,14 @@ namespace lactel
            //fDetectedEvent.a = info->GetOriginalEnergy() / CLHEP::eV;
         //fDetectedEvent.runNb = fRun.runNb; // OK as fRun.runNb is set in the start of the run
         nhit+=1;
+        //fTEvent->Fill();    
     } 
+
+    // void BAnalysis::AddPhotoTubeEntranceInfo (const G4Step* fStep){
+    //     AAAnalysisManager::AddOMEntranceInfo(fStep);
+    //     AAAnalysisManager::AddPhotoTubeEntranceInfo(fStep);
+    //     fTEvent->Fill();        
+    // }
 
     void BAnalysis::Write(){
     //     fMeasure_parameters.getGainVsHV()->Write();
@@ -314,4 +368,133 @@ namespace lactel
 
     //ClassImp(lactel::BAnalysis::Measure);
    //ClassImp(BAnalysis);
+
+
+
+
+
+
+
+ void BAnalysis::AddPhotoTubeEntranceInfo (const G4Step* STEP)
+  {
+    if (fNbPhoto % 500 ==0)
+      {
+       cout << "\r\033[20C" << fNbPhoto << " in pmt ";
+       cout.flush ();
+      }
+    fNbPhoto++;
+    if (fRFile == NULL)
+      return;
+    if (fFastAnalysisOnly)
+      return;
+
+    /*
+     * More flexible and robust way of PMT number search introduced (scroll through all volumes).
+     * Get OMid here was added here.
+     */
+    const G4VTouchable*   touchpost = STEP->GetPostStepPoint ()->GetTouchable ();
+    for (int ihist = 0; ihist < touchpost->GetHistoryDepth (); ihist++) {
+        G4String volname = touchpost->GetVolume(ihist)->GetName();
+        if (volname.find(KM3PhotoTubeMgr::fPMTContainerName) != std::string::npos) {
+             fPMID=touchpost->GetCopyNumber(ihist);
+        } else if (KM3DetectorConstruction::fOMNames.find(volname) != KM3DetectorConstruction::fOMNames.end()) {
+             fOMId=touchpost->GetCopyNumber(ihist);
+        }
+    }
+
+    const G4StepPoint* prestep = STEP->GetPreStepPoint();
+    const G4ThreeVector& globalPoint = prestep->GetPosition();
+    const G4VTouchable*   touch = prestep->GetTouchable();
+    const G4ThreeVector& localpoint=touch->GetHistory ()->GetTopTransform().TransformPoint(globalPoint);
+    // const G4ThreeVector norm=prestep->GetPhysicalVolume()->GetLogicalVolume ()->GetSolid ()->SurfaceNormal( localpoint );
+
+    fPhotoX=localpoint.x ();
+    fPhotoY=localpoint.y ();
+    fPhotoZ=localpoint.z ();
+    fPhotoT=localpoint.theta ();
+    fPhotoP=localpoint.phi ();
+
+    fHits.pm_x=localpoint.x ();
+    fHits.pm_y=localpoint.y ();
+    fHits.pm_z=localpoint.z ();
+    fHits.pm_p=localpoint.theta ();
+    fHits.pm_t=localpoint.phi ();
+
+    // std::cout << "\r\033[55C" << "PMT infos: "  << fPhotoX
+    //                                             << fPhotoY
+    //                                             << fPhotoZ
+    //                                             << fPhotoT
+    //                                             << fPhotoT
+    //                                             << std::endl;
+
+    fTEvent->Fill();
+    
+  }
+
+  //Vladimir: This function is outdated and not used currently. OMid is added at AddPhotoTubeEntranceInfo.
+  void BAnalysis::AddOMEntranceInfo (const G4Step* STEP)
+  {
+    const G4StepPoint* prestep = STEP->GetPreStepPoint();
+    G4String prestepName = prestep->GetPhysicalVolume()->GetName();
+
+    // if (prestepName != "Target")
+    //   {
+    //     return;
+    //   }
+
+    const G4StepPoint* poststep = STEP->GetPostStepPoint();
+    G4String poststepName=poststep->GetPhysicalVolume()->GetName();
+
+    if (fNbOM % 10000 == 0)
+      {
+        cout << endl;
+        cout << "\r\033[40C" << fNbOM << " in OM ";
+        cout << endl;
+        cout.flush ();
+      }
+    fNbOM++;
+    // std::cout << "\r\033[55C" << "RFile: " << fRFile << "  --  fFastAnalysisOnly: " << fFastAnalysisOnly << std::endl;
+    if (fRFile == NULL)
+      return;
+    if (fFastAnalysisOnly)
+      return;
+
+    const G4ThreeVector& globalPoint = poststep->GetPosition();
+    const G4VTouchable*   touch = poststep->GetTouchable();
+    const G4ThreeVector& localpoint=touch->GetHistory ()->GetTopTransform().TransformPoint(globalPoint);
+
+    /*
+     * G4int copyNo = theTouchable->GetCopyNumber(); 
+     * G4int motherCopyNo = theTouchable->GetCopyNumber(1); 
+     * where Copy here stays for any duplicated instance of a physical volume, 
+     * either if it is a G4PVPlacement (multiple placements of the same logical volume) 
+     * or a G4PVReplica/G4PVParameterised. 
+     * The method GetCopyNo()is meant to return only the serial number of placements not duplicated in the geometry tree. 
+     *
+     * So, it seems, GetCopyNumber should be used instead of GetCopyNo since we do different placements of the same logical volume.
+     */
+
+   // cout <<" replica: " << touch->GetVolume ()->GetCopyNo () << endl;
+    // fOMId = touch->GetVolume ()->GetCopyNo ();
+    //fOMId = touch->GetCopyNumber (2);
+
+    fOMHitX = globalPoint.x ();
+    fOMHitY = globalPoint.y ();
+    fOMHitZ = globalPoint.z ();
+    fOMHitT = localpoint.theta ();
+    fOMHitP = localpoint.phi ();
+
+    fHits.om_x=localpoint.x ();
+    fHits.om_y=localpoint.y ();
+    fHits.om_z=localpoint.z ();
+    fHits.om_p=localpoint.theta ();
+    fHits.om_t=localpoint.phi ();
+    
+  }
+
+
+
+
+
+
 } // namespace lactel

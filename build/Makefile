@@ -502,6 +502,60 @@ analysis/src/BDetectorMessenger.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BDetectorMessenger.cc.s
 .PHONY : analysis/src/BDetectorMessenger.cc.s
 
+analysis/src/BDigi.o: analysis/src/BDigi.cc.o
+.PHONY : analysis/src/BDigi.o
+
+# target to build an object file
+analysis/src/BDigi.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BDigi.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BDigi.cc.o
+.PHONY : analysis/src/BDigi.cc.o
+
+analysis/src/BDigi.i: analysis/src/BDigi.cc.i
+.PHONY : analysis/src/BDigi.i
+
+# target to preprocess a source file
+analysis/src/BDigi.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BDigi.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BDigi.cc.i
+.PHONY : analysis/src/BDigi.cc.i
+
+analysis/src/BDigi.s: analysis/src/BDigi.cc.s
+.PHONY : analysis/src/BDigi.s
+
+# target to generate assembly for a file
+analysis/src/BDigi.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BDigi.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BDigi.cc.s
+.PHONY : analysis/src/BDigi.cc.s
+
+analysis/src/BDigitizerModule.o: analysis/src/BDigitizerModule.cc.o
+.PHONY : analysis/src/BDigitizerModule.o
+
+# target to build an object file
+analysis/src/BDigitizerModule.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BDigitizerModule.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BDigitizerModule.cc.o
+.PHONY : analysis/src/BDigitizerModule.cc.o
+
+analysis/src/BDigitizerModule.i: analysis/src/BDigitizerModule.cc.i
+.PHONY : analysis/src/BDigitizerModule.i
+
+# target to preprocess a source file
+analysis/src/BDigitizerModule.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BDigitizerModule.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BDigitizerModule.cc.i
+.PHONY : analysis/src/BDigitizerModule.cc.i
+
+analysis/src/BDigitizerModule.s: analysis/src/BDigitizerModule.cc.s
+.PHONY : analysis/src/BDigitizerModule.s
+
+# target to generate assembly for a file
+analysis/src/BDigitizerModule.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BDigitizerModule.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BDigitizerModule.cc.s
+.PHONY : analysis/src/BDigitizerModule.cc.s
+
 analysis/src/BEventAction.o: analysis/src/BEventAction.cc.o
 .PHONY : analysis/src/BEventAction.o
 
@@ -529,6 +583,33 @@ analysis/src/BEventAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BEventAction.cc.s
 .PHONY : analysis/src/BEventAction.cc.s
 
+analysis/src/BHit.o: analysis/src/BHit.cc.o
+.PHONY : analysis/src/BHit.o
+
+# target to build an object file
+analysis/src/BHit.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BHit.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BHit.cc.o
+.PHONY : analysis/src/BHit.cc.o
+
+analysis/src/BHit.i: analysis/src/BHit.cc.i
+.PHONY : analysis/src/BHit.i
+
+# target to preprocess a source file
+analysis/src/BHit.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BHit.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BHit.cc.i
+.PHONY : analysis/src/BHit.cc.i
+
+analysis/src/BHit.s: analysis/src/BHit.cc.s
+.PHONY : analysis/src/BHit.s
+
+# target to generate assembly for a file
+analysis/src/BHit.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BHit.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BHit.cc.s
+.PHONY : analysis/src/BHit.cc.s
+
 analysis/src/BPrimaryGeneratorAction.o: analysis/src/BPrimaryGeneratorAction.cc.o
 .PHONY : analysis/src/BPrimaryGeneratorAction.o
 
@@ -555,6 +636,33 @@ analysis/src/BPrimaryGeneratorAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BPrimaryGeneratorAction.cc.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BPrimaryGeneratorAction.cc.s
 .PHONY : analysis/src/BPrimaryGeneratorAction.cc.s
+
+analysis/src/BPrimaryGeneratorMessenger.o: analysis/src/BPrimaryGeneratorMessenger.cc.o
+.PHONY : analysis/src/BPrimaryGeneratorMessenger.o
+
+# target to build an object file
+analysis/src/BPrimaryGeneratorMessenger.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BPrimaryGeneratorMessenger.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BPrimaryGeneratorMessenger.cc.o
+.PHONY : analysis/src/BPrimaryGeneratorMessenger.cc.o
+
+analysis/src/BPrimaryGeneratorMessenger.i: analysis/src/BPrimaryGeneratorMessenger.cc.i
+.PHONY : analysis/src/BPrimaryGeneratorMessenger.i
+
+# target to preprocess a source file
+analysis/src/BPrimaryGeneratorMessenger.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BPrimaryGeneratorMessenger.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BPrimaryGeneratorMessenger.cc.i
+.PHONY : analysis/src/BPrimaryGeneratorMessenger.cc.i
+
+analysis/src/BPrimaryGeneratorMessenger.s: analysis/src/BPrimaryGeneratorMessenger.cc.s
+.PHONY : analysis/src/BPrimaryGeneratorMessenger.s
+
+# target to generate assembly for a file
+analysis/src/BPrimaryGeneratorMessenger.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BPrimaryGeneratorMessenger.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BPrimaryGeneratorMessenger.cc.s
+.PHONY : analysis/src/BPrimaryGeneratorMessenger.cc.s
 
 analysis/src/BRunAction.o: analysis/src/BRunAction.cc.o
 .PHONY : analysis/src/BRunAction.o
@@ -1334,12 +1442,24 @@ help:
 	@echo "... analysis/src/BDetectorMessenger.o"
 	@echo "... analysis/src/BDetectorMessenger.i"
 	@echo "... analysis/src/BDetectorMessenger.s"
+	@echo "... analysis/src/BDigi.o"
+	@echo "... analysis/src/BDigi.i"
+	@echo "... analysis/src/BDigi.s"
+	@echo "... analysis/src/BDigitizerModule.o"
+	@echo "... analysis/src/BDigitizerModule.i"
+	@echo "... analysis/src/BDigitizerModule.s"
 	@echo "... analysis/src/BEventAction.o"
 	@echo "... analysis/src/BEventAction.i"
 	@echo "... analysis/src/BEventAction.s"
+	@echo "... analysis/src/BHit.o"
+	@echo "... analysis/src/BHit.i"
+	@echo "... analysis/src/BHit.s"
 	@echo "... analysis/src/BPrimaryGeneratorAction.o"
 	@echo "... analysis/src/BPrimaryGeneratorAction.i"
 	@echo "... analysis/src/BPrimaryGeneratorAction.s"
+	@echo "... analysis/src/BPrimaryGeneratorMessenger.o"
+	@echo "... analysis/src/BPrimaryGeneratorMessenger.i"
+	@echo "... analysis/src/BPrimaryGeneratorMessenger.s"
 	@echo "... analysis/src/BRunAction.o"
 	@echo "... analysis/src/BRunAction.i"
 	@echo "... analysis/src/BRunAction.s"

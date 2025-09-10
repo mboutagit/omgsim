@@ -12,6 +12,8 @@ namespace lactel
 
     float BDetectorConstruction::worldSizeOffset = 20*cm;
     float BDetectorConstruction::acceptanceAngle = 10*deg;
+    double BDetectorConstruction::omPos = 44*deg;
+    G4ThreeVector BDetectorConstruction::OMPosition = G4ThreeVector(0, 0, .6*m); // set default OM position 
 
     // std::string BDetectorConstruction::className = "BDetectorConstruction";
     BDetectorConstruction* BDetectorConstruction::GetIt(){
@@ -23,7 +25,10 @@ namespace lactel
 
     BDetectorConstruction::BDetectorConstruction(){
         detectorMessenger = new BDetectorMessenger(this);
-        cout << "\r\033[20C" << "---- Construct the Det" << endl;
+
+        std::cout << "\r\033[30C" << "OMPostion: " << getOMPosition() << std::endl;
+
+        std::cout << "\r\033[30C" << "---- Construct the Det" << std::endl;        
     }
 
     BDetectorConstruction::~BDetectorConstruction(){
@@ -35,7 +40,12 @@ namespace lactel
     }
 
     void BDetectorConstruction::setOMPosition(G4ThreeVector vect){
-        OMPosition = vect;
+        omPos =  5.1; //vect;
+    }    
+    
+    // G4ThreeVector BDetectorConstruction::getOMPosition(){
+    double BDetectorConstruction::getOMPosition(){
+        return omPos;
     }
 
     void BDetectorConstruction::setAcceptanceAngle(float angle){
@@ -80,6 +90,7 @@ namespace lactel
 
         //recalculate the size for the world and generation valume based on the target length (accept 60° events that would hit the target)
         double gen_half_length = 2*target_half_length * tan(acceptanceAngle/rad) + target_half_length; // (c+d)*tg(theta) + d/2
+        AGen = 2*gen_half_length/cm * 2*gen_half_length/cm; // generation volume above the cell cm²
 
 
         // for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
@@ -117,15 +128,15 @@ namespace lactel
         
         for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
             //place the OM 50 cm above the target volume
-            if(pv->GetName() == "AntaresOM"){
-                pv->SetTranslation(G4ThreeVector(0, 0, - target_half_length + 50 *cm));
-            }
+            // if(pv->GetName() == "AntaresOM"){
+            //     pv->SetTranslation(G4ThreeVector(0, 0, - target_half_length + 50 *cm));
+            // }
                 
             if(pv->GetName() == "LACTEL_Cell_Outer"){
-                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetXHalfLength(target_half_length);
-                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetYHalfLength(target_half_length);
-                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(target_half_length);
-                pv->SetTranslation(G4ThreeVector(0, 0, - target_half_length));
+                // dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetXHalfLength(target_half_length);
+                // dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetYHalfLength(target_half_length);
+                // dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(target_half_length);
+                // pv->SetTranslation(G4ThreeVector(0, 0, - target_half_length));
                 pv->GetLogicalVolume()->SetVisAttributes(outer_vol);
             }
 
@@ -144,7 +155,7 @@ namespace lactel
                                 << " m^3 is: "  
                                 <<" length = " << 2*gen_half_length/m << " m - s = "
                                 << 2*gen_half_length/m * 2*gen_half_length/m << " m² - s = "
-                                << 2*gen_half_length/cm * 2*gen_half_length/cm << " cm²"
+                                << AGen << " cm²"
                                 << "\nAcceptance angle in deg: " << acceptanceAngle/deg
                                 << endl;
         return pv; 
@@ -152,6 +163,8 @@ namespace lactel
 
     void BDetectorConstruction::setTargetType(G4String type){
         std::string functionName="BDetectorConstruction::setTargetType: ";
+        GetIt()->detName = type;
+
         if(type.length() <= 3){
             if(type.substr(0, 1) == "M"){
                 try

@@ -57,7 +57,7 @@ namespace lactel
     };
 
     void BDetectorMessenger::SetNewValue(G4UIcommand* cmd, G4String value){
-        KM3DetectorMessenger::SetNewValue(cmd, value);
+        // KM3DetectorMessenger::SetNewValue(cmd, value);
         if(cmd == targetPos_cmd){
             BDetector->targetPos = targetPos_cmd->GetNew3VectorValue(value);
         } 
@@ -72,7 +72,7 @@ namespace lactel
             BDetector->OMPosition = OMPosition_cmd->GetNew3VectorValue(value);
 
             for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
-                //place the OM 50 cm above the target volume
+                //place the OM 60 cm above the target volume
                 if(pv->GetName() == "AntaresOM"){
                     pv->SetTranslation(BDetector->OMPosition);
                     std::cout << "\r\033[10C" << "PV: " << pv->GetName() << " Found! " << std::endl;
@@ -85,6 +85,7 @@ namespace lactel
         else if (cmd == acceptanceAngle_cmd){
             BDetector->acceptanceAngle = targetLength_cmd->GetNewDoubleValue(value);
             std::cout << "\r\033[20C" << "Set new acceptance angle (deg): " << BDetector->acceptanceAngle/deg << std::endl;
+
 
         }
     }
