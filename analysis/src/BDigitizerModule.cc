@@ -7,8 +7,8 @@
 namespace lactel
 {
 
-    BDigitizerModule::BDigitizerModule(const G4String& name) : G4VDigitizerModule(name) {
-        collectionName.push_back("MyDigiCollection");
+    BDigitizerModule::BDigitizerModule(const G4String& name){
+        collectionName.push_back(name);
     }
 
     BDigitizerModule::~BDigitizerModule() {}
