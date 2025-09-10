@@ -4,6 +4,12 @@
 #include "BAnalysis.hh"
 
 
+#include "G4LogicalSurface.hh"
+#include "G4LogicalBorderSurface.hh"
+#include "G4LogicalSkinSurface.hh"
+
+
+
 namespace lactel
 {
     
