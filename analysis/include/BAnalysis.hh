@@ -110,6 +110,8 @@ namespace lactel
                    //float a = 0; // hit charge
                     float tmin=0.;
                     float tmax=0.;
+                    float zenith;
+                    G4ThreeVector OMPosition;
 
                    // bool isDetected=false; // mainly used for Run managing
 
@@ -144,6 +146,7 @@ namespace lactel
                 float expectedRate = 0;
                 float generationSurface = 0; // in cm²
                 float acceptanceAngle = -999; // in deg
+
                 std::string detName ="";
             };
               
@@ -185,6 +188,8 @@ namespace lactel
             virtual void EndOfEvent(const G4Event* evt);
             virtual void StartOfEvent(const G4Event*);
             virtual void Init(std::string rfn = "");
+
+            std::string evtFileName = "output.evt";
 
         ClassDef(BAnalysis, 1);
 

@@ -20,7 +20,6 @@
 
 /KM3/GenType 3
 /run/initialize
-
 /KM3/BDet/OMPosition 0 0 -0.7 m
 
 
@@ -34,7 +33,7 @@
 # /vis/viewer/flush
 # /vis/drawVolume
 
- /run/beamOn 10000
+ /run/beamOn 10
 
 
 

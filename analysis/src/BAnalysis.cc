@@ -1,6 +1,7 @@
 #include "BAnalysis.hh"
 #include "ParametrizedGenerator.hh"
 #include "BPrimaryGeneratorAction.hh"
+#include "BDetectorConstruction.hh"
 
 #include "KM3EventAction.hh"
 #include "KM3PhotoTubeMgr.hh"
@@ -155,7 +156,31 @@ namespace lactel
         //     delete genTree;
     }
     void BAnalysis::Init(std::string rfn){
-        AAAnalysisManager::Init(rfn);
+        // AAAnalysisManager::Init(rfn);
+
+        if (rfn.size ())
+        fRootFileName=rfn;
+
+        std::cout << "\r\033[20C" << "Creating an Analysis root files: " << fRootFileName << std::endl;
+        fRFile = new TFile (fRootFileName.data (), "RECREATE");
+
+        fTRunInfos = new TTree("RunInfo","Infos about the simulation.");
+        fTRunInfos->Branch("NBTrigg",&fNbTrigg,"NbTrigg/l");
+        fTEvent = new TTree("Hit","Hits in a TTree");
+        fTEvent->Branch("Vertex",&run_id,"run_id/i:evt_id:VertexX/f:VertexY:VertexZ:VertexT:VertexP:VertexDirX:VertexDirY:VertexDirZ:VertexEnergy:OMHitX:OMHitY:OMHitZ:OMHitT:OMHitP:PhotoX:PhotoY:PhotoZ:PhotoT:PhotoP:OMID/S:PMID");
+        fTFastAnalysis = new TTree("FastAnalysis","Data used for very fast analysis.");
+        fTFastAnalysis->Branch("PhotonReach",&fNbOM,"NbOM/l:NbPhoto");
+
+        //ANTARES evt-like format output
+        if (fEvtOutput) {
+            evt_stream.open(evtFileName);
+            evt_stream << "start_run: 1" << endl;
+            evt_stream << "simul: OMGsim " << GIT_VERSION << "-" << BUILD_DATE << " " << KM3AnalysisManager::currentDateTime() << endl;
+        }   
+
+        fTFastAnalysis->Branch ("Detection" ,fNbDetected,"NbDetected[4][100]/i");
+        fTEvent->Branch        ("Hit"       ,&fTotalTime,"TotalTime:Energy:Polarity/O:Limit/b");
+
         genTree = new TTree("Gen", "generation parameters");
         runTree = new TTree("Run", "Run parameters");
         detectedEventTree = new TTree("DetectedEvent", "DetectedEvents parameters");
@@ -275,6 +300,8 @@ namespace lactel
 
         fDetectedEvent.event_id = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
         fDetectedEvent.runNb = fRun.runNb; // OK as fRun.runNb is set in the start of the run
+        fDetectedEvent.zenith =  BDetectorConstruction::GetIt()->acceptanceAngle;
+        fDetectedEvent.OMPosition = BDetectorConstruction::GetIt()->OMPosition;
 
         if(fDetectedEvent.nhit > 0){    // only detected events
             detectedEventTree->Fill();
