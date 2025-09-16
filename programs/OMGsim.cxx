@@ -64,6 +64,10 @@
 #include <sys/time.h>
 #include <unistd.h>
 
+
+#include "BAnalysis.hh"
+
+
 #include <random>
 #include <iostream>
 
@@ -77,6 +81,7 @@ using namespace km3net;
 int main(int argc_,char** argv_)
 {
   G4String srf="default.root";
+  G4String evtFileName="default.evt";
   string MacFileName;
 
 
@@ -118,6 +123,11 @@ int main(int argc_,char** argv_)
           else if ( (option == "-of") && (iarg+1 <= argc_) )
             {
               srf=argv_[iarg+1];
+              //std::cout << "\r\033[20C" << "token: " << token << " ---- value: " << argv_[iarg+1] << std::endl;
+            }
+            else if ( (option == "-evtf") && (iarg+1 <= argc_) )
+            {
+              evtFileName=argv_[iarg+1];
               //std::cout << "\r\033[20C" << "token: " << token << " ---- value: " << argv_[iarg+1] << std::endl;
             }
            
@@ -163,6 +173,9 @@ int main(int argc_,char** argv_)
     KM3AnalysisManager::fVerbose=(short)debug;
     KM3AnalysisManager::fRootFileName = srf;
 
+    lactel::BAnalysis::getIt()->evtFileName = evtFileName;
+
+
     // random engine
     //CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);
     //CLHEP::HepRandom::setTheEngine(new CLHEP::Hurd160Engine);
@@ -187,6 +200,7 @@ int main(int argc_,char** argv_)
     seeds[0] =  Seed;
     seeds[1] =  (long)(Seed*G4UniformRand());
     G4cout << "seed1: " << seeds[0] << "; seed2: " << seeds[1] << G4endl;
+  
 
     CLHEP::HepRandom::getTheEngine()->setSeeds(seeds,-1);
     CLHEP::HepRandom::showEngineStatus();
