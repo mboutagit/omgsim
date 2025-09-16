@@ -140,7 +140,7 @@ namespace km3net
     G4complex fdelta;
     G4complex ftheta1;
     G4complex ftheta2;
-    G4complex ftheta3;//geometric parameters
+    G4complex ftheta3;  //geometric parameters
 
     G4double fR_s;           // reflection coefficient for s-polarized light
     G4double fT_s;           // transmission coefficient for s-polarized light

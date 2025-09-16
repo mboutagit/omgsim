@@ -275,6 +275,8 @@ namespace lactel
 
         fDetectedEvent.event_id = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
         fDetectedEvent.runNb = fRun.runNb; // OK as fRun.runNb is set in the start of the run
+        fDetectedEvent.zenith =  BDetectorConstruction::getIt()->accepatnceAngle;
+        fDetectedEvent.OMPostion = BDetectorConstruction::getIt()->OMPosition;
 
         if(fDetectedEvent.nhit > 0){    // only detected events
             detectedEventTree->Fill();

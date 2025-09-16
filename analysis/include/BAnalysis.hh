@@ -144,7 +144,10 @@ namespace lactel
                 float expectedRate = 0;
                 float generationSurface = 0; // in cm²
                 float acceptanceAngle = -999; // in deg
+
                 std::string detName ="";
+                float zenith;
+                float OMPosition;
             };
               
             MeasureParameters fMeasure_parameters;
