@@ -48,28 +48,28 @@ Name = "LactelOneModule"
       #   MotherVolume="World";
   };
 
-#     Volume4:
-#   {
-#         Name = "LACTEL_Cell_Inner";
-#         ID   = 4;
-#         X      = 0;
-#         Y      = 0;
-#         Z      = -3002.5; # in mm
-#         Theta  = 0; #3.14;
-#         Phi    = 0.;
-#         MotherVolume="LACTEL_Cell_Outer";
-#   };
+    Volume4:
+  {
+        Name = "LACTEL_Cell_Inner";
+        ID   = 4;
+        X      = 0;
+        Y      = 0;
+        Z      = -3002.5; # in mm
+        Theta  = 0; #3.14;
+        Phi    = 0.;
+        MotherVolume="LACTEL_Cell_Outer";
+  };
   
-#   OM2:
-#   {
-#         Name = "AntaresOM";
-#         ID   = 2;
-#         X      = 0;
-#         Y      = 0;
-#         Z      = -3750; # in mm
-#         Theta  = 0.; #3.14;
-#         Phi    = 0.;
-#         MotherVolume="LACTEL_Cell_Inner";
-#   };
+  OM2:
+  {
+        Name = "AntaresOM";
+        ID   = 2;
+        X      = 0;
+        Y      = 0;
+        Z      = -3750; # in mm
+        Theta  = 0.; #3.14;
+        Phi    = 0.;
+        MotherVolume="LACTEL_Cell_Inner";
+  };
 
 

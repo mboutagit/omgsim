@@ -115,6 +115,13 @@ set(LINKDEF analysis/include/LinkDef.hh)
 file(GLOB ba_sources analysis/src/[a-zA-Z0-9]*.cc)
 file(GLOB ba_headers analysis/include/*.hh)
 
+list(REMOVE_ITEM ba_headers "${CMAKE_CURRENT_SOURCE_DIR}/analysis/include/LinkDef.hh")
+list(APPEND ba_headers "${CMAKE_CURRENT_SOURCE_DIR}/analysis/include/LinkDef.hh")
+
+
+message("")
+message("BAnalysis headers: ${ba_headers}")
+
 ROOT_GENERATE_DICTIONARY(G__Dict ${ba_headers} LINKDEF)
 
 
