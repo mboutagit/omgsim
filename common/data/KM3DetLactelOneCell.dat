@@ -2,8 +2,8 @@ Name = "LactelOneCell"
 
 Volume1:
 {
-      Name = "LACTEL_Cell_Outer";
-      ID   = 11;
+      Name = "Cell1Outer";
+      ID   = 1;
       X      = 0;
       Y      = 0;
       Z      = -1000; # in mm
@@ -14,36 +14,36 @@ Volume1:
 
 Volume2:
   {
-        Name = "LACTEL_Cell_Inner";
-        ID   = 12;
+        Name = "Cell1Inner";
+        ID   = 2;
         X      = 0;
         Y      = 0;
-        Z      = -1500; # in mm
+        Z      = -1000; # in mm
         Theta  = 0; #3.14;
         Phi    = 0.;
-        MotherVolume="LACTEL_Cell_Outer";
+        MotherVolume="Cell1Outer";
   };
   
 OM1:
 {
       Name = "AntaresOM";
-      ID   = 11;
+      ID   = 1;
       X      = 0;
       Y      = 0;
       Z      = -750; # in mm
       Theta  = 0.; #3.14;
       Phi    = 0.;
-      MotherVolume="LACTEL_Cell_Inner";
+      MotherVolume="Cell1Inner";
 };
 
-OM2:
-{
-      Name = "AntaresOM";
-      ID   = 12;
-      X      = 0;
-      Y      = 0;
-      Z      = 0; # in mm
-      Theta  = 0.; #3.14;
-      Phi    = 0.;
-      MotherVolume="LACTEL_Cell_Inner";
-};
+# OM2:
+# {
+#       Name = "AntaresOM";
+#       ID   = 12;
+#       X      = 0;
+#       Y      = 0;
+#       Z      = 0; # in mm
+#       Theta  = 0.; #3.14;
+#       Phi    = 0.;
+#       MotherVolume="LACTEL_Cell_Inner";
+# };

@@ -284,13 +284,13 @@ namespace km3net
       return false;
     }
 
-    _angular_efficiency_err= aMaterialPropertiesTable->GetProperty("ANGULAR_EFFICIENCY_ERROR");
+    _angular_efficiency= aMaterialPropertiesTable->GetProperty("ANGULAR_EFFICIENCY");
     if (_angular_efficiency == NULL)
       {
         return false;
       }
-
-    _angular_efficiency= aMaterialPropertiesTable->GetProperty("ANGULAR_EFFICIENCY");
+      
+    _angular_efficiency_err= aMaterialPropertiesTable->GetProperty("ANGULAR_EFFICIENCY_ERROR");
     if (_angular_efficiency == NULL)
       {
         return false;

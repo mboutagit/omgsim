@@ -24,17 +24,23 @@ namespace lactel
     }
     void BSteppingAction::UserSteppingAction(const G4Step* step){
 
+    G4Track* fTrack = step->GetTrack();
+    if(fTrack->GetParentID() == 0){
+        myCostumTrackColor(step);
+    }
+    
+
          G4Box* targetBox;
 
          for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
-            if(pv->GetName() == "LACTEL_Cell_Outer"){
+            if(pv->GetName().rfind("IdealWaterVolume1", 0) == 0){ // find the first outer volume and break;
                 targetBox = dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid());
                 // std::cout << "\r\033[10C" << "Box found, Name: "  << pv->GetName() << std::endl;
                 break; // return the first outer cell found (should be handled for multi boxes)
             }
         } 
 
-        // std::cout << "\r\033[55C" << "Checking hit possibility" << std::endl;
+        std::cout << "\r\033[55C" << "Checking hit possibility" << std::endl;
         if(! BPrimaryGeneratorAction::getInstance()->couldHitCube(BPrimaryGeneratorAction::getInstance()->particle_position,
                                                                 BPrimaryGeneratorAction::getInstance()->particle_direction, 
                                                                 *targetBox
@@ -45,10 +51,11 @@ namespace lactel
                 //                             << "--- D="
                 //                             << BPrimaryGeneratorAction::getInstance()->particle_direction
                 //                             << std::endl;
-                G4Track* fTrack = step->GetTrack();
+                
                 fTrack->SetTrackStatus(fStopAndKill);
                 // std::cout << "\r\033[C" << "Track killed" << std::endl;
             }
+        std::cout << "\r\033[20C" << "---- after couldHitCube test " << std::endl;
         
         G4StepPoint* prestep = step->GetPreStepPoint();
         G4StepPoint* poststep = step->GetPostStepPoint();
@@ -76,9 +83,11 @@ namespace lactel
                 return;
             }
             
+            const G4VTouchable* touchable = step->GetPreStepPoint()->GetTouchable();
+
             G4String prestepName=thePreOriginalPV->GetLogicalVolume ()->GetName();
             G4String poststepName=thePostOriginalPV->GetLogicalVolume ()->GetName();
-            G4Track* fTrack = step->GetTrack();
+            // G4Track* fTrack = step->GetTrack();
 
             if (!thePrePV || !thePostPV || !thePreOriginalPV || !thePostOriginalPV ){
             // cout << "A volume is messing !!" << endl;

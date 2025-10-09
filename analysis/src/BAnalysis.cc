@@ -423,13 +423,13 @@ namespace lactel
     for (int ihist = 0; ihist < touchpost->GetHistoryDepth (); ihist++) {
         G4String volname = touchpost->GetVolume(ihist)->GetName();
         if (volname.find(KM3PhotoTubeMgr::fPMTContainerName) != std::string::npos) {
-             fPMID=touchpost->GetCopyNumber(ihist);
+             fPMID=touchpost->GetCopyNumber(ihist); // OK for OM and DOM
 
-             std::cout << "\r\033[10C" << " touchpost->GetCopyNumber(ihist): " 
-                                        <<  touchpost->GetCopyNumber(ihist) 
-                                        << " -- touchpost->GetVolume(ihist)->GetName(): "
-                                        << touchpost->GetVolume(ihist)->GetName()
-                                        << std::endl;
+            //  std::cout << "\r\033[10C" << " touchpost->GetCopyNumber(ihist): " 
+            //                             <<  touchpost->GetCopyNumber(ihist) 
+            //                             << " -- touchpost->GetVolume(ihist)->GetName(): "
+            //                             << touchpost->GetVolume(ihist)->GetName()
+            //                             << std::endl;
         } else if (KM3DetectorConstruction::fOMNames.find(volname) != KM3DetectorConstruction::fOMNames.end()) {
              fOMId=touchpost->GetCopyNumber(ihist);
         }

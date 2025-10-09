@@ -1,13 +1,33 @@
-Name = "LACTEL_Cell_Outer";
+OuterCell1:
+{
+    Name = "OuterCell1";
 
-Prefix = "LACTELCellOuter";
+    Prefix = "OuterCell";
 
-Material = "G4_POLYETHYLENE";
+    Material = "G4_POLYETHYLENE";
 
-VolumeKind = "Box";
-X = 1005; // 2X2X2 m 
-Y = 1005;
-Z = 1005;
+    VolumeKind = "Box";
+    X = 1005; // 2X2X2 m 
+    Y = 1005;
+    Z = 1005;
 
-CheckOverlaps = false;
-SkinMaterial="AbsorberSurf";
+    CheckOverlaps = false;
+    SkinMaterial="AbsorberSurf";
+}
+
+OuterCell2:
+{
+    Name = "OuterCell2";
+
+    Prefix = "OuterCell";
+
+    Material = "G4_POLYETHYLENE";
+
+    VolumeKind = "Box";
+    X = 1005; // 2X2X2 m 
+    Y = 1005;
+    Z = 1005;
+
+    CheckOverlaps = false;
+    SkinMaterial="AbsorberSurf";
+}

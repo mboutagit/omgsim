@@ -133,7 +133,7 @@ namespace km3net
     TargetMater = fMaterialsManager->GetMaterial("AntaresWater");
   }
 
-  G4VPhysicalVolume* KM3DetectorConstruction::PlaceThem (KM3ParametrizedVolume* theVolToPlace, PositionParameters& PosPar)
+  G4VPhysicalVolume* KM3DetectorConstruction::PlaceThem (KM3ParametrizedVolume* theVolToPlace, PositionParameters& PosPar) // place volume's from KM3Det*.dat 
   {
     cout << "\r\033[20C" << "Placing the detector components" << endl;
     G4LogicalVolume* WhereToPlace=0;
@@ -161,6 +161,8 @@ namespace km3net
     G4ThreeVector thePos(PosPar.X, PosPar.Y, PosPar.Z);
 
     G4LogicalVolume* logicVolume=theVolToPlace->GetLogicalVolume (PosPar.Name);
+    // std::cout << "\r\033[50C" << "Setting thge G4LogicalVolume: " << PosPar.Name+std::to_string(PosPar.ID) << std::endl;
+    // logicVolume->SetName(PosPar.Name+std::to_string(PosPar.ID));
     if (!logicVolume)
       {
         cerr << "ERROR:KM3DetectorConstruction didn't place " << PosPar.Name <<
@@ -181,7 +183,7 @@ namespace km3net
         cerr << "ERROR:KM3DetectorConstruction, volume "<< PosPar.MotherVolume<< " can't be found"<< endl;
         return NULL;
       }
-    //cout << "Placing " << logicVolume->GetName () << " |" << logicVolume << "| in " << WhereToPlace->GetName () << " |" << WhereToPlace <<  "| at " << thePos.x() << " " << thePos.y() << ' ' << thePos.z () << endl;
+    cout << "Placing " << logicVolume->GetName () << " |" << logicVolume << "| in " << WhereToPlace->GetName () << " |" << WhereToPlace <<  "| at " << thePos.x() << " " << thePos.y() << ' ' << thePos.z () << endl;
     const G4String LACTELCELL = "LactelCell";
     if(logicVolume->GetName() == LACTELCELL){
       G4VisAttributes* cellCol = new G4VisAttributes(G4Colour(0.0, 0.0, 1.0, 0.2));
@@ -408,8 +410,8 @@ namespace km3net
     KM3ParametrizedVolume::SetDataFilesSources (Path);
   }
 
-  void KM3DetectorConstruction::ReadThisConfiguration (libconfig::Setting* cfg,
-                                                       vector<PositionParameters>&  ConfList)
+  void KM3DetectorConstruction::ReadThisConfiguration (libconfig::Setting* cfg, // reads settings from KM3Det*.dat file
+                                                       vector<PositionParameters>&  ConfList) 
   {
     PositionParameters thePar;
     libconfig::Setting
@@ -453,6 +455,7 @@ namespace km3net
 
     thePar.Name  =GetStringParameter   (sName);
     thePar.ID    =GetIntegerParameter  (sID);
+
 
     if (cfg->exists("MotherVolume"))
       thePar.MotherVolume=GetStringParameter (cfg->lookup("MotherVolume"));
@@ -517,7 +520,7 @@ namespace km3net
     ConfList.push_back(thePar);
   }
 
-  void KM3DetectorConstruction::ReadConfiguration (string ConfigFile)
+  void KM3DetectorConstruction::ReadConfiguration (string ConfigFile) // reads KM3Det*.dat file base infos
   {
     libconfig::Config cfg;
     cfg.readFile (ConfigFile.data ());
@@ -622,7 +625,7 @@ namespace km3net
 
   void KM3DetectorConstruction::SetTargetMaterial(G4String materialName) {
     // search the material by its name
-    cout << "---> " << materialName << endl;
+    cout << " ---> " << materialName << endl;
     G4Material* pttoMaterial = KM3Material::GetMaterial(materialName);
     if (pttoMaterial) {
       TargetMater = pttoMaterial;

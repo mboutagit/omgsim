@@ -552,6 +552,7 @@ namespace km3net
     const PassiveVolumeParameters &thePTP=*((PassiveVolumeParameters*)fTheParameters);
     KM3Material* materialsManager = KM3Material::GetIt ();
     G4LogicalVolume* toreturn = new G4LogicalVolume (Solid, materialsManager->GetMaterial (thePTP.Material), thePTP.Name);
+    std::cout << "\r\033[20C" << "making it logic: " <<  thePTP.Name << std::endl;
 
     if (thePTP.SkinMaterial.size () == 0)
       return toreturn;

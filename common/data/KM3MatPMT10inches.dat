@@ -330,7 +330,7 @@ PROPERTY  ANGULAR_EFFICIENCY_ERROR
 #
 #
 #
-## Added by Bouta to make the detection work. 
+## Added by Bouta to make the detection works. 
 ## check: 
 ##      KM3PMTOpticalModel::LoadMaterialProps() 
 ##      KM3PMTOpticalModel::IsPhotocathode()

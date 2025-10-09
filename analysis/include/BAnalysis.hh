@@ -98,27 +98,27 @@ namespace lactel
             struct Hit;
             struct DetectedEvent
             {                    
-                    // unsigned int event_ID;
-                    std::vector<Hit> hits;
-                    // std::vector<HitInfos> pmHits;
-                    // std::vector<HitInfos> hits;
-                    float event_energy;
-                    int  event_id = -1;
-                    int runNb = -1;
-                    uint nhit=0;
-                    float tota=0.; // cumulative charge
-                   //float a = 0; // hit charge
-                    float tmin=0.;
-                    float tmax=0.;
-                    float zenith;
-                    G4ThreeVector OMPosition;
+                // unsigned int event_ID;
+                std::vector<Hit> hits;
+                // std::vector<HitInfos> pmHits;
+                // std::vector<HitInfos> hits;
+                float event_energy;
+                int  event_id = -1;
+                int runNb = -1;
+                uint nhit=0;
+                float tota=0.; // cumulative charge
+                //float a = 0; // hit charge
+                float tmin=0.;
+                float tmax=0.;
+                float zenith;
+                G4ThreeVector OMPosition;
 
-                   // bool isDetected=false; // mainly used for Run managing
+                // bool isDetected=false; // mainly used for Run managing
 
-                //     friend class BAnalysis;
-                // public:
-                //     Event(){};
-                //     ~Event(){};
+            //     friend class BAnalysis;
+            // public:
+            //     Event(){};
+            //     ~Event(){};
             };
 
             struct Hit{

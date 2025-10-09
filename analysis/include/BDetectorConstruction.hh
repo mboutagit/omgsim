@@ -40,6 +40,10 @@ namespace lactel
 
         void autoWorldSize();
 
+        void ReadThisConfiguration (libconfig::Setting* cfg, // reads settings from KM3Det*.dat file
+                                                       vector<PositionParameters>&  ConfList);
+
+        G4VPhysicalVolume* PlaceThem (KM3ParametrizedVolume* theVolToPlace, PositionParameters& PosPar);
 
         static BDetectorConstruction* GetIt();
         // static std::string className;

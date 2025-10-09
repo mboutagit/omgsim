@@ -1,0 +1,86 @@
+Name = "LACTEL_Cell_MODEL"
+
+Prefix = "LACTELCellInner";
+
+Material = "IdealWater";
+
+VolumeKind = "Box";
+X = 1000; // 2X2X2 m 
+Y = 1000;
+Z = 1000;
+
+CheckOverlaps = false;
+
+  Volume1:
+  {
+        Name = "LACTEL_Cell_Outer";
+        ID   = 1;
+        X      = 0;
+        Y      = 0;
+        Z      = -1000; # in mm
+        Theta  = 0; #3.14;
+        Phi    = 0.;
+      #   MotherVolume="World";
+  };
+
+    Volume2:
+  {
+        Name = "LACTEL_Cell_Inner";
+        ID   = 2;
+        X      = 0;
+        Y      = 0;
+        Z      = 0; # in mm
+        Theta  = 0; #3.14;
+        Phi    = 0.;
+        MotherVolume="LACTEL_Cell_Outer";
+  };
+  
+  OM1:
+  {
+        Name = "AntaresOM";
+        ID   = 1;
+        X      = 0;
+        Y      = 0;
+        Z      = -750; # in mm
+        Theta  = 0.; #3.14;
+        Phi    = 0.;
+        MotherVolume="LACTEL_Cell_Inner";
+   };
+
+    Volume3:
+  {
+        Name = "LACTEL_Cell_Outer";
+        ID   = 3;
+        X      = 0;
+        Y      = 0;
+        Z      = -3200; # in mm
+        Theta  = 0; #3.14;
+        Phi    = 0.;
+      #   MotherVolume="World";
+  };
+
+    Volume4:
+  {
+        Name = "LACTEL_Cell_Inner";
+        ID   = 4;
+        X      = 0;
+        Y      = 0;
+        Z      = -3002.5; # in mm
+        Theta  = 0; #3.14;
+        Phi    = 0.;
+        MotherVolume="LACTEL_Cell_Outer";
+  };
+  
+  OM2:
+  {
+        Name = "AntaresOM";
+        ID   = 2;
+        X      = 0;
+        Y      = 0;
+        Z      = -3750; # in mm
+        Theta  = 0.; #3.14;
+        Phi    = 0.;
+        MotherVolume="LACTEL_Cell_Inner";
+  };
+
+

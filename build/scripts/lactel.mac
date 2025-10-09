@@ -24,16 +24,16 @@
 
 
 /vis/open OGL 800x600-0+0
+/vis/drawVolume
+
 /vis/viewer/set/style wireframe
 /vis/scene/add/extent -10 10 -10 10 -10 10 cm
 /vis/viewer/set/background 1.0 1.0 1.0 0.2
-/vis/scene/endOfEventAction accumulate 10
-/tracking/storeTrajectory 1
 /vis/scene/add/trajectories smooth
-/vis/viewer/flush
-/vis/drawVolume
+/vis/scene/endOfEventAction accumulate
+# /vis/viewer/flush
 
-#  /run/beamOn 10
+#  /run/beamOn 1000
 
 
 

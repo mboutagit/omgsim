@@ -126,24 +126,24 @@ namespace km3net
   private:
     class KM3PassiveVolume: public KM3ParametrizedVolume::KM3Volume
     {
-    public:
-      KM3PassiveVolume (PassiveVolumeParameters* PTP);
-      ~KM3PassiveVolume ();
+      public:
+        KM3PassiveVolume (PassiveVolumeParameters* PTP);
+        ~KM3PassiveVolume ();
 
 
-      G4LogicalVolume* Construct (const VolumeParameters* = NULL);
+        G4LogicalVolume* Construct (const VolumeParameters* = NULL);
 
-    private:
-      G4LogicalVolume* ConstructEllipsoidVolume ();
-      G4LogicalVolume* ConstructBoxVolume ();
-      G4LogicalVolume* ConstructConVolume ();
-      G4LogicalVolume* ConstructTubVolume ();
-      G4LogicalVolume* ConstructSphereVolume ();
-      G4LogicalVolume* ConstructTorusVolume ();
-      G4LogicalVolume* ConstructHexagoneVolume ();
-      G4LogicalVolume* ConstructBooleanVolume ();
+      private:
+        G4LogicalVolume* ConstructEllipsoidVolume ();
+        G4LogicalVolume* ConstructBoxVolume ();
+        G4LogicalVolume* ConstructConVolume ();
+        G4LogicalVolume* ConstructTubVolume ();
+        G4LogicalVolume* ConstructSphereVolume ();
+        G4LogicalVolume* ConstructTorusVolume ();
+        G4LogicalVolume* ConstructHexagoneVolume ();
+        G4LogicalVolume* ConstructBooleanVolume ();
 
-      G4LogicalVolume* MakeItLogical (G4VSolid* Solid);
+        G4LogicalVolume* MakeItLogical (G4VSolid* Solid);
     };
 
 
@@ -153,23 +153,23 @@ namespace km3net
     void ReadConfiguration (std::string);
     void ReadCurrentConfiguration (libconfig::Setting* stg);
 
-  private:
-    void ReadEllipsoidConfiguration(libconfig::Setting* stg);
-    void ReadBoxConfiguration(libconfig::Setting* stg);
-    void ReadConConfiguration(libconfig::Setting* stg);
-    void ReadTubConfiguration(libconfig::Setting* stg);
-    void ReadSphereConfiguration(libconfig::Setting* stg);
-    void ReadTorusConfiguration(libconfig::Setting* stg);
-    void ReadHexagoneConfiguration(libconfig::Setting* stg);
-    void ReadBooleanConfiguration(libconfig::Setting* stg);
+    private:
+      void ReadEllipsoidConfiguration(libconfig::Setting* stg);
+      void ReadBoxConfiguration(libconfig::Setting* stg);
+      void ReadConConfiguration(libconfig::Setting* stg);
+      void ReadTubConfiguration(libconfig::Setting* stg);
+      void ReadSphereConfiguration(libconfig::Setting* stg);
+      void ReadTorusConfiguration(libconfig::Setting* stg);
+      void ReadHexagoneConfiguration(libconfig::Setting* stg);
+      void ReadBooleanConfiguration(libconfig::Setting* stg);
 
 
-  private:
-    static std::string fname;
-    static KM3ParametrizedVolume* fInstance;
-    KM3Volume* ConstructTheVolume (VolumeParameters*);
-    KM3PassiveVolumeMgr ();
-    ~KM3PassiveVolumeMgr ();
+    private:
+      static std::string fname;
+      static KM3ParametrizedVolume* fInstance;
+      KM3Volume* ConstructTheVolume (VolumeParameters*);
+      KM3PassiveVolumeMgr ();
+      ~KM3PassiveVolumeMgr ();
   };
 }
 #endif
