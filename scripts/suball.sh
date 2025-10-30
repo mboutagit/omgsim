@@ -1,5 +1,0 @@
-./sub.sh DOMK40Water_QE2 200000 1000
-./sub.sh DOMK40Glass_QE2 200000 100
-./sub.sh DOMU238Glass_QE2 200000 100
-./sub.sh DOMTh232Glass_QE2 200000 100
-./sub.sh DOMU238Water_QE2 200000 200
