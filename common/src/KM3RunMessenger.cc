@@ -85,12 +85,18 @@ namespace km3net
       the_UPGA->fTargetRadius=TargLengthCmd->GetNewDoubleValue(newValue);
     } else if (command == fGenType) {
       int thetype=fGenType->GetNewIntValue(newValue);
-      if (thetype == 1)
+      if (thetype == 1){
+        std::cout << "\r\033[10C" << "\033[1;35mInfo: KM3RunMessenger, normal mode.\033[0m" << std::endl;
         the_UPGA->InitializeNormalType ();
-      else if (thetype == 2)
+      }
+      else if (thetype == 2){
+        std::cout << "\r\033[10C" << "\033[1;35mInfo: KM3RunMessenger, decay mode.\033[0m" << std::endl;
         the_UPGA->InitializeDecayType ();
-      else if (thetype == 3)
-       the_UPGA->initMuons ();
+      }
+      else{
+        std::cout << "\r\033[10C" << "\033[1;35mInfo: GenType " << thetype << " is not defined for KM3RunMessenger! \nExiting ...\033[0m" << std::endl;
+        exit(-1);
+      }      
     }
   }
 }

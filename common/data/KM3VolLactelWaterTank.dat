@@ -79,8 +79,6 @@ IdealWaterVolume2:
     CheckOverlaps = false;
 }
 
-
-
 LactelWaterTank1:
 {
     Name= "LactelWaterTank1";

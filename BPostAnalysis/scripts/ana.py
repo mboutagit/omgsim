@@ -16,21 +16,32 @@ import uproot
 
 
 file=uproot.open("/home/bouta-mohammed/work/cppm/lactel/trunk/build/results/last/all_M2.root")
-tree=file["Run"]
+# tree=file["Run"]
 
-run=tree["Run"].array(library="np")
+# run=tree["Run"].array(library="np")
+detEvents=file["Run"]["Run"]
+# print(detEvents["runNb"])
 
-ng = tree["Run/nGenEvent"].array(library="np")
-nd = tree["Run/nDetEvent"].array(library="np")
+# ng = tree["Run/nGenEvent"].array(library="np")
+# nd = tree["Run/nDetEvent"].array(library="np")
+ri = file["Run"]["Run"].arrays(filter_name="*", library="pd")
+# runs = pd.DataFrame(file["Run"]["Run"])
+# dei = file["DetectedEvent"]["DetectedEvent"].arrays(filter_name="*", library="pd")
+# print(runInfo.nGenEvent)
+# print(dei.columns)
 
-df=tree.arrays(["Run/nGenEvent", "Run/nDetEvent", "Run/runNb", "Run/detName", "Run/expectedRate", "Run/acceptanceAngle", "Run/generationSurface"], library="pd")
-filter=df[df["Run/acceptanceAngle"] > 40]
-filter["Run/acceptanceAngle"].plot.hist(bins=100)
+
+
+# df=tree.arrays(["Run/nGenEvent", "Run/nDetEvent", "Run/runNb", "Run/detName", "Run/expectedRate", "Run/acceptanceAngle", "Run/generationSurface"], library="pd")
+# filter=df[df["Run/acceptanceAngle"] >=0]
+# filter["Run/acceptanceAngle"].plot.hist(bins=100)
+# plt.show()
+
+# print(filter["Run/acceptanceAngle"])
+# fig = plt.figure()
+# ax = fig.add_subplot(111, projection='3d')
+
+plt.scatter(ri["acceptanceAngle"], ri["expectedRate"])
 plt.show()
-
-print(filter["Run/acceptanceAngle"])
-
-# plt.scatter(ng, nd, s=5, alpha=0.5)
-# plt.title("Test Plot")
-# plt.ylabel("Number of detected events")
+# plt.scatter(dei["hits"])
 # plt.show()

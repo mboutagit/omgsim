@@ -80,7 +80,7 @@ namespace km3net
       void InitializeNormalType ();
       void InitializeDecayType ();
      // void InitializeCustumMuonType();
-      void initMuons();
+      // void initMuons();
       G4int PrevTime;
 
     private:

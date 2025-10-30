@@ -26,7 +26,7 @@ namespace lactel
     }
 
     void BHit::Print() {
-        G4cout << "BHit: E = " << edep / keV << " keV, t = " << time / ns << " ns, pos = " << pos << G4endl;
+        G4cout << "BHit: E = " << edep / eV << " eV, t = " << time / ns << " ns, pos = " << pos << G4endl;
     }    
 } // namespace lactel
 

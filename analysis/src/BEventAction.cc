@@ -1,6 +1,7 @@
 
 #include "BEventAction.hh"
 #include "G4DigiManager.hh"
+#include "BWaveCatcher.hh"
 
 using namespace km3net;
 
@@ -23,8 +24,12 @@ namespace lactel
         //Digi
         // G4DigiManager* digiMan = G4DigiManager::GetDMpointer();
         // digiMan->Digitize("DigitizerModule");  
-        }
+        // BWaveCatcher* wc1 = new BWaveCatcher();
+        // Waveform wf = wc1->getFakeWaveform(1); // get channel one wavefrom
+
+        // wc1->drawWaveform(wf).Write();
 
 
-    
+    }
+
 } // namespace lactel

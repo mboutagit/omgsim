@@ -96,15 +96,14 @@ namespace km3net
    * memuntum and energy based on PDG
    */
 
-  void KM3PrimaryGeneratorAction::initMuons ()
-    {
-      if (fGunType)
-        throw ("Two guntype init in the mac file !!");
+  // void KM3PrimaryGeneratorAction::initMuons ()
+  //   {
+  //     if (fGunType)
+  //       throw ("Two guntype init in the mac file !!");
 
-      particleGun = new G4ParticleGun();
-      fGunType = 3;
-    }
-
+  //     particleGun = new G4ParticleGun();
+  //     fGunType = 3;
+  //   }
 
   void KM3PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   {

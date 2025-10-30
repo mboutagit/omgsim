@@ -1,7 +1,10 @@
-build/results
-build/CMakeFiles
-build/*.*
-build/*.root
+build
 simOutputs
+results
 *.log
 *.root
+.*
+*.png
+*.sh
+*.csh
+*.zsh

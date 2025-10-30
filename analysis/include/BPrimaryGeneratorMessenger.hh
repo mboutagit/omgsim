@@ -9,11 +9,14 @@
 #include "G4UIcmdWithADoubleAndUnit.hh"
 #include "G4UIcmdWithAString.hh"
 #include "G4UIcmdWithABool.hh"
+#include "G4UIcmdWithAnInteger.hh"
+
+#include "KM3RunMessenger.hh"
 
 class G4UIdirectory;
 class BDetetcorConstruction;
 
-// using namespace km3net;
+using namespace km3net;
 
 namespace lactel
 {
@@ -27,6 +30,7 @@ namespace lactel
             G4UIcmdWithADoubleAndUnit* thetaGen_cmd;
             G4UIcmdWithADoubleAndUnit* EGen_cmd;
             G4UIcmdWithAString* genParsMode_cmd;
+            G4UIcmdWithAnInteger* genType_cmd;
 
             BPrimaryGeneratorAction* BPGA;
 

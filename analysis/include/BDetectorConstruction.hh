@@ -38,6 +38,9 @@ namespace lactel
         void setAcceptanceAngle(float angle);
         // virtual G4LogicalVolume* Construct(const VolumeParameters* = NULL) override;
 
+        void DefineOpticalProperties();
+
+
         void autoWorldSize();
 
         void ReadThisConfiguration (libconfig::Setting* cfg, // reads settings from KM3Det*.dat file

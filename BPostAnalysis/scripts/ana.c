@@ -69,16 +69,16 @@ for(int ze = 0; ze <= 20; ze+=2){
     ostringstream angle;
     angle << ze;
     std::string hisName = "M2_" + angle.str() + "_hist";
-    std::string drawCommand="nDetEvent:nGenEvent >> M2_" + angle.str() + "_hist";
+    std::string drawCommand="expectedRate:acceptanceAngle >> M2_" + angle.str() + "_hist";
     std::string drawCondition="";
-    std::string drawOption="";
+    std::string drawOption="P";
     
     std::cout << "\r\033[10C" << "drawCommand: " << drawCommand << std::endl;
 
-    hisndngz[i] = new TH2F(hisName.c_str(), ("his nDet vs nGen" + angle.str() + "; nGen; nDet").c_str(), 100, 24000, 26000, 100, 0, 10000);
+    // hisndngz[i] = new TH2F(hisName.c_str(), ("his nDet vs nGen" + angle.str() + "; nGen; nDet").c_str(), 100, -60, 60, 100, 0, 1e4);
     M2RunTree->Draw(drawCommand.c_str(), drawCondition.c_str(), drawOption.c_str());
     // hisndngz[i]->SetStats(0);
-    hisndngz[i]->Draw("same");
+    // hisndngz[i]->Draw("same");
     i++;
 }
 

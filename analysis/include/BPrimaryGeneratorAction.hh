@@ -37,8 +37,11 @@ private:
     BPrimaryGeneratorAction();
     BPrimaryGeneratorMessenger* fMessenger;
 
+
     
 public:
+    void initMuons ();
+    void initTest ();
 
     static BPrimaryGeneratorAction* getInstance();
     BPrimaryGeneratorAction(const BPrimaryGeneratorAction&) = delete;
@@ -79,6 +82,7 @@ public:
     G4ThreeVector FixedThetaDirection(double theta);
 
     bool couldHitCube(G4ThreeVector origin, G4ThreeVector direction, G4Box box);
+    inline unsigned char getGunType(){return fGunType;}
 
     ofstream gen_data;
     gen_mode generator;

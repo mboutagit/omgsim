@@ -21,6 +21,7 @@ namespace lactel
         
         void BeginOfRunAction(const G4Run*);
         void EndOfRunAction(const G4Run*);
+        
     };
 } // namespace lactel
 

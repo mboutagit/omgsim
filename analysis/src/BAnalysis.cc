@@ -6,7 +6,10 @@
 #include "KM3EventAction.hh"
 #include "KM3PhotoTubeMgr.hh"
 
-#include "G4RunManager.hh"
+#include "BHit.hh"
+
+#include "BRunManager.hh"
+#include "BEvent.hh"
 
 #include "TTree.h"
 
@@ -354,6 +357,12 @@ namespace lactel
         fHits.charge = info->GetOriginalEnergy() / CLHEP::eV;
 
         fDetectedEvent.hits.push_back(fHits);
+        BHit ahit;
+        ahit.SetEdep(info->GetOriginalEnergy() / CLHEP::eV);
+        ahit.SetTime(info->GetOriginalTime());
+
+        // G4Event* event = BRunManager::GetRunManager()->GetEventManager()->GetConstCurrentEvent();
+        // BEvent* myEvent = static_cast<BEvent*> (event);
 
         //fDetectedEvent.event_id = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
         fDetectedEvent.event_energy += info->GetOriginalEnergy() / CLHEP::eV; 
@@ -450,8 +459,8 @@ namespace lactel
     fHits.pm_x=localpoint.x ();
     fHits.pm_y=localpoint.y ();
     fHits.pm_z=localpoint.z ();
-    fHits.pm_p=localpoint.theta ();
-    fHits.pm_t=localpoint.phi ();
+    fHits.pm_t=localpoint.theta ();
+    fHits.pm_p=localpoint.phi ();
 
     // std::cout << "\r\033[55C" << "PMT infos: "  << fPhotoX
     //                                             << fPhotoY
@@ -520,8 +529,8 @@ namespace lactel
     fHits.om_x=localpoint.x ();
     fHits.om_y=localpoint.y ();
     fHits.om_z=localpoint.z ();
-    fHits.om_p=localpoint.theta ();
-    fHits.om_t=localpoint.phi ();
+    fHits.om_t=localpoint.theta ();
+    fHits.om_p=localpoint.phi ();
     
   }
 

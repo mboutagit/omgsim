@@ -26,6 +26,10 @@ namespace lactel{
         BSteppingAction();
         virtual ~BSteppingAction();
         virtual void UserSteppingAction(const G4Step*);
+        // unsigned char CheckDetection(const G4ThreeVector& localPoint, KM3TrackInformation* infos);
+        // unsigned char CheckDetection (const G4Step* STEP, KM3TrackInformation* infos);
+        // unsigned char CalculateDetection(const G4Step* STEP);
+
     };
 } // namespace lactel
 

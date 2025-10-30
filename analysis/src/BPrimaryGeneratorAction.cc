@@ -5,6 +5,7 @@
 #include "BDetectorConstruction.hh"
 #include "Randomize.hh"
 #include "G4StateManager.hh"
+#include "G4OpticalPhoton.hh"
 
 #include "BPrimaryGeneratorMessenger.hh"
 
@@ -37,6 +38,22 @@ namespace lactel
         return (BPrimaryGeneratorAction*) instance;
     }
 
+    void BPrimaryGeneratorAction::initMuons (){
+      if (fGunType)
+        throw ("Two guntype init in the mac file !!");
+
+      particleGun = new G4ParticleGun();
+      fGunType = 3;
+    }
+
+    void BPrimaryGeneratorAction::initTest (){
+      if (fGunType)
+        throw ("Two guntype init in the mac file !!");
+
+      particleGun = new G4ParticleGun();
+      fGunType = 4;
+    }
+
     BPrimaryGeneratorAction::BPrimaryGeneratorAction() : generator(BPrimaryGeneratorAction::gen_mode::GEANT4),
                                                             particle_name("muons")
     {
@@ -48,6 +65,40 @@ namespace lactel
         }
 
         fMessenger = new BPrimaryGeneratorMessenger(this);
+
+        double Emin = 10*GeV, Emax=10*TeV, dE = 500*MeV;
+        double Tmin = 0 * deg, Tmax = 70 *deg, dT = .1 * deg;
+        double alt = 274 * m;
+
+        TH2F* hisET = new TH2F("hisET", "Muons flux; log10(E) (GeV); #theta (Deg)", 500, log10(Emin/GeV), log10(Emax/GeV), 200, Tmin/deg, Tmax/deg);
+
+        vector<double> angles = {0*deg, 10*deg , 20*deg , 30*deg, 40*deg, 50*deg, 60*deg};
+        vector<TGraph*> FEGraphes;
+
+        for(auto& angle : angles){
+            TGraph* gr = new TGraph();
+            gr->SetTitle(("gr_" + std::to_string((int)(angle/deg)) + "; Energy (GeV); Flux").c_str());
+            gr->SetName(("gr_" + std::to_string((int)(angle/deg))).c_str());
+
+            int p = 0;
+            std::cout << "\r\033[10C" << "energy min in GeV: " << Emin/GeV << " angle in rad: " << angle/rad << std::endl;
+            for(double E = Emin; E <= Emax; E+=dE){
+                gr->SetPoint(p, E/GeV, muon_flux(E/GeV, angle/rad, alt/m) * 100 * 100 );
+                p++;
+            }
+            // FEGraphes.push_back(gr);
+            gr->Write();
+        }
+
+
+
+        for(double E = Emin; E <= Emax; E+=dE){
+            for(double T = Tmin; T <= Tmax; T+=dT){
+                hisET->Fill(log10(E/GeV), T/deg, muon_flux(E/GeV, T/rad, alt/m));
+            }
+        }
+        hisET->Write();
+       
     }
 
     BPrimaryGeneratorAction::~BPrimaryGeneratorAction(){
@@ -93,9 +144,61 @@ namespace lactel
             ((G4ParticleGun*)particleGun)->GeneratePrimaryVertex(event);
             return;
         }
+        else if(fGunType == 4){
+            // std::cout << "\r\033[10C" << "\033[1;35mInfo: Using costum particle gun. \033[0m" << std::endl;
+            
+             G4ParticleGun* gun = new G4ParticleGun(1);
 
+            // // Define the optical photon
+            // G4ParticleDefinition* photon = G4OpticalPhoton::Definition();
+            // gun->SetParticleDefinition(photon);
+
+            // // ---- Laser-like properties ----
+            // gun->SetParticleEnergy(3.5 * eV);               // ~620 nm (red laser)
+            // gun->SetParticlePosition(G4ThreeVector(0., 0., 0.)); // source position
+            // gun->SetParticleMomentumDirection(G4ThreeVector((0.01 + 0.01 * G4UniformRand()), 
+            //                                                     (0.01 + 0.02 * G4UniformRand()),
+            //                                                      -(0.9 + 0.1 * G4UniformRand()))); // +z direction (collimated)
+
+            // // Set linear polarization (unit vector orthogonal to momentum)
+            // G4ThreeVector pol(1., 0., 0.); // polarization along x-axis
+            // gun->SetParticlePolarization(pol);
+
+            // // Generate the event
+            // gun->GeneratePrimaryVertex(event);
+            // ((G4ParticleGun*)particleGun)->GeneratePrimaryVertex(event);
+
+            G4ThreeVector hemisphereCenter(0., 0., -650.*mm);  // center position in world coordinates
+            G4double R = 0.5 * m;                           // radius of hemisphere
+
+
+            G4double theta = 3.145*G4UniformRand(); //;std::acos(G4UniformRand());     // [0, π/2] for upper hemisphere
+            G4double phi   = 2.0 * CLHEP::pi * G4UniformRand();
+
+            G4double x = R * std::sin(theta) * std::cos(phi);
+            G4double y = R * std::sin(theta) * std::sin(phi);
+            G4double z = R * std::cos(theta);                // upper hemisphere (+z)
+
+            // Shift by the hemisphere’s origin
+            G4ThreeVector position = hemisphereCenter + G4ThreeVector(x, y, z);
+
+        
+            G4ThreeVector direction = (hemisphereCenter - position).unit();
+
+            gun->SetParticleDefinition(G4OpticalPhoton::Definition());
+            gun->SetParticleEnergy((1.77 + 4.13 * G4UniformRand()) * eV);
+            gun->SetParticlePosition(position);
+            gun->SetParticleMomentumDirection(direction);
+
+            gun->GeneratePrimaryVertex(event);
+
+
+            return;
+        }
         else{
-            throw("This type is only for GenType = 3: Please use other type for in /KM3/XP/Type! ");
+            std::cerr << "\r\033[10C" << "\033[1;33mWarning: Usage of GunType = " << static_cast<int> (fGunType) 
+                                        << ". This type is not suitable for BA Type simulations. \033[0m" << std::endl;
+            KM3PrimaryGeneratorAction::GeneratePrimaries(event);
         }
     }
 
@@ -263,6 +366,8 @@ namespace lactel
             else
               particleName = "mu-";
 
+            particleName="gamma";
+
             double Emin = 1.0;     // GeV
             double Emax = 1e4;     // GeV (10 TeV)
             G4ThreeVector direction;
@@ -379,7 +484,7 @@ namespace lactel
 
 
         // Muon flux parameterization (Gaisser's formula)
-    double BPrimaryGeneratorAction::muon_flux(double E, double theta, double altitude) {
+    double BPrimaryGeneratorAction::muon_flux(double E, double theta, double altitude) { // E in GeV, theta in rad and alt in m
         // double cos_theta = cos(theta/rad);
         // double X = BUnits::rho_air * BUnits::H_0 * exp(-altitude/m / BUnits::H_0/m) / cos_theta; // Atmospheric depth
         // double norm = 0.14;  // Normalization factor for flux (cm⁻² s⁻¹ sr⁻¹ GeV⁻¹)
@@ -387,12 +492,11 @@ namespace lactel
         // double E_pion = 115.0 / (cos_theta + 0.1 * sqrt(X / BUnits::H_0));  // Pion critical energy
         // return norm * pow(E, -gamma) * (1.0 / (1.0 + E / E_pion)); // Differential flux (cm⁻² s⁻¹ sr⁻¹ GeV⁻¹)
 
-        double cosTheta = std::cos(theta);
-        double term1 = 1.0 / (1.0 + 1.1 * E * cosTheta / 115.0);
-        double term2 = 0.054 / (1.0 + 1.1 * E * cosTheta / 850.0);
+        double cost = std::cos(theta);
+        double term1 = 1.0 / (1.0 + 1.1 * E * cost / 115.0);
+        double term2 = 0.054 / (1.0 + 1.1 * E * cost / 850.0);
         const double H = 6.3 * km; // in km   // Atmospheric scale height
         return 0.14 * std::pow(E, -2.7) * (term1 + term2) * exp(-altitude / H/m); // muons/cm²/s/sr/GeV * altitude correction
-
     }
 
     // integration using trapezoidal rule

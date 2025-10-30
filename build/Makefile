@@ -556,6 +556,33 @@ analysis/src/BDigitizerModule.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BDigitizerModule.cc.s
 .PHONY : analysis/src/BDigitizerModule.cc.s
 
+analysis/src/BEvent.o: analysis/src/BEvent.cc.o
+.PHONY : analysis/src/BEvent.o
+
+# target to build an object file
+analysis/src/BEvent.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BEvent.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BEvent.cc.o
+.PHONY : analysis/src/BEvent.cc.o
+
+analysis/src/BEvent.i: analysis/src/BEvent.cc.i
+.PHONY : analysis/src/BEvent.i
+
+# target to preprocess a source file
+analysis/src/BEvent.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BEvent.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BEvent.cc.i
+.PHONY : analysis/src/BEvent.cc.i
+
+analysis/src/BEvent.s: analysis/src/BEvent.cc.s
+.PHONY : analysis/src/BEvent.s
+
+# target to generate assembly for a file
+analysis/src/BEvent.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BEvent.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BEvent.cc.s
+.PHONY : analysis/src/BEvent.cc.s
+
 analysis/src/BEventAction.o: analysis/src/BEventAction.cc.o
 .PHONY : analysis/src/BEventAction.o
 
@@ -691,6 +718,33 @@ analysis/src/BRunAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BRunAction.cc.s
 .PHONY : analysis/src/BRunAction.cc.s
 
+analysis/src/BRunManager.o: analysis/src/BRunManager.cc.o
+.PHONY : analysis/src/BRunManager.o
+
+# target to build an object file
+analysis/src/BRunManager.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BRunManager.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BRunManager.cc.o
+.PHONY : analysis/src/BRunManager.cc.o
+
+analysis/src/BRunManager.i: analysis/src/BRunManager.cc.i
+.PHONY : analysis/src/BRunManager.i
+
+# target to preprocess a source file
+analysis/src/BRunManager.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BRunManager.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BRunManager.cc.i
+.PHONY : analysis/src/BRunManager.cc.i
+
+analysis/src/BRunManager.s: analysis/src/BRunManager.cc.s
+.PHONY : analysis/src/BRunManager.s
+
+# target to generate assembly for a file
+analysis/src/BRunManager.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BRunManager.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BRunManager.cc.s
+.PHONY : analysis/src/BRunManager.cc.s
+
 analysis/src/BSteppingAction.o: analysis/src/BSteppingAction.cc.o
 .PHONY : analysis/src/BSteppingAction.o
 
@@ -717,6 +771,60 @@ analysis/src/BSteppingAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BSteppingAction.cc.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BSteppingAction.cc.s
 .PHONY : analysis/src/BSteppingAction.cc.s
+
+analysis/src/BWaveCatcher.o: analysis/src/BWaveCatcher.cc.o
+.PHONY : analysis/src/BWaveCatcher.o
+
+# target to build an object file
+analysis/src/BWaveCatcher.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BWaveCatcher.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BWaveCatcher.cc.o
+.PHONY : analysis/src/BWaveCatcher.cc.o
+
+analysis/src/BWaveCatcher.i: analysis/src/BWaveCatcher.cc.i
+.PHONY : analysis/src/BWaveCatcher.i
+
+# target to preprocess a source file
+analysis/src/BWaveCatcher.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BWaveCatcher.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BWaveCatcher.cc.i
+.PHONY : analysis/src/BWaveCatcher.cc.i
+
+analysis/src/BWaveCatcher.s: analysis/src/BWaveCatcher.cc.s
+.PHONY : analysis/src/BWaveCatcher.s
+
+# target to generate assembly for a file
+analysis/src/BWaveCatcher.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BWaveCatcher.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BWaveCatcher.cc.s
+.PHONY : analysis/src/BWaveCatcher.cc.s
+
+analysis/src/BWaveCatcherConf.o: analysis/src/BWaveCatcherConf.cc.o
+.PHONY : analysis/src/BWaveCatcherConf.o
+
+# target to build an object file
+analysis/src/BWaveCatcherConf.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BWaveCatcherConf.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BWaveCatcherConf.cc.o
+.PHONY : analysis/src/BWaveCatcherConf.cc.o
+
+analysis/src/BWaveCatcherConf.i: analysis/src/BWaveCatcherConf.cc.i
+.PHONY : analysis/src/BWaveCatcherConf.i
+
+# target to preprocess a source file
+analysis/src/BWaveCatcherConf.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BWaveCatcherConf.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BWaveCatcherConf.cc.i
+.PHONY : analysis/src/BWaveCatcherConf.cc.i
+
+analysis/src/BWaveCatcherConf.s: analysis/src/BWaveCatcherConf.cc.s
+.PHONY : analysis/src/BWaveCatcherConf.s
+
+# target to generate assembly for a file
+analysis/src/BWaveCatcherConf.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/analysis/src/BWaveCatcherConf.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/analysis/src/BWaveCatcherConf.cc.s
+.PHONY : analysis/src/BWaveCatcherConf.cc.s
 
 analysis/src/Utils.o: analysis/src/Utils.cc.o
 .PHONY : analysis/src/Utils.o
@@ -1475,6 +1583,9 @@ help:
 	@echo "... analysis/src/BDigitizerModule.o"
 	@echo "... analysis/src/BDigitizerModule.i"
 	@echo "... analysis/src/BDigitizerModule.s"
+	@echo "... analysis/src/BEvent.o"
+	@echo "... analysis/src/BEvent.i"
+	@echo "... analysis/src/BEvent.s"
 	@echo "... analysis/src/BEventAction.o"
 	@echo "... analysis/src/BEventAction.i"
 	@echo "... analysis/src/BEventAction.s"
@@ -1490,9 +1601,18 @@ help:
 	@echo "... analysis/src/BRunAction.o"
 	@echo "... analysis/src/BRunAction.i"
 	@echo "... analysis/src/BRunAction.s"
+	@echo "... analysis/src/BRunManager.o"
+	@echo "... analysis/src/BRunManager.i"
+	@echo "... analysis/src/BRunManager.s"
 	@echo "... analysis/src/BSteppingAction.o"
 	@echo "... analysis/src/BSteppingAction.i"
 	@echo "... analysis/src/BSteppingAction.s"
+	@echo "... analysis/src/BWaveCatcher.o"
+	@echo "... analysis/src/BWaveCatcher.i"
+	@echo "... analysis/src/BWaveCatcher.s"
+	@echo "... analysis/src/BWaveCatcherConf.o"
+	@echo "... analysis/src/BWaveCatcherConf.i"
+	@echo "... analysis/src/BWaveCatcherConf.s"
 	@echo "... analysis/src/Utils.o"
 	@echo "... analysis/src/Utils.i"
 	@echo "... analysis/src/Utils.s"

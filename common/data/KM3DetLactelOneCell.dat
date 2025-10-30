@@ -1,49 +1,52 @@
 Name = "LactelOneCell"
 
-Volume1:
-{
-      Name = "Cell1Outer";
-      ID   = 1;
-      X      = 0;
-      Y      = 0;
-      Z      = -1000; # in mm
-      Theta  = 0; #3.14;
-      Phi    = 0.;
-      #MotherVolume="Target";
-};
-
-Volume2:
+  Volume0:
   {
-        Name = "Cell1Inner";
+        Name = "LacWater";
+        ID   = 1;
+        X      = 0;
+        Y      = 0;
+        Z      = -1200; # in mm
+        Theta  = 0; #3.14;
+        Phi    = 0.;
+        # MotherVolume="LACTELCellOuter";
+  };
+
+  Volume1:
+  {
+        Name = "LactelWaterTank1";
+        ID   = 1;
+        X      = 0;
+        Y      = 0;
+        Z      = 0; # in mm
+        Theta  = 0; #3.14;
+        Phi    = 0.;
+        MotherVolume="LacWater";
+  };
+
+   Volume2:
+  {
+        Name = "IdealWaterVolume1";
         ID   = 2;
         X      = 0;
         Y      = 0;
-        Z      = -1000; # in mm
+        Z      = 0; # in mm
         Theta  = 0; #3.14;
         Phi    = 0.;
-        MotherVolume="Cell1Outer";
+        MotherVolume="LactelWaterTank1";
   };
-  
-OM1:
-{
-      Name = "AntaresOM";
-      ID   = 1;
-      X      = 0;
-      Y      = 0;
-      Z      = -750; # in mm
-      Theta  = 0.; #3.14;
-      Phi    = 0.;
-      MotherVolume="Cell1Inner";
-};
 
-# OM2:
-# {
-#       Name = "AntaresOM";
-#       ID   = 12;
-#       X      = 0;
-#       Y      = 0;
-#       Z      = 0; # in mm
-#       Theta  = 0.; #3.14;
-#       Phi    = 0.;
-#       MotherVolume="LACTEL_Cell_Inner";
-# };
+
+  OM1:
+  {
+        Name = "AntaresOM";
+        ID   = 1;
+        X      = 0;
+        Y      = 0;
+        Z      = -750; # in mm
+        Theta  = 0.; #3.14;
+        Phi    = 0.;
+        MotherVolume="IdealWaterVolume1";
+   };
+
+

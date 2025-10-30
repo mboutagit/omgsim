@@ -3,6 +3,7 @@
 
 #include "KM3EventAction.hh"
 #include "BAnalysis.hh"
+#include "BEvent.hh"
 
 using namespace km3net;
 namespace lactel
@@ -19,7 +20,6 @@ namespace lactel
 
     private:
       /*--*/
-
   };
 
 } // namespace lactel

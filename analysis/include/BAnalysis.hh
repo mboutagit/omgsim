@@ -10,6 +10,8 @@
 #include "TF1.h"
 #include "TGraph.h"
 
+#include "BEvent.hh"
+
 using namespace std;
 using namespace km3net;
 

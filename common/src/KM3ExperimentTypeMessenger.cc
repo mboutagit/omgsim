@@ -55,6 +55,7 @@
 #include "BPrimaryGeneratorAction.hh"
 #include "BEventAction.hh"
 #include "BRunAction.hh"
+#include "BRunManager.hh"
 
 #include <iostream>
 
@@ -126,8 +127,12 @@ namespace km3net
             fDetector = lactel::BDetectorConstruction::GetIt();
           else
             fDetector = KM3DetectorConstruction::GetIt ();
-          
-          frunManager = new KM3RunManager;
+
+          if (newValue == "BA")
+            frunManager = new BRunManager();
+          else
+            frunManager = new KM3RunManager;
+
 
           // set mandatory initialization classes
           frunManager->SetUserInitialization(new KM3PhysicsList);

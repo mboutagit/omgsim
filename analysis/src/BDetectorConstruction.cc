@@ -38,7 +38,7 @@ namespace lactel
         detectorMessenger = new BDetectorMessenger(this);
 
         std::cout << "\r\033[30C" << "OMPostion: " << getOMPosition() << std::endl;
-
+        DefineOpticalProperties();
         std::cout << "\r\033[30C" << "---- Construct the Det" << std::endl;        
     }
 
@@ -64,33 +64,35 @@ namespace lactel
     }
 
     void BDetectorConstruction::autoWorldSize(){
-        float zmin, zmax;
-        zmin = (*G4PhysicalVolumeStore::GetInstance())[0]->GetTranslation().getZ(); // initilize
-        zmax = (*G4PhysicalVolumeStore::GetInstance())[0]->GetTranslation().getZ(); // initilize
+        float zmax;
+        zmax = (*G4PhysicalVolumeStore::GetInstance())[0]->GetTranslation().getZ() + 
+                    dynamic_cast<G4Box*> ((*G4PhysicalVolumeStore::GetInstance())[0]->GetLogicalVolume()->GetSolid())->GetZHalfLength(); // initilize
+
+        G4VPhysicalVolume* farVolume;
 
         for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
                         
             if(dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid())){
-                if(abs(pv->GetTranslation().getZ()) > zmax){
-                    zmax = abs(pv->GetTranslation().getZ()) + 
-                            dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->GetZHalfLength();
-                     
+                
+                if((abs(pv->GetTranslation().getZ()) + abs((dynamic_cast<G4Box*> (pv->GetLogicalVolume()->GetSolid()))->GetZHalfLength())) > abs(zmax)){
+                    zmax = (abs(pv->GetTranslation().getZ()) + abs(dynamic_cast<G4Box*> (pv->GetLogicalVolume()->GetSolid())->GetZHalfLength()));
+                    farVolume=pv;                     
                 }
-
+            
                 std::cout << "\r\033[10C" << "Check Volume: " << pv->GetName() << "  -- zpos: " << pv->GetTranslation().getZ()
-                            << " -- halfZ size: " << dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->GetZHalfLength()
-                            << std::endl;
-
-                    
+                            << " -- halfZ size: " << dynamic_cast<G4Box*>  (dynamic_cast<G4Box*> (pv->GetLogicalVolume()->GetSolid())) ->GetZHalfLength()
+                            << std::endl;   
             }
         }
 
-        float autoZ = (abs(zmin) > abs(zmax)) ? (abs(zmin) + worldSizeOffset) : (abs(zmax) + worldSizeOffset);
-        dynamic_cast<G4Box*> (solidWorld)->SetZHalfLength(autoZ);
+         float autoZ = zmax;  // (abs(zmin) > abs(zmax)) ? 
+        //                 (abs(zmin) + worldSizeOffset) : 
+        //                 (abs(zmax) + worldSizeOffset);
+        dynamic_cast<G4Box*> (solidWorld)->SetZHalfLength(autoZ + worldSizeOffset);
 
 
-        std::cout << "\r\033[10C" << "zmin: " << zmin << " -- zmax: " << zmax << " -- worldsizeOffSet " 
-                    << worldSizeOffset << " -- val: " << autoZ << std::endl;
+        std::cout << "\r\033[10C" << "zmin: " << " zmin " << " -- zmax: " << zmax << " -- worldsizeOffSet " 
+                    << worldSizeOffset << " -- zmin + offset: " << autoZ << std::endl;
     }
 
    // G4LogicalVolume* BDetectorConstruction::Construct(const VolumeParameters* = NULL) {return 0;}
@@ -508,7 +510,7 @@ namespace lactel
         //recalculate the 
         dynamic_cast<G4Box*> (solidWorld)->SetXHalfLength(gen_half_length);
         dynamic_cast<G4Box*> (solidWorld)->SetYHalfLength(gen_half_length);
-        dynamic_cast<G4Box*> (solidWorld)->SetZHalfLength(6*m);
+        dynamic_cast<G4Box*> (solidWorld)->SetZHalfLength(1*m);
 
         dynamic_cast<G4Box*> (genSolid)->SetXHalfLength(gen_half_length);
         dynamic_cast<G4Box*> (genSolid)->SetYHalfLength(gen_half_length);
@@ -528,15 +530,20 @@ namespace lactel
         lw->SetForceSolid(true);  
         
         //costum colors
+        autoWorldSize();
+
         float maxX=0, maxY=0, maxZ=0;
         for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){      
             if(pv->GetName().rfind("LacWater", 0) == 0){
                 dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetXHalfLength(gen_half_length);
                 dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetYHalfLength(gen_half_length);
-                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(2.5*m);
+                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(1.2*m);
                 pv->GetLogicalVolume()->SetVisAttributes(lw);
 
             }
+
+            if(pv->GetName().rfind("CPPMBlackBox", 0) == 0)
+                pv->GetLogicalVolume()->SetVisAttributes(outer_vol);
 
             if(pv->GetName().rfind("LactelWaterTank", 0) == 0){
                 // dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetXHalfLength(target_half_length);
@@ -560,7 +567,7 @@ namespace lactel
             }
         } 
 
-        // autoWorldSize();
+        
 
         cout << "\r\033[20C" << "New generation surface for a detector of volume " 
                                 << 2*target_half_length/m * 2*target_half_length/m * 2*target_half_length/m 
@@ -574,6 +581,42 @@ namespace lactel
         return physiWorld;
     }
 
+
+
+
+    ///////////////////////////////// TEST //////////////////////////////////////////////
+
+    void BDetectorConstruction::DefineOpticalProperties(){
+        auto air = G4Material::GetMaterial("G4_AIR");
+
+        // Visible range: 300–700 nm → 4.13–1.77 eV
+        const G4int nEntries = 6;
+        G4double photonEnergy[nEntries] =
+        {4.13*eV, 3.10*eV, 2.48*eV, 2.07*eV, 1.90*eV, 1.77*eV};
+
+        // Refractive index is nearly constant for air
+        G4double refractiveIndex[nEntries] =
+        {1.00029, 1.00029, 1.00029, 1.00029, 1.00029, 1.00029};
+
+        // Absorption length (how far photons travel before being absorbed)
+        // Air is very transparent to visible light — hundreds of meters
+        G4double absorption[nEntries] =
+        {500.*m, 500.*m, 500.*m, 500.*m, 500.*m, 500.*m};
+
+        // Rayleigh scattering length (depends on λ⁴, but we can approximate)
+        // If you want a wavelength dependence: λ⁴ scaling
+        G4double rayleigh[nEntries] =
+        {250.*m, 280.*m, 320.*m, 360.*m, 400.*m, 450.*m};
+
+        // Create the material properties table
+        auto airMPT = new G4MaterialPropertiesTable();
+        airMPT->AddProperty("RINDEX", photonEnergy, refractiveIndex, nEntries);
+        airMPT->AddProperty("ABSLENGTH", photonEnergy, absorption, nEntries);
+        airMPT->AddProperty("RAYLEIGH", photonEnergy, rayleigh, nEntries);
+
+        // Attach it to air
+        air->SetMaterialPropertiesTable(airMPT);
+    }
 
 } // namespace lactel
 

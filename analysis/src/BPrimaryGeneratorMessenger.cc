@@ -9,7 +9,7 @@
 
 
 using namespace std;
-
+using namespace km3net;
 namespace lactel
 {
     BPrimaryGeneratorMessenger::BPrimaryGeneratorMessenger(BPrimaryGeneratorAction* bpga) : BPGA(bpga){
@@ -34,6 +34,11 @@ namespace lactel
         genParsMode_cmd->SetParameterName("genPars", false);
         genParsMode_cmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
+        genType_cmd = new G4UIcmdWithAnInteger("/LACTEL/BPGA/genType", this);
+        genType_cmd->SetGuidance("3 for for muons, 4 for dark box test. else, check KM3RunMessenger");
+        genType_cmd->SetParameterName("choice", false);
+        genType_cmd->AvailableForStates(G4State_PreInit);
+
         cout << "\r\033[20C" << "---->>>> Calling BPG Messenger" << endl;
     };
 
@@ -43,6 +48,7 @@ namespace lactel
         delete thetaGen_cmd;
         delete EGen_cmd;
         delete genParsMode_cmd;
+        delete genType_cmd;
     };
 
     void BPrimaryGeneratorMessenger::SetNewValue(G4UIcommand* cmd, G4String value){
@@ -54,6 +60,22 @@ namespace lactel
         } 
         else if(cmd == genParsMode_cmd){
             BPGA->SetGenParsMode(value);
+        } 
+        else if(cmd == genType_cmd){
+            int thetype=genType_cmd->GetNewIntValue(value);
+
+            if(thetype == 3){ // for muons sim
+                std::cout << "\r\033[10C" << "\033[1;35mInfo: BPrimaryGeneratorMessenger, muons mode.\033[0m" << std::endl;
+                BPGA->initMuons ();
+            }
+            else if(thetype == 4){ // for dark box tests
+                std::cout << "\r\033[10C" << "\033[1;35mInfo: BPrimaryGeneratorMessenger, test mode.\033[0m" << std::endl;
+                BPGA->initTest (); 
+            }
+            else{ // for KM3 modes
+                std::cout << "\r\033[10C" << "\033[1;35mInfo: BPrimaryGeneratorMessenger, mode not supported. Please switch to KM3RunMessenger modes. \nExiting ...\033[0m" << std::endl;
+                exit(-1);
+            }
         } 
     }
 

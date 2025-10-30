@@ -1,6 +1,8 @@
 /KM3/XP/Type BA
 /KM3/det/DetInit Lactel
-/KM3/det/DetectorTypeName LactelOneModule #KM3K40
+# /KM3/det/DetectorTypeName LactelOneModule #KM3K40
+# /KM3/det/DetectorTypeName LactelOneCell 
+/KM3/det/DetectorTypeName OMInCPPMBalckBox 
 /KM3/det/setMeanCapRadius 5 cm
 
 #/PMTOpticalModel/luxlevel 0
@@ -9,31 +11,35 @@
 /KM3/det/setTargetMaterial IdealWater #AntaresWater
 #/KM3/det/setTargetMaterial NEMOWater
 #/KM3/det/DontDraw bento absorber
-/KM3/det/setWorldLength 11.0 m # max det half width (5 m) + 6 m for 60° zenith angles incidence 
+/KM3/det/setWorldLength 1.0 m # max det half width (5 m) + 6 m for 60° zenith angles incidence 
 /KM3/det/setTargetLength  .5 m
 
 /KM3/BDet/targetType M2
-/KM3/BDet/acceptanceAngle 60 deg
+/KM3/BDet/acceptanceAngle 0 deg
 
 
 /LACTEL/BPGA/genParsMode integral
 
-/KM3/GenType 3
+/LACTEL/BPGA/genType 4
+# /KM3/GenType 2
 /run/initialize
-/KM3/BDet/OMPosition 0 0 -0.7 m
+/KM3/BDet/OMPosition 0 0 -0.250 m
 
 
-/vis/open OGL 800x600-0+0
-/vis/drawVolume
+# /vis/open OGL 800x600-0+0
+# /vis/drawVolume
 
-/vis/viewer/set/style wireframe
-/vis/scene/add/extent -10 10 -10 10 -10 10 cm
-/vis/viewer/set/background 1.0 1.0 1.0 0.2
-/vis/scene/add/trajectories smooth
-/vis/scene/endOfEventAction accumulate
-# /vis/viewer/flush
+# /vis/viewer/set/style wireframe
+# /vis/scene/add/extent -10 10 -10 10 -10 10 cm
+# /vis/viewer/set/background 1.0 1.0 1.0 0.2
+# /vis/scene/add/trajectories smooth
+# /vis/scene/endOfEventAction accumulate
 
-#  /run/beamOn 1000
+# /vis/viewer/set/upVector 0 0 1
+# /vis/scene/add/axes 0 0 0 1 m
+# /vis/viewer/set/viewpointThetaPhi 105  -60  deg
+
+/run/beamOn 50000
 
 
 
