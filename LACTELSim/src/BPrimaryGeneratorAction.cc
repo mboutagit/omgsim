@@ -188,6 +188,7 @@ namespace lactel
             gun->SetParticleDefinition(G4OpticalPhoton::Definition());
             gun->SetParticleEnergy((1.77 + 4.13 * G4UniformRand()) * eV);
             gun->SetParticlePosition(position);
+            gun->SetParticlePolarization(G4ThreeVector(1, 0, 0));
             gun->SetParticleMomentumDirection(direction);
 
             gun->GeneratePrimaryVertex(event);

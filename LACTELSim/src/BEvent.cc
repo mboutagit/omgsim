@@ -2,10 +2,8 @@
 #include "BEvent.hh"
 
 namespace lactel
-{
-    BEvent::BEvent(){}
-    BEvent::BEvent(G4int evt_id) : G4Event(evt_id) {}
-
+{   
+    BEvent::BEvent(G4int eventID) : G4Event(eventID) {}
     BEvent::~BEvent(){}
 
     std::vector<BHit> BEvent::getHitCollection(){return hitCollection;}

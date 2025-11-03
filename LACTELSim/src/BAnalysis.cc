@@ -147,7 +147,8 @@ namespace lactel
     }
 
 
-    BAnalysis::BAnalysis(){}
+    BAnalysis::BAnalysis(){
+    }
     BAnalysis::~BAnalysis(){
         // if(genTree)
         //     delete genTree;
@@ -357,9 +358,11 @@ namespace lactel
         fHits.charge = info->GetOriginalEnergy() / CLHEP::eV;
 
         fDetectedEvent.hits.push_back(fHits);
-        BHit ahit;
-        ahit.SetEdep(info->GetOriginalEnergy() / CLHEP::eV);
-        ahit.SetTime(info->GetOriginalTime());
+        // BHit ahit;
+        // ahit.SetEdep(info->GetOriginalEnergy() / CLHEP::eV);
+        // ahit.SetTime(info->GetOriginalTime());
+
+        // BEvent* event = BRunManager::GetRunManager()->GetCurrentEvent();
 
         // G4Event* event = BRunManager::GetRunManager()->GetEventManager()->GetConstCurrentEvent();
         // BEvent* myEvent = static_cast<BEvent*> (event);

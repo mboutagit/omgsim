@@ -11,9 +11,17 @@ namespace lactel
   private:
       /* data */
   public:
-      BEvent();
-      BEvent(G4int id);
+      BEvent(G4int eventID = 0);
       virtual ~BEvent();
+
+      double totalCharge = 0.0;
+      double timeSpread = 0.0;
+
+      void SetTotalCharge(double q) { totalCharge = q; }
+      double GetTotalCharge() const { return totalCharge; }
+
+      void SetTimeSpread(double t) { timeSpread = t; }
+      double GetTimeSpread() const { return timeSpread; }
       
       std::vector<BHit> getHitCollection();
       void addHit(BHit ahit);

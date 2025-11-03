@@ -1,6 +1,7 @@
 #ifndef BWaveCatcherConf_hh
 #define BWaveCatcherConf_hh
 
+#include <iostream>
 #include <string>
 #include <array>
 
@@ -11,11 +12,42 @@ namespace lactel
     private:
         /* data */
     public: 
+
+        
         BWaveCatcherConf(/* args */);
         ~BWaveCatcherConf();
 
         inline double getSamplingFrequency(){return samplingFrequency;}
         inline double getREcordLength(){return recordLength;}
+
+        void setSimplingFrequenct(double f); // in GS/s
+        void setChannelInputOffset(int c, double offset); // set DC Offset in volt
+        void setInputDynamicRange(double dr);
+        void setBandWidth(double bw);
+
+        void setRecordLength(int rl); // number of slices
+        void setBufferDepth (int); // number of event to be stored in the buffer
+
+        void setChannelTriggerThreshold(int c, int thr);
+        void setAllChannelTriggerThreshold(int thr);
+        
+        void setTriggerSource(std::string src);
+        void setChannelTriggerEdge(int c, std::string te);
+
+        void setPreTriggerTime(double);
+        void setPostTriggerTime(double);
+
+        bool enableChannel(int c);
+        bool disableChannel(int c);
+        bool enableAllChannels();
+        bool disableAllChannels();
+
+        void setTriggerLogic(std::string trig);
+        void setGateLEngth(int);
+
+        void print();
+
+
 
          // Constants
         static constexpr int NumChannels = 2;

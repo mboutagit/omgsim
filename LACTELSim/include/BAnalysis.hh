@@ -12,8 +12,11 @@
 
 #include "BEvent.hh"
 
+#include "BWaveCatcher.hh"
+
 using namespace std;
 using namespace km3net;
+using namespace tools;
 
 namespace lactel
 {
@@ -192,6 +195,8 @@ namespace lactel
             virtual void Init(std::string rfn = "");
 
             std::string evtFileName = "output.evt";
+            BWaveCatcher wavecatcher;
+            
 
         ClassDef(BAnalysis, 1);
 
