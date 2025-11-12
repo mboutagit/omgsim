@@ -57,6 +57,7 @@ namespace lactel
         double inputDynamicRange;                        // in Vpp (e.g. 2.5 V)
         std::array<double, NumChannels> inputOffsets;    // DC offset per channel (±1.25V)
         double bandwidth;                                // in MHz (e.g. 500 MHz)
+        int resolution;                                  // resolution in bits
 
         // Acquisition Settings
         int recordLength;                                // Number of samples per event (up to 1024)

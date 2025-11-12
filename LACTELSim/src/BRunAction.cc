@@ -2,8 +2,9 @@
 
 #include "G4DigiManager.hh"
 #include "BDigitizerModule.hh"
+#include "BWaveCatcher.hh"
 
-
+using namespace tools;
 namespace lactel
 {
     BRunAction::BRunAction(){
@@ -16,7 +17,7 @@ namespace lactel
     void BRunAction::BeginOfRunAction(const G4Run* run){
         KM3RunAction::BeginOfRunAction(run);
 
-        BAnalysis * ana = BAnalysis::getIt();
+        BAnalysisManager * ana = BAnalysisManager::getIt();
         ana->fRun.runNb = run->GetRunID();
 
         ana->fRun.acceptanceAngle = BDetectorConstruction::GetIt()->acceptanceAngle /deg;
@@ -38,12 +39,15 @@ namespace lactel
             digiMan->AddNewModule(new BDigitizerModule("DigitizerModule"));
             first = false;
         }
+
+        BWaveCatcher* wc = new BWaveCatcher();
+        // wc->startAcquisition();
     }
 
     void BRunAction::EndOfRunAction(const G4Run* run){
         KM3RunAction::EndOfRunAction(run);
 
-        BAnalysis * ana = BAnalysis::getIt();
+        BAnalysisManager * ana = BAnalysisManager::getIt();
         BPrimaryGeneratorAction * bpga = BPrimaryGeneratorAction::getInstance();
         ana->runTree->Fill();
         ana->fTRunInfos->Fill();

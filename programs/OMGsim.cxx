@@ -64,8 +64,7 @@
 #include <sys/time.h>
 #include <unistd.h>
 
-
-#include "BAnalysis.hh"
+#include "BAnalysisManager.hh"
 
 
 #include <random>
@@ -173,7 +172,7 @@ int main(int argc_,char** argv_)
     KM3AnalysisManager::fVerbose=(short)debug;
     KM3AnalysisManager::fRootFileName = srf;
 
-    lactel::BAnalysis::getIt()->evtFileName = evtFileName;
+    lactel::BAnalysisManager::getIt()->evtFileName = evtFileName;
 
 
     // random engine

@@ -2,7 +2,7 @@
 #define BEventAction_h 
 
 #include "KM3EventAction.hh"
-#include "BAnalysis.hh"
+#include "BAnalysisManager.hh"
 #include "BEvent.hh"
 
 using namespace km3net;

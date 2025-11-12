@@ -64,6 +64,19 @@ namespace lactel
         std::string detName;
 
         DetGeoConf detGeoConf;
+
+        // class LactelWaterTank
+        // {
+        // protected:
+        //     static int nObjetcs;
+        //     int id;
+        //     std::string name;
+            
+    
+        // public:
+        //     WaterTank(/* args */);
+        //     ~WaterTank();
+        // };
     };
 } // namespace lactel
 

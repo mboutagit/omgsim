@@ -9,9 +9,10 @@ namespace lactel
           inputDynamicRange(2.5),
           inputOffsets{0.0, 0.0},
           bandwidth(500.0),
+          resolution(12), // 12 bit resolution
           recordLength(1024),
           eventBufferDepth(7),
-          triggerThresholds{1000, 1000},
+          triggerThresholds{0, 0}, // mv threshold;
           triggerSource("self"),
           triggerEdges{"rising", "rising"},
           preTriggerTime(10.0),

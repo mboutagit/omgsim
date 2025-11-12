@@ -530,14 +530,14 @@ namespace lactel
         lw->SetForceSolid(true);  
         
         //costum colors
-        autoWorldSize();
+        
 
         float maxX=0, maxY=0, maxZ=0;
         for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){      
             if(pv->GetName().rfind("LacWater", 0) == 0){
                 dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetXHalfLength(gen_half_length);
                 dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetYHalfLength(gen_half_length);
-                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(1.2*m);
+                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(2.5*m);
                 pv->GetLogicalVolume()->SetVisAttributes(lw);
 
             }
@@ -578,6 +578,7 @@ namespace lactel
                                 << "\nAcceptance angle in deg: " << acceptanceAngle/deg
                                 << endl;
 
+        autoWorldSize();
         return physiWorld;
     }
 

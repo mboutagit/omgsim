@@ -7,9 +7,13 @@
 #include <chrono>
 #include <thread>
 #include <atomic>
+#include <csignal>
+
 #include "TCanvas.h"
 #include "TGraph.h"
 
+#include "BAnalysisManager.hh"
+#include "OM.hh"
 
 using namespace lactel;
 
@@ -34,9 +38,26 @@ namespace tools{
             void reset() override;
 
             Waveform getFakeWaveform(int channel);
-            TGraph drawWaveform(Waveform wf);
+            TGraph drawWaveform(Waveform wf, int buffer_size=1);
 
             BWaveCatcherConf getConfiguration();
+
+            std::vector<ADC_record> digitizeEvent(int channel, BAnalysisManager::DetectedEvent event);
+            Waveform waveformFromADC(ADC_record record);
+            TGraph drawADCRecord(ADC_record record);
+            std::vector<Waveform> waveformFromADC(std::vector<ADC_record> records);
+            TCanvas* getCanvas(){return canvas;}
+
+            bool plugOM(int channel, const OM& om);
+            Waveform joinWavefroms(std::vector<Waveform> wfs);
+
+            void setTriggerThreshold(int channel, double threshold); // in mV
+            void setTriggerThreshold(double threshold); // for all channels;
+
+            void setInputOffset(int channel, double offset);
+            void setInputOffset(double offset); // for all channels;
+
+
             // Waveform digitizeEvent(int channel, lactel::BAnalysis::DetectedEvent event);
 
 
@@ -45,12 +66,18 @@ namespace tools{
             bool acquiring_;
             std::vector<Waveform> lastWaveforms_;
             std::default_random_engine rng_;
-            std::uniform_int_distribution<uint16_t> noiseDist_;
+            std::uniform_int_distribution<int> noiseDist_;
+            std::vector<OM> signalSource;
 
             Waveform generateFakeWaveform(int channel);
 
-            std::atomic<bool> isRunning;
+            void signalHandler(int signum);
+
+            std::atomic<bool> isRunning=false;
             std::thread acquisitionThread;
+
+            TCanvas* canvas;
+            std::vector<TGraph*> scope;
     };
 } // namespace tools
 #endif // BWaveCatcher_hh

@@ -1,4 +1,4 @@
-#include "BAnalysis.hh"
+#include "BAnalysisManager.hh"
 #include "ParametrizedGenerator.hh"
 #include "BPrimaryGeneratorAction.hh"
 #include "BDetectorConstruction.hh"
@@ -16,7 +16,7 @@
 namespace lactel
 {
 
-    // std::map<float, float> BAnalysis::MeasureParameters::quantum_efficiency = {
+    // std::map<float, float> BAnalysisManager::MeasureParameters::quantum_efficiency = {
     //                         {290., 0.},
     //                         {293., 0.05},
     //                         {295., 0.013},
@@ -62,9 +62,9 @@ namespace lactel
     //                         {650.,  0.010},
     //                         {680.,  0.}
     //                     };
-    // float BAnalysis::MeasureParameters::HV = 1600.;
+    // float BAnalysisManager::MeasureParameters::HV = 1600.;
 
-    BAnalysis::MeasureParameters::MeasureParameters(){
+    BAnalysisManager::MeasureParameters::MeasureParameters(){
         gain_vs_highVoltage = new TF1("gainVsHv", getGainROOT, 1600, 1900, 0);
         gain_vs_highVoltage->SetTitle("Gain vs. High voltage (OMS0321); HV (V); Gain");
 
@@ -98,7 +98,7 @@ namespace lactel
 
     }
 
-    BAnalysis::MeasureParameters::~MeasureParameters(){
+    BAnalysisManager::MeasureParameters::~MeasureParameters(){
         if(gain_vs_highVoltage)
             delete gain_vs_highVoltage;
 
@@ -109,36 +109,36 @@ namespace lactel
             delete muon_flux;
     };
 
-    float BAnalysis::MeasureParameters::getQE(float lambda){
+    float BAnalysisManager::MeasureParameters::getQE(float lambda){
         return QEVsLambda_graph->Eval(lambda);
     }
 
-    TF1* BAnalysis::MeasureParameters::getGainVsHV(){
+    TF1* BAnalysisManager::MeasureParameters::getGainVsHV(){
         if(gain_vs_highVoltage)
             return gain_vs_highVoltage;
     }
 
-    TF1* BAnalysis::MeasureParameters::getMuonFlux(){
+    TF1* BAnalysisManager::MeasureParameters::getMuonFlux(){
         if(muon_flux)
             return muon_flux;
     }
 
-    TGraph* BAnalysis::MeasureParameters::getQEVsLambda(){
+    TGraph* BAnalysisManager::MeasureParameters::getQEVsLambda(){
         if(QEVsLambda_graph)
             return QEVsLambda_graph;
     }
     
 
-    BAnalysis::Measure::Measure() : fId(0), fEnergy(0), fNpe(0), fTime(0) {
+    BAnalysisManager::Measure::Measure() : fId(0), fEnergy(0), fNpe(0), fTime(0) {
      //   cout << "\r\033[20C" << "Measure invoked with id: " << fId << endl;
     }
 
-    BAnalysis::Measure::Measure(float energy) : fId(0), fNpe(0), fTime(0) {
+    BAnalysisManager::Measure::Measure(float energy) : fId(0), fNpe(0), fTime(0) {
         fEnergy = energy;
     }
 
-    BAnalysis::Measure::~Measure(){}
-    void BAnalysis::Measure::print(std::ostream& out = std::cout){
+    BAnalysisManager::Measure::~Measure(){}
+    void BAnalysisManager::Measure::print(std::ostream& out = std::cout){
         out << "id: " << fId << "\t"
             << "Ene: " << fEnergy << "\t"
             << "NPE: " << fNpe << "\t"
@@ -147,9 +147,9 @@ namespace lactel
     }
 
 
-    BAnalysis::BAnalysis(){
+    BAnalysisManager::BAnalysisManager(){
     }
-    BAnalysis::~BAnalysis(){
+    BAnalysisManager::~BAnalysisManager(){
         // if(genTree)
         //     delete genTree;
         
@@ -159,7 +159,7 @@ namespace lactel
         // if(bEventTree)
         //     delete genTree;
     }
-    void BAnalysis::Init(std::string rfn){
+    void BAnalysisManager::Init(std::string rfn){
         // AAAnalysisManager::Init(rfn);
 
         if (rfn.size ())
@@ -195,12 +195,12 @@ namespace lactel
         runTree->Branch("Run", &fRun);
     }
 
-    // void BAnalysis::BeginOfRunAction(const G4Run* run){
+    // void BAnalysisManager::BeginOfRunAction(const G4Run* run){
     //     fRun.runNb = run->GetRunID();
     //     cout << endl << "\r\033[10C" << "Begin of run: " << run->GetRunID() << endl;
     // }
 
-    // void BAnalysis::EndOfRunAction(const G4Run* run){
+    // void BAnalysisManager::EndOfRunAction(const G4Run* run){
     //    // fRun.runNb = run->GetRunID();
     //     runTree->Fill();
 
@@ -212,7 +212,7 @@ namespace lactel
     // }
 
 
-    void BAnalysis::StartOfEvent(const G4Event* EV){
+    void BAnalysisManager::StartOfEvent(const G4Event* EV){
         AAAnalysisManager::StartOfEvent(EV); // call the base class function first
 
         fDetectedEvent.event_id = 0;
@@ -250,9 +250,9 @@ namespace lactel
         fPMID=0;
     }
 
-    void BAnalysis::EndOfEvent(const G4Event* EV) {
+    void BAnalysisManager::EndOfEvent(const G4Event* EV) {
         #ifdef DEBUG
-            std::cout << "\r\033[10C" << "From : BAnalysis::EndOfEvent(const G4Event* EV)" << std::endl;
+            std::cout << "\r\033[10C" << "From : BAnalysisManager::EndOfEvent(const G4Event* EV)" << std::endl;
         #endif
 
         fRun.nGenEvent += 1; 
@@ -316,29 +316,29 @@ namespace lactel
         
         genTree->Fill();
         // std::cout << "\r\033[55C" << "Fill TEvent tree." << std::endl;
-        //fTEvent->Fill(); used in BAnalysis::AddPhotoTubeEntranceInfo  to include PMT hit infos
+        //fTEvent->Fill(); used in BAnalysisManager::AddPhotoTubeEntranceInfo  to include PMT hit infos
 
         // AAAnalysisManager::EndOfEvent();
         // std::cout << "\r\033[10C" << "End of Event: " << EV->GetEventID() << std::endl;
     }
 
-    BAnalysis::MeasureParameters BAnalysis::getMeasurePars(){
+    BAnalysisManager::MeasureParameters BAnalysisManager::getMeasurePars(){
         return fMeasure_parameters;
     }
 
-    BAnalysis::Measure BAnalysis::getMeasure(){
+    BAnalysisManager::Measure BAnalysisManager::getMeasure(){
         return fMeasure;
     }
 
 
-    BAnalysis* BAnalysis::getIt(){
+    BAnalysisManager* BAnalysisManager::getIt(){
         if(!fManager){
-          fManager = new BAnalysis();
+          fManager = new BAnalysisManager();
         }
-        return (BAnalysis*) fManager;
+        return (BAnalysisManager*) fManager;
     }
 
-    void BAnalysis::AddDetectedParticule(const KM3TrackInformation* info, unsigned char LIM){
+    void BAnalysisManager::AddDetectedParticule(const KM3TrackInformation* info, unsigned char LIM){
         
         AAAnalysisManager::AddDetectedParticule(info, LIM);
 
@@ -378,19 +378,21 @@ namespace lactel
             fDetectedEvent.tmax = info->GetOriginalTime();
 
         fDetectedEvent.tota += info->GetOriginalEnergy() /eV;
+
+        
            //fDetectedEvent.a = info->GetOriginalEnergy() / CLHEP::eV;
         //fDetectedEvent.runNb = fRun.runNb; // OK as fRun.runNb is set in the start of the run
         nhit+=1;
         //fTEvent->Fill();    
     } 
 
-    // void BAnalysis::AddPhotoTubeEntranceInfo (const G4Step* fStep){
+    // void BAnalysisManager::AddPhotoTubeEntranceInfo (const G4Step* fStep){
     //     AAAnalysisManager::AddOMEntranceInfo(fStep);
     //     AAAnalysisManager::AddPhotoTubeEntranceInfo(fStep);
     //     fTEvent->Fill();        
     // }
 
-    void BAnalysis::Write(){
+    void BAnalysisManager::Write(){
     //     fMeasure_parameters.getGainVsHV()->Write();
     //     fMeasure_parameters.getQEVsLambda()->Write();
     //    if(fMeasure_parameters.getMuonFlux())
@@ -405,8 +407,8 @@ namespace lactel
         AAAnalysisManager::Write();
     }
 
-    //ClassImp(lactel::BAnalysis::Measure);
-   //ClassImp(BAnalysis);
+    //ClassImp(lactel::BAnalysisManager::Measure);
+   //ClassImp(BAnalysisManager);
 
 
 
@@ -414,7 +416,7 @@ namespace lactel
 
 
 
- void BAnalysis::AddPhotoTubeEntranceInfo (const G4Step* STEP)
+ void BAnalysisManager::AddPhotoTubeEntranceInfo (const G4Step* STEP)
   {
     if (fNbPhoto % 500 ==0)
       {
@@ -477,7 +479,7 @@ namespace lactel
   }
 
   //Vladimir: This function is outdated and not used currently. OMid is added at AddPhotoTubeEntranceInfo.
-  void BAnalysis::AddOMEntranceInfo (const G4Step* STEP)
+  void BAnalysisManager::AddOMEntranceInfo (const G4Step* STEP)
   {
     const G4StepPoint* prestep = STEP->GetPreStepPoint();
     G4String prestepName = prestep->GetPhysicalVolume()->GetName();

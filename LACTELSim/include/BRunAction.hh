@@ -4,7 +4,7 @@
 #include "KM3RunAction.hh"
 #include "BPrimaryGeneratorAction.hh"
 #include "BDetectorConstruction.hh"
-#include "BAnalysis.hh"
+#include "BAnalysisManager.hh"
 
 
 using namespace km3net;

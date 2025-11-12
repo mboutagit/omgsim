@@ -27,7 +27,6 @@
 
 #include "KM3RunAction.hh"
 #include "KM3AnalysisManager.hh"
-#include "BAnalysis.hh"
 
 #include "G4Run.hh"
 #include "G4UImanager.hh"
@@ -60,7 +59,7 @@ namespace km3net
     G4int RunN = aRun->GetRunID();
     //if ( RunN % 1000 == 0 )
       G4cout << G4endl;
-      cout << endl << "### - Run : " << RunN << endl;
+      std::cout << std::endl << "### - Run : " << RunN << std::endl;
 
     if (G4VVisManager::GetConcreteInstance())
       {

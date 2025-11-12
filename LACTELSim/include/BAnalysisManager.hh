@@ -1,6 +1,6 @@
 
-#ifndef BAnalysis_h 
-#define BAnalysis_h 
+#ifndef BAnalysisManager_h 
+#define BAnalysisManager_h 
 
 #include "AAAnalysisManager.hh"
 #include "globals.hh"
@@ -11,18 +11,16 @@
 #include "TGraph.h"
 
 #include "BEvent.hh"
-
-#include "BWaveCatcher.hh"
+#include "OM.hh"
 
 using namespace std;
 using namespace km3net;
-using namespace tools;
 
 namespace lactel
 {
     class BRunAction;
 
-    class BAnalysis : public AAAnalysisManager
+    class BAnalysisManager : public AAAnalysisManager
     {
         public:
             struct HitInfos
@@ -88,7 +86,7 @@ namespace lactel
                     float fNpe;
                     float fTime;
 
-                    friend class BAnalysis;
+                    friend class BAnalysisManager;
                 public:
                     Measure();
                     Measure(float);
@@ -120,7 +118,7 @@ namespace lactel
 
                 // bool isDetected=false; // mainly used for Run managing
 
-            //     friend class BAnalysis;
+            //     friend class BAnalysisManager;
             // public:
             //     Event(){};
             //     ~Event(){};
@@ -142,6 +140,8 @@ namespace lactel
                 float om_z; 
                 float om_t; 
                 float om_p; 
+
+                int om_id;
             };
 
             struct Run {
@@ -166,8 +166,8 @@ namespace lactel
             Run fRun;
             
         protected:
-            BAnalysis();
-            ~BAnalysis();
+            BAnalysisManager();
+            ~BAnalysisManager();
             TTree* genTree;
             TTree* runTree;
             TTree* detectedEventTree;
@@ -182,7 +182,7 @@ namespace lactel
             friend class BRunAction;
 
         public:
-            static BAnalysis* getIt();
+            static BAnalysisManager* getIt();
             virtual void Write();
             virtual void AddDetectedParticule(const KM3TrackInformation* info, unsigned char LIM);
             void AddPhotoTubeEntranceInfo (const G4Step* STEP);
@@ -193,12 +193,12 @@ namespace lactel
             virtual void EndOfEvent(const G4Event* evt);
             virtual void StartOfEvent(const G4Event*);
             virtual void Init(std::string rfn = "");
+            inline Hit& getHit(){return fHits;}
 
             std::string evtFileName = "output.evt";
-            BWaveCatcher wavecatcher;
             
 
-        ClassDef(BAnalysis, 1);
+        ClassDef(BAnalysisManager, 1);
 
         
     };

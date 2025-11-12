@@ -50,7 +50,7 @@
 #include <KM3EventAction.hh>
 #include <KM3TrackingAction.hh>
 
-#include "BAnalysis.hh"
+#include "BAnalysisManager.hh"
 #include "ParametrizedGenerator.hh"
 #include "BPrimaryGeneratorAction.hh"
 #include "BEventAction.hh"
@@ -95,7 +95,7 @@ namespace km3net
   KM3ExperimentTypeMessenger::~KM3ExperimentTypeMessenger() {
     delete XPCommand;
     KM3AnalysisManager::getIt ()->Write ();
-    BAnalysis::getIt() -> Write();
+    BAnalysisManager::getIt() -> Write();
     if (frunManager != NULL)
       delete frunManager;
     fInstance = NULL;
@@ -141,7 +141,7 @@ namespace km3net
 
           if(newValue == "BA"){
             frunManager->SetUserAction(new BRunAction);
-            std::cout << "\r\033[10C" << "BAnalysis Start .. " << std::endl;
+            std::cout << "\r\033[10C" << "BAnalysisManager Start .. " << std::endl;
           }
           else{
             frunManager->SetUserAction(new KM3RunAction);
@@ -187,7 +187,7 @@ namespace km3net
             }
 
             else if (newValue.substr (0,2) == "BA"){
-              BAnalysis::getIt();
+              BAnalysisManager::getIt();
             }
 
           ////TODO
@@ -198,7 +198,7 @@ namespace km3net
             fTrackingAction=new KM3TrackingAction ();
 
           if(newValue == "BA")
-            BAnalysis::getIt()->Init();          
+            BAnalysisManager::getIt()->Init();          
           else  
             KM3AnalysisManager::getIt()->Init();
 

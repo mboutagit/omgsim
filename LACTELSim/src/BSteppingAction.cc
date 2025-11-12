@@ -1,7 +1,7 @@
 #include "BSteppingAction.hh"
 #include "BDetectorConstruction.hh"
 #include "BPrimaryGeneratorAction.hh"
-#include "BAnalysis.hh"
+#include "BAnalysisManager.hh"
 
 #include "KM3PhysicsList.hh"
 #include <G4RunManager.hh>
@@ -115,7 +115,7 @@ namespace lactel
                 fTrack->GetDefinition()->GetParticleName() == "opticalphoton")
             {
                 // std::cout << "\r\033[55C" << "YEEEEEEEEEEES" << std::endl;
-               BAnalysis::getIt()->AddOMEntranceInfo(step);
+               BAnalysisManager::getIt()->AddOMEntranceInfo(step);
             }
             // std::cout << "\r\033[55C" << "YEEEEEEEEEEES" << std::endl;
             // for (auto& name : KM3DetectorConstruction::fOMNames)
@@ -131,8 +131,8 @@ namespace lactel
                     GetMaterialPropertiesTable ()->ConstPropertyExists("electronSensitive"))
 
             {
-                BAnalysis::getIt()->AddPhotoTubeEntranceInfo (step);
-             //   BAnalysis::getIt()->AddOMEntranceInfo(step);
+                BAnalysisManager::getIt()->AddPhotoTubeEntranceInfo (step);
+             //   BAnalysisManager::getIt()->AddOMEntranceInfo(step);
             }
             else { 
                 return;
@@ -184,7 +184,14 @@ namespace lactel
             // unsigned char detectedGamma = CheckDetection (step, info);
             if (detectedGamma != 0 && detectedGamma > 0){
                 // std::cout << "\r\033[44C" << "detected particle!!" << std::endl;
-                BAnalysis::getIt() ->AddDetectedParticule (info, detectedGamma);
+                for (int ihist = 0; ihist < touch->GetHistoryDepth (); ihist++) {
+                    G4String volname = touch->GetVolume(ihist)->GetName();
+                    if (KM3DetectorConstruction::fOMNames.find(volname) != KM3DetectorConstruction::fOMNames.end()) {
+                        BAnalysisManager::getIt()->getHit().om_id  = touch->GetCopyNumber(ihist);
+                    }
+                }
+                BAnalysisManager::getIt() ->AddDetectedParticule (info, detectedGamma);
+                
                 //G4cout << " -------- Detected particle. From KM3SteppingAction::UserSteppingAction" << G4endl;
             }
 

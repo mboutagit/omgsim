@@ -7,8 +7,12 @@
 #include <TRint.h>
 #include <TSystem.h> 
 
+#include <csignal>
+
+
 using namespace lactel;
 using namespace std;
+using namespace tools;
 
 
 int main(int argc, char* argv[]){
@@ -22,15 +26,20 @@ int main(int argc, char* argv[]){
     cmdApp.add_option("-t,--thr", thr, "threshold")->required(); // directory containing test files
 
     CLI11_PARSE(cmdApp, argc, argv);
-
-    TRint app("ROOTApp", &argc, argv);
+    TApplication app("ROOTApp", &argc, argv);
     gSystem->Load("libLACTELSim.so");
     gSystem->Load("liblibOMG.so");
 
+    BWaveCatcher *wc = new BWaveCatcher();
+    wc->startAcquisition();
+
+    
+
+    
+
+    
 
 
-    std::cout << "\033[1;35mWaiting for user action...\033[0m" << std::endl;
-    std::cout << "\033[5;35m\tPress ctrl-c to exit\033[0m" << std::endl;
     app.Run();
     return 0;
 }

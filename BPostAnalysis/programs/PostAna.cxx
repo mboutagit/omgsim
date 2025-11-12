@@ -62,11 +62,11 @@ int main(int argc, char* argv[]){
     TTree* runTree = (TTree*)file->Get("Run");
     TTree* detEvtTree = (TTree*)file->Get("DetectedEvent");
 
-    BAnalysis::GenerationParameters* gps = nullptr;
-    BAnalysis::DetectedEvent* evt = nullptr;
+    BAnalysisManager::GenerationParameters* gps = nullptr;
+    BAnalysisManager::DetectedEvent* evt = nullptr;
     PhotonProduction pp;
     Hit hit;
-    BAnalysis::Run run;
+    BAnalysisManager::Run run;
 
     genTree->SetBranchAddress("gen", &gps);
     hitTree->SetBranchAddress("Hit", &hit);
@@ -127,7 +127,7 @@ int main(int argc, char* argv[]){
 
 
 
-        std::vector<BAnalysis::Hit> hits = evt->hits;
+        std::vector<BAnalysisManager::Hit> hits = evt->hits;
         for(auto& hit : hits){
           his_hits->Fill(hit.charge);
         }

@@ -1,7 +1,7 @@
 #ifndef __BPOSTANALYSIS_HH__
 #define __BPOSTANALYSIS_HH__
 
-#include "BAnalysis.hh"
+#include "BAnalysisManager.hh"
 
 namespace km3net{
 
