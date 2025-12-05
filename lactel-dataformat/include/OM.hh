@@ -4,6 +4,8 @@
 #include <iostream>
 #include <set>
 #include <stdexcept>
+#include "dbRoutines.hh"
+#include "BLogger.hh"
 
 namespace lactel
 {
@@ -23,12 +25,18 @@ namespace lactel
 
             struct OMProperties
             {
+                double high_voltage   = 0.;
                 double gain           = 0.;
                 double rise_time      = 0.;
                 double fall_time      = 0.; 
                 double width_time     = 0.;
                 double dark_count     = 0.;
                 double peak_to_valley = 0.;
+
+                bool operator<(const OMProperties& p) const { return high_voltage < p.high_voltage;}
+                bool operator>(const OMProperties& p) const { return high_voltage > p.high_voltage;}
+                bool operator==(const OMProperties& p) const { return high_voltage == p.high_voltage;}
+
             };
 
             int id;
@@ -42,13 +50,19 @@ namespace lactel
             static int nInstance;
             static std::set<std::string> om_ids;
             static OMsParameters parameters;
-            OMProperties properties; 
-            std::string getOMID(){return om_id;}
+            std::set<OMProperties>  properties; 
+            std::string getOMID() const;
             int getOMNumber() const;
+            void uploadOMValuesFormDB();
+            bool isOK;
 
             bool operator<(const OM& om) const;
             bool operator>(const OM& om) const;
             bool operator==(const OM& om) const;
+            bool operator!() const {return ! isOK;}
+        
+        private:
+            static ConnectionInfos con;
     };    
 } // namespace lactel
 

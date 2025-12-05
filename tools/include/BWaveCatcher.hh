@@ -11,16 +11,18 @@
 
 #include "TCanvas.h"
 #include "TGraph.h"
+#include "TH1F.h"
 
 #include "BAnalysisManager.hh"
 #include "OM.hh"
+#include "BLogger.hh"
 
 using namespace lactel;
 
 namespace tools{
     class BWaveCatcher : public BWaveCatcherInterface {
         public:
-            BWaveCatcher();
+            BWaveCatcher(std::string name);
             virtual ~BWaveCatcher();
 
             bool initialize() override;
@@ -42,7 +44,7 @@ namespace tools{
 
             BWaveCatcherConf getConfiguration();
 
-            std::vector<ADC_record> digitizeEvent(int channel, BAnalysisManager::DetectedEvent event);
+            std::vector<ADC_record> digitizeEvent(int channel, BAnalysisManager::DetectedEvent& event);
             Waveform waveformFromADC(ADC_record record);
             TGraph drawADCRecord(ADC_record record);
             std::vector<Waveform> waveformFromADC(std::vector<ADC_record> records);
@@ -67,7 +69,10 @@ namespace tools{
             std::vector<Waveform> lastWaveforms_;
             std::default_random_engine rng_;
             std::uniform_int_distribution<int> noiseDist_;
+            std::normal_distribution<> TTSDist_; // mean=0, sigma=1
+            std::normal_distribution<> AmpDist_; // mean=0, sigma=1
             std::vector<OM> signalSource;
+            std::string name;
 
             Waveform generateFakeWaveform(int channel);
 

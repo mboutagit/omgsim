@@ -351,14 +351,14 @@ namespace lactel
 
         if(gen == BPrimaryGeneratorAction::gen_mode::GEANT4 && particle_name == "muons"){
             BDetectorConstruction* det = BDetectorConstruction::GetIt();
-            if(!det->genPhysic){
+            if(! det->genPhysic){
                 throw("KM3PrimaryGeneratorAction::InitializeCustumMuonType: -- Generation physical volume is not defined");
             }
 
             fGunType = 3;
             particleGun = new G4ParticleGun(); 
-            G4ThreeVector surfPoints = GetRandomPointOnBoxFace(det->genPhysic, "+Z"); //genVolume->GetPointOnSurface()
-
+            // G4ThreeVector surfPoints = GetRandomPointOnBoxFace(det->genPhysic, "+Z"); //genVolume->GetPointOnSurface()
+            G4ThreeVector surfPoints = generateOnGenSurf();
             G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
         
             G4String particleName;
@@ -415,6 +415,45 @@ namespace lactel
         }
     }
 
+    G4ThreeVector BPrimaryGeneratorAction::generateOnGenSurf(){
+        BDetectorConstruction* det = BDetectorConstruction::GetIt();
+        G4ThreeVector sv = det->genSurfSize;
+        G4ThreeVector pv = det->genSurfPosition;
+        double R = 1*meter; // default radius (don't know if it has a meaning right here)
+        double phi      = 2*CLHEP::pi*G4UniformRand();
+        
+        if(det->generationShape == "disk"){
+            double u   = G4UniformRand();
+            double r = std::sqrt(sv.getX()*sv.getX() + (sv.getY()*sv.getY() - sv.getX()*sv.getX()) * u);
+            return G4ThreeVector{ r * std::cos(phi), // x      
+                                    r * std::sin(phi), // y    
+                                    pv.getZ() // z     
+                                };
+            
+        }
+        else if(det->generationShape == "sphere"){
+            double R = sv.getY(); // outer diameter
+            double theta    = std::acos( 2*G4UniformRand() - 1 ); 
+            return G4ThreeVector{ R * std::sin(theta) * std::cos(phi), // x      
+                                    R * std::sin(theta) * std::sin(phi), // y    
+                                    R * std::cos(theta) // z     
+                                };
+        }
+        else if(det->generationShape == "hemisphere"){
+            double R = sv.getY(); // outer diameter
+            double theta = std::acos( G4UniformRand() );
+            return G4ThreeVector{ R * std::sin(theta) * std::cos(phi), // x      
+                                    R * std::sin(theta) * std::sin(phi), // y    
+                                    R * std::cos(theta) // z     
+                                };
+        }
+        else{ // should be a box
+            return G4ThreeVector{ (2 * G4UniformRand() - 1) * sv.getX(), // x      
+                                    (2 * G4UniformRand() - 1) * sv.getY(), // y from -y to +y   
+                                    sv.getZ(), // z     
+                                };
+        }
+    }
 
     G4ThreeVector BPrimaryGeneratorAction::GetRandomPointOnBoxFace(G4VPhysicalVolume* physVol, G4String face) {
 

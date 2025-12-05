@@ -8,6 +8,9 @@
 #include "G4VisAttributes.hh"
 #include "G4PhysicalVolumeStore.hh"
 
+#include "G4Tubs.hh"
+#include "G4Sphere.hh"
+
 
 
 
@@ -21,6 +24,7 @@ namespace lactel
     {
     private:
         enum class DetGeoConf{M2, M4, M6, M8, M10};
+        enum class DetectorState{ON, OFF, IDLE, RUN};
         //BDetectorConstruction();
 
     public:        
@@ -39,6 +43,7 @@ namespace lactel
         // virtual G4LogicalVolume* Construct(const VolumeParameters* = NULL) override;
 
         void DefineOpticalProperties();
+        bool IsRunning(){if(state == DetectorState::RUN) return true; else return false;}
 
 
         void autoWorldSize();
@@ -49,6 +54,7 @@ namespace lactel
         G4VPhysicalVolume* PlaceThem (KM3ParametrizedVolume* theVolToPlace, PositionParameters& PosPar);
 
         static BDetectorConstruction* GetIt();
+        static DetectorState state;
         // static std::string className;
 
         G4double detSize;
@@ -61,7 +67,16 @@ namespace lactel
         static float acceptanceAngle; // angle used to compute the generation surface
         static G4ThreeVector OMPosition;
         float AGen = 0; // generation surface above the cell in cm²
+
         std::string detName;
+        static std::string generationShape; // used to handle the command shape
+        static G4ThreeVector genSurfPosition;
+        static G4ThreeVector genSurfSize;
+
+        
+
+        void setGenerationShape(std::string shape);
+        void setGenSurfShape(std::string shape);
 
         DetGeoConf detGeoConf;
 

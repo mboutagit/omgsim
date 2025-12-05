@@ -40,7 +40,7 @@ namespace lactel
             first = false;
         }
 
-        BWaveCatcher* wc = new BWaveCatcher();
+        // BWaveCatcher* wc = new BWaveCatcher();
         // wc->startAcquisition();
     }
 

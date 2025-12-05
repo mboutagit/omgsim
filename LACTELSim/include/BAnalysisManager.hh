@@ -110,7 +110,8 @@ namespace lactel
                 int runNb = -1;
                 uint nhit=0;
                 float tota=0.; // cumulative charge
-                //float a = 0; // hit charge
+                float a0 = 0; 
+                float a1 = 0; 
                 float tmin=0.;
                 float tmax=0.;
                 float zenith;
@@ -128,6 +129,9 @@ namespace lactel
                 long id = 0;
                 float time = 0;
                 float charge = 0;
+                float a = 0;
+                float a_f = 0;
+                float t_tts = 0;
                 
                 float pm_x; 
                 float pm_y; 

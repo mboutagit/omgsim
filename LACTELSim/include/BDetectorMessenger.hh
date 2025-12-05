@@ -28,10 +28,13 @@ namespace lactel
             G4UIdirectory* BDet;
             G4UIcmdWith3VectorAndUnit* targetPos_cmd;
             G4UIcmdWith3VectorAndUnit* OMPosition_cmd;
+            G4UIcmdWith3VectorAndUnit* genSurfPosition_cmd;
+            G4UIcmdWith3VectorAndUnit* genSurfSize_cmd;
             G4UIcmdWithADoubleAndUnit* targetLength_cmd;
             G4UIcmdWithADoubleAndUnit* acceptanceAngle_cmd;
             G4UIcmdWithAString* targetType_cmd;
-
+            G4UIcmdWithAString* genSurfShape_cmd;
+        
             BDetectorConstruction* BDetector;
 
         public:

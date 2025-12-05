@@ -30,7 +30,7 @@ int main(int argc, char* argv[]){
     gSystem->Load("libLACTELSim.so");
     gSystem->Load("liblibOMG.so");
 
-    BWaveCatcher *wc = new BWaveCatcher();
+    BWaveCatcher *wc = new BWaveCatcher("TestWC");
     wc->startAcquisition();
 
     

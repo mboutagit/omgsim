@@ -1,9 +1,7 @@
 CPPM_Black_box:
 {
     Name = "CPPMBlackBox";
-
     Prefix = "BB";
-
     Material = "G4_AIR";
 
     VolumeKind = "Box";

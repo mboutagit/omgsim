@@ -2,9 +2,9 @@
 
 namespace tools
 {
-    BWaveCatcher::BWaveCatcher()
-    : acquiring_(false), rng_(std::random_device{}()), noiseDist_(-2, 2) {
-
+    BWaveCatcher::BWaveCatcher(std::string n)
+    : acquiring_(false), rng_(std::random_device{}()), noiseDist_(-2, 2), TTSDist_(3.314, 0.1531*0.1531), AmpDist_(0, 0.3) {
+        name = n;
         scope.resize(config_.NumChannels);
         signalSource.resize(config_.NumChannels);
 
@@ -17,6 +17,17 @@ namespace tools
             scope[c]->SetTitle(("Channel " + std::to_string(c) + "; Time (ns); Amplitude (mV)").c_str());
             scope[c]->Draw("APL");
         }
+
+        TH1F tts = TH1F("tts", "TTS", 100, 2, 5);
+        TH1F amp = TH1F("amp", "TTS", 100, -2, 2);
+
+        for(int i=0; i<10000; i++){
+            tts.Fill(TTSDist_(rng_));
+            amp.Fill(AmpDist_(rng_));
+        }
+        tts.Write();
+        amp.Write();
+        
     }
 
     BWaveCatcher::~BWaveCatcher() {}
@@ -35,16 +46,25 @@ namespace tools
         return config_;
     }
 
-    bool BWaveCatcher::plugOM(int c, const OM& om){
-        if(c > config_.NumChannels -1){
-            std::cout << "\033[1;35mChannel with index " << c << " does not exists ..\033[0m" << std::endl;
+    bool BWaveCatcher::plugOM(int channel, const OM& om){
+        if(channel > config_.NumChannels -1){
+            std::cout << "\033[1;35mChannel with index " << channel << " does not exists ..\033[0m" << std::endl;
             return false;
         }
 
-        signalSource[c] = om;
+        if(config_.inputOMs[channel].isOK){
+            std::cout << "\033[1;35mInfo: Channel " << channel << " Already in use ..\033[0m" << std::endl;
+            return false;
+        }
+
+        // std::cout << "\033[1;32mInfo: OM " << om.getOMID() << " is now plugged on channel " 
+        //                                     << channel << " - " 
+        //                                     << name 
+        //                                     << " ..\033[0m" 
+        //                                     << std::endl;
+        config_.inputOMs[channel] = om;
         return true;
     }
-
 
     void BWaveCatcher::signalHandler(int signum) {
         std::cout << "\nCtrl-C pressed. Stopping...\n";
@@ -198,59 +218,88 @@ namespace tools
         return gr;
      }
 
-    std::vector<ADC_record> BWaveCatcher::digitizeEvent(int channel, BAnalysisManager::DetectedEvent event){
+    std::vector<ADC_record> BWaveCatcher::digitizeEvent(int channel, BAnalysisManager::DetectedEvent& event){
         std::vector<ADC_record> adcs;
         if(! event.hits.size())
             return adcs;
+
+        if(! config_.inputOMs[channel]){
+            std::cout << "\r\033[20C" << "\033[1;31mError: " + name + ",  Invalid channel input ..\033[0m" 
+                                                << config_.inputOMs[channel].getOMID() 
+                                                << " -- " << config_.inputOMs[channel].isOK
+                                                << " -- " << ! config_.inputOMs[channel]
+                                                << std::endl;
+            return adcs;
+        }
+
         // for(int i = 0; i < config_.NumChannels; i++)
         //     std::cout << "\r\033[10C" << "Channel " << i << ": OM Connected: " << signalSource[i].getOMID() << std::endl;
             
         double dt = 1. / (config_.samplingFrequency); // ns per sample
-        double tau_r = 4; // rise time  ns
-        double tau_f = 11; // fall time ns
+        double t_r = 4;
+        double t_f = 11;
+        double tau_r = t_r/2.2; // rise time  ns
+        double tau_f = t_f/2.2; // fall time ns
         double pmt_gain = 5e7;
-        double electron_charge = 1.602e-19; // in Columb
-        double resistor = 50; // in ohm
-        double one_pe_charge = pmt_gain * electron_charge;
-        double amplitude = one_pe_charge/((tau_f - tau_r)*1e-9); // charge in C and time in s
-        double vStep = (config_.inputDynamicRange*1e3/pow(2, config_.resolution));
-
+        double electron_charge = 1.602e-19; // in Coulomb
+        double R = 50; // in Ohm
+        double one_pe_charge = pmt_gain * electron_charge; // in C
+        // double I_peak = one_pe_charge/((tau_f - tau_r)*1e-9) ; // charge in C and time in s => A 
+        // double t_peak=tau_r*tau_f/(tau_f-tau_r)*TMath::ln(tau_f/tau_r);
+        double I_0 = (one_pe_charge/((tau_f - tau_r)*1e-9));
+        // double I_peak = I_0*(1-exp())
+        double I_peak = (one_pe_charge/(tau_f*1e-9)) * pow((tau_r/tau_f), (tau_r/(tau_f-tau_r))); // A
+        double lsb = config_.inputDynamicRange / (pow(2, config_.resolution) - 1); // in Volts
+        std::normal_distribution<> pedDist_(0, 0.30*I_peak/lsb); 
+        double t_jutter = 0.;
+    
         for(auto& hit : event.hits){
-            if(hit.om_id != channel+1) // om_id starts from 1 while channel starts from 0
+            if(hit.om_id != channel+1) // om id comes from copynumber in geant4 and channel is 0 or 1 while copy number starts from 1
                 continue;
-
-            double global_time = 0;
             ADC_record adc;
             adc.samples.resize(config_.recordLength);
             adc.channel = channel; // set channel
-            double t=0; // time in ns
+            double I_peak_stat = (I_peak + AmpDist_(rng_)*I_peak) ;
+            hit.a = I_peak * R * 1e3; // mV
+            hit.a_f = I_peak_stat * R * 1e3; // mV
+
+            double sigma_tts = TTSDist_(rng_)/2.355; // FWHM /2*sqrt(2*ln(2))
+            std::normal_distribution<> TTSFDist_(t_jutter, sigma_tts*sigma_tts);  // sample from TTS FWHM dist. with time jutter
+            hit.t_tts = hit.time + TTSFDist_(rng_); // hit time + tts in ns
+            double t=0; // time in nsx
             for (size_t i = 0; i < config_.recordLength; ++i) {
                 t = i * dt;
-                if (t < hit.time ){
-                    adc.samples[i] = pow(2, config_.resolution)/2. + noiseDist_(rng_); // set to 0 and always add basline noise;
+                double ped=pedDist_(rng_);
+                
+                if (t < hit.t_tts){
+                    adc.samples[i] = ped; // + noiseDist_(rng_); // set to 0 and always add basline noise;
                    continue; 
                 } 
-                double pulse = - (1 - exp(-(t - hit.time)/tau_r)) * exp(-(t - hit.time) / tau_f); // model hit pulse shape // current
-                double voltage = amplitude * pulse * resistor * 1e3; // U=RI in mV 
-                double signal = pow(2, config_.resolution)/2. + voltage * vStep + noiseDist_(rng_); // mV
+                
+                double i_t = - I_peak_stat* (1 - exp(-(t - hit.t_tts)/tau_r)) * exp(-(t - hit.t_tts) / tau_f); // i(t) = I*(1 - exp(..))*exp(..) model hit i pulse shape // current
+                double v_t = R * i_t; // + analog noise // u(t)=Ri(t) in V 
+                double pre_count = v_t/lsb + ped; // + ped;
+                double count = std::clamp(std::round(pre_count),  - pow(2, config_.resolution-1), pow(2, config_.resolution-1) -1); // + noiseDist_(rng_); // mV
 
-                // std::cout << "\r\033[10C" << "Voltage: " << voltage 
-                //                             << " // one_pe_charge: " << one_pe_charge 
-                //                             << " // amplitude: " << amplitude 
-                //                             << " // pulse: " << pulse 
-                //                             << " // step: " << i 
-                //                             << " // time: " << t
-                //                             << " // comp: " << signal 
-                //                             << " // v*vstep: " << voltage * vStep 
-                //                             << " // v*vstep int: " << (int)(std::round(signal)) 
+                // std::cout << "\r\033[10C" << "v_t: " << v_t 
+                //                             << " // spe_c: " << one_pe_charge 
+                //                             << " // I: " << I_peak
+                //                             << " // I+10%I: " << (I_peak + AmpDist_(rng_)*I_peak) 
+                //                             << " // i_t: " << i_t 
+                //                             << " // cnt: " << count 
+                //                             << " // pcnt: " << pre_count 
+                //                             << " // lsb: " << lsb 
+                //                             << std::endl;
+                //  std::cout << "\r\033[10C" << "std::round(pre_count): " << std::round(pre_count) 
+                //                             << " // - pow(2, config_.resolution-1): " << - pow(2, config_.resolution-1) 
+                //                             << " // Ipeak: " << I_peak
+                //                             << " // pow(2, config_.resolution-1) -1: " << pow(2, config_.resolution-1) -1 
+                //                             << " // lsb: " << lsb
                 //                             << std::endl;
 
-                if(signal > pow(2, config_.resolution))
-                    signal = pow(2, config_.resolution); // positive saturation 
-                if(signal < 0)
-                    signal = 0; // negative saturation 
 
-                adc.samples[i] = std::round(signal);    
+
+                adc.samples[i] = count;    
                 adc.timestamp=hit.time;            
             }
             adcs.push_back(adc);
@@ -270,28 +319,31 @@ namespace tools
         bool useShift=false;
         bool trigger = false;
         double inputOffset=config_.inputOffsets[record.channel];
+        double lsb = config_.inputDynamicRange / (pow(2, config_.resolution) - 1); // in Volts
+        std::normal_distribution<> pedDist_(0, 500*lsb); 
         for(int i=0; i<record.samples.size(); i++){
+            double ped=pedDist_(rng_);  
             if(i*dt < record.timestamp || 
                 i-shift > record.samples.size() || 
                 i+inputOffset > record.samples.size()
             ){    // check range
-                // wf.samples[i] = noiseDist_(rng_) % 2; // always add basline noise;
+                wf.samples[i] = ped; // always add basline noise;
                 continue; 
             }
-            if(!useShift){
-                shift=i;
+            if(!useShift){ // determine time shift sample
+                shift=i; 
                 useShift=true;
             }
-                
-            wf.samples[i+inputOffset] =(record.samples[(i-shift)] - pow(2, config_.resolution)/2.) * vStep; // +  noiseDist_(rng_) % 2;  // positive region
-            // std::cout << "\r\033[15C" << "wf.samples[i+inputOffset]: " << wf.samples[i+inputOffset] 
+              
+            wf.samples[i+inputOffset] = (record.samples[(i-shift)] - ped) * lsb *1e3 ; // +  noiseDist_(rng_) % 2;  mV
+            // std::cout << "\r\033[15C"   << "wf.samples[i+inputOffset]: " << wf.samples[i+inputOffset] 
             //                             << "config_.triggerThresholds[record.channel]: " << config_.triggerThresholds[record.channel]                           
             //                             << std::endl;
-            if(abs(wf.samples[i+inputOffset]) > config_.triggerThresholds[record.channel]){
-                trigger=true;
-            }
-                
 
+            if(config_.triggerThresholds[record.channel] <= 0 && wf.samples[i+inputOffset] <= config_.triggerThresholds[record.channel])
+                trigger=true;
+            else 
+                trigger = true;            
         }
         wf.timestamp=record.timestamp;
         if(trigger){ // if descriminator OK
@@ -299,7 +351,7 @@ namespace tools
             return wf; 
         }
         else{
-            // std::cout << "\r\033[15C" << "Trigger Not OK" << std::endl;
+            std::cout << "\r\033[15C" << "Trigger Not OK" << std::endl;
             return Waveform();
         }   
     }
@@ -315,6 +367,7 @@ namespace tools
     void BWaveCatcher::setInputOffset(int channel, double offset){
         config_.inputOffsets[channel] = offset;
     }
+
     void BWaveCatcher::setInputOffset(double offset){
         config_.inputOffsets.fill(offset);
     }

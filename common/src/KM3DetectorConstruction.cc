@@ -161,8 +161,7 @@ namespace km3net
     G4ThreeVector thePos(PosPar.X, PosPar.Y, PosPar.Z);
 
     G4LogicalVolume* logicVolume=theVolToPlace->GetLogicalVolume (PosPar.Name);
-    // std::cout << "\r\033[50C" << "Setting thge G4LogicalVolume: " << PosPar.Name+std::to_string(PosPar.ID) << std::endl;
-    // logicVolume->SetName(PosPar.Name+std::to_string(PosPar.ID));
+
     if (!logicVolume)
       {
         cerr << "ERROR:KM3DetectorConstruction didn't place " << PosPar.Name <<

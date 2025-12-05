@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <array>
+#include "OM.hh"
 
 namespace lactel
 {
@@ -56,6 +57,7 @@ namespace lactel
         double samplingFrequency;                        // in GS/s (e.g. 0.4, 0.8, 1.6, 3.2)
         double inputDynamicRange;                        // in Vpp (e.g. 2.5 V)
         std::array<double, NumChannels> inputOffsets;    // DC offset per channel (±1.25V)
+        std::array<OM, NumChannels> inputOMs;    // DC offset per channel (±1.25V)
         double bandwidth;                                // in MHz (e.g. 500 MHz)
         int resolution;                                  // resolution in bits
 

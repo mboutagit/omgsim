@@ -21,10 +21,14 @@ namespace lactel
 {
 
 
-    float BDetectorConstruction::worldSizeOffset = 20*cm;
+    BDetectorConstruction::DetectorState BDetectorConstruction::state = BDetectorConstruction::DetectorState::OFF;
+    float BDetectorConstruction::worldSizeOffset = 5*cm;
     float BDetectorConstruction::acceptanceAngle = 10*deg;
     double BDetectorConstruction::omPos = 44*deg;
-    G4ThreeVector BDetectorConstruction::OMPosition = G4ThreeVector(0, 0, .6*m); // set default OM position 
+    G4ThreeVector BDetectorConstruction::OMPosition = G4ThreeVector(0, 0, 0); // set default OM position 
+    std::string  BDetectorConstruction::generationShape = "box"; // set default OM position 
+    G4ThreeVector BDetectorConstruction::genSurfPosition = G4ThreeVector(0, 0, .0); // set default SG position 
+    G4ThreeVector BDetectorConstruction::genSurfSize = G4ThreeVector(1*m, 1*m, 1*m); // set default GS size 
 
     // std::string BDetectorConstruction::className = "BDetectorConstruction";
     BDetectorConstruction* BDetectorConstruction::GetIt(){
@@ -64,6 +68,10 @@ namespace lactel
     }
 
     void BDetectorConstruction::autoWorldSize(){
+
+        G4ThreeVector min, max;
+        
+
         float zmax;
         zmax = (*G4PhysicalVolumeStore::GetInstance())[0]->GetTranslation().getZ() + 
                     dynamic_cast<G4Box*> ((*G4PhysicalVolumeStore::GetInstance())[0]->GetLogicalVolume()->GetSolid())->GetZHalfLength(); // initilize
@@ -79,7 +87,9 @@ namespace lactel
                     farVolume=pv;                     
                 }
             
-                std::cout << "\r\033[10C" << "Check Volume: " << pv->GetName() << "  -- zpos: " << pv->GetTranslation().getZ()
+                std::cout << "\r\033[10C" << "Check Volume: " << pv->GetName() << "  -- xpos: " << pv->GetTranslation().getX()
+                                                                                 << "  -- ypos: " << pv->GetTranslation().getY()
+                                                                                 << "  -- zpos: " << pv->GetTranslation().getZ()
                             << " -- halfZ size: " << dynamic_cast<G4Box*>  (dynamic_cast<G4Box*> (pv->GetLogicalVolume()->GetSolid())) ->GetZHalfLength()
                             << std::endl;   
             }
@@ -200,6 +210,53 @@ namespace lactel
             exit(-1);
         } 
     }
+
+    void BDetectorConstruction::setGenerationShape(std::string shape){
+        generationShape = shape;
+    }
+
+    void BDetectorConstruction::setGenSurfShape(std::string shape){
+        G4Material* Air = G4NistManager::Instance()->FindOrBuildMaterial("G4_AIR");
+        G4Material* vacuum = G4NistManager::Instance()->FindOrBuildMaterial("G4_Vacuum");
+
+
+        G4double z = 1.;  // Atomic number (Hydrogen)
+        G4double a = 1.01 * g/mole;  // Atomic mass
+        G4double density = 1.0e-25 * g/cm3;  // Extremely low density
+        G4double temperature = 2.73 * kelvin;  // Space temperature
+        G4double pressure = 3.0e-18 * pascal;  // Very low pressure
+
+        G4Material* myVacuum = new G4Material("CustomVacuum", z, a, density, kStateGas, temperature, pressure);
+    
+        if(shape == "disk")
+            genSolid = new G4Tubs("disk",  genSurfSize.getX(), genSurfSize.getY(), genSurfSize.getZ(), 0, 360*deg);
+        else if (shape == "sphere")
+            genSolid = new G4Sphere("sphere", genSurfSize.getX(), genSurfSize.getY(), 0, 360*deg, 0, 180*deg);
+        else if (shape == "hemisphere")
+            genSolid = new G4Sphere("hemisphere", genSurfSize.getX(), genSurfSize.getY(), 0, 360*deg, 0, 90*deg);
+        else{
+            genSolid = new G4Box("genSolid", genSurfSize.getX(), genSurfSize.getY(), genSurfSize.getZ());
+        }     
+        genLogic = new G4LogicalVolume(genSolid,
+                                        myVacuum, 
+                                        "genLogic", 0, 0, 0);
+        
+        genPhysic = new G4PVPlacement(0,                // no rotation
+                                    genSurfPosition, // at (0,0,0)
+                                    genLogic,        // its logical volume
+                                    "genPhysic",     // its name
+                                    logicWorld,      // its mother  volume
+                                    false,           // no boolean operations
+                                    0);              // no field specific to volume  
+                                    
+        G4VisAttributes* genAttributes = new G4VisAttributes(G4Colour(.7, .0, 0.1, 0.2));
+        genAttributes->SetVisibility(true);  // Make the volume visible
+        genAttributes->SetForceSolid(true);  // Force solid rendering mode
+        genLogic->SetVisAttributes(genAttributes);
+
+        std::cout << "\r\033[10C" << "gen volume has been created !!" << std::endl;
+    }
+
 
     void BDetectorConstruction::ReadThisConfiguration (libconfig::Setting* cfg, // reads settings from KM3Det*.dat file
                                                        vector<PositionParameters>&  ConfList) 
@@ -411,10 +468,10 @@ namespace lactel
                                     false,           // no boolean operations
                                     0);              // no field specific to volume
     
-        genSolid = new G4Box("genSolid", fWorldLength, fWorldLength, fWorldLength/2);
-        genLogic = new G4LogicalVolume(genSolid,
-                                         Air,  //myVacuum, 
-                                        "genLogic", 0, 0, 0);
+        // genSolid = new G4Box("genSolid", fWorldLength, fWorldLength, fWorldLength/2);
+        // genLogic = new G4LogicalVolume(genSolid,
+        //                                  Air,  //myVacuum, 
+        //                                 "genLogic", 0, 0, 0);
                                         
         G4VisAttributes* worldCol = new G4VisAttributes(G4Colour(0.1, 0.1, 0.9, 0.1));
         G4VisAttributes* genAttributes = new G4VisAttributes(G4Colour(.1, 0.0, 0.7, 0.1));
@@ -427,7 +484,7 @@ namespace lactel
         
         genAttributes->SetVisibility(true);  // Make the volume visible
         genAttributes->SetForceSolid(true);  // Force solid rendering mode
-    // genLogic->SetVisAttributes(genAttributes);
+        // genLogic->SetVisAttributes(genAttributes);
 
         worldCol->SetVisibility(true);  // Make the volume visible
         worldCol->SetForceSolid(true);  // Force solid rendering mode
@@ -436,7 +493,6 @@ namespace lactel
 
         genColor->SetVisibility(true);  // Make the volume visible
         genColor->SetForceSolid(true);  // Force solid rendering mode
-        genLogic->SetVisAttributes(genColor);
 
 
         G4RotationMatrix *targetRot=new G4RotationMatrix(0,0,0);
@@ -482,16 +538,7 @@ namespace lactel
             omID++;
         }
 
-            G4ThreeVector genPosition = G4ThreeVector(0., 0., 0.);
-            G4ThreeVector targetPosition = G4ThreeVector(0, 0, -fTargetLength);
-            genPhysic = new G4PVPlacement(0,                // no rotation
-                                    genPosition, // at (0,0,0)
-                                    genLogic,        // its logical volume
-                                    "genPhysic",     // its name
-                                    logicWorld,      // its mother  volume
-                                    false,           // no boolean operations
-                                    0);              // no field specific to volume
-        
+        setGenSurfShape(generationShape);
         G4RotationMatrix* rotZtoUp = new G4RotationMatrix();
         rotZtoUp->rotateX(90 * deg);  // Rotate 90 degrees about the X-axis
 
@@ -510,11 +557,11 @@ namespace lactel
         //recalculate the 
         dynamic_cast<G4Box*> (solidWorld)->SetXHalfLength(gen_half_length);
         dynamic_cast<G4Box*> (solidWorld)->SetYHalfLength(gen_half_length);
-        dynamic_cast<G4Box*> (solidWorld)->SetZHalfLength(1*m);
+        dynamic_cast<G4Box*> (solidWorld)->SetZHalfLength(5*m);
 
-        dynamic_cast<G4Box*> (genSolid)->SetXHalfLength(gen_half_length);
-        dynamic_cast<G4Box*> (genSolid)->SetYHalfLength(gen_half_length);
-        dynamic_cast<G4Box*> (genSolid)->SetZHalfLength(0.1*mm);
+        // dynamic_cast<G4Box*> (genSolid)->SetXHalfLength(gen_half_length);
+        // dynamic_cast<G4Box*> (genSolid)->SetYHalfLength(gen_half_length);
+        // dynamic_cast<G4Box*> (genSolid)->SetZHalfLength(0.1*mm);
         
         G4VisAttributes* inner_vol = new G4VisAttributes(G4Colour(0.1, 0.1, 0.9, 0.1));
         G4VisAttributes* outer_vol = new G4VisAttributes(G4Colour(.1, 0.8, 0.2, 0.1));
@@ -578,7 +625,7 @@ namespace lactel
                                 << "\nAcceptance angle in deg: " << acceptanceAngle/deg
                                 << endl;
 
-        autoWorldSize();
+        // autoWorldSize();
         return physiWorld;
     }
 

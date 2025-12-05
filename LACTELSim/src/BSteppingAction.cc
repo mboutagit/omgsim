@@ -28,6 +28,11 @@ namespace lactel
     void BSteppingAction::UserSteppingAction(const G4Step* step){
         // std::cout << "\r\033[10C" << "start steeping: " << std::endl;
 
+        if( ! BDetectorConstruction::GetIt()->IsRunning()){
+            return;
+        }
+            
+
         G4Track* fTrack = step->GetTrack();
         if(fTrack->GetParentID() == 0){
             myCostumTrackColor(step);
