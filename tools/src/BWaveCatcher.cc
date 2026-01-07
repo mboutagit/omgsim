@@ -3,30 +3,30 @@
 namespace tools
 {
     BWaveCatcher::BWaveCatcher(std::string n)
-    : acquiring_(false), rng_(std::random_device{}()), noiseDist_(-2, 2), TTSDist_(3.314, 0.1531*0.1531), AmpDist_(0, 0.3) {
+    : acquiring_(false), rng_(std::random_device{}()), noiseDist_(-2, 2), TTSDist_(3.314, 0.1531*0.1531), AmpDist_(0, 0.1156) { // 0.1156 is to have 90% of amplitudes inside 30% fluctuation
         name = n;
         scope.resize(config_.NumChannels);
         signalSource.resize(config_.NumChannels);
 
-        canvas = new TCanvas("scope", "BWaveCatcher scope");
-        canvas->Divide(config_.NumChannels);
-        canvas->SetTitle("Oscil");
-        for(int c = 0; c < config_.NumChannels; c++){
-            canvas->cd(c);
-            scope[c] = new TGraph();
-            scope[c]->SetTitle(("Channel " + std::to_string(c) + "; Time (ns); Amplitude (mV)").c_str());
-            scope[c]->Draw("APL");
-        }
+        // canvas = new TCanvas("scope", "BWaveCatcher scope");
+        // canvas->Divide(config_.NumChannels);
+        // canvas->SetTitle("Oscil");
+        // for(int c = 0; c < config_.NumChannels; c++){
+        //     canvas->cd(c);
+        //     scope[c] = new TGraph();
+        //     scope[c]->SetTitle(("Channel " + std::to_string(c) + "; Time (ns); Amplitude (mV)").c_str());
+        //     scope[c]->Draw("APL");
+        // }
 
-        TH1F tts = TH1F("tts", "TTS", 100, 2, 5);
-        TH1F amp = TH1F("amp", "TTS", 100, -2, 2);
+        // TH1F tts = TH1F("tts", "TTS", 100, 2, 5);
+        // TH1F amp = TH1F("amp", "TTS", 100, -2, 2);
 
-        for(int i=0; i<10000; i++){
-            tts.Fill(TTSDist_(rng_));
-            amp.Fill(AmpDist_(rng_));
-        }
-        tts.Write();
-        amp.Write();
+        // for(int i=0; i<10000; i++){
+        //     // tts.Fill(TTSDist_(rng_));
+        //     amp.Fill(AmpDist_(rng_));
+        // }
+        // // tts.Write();
+        // amp.Write();
         
     }
 
@@ -259,7 +259,13 @@ namespace tools
             ADC_record adc;
             adc.samples.resize(config_.recordLength);
             adc.channel = channel; // set channel
-            double I_peak_stat = (I_peak + AmpDist_(rng_)*I_peak) ;
+
+            // double fluct;
+            // do {
+            //     fluct = AmpDist_(rng_);
+            // } while (fluct < -0.3 || fluct > 0.3);
+
+            double I_peak_stat = I_peak*(1 + AmpDist_(rng_)) ;
             hit.a = I_peak * R * 1e3; // mV
             hit.a_f = I_peak_stat * R * 1e3; // mV
 
@@ -344,16 +350,16 @@ namespace tools
                 trigger=true;
             else 
                 trigger = true;            
-        }
-        wf.timestamp=record.timestamp;
-        if(trigger){ // if descriminator OK
-            // std::cout << "\r\033[15C" << "Trigger OK" << std::endl;
-            return wf; 
-        }
-        else{
-            std::cout << "\r\033[15C" << "Trigger Not OK" << std::endl;
-            return Waveform();
-        }   
+            }
+            wf.timestamp=record.timestamp;
+            if(trigger){ // if descriminator OK
+                // std::cout << "\r\033[15C" << "Trigger OK" << std::endl;
+                return wf; 
+            }
+            else{
+                std::cout << "\r\033[15C" << "Trigger Not OK" << std::endl;
+                return Waveform();
+            }   
     }
 
     void BWaveCatcher::setTriggerThreshold(int channel, double threshold){

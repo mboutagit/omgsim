@@ -6,7 +6,7 @@ namespace lactel
         // Constructor with defaults
     BWaveCatcherConf::BWaveCatcherConf()
         : samplingFrequency(3.2),
-          inputDynamicRange(5),
+          inputDynamicRange(2.5), // true WaveCatcher range
           inputOffsets{0.0, 0.0},
           bandwidth(500.0),
           resolution(12), // 12 bit resolution
@@ -28,6 +28,7 @@ namespace lactel
           clockSource("internal"),
           syncWithOtherBoards(false),
           deadTime(125.0) // µs
+
     {}
 
     BWaveCatcherConf::~BWaveCatcherConf(){}

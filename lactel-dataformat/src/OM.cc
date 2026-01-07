@@ -20,6 +20,10 @@ namespace lactel
         nInstance++;
     }
 
+    // OM(OM& om){
+    //     om_id = om.om_id;
+    // }
+
     OM::~OM(){
         om_ids.clear();
     }

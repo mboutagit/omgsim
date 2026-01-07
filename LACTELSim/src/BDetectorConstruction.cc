@@ -22,6 +22,7 @@ namespace lactel
 
 
     BDetectorConstruction::DetectorState BDetectorConstruction::state = BDetectorConstruction::DetectorState::OFF;
+    bool BDetectorConstruction::useDAQ = false;
     float BDetectorConstruction::worldSizeOffset = 5*cm;
     float BDetectorConstruction::acceptanceAngle = 10*deg;
     double BDetectorConstruction::omPos = 44*deg;
@@ -80,7 +81,7 @@ namespace lactel
 
         for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
                         
-            if(dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid())){
+            if(dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid())){ // just for box kind volumes
                 
                 if((abs(pv->GetTranslation().getZ()) + abs((dynamic_cast<G4Box*> (pv->GetLogicalVolume()->GetSolid()))->GetZHalfLength())) > abs(zmax)){
                     zmax = (abs(pv->GetTranslation().getZ()) + abs(dynamic_cast<G4Box*> (pv->GetLogicalVolume()->GetSolid())->GetZHalfLength()));
@@ -95,9 +96,22 @@ namespace lactel
             }
         }
 
-         float autoZ = zmax;  // (abs(zmin) > abs(zmax)) ? 
+        double max_gen=0;
+        if(generationShape == "disk" ){
+            max_gen  = (dynamic_cast<G4Tubs*>  (genSolid))->GetOuterRadius();
+        }
+        else if(generationShape == "sphere" || generationShape == "hemisphere")  {
+            max_gen  = (dynamic_cast<G4Sphere*>  (genSolid))->GetOuterRadius();
+        }  
+
+            
+                
+     
+         float autoZ = zmax > max_gen ? zmax : max_gen;  // (abs(zmin) > abs(zmax)) ? 
         //                 (abs(zmin) + worldSizeOffset) : 
         //                 (abs(zmax) + worldSizeOffset);
+        dynamic_cast<G4Box*> (solidWorld)->SetXHalfLength(autoZ + worldSizeOffset);
+        dynamic_cast<G4Box*> (solidWorld)->SetYHalfLength(autoZ + worldSizeOffset);
         dynamic_cast<G4Box*> (solidWorld)->SetZHalfLength(autoZ + worldSizeOffset);
 
 
@@ -228,14 +242,21 @@ namespace lactel
 
         G4Material* myVacuum = new G4Material("CustomVacuum", z, a, density, kStateGas, temperature, pressure);
     
-        if(shape == "disk")
+        if(shape == "disk"){
             genSolid = new G4Tubs("disk",  genSurfSize.getX(), genSurfSize.getY(), genSurfSize.getZ(), 0, 360*deg);
-        else if (shape == "sphere")
+            AGen = CLHEP::pi * (genSurfSize.getY()*genSurfSize.getY() - genSurfSize.getX()*genSurfSize.getX());
+        }
+        else if (shape == "sphere"){
             genSolid = new G4Sphere("sphere", genSurfSize.getX(), genSurfSize.getY(), 0, 360*deg, 0, 180*deg);
-        else if (shape == "hemisphere")
+            AGen = 4 * CLHEP::pi * genSurfSize.getY() * genSurfSize.getY(); // surface 
+        }
+        else if (shape == "hemisphere"){
             genSolid = new G4Sphere("hemisphere", genSurfSize.getX(), genSurfSize.getY(), 0, 360*deg, 0, 90*deg);
+            AGen = 2 * CLHEP::pi * genSurfSize.getY() * genSurfSize.getY(); // surface 
+        }
         else{
             genSolid = new G4Box("genSolid", genSurfSize.getX(), genSurfSize.getY(), genSurfSize.getZ());
+            AGen = genSurfSize.getX() * genSurfSize.getY(); // just on x and y
         }     
         genLogic = new G4LogicalVolume(genSolid,
                                         myVacuum, 
@@ -550,10 +571,10 @@ namespace lactel
 
         //recalculate the size for the world and generation valume based on the target length (accept 60° events that would hit the target)
         double gen_half_length = 2*target_half_length * tan(acceptanceAngle/rad) + target_half_length; // (c+d)*tg(theta) + d/2
-        AGen = 2*gen_half_length/cm * 2*gen_half_length/cm; // generation volume above the cell cm²
+        // AGen = 2*gen_half_length/cm * 2*gen_half_length/cm; // generation volume above the cell cm²
 
-        BPrimaryGeneratorAction::getInstance()->genArea = (2*gen_half_length) * (2*gen_half_length); // generation area in mm2
-
+        //BPrimaryGeneratorAction::getInstance()->genArea = (2*gen_half_length) * (2*gen_half_length); // generation area in mm2
+        BPrimaryGeneratorAction::getInstance()->genArea = AGen;
         //recalculate the 
         dynamic_cast<G4Box*> (solidWorld)->SetXHalfLength(gen_half_length);
         dynamic_cast<G4Box*> (solidWorld)->SetYHalfLength(gen_half_length);
@@ -614,18 +635,7 @@ namespace lactel
             }
         } 
 
-        
-
-        cout << "\r\033[20C" << "New generation surface for a detector of volume " 
-                                << 2*target_half_length/m * 2*target_half_length/m * 2*target_half_length/m 
-                                << " m^3 is: "  
-                                <<" length = " << 2*gen_half_length/m << " m - s = "
-                                << 2*gen_half_length/m * 2*gen_half_length/m << " m² - s = "
-                                << AGen << " cm²"
-                                << "\nAcceptance angle in deg: " << acceptanceAngle/deg
-                                << endl;
-
-        // autoWorldSize();
+        autoWorldSize();
         return physiWorld;
     }
 

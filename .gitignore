@@ -1,0 +1,7 @@
+*.root
+*.png
+*.db
+*.txt
+penv
+*.log
+*.evt

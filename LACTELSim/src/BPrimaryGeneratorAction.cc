@@ -205,14 +205,14 @@ namespace lactel
 
     void BPrimaryGeneratorAction::getExpectedFlux(){
         double nMuons = integrate_muon_flux(genAltitude, EMin, EMax, dE, thetaMin, thetaMax, dTheta); // muon/second/cm^2
-        std::cout << "Estimated muon rate per " << genArea/cm2 << " cm2 per " << tExposure/s << " seconds: " 
-                    << std::setprecision(4) << nMuons * genArea/cm2 * tExposure/s
+        std::cout << "Estimated muon rate per " << genArea << " cm2 per " << tExposure/s << " seconds: " 
+                    << std::setprecision(4) << nMuons * genArea * tExposure/s
                     <<  "\nExpected muons /cm2: "
                     << std::setprecision(4) <<   nMuons
 
                     << std::endl;
 
-        muonsFlux = nMuons * genArea/cm2 * tExposure/s;
+        muonsFlux = nMuons * genArea * tExposure; // nMuons is a number, genArea in cm2 and and tExposure is in s 
     }
 
     G4ThreeVector BPrimaryGeneratorAction::GenerateDirThetaCos2(double theta_min, double theta_max) {
@@ -367,7 +367,7 @@ namespace lactel
             else
               particleName = "mu-";
 
-            particleName="gamma";
+            //particleName="gamma";
 
             double Emin = 1.0;     // GeV
             double Emax = 1e4;     // GeV (10 TeV)
@@ -389,7 +389,6 @@ namespace lactel
             }
                 
             
-
             if(direction.getZ() > 0)
                 direction.setZ(- direction.getZ());
             G4ThreeVector polarization(G4UniformRand(), G4UniformRand(), 0.0); 
@@ -551,7 +550,7 @@ namespace lactel
         theta_max /= rad;
         theta_steps /= rad;
 
-        std::cout << "BPrimaryGeneratorAction::integrate_flux: " 
+        std::cout << "BPrimaryGeneratorAction::integrate_muon_flux: " 
                             << "\n Altitude in m: " << alt
                             << "\n E_min in GeV: " << Emin
                             << "\n E_max in GeV: " << Emax

@@ -18,7 +18,7 @@ using namespace km3net;
 
 namespace lactel
 {
-    class BRunAction;
+    class BRunAction;    
 
     class BAnalysisManager : public AAAnalysisManager
     {
@@ -99,10 +99,31 @@ namespace lactel
             };
 
             struct Hit;
+            struct DAQEvent{
+                uint channel;
+                uint event_nb;
+                std::string om_id;
+                float a; // in mV
+                float t; // in ns
+
+                DAQEvent() : channel(9999), event_nb(999999999), om_id("XXXXXXX"), a(-9999), t(-9999){}
+                void reset(){
+                    channel = 9999; event_nb = 999999999; om_id = "XXXXXXX"; a = -9999; t = -9999;
+                }
+
+                DAQEvent(uint c, uint evtnb, std::string om, float _a, float _t){
+                    channel = c; event_nb = evtnb; om_id = om; a = _a; t = _t;
+                }
+                void addEvent(uint c, uint evtnb, std::string om, float _a, float _t){
+                    channel = c; event_nb = evtnb; om_id = om; a = _a; t = _t;
+                }
+            };
+
             struct DetectedEvent
             {                    
                 // unsigned int event_ID;
                 std::vector<Hit> hits;
+                std::vector<DAQEvent> daqEvent;
                 // std::vector<HitInfos> pmHits;
                 // std::vector<HitInfos> hits;
                 float event_energy;
@@ -146,6 +167,28 @@ namespace lactel
                 float om_p; 
 
                 int om_id;
+
+                static float getMeanTime(std::vector<Hit> hits){
+                    if(! hits.size())
+                        return 0;
+                    float time = 0;
+                    for(auto& hit : hits)
+                        time+=hit.time;
+
+                    return time/hits.size(); // mean time
+                }
+
+                static float getMeanTimeforOM(std::vector<Hit> hits, int om_id){
+                    if(! hits.size())
+                        return 0;
+                    float time = 0;
+                    for(auto& hit : hits){
+                        if(hit.om_id != om_id)
+                            continue;
+                        time+=hit.time;
+                    }
+                    return time/hits.size(); // mean time
+                }
             };
 
             struct Run {
@@ -158,6 +201,7 @@ namespace lactel
 
                 std::string detName ="";
             };
+
               
             MeasureParameters fMeasure_parameters;
             Measure fMeasure;
@@ -168,13 +212,15 @@ namespace lactel
             Measure getMeasure();
             DetectedEvent fDetectedEvent;
             Run fRun;
-            
+            // DAQEvent fDaqEvent;
+
         protected:
             BAnalysisManager();
             ~BAnalysisManager();
             TTree* genTree;
             TTree* runTree;
             TTree* detectedEventTree;
+            TTree* DAQEventTree;
             GenerationParameters genPars;
 
             int ndet = 0;

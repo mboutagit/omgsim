@@ -58,6 +58,12 @@ namespace lactel
         acceptanceAngle_cmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
 
+        detectorState_cmd = new G4UIcmdWithAString("/LACTEL/BDet/state", this);
+        detectorState_cmd->SetGuidance("State of the detector, OFF, IDLE, ON, RUN");
+        detectorState_cmd->SetParameterName("state", false);
+        detectorState_cmd->AvailableForStates(G4State_PreInit, G4State_Idle);
+
+
         cout << "\r\033[20C" << "---- Calling det Messenger" << endl;
 
 
@@ -69,6 +75,8 @@ namespace lactel
         delete targetLength_cmd;
         delete targetType_cmd;
         delete OMPosition_cmd;
+        delete acceptanceAngle_cmd;
+        delete detectorState_cmd;
     };
 
     void BDetectorMessenger::SetNewValue(G4UIcommand* cmd, G4String value){
@@ -115,6 +123,10 @@ namespace lactel
         else if (cmd == genSurfSize_cmd){
             BDetector->genSurfSize = genSurfSize_cmd->GetNew3VectorValue(value);
             std::cout << "\r\033[20C \033[1;33m" << "Generation surface size is: " << BDetector->genSurfSize << "\033[0m" << std::endl;
+        }
+        else if (cmd == detectorState_cmd){
+            BDetector->setDetectorState(value);
+            // std::cout << "\r\033[20C \033[1;33m" << "Detector state is: " << value << "\033[0m" << std::endl;
         }
     }
 

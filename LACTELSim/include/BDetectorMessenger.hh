@@ -34,6 +34,7 @@ namespace lactel
             G4UIcmdWithADoubleAndUnit* acceptanceAngle_cmd;
             G4UIcmdWithAString* targetType_cmd;
             G4UIcmdWithAString* genSurfShape_cmd;
+            G4UIcmdWithAString* detectorState_cmd;
         
             BDetectorConstruction* BDetector;
 

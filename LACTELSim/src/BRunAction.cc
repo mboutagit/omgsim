@@ -21,7 +21,7 @@ namespace lactel
         ana->fRun.runNb = run->GetRunID();
 
         ana->fRun.acceptanceAngle = BDetectorConstruction::GetIt()->acceptanceAngle /deg;
-        ana->fRun.generationSurface = BDetectorConstruction::GetIt()->AGen;
+        ana->fRun.generationSurface = BDetectorConstruction::GetIt()->AGen/cm2; // in cm2
         
         BPrimaryGeneratorAction::getInstance()->getExpectedFlux(); // just to set up BPrimaryGeneratorAction::muonsFlux first;
         ana->fRun.expectedRate = BPrimaryGeneratorAction::getInstance()->muonsFlux;

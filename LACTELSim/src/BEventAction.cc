@@ -3,9 +3,12 @@
 #include "G4DigiManager.hh"
 #include "BWaveCatcher.hh"
 #include "BRunManager.hh"
+#include "BDetectorConstruction.hh"
+# include "BLogger.hh"
 
 using namespace km3net;
 using namespace tools;
+using namespace utils;
 
 namespace lactel
 {
@@ -13,6 +16,11 @@ namespace lactel
     BEventAction::~BEventAction(){};
 
     void BEventAction::BeginOfEventAction(const G4Event* anEvent){
+        if(! BDetectorConstruction::GetIt()->IsRunning()){
+            BLogger::getInstance()->log(BLogger::Level::INFO, "The Detector is not running ..");
+            EndOfEventAction(anEvent);
+            return;
+        }
         KM3EventAction::BeginOfEventAction(anEvent);
         BAnalysisManager::getIt()->StartOfEvent(anEvent);
     }
@@ -23,6 +31,7 @@ namespace lactel
         KM3EventAction::EndOfEventAction (anEvent);
 
         BAnalysisManager* ana = BAnalysisManager::getIt();
+
         // for(auto& hit : ana->fDetectedEvent.hits){
         //     // std::cout << "\r\033[10C" << "hit charge: " << hit.charge << std::endl;
         // }
@@ -34,8 +43,8 @@ namespace lactel
         OM om1("OMS0321");
         OM om2("OMS0302");
         OM om3("OMS0298"); // for test
-        om1.uploadOMValuesFormDB();
-        om2.uploadOMValuesFormDB();
+        // om1.uploadOMValuesFormDB();
+        // om2.uploadOMValuesFormDB();
         wc1->plugOM(0, om1);
         wc1->plugOM(1, om2);
         // wc1->getConfiguration().disableAllChannels();
@@ -43,26 +52,26 @@ namespace lactel
         std::vector<ADC_record> oms0321 = wc1->digitizeEvent(0, ana->fDetectedEvent); // digitize on channel 1 wavefrom
         std::vector<ADC_record> oms0302 = wc1->digitizeEvent(1, ana->fDetectedEvent); // digitize on channel 1 wavefrom
         std::sort(oms0321.begin(), oms0321.end()); // sort waveform according to timestamp;
-        for(auto& record : oms0321){
-            if(!record.samples.size())
-                continue;
-            TGraph gr = wc1->drawADCRecord(record);
-            gr.SetName(("adc_" + std::to_string(event_id)).c_str());
-            // gr.Write();
-        }
+        // for(auto& record : oms0321){
+        //     if(!record.samples.size())
+        //         continue;
+        //     TGraph gr = wc1->drawADCRecord(record);
+        //     gr.SetName(("adc_" + std::to_string(event_id)).c_str());
+        //     // gr.Write();
+        // }
 
         std::vector<Waveform> wfs_oms0321 = wc1->waveformFromADC(oms0321);
         std::vector<Waveform> wfs_oms0302 = wc1->waveformFromADC(oms0302);
         
         TGraph totA0 = wc1->drawWaveform(wc1->joinWavefroms(wfs_oms0321), wc1->getConfiguration().eventBufferDepth);
-        totA0.SetName(("tot_Evt" + std::to_string(event_id) + "_Channel 0").c_str());
+        totA0.SetName(("totA_evt" + std::to_string(event_id) + "_Channel 0").c_str());
         totA0.SetLineColor(1);
         // totA0.Write();
 
 
 
         TGraph totA1 = wc1->drawWaveform(wc1->joinWavefroms(wfs_oms0302), wc1->getConfiguration().eventBufferDepth);
-        totA1.SetName(("tot_Evt" + std::to_string(event_id) + "_Channel 1").c_str());
+        totA1.SetName(("totA_evt" + std::to_string(event_id) + "_Channel 1").c_str());
         totA1.SetLineColor(2);
         // totA1.Write();
 
@@ -74,6 +83,14 @@ namespace lactel
 
         ana->fDetectedEvent.a0=ymin_a0;
         ana->fDetectedEvent.a1=ymin_a1;
+
+        // ana->fDaqEvent.addEvent(0, anEvent->GetEventID(), om1.getOMID(), ymin_a0, 0);
+        // ana->fDaqEvent.addEvent(1, anEvent->GetEventID(), om2.getOMID(), ymin_a1, 0);
+
+        ana->fDetectedEvent.daqEvent.push_back(BAnalysisManager::DAQEvent(0, anEvent->GetEventID(), 
+            om1.getOMID(), ymin_a0, BAnalysisManager::Hit::getMeanTimeforOM(ana->fDetectedEvent.hits, 1)));
+        ana->fDetectedEvent.daqEvent.push_back(BAnalysisManager::DAQEvent(1, anEvent->GetEventID(), 
+            om2.getOMID(), ymin_a1, BAnalysisManager::Hit::getMeanTimeforOM(ana->fDetectedEvent.hits, 2)));
 
         // if(wfs_oms0321.size()){
         //     Waveform firstWf = *std::min_element(wfs_oms0321.begin(), wfs_oms0321.end());
@@ -88,7 +105,7 @@ namespace lactel
         //     //                             << std::endl;
         
 
-        //     TCanvas* canvas =  new TCanvas(("canvas_" + std::to_string(event_id)).c_str(), ("Event " + std::to_string(event_id)).c_str());
+        //     TCanvas* canvas =  new TCanvas(("canvas_Ch0_evt" + std::to_string(event_id)).c_str(), ("Event " + std::to_string(event_id)).c_str());
         //     int i=0;
         //     std::vector<TGraph> graphs;
         //     for(auto& wf : wfs_oms0321){
@@ -120,10 +137,9 @@ namespace lactel
 
         //     if(canvas)
         //         delete canvas;
-
         // }
 
-        // TCanvas* canvas1 =  new TCanvas(("canvas_Ch-1_Evt"+ std::to_string(event_id)).c_str(), ("Event " + std::to_string(event_id)).c_str());
+        // TCanvas* canvas1 =  new TCanvas(("canvas_Ch1_evt"+ std::to_string(event_id)).c_str(), ("Event " + std::to_string(event_id)).c_str());
         //     int i=0;
         //     std::vector<TGraph> graphs1;
         //     for(auto& wf : wfs_oms0302){
@@ -157,7 +173,6 @@ namespace lactel
         //         delete canvas1;
 
         ana->EndOfEvent(anEvent);   // stop recording
-
     }
 
 } // namespace lactel

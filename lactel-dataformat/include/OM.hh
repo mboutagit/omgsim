@@ -19,8 +19,6 @@ namespace lactel
                 double TTS_mean  = 0.;
                 double TTS_sigma = 0.;
                 double TTS_amplitude = 0.;
-
-
             };
 
             struct OMProperties
@@ -36,7 +34,6 @@ namespace lactel
                 bool operator<(const OMProperties& p) const { return high_voltage < p.high_voltage;}
                 bool operator>(const OMProperties& p) const { return high_voltage > p.high_voltage;}
                 bool operator==(const OMProperties& p) const { return high_voltage == p.high_voltage;}
-
             };
 
             int id;
@@ -45,6 +42,7 @@ namespace lactel
         public:
             OM();
             OM(std::string om_id);
+            // OM(OM& om);
             ~OM();
 
             static int nInstance;

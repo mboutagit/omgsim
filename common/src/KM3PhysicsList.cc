@@ -141,7 +141,7 @@ namespace km3net
   KM3PhysicsList::KM3PhysicsList() {
     //G4VModularPhysicsList() {
     //G4LossTableManager::Instance();
-    defaultCutValue = 0.001 * mm;   // V. Kulikovskiy - we found that even 1 mum is optimal step for K40 decays simulation
+    defaultCutValue = 0.001*mm;   // V. Kulikovskiy - we found that even 1 mum is optimal step for K40 decays simulation
     cutForGamma = defaultCutValue;
     cutForElectron = defaultCutValue;
     cutForPositron = defaultCutValue;
@@ -553,6 +553,19 @@ namespace km3net
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
   void KM3PhysicsList::SetCuts() {
+
+    G4ParticleDefinition* gamma =
+    G4ParticleTable::GetParticleTable()->FindParticle("gamma");
+
+  if (gamma) {
+      G4cout << "Gamma already defined" << G4endl;
+  }else{
+    std::cout << "\r\033[10C" << "Gamma not defined .. " << std::endl;
+  }
+
+  // G4cout << "Dumping particle table BEFORE setting cuts:\n";
+  // G4ParticleTable::GetParticleTable()->DumpTable();
+
 
     SetCutValue(cutForGamma, "gamma");
     SetCutValue(cutForElectron, "e-");

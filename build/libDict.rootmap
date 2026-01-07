@@ -1,0 +1,11 @@
+{ decls }
+namespace lactel {  }
+
+[ libDict.so ]
+# List of selected classes
+class lactel::BAnalysisManager
+class lactel::BAnalysisManager::Measure
+class lactel::BAnalysisManager::MeasureParameters
+header BAnalysisManager.hh
+# List of selected namespaces
+namespace lactel

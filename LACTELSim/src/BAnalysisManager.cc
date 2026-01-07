@@ -188,10 +188,13 @@ namespace lactel
         genTree = new TTree("Gen", "generation parameters");
         runTree = new TTree("Run", "Run parameters");
         detectedEventTree = new TTree("DetectedEvent", "DetectedEvents parameters");
+        DAQEventTree = new TTree("DAQEvent", "DAQ parameters");
+
         
         genTree->Branch("gen", &genPars);
         //fTEvent->Branch("measure", &fMeasure);
         detectedEventTree->Branch("DetectedEvent", &fDetectedEvent);
+        // DAQEventTree->Branch("DAQ Event", &fDaqEvent);
         runTree->Branch("Run", &fRun);
     }
 
@@ -248,6 +251,9 @@ namespace lactel
         fVertexDirZ = 0;
         fOMId=-1;
         fPMID=0;
+
+        // fDaqEvent.reset();
+        fDetectedEvent.daqEvent.clear();
     }
 
     void BAnalysisManager::EndOfEvent(const G4Event* EV) {
@@ -307,19 +313,37 @@ namespace lactel
         fDetectedEvent.zenith =  BDetectorConstruction::GetIt()->acceptanceAngle;
         fDetectedEvent.OMPosition = BDetectorConstruction::GetIt()->OMPosition;
 
+
         if(fDetectedEvent.nhit > 0){    // only detected events
+            // fill tmin and tmax for the event
+            float mint = fDetectedEvent.hits[0].t_tts;
+            float maxt = fDetectedEvent.hits[0].t_tts;
+            for(auto& hit : fDetectedEvent.hits){
+                if(hit.t_tts < mint)
+                    mint = hit.t_tts;
+                if(hit.t_tts > maxt)
+                    maxt = hit.t_tts;
+            }
+            fDetectedEvent.tmin = mint;
+            fDetectedEvent.tmax = maxt;
+            // fill the tota for the event
+
+
             detectedEventTree->Fill();
             genPars.isDetected = true;
             ndet+=1;
             // std::cout << "\r\033[10C" << "-- Detected event: nhit=" << fDetectedEvent.nhit << std::endl;  
         }
+
         
         genTree->Fill();
+        DAQEventTree->Fill();
         // std::cout << "\r\033[55C" << "Fill TEvent tree." << std::endl;
         //fTEvent->Fill(); used in BAnalysisManager::AddPhotoTubeEntranceInfo  to include PMT hit infos
 
         // AAAnalysisManager::EndOfEvent();
         // std::cout << "\r\033[10C" << "End of Event: " << EV->GetEventID() << std::endl;
+
     }
 
     BAnalysisManager::MeasureParameters BAnalysisManager::getMeasurePars(){

@@ -10,12 +10,14 @@
 
 #include "G4Tubs.hh"
 #include "G4Sphere.hh"
+#include "BLogger.hh"
 
 
 
 
 using namespace std;
 using namespace km3net;
+using namespace utils;
 
 namespace lactel
 {
@@ -44,8 +46,7 @@ namespace lactel
 
         void DefineOpticalProperties();
         bool IsRunning(){if(state == DetectorState::RUN) return true; else return false;}
-
-
+        bool useDAD(){return useDAQ;}
         void autoWorldSize();
 
         void ReadThisConfiguration (libconfig::Setting* cfg, // reads settings from KM3Det*.dat file
@@ -55,6 +56,7 @@ namespace lactel
 
         static BDetectorConstruction* GetIt();
         static DetectorState state;
+        static bool useDAQ;
         // static std::string className;
 
         G4double detSize;
@@ -77,6 +79,21 @@ namespace lactel
 
         void setGenerationShape(std::string shape);
         void setGenSurfShape(std::string shape);
+        void setDetectorState(std::string state_){
+            if(state_ == "ON")
+                state = DetectorState::ON;
+            else if(state_ == "OFF")
+                state = DetectorState::OFF;
+            else if(state_ == "IDLE")
+                state = DetectorState::IDLE;
+            else if(state_ == "RUN")
+                state = DetectorState::RUN;
+            else {
+                BLogger::getInstance()->log(BLogger::Level::ERROR, "Unkown detector state !");  
+                return;
+            }
+            BLogger::getInstance()->log(BLogger::Level::INFO, "Detector state: " + state_);
+        }
 
         DetGeoConf detGeoConf;
 
