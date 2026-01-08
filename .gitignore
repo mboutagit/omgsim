@@ -7,3 +7,7 @@ penv
 *.evt
 *.svg
 *.pdf
+*.blend
+
+simOutputs
+results
