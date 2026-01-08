@@ -1,13 +1,11 @@
 *.root
 *.png
 *.db
-*.txt
-penv
 *.log
 *.evt
 *.svg
 *.pdf
 *.blend
-
+penv
 simOutputs
 results

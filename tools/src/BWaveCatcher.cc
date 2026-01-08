@@ -408,7 +408,7 @@ namespace tools
         waveform.samples.resize(length);
         
         for(auto& wf : wfs){
-            if(!wf.samples.size())
+            if(! wf.samples.size())
                 continue; // if this specific wavefrom is empty
             int sample=0; // sample 
             int ref_sample=0;
