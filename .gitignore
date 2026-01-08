@@ -5,3 +5,5 @@
 penv
 *.log
 *.evt
+*.svg
+*.pdf
