@@ -230,6 +230,7 @@ CMakeFiles/BAnalysis.dir/LACTELSim/src/BDetectorMessenger.cc.o: \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4UIcmdWith3VectorAndUnit.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4UIcmdWithADoubleAndUnit.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4UIcmdWithAString.hh \
+ /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4UIcmdWithABool.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetectorConstruction.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3DetectorConstruction.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4VUserDetectorConstruction.hh \

@@ -53,6 +53,8 @@ namespace lactel
                                                        vector<PositionParameters>&  ConfList);
 
         G4VPhysicalVolume* PlaceThem (KM3ParametrizedVolume* theVolToPlace, PositionParameters& PosPar);
+        std::vector<G4VPhysicalVolume*> getPhysicalVolumesByName(std::string name);
+        std::vector<G4VPhysicalVolume*> getPhysicalVolumesByNameLike(std::string name);
 
         static BDetectorConstruction* GetIt();
         static DetectorState state;
@@ -74,6 +76,7 @@ namespace lactel
         static std::string generationShape; // used to handle the command shape
         static G4ThreeVector genSurfPosition;
         static G4ThreeVector genSurfSize;
+        static bool autoGenSize;
 
         
 

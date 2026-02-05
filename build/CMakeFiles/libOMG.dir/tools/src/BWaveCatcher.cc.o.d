@@ -1221,4 +1221,5 @@ CMakeFiles/libOMG.dir/tools/src/BWaveCatcher.cc.o: \
  /home/bouta-mohammed/root/root_install/include/RtypesCore.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEvent.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHit.hh \
- /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4VHit.hh
+ /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4VHit.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh

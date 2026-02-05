@@ -91,7 +91,7 @@ namespace ROOT {
       ::lactel::BAnalysisManager *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::lactel::BAnalysisManager >(nullptr);
       static ::ROOT::TGenericClassInfo 
-         instance("lactel::BAnalysisManager", ::lactel::BAnalysisManager::Class_Version(), "BAnalysisManager.hh", 23,
+         instance("lactel::BAnalysisManager", ::lactel::BAnalysisManager::Class_Version(), "BAnalysisManager.hh", 24,
                   typeid(::lactel::BAnalysisManager), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::lactel::BAnalysisManager::Dictionary, isa_proxy, 4,
                   sizeof(::lactel::BAnalysisManager) );
@@ -118,7 +118,7 @@ namespace ROOT {
       ::lactel::BAnalysisManager::MeasureParameters *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::lactel::BAnalysisManager::MeasureParameters >(nullptr);
       static ::ROOT::TGenericClassInfo 
-         instance("lactel::BAnalysisManager::MeasureParameters", ::lactel::BAnalysisManager::MeasureParameters::Class_Version(), "BAnalysisManager.hh", 55,
+         instance("lactel::BAnalysisManager::MeasureParameters", ::lactel::BAnalysisManager::MeasureParameters::Class_Version(), "BAnalysisManager.hh", 56,
                   typeid(::lactel::BAnalysisManager::MeasureParameters), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::lactel::BAnalysisManager::MeasureParameters::Dictionary, isa_proxy, 4,
                   sizeof(::lactel::BAnalysisManager::MeasureParameters) );
@@ -150,7 +150,7 @@ namespace ROOT {
       ::lactel::BAnalysisManager::Measure *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::lactel::BAnalysisManager::Measure >(nullptr);
       static ::ROOT::TGenericClassInfo 
-         instance("lactel::BAnalysisManager::Measure", ::lactel::BAnalysisManager::Measure::Class_Version(), "BAnalysisManager.hh", 80,
+         instance("lactel::BAnalysisManager::Measure", ::lactel::BAnalysisManager::Measure::Class_Version(), "BAnalysisManager.hh", 81,
                   typeid(::lactel::BAnalysisManager::Measure), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::lactel::BAnalysisManager::Measure::Dictionary, isa_proxy, 4,
                   sizeof(::lactel::BAnalysisManager::Measure) );

@@ -1160,4 +1160,6 @@ CMakeFiles/libOMG.dir/BPostAnalysis/src/BPostAnalysis.cc.o: \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/BLogger.hh \
  /usr/include/c++/13/mutex /usr/include/c++/13/bits/std_mutex.h \
- /usr/include/c++/13/bits/unique_lock.h /usr/include/c++/13/chrono
+ /usr/include/c++/13/bits/unique_lock.h /usr/include/c++/13/chrono \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh

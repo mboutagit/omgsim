@@ -9,6 +9,8 @@
 #include "G4UIcmdWith3VectorAndUnit.hh"
 #include "G4UIcmdWithADoubleAndUnit.hh"
 #include "G4UIcmdWithAString.hh"
+#include "G4UIcmdWithABool.hh"
+
 
 
 
@@ -35,6 +37,8 @@ namespace lactel
             G4UIcmdWithAString* targetType_cmd;
             G4UIcmdWithAString* genSurfShape_cmd;
             G4UIcmdWithAString* detectorState_cmd;
+            G4UIcmdWithABool* autoGenSize_cmd;
+
         
             BDetectorConstruction* BDetector;
 

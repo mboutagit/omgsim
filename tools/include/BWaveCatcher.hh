@@ -51,7 +51,7 @@ namespace tools{
             TCanvas* getCanvas(){return canvas;}
 
             bool plugOM(int channel, const OM& om);
-            Waveform joinWavefroms(std::vector<Waveform> wfs);
+            Waveform joinWavefroms(int channel, std::vector<Waveform> wfs);
 
             void setTriggerThreshold(int channel, double threshold); // in mV
             void setTriggerThreshold(double threshold); // for all channels;
@@ -59,12 +59,15 @@ namespace tools{
             void setInputOffset(int channel, double offset);
             void setInputOffset(double offset); // for all channels;
 
+            void setTimeCorrection(bool state){timeCorrection = state;};
+            void setAmplitudeCorrection(bool state) {amplitudeCorrection = state;};
+
 
             // Waveform digitizeEvent(int channel, lactel::BAnalysis::DetectedEvent event);
 
 
         private:
-            BWaveCatcherConf config_;
+            static BWaveCatcherConf config_;
             bool acquiring_;
             std::vector<Waveform> lastWaveforms_;
             std::default_random_engine rng_;
@@ -73,6 +76,13 @@ namespace tools{
             std::normal_distribution<> AmpDist_; // mean=0, sigma=1
             std::vector<OM> signalSource;
             std::string name;
+
+            bool timeCorrection = true;
+            bool amplitudeCorrection = true;
+            
+            std::array<OM, config_.NumChannels> inputOMs;    //
+            std::array<Waveform, config_.NumChannels> waveforms; 
+
 
             Waveform generateFakeWaveform(int channel);
 

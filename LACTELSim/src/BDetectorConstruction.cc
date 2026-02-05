@@ -30,6 +30,8 @@ namespace lactel
     std::string  BDetectorConstruction::generationShape = "box"; // set default OM position 
     G4ThreeVector BDetectorConstruction::genSurfPosition = G4ThreeVector(0, 0, .0); // set default SG position 
     G4ThreeVector BDetectorConstruction::genSurfSize = G4ThreeVector(1*m, 1*m, 1*m); // set default GS size 
+    bool BDetectorConstruction::autoGenSize = false;
+
 
     // std::string BDetectorConstruction::className = "BDetectorConstruction";
     BDetectorConstruction* BDetectorConstruction::GetIt(){
@@ -68,16 +70,37 @@ namespace lactel
         acceptanceAngle = angle;
     }
 
+    std::vector<G4VPhysicalVolume*> BDetectorConstruction::getPhysicalVolumesByName(std::string name){
+        std::vector<G4VPhysicalVolume*> volumes;
+        for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
+            if(pv->GetName().data() == name){
+                volumes.push_back(pv);
+            }
+        }                  
+    }
+
+    std::vector<G4VPhysicalVolume*> BDetectorConstruction::getPhysicalVolumesByNameLike(std::string name){
+        std::vector<G4VPhysicalVolume*> volumes;
+        for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
+            if(pv->GetName().rfind(name, 0) == 0){
+                volumes.push_back(pv);
+            }
+        }                  
+    }
+
+
     void BDetectorConstruction::autoWorldSize(){
 
         G4ThreeVector min, max;
-        
+        std::cout << "\r\033[10C" << "I am OK" << std::endl;
 
         float zmax;
         zmax = (*G4PhysicalVolumeStore::GetInstance())[0]->GetTranslation().getZ() + 
                     dynamic_cast<G4Box*> ((*G4PhysicalVolumeStore::GetInstance())[0]->GetLogicalVolume()->GetSolid())->GetZHalfLength(); // initilize
 
         G4VPhysicalVolume* farVolume;
+
+            std::cout << "\r\033[10C" << "here as well" << std::endl;
 
         for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
                         
@@ -230,39 +253,96 @@ namespace lactel
     }
 
     void BDetectorConstruction::setGenSurfShape(std::string shape){
+        // if(! genPhysic)
+        //     return;
         G4Material* Air = G4NistManager::Instance()->FindOrBuildMaterial("G4_AIR");
         G4Material* vacuum = G4NistManager::Instance()->FindOrBuildMaterial("G4_Vacuum");
 
-
         G4double z = 1.;  // Atomic number (Hydrogen)
-        G4double a = 1.01 * g/mole;  // Atomic mass
+        G4double am = 1.01 * g/mole;  // Atomic mass
         G4double density = 1.0e-25 * g/cm3;  // Extremely low density
         G4double temperature = 2.73 * kelvin;  // Space temperature
         G4double pressure = 3.0e-18 * pascal;  // Very low pressure
 
-        G4Material* myVacuum = new G4Material("CustomVacuum", z, a, density, kStateGas, temperature, pressure);
+                
+        //                ___a__ ___b__
+        //      ==========|=====|======| d     gen surface
+        //                |     | |c  /
+        //            ____|_____| |__/__      b = (2a+c)tan(α)
+        //           |          | α /   |       = e*tan(α)
+        //           |   water  |--/    | 2a 
+        //           |   tank   | /     |
+        //           |__________|/      |
+
+        //  (*G4PhysicalVolumeStore::GetInstance())[0]->GetTranslation().getZ()
+            
+        // std::cout << "\r\033[10C\033[1;35m" << "From here :) \033[0m" <<  endl;
+        // double GVCz = genPhysic->GetTranslation().getZ(); // Generation Volume Center on z
+        // double MCCz = 0; //getPhysicalVolumesByName("LacWater")[0]->GetTranslation().getZ(); // Module Container Center on z
+        // double d = 0; //dynamic_cast<G4Box*>  (genPhysic->GetLogicalVolume()->GetSolid()) ->GetZHalfLength();
+        // double a = 0; //dynamic_cast<G4Box*>  (getPhysicalVolumesByName("LacWater")[0]) ->GetZHalfLength();
+        // double c = abs( (MCCz+a) - (GVCz-d) );
+        // double e = 2*a+c;
+
+        // std::cout << "\r\033[10C\033[1;35m" << "values: " <<  
+        //                             GVCz    <<
+        //                             MCCz    <<
+        //                             d       <<
+        //                             a       <<
+        //                             c       <<
+        //                             e       <<
+        //                             "\033[0m" <<
+        //                             std::endl;
+
+        
+        // double radius = e * tan(acceptanceAngle/rad);
+        // double radius = 5.96*m;
+        double radius = 6.19*m;
+        std::cout << "\r\033[10C\033[1;31m" << "autoGenSize: " << autoGenSize << "\033[0m" << std::endl;
+
+        G4Material* myVacuum = new G4Material("CustomVacuum", z, am, density, kStateGas, temperature, pressure);
     
         if(shape == "disk"){
-            genSolid = new G4Tubs("disk",  genSurfSize.getX(), genSurfSize.getY(), genSurfSize.getZ(), 0, 360*deg);
-            AGen = CLHEP::pi * (genSurfSize.getY()*genSurfSize.getY() - genSurfSize.getX()*genSurfSize.getX());
+            if(! autoGenSize){
+                genSolid = new G4Tubs("disk",  genSurfSize.getX(), genSurfSize.getY(), genSurfSize.getZ(), 0, 360*deg);
+                AGen = CLHEP::pi * (genSurfSize.getY()*genSurfSize.getY() - genSurfSize.getX()*genSurfSize.getX());
+            }else{
+                genSolid = new G4Tubs("disk",  genSurfSize.getX(), radius, genSurfSize.getZ(), 0, 360*deg);
+                AGen = CLHEP::pi * (radius*radius - genSurfSize.getX()*genSurfSize.getX());
+            }
         }
         else if (shape == "sphere"){
-            genSolid = new G4Sphere("sphere", genSurfSize.getX(), genSurfSize.getY(), 0, 360*deg, 0, 180*deg);
-            AGen = 4 * CLHEP::pi * genSurfSize.getY() * genSurfSize.getY(); // surface 
+            if(! autoGenSize){
+                genSolid = new G4Sphere("sphere", genSurfSize.getX(), genSurfSize.getY(), 0, 360*deg, 0, 180*deg);
+                AGen = 4 * CLHEP::pi * genSurfSize.getY() * genSurfSize.getY(); // surface 
+            }else{
+                genSolid = new G4Sphere("sphere", genSurfSize.getX(), radius, 0, 360*deg, 0, 180*deg);
+                AGen = 4 * CLHEP::pi * radius * radius; // surface 
+            }
         }
         else if (shape == "hemisphere"){
-            genSolid = new G4Sphere("hemisphere", genSurfSize.getX(), genSurfSize.getY(), 0, 360*deg, 0, 90*deg);
-            AGen = 2 * CLHEP::pi * genSurfSize.getY() * genSurfSize.getY(); // surface 
+            if(! autoGenSize){
+                genSolid = new G4Sphere("hemisphere", genSurfSize.getX(), genSurfSize.getY(), 0, 360*deg, 0, 90*deg);
+                AGen = 2 * CLHEP::pi * genSurfSize.getY() * genSurfSize.getY(); // surface 
+            }else{
+                genSolid = new G4Sphere("hemisphere", genSurfSize.getX(), radius, 0, 360*deg, 0, 90*deg);
+                AGen = 2 * CLHEP::pi * radius * radius; // surface 
+            }
         }
         else{
-            genSolid = new G4Box("genSolid", genSurfSize.getX(), genSurfSize.getY(), genSurfSize.getZ());
-            AGen = genSurfSize.getX() * genSurfSize.getY(); // just on x and y
+            if(! autoGenSize){
+                genSolid = new G4Box("genSolid", genSurfSize.getX(), genSurfSize.getY(), genSurfSize.getZ());
+                AGen = genSurfSize.getX() * genSurfSize.getY(); // just on x and y
+            }else{
+                genSolid = new G4Box("genSolid", radius, radius, radius);
+                AGen = radius * radius; // just on x and y
+            }
         }     
         genLogic = new G4LogicalVolume(genSolid,
                                         myVacuum, 
                                         "genLogic", 0, 0, 0);
         
-        genPhysic = new G4PVPlacement(0,                // no rotation
+        genPhysic = new G4PVPlacement(0,             // no rotation
                                     genSurfPosition, // at (0,0,0)
                                     genLogic,        // its logical volume
                                     "genPhysic",     // its name

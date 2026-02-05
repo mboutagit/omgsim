@@ -17,8 +17,12 @@ namespace lactel
       virtual ~BEventAction();
       void BeginOfEventAction(const G4Event* anEvent);
       void EndOfEventAction(const G4Event* anEvent);
+      
+      static G4double GetGlobalTime() { return globalTime; }
+
 
     private:
+      static double globalTime;
       /*--*/
   };
 

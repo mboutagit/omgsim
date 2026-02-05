@@ -63,6 +63,11 @@ namespace lactel
         detectorState_cmd->SetParameterName("state", false);
         detectorState_cmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
+        autoGenSize_cmd = new G4UIcmdWithABool("/LACTEL/BDet/autoGenSize", this);
+        autoGenSize_cmd->SetGuidance("Automatically resize the generation surface to allow for the acceptance angle");
+        autoGenSize_cmd->SetParameterName("autoSize", false);
+        autoGenSize_cmd->AvailableForStates(G4State_PreInit, G4State_Idle);
+
 
         cout << "\r\033[20C" << "---- Calling det Messenger" << endl;
 
@@ -77,6 +82,7 @@ namespace lactel
         delete OMPosition_cmd;
         delete acceptanceAngle_cmd;
         delete detectorState_cmd;
+        delete autoGenSize_cmd;
     };
 
     void BDetectorMessenger::SetNewValue(G4UIcommand* cmd, G4String value){
@@ -126,6 +132,10 @@ namespace lactel
         }
         else if (cmd == detectorState_cmd){
             BDetector->setDetectorState(value);
+            // std::cout << "\r\033[20C \033[1;33m" << "Detector state is: " << value << "\033[0m" << std::endl;
+        }
+        else if (cmd == autoGenSize_cmd){
+            BDetector->autoGenSize = autoGenSize_cmd->GetNewBoolValue(value);
             // std::cout << "\r\033[20C \033[1;33m" << "Detector state is: " << value << "\033[0m" << std::endl;
         }
     }

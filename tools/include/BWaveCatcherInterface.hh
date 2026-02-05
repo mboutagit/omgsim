@@ -14,17 +14,17 @@ struct Waveform {
     bool operator>(const Waveform& wf) const {return timestamp > wf.timestamp;}
     bool operator==(const Waveform& wf) const {return timestamp == wf.timestamp & channel == wf.channel;}
 
-    double getAbsoluteMaxAmplitude(){
+    double getAbsoluteMaxAmplitude() const{
         if(!samples.size())
             return 0.;
         double max = abs(samples[0]);
         for(auto& sample : samples)
             if(abs(sample) > max)
-                max = sample;
+                max = abs(sample);
         return max;
     }
 
-    double getMaxAmplitude(){
+    double getMaxAmplitude() const{
         if(!samples.size())
             return 0.;
         double max = samples[0];
@@ -34,7 +34,7 @@ struct Waveform {
         return max;
     }
 
-    double getMinAmplitude(){
+    double getMinAmplitude() const {
         if(!samples.size())
             return 0.;
         double min = samples[0];
@@ -43,6 +43,42 @@ struct Waveform {
                 min = sample;
         return min;
     }
+
+    std::array<double, 2> signalTime(int threshold, double timeStep) const{
+        bool first = false;
+        bool second = false;
+        double tmin = 0, tmax = 0;
+        for(int i=0; i< samples.size(); i++){
+            if(samples[i] <= threshold){
+                if(! first){
+                    tmin = timeStep*i;
+                    first = true;
+                }
+            }
+            if(samples[i] >= threshold && first){
+                if(! second){
+                    tmax = timeStep*i;
+                    second = true;
+                }
+            }
+                // std::cout << "\r\033[55C" << "samples: " << samples[i] << " - timeStep: " << timeStep << " - threshold: " << threshold << std::endl;
+        }
+        return {tmin, tmax};
+    }
+
+    double integrate(double timeStep, float tmin, float tmax) {
+        if(!samples.size())
+            return 0;
+        double integral = 0;
+        for(int s = 0; s < samples.size()-1; s++){
+            if(s*timeStep >= tmin && s*timeStep <= tmax){
+                double avg_v = 0.5 * (samples[s+1] + samples[s]); 
+                integral += abs(avg_v) * timeStep;
+            }
+        }
+        return integral;
+    }
+
 };
 
 struct ADC_record {

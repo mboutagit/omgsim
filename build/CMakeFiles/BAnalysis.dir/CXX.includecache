@@ -3597,6 +3597,8 @@ G4UIcmdWithADoubleAndUnit.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/G4UIcmdWithADoubleAndUnit.hh
 G4UIcmdWithAString.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/G4UIcmdWithAString.hh
+G4UIcmdWithABool.hh
+/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/G4UIcmdWithABool.hh
 
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDigi.hh
 G4VDigi.hh

@@ -12,6 +12,7 @@
 
 #include "BEvent.hh"
 #include "OM.hh"
+#include "BWaveCatcherInterface.hh"
 
 using namespace std;
 using namespace km3net;
@@ -103,7 +104,8 @@ namespace lactel
                 uint channel;
                 uint event_nb;
                 std::string om_id;
-                float a; // in mV
+                float a; // amplitude in mV
+                float c; // charge in pC
                 float t; // in ns
 
                 DAQEvent() : channel(9999), event_nb(999999999), om_id("XXXXXXX"), a(-9999), t(-9999){}
@@ -135,8 +137,11 @@ namespace lactel
                 float a1 = 0; 
                 float tmin=0.;
                 float tmax=0.;
+                float tmean=0.;
                 float zenith;
                 G4ThreeVector OMPosition;
+                bool coincidence = false;
+                Waveform wf;
 
                 // bool isDetected=false; // mainly used for Run managing
 
@@ -144,6 +149,8 @@ namespace lactel
             // public:
             //     Event(){};
             //     ~Event(){};
+
+                void checkCoincidences(float ctime = 16); // default coincidence time of 16 ns
             };
 
             struct Hit{

@@ -5,14 +5,14 @@ namespace lactel
 
         // Constructor with defaults
     BWaveCatcherConf::BWaveCatcherConf()
-        : samplingFrequency(3.2),
-          inputDynamicRange(2.5), // true WaveCatcher range
+        : samplingFrequency(3.2), // 3.2 Gs/s 
+          inputDynamicRange(4.70), // true WaveCatcher range / using attinuator
           inputOffsets{0.0, 0.0},
           bandwidth(500.0),
           resolution(12), // 12 bit resolution
           recordLength(1024),
           eventBufferDepth(7),
-          triggerThresholds{0, 0}, // mv threshold;
+          triggerThresholds{-50, -50}, // mv threshold;
           triggerSource("self"),
           triggerEdges{"rising", "rising"},
           preTriggerTime(10.0),
@@ -27,7 +27,8 @@ namespace lactel
           enableHitRateMonitor(false),
           clockSource("internal"),
           syncWithOtherBoards(false),
-          deadTime(125.0) // µs
+          deadTime(125.0), // µs
+          internalResistor(50) // Ohm
 
     {}
 

@@ -9,6 +9,8 @@
 
 #include "BPrimaryGeneratorMessenger.hh"
 
+#include "Jurgen.hh"
+#include "BEventAction.hh"
 namespace lactel
 {   
 
@@ -370,10 +372,13 @@ namespace lactel
             //particleName="gamma";
 
             double Emin = 1.0;     // GeV
-            double Emax = 1e4;     // GeV (10 TeV)
+            double Emax = 1e2;     // GeV (10 TeV)
+
+            double ctmin = -1;     // rad (pi/2)
+            double ctmax = 0;     // rad (0)
+
             G4ThreeVector direction;
             G4double energy;
-
 
             if(genParsMode == GenParsMode::cos2){
                 direction = GenerateMuonDirection("down-going_cos2");
@@ -388,6 +393,11 @@ namespace lactel
                 direction = FixedThetaDirection(thetaGen);
             }
                 
+            TF2 generator = Jurgen::getFluxFunction(Emin, Emax, ctmin, ctmax);
+            double cost;
+            generator.GetRandom2(energy, cost);
+            energy=energy*GeV;
+            direction=FixedThetaDirection(acos(cost));
             
             if(direction.getZ() > 0)
                 direction.setZ(- direction.getZ());
@@ -396,14 +406,16 @@ namespace lactel
         
             G4ParticleDefinition* particle = particleTable->FindParticle(particleName);
             if(!particle)
-              return;
-            
-            
+              return;        
+
+            // std::cout << "\r\033[10C \033[1;31m" << "Generation: cost=" << cost << " - energy=" << energy  << "\033[0m" << std::endl;
 
             ((G4ParticleGun*)particleGun)->SetParticleDefinition(particle);
             ((G4ParticleGun*)particleGun)->SetParticlePosition(surfPoints);
             ((G4ParticleGun*)particleGun)->SetParticleEnergy(energy);
-            ((G4ParticleGun*)particleGun)->SetParticleMomentumDirection(direction); // Toward the ground        
+            ((G4ParticleGun*)particleGun)->SetParticleMomentumDirection(direction); // Toward the ground      
+            ((G4ParticleGun*)particleGun)->SetParticleTime(BEventAction::GetGlobalTime());
+  
             
             particle_position = surfPoints;
             particle_direction = direction;

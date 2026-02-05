@@ -66,16 +66,14 @@ namespace lactel
 
                 int size=0;
                 while (res->next()) {     // <-- move cursor to next row
-                    OMProperties prop;
-                    prop.high_voltage = res->getDouble("rise_time");
-                    prop.rise_time = res->getDouble("rise_time");
-                    prop.fall_time = res->getDouble("fall_time");
-                    prop.width_time = res->getDouble("width_time");
-                    prop.gain = res->getDouble("gain");
-                    prop.rise_time = res->getDouble("rise_time");
-                    prop.dark_count = res->getDouble("dark_count");
+                    properties.hv = res->getDouble("high_voltage");
+                    properties.rt = res->getDouble("rise_time");
+                    properties.ft = res->getDouble("fall_time");
+                    properties.wt = res->getDouble("width_time");
+                    properties.g = res->getDouble("gain");
+                    properties.pv = res->getDouble("peak_to_valley");
+                    properties.dc = res->getDouble("dark_count");
 
-                    properties.insert(prop);
                     size++;
                 }
                 if(! size){

@@ -286,6 +286,7 @@ namespace lactel
         genPars.fGenTheta  = particle->GetMomentum().theta() / deg;
         genPars.fGenPhi    = particle->GetMomentum().phi() /deg;
         genPars.fGenEnergy = particle->GetTotalEnergy() / MeV; 
+        // genPars.fGenEnergy = BPrimaryGeneratorAction::getInstance()->particle_energy / GeV; 
         
         /////////////////////////////////
         
@@ -563,9 +564,25 @@ namespace lactel
     
   }
 
-
-
-
+    void BAnalysisManager::DetectedEvent::checkCoincidences(float ctime){
+        for(auto& hita: hits){
+            for(auto& hitb : hits){
+                if(hita.om_id == hitb.om_id) // check on different OMs 
+                    continue;
+                if(abs(hita.time - hitb.time) <= ctime){ // coincidence
+                    coincidence = true;
+                }
+                bool c = abs(hita.time - hitb.time) <= ctime ? 1 : 0;
+                // std::cout << "\r\033[5C" << "Check Coincidence: " 
+                //         << " ch0: " << hita.om_id
+                //         << " ch1: " << hitb.om_id
+                //         << "  -- time ch0: " << hita.time
+                //         << " time ch1: " << hitb.time
+                //         << " ---- coi: " << c
+                //         << std::endl;
+            }
+        }
+    }
 
 
 } // namespace lactel

@@ -57,7 +57,6 @@ namespace lactel
         double samplingFrequency;                        // in GS/s (e.g. 0.4, 0.8, 1.6, 3.2)
         double inputDynamicRange;                        // in Vpp (e.g. 2.5 V)
         std::array<double, NumChannels> inputOffsets;    // DC offset per channel (±1.25V)
-        std::array<OM, NumChannels> inputOMs;    // DC offset per channel (±1.25V)
         double bandwidth;                                // in MHz (e.g. 500 MHz)
         int resolution;                                  // resolution in bits
 
@@ -66,7 +65,7 @@ namespace lactel
         int eventBufferDepth;                            // Number of events that can be stored in buffer
 
         // Trigger Configuration
-        std::array<int, NumChannels> triggerThresholds;  // Discriminator thresholds (DAC values)
+        std::array<double, NumChannels> triggerThresholds;  // Discriminator thresholds (DAC values)
         std::string triggerSource;                       // "external", "self", "software", etc.
         std::array<std::string, NumChannels> triggerEdges; // "rising" or "falling"
 
@@ -85,6 +84,7 @@ namespace lactel
 
         // Monitoring
         bool enableHitRateMonitor;
+        bool enableCoincidenceTrigger;
 
         // System & Clock
         std::string clockSource;                         // "internal", "external"
@@ -92,6 +92,8 @@ namespace lactel
 
         // Miscellaneous
         double deadTime;                                 // Readout dead time in microseconds
+
+        double internalResistor;   // interanl resistor in Ohm
     };
  
 } // namespace lactel
