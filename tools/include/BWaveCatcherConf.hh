@@ -57,6 +57,7 @@ namespace lactel
         double samplingFrequency;                        // in GS/s (e.g. 0.4, 0.8, 1.6, 3.2)
         double inputDynamicRange;                        // in Vpp (e.g. 2.5 V)
         std::array<double, NumChannels> inputOffsets;    // DC offset per channel (±1.25V)
+        std::array<double, NumChannels> timeDelay;       // time Delay for each channel
         double bandwidth;                                // in MHz (e.g. 500 MHz)
         int resolution;                                  // resolution in bits
 

@@ -65,7 +65,7 @@ namespace lactel {
       inline ::ROOT::TGenericClassInfo *GenerateInitInstance()
       {
          static ::ROOT::TGenericClassInfo 
-            instance("lactel", 0 /*version*/, "KM3DetectorConstruction.hh", 65,
+            instance("lactel", 0 /*version*/, "KM3DetectorConstruction.hh", 47,
                      ::ROOT::Internal::DefineBehavior((void*)nullptr,(void*)nullptr),
                      &lactel_Dictionary, 0);
          return &instance;

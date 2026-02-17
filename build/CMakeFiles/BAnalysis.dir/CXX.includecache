@@ -3565,6 +3565,8 @@ BEvent.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEvent.hh
 OM.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/OM.hh
+BWaveCatcherInterface.hh
+/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BWaveCatcherInterface.hh
 
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetectorConstruction.hh
 G4UImessenger.hh

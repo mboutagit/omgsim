@@ -32,6 +32,20 @@ namespace lactel
     G4ThreeVector BDetectorConstruction::genSurfSize = G4ThreeVector(1*m, 1*m, 1*m); // set default GS size 
     bool BDetectorConstruction::autoGenSize = false;
 
+    void BDetectorConstruction::getOMIDbyVolumeName(std::string volumeName){
+        for(auto& volume : KM3DetectorConstruction::GetIt()->getOMsMap()){
+            for(auto& par : volume.second){
+                std::cout << "\r\033[10C" << "volumes: om_id: " << par.om_id << std::endl;
+            }
+        }
+    }
+
+    void BDetectorConstruction::getOMsUsedbyVolumeName(std::string volumeName){
+        std::set<std::string> oms =  KM3DetectorConstruction::GetIt()->getOMsList();
+        for(auto& om : oms){
+            std::cout << "\r\033[10C" << "volumes: om_id: " << om << std::endl;
+        }
+    }
 
     // std::string BDetectorConstruction::className = "BDetectorConstruction";
     BDetectorConstruction* BDetectorConstruction::GetIt(){

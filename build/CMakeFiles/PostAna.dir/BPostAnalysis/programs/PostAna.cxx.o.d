@@ -1,7 +1,8 @@
 CMakeFiles/PostAna.dir/BPostAnalysis/programs/PostAna.cxx.o: \
  /home/bouta-mohammed/work/cppm/lactel/trunk/BPostAnalysis/programs/PostAna.cxx \
- /usr/include/stdc-predef.h /usr/include/c++/13/iostream \
- /usr/include/c++/13/bits/requires_hosted.h \
+ /usr/include/stdc-predef.h \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/BPostAnalysis/include/BPostAnalysis.hh \
+ /usr/include/c++/13/iostream /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -347,6 +348,10 @@ CMakeFiles/PostAna.dir/BPostAnalysis/programs/PostAna.cxx.o: \
  /home/bouta-mohammed/root/root_install/include/TLine.h \
  /home/bouta-mohammed/root/root_install/include/TView.h \
  /home/bouta-mohammed/root/root_install/include/TBox.h \
+ /home/bouta-mohammed/root/root_install/include/TLegend.h \
+ /home/bouta-mohammed/root/root_install/include/TPave.h \
+ /home/bouta-mohammed/root/root_install/include/TBox.h \
+ /home/bouta-mohammed/root/root_install/include/TAttText.h \
  /home/bouta-mohammed/root/root_install/include/TGeoManager.h \
  /usr/include/c++/13/thread /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/bits/this_thread_sleep.h \
@@ -388,7 +393,6 @@ CMakeFiles/PostAna.dir/BPostAnalysis/programs/PostAna.cxx.o: \
  /home/bouta-mohammed/root/root_install/include/TTimer.h \
  /home/bouta-mohammed/root/root_install/include/TSysEvtHandler.h \
  /home/bouta-mohammed/root/root_install/include/TTime.h \
- /home/bouta-mohammed/work/cppm/lactel/trunk/BPostAnalysis/include/BPostAnalysis.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BAnalysisManager.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/AA/include/AAAnalysisManager.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/globals.hh \

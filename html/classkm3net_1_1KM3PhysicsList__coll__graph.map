@@ -1,0 +1,19 @@
+<map id="km3net::KM3PhysicsList" name="km3net::KM3PhysicsList">
+<area shape="rect" id="Node000001" title=" " alt="" coords="239,923,440,1688"/>
+<area shape="rect" id="Node000003" href="$classkm3net_1_1KM3PhysicsListMessenger.html" title=" " alt="" coords="84,1751,328,1936"/>
+<area shape="poly" id="edge4_Node000003_Node000001" title=" " alt="" coords="241,1564,220,1638,205,1712,202,1734,197,1734,199,1712,215,1637,236,1562"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="379,457,521,523"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="449,537,433,697,409,899,405,923,400,922,403,898,427,696,443,536"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="295,1749,308,1726,317,1703,321,1704,312,1728,300,1752"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,5,124,71"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="67,84,72,408,79,631,93,860,115,1113,144,1363,195,1750,190,1751,138,1364,110,1114,87,860,74,632,67,408,62,84"/>
+<area shape="rect" id="Node000005" href="$classkm3net_1_1KM3PMTOpticalModel.html" title=" " alt="" coords="103,120,355,860"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="83,83,105,142,100,144,78,85"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="256,860,261,898,262,906,256,907,255,899,250,860"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="149,5,311,71"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="233,84,232,120,227,120,227,84"/>
+<area shape="rect" id="Node000007" href="$classkm3net_1_1KM3PetzoldScattering.html" title=" " alt="" coords="545,160,760,820"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="550,821,535,861,449,1070,444,1068,530,859,545,819"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="580,5,725,71"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="655,85,655,160,650,160,650,85"/>
+</map>

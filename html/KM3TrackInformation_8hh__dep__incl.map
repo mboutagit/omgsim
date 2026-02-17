@@ -1,0 +1,56 @@
+<map id="common/include/KM3TrackInformation.hh" name="common/include/KM3TrackInformation.hh">
+<area shape="rect" id="Node000001" title=" " alt="" coords="1793,5,2087,31"/>
+<area shape="rect" id="Node000002" href="$BSteppingAction_8hh.html" title=" " alt="" coords="1067,167,1285,207"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1875,36,1263,169,1262,164,1874,31"/>
+<area shape="rect" id="Node000004" href="$KM3AnalysisManager_8hh.html" title=" " alt="" coords="1684,79,1903,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="1908,40,1830,81,1827,76,1905,35"/>
+<area shape="rect" id="Node000021" href="$KM3SteppingAction_8cc.html" title=" " alt="" coords="2335,174,2585,199"/>
+<area shape="poly" id="edge29_Node000001_Node000021" title=" " alt="" coords="1942,44,1948,83,1956,101,1968,117,1997,133,2037,144,2085,152,2138,156,2242,159,2323,164,2377,171,2376,177,2322,169,2242,165,2137,161,2084,157,2036,150,1995,138,1965,121,1951,104,1943,84,1937,45"/>
+<area shape="rect" id="Node000022" href="$KM3TrackInformation_8cc.html" title=" " alt="" coords="1978,86,2241,111"/>
+<area shape="poly" id="edge30_Node000001_Node000022" title=" " alt="" coords="1978,34,2086,84,2084,88,1976,39"/>
+<area shape="rect" id="Node000023" href="$KM3TrackingAction_8cc.html" title=" " alt="" coords="2265,86,2513,111"/>
+<area shape="poly" id="edge31_Node000001_Node000023" title=" " alt="" coords="2019,30,2324,83,2323,89,2018,36"/>
+<area shape="rect" id="Node000003" href="$BSteppingAction_8cc.html" title=" " alt="" coords="5,350,253,375"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1054,211,770,257,197,353,197,347,769,252,1054,205"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="1671,118,1298,169,1286,171,1285,166,1297,164,1670,113"/>
+<area shape="rect" id="Node000005" href="$KM3PrimaryGeneratorAction_8hh.html" title=" " alt="" coords="1807,167,2022,207"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="1833,124,1889,164,1886,169,1830,129"/>
+<area shape="rect" id="Node000018" href="$KM3AnalysisManager_8cc.html" title=" " alt="" coords="2047,174,2311,199"/>
+<area shape="poly" id="edge25_Node000004_Node000018" title=" " alt="" coords="1892,119,2128,171,2127,177,1891,124"/>
+<area shape="rect" id="Node000019" href="$KM3EventAction_8cc.html" title=" " alt="" coords="1309,174,1539,199"/>
+<area shape="poly" id="edge26_Node000004_Node000019" title=" " alt="" coords="1700,124,1474,177,1473,171,1699,119"/>
+<area shape="rect" id="Node000020" href="$KM3RunAction_8cc.html" title=" " alt="" coords="1564,174,1783,199"/>
+<area shape="poly" id="edge27_Node000004_Node000020" title=" " alt="" coords="1757,129,1691,176,1688,172,1754,125"/>
+<area shape="poly" id="edge28_Node000004_Node000021" title=" " alt="" coords="1917,115,1922,116,2323,164,2378,171,2378,177,2322,169,1921,121,1916,121"/>
+<area shape="rect" id="Node000006" href="$BPrimaryGeneratorAction_8hh.html" title=" " alt="" coords="781,255,992,295"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="1794,209,1566,232,1344,250,992,271,992,266,1343,244,1566,227,1793,204"/>
+<area shape="rect" id="Node000009" href="$KM3ExperimentTypeMessenger_8cc.html" title=" " alt="" coords="1089,431,1300,471"/>
+<area shape="poly" id="edge21_Node000005_Node000009" title=" " alt="" coords="2036,205,2177,230,2232,242,2264,252,2310,279,2349,310,2362,327,2368,346,2365,365,2352,385,2337,392,2307,399,2211,410,1917,429,1577,442,1300,450,1300,444,1577,437,1916,424,2210,405,2306,393,2335,387,2349,381,2360,363,2363,346,2357,330,2345,314,2307,283,2262,257,2231,248,2176,236,2035,210"/>
+<area shape="rect" id="Node000014" href="$ParametrizedGenerator_8hh.html" title=" " alt="" coords="1657,255,1877,295"/>
+<area shape="poly" id="edge16_Node000005_Node000014" title=" " alt="" coords="1871,216,1800,257,1798,252,1869,211"/>
+<area shape="rect" id="Node000015" href="$KM3PrimaryGeneratorAction_8cc.html" title=" " alt="" coords="1789,343,2040,383"/>
+<area shape="poly" id="edge22_Node000005_Node000015" title=" " alt="" coords="1917,220,1917,342,1912,342,1912,220"/>
+<area shape="rect" id="Node000016" href="$ParametrizedGenerator_8cc.html" title=" " alt="" coords="2064,350,2339,375"/>
+<area shape="poly" id="edge24_Node000005_Node000016" title=" " alt="" coords="1932,218,1957,257,1974,276,1992,293,2024,312,2059,327,2128,347,2127,353,2057,332,2022,317,1989,297,1970,280,1953,260,1928,221"/>
+<area shape="rect" id="Node000017" href="$KM3RunMessenger_8cc.html" title=" " alt="" coords="2003,262,2251,287"/>
+<area shape="poly" id="edge23_Node000005_Node000017" title=" " alt="" coords="1975,209,2099,260,2097,264,1973,214"/>
+<area shape="poly" id="edge14_Node000006_Node000003" title=" " alt="" coords="768,290,266,345,209,353,209,347,265,340,767,285"/>
+<area shape="rect" id="Node000007" href="$BRunAction_8hh.html" title=" " alt="" coords="277,350,523,375"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="768,299,465,353,464,347,767,294"/>
+<area shape="poly" id="edge15_Node000006_Node000009" title=" " alt="" coords="768,284,686,295,615,313,590,326,576,341,574,359,587,381,611,393,655,404,788,422,946,435,1089,443,1089,448,945,440,787,428,654,410,609,398,583,385,569,360,571,339,587,322,613,308,685,290,767,279"/>
+<area shape="rect" id="Node000010" href="$BAnalysisManager_8cc.html" title=" " alt="" coords="1453,350,1715,375"/>
+<area shape="poly" id="edge10_Node000006_Node000010" title=" " alt="" coords="1006,287,1442,340,1499,347,1498,353,1441,345,1005,293"/>
+<area shape="rect" id="Node000011" href="$BDetectorConstruction_8cc.html" title=" " alt="" coords="597,350,885,375"/>
+<area shape="poly" id="edge11_Node000006_Node000011" title=" " alt="" coords="844,304,762,352,759,348,842,299"/>
+<area shape="rect" id="Node000012" href="$BPrimaryGeneratorAction_8cc.html" title=" " alt="" coords="909,343,1157,383"/>
+<area shape="poly" id="edge12_Node000006_Node000012" title=" " alt="" coords="932,299,1003,340,1000,345,930,304"/>
+<area shape="rect" id="Node000013" href="$BPrimaryGeneratorMessenger_8cc.html" title=" " alt="" coords="1181,343,1429,383"/>
+<area shape="poly" id="edge13_Node000006_Node000013" title=" " alt="" coords="992,295,1214,340,1213,345,991,300"/>
+<area shape="rect" id="Node000008" href="$BRunAction_8cc.html" title=" " alt="" coords="292,438,508,463"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="403,389,403,437,397,437,397,389"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="497,374,542,380,1090,437,1089,442,541,385,496,380"/>
+<area shape="poly" id="edge18_Node000014_Node000009" title=" " alt="" coords="1766,309,1754,349,1744,368,1728,385,1697,402,1653,417,1541,436,1415,447,1300,451,1300,446,1415,442,1540,431,1651,411,1694,397,1725,381,1739,365,1750,347,1761,307"/>
+<area shape="poly" id="edge17_Node000014_Node000010" title=" " alt="" coords="1715,303,1609,352,1607,348,1713,298"/>
+<area shape="poly" id="edge19_Node000014_Node000015" title=" " alt="" coords="1813,299,1884,340,1881,345,1810,304"/>
+<area shape="poly" id="edge20_Node000014_Node000016" title=" " alt="" coords="1876,295,2144,347,2143,353,1875,300"/>
+</map>

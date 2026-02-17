@@ -11,6 +11,7 @@
 
 #include "Jurgen.hh"
 #include "BEventAction.hh"
+#include "DAQManager.hh"
 namespace lactel
 {   
 
@@ -413,8 +414,9 @@ namespace lactel
             ((G4ParticleGun*)particleGun)->SetParticleDefinition(particle);
             ((G4ParticleGun*)particleGun)->SetParticlePosition(surfPoints);
             ((G4ParticleGun*)particleGun)->SetParticleEnergy(energy);
-            ((G4ParticleGun*)particleGun)->SetParticleMomentumDirection(direction); // Toward the ground      
-            ((G4ParticleGun*)particleGun)->SetParticleTime(BEventAction::GetGlobalTime());
+            ((G4ParticleGun*)particleGun)->SetParticleMomentumDirection(direction); // Toward the ground  
+            if(DAQ::DAQManager::getIt()->isActive())    
+                ((G4ParticleGun*)particleGun)->SetParticleTime(BEventAction::GetGlobalTime());
   
             
             particle_position = surfPoints;

@@ -1,0 +1,17 @@
+<map id="common/include/KM3ActionInitialization.hh" name="common/include/KM3ActionInitialization.hh">
+<area shape="rect" id="Node000001" title=" " alt="" coords="309,5,513,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,227,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="341,48,173,92,172,87,339,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="251,93,392,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="391,48,347,86,343,82,387,44"/>
+<area shape="rect" id="Node000004" href="$KM3TrackingAction_8hh.html" title=" " alt="" coords="417,93,583,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="434,44,478,82,475,86,431,48"/>
+<area shape="rect" id="Node000006" href="$KM3RunAction_8hh.html" title=" " alt="" coords="617,93,754,119"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="477,43,633,87,631,92,476,48"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="398,167,583,192"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="501,119,497,154,491,153,496,119"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="607,167,763,192"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="688,119,688,153,683,153,683,119"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="787,167,877,192"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="710,116,797,158,795,163,708,121"/>
+</map>

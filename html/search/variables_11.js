@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['radiusmax_0',['RadiusMax',['../structkm3net_1_1KM3PassiveVolumeMgr_1_1PassiveVolumeParameters.html#a4147514df71cd52e1a9071f67e21b80c',1,'km3net::KM3PassiveVolumeMgr::PassiveVolumeParameters']]],
+  ['radiusmin_1',['RadiusMin',['../structkm3net_1_1KM3PassiveVolumeMgr_1_1PassiveVolumeParameters.html#a1e5a8c0af5b913ebc4044f257af29b31',1,'km3net::KM3PassiveVolumeMgr::PassiveVolumeParameters']]],
+  ['radiussphere_2',['RadiusSphere',['../structkm3net_1_1KM3PhotoTubeMgr_1_1PhotoTubeParameters.html#a697eb365de0b720e8d63e19197ceda0d',1,'km3net::KM3PhotoTubeMgr::PhotoTubeParameters']]],
+  ['randcount_3',['randcount',['../classkm3net_1_1KM3PrimaryGeneratorAction.html#a04c27280120d93e09762c10653ca3fac',1,'km3net::KM3PrimaryGeneratorAction']]],
+  ['recordlength_4',['recordLength',['../classlactel_1_1BWaveCatcherConf.html#a844ce0afc95b9e98e3f9da023acca332',1,'lactel::BWaveCatcherConf']]],
+  ['reflectorangle_5',['ReflectorAngle',['../structkm3net_1_1KM3OpticalModuleMgr_1_1OpticalModuleParameters.html#ae09ef80212f2fbefc60c1ac5063b2585',1,'km3net::KM3OpticalModuleMgr::OpticalModuleParameters']]],
+  ['reflectordistglass_6',['ReflectorDistGlass',['../structkm3net_1_1KM3OpticalModuleMgr_1_1OpticalModuleParameters.html#a1bfcc3dc4a2882b88351028772885401',1,'km3net::KM3OpticalModuleMgr::OpticalModuleParameters']]],
+  ['reflectorradiusmin_7',['ReflectorRadiusMin',['../structkm3net_1_1KM3OpticalModuleMgr_1_1OpticalModuleParameters.html#aaac73ffc8e3f885cc2b27cfea9a537d7',1,'km3net::KM3OpticalModuleMgr::OpticalModuleParameters']]],
+  ['reflectorthickness_8',['ReflectorThickness',['../structkm3net_1_1KM3OpticalModuleMgr_1_1OpticalModuleParameters.html#af76f39a2b445210a0389e8bce1efb682',1,'km3net::KM3OpticalModuleMgr::OpticalModuleParameters']]],
+  ['refvolume_9',['RefVolume',['../structkm3net_1_1KM3PassiveVolumeMgr_1_1PassiveVolumeParameters.html#ae82f2d483dfacd671e3a9c39f1c69f52',1,'km3net::KM3PassiveVolumeMgr::PassiveVolumeParameters']]],
+  ['resolution_10',['resolution',['../classlactel_1_1BWaveCatcherConf.html#a4e37a78e245beb9b758f20a6e7d71e80',1,'lactel::BWaveCatcherConf']]],
+  ['rho_5fair_11',['rho_air',['../namespaceBUnits.html#af21ca546736da91273e1c0c03897385e',1,'BUnits']]],
+  ['rng_5f_12',['rng_',['../classtools_1_1BWaveCatcher.html#a412f9ce0c3400ebee87a70d889ad7eee',1,'tools::BWaveCatcher']]],
+  ['rotphi_13',['RotPhi',['../structkm3net_1_1KM3PassiveVolumeMgr_1_1PassiveVolumeParameters.html#a62a6f0e9c1489e8c4c03af682cf89b53',1,'km3net::KM3PassiveVolumeMgr::PassiveVolumeParameters']]],
+  ['rottheta_14',['RotTheta',['../structkm3net_1_1KM3PassiveVolumeMgr_1_1PassiveVolumeParameters.html#aee21bbd04106fdbdd3b75ddf2f0c3f42',1,'km3net::KM3PassiveVolumeMgr::PassiveVolumeParameters']]],
+  ['run_5fid_15',['run_id',['../classkm3net_1_1KM3AnalysisManager.html#a7982892c3f66ba589ed0339586cd1ffa',1,'km3net::KM3AnalysisManager']]],
+  ['runnb_16',['runnb',['../structlactel_1_1BAnalysisManager_1_1DetectedEvent.html#a5c519bc018b2d387f259efd442e3a1e3',1,'lactel::BAnalysisManager::DetectedEvent::runNb'],['../structlactel_1_1BAnalysisManager_1_1Run.html#a2128a1345a15e66522f6cf181cfcd75e',1,'lactel::BAnalysisManager::Run::runNb']]],
+  ['runtree_17',['runTree',['../classlactel_1_1BAnalysisManager.html#ae4097b5f07e5a86747258971cb292ea0',1,'lactel::BAnalysisManager']]]
+];

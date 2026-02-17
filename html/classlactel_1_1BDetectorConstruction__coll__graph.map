@@ -1,0 +1,22 @@
+<map id="lactel::BDetectorConstruction" name="lactel::BDetectorConstruction">
+<area shape="rect" id="Node000001" title=" " alt="" coords="403,2399,609,3004"/>
+<area shape="rect" id="Node000002" href="$classkm3net_1_1KM3DetectorConstruction.html" title=" " alt="" coords="293,1411,532,2336"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="489,2349,490,2360,494,2398,488,2399,485,2360,484,2350"/>
+<area shape="poly" id="edge4_Node000002_Node000002" title=" " alt="" coords="535,1792,544,1806,552,1824,559,1873,555,1912,545,1941,540,1939,550,1911,553,1873,547,1825,540,1808,530,1795"/>
+<area shape="rect" id="Node000005" href="$classkm3net_1_1KM3DetectorMessenger.html" title=" " alt="" coords="113,2549,341,2854"/>
+<area shape="poly" id="edge7_Node000005_Node000002" title=" " alt="" coords="296,2130,255,2244,226,2360,226,2375,228,2532,222,2532,221,2375,221,2360,250,2242,291,2128"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="376,795,585,861"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="480,875,445,1411,440,1410,475,874"/>
+<area shape="rect" id="Node000004" href="$classkm3net_1_1KM3ParametrizedVolume.html" title=" " alt="" coords="609,308,845,1348"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="608,1319,599,1349,535,1548,529,1546,594,1347,603,1317"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="268,2548,313,2374,318,2351,323,2352,318,2375,273,2549"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="5,5,124,71"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="60,84,54,131,51,181,51,1875,55,1966,64,2058,77,2150,94,2239,135,2407,177,2548,172,2549,130,2408,89,2241,72,2150,58,2058,49,1966,46,1875,46,181,49,131,54,84"/>
+<area shape="rect" id="Node000008" href="$classkm3net_1_1KM3MaterialMessenger.html" title=" " alt="" coords="86,120,313,245"/>
+<area shape="poly" id="edge11_Node000008_Node000006" title=" " alt="" coords="106,79,143,118,139,121,102,83"/>
+<area shape="rect" id="Node000007" href="$classkm3net_1_1KM3Material.html" title=" " alt="" coords="87,565,259,1091"/>
+<area shape="poly" id="edge8_Node000002_Node000007" title=" " alt="" coords="235,1090,303,1386,305,1394,300,1395,298,1387,230,1091"/>
+<area shape="poly" id="edge9_Node000007_Node000007" title=" " alt="" coords="261,731,271,745,279,766,284,794,285,828,281,877,271,911,266,909,276,876,280,828,278,794,273,767,266,748,257,734"/>
+<area shape="poly" id="edge12_Node000008_Node000007" title=" " alt="" coords="229,565,253,426,271,284,271,270,267,260,272,258,277,269,277,284,259,426,234,566"/>
+<area shape="poly" id="edge10_Node000007_Node000008" title=" " alt="" coords="148,247,137,270,137,284,152,549,146,549,131,284,131,269,143,245"/>
+</map>

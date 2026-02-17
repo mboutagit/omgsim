@@ -1,0 +1,19 @@
+<map id="LACTELSim/include/BRunManager.hh" name="LACTELSim/include/BRunManager.hh">
+<area shape="rect" id="Node000001" title=" " alt="" coords="15,5,276,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,147,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,33,99,71,95,67,132,29"/>
+<area shape="rect" id="Node000003" href="$BEvent_8hh.html" title=" " alt="" coords="171,79,259,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="159,29,196,67,192,71,155,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="113,152,210,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="208,106,180,143,176,140,204,103"/>
+<area shape="rect" id="Node000005" href="$BHit_8hh.html" title=" " alt="" coords="234,152,305,177"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="226,103,254,140,250,143,222,106"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="12,225,100,251"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="236,180,104,223,103,218,234,175"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="125,225,262,251"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="259,179,218,218,214,214,255,175"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="287,225,404,251"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="283,175,325,214,321,218,280,179"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="429,225,518,251"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="303,175,428,218,427,223,301,180"/>
+</map>

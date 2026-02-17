@@ -1,0 +1,8 @@
+<map id="km3net::KM3OpticalModuleMgr::OpticalModuleParameters" name="km3net::KM3OpticalModuleMgr::OpticalModuleParameters">
+<area shape="rect" id="Node000001" title=" " alt="" coords="21,517,236,797"/>
+<area shape="rect" id="Node000002" href="$structkm3net_1_1KM3ParametrizedVolume_1_1VolumeParameters.html" title=" " alt="" coords="5,5,241,125"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,140,130,517,125,517,121,140"/>
+<area shape="rect" id="Node000003" href="$structkm3net_1_1KM3PhotoTubeMgr_1_1PhotoTubeParameters.html" title=" " alt="" coords="145,175,339,455"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="160,137,178,173,173,176,155,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="198,456,183,502,178,501,193,454"/>
+</map>

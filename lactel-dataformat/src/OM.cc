@@ -9,12 +9,11 @@ namespace lactel
     ConnectionInfos OM::con = ConnectionInfos("/home/bouta-mohammed/work/cppm/lactel/omTesting/include/config.ini");
 
     OM::OM(): isOK (false), om_id("OMS0000"){} // default OM ref isOK should be false
-    OM::OM(std::string id) : isOK(true){
+    OM::OM(std::string id) : isOK(true), om_id(id){
         if(om_ids.count(id)){
             std::cerr << "\033[1;31mError: OM with id " + id + " already defined!\033[0m" << std::endl;
             return;
         }
-        om_id = id;
         om_ids.insert(id);
         id = nInstance;
         nInstance++;

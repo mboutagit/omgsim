@@ -44,7 +44,11 @@
 
 //#include "KM3MagneticField.hh"
 
-class BDetectorConstruction;
+namespace lactel
+{
+  class BDetectorConstruction;
+} // namespace lactel
+
 
 namespace libconfig
 {
@@ -163,6 +167,7 @@ namespace km3net
       double Phi=0;
       double Psi=0;
       std::string Name="AntaresOM";
+      std::string om_id="OMSXXXX"; // default Antares om identifier
       std::string MotherVolume = "";
       std::string BorderSurfaceMaterial;
       std::string BorderSurfaceWith;
@@ -172,6 +177,7 @@ namespace km3net
     std::map<std::string, std::vector<PositionParameters> > fOMList;
     std::map<std::string, std::vector<PositionParameters> > fPMList;
     std::map<std::string, std::vector<PositionParameters> > fVolumeList;
+
 
     void ReadConfiguration (std::string);
     void ReadThisConfiguration (libconfig::Setting* cfg,
@@ -249,7 +255,11 @@ namespace km3net
     std::map <std::string, G4VPhysicalVolume*>  fPlacedVolumeDict;
     std::map <std::string, std::string>         fBorderSurfaceList;
 
-    friend class BDetectorConstruction;
+    public:
+      std::map<std::string, std::vector<PositionParameters>> getOMsMap(){return fOMList;}
+      std::set<std::string> getOMsList(){return fOMNames;}
+
+    friend class lactel::BDetectorConstruction;
 
   };
 }

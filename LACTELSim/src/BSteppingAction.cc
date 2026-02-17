@@ -193,6 +193,8 @@ namespace lactel
                     G4String volname = touch->GetVolume(ihist)->GetName();
                     if (KM3DetectorConstruction::fOMNames.find(volname) != KM3DetectorConstruction::fOMNames.end()) {
                         BAnalysisManager::getIt()->getHit().om_id  = touch->GetCopyNumber(ihist);
+                        std::cout << "\r\033[10C" << "volume name: " << volname << std::endl;
+                        BDetectorConstruction::GetIt()->getOMsUsedbyVolumeName(volname);
                     }
                 }
                 BAnalysisManager::getIt() ->AddDetectedParticule (info, detectedGamma);

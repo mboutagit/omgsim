@@ -75,64 +75,64 @@ namespace tools
 
     void BWaveCatcher::signalHandler(int signum) {
         std::cout << "\nCtrl-C pressed. Stopping...\n";
-        isRunning = false;
+        // isRunning = false;
     }
 
-    bool BWaveCatcher::startAcquisition() {
-        acquiring_ = true;
+    bool BWaveCatcher::startAcquisition() {}
+    //     acquiring_ = true;
         
-        if (isRunning) { // avoid multiple starts
-            std::cout << "\r\033[10C" << "Already acquiring ..." << std::endl;
-            return true;
-        }
-        isRunning = true;
+    //     if (isRunning) { // avoid multiple starts
+    //         std::cout << "\r\033[10C" << "Already acquiring ..." << std::endl;
+    //         return true;
+    //     }
+    //     isRunning = true;
 
-        acquisitionThread = std::thread([this]() {
-            size_t sampleIndex = 0;
-            double period = 1.0 / (config_.samplingFrequency*1e9);
+    //     acquisitionThread = std::thread([this]() {
+    //         size_t sampleIndex = 0;
+    //         double period = 1.0 / (config_.samplingFrequency*1e9);
             
-            while (true)
-            {
-                std::cout << "\r\033[10C" << "acquiring ...: sample Index: " << sampleIndex << std::endl;
-                                // simulate one ADC sample
+    //         while (true)
+    //         {
+    //             std::cout << "\r\033[10C" << "acquiring ...: sample Index: " << sampleIndex << std::endl;
+    //                             // simulate one ADC sample
 
-                // circular buffer
+    //             // circular buffer
 
-                for(int c = 0; c < config_.NumChannels; c++){
-                    sampleIndex = (sampleIndex + 1) % config_.recordLength;
-                    double signal = 2048 + 1000 * std::cos(2.* 3.14159 * sampleIndex / config_.recordLength);
-                    double noise = noiseDist_(rng_) % 100;
+    //             for(int c = 0; c < config_.NumChannels; c++){
+    //                 sampleIndex = (sampleIndex + 1) % config_.recordLength;
+    //                 double signal = 2048 + 1000 * std::cos(2.* 3.14159 * sampleIndex / config_.recordLength);
+    //                 double noise = noiseDist_(rng_) % 100;
 
                     
-                    scope[c]->SetPoint(sampleIndex, sampleIndex*config_.samplingFrequency, signal+noise);
-                    if(sampleIndex == config_.recordLength -1){
-                        std::cout << "\r\033[50C" << "Update" << std::endl;
-                        scope[c]->Draw("APL");
-                        canvas->Draw();
-                        canvas->Modified();
-                        canvas->Update();
-                    }
-                }      
-                // wait for next sample
-                std::this_thread::sleep_for(std::chrono::duration<double>(period));
-            }   
-        });
-        return true;
-    }
+    //                 scope[c]->SetPoint(sampleIndex, sampleIndex*config_.samplingFrequency, signal+noise);
+    //                 if(sampleIndex == config_.recordLength -1){
+    //                     std::cout << "\r\033[50C" << "Update" << std::endl;
+    //                     scope[c]->Draw("APL");
+    //                     canvas->Draw();
+    //                     canvas->Modified();
+    //                     canvas->Update();
+    //                 }
+    //             }      
+    //             // wait for next sample
+    //             std::this_thread::sleep_for(std::chrono::duration<double>(period));
+    //         }   
+    //     });
+    //     return true;
+    // }
 
-    bool BWaveCatcher::stopAcquisition() {
-        acquiring_ = false;
+    bool BWaveCatcher::stopAcquisition() {}
+    //     acquiring_ = false;
 
-        if (!isRunning) {
-            std::cout << "\r\033[10C" << "Already Stopped ..." << std::endl;
-            return true;
-        }
-        isRunning = false;
-        if (acquisitionThread.joinable())
-            acquisitionThread.join();
+    //     if (!isRunning) {
+    //         std::cout << "\r\033[10C" << "Already Stopped ..." << std::endl;
+    //         return true;
+    //     }
+    //     isRunning = false;
+    //     if (acquisitionThread.joinable())
+    //         acquisitionThread.join();
 
-        return true;
-    }
+    //     return true;
+    // }
 
     bool BWaveCatcher::isAcquiring() const {
         return acquiring_;
@@ -317,7 +317,7 @@ namespace tools
         double lsb = config_.inputDynamicRange / (pow(2, config_.resolution) - 1); // in Volts
         std::normal_distribution<> pedDist_(0, 0.30*I_peak/lsb); 
         double t_jutter = 0.;
-        std::cout << "\r\033[10C" << "info: " << one_pe_charge << " - " << I_0 << " - " << I_peak << " - " << lsb << " - " << -e_SI << std::endl;
+        // std::cout << "\r\033[10C" << "info: " << one_pe_charge << " - " << I_0 << " - " << I_peak << " - " << lsb << " - " << -e_SI << std::endl;
     
         for(auto& hit : event.hits){
             if(hit.om_id != channel+1) // om id comes from copynumber in geant4 and channel is 0 or 1 while copy number starts from 1
@@ -490,10 +490,10 @@ namespace tools
             if(sample <= config_.triggerThresholds[channel] && ! triggered){
                 triggered = true;
                 waveform.timestamp = itr*dt; // timestamp when the trigger is fired
-                std::cout << "\r\033[10C \033[1,35m" << "Trigger: " << waveform.samples[itr] << " on channel "<< channel 
-                                                        << " : set to: " << config_.triggerThresholds[channel] 
-                                                        << " : timestamp: " << itr*dt
-                                                        << std::endl;
+                // std::cout << "\r\033[10C \033[1,35m" << "Trigger: " << waveform.samples[itr] << " on channel "<< channel 
+                //                                         << " : set to: " << config_.triggerThresholds[channel] 
+                //                                         << " : timestamp: " << itr*dt
+                //                                         << std::endl;
             }
             itr++;
         }

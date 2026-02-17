@@ -1,0 +1,29 @@
+<map id="LACTELSim/src/BRunManager.cc" name="LACTELSim/src/BRunManager.cc">
+<area shape="rect" id="Node000001" title=" " alt="" coords="250,5,481,31"/>
+<area shape="rect" id="Node000002" href="$BRunManager_8hh.html" title=" " alt="" coords="217,79,349,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="354,33,308,72,305,67,350,29"/>
+<area shape="rect" id="Node000011" href="$KM3RunManager_8hh.html" title=" " alt="" coords="373,79,525,104"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="381,29,427,67,423,72,377,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="281,152,423,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="296,102,333,140,329,144,292,106"/>
+<area shape="rect" id="Node000004" href="$BEvent_8hh.html" title=" " alt="" coords="169,152,257,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="273,106,236,144,232,140,269,102"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="75,225,173,251"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="201,179,151,219,148,214,197,175"/>
+<area shape="rect" id="Node000006" href="$BHit_8hh.html" title=" " alt="" coords="197,225,267,251"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="219,177,228,212,223,213,214,178"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="5,299,93,324"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="204,253,93,296,91,291,202,248"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="118,299,255,324"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="227,252,204,289,199,286,222,250"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="280,299,397,324"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="251,248,311,289,308,293,248,253"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="422,299,511,324"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="268,248,416,292,415,297,267,253"/>
+<area shape="poly" id="edge11_Node000011_Node000003" title=" " alt="" coords="435,106,381,146,378,141,432,102"/>
+<area shape="rect" id="Node000012" href="$KM3RunMessenger_8hh.html" title=" " alt="" coords="447,152,614,177"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="464,102,509,141,505,145,461,106"/>
+<area shape="poly" id="edge13_Node000012_Node000010" title=" " alt="" coords="524,179,496,226,475,286,470,284,491,224,520,176"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="505,225,650,251"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="541,176,564,212,560,215,536,179"/>
+</map>

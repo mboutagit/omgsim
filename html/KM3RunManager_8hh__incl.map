@@ -1,0 +1,11 @@
+<map id="common/include/KM3RunManager.hh" name="common/include/KM3RunManager.hh">
+<area shape="rect" id="Node000001" title=" " alt="" coords="33,5,297,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,147,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,33,103,72,100,68,149,29"/>
+<area shape="rect" id="Node000003" href="$KM3RunMessenger_8hh.html" title=" " alt="" coords="171,79,338,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="181,29,231,68,228,72,178,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="139,152,229,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="245,106,207,144,203,140,241,102"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="253,152,398,177"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="268,102,306,140,302,144,264,106"/>
+</map>

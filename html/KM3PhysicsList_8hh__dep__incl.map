@@ -1,0 +1,17 @@
+<map id="common/include/KM3PhysicsList.hh" name="common/include/KM3PhysicsList.hh">
+<area shape="rect" id="Node000001" title=" " alt="" coords="777,5,989,45"/>
+<area shape="rect" id="Node000002" href="$BSteppingAction_8cc.html" title=" " alt="" coords="5,101,253,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="764,41,266,96,209,103,209,98,265,91,763,36"/>
+<area shape="rect" id="Node000003" href="$KM3ExperimentTypeMessenger_8cc.html" title=" " alt="" coords="277,93,488,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="764,50,489,97,488,91,763,44"/>
+<area shape="rect" id="Node000004" href="$KM3OpticalModuleMgr_8cc.html" title=" " alt="" coords="512,93,741,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="814,52,684,96,682,91,813,47"/>
+<area shape="rect" id="Node000005" href="$KM3PassiveVolumeMgr_8cc.html" title=" " alt="" coords="766,93,999,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="885,59,885,93,880,93,880,59"/>
+<area shape="rect" id="Node000006" href="$KM3PhotoTubeMgr_8cc.html" title=" " alt="" coords="1023,101,1267,126"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="954,47,1111,98,1110,103,953,52"/>
+<area shape="rect" id="Node000007" href="$KM3PhysicsList_8cc.html" title=" " alt="" coords="1291,101,1517,126"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1003,44,1335,98,1334,103,1002,49"/>
+<area shape="rect" id="Node000008" href="$KM3PhysicsListMessenger_8cc.html" title=" " alt="" coords="1541,93,1747,133"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1002,34,1246,58,1530,91,1541,92,1540,97,1529,96,1245,63,1002,40"/>
+</map>

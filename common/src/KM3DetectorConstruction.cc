@@ -426,6 +426,12 @@ namespace km3net
     if (cfg->exists("Psi"))
       sPsi = &(cfg->lookup("Psi"));
 
+    
+    if (cfg->exists("om_id")){
+        libconfig::Setting &som_id = cfg->lookup("om_id");
+        thePar.om_id =GetStringParameter  (som_id);
+    }
+
 
     vector <double>
       vX = GetScalarArrayParameter (sX),

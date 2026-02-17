@@ -138,6 +138,7 @@ namespace lactel
                 float tmin=0.;
                 float tmax=0.;
                 float tmean=0.;
+                float time =0.;
                 float zenith;
                 G4ThreeVector OMPosition;
                 bool coincidence = false;
@@ -150,7 +151,38 @@ namespace lactel
             //     Event(){};
             //     ~Event(){};
 
-                void checkCoincidences(float ctime = 16); // default coincidence time of 16 ns
+                bool isACoincidence(float ctime = 200); // default coincidence time of 16 ns
+                void dumpEvent(std::ostream& out = std::cout){
+                    out 
+                        << "Run: " << runNb
+                        << ", Event: " << event_id   
+                        << ", E: " << event_energy
+                        << ", nhit: " << nhit
+                        << ", time: " << time
+                        << std::endl;
+                }
+                void dumpEventHits(std::ostream& out = std::cout){
+                    for(auto& hit : hits){
+                        out 
+                            << "Run: " << runNb
+                            << ", Event: " << event_id   
+                            << ", om: " << hit.om_id   
+                            << ", hit: " << hit.id   
+                            << ", time: " << hit.time   
+                            << ", charge: " << hit.charge   
+                            << ", a: " << hit.a   
+                            << std::endl;
+                    }
+                }
+
+                std::vector<Hit> getHitsByOMID(std::string id){
+                    std::vector<Hit> _hits;
+                    for(auto& hit : hits){
+                        if(hit.om_id == id)
+                            _hits.push_back(hit);
+                    }
+                    return _hits;
+                }
             };
 
             struct Hit{
@@ -183,6 +215,16 @@ namespace lactel
                         time+=hit.time;
 
                     return time/hits.size(); // mean time
+                }
+
+                void dump(std::ostream& out = std::cout){
+                    out 
+                        << "om: " << om_id   
+                        << ", hit: " << id   
+                        << ", time: " << time   
+                        << ", charge: " << charge   
+                        << ", a: " << a
+                        << std::endl;
                 }
 
                 static float getMeanTimeforOM(std::vector<Hit> hits, int om_id){
@@ -251,6 +293,8 @@ namespace lactel
             virtual void StartOfEvent(const G4Event*);
             virtual void Init(std::string rfn = "");
             inline Hit& getHit(){return fHits;}
+
+            TTree* getDetectedEventsTree(){return detectedEventTree;}
 
             std::string evtFileName = "output.evt";
             

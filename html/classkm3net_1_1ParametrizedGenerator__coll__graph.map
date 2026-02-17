@@ -1,0 +1,9 @@
+<map id="km3net::ParametrizedGenerator" name="km3net::ParametrizedGenerator">
+<area shape="rect" id="Node000001" title=" " alt="" coords="12,523,235,1028"/>
+<area shape="poly" id="edge4_Node000001_Node000001" title=" " alt="" coords="237,727,254,745,261,775,258,797,250,813,245,810,253,795,256,775,250,748,233,731"/>
+<area shape="rect" id="Node000002" href="$classkm3net_1_1KM3PrimaryGeneratorAction.html" title=" " alt="" coords="5,120,241,460"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,474,123,484,123,523,118,522,118,484,118,474"/>
+<area shape="poly" id="edge3_Node000001_Node000002" title=" " alt="" coords="126,460,126,506,121,506,121,460"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="9,5,237,71"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="126,84,126,120,121,120,121,84"/>
+</map>

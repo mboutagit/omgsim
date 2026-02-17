@@ -61,6 +61,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/src/OM.cc" "CMakeFiles/libOMG.dir/lactel-dataformat/src/OM.cc.o" "gcc" "CMakeFiles/libOMG.dir/lactel-dataformat/src/OM.cc.o.d"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/src/BWaveCatcher.cc" "CMakeFiles/libOMG.dir/tools/src/BWaveCatcher.cc.o" "gcc" "CMakeFiles/libOMG.dir/tools/src/BWaveCatcher.cc.o.d"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/src/BWaveCatcherConf.cc" "CMakeFiles/libOMG.dir/tools/src/BWaveCatcherConf.cc.o" "gcc" "CMakeFiles/libOMG.dir/tools/src/BWaveCatcherConf.cc.o.d"
+  "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/src/BWaveCatcherMessenger.cc" "CMakeFiles/libOMG.dir/tools/src/BWaveCatcherMessenger.cc.o" "gcc" "CMakeFiles/libOMG.dir/tools/src/BWaveCatcherMessenger.cc.o.d"
+  "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/src/DAQManager.cc" "CMakeFiles/libOMG.dir/tools/src/DAQManager.cc.o" "gcc" "CMakeFiles/libOMG.dir/tools/src/DAQManager.cc.o.d"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/utils/src/BLogger.cc" "CMakeFiles/libOMG.dir/utils/src/BLogger.cc.o" "gcc" "CMakeFiles/libOMG.dir/utils/src/BLogger.cc.o.d"
   )
 

@@ -12,7 +12,7 @@ namespace lactel
           resolution(12), // 12 bit resolution
           recordLength(1024),
           eventBufferDepth(7),
-          triggerThresholds{-50, -50}, // mv threshold;
+          triggerThresholds{0, 0}, // mv threshold;
           triggerSource("self"),
           triggerEdges{"rising", "rising"},
           preTriggerTime(10.0),

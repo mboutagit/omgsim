@@ -1,0 +1,15 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="19,5,236,31"/>
+<area shape="rect" id="Node000001" href="$classkm3net_1_1KM3DetectorConstruction.html" title=" " alt="" coords="297,5,544,31"/>
+<area shape="poly" id="edge29_Node000000_Node000001" title=" " alt="" coords="250,15,297,15,297,21,250,21"/>
+<area shape="rect" id="Node000002" href="$classlactel_1_1BDetectorConstruction.html" title=" " alt="" coords="592,5,805,31"/>
+<area shape="poly" id="edge30_Node000001_Node000002" title=" " alt="" coords="558,15,592,15,592,21,558,21"/>
+<area shape="rect" id="Node000003" href="$classkm3net_1_1KM3ParametrizedVolume.html" title=" " alt="" coords="5,79,249,104"/>
+<area shape="poly" id="edge31_Node000003_Node000001" title=" " alt="" coords="182,72,297,41,353,28,355,33,298,46,184,77"/>
+<area shape="rect" id="Node000004" href="$classkm3net_1_1KM3OpticalModuleMgr.html" title=" " alt="" coords="307,55,535,80"/>
+<area shape="poly" id="edge32_Node000003_Node000004" title=" " alt="" coords="263,78,306,74,307,79,263,83"/>
+<area shape="rect" id="Node000005" href="$classkm3net_1_1KM3PassiveVolumeMgr.html" title="Manage the automatic volume generator, configured in common/data/KM3Vol*.dat, see VolumeParameters." alt="" coords="305,104,537,129"/>
+<area shape="poly" id="edge33_Node000003_Node000005" title=" " alt="" coords="263,100,305,104,304,109,263,106"/>
+<area shape="rect" id="Node000006" href="$classkm3net_1_1KM3PhotoTubeMgr.html" title=" " alt="" coords="320,153,521,179"/>
+<area shape="poly" id="edge34_Node000003_Node000006" title=" " alt="" coords="181,106,298,139,349,151,348,156,297,145,180,111"/>
+</map>

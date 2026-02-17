@@ -4,10 +4,10 @@
 #include <iostream>
 #include "BWaveCatcherInterface.hh"
 #include <random>
-#include <chrono>
-#include <thread>
-#include <atomic>
-#include <csignal>
+// #include <chrono>
+// #include <thread>
+// #include <atomic>
+// #include <csignal>
 
 #include "TCanvas.h"
 #include "TGraph.h"
@@ -62,6 +62,8 @@ namespace tools{
             void setTimeCorrection(bool state){timeCorrection = state;};
             void setAmplitudeCorrection(bool state) {amplitudeCorrection = state;};
 
+            std::string getName(){return name;};
+            OM getOMByChannelID(int channel){return inputOMs[channel];}
 
             // Waveform digitizeEvent(int channel, lactel::BAnalysis::DetectedEvent event);
 
@@ -88,8 +90,8 @@ namespace tools{
 
             void signalHandler(int signum);
 
-            std::atomic<bool> isRunning=false;
-            std::thread acquisitionThread;
+            // std::atomic<bool> isRunning=false;
+            // std::thread acquisitionThread;
 
             TCanvas* canvas;
             std::vector<TGraph*> scope;

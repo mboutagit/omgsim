@@ -1570,6 +1570,54 @@ tools/src/BWaveCatcherConf.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/src/BWaveCatcherConf.cc.s
 .PHONY : tools/src/BWaveCatcherConf.cc.s
 
+tools/src/BWaveCatcherMessenger.o: tools/src/BWaveCatcherMessenger.cc.o
+.PHONY : tools/src/BWaveCatcherMessenger.o
+
+# target to build an object file
+tools/src/BWaveCatcherMessenger.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/src/BWaveCatcherMessenger.cc.o
+.PHONY : tools/src/BWaveCatcherMessenger.cc.o
+
+tools/src/BWaveCatcherMessenger.i: tools/src/BWaveCatcherMessenger.cc.i
+.PHONY : tools/src/BWaveCatcherMessenger.i
+
+# target to preprocess a source file
+tools/src/BWaveCatcherMessenger.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/src/BWaveCatcherMessenger.cc.i
+.PHONY : tools/src/BWaveCatcherMessenger.cc.i
+
+tools/src/BWaveCatcherMessenger.s: tools/src/BWaveCatcherMessenger.cc.s
+.PHONY : tools/src/BWaveCatcherMessenger.s
+
+# target to generate assembly for a file
+tools/src/BWaveCatcherMessenger.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/src/BWaveCatcherMessenger.cc.s
+.PHONY : tools/src/BWaveCatcherMessenger.cc.s
+
+tools/src/DAQManager.o: tools/src/DAQManager.cc.o
+.PHONY : tools/src/DAQManager.o
+
+# target to build an object file
+tools/src/DAQManager.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/src/DAQManager.cc.o
+.PHONY : tools/src/DAQManager.cc.o
+
+tools/src/DAQManager.i: tools/src/DAQManager.cc.i
+.PHONY : tools/src/DAQManager.i
+
+# target to preprocess a source file
+tools/src/DAQManager.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/src/DAQManager.cc.i
+.PHONY : tools/src/DAQManager.cc.i
+
+tools/src/DAQManager.s: tools/src/DAQManager.cc.s
+.PHONY : tools/src/DAQManager.s
+
+# target to generate assembly for a file
+tools/src/DAQManager.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/src/DAQManager.cc.s
+.PHONY : tools/src/DAQManager.cc.s
+
 utils/src/BLogger.o: utils/src/BLogger.cc.o
 .PHONY : utils/src/BLogger.o
 
@@ -1775,6 +1823,12 @@ help:
 	@echo "... tools/src/BWaveCatcherConf.o"
 	@echo "... tools/src/BWaveCatcherConf.i"
 	@echo "... tools/src/BWaveCatcherConf.s"
+	@echo "... tools/src/BWaveCatcherMessenger.o"
+	@echo "... tools/src/BWaveCatcherMessenger.i"
+	@echo "... tools/src/BWaveCatcherMessenger.s"
+	@echo "... tools/src/DAQManager.o"
+	@echo "... tools/src/DAQManager.i"
+	@echo "... tools/src/DAQManager.s"
 	@echo "... utils/src/BLogger.o"
 	@echo "... utils/src/BLogger.i"
 	@echo "... utils/src/BLogger.s"

@@ -56,11 +56,13 @@
 #include "BEventAction.hh"
 #include "BRunAction.hh"
 #include "BRunManager.hh"
+#include "DAQManager.hh"
 
 #include <iostream>
 
 using namespace std;
 using namespace lactel;
+using namespace DAQ;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -197,8 +199,11 @@ namespace km3net
           if (!fTrackingAction)
             fTrackingAction=new KM3TrackingAction ();
 
-          if(newValue == "BA")
-            BAnalysisManager::getIt()->Init();          
+          if(newValue == "BA"){
+            BAnalysisManager::getIt()->Init(); 
+            DAQManager::getIt();
+          }
+                     
           else  
             KM3AnalysisManager::getIt()->Init();
 

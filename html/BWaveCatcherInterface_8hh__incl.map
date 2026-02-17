@@ -1,0 +1,15 @@
+<map id="tools/include/BWaveCatcherInterface.hh" name="tools/include/BWaveCatcherInterface.hh">
+<area shape="rect" id="Node000001" title=" " alt="" coords="146,5,350,45"/>
+<area shape="rect" id="Node000002" href="$BWaveCatcherConf_8hh.html" title=" " alt="" coords="95,93,262,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="233,47,200,84,196,81,229,44"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="286,93,349,119"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="267,44,300,81,296,84,263,47"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,167,85,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="158,121,80,162,78,158,156,116"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="109,167,168,192"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="174,120,154,156,150,153,170,118"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="192,167,248,192"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="188,118,209,153,204,156,183,120"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="272,167,336,192"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="200,116,273,157,270,162,197,121"/>
+</map>

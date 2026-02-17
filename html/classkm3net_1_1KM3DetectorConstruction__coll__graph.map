@@ -1,0 +1,20 @@
+<map id="km3net::KM3DetectorConstruction" name="km3net::KM3DetectorConstruction">
+<area shape="rect" id="Node000001" title=" " alt="" coords="225,1411,464,2336"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="467,1792,476,1806,484,1824,491,1873,487,1912,477,1941,472,1939,482,1911,485,1873,479,1825,472,1808,462,1795"/>
+<area shape="rect" id="Node000004" href="$classkm3net_1_1KM3DetectorMessenger.html" title=" " alt="" coords="113,2399,341,2704"/>
+<area shape="poly" id="edge6_Node000004_Node000001" title=" " alt="" coords="229,2337,226,2360,226,2375,226,2382,221,2382,221,2375,221,2360,224,2336"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="376,795,585,861"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="477,875,408,1411,402,1410,472,874"/>
+<area shape="rect" id="Node000003" href="$classkm3net_1_1KM3ParametrizedVolume.html" title=" " alt="" coords="609,308,845,1348"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="607,1326,599,1349,536,1503,466,1650,462,1648,531,1501,594,1347,602,1324"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="305,2398,313,2374,318,2351,324,2353,318,2375,310,2399"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,5,124,71"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="60,84,54,131,51,181,51,1875,54,1944,62,2015,89,2154,126,2285,166,2397,161,2399,121,2286,84,2156,57,2016,49,1945,46,1875,46,181,49,131,54,84"/>
+<area shape="rect" id="Node000007" href="$classkm3net_1_1KM3MaterialMessenger.html" title=" " alt="" coords="86,120,313,245"/>
+<area shape="poly" id="edge10_Node000007_Node000005" title=" " alt="" coords="106,79,143,118,139,121,102,83"/>
+<area shape="rect" id="Node000006" href="$classkm3net_1_1KM3Material.html" title=" " alt="" coords="87,565,259,1091"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="218,1090,268,1394,263,1395,213,1091"/>
+<area shape="poly" id="edge8_Node000006_Node000006" title=" " alt="" coords="261,731,271,745,279,766,284,794,285,828,281,877,271,911,266,909,276,876,280,828,278,794,273,767,266,748,257,734"/>
+<area shape="poly" id="edge11_Node000007_Node000006" title=" " alt="" coords="229,565,253,426,271,284,271,270,267,260,272,258,277,269,277,284,259,426,234,566"/>
+<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="148,247,137,270,137,284,152,549,146,549,131,284,131,269,143,245"/>
+</map>

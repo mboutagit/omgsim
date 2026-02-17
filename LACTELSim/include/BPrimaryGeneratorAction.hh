@@ -123,6 +123,10 @@ public:
     int nDet = 0; // ,number of detected event (at least one hit in the detector)
     float muonsFlux = 0; // expected muons rate on a given surface for a given energy range and solid angle. unit: muons/cm^2/s
     
+    void init(){
+        nGen = 0;
+        nDet = 0;
+    }
     ~BPrimaryGeneratorAction();
 };
 

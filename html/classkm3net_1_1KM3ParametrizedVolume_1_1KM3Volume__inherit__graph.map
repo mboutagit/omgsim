@@ -1,0 +1,9 @@
+<map id="km3net::KM3ParametrizedVolume::KM3Volume" name="km3net::KM3ParametrizedVolume::KM3Volume">
+<area shape="rect" id="Node000001" title=" " alt="" coords="214,5,450,185"/>
+<area shape="rect" id="Node000002" href="$classkm3net_1_1KM3OpticalModuleMgr_1_1KM3OpticalModule.html" title=" " alt="" coords="5,303,200,463"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="245,198,214,235,161,305,157,301,210,232,241,194"/>
+<area shape="rect" id="Node000003" href="$classkm3net_1_1KM3PassiveVolumeMgr_1_1KM3PassiveVolume.html" title=" " alt="" coords="224,233,440,533"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="335,199,335,233,329,233,329,199"/>
+<area shape="rect" id="Node000004" href="$classkm3net_1_1KM3PhotoTubeMgr_1_1KM3PhotoTube.html" title=" " alt="" coords="464,273,659,493"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="423,194,454,232,485,272,481,275,450,235,419,198"/>
+</map>

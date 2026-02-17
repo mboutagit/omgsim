@@ -12,6 +12,7 @@
 #include "BEvent.hh"
 
 #include "TTree.h"
+#include "DAQManager.hh"
 
 namespace lactel
 {
@@ -331,6 +332,8 @@ namespace lactel
 
 
             detectedEventTree->Fill();
+            if(DAQ::DAQManager::getIt()->isActive())
+                DAQ::DAQManager::getIt()->addEvent(&fDetectedEvent);
             genPars.isDetected = true;
             ndet+=1;
             // std::cout << "\r\033[10C" << "-- Detected event: nhit=" << fDetectedEvent.nhit << std::endl;  
@@ -564,7 +567,8 @@ namespace lactel
     
   }
 
-    void BAnalysisManager::DetectedEvent::checkCoincidences(float ctime){
+    bool BAnalysisManager::DetectedEvent::isACoincidence(float ctime){
+        bool coincidence = false;
         for(auto& hita: hits){
             for(auto& hitb : hits){
                 if(hita.om_id == hitb.om_id) // check on different OMs 
@@ -572,16 +576,9 @@ namespace lactel
                 if(abs(hita.time - hitb.time) <= ctime){ // coincidence
                     coincidence = true;
                 }
-                bool c = abs(hita.time - hitb.time) <= ctime ? 1 : 0;
-                // std::cout << "\r\033[5C" << "Check Coincidence: " 
-                //         << " ch0: " << hita.om_id
-                //         << " ch1: " << hitb.om_id
-                //         << "  -- time ch0: " << hita.time
-                //         << " time ch1: " << hitb.time
-                //         << " ---- coi: " << c
-                //         << std::endl;
             }
         }
+        return coincidence;
     }
 
 

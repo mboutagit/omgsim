@@ -77,11 +77,13 @@ Name = "LactelOneModule"
   {
         Name = "AntaresOM";
         ID   = 1;
+        om_id = "OMS0321";
         X      = 0;
         Y      = 0;
         Z      = 0; # in mm
         Theta  = 0.; #3.14;
         Phi    = 0.;
+      #   om_id  = OMS0321
         MotherVolume="IdealWaterVolume1";
    };
 
@@ -115,11 +117,13 @@ Name = "LactelOneModule"
   {
         Name = "AntaresOM";
         ID   = 2;
+        om_id = "OMS0304";
         X      = 0;
         Y      = 0;
         Z      = 0; # in mm
         Theta  = 0.; #3.14;
         Phi    = 0.;
+      #   om_id   = OMS0304
         MotherVolume="IdealWaterVolume2";
    };
 

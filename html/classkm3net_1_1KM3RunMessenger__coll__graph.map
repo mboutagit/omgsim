@@ -1,0 +1,10 @@
+<map id="km3net::KM3RunMessenger" name="km3net::KM3RunMessenger">
+<area shape="rect" id="Node000001" title=" " alt="" coords="144,120,341,285"/>
+<area shape="rect" id="Node000003" href="$classkm3net_1_1KM3RunManager.html" title=" " alt="" coords="35,348,218,433"/>
+<area shape="poly" id="edge4_Node000003_Node000001" title=" " alt="" coords="146,278,125,310,120,332,115,331,120,308,141,275"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="183,5,302,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="245,85,245,120,240,120,240,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="191,346,211,322,223,300,227,303,216,326,195,350"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,170,120,235"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="77,248,100,323,109,347,105,349,95,325,71,250"/>
+</map>

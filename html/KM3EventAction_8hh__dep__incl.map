@@ -1,0 +1,16 @@
+<map id="common/include/KM3EventAction.hh" name="common/include/KM3EventAction.hh">
+<area shape="rect" id="Node000001" title=" " alt="" coords="559,5,821,31"/>
+<area shape="rect" id="Node000002" href="$BEventAction_8hh.html" title=" " alt="" coords="342,79,539,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="642,37,501,81,500,76,640,32"/>
+<area shape="rect" id="Node000005" href="$KM3ExperimentTypeMessenger_8cc.html" title=" " alt="" coords="530,167,741,207"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="664,41,647,59,634,80,628,102,627,125,633,166,627,167,622,125,623,101,629,78,643,55,661,37"/>
+<area shape="rect" id="Node000006" href="$BAnalysisManager_8cc.html" title=" " alt="" coords="643,86,905,111"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="714,38,763,84,760,88,711,42"/>
+<area shape="rect" id="Node000007" href="$KM3EventAction_8cc.html" title=" " alt="" coords="929,86,1160,111"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="755,31,994,83,992,89,754,36"/>
+<area shape="rect" id="Node000003" href="$BEventAction_8cc.html" title=" " alt="" coords="5,174,233,199"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="358,125,163,177,161,171,356,120"/>
+<area shape="rect" id="Node000004" href="$BPrimaryGeneratorAction_8cc.html" title=" " alt="" coords="258,167,506,207"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="422,131,397,168,393,165,418,128"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="497,122,594,164,592,169,495,127"/>
+</map>

@@ -1,7 +1,37 @@
 #ifndef __BPOSTANALYSIS_HH__
 #define __BPOSTANALYSIS_HH__
 
+#include <iostream>
+#include <string>
+
+#include <TFile.h>
+#include <TTree.h>
+#include <TBranch.h>
+#include <TKey.h>
+#include <TLeaf.h>
+#include <TCollection.h> 
+#include <TCanvas.h> 
+#include <TH1F.h> 
+#include <TH2F.h> 
+#include <TH3F.h> 
+#include <TApplication.h>
+#include <TPolyLine3D.h>
+#include <TArrow.h>
+#include <TLine.h>
+#include <TView.h>
+#include <TBox.h>
+#include <TLegend.h>
+
+#include <TGeoManager.h>
+#include <TGeoMaterial.h>
+#include <TGeoMedium.h>
+#include <TGeoVolume.h>
+
+#include <TSystem.h>  // For gSystem->ProcessEvents()
+#include <unistd.h>   // For usleep()
+
 #include "BAnalysisManager.hh"
+;
 
 namespace km3net{
 
@@ -45,6 +75,11 @@ namespace km3net{
         float OMHitT=0;
         float OMHitP=0;
     };
+
+
+    std::vector<TCanvas*>  getNPEPlot(TTree* tree, BAnalysisManager::DetectedEvent* evt, float exposure_time = 1, float t_coin = 16); // in second
+    TCanvas* getDAQParameter(TTree* tree, BAnalysisManager::DetectedEvent* evt, std::string par); // in mV
+
 
 } // namespace km3net
 #endif

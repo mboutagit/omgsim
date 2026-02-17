@@ -1,0 +1,35 @@
+<map id="common/include/KM3PrimaryGeneratorAction.hh" name="common/include/KM3PrimaryGeneratorAction.hh">
+<area shape="rect" id="Node000001" title=" " alt="" coords="421,5,636,45"/>
+<area shape="rect" id="Node000002" href="$BPrimaryGeneratorAction_8hh.html" title=" " alt="" coords="1133,93,1343,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="650,39,1133,97,1132,102,649,44"/>
+<area shape="rect" id="Node000005" href="$KM3ExperimentTypeMessenger_8cc.html" title=" " alt="" coords="829,269,1039,309"/>
+<area shape="poly" id="edge16_Node000001_Node000005" title=" " alt="" coords="408,37,256,55,179,70,108,89,52,113,32,127,17,143,10,159,9,177,17,197,33,219,48,229,72,238,147,253,247,265,365,273,616,283,828,285,828,291,616,288,365,279,247,270,146,258,71,243,45,234,29,223,12,200,4,178,5,158,13,140,29,123,50,109,107,84,177,65,255,50,407,32"/>
+<area shape="rect" id="Node000011" href="$ParametrizedGenerator_8hh.html" title=" " alt="" coords="493,93,713,133"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="556,54,589,91,585,95,552,58"/>
+<area shape="rect" id="Node000012" href="$KM3PrimaryGeneratorAction_8cc.html" title=" " alt="" coords="43,181,294,221"/>
+<area shape="poly" id="edge17_Node000001_Node000012" title=" " alt="" coords="478,54,209,184,207,179,476,49"/>
+<area shape="rect" id="Node000013" href="$ParametrizedGenerator_8cc.html" title=" " alt="" coords="318,189,593,214"/>
+<area shape="poly" id="edge19_Node000001_Node000013" title=" " alt="" coords="507,58,484,94,467,146,459,189,454,188,462,145,480,92,502,55"/>
+<area shape="rect" id="Node000014" href="$KM3RunMessenger_8cc.html" title=" " alt="" coords="1367,101,1615,126"/>
+<area shape="poly" id="edge18_Node000001_Node000014" title=" " alt="" coords="650,32,970,55,1356,91,1414,98,1414,103,1355,96,969,60,650,37"/>
+<area shape="rect" id="Node000003" href="$BRunAction_8hh.html" title=" " alt="" coords="1547,189,1793,214"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1347,133,1613,186,1612,191,1346,139"/>
+<area shape="poly" id="edge10_Node000002_Node000005" title=" " alt="" coords="1241,148,1235,187,1227,206,1214,223,1186,241,1143,256,1040,277,1039,272,1142,250,1184,236,1211,219,1222,204,1230,185,1236,147"/>
+<area shape="rect" id="Node000006" href="$BAnalysisManager_8cc.html" title=" " alt="" coords="667,189,929,214"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="1128,139,857,191,856,186,1127,133"/>
+<area shape="rect" id="Node000007" href="$BDetectorConstruction_8cc.html" title=" " alt="" coords="1818,189,2106,214"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="1357,131,1583,156,1806,179,1869,186,1868,191,1806,184,1583,162,1357,136"/>
+<area shape="rect" id="Node000008" href="$BPrimaryGeneratorAction_8cc.html" title=" " alt="" coords="2130,181,2378,221"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="1357,131,1572,149,1739,156,1906,162,2118,179,2130,180,2130,185,2118,184,1906,168,1739,161,1572,154,1357,136"/>
+<area shape="rect" id="Node000009" href="$BPrimaryGeneratorMessenger_8cc.html" title=" " alt="" coords="953,181,1201,221"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="1192,142,1113,184,1111,179,1189,137"/>
+<area shape="rect" id="Node000010" href="$BSteppingAction_8cc.html" title=" " alt="" coords="1275,189,1523,214"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="1287,137,1379,186,1377,191,1284,142"/>
+<area shape="rect" id="Node000004" href="$BRunAction_8cc.html" title=" " alt="" coords="1562,277,1778,302"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1673,228,1673,276,1667,276,1667,228"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="1578,218,1536,224,1040,280,1039,275,1535,219,1577,213"/>
+<area shape="poly" id="edge13_Node000011_Node000005" title=" " alt="" coords="613,146,629,185,642,203,657,219,696,244,740,262,785,274,829,282,828,287,784,279,738,267,694,249,654,223,637,207,625,187,608,148"/>
+<area shape="poly" id="edge12_Node000011_Node000006" title=" " alt="" coords="660,137,773,186,771,191,658,141"/>
+<area shape="poly" id="edge14_Node000011_Node000012" title=" " alt="" coords="495,139,264,184,263,179,494,133"/>
+<area shape="poly" id="edge15_Node000011_Node000013" title=" " alt="" coords="560,143,476,191,474,186,558,138"/>
+</map>

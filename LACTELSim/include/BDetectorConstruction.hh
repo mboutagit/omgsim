@@ -48,6 +48,9 @@ namespace lactel
         bool IsRunning(){if(state == DetectorState::RUN) return true; else return false;}
         bool useDAD(){return useDAQ;}
         void autoWorldSize();
+        
+        void getOMIDbyVolumeName(std::string volumeName);
+        void getOMsUsedbyVolumeName(std::string volumeName);
 
         void ReadThisConfiguration (libconfig::Setting* cfg, // reads settings from KM3Det*.dat file
                                                        vector<PositionParameters>&  ConfList);
