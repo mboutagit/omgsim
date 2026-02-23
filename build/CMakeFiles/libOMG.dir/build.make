@@ -1006,6 +1006,23 @@ liblibOMG.so: /home/bouta-mohammed/root/root_install/lib/libMathCore.so
 liblibOMG.so: /home/bouta-mohammed/root/root_install/lib/libThread.so
 liblibOMG.so: /home/bouta-mohammed/root/root_install/lib/libMultiProc.so
 liblibOMG.so: /home/bouta-mohammed/root/root_install/lib/libROOTVecOps.so
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/libcrypto.so
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/libcurl.so
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/libpthread.a
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/libsz.so
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/libz.so
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/libdl.a
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/libm.so
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5_cpp.so
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/libcrypto.so
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/libcurl.so
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/libpthread.a
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/libsz.so
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/libz.so
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/libdl.a
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/libm.so
 liblibOMG.so: /usr/lib/x86_64-linux-gnu/libmysqlcppconn.so
 liblibOMG.so: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4FR.so
 liblibOMG.so: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4vis_management.so
@@ -1034,6 +1051,8 @@ liblibOMG.so: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/li
 liblibOMG.so: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4intercoms.so
 liblibOMG.so: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4global.so
 liblibOMG.so: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4clhep.so
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5_cpp.so
+liblibOMG.so: /usr/lib/x86_64-linux-gnu/libmysqlcppconn.so
 liblibOMG.so: CMakeFiles/libOMG.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Linking CXX shared library liblibOMG.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/libOMG.dir/link.txt --verbose=$(VERBOSE)

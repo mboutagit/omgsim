@@ -127,6 +127,23 @@ PostAna: /home/bouta-mohammed/root/root_install/lib/libMathCore.so
 PostAna: /home/bouta-mohammed/root/root_install/lib/libThread.so
 PostAna: /home/bouta-mohammed/root/root_install/lib/libMultiProc.so
 PostAna: /home/bouta-mohammed/root/root_install/lib/libROOTVecOps.so
+PostAna: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so
+PostAna: /usr/lib/x86_64-linux-gnu/libcrypto.so
+PostAna: /usr/lib/x86_64-linux-gnu/libcurl.so
+PostAna: /usr/lib/x86_64-linux-gnu/libpthread.a
+PostAna: /usr/lib/x86_64-linux-gnu/libsz.so
+PostAna: /usr/lib/x86_64-linux-gnu/libz.so
+PostAna: /usr/lib/x86_64-linux-gnu/libdl.a
+PostAna: /usr/lib/x86_64-linux-gnu/libm.so
+PostAna: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5_cpp.so
+PostAna: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so
+PostAna: /usr/lib/x86_64-linux-gnu/libcrypto.so
+PostAna: /usr/lib/x86_64-linux-gnu/libcurl.so
+PostAna: /usr/lib/x86_64-linux-gnu/libpthread.a
+PostAna: /usr/lib/x86_64-linux-gnu/libsz.so
+PostAna: /usr/lib/x86_64-linux-gnu/libz.so
+PostAna: /usr/lib/x86_64-linux-gnu/libdl.a
+PostAna: /usr/lib/x86_64-linux-gnu/libm.so
 PostAna: /usr/lib/x86_64-linux-gnu/libmysqlcppconn.so
 PostAna: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4FR.so
 PostAna: /usr/lib/x86_64-linux-gnu/libQt5OpenGL.so.5.15.13
@@ -155,6 +172,8 @@ PostAna: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4gl
 PostAna: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4clhep.so
 PostAna: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4zlib.so
 PostAna: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4geomUSolids.so
+PostAna: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5_cpp.so
+PostAna: /usr/lib/x86_64-linux-gnu/libmysqlcppconn.so
 PostAna: CMakeFiles/PostAna.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable PostAna"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/PostAna.dir/link.txt --verbose=$(VERBOSE)

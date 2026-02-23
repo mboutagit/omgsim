@@ -31,7 +31,10 @@
 #include <unistd.h>   // For usleep()
 
 #include "BAnalysisManager.hh"
-;
+
+#include <H5Cpp.h>
+#include <variant>
+
 
 namespace km3net{
 
@@ -77,9 +80,20 @@ namespace km3net{
     };
 
 
-    std::vector<TCanvas*>  getNPEPlot(TTree* tree, BAnalysisManager::DetectedEvent* evt, float exposure_time = 1, float t_coin = 16); // in second
+    std::vector<TCanvas*>  getNPEPlot(TTree* tree, BAnalysisManager::DetectedEvent* evt, 
+                                        std::vector<std::pair<std::string, TH1F*>>& hist, 
+                                        float exposure_time = 1, float t_coin = 16); // in second
     TCanvas* getDAQParameter(TTree* tree, BAnalysisManager::DetectedEvent* evt, std::string par); // in mV
+    std::vector<TCanvas*>  getRealDataPlots(std::vector<std::pair<std::string, TH1F*>>& hist); 
 
+    using stack = std::variant<
+                                std::pair<std::string, TH1F*>,
+                                std::pair<std::string, TH2F*>,
+                                std::pair<std::string, TH3F*>,
+                                std::pair<std::string, TGraph*>
+                            >;
+    
+    std::vector<stack> container;
 
 } // namespace km3net
 #endif

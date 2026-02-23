@@ -193,7 +193,6 @@ namespace km3net
       logicVolume->SetVisAttributes(cellCol);
     }
       
-    
     return new G4PVPlacement(theRot, thePos, logicVolume, PosPar.Name.data (),
                       WhereToPlace, true, PosPar.ID);
 

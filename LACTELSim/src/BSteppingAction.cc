@@ -31,6 +31,19 @@ namespace lactel
         if( ! BDetectorConstruction::GetIt()->IsRunning()){
             return;
         }
+
+
+
+        G4VPhysicalVolume* vol = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
+        // if (vol->GetName()) {
+            // Prevent scintillation/Cerenkov photons
+            // std::cout << "\r\033[50C" << "volume name: " << vol->GetName() << std::endl;
+            // auto particle = step->GetTrack()->GetDefinition();
+            // if (particle->GetParticleName() == "opticalphoton") {
+            //     // std::cout << "\r\033[50C" << "killing the particle. " << std::endl;
+            //     step->GetTrack()->SetTrackStatus(fStopAndKill);
+            // }
+        // }
             
 
         G4Track* fTrack = step->GetTrack();
@@ -193,8 +206,8 @@ namespace lactel
                     G4String volname = touch->GetVolume(ihist)->GetName();
                     if (KM3DetectorConstruction::fOMNames.find(volname) != KM3DetectorConstruction::fOMNames.end()) {
                         BAnalysisManager::getIt()->getHit().om_id  = touch->GetCopyNumber(ihist);
-                        std::cout << "\r\033[10C" << "volume name: " << volname << std::endl;
-                        BDetectorConstruction::GetIt()->getOMsUsedbyVolumeName(volname);
+                        // std::cout << "\r\033[10C" << "volume name: " << volname << std::endl;
+                        // BDetectorConstruction::GetIt()->getOMsUsedbyVolumeName(volname);
                     }
                 }
                 BAnalysisManager::getIt() ->AddDetectedParticule (info, detectedGamma);

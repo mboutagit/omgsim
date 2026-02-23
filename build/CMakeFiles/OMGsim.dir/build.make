@@ -127,6 +127,23 @@ OMGsim: /home/bouta-mohammed/root/root_install/lib/libMathCore.so
 OMGsim: /home/bouta-mohammed/root/root_install/lib/libThread.so
 OMGsim: /home/bouta-mohammed/root/root_install/lib/libMultiProc.so
 OMGsim: /home/bouta-mohammed/root/root_install/lib/libROOTVecOps.so
+OMGsim: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so
+OMGsim: /usr/lib/x86_64-linux-gnu/libcrypto.so
+OMGsim: /usr/lib/x86_64-linux-gnu/libcurl.so
+OMGsim: /usr/lib/x86_64-linux-gnu/libpthread.a
+OMGsim: /usr/lib/x86_64-linux-gnu/libsz.so
+OMGsim: /usr/lib/x86_64-linux-gnu/libz.so
+OMGsim: /usr/lib/x86_64-linux-gnu/libdl.a
+OMGsim: /usr/lib/x86_64-linux-gnu/libm.so
+OMGsim: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5_cpp.so
+OMGsim: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so
+OMGsim: /usr/lib/x86_64-linux-gnu/libcrypto.so
+OMGsim: /usr/lib/x86_64-linux-gnu/libcurl.so
+OMGsim: /usr/lib/x86_64-linux-gnu/libpthread.a
+OMGsim: /usr/lib/x86_64-linux-gnu/libsz.so
+OMGsim: /usr/lib/x86_64-linux-gnu/libz.so
+OMGsim: /usr/lib/x86_64-linux-gnu/libdl.a
+OMGsim: /usr/lib/x86_64-linux-gnu/libm.so
 OMGsim: /usr/lib/x86_64-linux-gnu/libmysqlcppconn.so
 OMGsim: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4FR.so
 OMGsim: /usr/lib/x86_64-linux-gnu/libQt5OpenGL.so.5.15.13
@@ -155,6 +172,8 @@ OMGsim: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4glo
 OMGsim: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4clhep.so
 OMGsim: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4zlib.so
 OMGsim: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4geomUSolids.so
+OMGsim: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5_cpp.so
+OMGsim: /usr/lib/x86_64-linux-gnu/libmysqlcppconn.so
 OMGsim: CMakeFiles/OMGsim.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable OMGsim"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/OMGsim.dir/link.txt --verbose=$(VERBOSE)

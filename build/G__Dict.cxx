@@ -402,6 +402,7 @@ nullptr
 "/home/bouta-mohammed/work/cppm/lactel/trunk/tests/include",
 "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include",
 "/home/bouta-mohammed/work/cppm/lactel/trunk/utils/include",
+"/usr/include/hdf5/serial",
 "/home/bouta-mohammed/work/cppm/lactel/trunk",
 "/home/bouta-mohammed/root/root_install/include/",
 "/home/bouta-mohammed/work/cppm/lactel/trunk/build/",

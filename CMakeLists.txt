@@ -19,6 +19,7 @@ find_library(MYSQLCPPCONN_LIBRARY
     NAMES mysqlcppconn
 )
 
+find_package(HDF5 REQUIRED COMPONENTS C CXX)
 
 #Git Version
 execute_process(COMMAND git --no-pager describe --tags --always
@@ -119,7 +120,7 @@ file(GLOB TESTS tests/[a-zA-Z1-9]*.cxx)
 message("programs: ${PROGRAMS}")
 
 #bstr: set include directories, include ROOT
-include_directories (${headers} ${ROOT_INCLUDE_DIRS} ${Geant4_INCLUDE_DIRS} ${MYSQLCPPCONN_INCLUDE_DIR})
+include_directories (${headers} ${ROOT_INCLUDE_DIRS} ${Geant4_INCLUDE_DIRS} ${MYSQLCPPCONN_INCLUDE_DIR} ${HDF5_INCLUDE_DIRS})
 if (DEFINED ENV{X11HEADERS_PATH})
     include_directories (/opt/X11/include)
 endif()
@@ -183,28 +184,27 @@ if (${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER "4.8.9")
   SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdiagnostics-color=auto")
 endif(${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER "4.8.9")
 
-
 SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__CXX_MIN_VERSION=${CMAKE_CXX_COMPILER_VERSION}")
 
 # (6) finish with all the binaries
 if(ENABLE_TESTING)
   add_library(libOMG SHARED ${sources})
   add_library(BAnalysis SHARED ${ba_sources} G__Dict.cxx)
-  target_link_libraries(libOMG BAnalysis  ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB} ${MYSQLCPPCONN_LIBRARY})
+  target_link_libraries(libOMG BAnalysis  ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB} ${HDF5_LIBRARIES} ${MYSQLCPPCONN_LIBRARY})
   SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DENABLE_TESTING=1")
   foreach(aprog IN LISTS TESTS)
     get_filename_component(aprogname ${aprog} NAME_WE)
     add_executable(${aprogname} ${aprog} ${headers} ${test_headers} ${test_sources})
-    target_link_libraries(${aprogname} libOMG BAnalysis ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB} ${MYSQLCPPCONN_LIBRARY})
+    target_link_libraries(${aprogname} libOMG BAnalysis ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB} ${HDF5_LIBRARIES} ${MYSQLCPPCONN_LIBRARY})
   endforeach ()
 else(ENABLE_TESTING)
   add_library(libOMG SHARED ${sources})
   add_library(BAnalysis SHARED ${ba_sources} G__Dict.cxx)
-  target_link_libraries(libOMG BAnalysis ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB} ${MYSQLCPPCONN_LIBRARY})
+  target_link_libraries(libOMG BAnalysis ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB} ${HDF5_LIBRARIES} ${MYSQLCPPCONN_LIBRARY})
   foreach(aprog IN LISTS PROGRAMS)
     get_filename_component(aprogname ${aprog} NAME_WE)
     add_executable(${aprogname} ${aprog} ${headers})
-    target_link_libraries(${aprogname} libOMG BAnalysis ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB} ${MYSQLCPPCONN_LIBRARY})
+    target_link_libraries(${aprogname} libOMG BAnalysis ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB} ${HDF5_LIBRARIES} ${MYSQLCPPCONN_LIBRARY})
   endforeach ()
 endif(ENABLE_TESTING)
 

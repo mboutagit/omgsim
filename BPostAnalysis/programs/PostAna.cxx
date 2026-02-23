@@ -27,7 +27,7 @@ int main(int argc, char* argv[]){
     
     // file->Print();
 
-    TTree* genTree = (TTree*)file->Get("Gen");
+    // TTree* genTree = (TTree*)file->Get("Gen");
     TTree* hitTree = (TTree*)file->Get("Hit");
     TTree* runTree = (TTree*)file->Get("Run");
     TTree* detEvtTree = (TTree*)file->Get("DetectedEvent");
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]){
     Hit hit;
     BAnalysisManager::Run* run;
 
-    genTree->SetBranchAddress("gen", &gps);
+    // genTree->SetBranchAddress("gen", &gps);
     hitTree->SetBranchAddress("Hit", &hit);
     runTree->SetBranchAddress("Run", &run);
     detEvtTree->SetBranchAddress("DetectedEvent", &evt);
@@ -47,16 +47,37 @@ int main(int argc, char* argv[]){
     float gen_surface_m2  = TMath::Pi() * radius*radius; // pi*R²
     float gen_surface_cm2 = gen_surface_m2 * 1e4;
  
-    float expected_muons_per_m2_per_s = 140; // by m²
+    float expected_muons_per_m2_per_s = 110; // by m²
     float expected_muons_per_cm2_per_s = expected_muons_per_m2_per_s/1e4; // to cm²
     float expected_muons_per_gensurf = expected_muons_per_cm2_per_s * gen_surface_cm2;
     float number_of_generated_muons_per_gensurf = 1e5; // 100 000 events
     float exposure_time = number_of_generated_muons_per_gensurf / expected_muons_per_gensurf;
+
+    std::vector<std::pair<std::string, TH1F*>> hists_data;
+    std::vector<std::pair<std::string, TH1F*>> hists_mc;
+    std::vector<TCanvas*>  canvas_data =  getRealDataPlots(hists_data);
+    std::vector<TCanvas*>  canvas_mc =  getNPEPlot(detEvtTree, evt, hists_mc, exposure_time, 1e7);
+
+
+    // std::vector<TCanvas*> canvas = getNPEPlot(detEvtTree, evt, exposure_time, 1e7);
+    // for(auto& c : canvas)
+    //   c->Draw();
+
+    TCanvas* cs = new TCanvas("cs");
+    cs->SetLogy();
+    for(auto& entry : hists_data){
+      entry.second->SetLineStyle(7);
+      entry.second->Draw("hist same");
+    }
+
+    for(auto& entry : hists_mc){
+      int pos = entry.first.find("amp_ch"); // find amplitude hists
+      if(pos != std::string::npos)
+        entry.second->Draw("hist same");
+    }
       
 
-    std::vector<TCanvas*> canvas = getNPEPlot(detEvtTree, evt, exposure_time, 1e7);
-    for(auto& c : canvas)
-      c->Draw();
+
     // getDAQParameter(detEvtTree, evt, "Amplitude")->Draw();
 
 

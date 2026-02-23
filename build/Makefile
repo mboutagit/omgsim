@@ -156,6 +156,19 @@ BAnalysis/fast:
 .PHONY : BAnalysis/fast
 
 #=============================================================================
+# Target rules for targets named BRateBuilder
+
+# Build rule for target.
+BRateBuilder: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BRateBuilder
+.PHONY : BRateBuilder
+
+# fast build rule for target.
+BRateBuilder/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BRateBuilder.dir/build.make CMakeFiles/BRateBuilder.dir/build
+.PHONY : BRateBuilder/fast
+
+#=============================================================================
 # Target rules for targets named PostAna
 
 # Build rule for target.
@@ -228,6 +241,30 @@ AA/src/XPPhSteppingAction.s: AA/src/XPPhSteppingAction.cc.s
 AA/src/XPPhSteppingAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/AA/src/XPPhSteppingAction.cc.s
 .PHONY : AA/src/XPPhSteppingAction.cc.s
+
+BPostAnalysis/programs/BRateBuilder.o: BPostAnalysis/programs/BRateBuilder.cxx.o
+.PHONY : BPostAnalysis/programs/BRateBuilder.o
+
+# target to build an object file
+BPostAnalysis/programs/BRateBuilder.cxx.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BRateBuilder.dir/build.make CMakeFiles/BRateBuilder.dir/BPostAnalysis/programs/BRateBuilder.cxx.o
+.PHONY : BPostAnalysis/programs/BRateBuilder.cxx.o
+
+BPostAnalysis/programs/BRateBuilder.i: BPostAnalysis/programs/BRateBuilder.cxx.i
+.PHONY : BPostAnalysis/programs/BRateBuilder.i
+
+# target to preprocess a source file
+BPostAnalysis/programs/BRateBuilder.cxx.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BRateBuilder.dir/build.make CMakeFiles/BRateBuilder.dir/BPostAnalysis/programs/BRateBuilder.cxx.i
+.PHONY : BPostAnalysis/programs/BRateBuilder.cxx.i
+
+BPostAnalysis/programs/BRateBuilder.s: BPostAnalysis/programs/BRateBuilder.cxx.s
+.PHONY : BPostAnalysis/programs/BRateBuilder.s
+
+# target to generate assembly for a file
+BPostAnalysis/programs/BRateBuilder.cxx.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BRateBuilder.dir/build.make CMakeFiles/BRateBuilder.dir/BPostAnalysis/programs/BRateBuilder.cxx.s
+.PHONY : BPostAnalysis/programs/BRateBuilder.cxx.s
 
 BPostAnalysis/programs/PostAna.o: BPostAnalysis/programs/PostAna.cxx.o
 .PHONY : BPostAnalysis/programs/PostAna.o
@@ -1652,6 +1689,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... G__Dict"
 	@echo "... BAnalysis"
+	@echo "... BRateBuilder"
 	@echo "... OMGsim"
 	@echo "... PostAna"
 	@echo "... libOMG"
@@ -1661,6 +1699,9 @@ help:
 	@echo "... AA/src/XPPhSteppingAction.o"
 	@echo "... AA/src/XPPhSteppingAction.i"
 	@echo "... AA/src/XPPhSteppingAction.s"
+	@echo "... BPostAnalysis/programs/BRateBuilder.o"
+	@echo "... BPostAnalysis/programs/BRateBuilder.i"
+	@echo "... BPostAnalysis/programs/BRateBuilder.s"
 	@echo "... BPostAnalysis/programs/PostAna.o"
 	@echo "... BPostAnalysis/programs/PostAna.i"
 	@echo "... BPostAnalysis/programs/PostAna.s"

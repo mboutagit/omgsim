@@ -5,10 +5,13 @@
 
 
 using namespace tools;
+using namespace H5;
 
 namespace km3net
 {
-    std::vector<TCanvas*> getNPEPlot(TTree* tree, BAnalysisManager::DetectedEvent* evt, float exposure_time, float t_coin){
+    std::vector<TCanvas*> getNPEPlot(TTree* tree, BAnalysisManager::DetectedEvent* evt, 
+                                        std::vector<std::pair<std::string, TH1F*>>& hists, 
+                                        float exposure_time, float t_coin){
         std::vector<TCanvas*> vCanvas;
         float xmin=0.;
         float xmax=200.;
@@ -102,7 +105,6 @@ namespace km3net
                                         nbins_amp, xmin_amp, xmax_amp
                                     );
 
-
         TH2F* npeCoin_oms_cut = new TH2F("npeCoin_oms_cut", 
                                         ("NPE - Coincidence #Deltat"+ std::to_string((int)t_coin) +" ns; nPE OM0; nPE OM1").c_str(),
                                         nbins, xmin, xmax,
@@ -149,27 +151,27 @@ namespace km3net
             npe_om2->Fill(nhits_om2, 1/exposure_time);
 
             if(evt->isACoincidence(t_coin)){
-                int nhits_om1 = 0;
-                int nhits_om2 = 0;
+                int nhits_om1_coin = 0;
+                int nhits_om2_coin = 0;
 
                 ampCoin_om1->Fill(abs(ymin_a0)/1e3, 1/exposure_time);
                 ampCoin_om2->Fill(abs(ymin_a1)/1e3, 1/exposure_time);
 
                 for(auto& hit : evt->hits){
                     if(hit.om_id == 1)
-                    nhits_om1++;
+                    nhits_om1_coin++;
 
                     if(hit.om_id == 2)
-                    nhits_om2++;
+                    nhits_om2_coin++;
                 }
 
-                npeCoin_oms_cut->Fill(nhits_om1, nhits_om2, 1/exposure_time);
+                npeCoin_oms_cut->Fill(nhits_om1_coin, nhits_om2_coin, 1/exposure_time);
 
-                npeCoin_om1->Fill(nhits_om1, 1/exposure_time);
-                npeCoin_om2->Fill(nhits_om2, 1/exposure_time); 
-                if(nhits_om1 >= 25 && nhits_om2 >= 25){ // coicidence and npe cut
-                    npeCoin_om1_cut->Fill(nhits_om1, 1/exposure_time);
-                    npeCoin_om2_cut->Fill(nhits_om2, 1/exposure_time); 
+                npeCoin_om1->Fill(nhits_om1_coin, 1/exposure_time);
+                npeCoin_om2->Fill(nhits_om2_coin, 1/exposure_time); 
+                if(nhits_om1_coin >= 25 && nhits_om2_coin >= 25){ // coicidence and npe cut
+                    npeCoin_om1_cut->Fill(nhits_om1_coin, 1/exposure_time);
+                    npeCoin_om2_cut->Fill(nhits_om2_coin, 1/exposure_time); 
                     
                     ampCoin_om1_cut->Fill(abs(ymin_a0)/1e3, 1/exposure_time);
                     ampCoin_om2_cut->Fill(abs(ymin_a1)/1e3, 1/exposure_time);
@@ -290,7 +292,6 @@ namespace km3net
 
         // plot npe with and without coincidence
         TCanvas* canvas_npe_wwCoin = new TCanvas("canvas_npe_wwCoin", "NPE", 800, 600);
-        canvas_npe_wwCoin->SetLogy();
         npe_om1->SetLineColor(1);
         npe_om2->SetLineColor(2);
         npeCoin_om1->SetLineColor(3);
@@ -311,18 +312,37 @@ namespace km3net
 
         // plot npe OM1 vs OM2 without coincidence
         TCanvas* canvas_npeOms = new TCanvas("canvas_npeOms", "NPE", 800, 600);
-        canvas_npeOms->SetLogy();
         npeCoin_oms_cut->SetLineColor(2);
         npeCoin_oms_cut->Draw("colz");
-
         npeCoin_oms_cut->SetStats(0);
         // TLegend* leg_amp = new TLegend(.6, .8, .8, .9);
         // leg_amp->AddEntry(npeCoin_om1, "OM", "l");
         // leg_amp->Draw();
 
+        TGraph* ampRatio_om1 = new TGraph();
+        TGraph* ampRatio_om2 = new TGraph();
+        for(int i = 0; i < amp_om1->GetNbinsX(); i++){
+            if(amp_om1->GetBinContent(i) != 0)
+                ampRatio_om1->SetPoint(i, amp_om1->GetBinCenter(i), ampCoin_om1->GetBinContent(i)/amp_om1->GetBinContent(i));  
+                
+            if(amp_om2->GetBinContent(i))
+                ampRatio_om2->SetPoint(i, amp_om2->GetBinCenter(i), ampCoin_om2->GetBinContent(i)/amp_om2->GetBinContent(i));
+        }
 
+        TCanvas* canvas_ampRatio = new TCanvas("Ratio", "Amp", 800, 600);
+        ampRatio_om1->SetMarkerColor(1);
+        ampRatio_om2->SetMarkerColor(2);
+        ampRatio_om1->SetMarkerStyle(28);
+        ampRatio_om2->SetMarkerStyle(30);
+        ampRatio_om1->Draw("AP");
+        ampRatio_om2->Draw("P same");
+        ampRatio_om1->SetStats(0);
 
-
+        TLegend* leg_ampRatio = new TLegend(.6, .8, .8, .9);
+        leg_ampRatio->AddEntry(ampRatio_om1, "OM0 - Upper", "p");
+        leg_ampRatio->AddEntry(ampRatio_om2, "OM1 - Lower", "p");
+        leg_ampRatio->Draw();
+        vCanvas.push_back(canvas_ampRatio);
 
         vCanvas.push_back(canvas_npeOms);
         vCanvas.push_back(canvas);
@@ -331,6 +351,23 @@ namespace km3net
         vCanvas.push_back(canvas_npe);
         vCanvas.push_back(canvas_amp_wwCoin);
         vCanvas.push_back(canvas_npe_wwCoin);
+
+
+        hists.push_back(std::pair("mc_npe_ch0_run3", npe_om1));
+        hists.push_back(std::pair("mc_npe_ch1_run3", npe_om2));
+        hists.push_back(std::pair("mc_npe_ch0_run4", npeCoin_om1));
+        hists.push_back(std::pair("mc_npe_ch1_run4", npeCoin_om2));
+        hists.push_back(std::pair("mc_npeCut_ch0_run3", npe_om1_cut));
+        hists.push_back(std::pair("mc_npeCut_ch0_run3", npe_om2_cut));
+        hists.push_back(std::pair("mc_npeCut_ch0_run4", npeCoin_om1_cut));
+        hists.push_back(std::pair("mc_npeCut_ch0_run4", npeCoin_om2_cut));
+        hists.push_back(std::pair("mc_amp_ch0_run3", amp_om1));
+        hists.push_back(std::pair("mc_amp_ch1_run3", amp_om2));
+        hists.push_back(std::pair("mc_amp_ch0_run4", ampCoin_om1));
+        hists.push_back(std::pair("mc_amp_ch1_run4", ampCoin_om2));
+        hists.push_back(std::pair("mc_ampCut_ch0_run4", ampCoin_om1_cut)); 
+        hists.push_back(std::pair("mc_ampCut_ch1_run4", ampCoin_om2_cut)); 
+        
         return vCanvas;
 
     }
@@ -376,4 +413,99 @@ namespace km3net
         }
         return new TCanvas;
     }
+
+
+    std::vector<TCanvas*>  getRealDataPlots(std::vector<std::pair<std::string, TH1F*>>& hists){
+        float xmin=0.;
+        float xmax=2.4;
+        float unitsPerBin=10/1e3;
+        const int nbins= (int)((xmax - xmin)/unitsPerBin);
+        std::string prefix="data_";
+
+        std::cout << "\r\033[45C" << " -- xmin: " << xmin 
+                                << " -- xmax: " << xmax 
+                                << " -- unitsPerBin: " << unitsPerBin 
+                                << " -- nbins: " << nbins 
+                                << std::endl;
+
+        std::vector<TCanvas*> canvas;
+        H5File file_run3("/home/bouta-mohammed/work/cppm/lactel/realData/data/run_003/data.h5", H5F_ACC_RDONLY);
+        H5File file_run4("/home/bouta-mohammed/work/cppm/lactel/realData/data/run_004/data.h5", H5F_ACC_RDONLY);
+
+        DataSet dataset_run3 = file_run3.openDataSet("channel_data/peak");
+        DataSet dataset_run4 = file_run4.openDataSet("channel_data/peak");
+
+        DataSpace dataspace_run3 = dataset_run3.getSpace();
+        DataSpace dataspace_run4 = dataset_run4.getSpace();
+
+        hsize_t dims_run3[2], dims_run4[2];
+        dataspace_run3.getSimpleExtentDims(dims_run3, NULL);
+        dataspace_run4.getSimpleExtentDims(dims_run4, NULL);
+
+        // std::cout << "Dimensions: " << dims_run3[0] << " x " << dims_run3[1] << std::endl;
+
+        std::vector<double> data_run3(dims_run3[0]*dims_run3[1]);
+        std::vector<double> data_run4(dims_run4[0]*dims_run4[1]);
+        dataset_run3.read(data_run3.data(), PredType::NATIVE_DOUBLE);
+        dataset_run4.read(data_run4.data(), PredType::NATIVE_DOUBLE);
+
+        TH1F* hist0_run3= new TH1F("hist0_run3", "hist0_run3 amp OM0 run003",
+                                nbins, xmin, xmax);
+        TH1F* hist1_run3= new TH1F("hist1_run3", "hist1_run3 amp OM1 run003",
+                                nbins, xmin, xmax);
+
+        TH1F* hist0_run4= new TH1F("hist0_run4", "hist0_run4 amp OM0 run003",
+                                nbins, xmin, xmax);
+        TH1F* hist1_run4= new TH1F("hist1_run4", "hist1_run4 amp OM1 run003",
+                                nbins, xmin, xmax);
+        
+        for(long i = 0; i < dims_run3[0]; i++){
+                // std::cout << "line: " << i << " -- col0: " << data[i*dims_run3[1]] << endl; // " - col1: " << data[i*dims_run3[1]+1] << std::endl;
+                hist0_run3->Fill(abs(data_run3[i*dims_run3[1]]), 1./410);
+                hist1_run3->Fill(abs(data_run3[i*dims_run3[1]+1]), 1./410);
+        }
+
+        for(long i = 0; i < dims_run4[0]; i++){
+                // std::cout << "line: " << i << " -- col0: " << data[i*dims_run3[1]] << endl; // " - col1: " << data[i*dims_run3[1]+1] << std::endl;
+                hist0_run4->Fill(abs(data_run4[i*dims_run4[1]]), 1./301); // one minute of data
+                hist1_run4->Fill(abs(data_run4[i*dims_run4[1]+1]), 1./301); // one minute of data
+        }
+
+
+
+        TCanvas* can = new TCanvas("can", "can ", 800, 600);
+        can->SetLogy();
+        hist0_run3->SetLineColor(1);
+        hist1_run3->SetLineColor(2);
+        hist0_run4->SetLineColor(3);
+        hist1_run4->SetLineColor(4);
+        hist0_run3->Draw("hist");
+        hist1_run3->Draw("hist same");
+        hist0_run4->Draw("hist same");
+        hist1_run4->Draw("hist same");
+
+        hist0_run3->SetStats(0);
+
+        TLegend* leg = new TLegend(.6, .8, .8, .9);
+        leg->AddEntry(hist0_run3, "OM0 - Upper", "l");
+        leg->AddEntry(hist1_run3, "OM1 - Lower", "l");
+        leg->AddEntry(hist0_run4, "C - OM0 - Upper", "l");
+        leg->AddEntry(hist1_run4, "C - OM1 - Lower", "l");
+        leg->Draw();
+
+        canvas.push_back(can);
+
+        hists.push_back(std::pair("ch0_run3", hist0_run3));
+        hists.push_back(std::pair("ch1_run3", hist1_run3));
+        hists.push_back(std::pair("ch0_run4", hist0_run4));
+        hists.push_back(std::pair("ch1_run4", hist1_run4));
+
+        container.push_back(std::pair("ch0_run3", hist0_run3));
+        container.push_back(std::pair("ch1_run3", hist1_run3));
+        container.push_back(std::pair("ch0_run4", hist0_run4));
+        container.push_back(std::pair("ch1_run4", hist1_run4));
+
+        return canvas;
+    }
+
 } // namespace km3net

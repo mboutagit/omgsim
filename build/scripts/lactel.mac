@@ -15,7 +15,7 @@
 /KM3/det/setTargetLength  6 m
 
 /LACTEL/BDet/targetType M2
-/LACTEL/BDet/acceptanceAngle 1 deg
+/LACTEL/BDet/acceptanceAngle 60 deg
 
 /LACTEL/BPGA/genParsMode integral
 
@@ -42,16 +42,14 @@
 /vis/scene/add/axes 0 0 0 1 m
 /vis/viewer/set/viewpointThetaPhi 105 -60  deg
 
-# /run/beamOn 100
+# /run/beamOn 5000
 # /run/beamOn 20000
 # /run/beamOn 20000
+# /run/beamOn 20000
 # /run/beamOn 10000
 # /run/beamOn 10000
 # /run/beamOn 10000
 # /run/beamOn 10000
-
-
-
 
 #/vis/verbose errors
 

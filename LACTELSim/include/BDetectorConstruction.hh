@@ -46,7 +46,7 @@ namespace lactel
 
         void DefineOpticalProperties();
         bool IsRunning(){if(state == DetectorState::RUN) return true; else return false;}
-        bool useDAD(){return useDAQ;}
+        bool useDAQStatus(){return useDAQ;}
         void autoWorldSize();
         
         void getOMIDbyVolumeName(std::string volumeName);

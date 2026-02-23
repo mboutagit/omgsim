@@ -90,7 +90,8 @@ namespace lactel
             if(pv->GetName().data() == name){
                 volumes.push_back(pv);
             }
-        }                  
+        }     
+        return volumes;               
     }
 
     std::vector<G4VPhysicalVolume*> BDetectorConstruction::getPhysicalVolumesByNameLike(std::string name){
@@ -99,7 +100,8 @@ namespace lactel
             if(pv->GetName().rfind(name, 0) == 0){
                 volumes.push_back(pv);
             }
-        }                  
+        }  
+        return volumes;                
     }
 
 
@@ -252,12 +254,12 @@ namespace lactel
                 }       
             }
             else{
-                std::cerr << functionName << "Check the /KM3/BDet/targetType option. it shoulb be Mxx" << endl;
+                std::cerr << functionName << "Check the /KM3/BDet/targetType option. it should be Mxx" << endl;
                 exit(-1);
             }
         } 
         else{
-            std::cerr << functionName << "Check the /KM3/BDet/targetType option. it shoulb be Mxx" << endl;
+            std::cerr << functionName << "Check the /KM3/BDet/targetType option. it should be Mxx" << endl;
             exit(-1);
         } 
     }
@@ -311,7 +313,7 @@ namespace lactel
         
         // double radius = e * tan(acceptanceAngle/rad);
         // double radius = 5.96*m;
-        double radius = 6.19*m;
+        double radius = genSurfSize.getY();
         std::cout << "\r\033[10C\033[1;31m" << "autoGenSize: " << autoGenSize << "\033[0m" << std::endl;
 
         G4Material* myVacuum = new G4Material("CustomVacuum", z, am, density, kStateGas, temperature, pressure);
@@ -547,8 +549,13 @@ namespace lactel
         logicVolume->SetVisAttributes(cellCol);
         }
         
-        
-        return new G4PVPlacement(theRot, thePos, logicVolume, PosPar.Name, // add identifier to distinguish volumes
+        std::string name = PosPar.Name.data ();
+        if(PosPar.Name == "AntaresOM")
+        name = PosPar.om_id;
+
+        std::cout << "\r\033[55C" << "Name: " << name << std::endl;
+
+        return new G4PVPlacement(theRot, thePos, logicVolume, name, // add identifier to distinguish volumes
                         WhereToPlace, true, PosPar.ID);
 
     }
@@ -618,22 +625,23 @@ namespace lactel
         for (auto& VolPar: fVolumeList [fDetectorTypeName])
         { 
             fPlacedVolumeDict[VolPar.Name] = PlaceThem (KM3PassiveVolumeMgr::GetIt (), VolPar);
-            if(fPlacedVolumeDict[VolPar.Name]->GetName().rfind("OuterCell", 0) == 0){
-                // fPlacedVolumeDict[VolPar.Name]->SetName("OLC");
-            }
+            // if(fPlacedVolumeDict[VolPar.Name]->GetName().rfind("OuterCell", 0) == 0){
+            //     // fPlacedVolumeDict[VolPar.Name]->SetName("OLC");
+            // }
         }
 
         for (auto& VolPar: fVolumeList [fDetectorTypeName])
         {
             if (VolPar.BorderSurfaceMaterial.size () == 0 || VolPar.BorderSurfaceWith.size () ==0)
-            continue;
+                continue;
 
             if (G4VPhysicalVolume* VolSecond = fPlacedVolumeDict[VolPar.BorderSurfaceWith])
             if (G4VPhysicalVolume* VolBase = fPlacedVolumeDict [VolPar.Name])
                 if (G4OpticalSurface* the_surface = KM3Material::GetIt()->GetOpticalSurface (VolPar.BorderSurfaceMaterial))
                 {
                     new G4LogicalBorderSurface(VolPar.Name + VolPar.BorderSurfaceWith +
-                                            VolPar.BorderSurfaceMaterial + "_border", VolBase, VolSecond,the_surface);
+                                                VolPar.BorderSurfaceMaterial + 
+                                                "_border", VolBase, VolSecond, the_surface);
                 }
         }
 

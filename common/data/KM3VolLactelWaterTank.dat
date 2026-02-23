@@ -12,7 +12,7 @@ OuterCell:
     Z = 1005;
 
     CheckOverlaps = false;
-    SkinMaterial="AbsorberSurf";
+    SkinMaterial="AbsorberPVC";
 }
 
 InnerCell:
@@ -94,7 +94,7 @@ LactelWaterTank1:
     RefVolume = "OuterCell";
     OperandVolume = "InnerCell";
     CheckOverlaps = false;
-    SkinMaterial="AbsorberSurf";
+    SkinMaterial="AbsorberPVC";
 }
 
 LactelWaterTank2:
@@ -112,5 +112,5 @@ LactelWaterTank2:
     RefVolume = "OuterCell";
     OperandVolume = "InnerCell";
     CheckOverlaps = false;
-    SkinMaterial="AbsorberSurf";
+    SkinMaterial="AbsorberPVC";
 }
