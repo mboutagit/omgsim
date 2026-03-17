@@ -12,7 +12,9 @@
 #include "G4Sphere.hh"
 #include "BLogger.hh"
 
+#include "OM.hh"
 
+#include "G4ProductionCuts.hh"
 
 
 using namespace std;
@@ -59,6 +61,9 @@ namespace lactel
         std::vector<G4VPhysicalVolume*> getPhysicalVolumesByName(std::string name);
         std::vector<G4VPhysicalVolume*> getPhysicalVolumesByNameLike(std::string name);
 
+        bool isAnOM(G4VPhysicalVolume*);
+        OM* getItsOM(G4VPhysicalVolume*);
+
         static BDetectorConstruction* GetIt();
         static DetectorState state;
         static bool useDAQ;
@@ -81,6 +86,10 @@ namespace lactel
         static G4ThreeVector genSurfSize;
         static bool autoGenSize;
 
+        static std::set<std::string> fOMIDs;
+        static std::map<OM*, G4VPhysicalVolume*> fOMPhysicalVolumes;
+        
+        void PrintAllMaterialProperties(ostream& out = std::cout);
         
 
         void setGenerationShape(std::string shape);
@@ -102,6 +111,13 @@ namespace lactel
         }
 
         DetGeoConf detGeoConf;
+
+        std::map<std::string, std::pair<G4VPhysicalVolume*, PositionParameters>> volumesMap;
+        G4VPhysicalVolume* getPhysicalVolumeByName(std::string name);
+        
+        G4Region* lakeWaterRegion;
+        G4ProductionCuts* lakeRegionCuts;
+
 
         // class LactelWaterTank
         // {

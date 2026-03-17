@@ -190,6 +190,10 @@ namespace km3net
                 currentMPT->GetProperty((char *)(const char *)(t.sval));
               if (currentPV == NULL) {
                 currentPV= new G4MaterialPropertyVector();
+                std::cout << string(25, '-/') << "Adding property: " << (char *)(const char *)(t.sval) 
+                            << "\nValues: "; 
+                            currentPV->DumpValues();
+                            cout << std::endl;
                 currentMPT->AddProperty((char *)(const char *)(t.sval),
                                           currentPV);
               }

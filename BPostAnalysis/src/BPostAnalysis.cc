@@ -7,10 +7,10 @@
 using namespace tools;
 using namespace H5;
 
-namespace km3net
+namespace lactel
 {
     std::vector<TCanvas*> getNPEPlot(TTree* tree, BAnalysisManager::DetectedEvent* evt, 
-                                        std::vector<std::pair<std::string, TH1F*>>& hists, 
+                                        histsByName& hists, 
                                         float exposure_time, float t_coin){
         std::vector<TCanvas*> vCanvas;
         float xmin=0.;
@@ -319,15 +319,15 @@ namespace km3net
         // leg_amp->AddEntry(npeCoin_om1, "OM", "l");
         // leg_amp->Draw();
 
-        TGraph* ampRatio_om1 = new TGraph();
-        TGraph* ampRatio_om2 = new TGraph();
-        for(int i = 0; i < amp_om1->GetNbinsX(); i++){
-            if(amp_om1->GetBinContent(i) != 0)
-                ampRatio_om1->SetPoint(i, amp_om1->GetBinCenter(i), ampCoin_om1->GetBinContent(i)/amp_om1->GetBinContent(i));  
+        TGraph* ampRatio_om1 = ratio(amp_om1, ampCoin_om1); //new TGraph();
+        TGraph* ampRatio_om2 = ratio(amp_om2, ampCoin_om2); //new TGraph();
+        // for(int i = 0; i < amp_om1->GetNbinsX(); i++){
+        //     if(amp_om1->GetBinContent(i) != 0)
+        //         ampRatio_om1->SetPoint(i, amp_om1->GetBinCenter(i), ampCoin_om1->GetBinContent(i)/amp_om1->GetBinContent(i));  
                 
-            if(amp_om2->GetBinContent(i))
-                ampRatio_om2->SetPoint(i, amp_om2->GetBinCenter(i), ampCoin_om2->GetBinContent(i)/amp_om2->GetBinContent(i));
-        }
+        //     if(amp_om2->GetBinContent(i))
+        //         ampRatio_om2->SetPoint(i, amp_om2->GetBinCenter(i), ampCoin_om2->GetBinContent(i)/amp_om2->GetBinContent(i));
+        // }
 
         TCanvas* canvas_ampRatio = new TCanvas("Ratio", "Amp", 800, 600);
         ampRatio_om1->SetMarkerColor(1);
@@ -415,7 +415,7 @@ namespace km3net
     }
 
 
-    std::vector<TCanvas*>  getRealDataPlots(std::vector<std::pair<std::string, TH1F*>>& hists){
+    std::vector<TCanvas*>  getRealDataPlots(histsByName& hists){
         float xmin=0.;
         float xmax=2.4;
         float unitsPerBin=10/1e3;
@@ -495,17 +495,39 @@ namespace km3net
 
         canvas.push_back(can);
 
-        hists.push_back(std::pair("ch0_run3", hist0_run3));
-        hists.push_back(std::pair("ch1_run3", hist1_run3));
-        hists.push_back(std::pair("ch0_run4", hist0_run4));
-        hists.push_back(std::pair("ch1_run4", hist1_run4));
+        hists.push_back(std::pair("amp_ch0_run3", hist0_run3));
+        hists.push_back(std::pair("amp_ch1_run3", hist1_run3));
+        hists.push_back(std::pair("amp_ch0_run4", hist0_run4));
+        hists.push_back(std::pair("amp_ch1_run4", hist1_run4));
 
-        container.push_back(std::pair("ch0_run3", hist0_run3));
-        container.push_back(std::pair("ch1_run3", hist1_run3));
-        container.push_back(std::pair("ch0_run4", hist0_run4));
-        container.push_back(std::pair("ch1_run4", hist1_run4));
+        container.push_back(std::pair("amp_ch0_run3", hist0_run3));
+        container.push_back(std::pair("amp_ch1_run3", hist1_run3));
+        container.push_back(std::pair("amp_ch0_run4", hist0_run4));
+        container.push_back(std::pair("amp_ch1_run4", hist1_run4));
 
         return canvas;
     }
 
-} // namespace km3net
+    TGraph* ratio(TH1* h1, TH1* h2){
+        int bins_h1 = h1->GetNbinsX();
+        int bins_h2 = h2->GetNbinsX();
+        if(bins_h1 != bins_h2 ){
+            std::cout << "\r\033[20C" << "Error: bins mismatch." << std::endl;
+            return nullptr;
+        }
+
+        TGraph* graph = new TGraph();
+            
+        for(int i = 0; i < bins_h1; i++){
+            if(h1->GetBinContent(i) != 0)
+                graph->SetPoint(i, h1->GetBinCenter(i), h2->GetBinContent(i)/h1->GetBinContent(i));  
+        }
+        return graph;
+    }
+
+    TH1* getHistByName(const histsByName& vec, std::string key) {
+        return std::find_if(vec.begin(), vec.end(),
+                        [key](const auto& p) { return p.first == key; })->second;
+    }
+
+} // namespace lactel

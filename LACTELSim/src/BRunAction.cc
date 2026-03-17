@@ -59,6 +59,9 @@ namespace lactel
         BAnalysisManager * ana = BAnalysisManager::getIt();
         BPrimaryGeneratorAction * bpga = BPrimaryGeneratorAction::getInstance();
         DAQManager* daqManager = DAQManager::getIt();
+        BDetectorConstruction* det = BDetectorConstruction::GetIt();
+
+        // det->PrintAllMaterialProperties();
 
 
         ana->runTree->Fill();

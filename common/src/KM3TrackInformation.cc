@@ -14,6 +14,7 @@ namespace km3net {
     originalParticleName = "";
     originalParticleType = "";
     originalPosition = G4ThreeVector(0.,0.,0.);
+    vertexPosition = G4ThreeVector(0.,0.,0.);
     originalMomentum = G4ThreeVector(0.,0.,0.);
     originalEnergy = 0.;
     originalTime = 0.;
@@ -30,6 +31,7 @@ namespace km3net {
     originalParticleName = INFO->GetOriginalParticleName();
     originalParticleType = INFO->GetOriginalParticleType();
     originalPosition = INFO->GetOriginalPosition();
+    vertexPosition = INFO->GetVertexPosition();
     originalLocalPosition = INFO->GetOriginalPosition();
     originalPreVolume = INFO->GetOriginalPrePV();
     originalPostVolume = INFO->GetOriginalPostPV();
@@ -53,6 +55,7 @@ namespace km3net {
     originalParticleName = aTrack->GetDefinition()->GetParticleName();
     originalParticleType = aTrack->GetDefinition()->GetParticleType();
     originalPosition = aTrack->GetPosition();
+    vertexPosition = aTrack->GetVertexPosition();
 
 
     if (aTrack->GetStep () != NULL) {

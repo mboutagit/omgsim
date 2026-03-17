@@ -1220,6 +1220,7 @@ CMakeFiles/BAnalysis.dir/G__Dict.cxx.o: \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4Tubs.icc \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4Sphere.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4Sphere.icc \
+ /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4ProductionCuts.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetectorMessenger.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3DetectorMessenger.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4UIcmdWith3VectorAndUnit.hh \
@@ -1435,6 +1436,9 @@ CMakeFiles/BAnalysis.dir/G__Dict.cxx.o: \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4UImessenger.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4UserTrackingAction.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4Event.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BStackingAction.hh \
+ /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4UserStackingAction.hh \
+ /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4OpticalPhoton.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BSteppingAction.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3SteppingAction.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4UserSteppingAction.hh \

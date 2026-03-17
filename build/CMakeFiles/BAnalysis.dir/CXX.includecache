@@ -1442,6 +1442,16 @@ G4ProcessVector.icc
 
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4ProcessVector.icc
 
+/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4ProductionCuts.hh
+globals.hh
+/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/globals.hh
+G4ios.hh
+/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4ios.hh
+vector
+-
+G4ParticleDefinition.hh
+/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4ParticleDefinition.hh
+
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4RandomDirection.hh
 CLHEP/Units/PhysicalConstants.h
 -
@@ -3585,6 +3595,10 @@ G4Sphere.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/G4Sphere.hh
 BLogger.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLogger.hh
+OM.hh
+/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/OM.hh
+G4ProductionCuts.hh
+/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/G4ProductionCuts.hh
 
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetectorMessenger.hh
 KM3DetectorMessenger.hh
@@ -3699,6 +3713,12 @@ G4RunManager.hh
 -
 BEvent.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEvent.hh
+
+/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BStackingAction.hh
+G4UserStackingAction.hh
+/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/G4UserStackingAction.hh
+G4OpticalPhoton.hh
+/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/G4OpticalPhoton.hh
 
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BSteppingAction.hh
 KM3SteppingAction.hh

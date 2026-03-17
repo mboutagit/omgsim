@@ -21,6 +21,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorMessenger.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunAction.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunManager.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
+  "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BStackingAction.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BSteppingAction.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/Utils.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/LinkDef.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
@@ -75,6 +76,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/src/BPrimaryGeneratorMessenger.cc" "CMakeFiles/BAnalysis.dir/LACTELSim/src/BPrimaryGeneratorMessenger.cc.o" "gcc" "CMakeFiles/BAnalysis.dir/LACTELSim/src/BPrimaryGeneratorMessenger.cc.o.d"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/src/BRunAction.cc" "CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunAction.cc.o" "gcc" "CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunAction.cc.o.d"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/src/BRunManager.cc" "CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunManager.cc.o" "gcc" "CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunManager.cc.o.d"
+  "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/src/BStackingAction.cc" "CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.o" "gcc" "CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.o.d"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/src/BSteppingAction.cc" "CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.o" "gcc" "CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.o.d"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/src/Utils.cc" "CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.o" "gcc" "CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.o.d"
   )

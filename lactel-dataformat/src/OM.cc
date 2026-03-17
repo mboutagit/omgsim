@@ -5,10 +5,17 @@ namespace lactel
 {
     
     std::set<std::string> OM::om_ids;
+    std::set<OM*> OM::instances;
     int OM::nInstance = 0;
     ConnectionInfos OM::con = ConnectionInfos("/home/bouta-mohammed/work/cppm/lactel/omTesting/include/config.ini");
 
-    OM::OM(): isOK (false), om_id("OMS0000"){} // default OM ref isOK should be false
+    OM::OM(): isOK (false), om_id("OMS0000"){
+        id = nInstance;
+        nInstance++;
+        om_ids.insert(om_id);
+        instances.insert(this);
+    } // default OM ref isOK should be false
+
     OM::OM(std::string id) : isOK(true), om_id(id){
         if(om_ids.count(id)){
             std::cerr << "\033[1;31mError: OM with id " + id + " already defined!\033[0m" << std::endl;
@@ -17,6 +24,7 @@ namespace lactel
         om_ids.insert(id);
         id = nInstance;
         nInstance++;
+        instances.insert(this);
     }
 
     // OM(OM& om){
@@ -24,7 +32,8 @@ namespace lactel
     // }
 
     OM::~OM(){
-        om_ids.clear();
+        om_ids.erase(this->om_id);
+        nInstance--;
     }
 
     std::string OM::getOMID() const {

@@ -39,6 +39,7 @@ namespace km3net{
     std::string           originalParticleType;
     G4Step                fLastStep;
     G4ThreeVector         originalPosition;
+    G4ThreeVector         vertexPosition;
     G4ThreeVector         originalLocalPosition;
     G4ThreeVector         originalMomentum;
     G4ThreeVector         originalPolarization;
@@ -67,6 +68,7 @@ namespace km3net{
     inline std::string GetOriginalParticleName() const {return originalParticleName;}
     inline std::string GetOriginalParticleType() const {return originalParticleType;}
     inline G4ThreeVector GetOriginalPosition() const {return originalPosition;}
+    inline G4ThreeVector GetVertexPosition() const {return vertexPosition;}
     inline G4ThreeVector GetOriginalLocalPosition() const {return originalLocalPosition;}
     inline G4ThreeVector GetOriginalMomentum() const {return originalMomentum;}
     inline G4ThreeVector GetOriginalPolarization() const {return originalPolarization;}

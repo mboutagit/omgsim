@@ -205,6 +205,10 @@ namespace lactel
                 float om_t; 
                 float om_p; 
 
+                float vrx;
+                float vry;
+                float vrz;
+
                 int om_id;
 
                 static float getMeanTime(std::vector<Hit> hits){

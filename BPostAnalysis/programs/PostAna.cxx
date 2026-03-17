@@ -27,7 +27,7 @@ int main(int argc, char* argv[]){
     
     // file->Print();
 
-    // TTree* genTree = (TTree*)file->Get("Gen");
+    TTree* genTree = (TTree*)file->Get("Gen");
     TTree* hitTree = (TTree*)file->Get("Hit");
     TTree* runTree = (TTree*)file->Get("Run");
     TTree* detEvtTree = (TTree*)file->Get("DetectedEvent");
@@ -38,25 +38,43 @@ int main(int argc, char* argv[]){
     Hit hit;
     BAnalysisManager::Run* run;
 
-    // genTree->SetBranchAddress("gen", &gps);
+    genTree->SetBranchAddress("gen", &gps);
     hitTree->SetBranchAddress("Hit", &hit);
     runTree->SetBranchAddress("Run", &run);
     detEvtTree->SetBranchAddress("DetectedEvent", &evt);
 
-    float radius = 6.19; // in meters
-    float gen_surface_m2  = TMath::Pi() * radius*radius; // pi*R²
+    float radius = 5; // in meters
+    float gen_surface_m2  = TMath::Pi() * radius*radius; // pi*R² disk
     float gen_surface_cm2 = gen_surface_m2 * 1e4;
  
-    float expected_muons_per_m2_per_s = 110; // by m²
+    float expected_muons_per_m2_per_s = 140; // by m²
     float expected_muons_per_cm2_per_s = expected_muons_per_m2_per_s/1e4; // to cm²
     float expected_muons_per_gensurf = expected_muons_per_cm2_per_s * gen_surface_cm2;
-    float number_of_generated_muons_per_gensurf = 1e5; // 100 000 events
+    float number_of_generated_muons_per_gensurf = genTree->GetEntries(); // 100 000 events
     float exposure_time = number_of_generated_muons_per_gensurf / expected_muons_per_gensurf;
 
-    std::vector<std::pair<std::string, TH1F*>> hists_data;
-    std::vector<std::pair<std::string, TH1F*>> hists_mc;
+    std::cout << "\r\033[10C" << "Generated Entries: " << number_of_generated_muons_per_gensurf << std::endl;
+
+    std::cout 
+    << string (100, '=')
+    << "\n"
+    << setw(15) << "A(m\u2082)"
+    << setw(15) << "\u03BCExp"
+    << setw(15) << "\u03BCGen"
+    << setw(15) << "tExpo"
+    <<"\n"
+    << setw(15) << gen_surface_m2
+    << setw(15) << expected_muons_per_m2_per_s
+    << setw(15) << number_of_generated_muons_per_gensurf
+    << setw(15) << exposure_time
+    << "\n"
+    << string (100, '=')
+    << std::endl;
+
+    histsByName hists_data;
+    histsByName hists_mc;
     std::vector<TCanvas*>  canvas_data =  getRealDataPlots(hists_data);
-    std::vector<TCanvas*>  canvas_mc =  getNPEPlot(detEvtTree, evt, hists_mc, exposure_time, 1e7);
+    std::vector<TCanvas*>  canvas_mc =  getNPEPlot(detEvtTree, evt, hists_mc, exposure_time, 15);
 
 
     // std::vector<TCanvas*> canvas = getNPEPlot(detEvtTree, evt, exposure_time, 1e7);
@@ -68,14 +86,47 @@ int main(int argc, char* argv[]){
     for(auto& entry : hists_data){
       entry.second->SetLineStyle(7);
       entry.second->Draw("hist same");
+      std::cout << "\r\033[10C" << "Integral for hist: " << entry.second->GetName() << " is: " << entry.second->Integral() << std::endl;
     }
 
     for(auto& entry : hists_mc){
       int pos = entry.first.find("amp_ch"); // find amplitude hists
-      if(pos != std::string::npos)
+      if(pos != std::string::npos){
         entry.second->Draw("hist same");
+        std::cout << "\r\033[10C" << "Integral for hist: " << entry.second->GetName() << " is: " << entry.second->Integral() << std::endl;
+      }
     }
+
+    TCanvas *c = new TCanvas("c", "Ratio Canvas");
+    c->SetLogy();
+    TGraph* ratio_om0_r3 = lactel::ratio(getHistByName(hists_data, "amp_ch0_run3"), getHistByName(hists_mc, "mc_amp_ch0_run3"));
+    TGraph* ratio_om0_r4 = lactel::ratio(getHistByName(hists_data, "amp_ch0_run4"), getHistByName(hists_mc, "mc_amp_ch0_run4"));
+    ratio_om0_r3->SetTitle("MC(OM0) / Data (OM0); Amplitude [V]; Ratio");
+    ratio_om0_r3->SetLineColor(1);
+    ratio_om0_r3->SetMarkerColor(2);
+    ratio_om0_r3->SetMarkerStyle(7);
+    ratio_om0_r4->SetLineColor(3);
+    ratio_om0_r4->SetMarkerColor(2);
+    ratio_om0_r4->SetMarkerStyle(7);
+    ratio_om0_r3->Draw("ALP");
+    ratio_om0_r4->Draw("LP same");
+
+    TCanvas *c1 = new TCanvas("c1", "Gen");
+    genTree->Draw("cos(fGenTheta*3.14/180):log10(fGenEnergy/1e3)", "", "colz");
+
+    TCanvas *c2 = new TCanvas("c2", "Gen Detected");
+    genTree->Draw("cos(fGenTheta*3.14/180):log10(fGenEnergy/1e3)", "isDetected==1", "colz");
+
+    TIter next(gROOT->GetListOfCanvases());
+    TCanvas* allCanvas;
+    while ((allCanvas = (TCanvas*)next())) {
+        cout << "Canvas: " << c->GetName() << endl;
+    }
+
+
       
+    // Run 3: rate: 1185 evt/s, dead time: 79%
+    // Run 4: rate: 57.5 evt/s, dead time: 3.8%
 
 
     // getDAQParameter(detEvtTree, evt, "Amplitude")->Draw();

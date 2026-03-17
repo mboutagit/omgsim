@@ -385,6 +385,10 @@ namespace lactel
         fHits.time = info->GetOriginalTime();
         fHits.charge = info->GetOriginalEnergy() / CLHEP::eV;
 
+        fHits.vrx = info->GetVertexPosition().getX();
+        fHits.vry = info->GetVertexPosition().getY();
+        fHits.vrz = info->GetVertexPosition().getZ();
+
         fDetectedEvent.hits.push_back(fHits);
         // BHit ahit;
         // ahit.SetEdep(info->GetOriginalEnergy() / CLHEP::eV);

@@ -554,14 +554,14 @@ namespace km3net
 
   void KM3PhysicsList::SetCuts() {
 
-    G4ParticleDefinition* gamma =
-    G4ParticleTable::GetParticleTable()->FindParticle("gamma");
+  //   G4ParticleDefinition* gamma =
+  //   G4ParticleTable::GetParticleTable()->FindParticle("gamma");
 
-  if (gamma) {
-      G4cout << "Gamma already defined" << G4endl;
-  }else{
-    std::cout << "\r\033[10C" << "Gamma not defined .. " << std::endl;
-  }
+  // if (gamma) {
+  //     G4cout << "Gamma already defined" << G4endl;
+  // }else{
+  //   std::cout << "\r\033[10C" << "Gamma not defined .. " << std::endl;
+  // }
 
   // G4cout << "Dumping particle table BEFORE setting cuts:\n";
   // G4ParticleTable::GetParticleTable()->DumpTable();

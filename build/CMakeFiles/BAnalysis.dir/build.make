@@ -82,6 +82,7 @@ G__Dict.cxx: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrim
 G__Dict.cxx: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorMessenger.hh
 G__Dict.cxx: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunAction.hh
 G__Dict.cxx: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunManager.hh
+G__Dict.cxx: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BStackingAction.hh
 G__Dict.cxx: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BSteppingAction.hh
 G__Dict.cxx: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/Utils.hh
 G__Dict.cxx: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/LinkDef.hh
@@ -98,11 +99,12 @@ G__Dict.cxx: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrim
 G__Dict.cxx: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorMessenger.hh
 G__Dict.cxx: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunAction.hh
 G__Dict.cxx: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunManager.hh
+G__Dict.cxx: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BStackingAction.hh
 G__Dict.cxx: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BSteppingAction.hh
 G__Dict.cxx: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/Utils.hh
 G__Dict.cxx: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/LinkDef.hh
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating G__Dict.cxx, libDict_rdict.pcm, libDict.rootmap"
-	/usr/bin/cmake -E env LD_LIBRARY_PATH=/home/bouta-mohammed/root/root_install/lib:/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib:/home/bouta-mohammed/root/root_install/lib:/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib:/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib:/home/bouta-mohammed/work/cppm/lactel/omTesting/build:/home/bouta-mohammed/work/cppm/lactel/trunk/build:/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib:/home/bouta-mohammed/root/root_install/lib:/home/bouta-mohammed/work/cppm/lactel/omTesting/build:/home/bouta-mohammed/work/cppm/lactel/trunk/build /home/bouta-mohammed/root/root_install/bin/rootcling -v2 -f G__Dict.cxx -s /home/bouta-mohammed/work/cppm/lactel/trunk/build/libDict.so -rml libDict.so -rmf /home/bouta-mohammed/work/cppm/lactel/trunk/build/libDict.rootmap -DG4_STORE_TRAJECTORY -DG4VERBOSE -DG4UI_USE -DG4VIS_USE -DG4UI_USE_TCSH -DG4INTY_USE_QT -DG4UI_USE_QT -DG4VIS_USE_OPENGLQT -DG4VIS_USE_OPENGL -compilerI/usr/include/c++/13 -compilerI/usr/include/x86_64-linux-gnu/c++/13 -compilerI/usr/include/c++/13/backward -compilerI/usr/lib/gcc/x86_64-linux-gnu/13/include -compilerI/usr/local/include -compilerI/usr/include/x86_64-linux-gnu -compilerI/usr/include -compilerI/usr/lib/gcc/x86_64-linux-gnu/13/include -compilerI/usr/local/include -compilerI/usr/include/x86_64-linux-gnu -compilerI/usr/include -I/home/bouta-mohammed/root/root_install/include -I/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4 -I/usr/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/AA/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/BPostAnalysis/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/K40/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/MottaSchonertSimulation/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/WProp/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/common/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/tests/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/utils/include -I/usr/include/hdf5/serial -I/home/bouta-mohammed/work/cppm/lactel/trunk /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BAnalysisManager.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetectorConstruction.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetectorMessenger.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDigi.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDigitizerModule.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEvent.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEventAction.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHardwareManager.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHit.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorAction.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorMessenger.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunAction.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunManager.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BSteppingAction.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/Utils.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/LinkDef.hh
+	/usr/bin/cmake -E env LD_LIBRARY_PATH=/home/bouta-mohammed/root/root_install/lib:/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib:/home/bouta-mohammed/root/root_install/lib:/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib:/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib:/home/bouta-mohammed/work/cppm/lactel/omTesting/build:/home/bouta-mohammed/work/cppm/lactel/trunk/build:/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib:/home/bouta-mohammed/root/root_install/lib:/home/bouta-mohammed/work/cppm/lactel/omTesting/build:/home/bouta-mohammed/work/cppm/lactel/trunk/build /home/bouta-mohammed/root/root_install/bin/rootcling -v2 -f G__Dict.cxx -s /home/bouta-mohammed/work/cppm/lactel/trunk/build/libDict.so -rml libDict.so -rmf /home/bouta-mohammed/work/cppm/lactel/trunk/build/libDict.rootmap -DG4_STORE_TRAJECTORY -DG4VERBOSE -DG4UI_USE -DG4VIS_USE -DG4UI_USE_TCSH -DG4INTY_USE_QT -DG4UI_USE_QT -DG4VIS_USE_OPENGLQT -DG4VIS_USE_OPENGL -compilerI/usr/include/c++/13 -compilerI/usr/include/x86_64-linux-gnu/c++/13 -compilerI/usr/include/c++/13/backward -compilerI/usr/lib/gcc/x86_64-linux-gnu/13/include -compilerI/usr/local/include -compilerI/usr/include/x86_64-linux-gnu -compilerI/usr/include -compilerI/usr/lib/gcc/x86_64-linux-gnu/13/include -compilerI/usr/local/include -compilerI/usr/include/x86_64-linux-gnu -compilerI/usr/include -I/home/bouta-mohammed/root/root_install/include -I/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4 -I/usr/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/AA/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/BPostAnalysis/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/K40/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/MottaSchonertSimulation/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/WProp/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/common/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/tests/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include -I/home/bouta-mohammed/work/cppm/lactel/trunk/utils/include -I/usr/include/hdf5/serial -I/home/bouta-mohammed/work/cppm/lactel/trunk /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BAnalysisManager.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetectorConstruction.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetectorMessenger.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDigi.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDigitizerModule.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEvent.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEventAction.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHardwareManager.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHit.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorAction.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorMessenger.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunAction.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunManager.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BStackingAction.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BSteppingAction.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/Utils.hh /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/LinkDef.hh
 
 libDict_rdict.pcm: G__Dict.cxx
 	@$(CMAKE_COMMAND) -E touch_nocreate libDict_rdict.pcm
@@ -292,10 +294,24 @@ CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunManager.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunManager.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/src/BRunManager.cc -o CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunManager.cc.s
 
+CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.o: CMakeFiles/BAnalysis.dir/flags.make
+CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.o: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/src/BStackingAction.cc
+CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.o: CMakeFiles/BAnalysis.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.o -MF CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.o.d -o CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/src/BStackingAction.cc
+
+CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/src/BStackingAction.cc > CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.i
+
+CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/src/BStackingAction.cc -o CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.s
+
 CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.o: CMakeFiles/BAnalysis.dir/flags.make
 CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.o: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/src/BSteppingAction.cc
 CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.o: CMakeFiles/BAnalysis.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.o -MF CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.o.d -o CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/src/BSteppingAction.cc
 
 CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.i: cmake_force
@@ -309,7 +325,7 @@ CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.s: cmake_force
 CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.o: CMakeFiles/BAnalysis.dir/flags.make
 CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.o: /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/src/Utils.cc
 CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.o: CMakeFiles/BAnalysis.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.o -MF CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.o.d -o CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/src/Utils.cc
 
 CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.i: cmake_force
@@ -323,7 +339,7 @@ CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.s: cmake_force
 CMakeFiles/BAnalysis.dir/G__Dict.cxx.o: CMakeFiles/BAnalysis.dir/flags.make
 CMakeFiles/BAnalysis.dir/G__Dict.cxx.o: G__Dict.cxx
 CMakeFiles/BAnalysis.dir/G__Dict.cxx.o: CMakeFiles/BAnalysis.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/BAnalysis.dir/G__Dict.cxx.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/BAnalysis.dir/G__Dict.cxx.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BAnalysis.dir/G__Dict.cxx.o -MF CMakeFiles/BAnalysis.dir/G__Dict.cxx.o.d -o CMakeFiles/BAnalysis.dir/G__Dict.cxx.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx
 
 CMakeFiles/BAnalysis.dir/G__Dict.cxx.i: cmake_force
@@ -349,6 +365,7 @@ BAnalysis_OBJECTS = \
 "CMakeFiles/BAnalysis.dir/LACTELSim/src/BPrimaryGeneratorMessenger.cc.o" \
 "CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunAction.cc.o" \
 "CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunManager.cc.o" \
+"CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.o" \
 "CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.o" \
 "CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.o" \
 "CMakeFiles/BAnalysis.dir/G__Dict.cxx.o"
@@ -369,12 +386,13 @@ libBAnalysis.so: CMakeFiles/BAnalysis.dir/LACTELSim/src/BPrimaryGeneratorAction.
 libBAnalysis.so: CMakeFiles/BAnalysis.dir/LACTELSim/src/BPrimaryGeneratorMessenger.cc.o
 libBAnalysis.so: CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunAction.cc.o
 libBAnalysis.so: CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunManager.cc.o
+libBAnalysis.so: CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.o
 libBAnalysis.so: CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.o
 libBAnalysis.so: CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.o
 libBAnalysis.so: CMakeFiles/BAnalysis.dir/G__Dict.cxx.o
 libBAnalysis.so: CMakeFiles/BAnalysis.dir/build.make
 libBAnalysis.so: CMakeFiles/BAnalysis.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX shared library libBAnalysis.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX shared library libBAnalysis.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/BAnalysis.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

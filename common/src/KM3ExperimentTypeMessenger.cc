@@ -57,6 +57,7 @@
 #include "BRunAction.hh"
 #include "BRunManager.hh"
 #include "DAQManager.hh"
+#include "BStackingAction.hh"
 
 #include <iostream>
 
@@ -149,8 +150,10 @@ namespace km3net
             frunManager->SetUserAction(new KM3RunAction);
           }
 
-          if(newValue == "BA")
+          if(newValue == "BA"){
             frunManager->SetUserAction(new BEventAction);
+            frunManager->SetUserAction(new BStackingAction());
+          }
           else  
             frunManager->SetUserAction(new KM3EventAction);
 

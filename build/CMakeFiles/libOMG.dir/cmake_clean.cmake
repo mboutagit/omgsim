@@ -33,6 +33,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/libOMG.dir/LACTELSim/src/BRunAction.cc.o.d"
   "CMakeFiles/libOMG.dir/LACTELSim/src/BRunManager.cc.o"
   "CMakeFiles/libOMG.dir/LACTELSim/src/BRunManager.cc.o.d"
+  "CMakeFiles/libOMG.dir/LACTELSim/src/BStackingAction.cc.o"
+  "CMakeFiles/libOMG.dir/LACTELSim/src/BStackingAction.cc.o.d"
   "CMakeFiles/libOMG.dir/LACTELSim/src/BSteppingAction.cc.o"
   "CMakeFiles/libOMG.dir/LACTELSim/src/BSteppingAction.cc.o.d"
   "CMakeFiles/libOMG.dir/LACTELSim/src/Utils.cc.o"

@@ -372,7 +372,7 @@ namespace lactel
 
             //particleName="gamma";
 
-            double Emin = 1.0;     // GeV
+            double Emin = 1;     // GeV
             double Emax = 1e2;     // GeV (10 TeV)
 
             double ctmin = -1;     // rad (pi/2)
@@ -400,8 +400,9 @@ namespace lactel
             energy=energy*GeV;
             direction=FixedThetaDirection(acos(cost));
             
-            if(direction.getZ() > 0)
-                direction.setZ(- direction.getZ());
+            // if(direction.getZ() > 0)
+            //     direction.setZ(- direction.getZ());
+
             G4ThreeVector polarization(G4UniformRand(), G4UniformRand(), 0.0); 
             ((G4ParticleGun*)particleGun)->SetParticlePolarization(polarization);
         

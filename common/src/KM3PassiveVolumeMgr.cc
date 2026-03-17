@@ -552,12 +552,12 @@ namespace km3net
     const PassiveVolumeParameters &thePTP=*((PassiveVolumeParameters*)fTheParameters);
     KM3Material* materialsManager = KM3Material::GetIt ();
     G4LogicalVolume* toreturn = new G4LogicalVolume (Solid, materialsManager->GetMaterial (thePTP.Material), thePTP.Name);
-    std::cout << "\r\033[20C" << "making it logic: " <<  thePTP.Name << std::endl;
+    std::cout << "\r\033[1;33m" << string(30, '-') << ">> Making it logic: " <<  thePTP.Name << "\033[0m" << std::endl;
 
     if (thePTP.SkinMaterial.size () == 0)
       return toreturn;
 
-    cout << "doing the skin" << thePTP.SkinMaterial << endl;
+    std::cout << "\033[1;35m" << string(20, '*') << " Doing the skin for volume: " << thePTP.SkinMaterial << " " << string(20, '*') << "\033[0m" << endl;
     //    G4OpticalSurface* the_surface =new G4OpticalSurface(thePTP.Prefix + thePTP.SkinMaterial + "_surface",
 
     //the_surface->SetMaterialPropertiesTable(G4Material::GetMaterial(thePTP.SkinMaterial)->GetMaterialPropertiesTable());

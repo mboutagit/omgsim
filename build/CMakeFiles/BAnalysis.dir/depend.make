@@ -192,6 +192,7 @@ G__Dict.cxx: \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4ProcessType.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4ProcessVector.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4ProcessVector.icc \
+ /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4ProductionCuts.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4RandomDirection.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4RandomTools.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4ReferenceCountedHandle.hh \
@@ -464,6 +465,7 @@ G__Dict.cxx: \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorMessenger.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunAction.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunManager.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BStackingAction.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BSteppingAction.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/LinkDef.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/Utils.hh \

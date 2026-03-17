@@ -8,6 +8,7 @@ namespace tools
 {
 
     BWaveCatcherConf BWaveCatcher::config_ = BWaveCatcherConf();
+    std::map<int, OM*> BWaveCatcher::connectedOMs;
 
     BWaveCatcher::BWaveCatcher(std::string n)
     : acquiring_(false), rng_(std::random_device{}()), noiseDist_(-2, 2), TTSDist_(3.314, 0.1531*0.1531), AmpDist_(0, 0.1156) { // 0.1156 is to have 90% of amplitudes inside 30% fluctuation
@@ -69,6 +70,11 @@ namespace tools
         //                                     << name 
         //                                     << " ..\033[0m" 
         //                                     << std::endl;
+
+        OM ommm = om;
+        if(om.isOK)
+            connectedOMs.insert({channel, &ommm});
+            
         inputOMs[channel] = om;
         return true;
     }

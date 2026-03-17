@@ -48,6 +48,7 @@
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorMessenger.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunAction.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunManager.hh"
+#include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BStackingAction.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BSteppingAction.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/Utils.hh"
 
@@ -383,6 +384,7 @@ namespace {
 "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorMessenger.hh",
 "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunAction.hh",
 "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunManager.hh",
+"/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BStackingAction.hh",
 "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BSteppingAction.hh",
 "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/Utils.hh",
 nullptr
@@ -462,6 +464,7 @@ namespace lactel{class __attribute__((annotate("$clingAutoload$/home/bouta-moham
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorMessenger.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunAction.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunManager.hh"
+#include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BStackingAction.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BSteppingAction.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/Utils.hh"
 

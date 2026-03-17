@@ -79,6 +79,8 @@ namespace tools{
             std::vector<OM> signalSource;
             std::string name;
 
+            static std::map<int, OM*> connectedOMs;
+
             bool timeCorrection = true;
             bool amplitudeCorrection = true;
             

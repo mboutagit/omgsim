@@ -46,6 +46,7 @@ namespace lactel
             ~OM();
 
             static int nInstance;
+            static std::set<OM*> instances;
             static std::set<std::string> om_ids;
             static OMsParameters parameters;
             OMProperties properties; 
@@ -58,15 +59,42 @@ namespace lactel
             bool operator>(const OM& om) const;
             bool operator==(const OM& om) const;
             bool operator!() const {return ! isOK;}
+            static inline int howMany(){return nInstance;};
 
-            void dump(){
-                std::cout << "\r\033[10C\033[1,35m" 
-                << " - hv - "<< " - g - "<< " - rt - "<< " - ft - "<< " - wt - "<< " - dc - "<< " - pv - "
-                << std::endl << "\033[10C"
-                <<  properties.hv << " - " <<  properties.g << " - " <<  properties.rt << " - " 
-                <<  properties.ft << " - " <<  properties.wt << " - " <<  properties.dc << " - " <<  properties.pv
+            void dump(std::ostream& out = std::cout){
+                out << "\033[1;35m" 
+                << left << setw(15) << "id" 
+                << left << setw(15) << "hv" 
+                << left << setw(15) << "g "
+                << left << setw(15) << "rt" 
+                << left << setw(15) << "ft" 
+                << left << setw(15) << "wt" 
+                << left << setw(15) << "dc" 
+                << left << setw(15) << "pv"
+                << "\033[0m"
+                << std::endl;
+
+                out << string(120, '-')
+                << std::endl;
+
+                out << left << setw(15) << om_id 
+                << left << setw(15) << properties.hv 
+                << left << setw(15) << properties.g 
+                << left << setw(15) << properties.rt
+                << left << setw(15) << properties.ft
+                << left << setw(15) << properties.wt
+                << left << setw(15) << properties.dc
+                << left << setw(15) << properties.pv
                 << std::endl;
             }
+    
+    static void dumpOMs(std::ostream& out = std::cout){
+        out << string(100, '=') << endl;
+        out << "nOMs = " << nInstance << endl;
+        for(auto& om : instances)
+            om->dump();
+        out << string(100, '=') << endl;
+    }
         
         private:
             static ConnectionInfos con;

@@ -713,6 +713,33 @@ LACTELSim/src/BRunManager.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunManager.cc.s
 .PHONY : LACTELSim/src/BRunManager.cc.s
 
+LACTELSim/src/BStackingAction.o: LACTELSim/src/BStackingAction.cc.o
+.PHONY : LACTELSim/src/BStackingAction.o
+
+# target to build an object file
+LACTELSim/src/BStackingAction.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BStackingAction.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.o
+.PHONY : LACTELSim/src/BStackingAction.cc.o
+
+LACTELSim/src/BStackingAction.i: LACTELSim/src/BStackingAction.cc.i
+.PHONY : LACTELSim/src/BStackingAction.i
+
+# target to preprocess a source file
+LACTELSim/src/BStackingAction.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BStackingAction.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.i
+.PHONY : LACTELSim/src/BStackingAction.cc.i
+
+LACTELSim/src/BStackingAction.s: LACTELSim/src/BStackingAction.cc.s
+.PHONY : LACTELSim/src/BStackingAction.s
+
+# target to generate assembly for a file
+LACTELSim/src/BStackingAction.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BStackingAction.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.s
+.PHONY : LACTELSim/src/BStackingAction.cc.s
+
 LACTELSim/src/BSteppingAction.o: LACTELSim/src/BSteppingAction.cc.o
 .PHONY : LACTELSim/src/BSteppingAction.o
 
@@ -1753,6 +1780,9 @@ help:
 	@echo "... LACTELSim/src/BRunManager.o"
 	@echo "... LACTELSim/src/BRunManager.i"
 	@echo "... LACTELSim/src/BRunManager.s"
+	@echo "... LACTELSim/src/BStackingAction.o"
+	@echo "... LACTELSim/src/BStackingAction.i"
+	@echo "... LACTELSim/src/BStackingAction.s"
 	@echo "... LACTELSim/src/BSteppingAction.o"
 	@echo "... LACTELSim/src/BSteppingAction.i"
 	@echo "... LACTELSim/src/BSteppingAction.s"

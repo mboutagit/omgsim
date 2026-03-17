@@ -26,23 +26,31 @@ namespace lactel
 
     }
     void BSteppingAction::UserSteppingAction(const G4Step* step){
-        // std::cout << "\r\033[10C" << "start steeping: " << std::endl;
-
         if( ! BDetectorConstruction::GetIt()->IsRunning()){
             return;
         }
 
-
-
-        G4VPhysicalVolume* vol = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
-        // if (vol->GetName()) {
-            // Prevent scintillation/Cerenkov photons
-            // std::cout << "\r\033[50C" << "volume name: " << vol->GetName() << std::endl;
-            // auto particle = step->GetTrack()->GetDefinition();
-            // if (particle->GetParticleName() == "opticalphoton") {
-            //     // std::cout << "\r\033[50C" << "killing the particle. " << std::endl;
-            //     step->GetTrack()->SetTrackStatus(fStopAndKill);
-            // }
+        // G4VPhysicalVolume* vol = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
+        // auto particle = step->GetTrack()->GetDefinition();
+        // G4StepPoint* point = step->GetPreStepPoint();
+        // std::cout << "\r\033[22C" << "volume: " << vol->GetName() 
+        //                             << " -- particle: " << particle->GetParticleName()
+        //                             << " -- Lstep (mm): " << step->GetStepLength()/mm
+        //                             << " -- Pos: " << step->GetPreStepPoint()->GetPosition()
+        //                             << " -- Mat: " << point->GetMaterial()->GetName()
+        //                             << " -- Proc: " << step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName()
+        //                             << " -- Edep (MeV): " << step->GetTotalEnergyDeposit()/MeV
+        //                             << std::endl;
+                                    
+        // G4VPhysicalVolume* vol = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
+        // if (vol->GetName() == "LacWater") {
+        //     // Prevent scintillation/Cerenkov photons
+        //     std::cout << "\r\033[50C" << "volume name: " << vol->GetName() << std::endl;
+        //     auto particle = step->GetTrack()->GetDefinition();
+        //     if (particle->GetParticleName() == "opticalphoton") {
+        //         // std::cout << "\r\033[50C" << "killing the particle. " << std::endl;
+        //         step->GetTrack()->SetTrackStatus(fStopAndKill);
+        //     }
         // }
             
 
@@ -52,37 +60,54 @@ namespace lactel
         }
             myCostumTrackColor(step);
 
+
+         // Check particle type
+        // if (fTrack->GetDefinition() == G4OpticalPhoton::Definition())
+        // {
+        //     G4LogicalVolume* volume =
+        //         step->GetPreStepPoint()
+        //             ->GetTouchableHandle()
+        //             ->GetVolume()
+        //             ->GetLogicalVolume();
+
+        //     if (volume->GetName() == "LacWater")
+        //     {
+        //         fTrack->SetTrackStatus(fStopAndKill);
+        //     }
+        // }
+
         
         // std::cout << "\r\033[10C" << "GunType: " << static_cast<int> (BPrimaryGeneratorAction::getInstance()->getGunType()) << std::endl;
-        if(static_cast<int> (BPrimaryGeneratorAction::getInstance()->getGunType()) == 3){
-            G4Box* targetBox;
-            std::string volumeName="IdealWaterVolume1";
-            for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
-                if(pv->GetName().rfind(volumeName, 0) == 0){ // find the first outer volume and break;
-                    targetBox = dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid());
-                    break; // return the first outer cell found (should be handled for multi boxes)
-                }
-            } 
-            if(! targetBox){
-                    std::cout << "\r\033[10C" << "Fatal: BSteppingAction::UserSteppingAction, Volume with name " << volumeName << " Not found!! \nExiting .." << std::endl;
-                    return; // Prevent processing
-            }
-            if(! BPrimaryGeneratorAction::getInstance()->couldHitCube(BPrimaryGeneratorAction::getInstance()->particle_position,
-                                                                    BPrimaryGeneratorAction::getInstance()->particle_direction, 
-                                                                    *targetBox
-                                                                    )
-                ){
-                    // std::cout << "\r\033[55C" << "NOT Possible to hit: P="
-                    //                             << BPrimaryGeneratorAction::getInstance()->particle_position
-                    //                             << "--- D="
-                    //                             << BPrimaryGeneratorAction::getInstance()->particle_direction
-                    //                             << std::endl;
+        // if(static_cast<int> (BPrimaryGeneratorAction::getInstance()->getGunType()) == 3){
+        //     G4Box* targetBox;
+        //     std::string volumeName="IdealWaterVolume1";
+        //     for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
+        //         if(pv->GetName().rfind(volumeName, 0) == 0){ // find the first outer volume and break;
+        //             targetBox = dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid());
+        //             break; // return the first outer cell found (should be handled for multi boxes)
+        //         }
+        //     } 
+        //     if(! targetBox){
+        //             std::cout << "\r\033[10C" << "Fatal: BSteppingAction::UserSteppingAction, Volume with name " << volumeName << " Not found!! \nExiting .." << std::endl;
+        //             return; // Prevent processing
+        //     }
+        //     if(! BPrimaryGeneratorAction::getInstance()->couldHitCube(BPrimaryGeneratorAction::getInstance()->particle_position,
+        //                                                             BPrimaryGeneratorAction::getInstance()->particle_direction, 
+        //                                                             *targetBox
+        //                                                             )
+        //         ){
+        //             // std::cout << "\r\033[55C" << "NOT Possible to hit: P="
+        //             //                             << BPrimaryGeneratorAction::getInstance()->particle_position
+        //             //                             << "--- D="
+        //             //                             << BPrimaryGeneratorAction::getInstance()->particle_direction
+        //             //                             << std::endl;
                     
-                    fTrack->SetTrackStatus(fStopAndKill);
-                    // std::cout << "\r\033[C" << "Track killed" << std::endl;
-                }
-            // std::cout << "\r\033[20C" << "---- after couldHitCube test " << std::endl;
-        }
+        //             fTrack->SetTrackStatus(fStopAndKill);
+        //             // std::cout << "\r\033[C" << "Track killed" << std::endl;
+        //         }
+        //     // std::cout << "\r\033[20C" << "---- after couldHitCube test " << std::endl;
+        // }
+
         G4StepPoint* prestep = step->GetPreStepPoint();
         G4StepPoint* poststep = step->GetPostStepPoint();
 
@@ -204,9 +229,14 @@ namespace lactel
                 // std::cout << "\r\033[44C" << "detected particle!!" << std::endl;
                 for (int ihist = 0; ihist < touch->GetHistoryDepth (); ihist++) {
                     G4String volname = touch->GetVolume(ihist)->GetName();
-                    if (KM3DetectorConstruction::fOMNames.find(volname) != KM3DetectorConstruction::fOMNames.end()) {
+                    if (KM3DetectorConstruction::fOMNames.find(volname) != KM3DetectorConstruction::fOMNames.end()
+                        || BDetectorConstruction::fOMIDs.find(volname) != BDetectorConstruction::fOMIDs.end()) {
                         BAnalysisManager::getIt()->getHit().om_id  = touch->GetCopyNumber(ihist);
+                        // BDetectorConstruction::GetIt()->getItsOM(touch->GetVolume(ihist))->dump();
+                        // std::cout << "\r\033[11C" << "HowMany: " << OM::howMany() << std::endl;
+                        // OM::dumpOMs();
                         // std::cout << "\r\033[10C" << "volume name: " << volname << std::endl;
+                        // std::cout << "\r\033[50C" << "om_id: " << touch->GetCopyNumber(ihist) << std::endl;
                         // BDetectorConstruction::GetIt()->getOMsUsedbyVolumeName(volname);
                     }
                 }

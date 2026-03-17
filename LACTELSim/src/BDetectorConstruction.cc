@@ -22,6 +22,9 @@ namespace lactel
 
 
     BDetectorConstruction::DetectorState BDetectorConstruction::state = BDetectorConstruction::DetectorState::OFF;
+    std::set<std::string> BDetectorConstruction::fOMIDs;
+    std::map<OM*, G4VPhysicalVolume*> BDetectorConstruction::fOMPhysicalVolumes;
+
     bool BDetectorConstruction::useDAQ = false;
     float BDetectorConstruction::worldSizeOffset = 5*cm;
     float BDetectorConstruction::acceptanceAngle = 10*deg;
@@ -32,6 +35,31 @@ namespace lactel
     G4ThreeVector BDetectorConstruction::genSurfSize = G4ThreeVector(1*m, 1*m, 1*m); // set default GS size 
     bool BDetectorConstruction::autoGenSize = false;
 
+    bool BDetectorConstruction::isAnOM(G4VPhysicalVolume* volume){
+        for(auto& ele : fOMPhysicalVolumes){
+            if(volume == ele.second)    
+                return true;
+        }
+        return false;
+    }
+
+    OM* BDetectorConstruction::getItsOM(G4VPhysicalVolume* volume){
+        for(auto& ele : fOMPhysicalVolumes){
+            if(volume == ele.second)    
+                return ele.first;
+        }
+        return nullptr;
+    }
+
+    G4VPhysicalVolume* BDetectorConstruction::getPhysicalVolumeByName(std::string name){
+        for(auto& v : volumesMap)
+            if(v.first == name){
+                // std::cout << "\r\033[10C" << string(22, '#') << " "<< name << " found! its Z pos: " << v.second.second.Z << std::endl;
+               return v.second.first; 
+            }
+        return nullptr;
+    }
+
     void BDetectorConstruction::getOMIDbyVolumeName(std::string volumeName){
         for(auto& volume : KM3DetectorConstruction::GetIt()->getOMsMap()){
             for(auto& par : volume.second){
@@ -39,6 +67,7 @@ namespace lactel
             }
         }
     }
+    
 
     void BDetectorConstruction::getOMsUsedbyVolumeName(std::string volumeName){
         std::set<std::string> oms =  KM3DetectorConstruction::GetIt()->getOMsList();
@@ -46,6 +75,7 @@ namespace lactel
             std::cout << "\r\033[10C" << "volumes: om_id: " << om << std::endl;
         }
     }
+
 
     // std::string BDetectorConstruction::className = "BDetectorConstruction";
     BDetectorConstruction* BDetectorConstruction::GetIt(){
@@ -576,7 +606,7 @@ namespace lactel
                             fWorldLength , fWorldLength);
         
         logicWorld = new G4LogicalVolume(solidWorld,
-                                        Air, //TargetMater,  // ideal water
+                                        myVacuum, //TargetMater,  // ideal water
                                         "World", 0, 0, 0);
                                         
         logicWorld->SetVisAttributes(G4VisAttributes::Invisible);
@@ -624,7 +654,9 @@ namespace lactel
         int waterTankID=0;
         for (auto& VolPar: fVolumeList [fDetectorTypeName])
         { 
-            fPlacedVolumeDict[VolPar.Name] = PlaceThem (KM3PassiveVolumeMgr::GetIt (), VolPar);
+            G4VPhysicalVolume* pv = PlaceThem (KM3PassiveVolumeMgr::GetIt (), VolPar);
+            fPlacedVolumeDict[VolPar.Name] = pv;
+            volumesMap.insert({VolPar.Name, {pv, VolPar}});
             // if(fPlacedVolumeDict[VolPar.Name]->GetName().rfind("OuterCell", 0) == 0){
             //     // fPlacedVolumeDict[VolPar.Name]->SetName("OLC");
             // }
@@ -655,9 +687,11 @@ namespace lactel
         int omID=0;
         for (auto& OMPar: fOMList [fDetectorTypeName])
         {
-            PlaceThem ( KM3OpticalModuleMgr::GetIt (), OMPar);
             // ->SetName("OM"+std::to_string(omID));
             fOMNames.insert(OMPar.Name.data());
+            fOMIDs.insert(OMPar.om_id.data());
+            fOMPhysicalVolumes.insert({new OM(OMPar.om_id.data()), PlaceThem ( KM3OpticalModuleMgr::GetIt (), OMPar)});
+
             omID++;
         }
 
@@ -710,6 +744,23 @@ namespace lactel
                 dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(2.5*m);
                 pv->GetLogicalVolume()->SetVisAttributes(lw);
 
+                // if(pv->GetLogicalVolume()) {
+               
+                //     lakeWaterRegion = new G4Region("lakeWaterRegion");
+                //     lakeWaterRegion->AddRootLogicalVolume(pv->GetLogicalVolume()); 
+
+                //     lakeRegionCuts = new G4ProductionCuts();
+
+                //     lakeRegionCuts->SetProductionCut(10.0*mm, "gamma");
+                //     lakeRegionCuts->SetProductionCut(300.0*mm, "opticalphoton");
+                //     lakeRegionCuts->SetProductionCut(300.0*mm, "mu+");
+                //     lakeRegionCuts->SetProductionCut(300.0*mm, "mu-");
+                //     lakeRegionCuts->SetProductionCut(10.0*mm, "e-");
+                //     lakeRegionCuts->SetProductionCut(10.0*mm, "e+");
+                //     lakeRegionCuts->SetProductionCut(10.0*mm, "proton");
+
+                //     lakeWaterRegion->SetProductionCuts(lakeRegionCuts);
+                // }
             }
 
             if(pv->GetName().rfind("CPPMBlackBox", 0) == 0)
@@ -742,6 +793,32 @@ namespace lactel
     }
 
 
+    void BDetectorConstruction::PrintAllMaterialProperties(ostream& out)
+    {
+        // if(out != std::cout)
+        //     if(! out == ofstream)
+
+        const G4MaterialTable* matTable = G4Material::GetMaterialTable();
+
+        for (size_t i = 0; i < matTable->size(); i++)
+        {
+            G4Material* mat = (*matTable)[i];
+
+            G4cout << "=================================" << G4endl;
+            G4cout << "Material: " << mat->GetName() << G4endl;
+
+            G4MaterialPropertiesTable* mpt = mat->GetMaterialPropertiesTable();
+
+            if (mpt)
+            {
+                mpt->DumpTable();
+            }
+            else
+            {
+                G4cout << "No MaterialPropertiesTable" << G4endl;
+            }
+        }
+    }
 
 
     ///////////////////////////////// TEST //////////////////////////////////////////////

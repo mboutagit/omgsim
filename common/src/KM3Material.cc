@@ -193,6 +193,7 @@ namespace km3net
       }
 
     fOpticalSurfaceDict [name] = the_surface;
+    std::cout << "An Optical surface: " << name << " " << the_surface->GetFinish () << " " << the_surface->GetPolish () <<' ' << polished <<" " << the_surface->GetModel () <<  endl;
     //the_surface->GetMaterialPropertiesTable () -> DumpTable ();
     return the_surface;
   }

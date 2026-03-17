@@ -22,6 +22,9 @@
 #include <TBox.h>
 #include <TLegend.h>
 
+#include "TROOT.h"
+// #include "TIter.h"
+
 #include <TGeoManager.h>
 #include <TGeoMaterial.h>
 #include <TGeoMedium.h>
@@ -36,7 +39,7 @@
 #include <variant>
 
 
-namespace km3net{
+namespace lactel{
 
     typedef unsigned int uint;
 
@@ -80,11 +83,29 @@ namespace km3net{
     };
 
 
+    typedef  std::vector<std::pair<std::string, TH1*>> histsByName;
+
+    class BPostAnalysis
+    {
+    private:
+        /* data */
+    public:
+        BPostAnalysis(/* args */);
+        ~BPostAnalysis();
+
+        std::map<std::string, TFile*> inputRootFiles;
+        std::map<std::string, TH1*> Hists1D;
+        std::map<std::string, TH2*> Hists2D;
+        std::map<std::string, TGraph*> TGraphs;
+
+    };
+    
+
     std::vector<TCanvas*>  getNPEPlot(TTree* tree, BAnalysisManager::DetectedEvent* evt, 
-                                        std::vector<std::pair<std::string, TH1F*>>& hist, 
+                                        histsByName& hist, 
                                         float exposure_time = 1, float t_coin = 16); // in second
     TCanvas* getDAQParameter(TTree* tree, BAnalysisManager::DetectedEvent* evt, std::string par); // in mV
-    std::vector<TCanvas*>  getRealDataPlots(std::vector<std::pair<std::string, TH1F*>>& hist); 
+    std::vector<TCanvas*>  getRealDataPlots(histsByName& hist); 
 
     using stack = std::variant<
                                 std::pair<std::string, TH1F*>,
@@ -95,5 +116,8 @@ namespace km3net{
     
     std::vector<stack> container;
 
-} // namespace km3net
+    TGraph* ratio(TH1*, TH1*);
+    TH1* getHistByName(const histsByName& vec, std::string key);
+
+} // namespace lactel
 #endif

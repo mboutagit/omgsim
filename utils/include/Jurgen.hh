@@ -28,8 +28,8 @@ namespace Jurgen
     }
 
     TF2 getFluxFunction(float Emin, float Emax, float cosmin, float cosmax){
-        int    NEbin  = 990;
-        int    Ncbin  = 95;
+        int    NEbin  = (Emax - Emin)/10e-3; // each 10 MeV   //990;
+        int    Ncbin  = 90; // step by 1 degree in 0 pi/2 //95;
 
         TF2 f2Flux("f2Flux; E_{#mu} [GeV]; cos(#theta) [rad]",Flux,Emin,Emax,cosmin,cosmax);
         f2Flux.SetNpx(NEbin);

@@ -27,6 +27,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunAction.cc.o.d"
   "CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunManager.cc.o"
   "CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunManager.cc.o.d"
+  "CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.o"
+  "CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.o.d"
   "CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.o"
   "CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.o.d"
   "CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.o"

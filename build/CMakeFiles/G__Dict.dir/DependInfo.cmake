@@ -21,6 +21,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorMessenger.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunAction.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunManager.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
+  "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BStackingAction.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BSteppingAction.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/Utils.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/LinkDef.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"

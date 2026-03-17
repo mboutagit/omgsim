@@ -62,12 +62,12 @@ namespace km3net
     fParticleColour["gamma"]       = G4Colour(0., 1., 0., 0.4); // green
     fParticleColour["e-"]          = G4Colour(1., 0., 0., 0.4); // red
     fParticleColour["e+"]          = G4Colour(0., 0., 1., 0.4); // blue
-    fParticleColour["mu-"]         = G4Colour(1., 1., 0., 0.4); // yellow
-    fParticleColour["mu+"]         = G4Colour(1., 0., 1., 0.4);
+    fParticleColour["mu-"]         = G4Colour(1., 1., 0., 0.8); // yellow
+    fParticleColour["mu+"]         = G4Colour(1., 0., 1., 0.8);
     fParticleColour["proton"]      = G4Colour(0.5, 0.5, 0., 0.4);
     fParticleColour["neutron"]     = G4Colour(0.5, 0., 0.5, 0.4);
 
-    fParticleColour["opticalphoton"]     = G4Colour(0.9,0.5,0.1, 0.4);
+    fParticleColour["opticalphoton"]     = G4Colour(0.9,0.5,0.1, 0.05);
 
     fParticleColour["nu_e"]        = G4Colour(.0, 0., 0.3, 0.2);
     fParticleColour["anti_nu_e"]   = G4Colour(.2, 0., 0.3, 0.2);
@@ -278,6 +278,8 @@ namespace km3net
     unsigned char detectedGamma = CheckDetection (touch->GetHistory()->GetTopTransform().TransformPoint(globalPoint));
     if (detectedGamma != 0){
       KM3AnalysisManager::getIt()->AddDetectedParticule (info, detectedGamma);
+      // G4ThreeVector creationPoint = fTrack->GetVertexPosition();
+
       //G4cout << " -------- Detected particle. From KM3SteppingAction::UserSteppingAction" << G4endl;
     }
       

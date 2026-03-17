@@ -193,9 +193,13 @@ namespace km3net
     G4Box* solidWorld;    // pointer to the solid envelope
     G4LogicalVolume* logicWorld;    // pointer to the logical envelope
     G4VPhysicalVolume* physiWorld;    // pointer to the physical envelope
-
+    
     //     G4Tubs*             solidTarget;   // pointer to the solid Target
   public: //!!!!!!!!!!!!!! attention, temporary stuff
+
+    G4LogicalVolume* getLogWorld() const {return logicWorld;};
+    G4VPhysicalVolume* getPhyWorld() const {return physiWorld;};
+
     G4VSolid* solidTarget;   // pointer to the solid Target
     G4LogicalVolume* logicTarget;   // pointer to the logical Target
     G4VPhysicalVolume* physiTarget;   // pointer to the physical Target
