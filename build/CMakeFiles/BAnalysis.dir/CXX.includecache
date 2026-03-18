@@ -3719,6 +3719,10 @@ G4UserStackingAction.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/G4UserStackingAction.hh
 G4OpticalPhoton.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/G4OpticalPhoton.hh
+G4Track.hh
+/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/G4Track.hh
+BDetectorConstruction.hh
+/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetectorConstruction.hh
 
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BSteppingAction.hh
 KM3SteppingAction.hh

@@ -91,6 +91,7 @@ int main(int argc_,char** argv_)
   bool keepall = false;
   bool analyse_all = false;
   bool evt_output = false;
+  int runNumber=-1;
   int iarg = 1;
   while (iarg < argc_)
     {
@@ -129,6 +130,24 @@ int main(int argc_,char** argv_)
               evtFileName=argv_[iarg+1];
               //std::cout << "\r\033[20C" << "token: " << token << " ---- value: " << argv_[iarg+1] << std::endl;
             }
+            else if ( (option == "-r" || option == "-run") && (iarg+1 <= argc_) )
+            {
+
+              try {
+                  runNumber = std::stoi(argv_[iarg+1]);
+                  // success
+              } catch (const std::invalid_argument&) {
+                  // not a number
+                  std::cout << "\r\033[10C" << "Error: run number must be an integer." << std::endl;
+                  exit(-1);
+              } catch (const std::out_of_range&) {
+                  // too large/small for int
+                  std::cout << "\r\033[10C" << "Error: Check the run number." << std::endl;
+                  exit(-1);
+              }
+              //std::cout << "\r\033[20C" << "token: " << token << " ---- value: " << argv_[iarg+1] << std::endl;
+            }
+           
            
 
           /* Here you may add more switches...
@@ -173,7 +192,7 @@ int main(int argc_,char** argv_)
     KM3AnalysisManager::fRootFileName = srf;
 
     lactel::BAnalysisManager::getIt()->evtFileName = evtFileName;
-
+    lactel::BAnalysisManager::getIt()->fRun.runNb=runNumber;
 
     // random engine
     //CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);
@@ -204,6 +223,9 @@ int main(int argc_,char** argv_)
     CLHEP::HepRandom::getTheEngine()->setSeeds(seeds,-1);
     CLHEP::HepRandom::showEngineStatus();
 
+    // G4RunManager* runManager = G4RunManager::GetRunManager();
+    // if(runNumber != -1)
+    //   runManager->SetRunID(runNumber);
     KM3ExperimentTypeMessenger* ketm = KM3ExperimentTypeMessenger::GetIt ();
   
     //G4UIsession* session=0;

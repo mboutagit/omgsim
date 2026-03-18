@@ -1,7 +1,9 @@
 #include "BPostAnalysis.hh"
+#include "utils.hh"
 
 using namespace km3net;
 using namespace lactel;
+using namespace UTILS;
 
 
 int main(int argc, char* argv[]){
@@ -101,15 +103,30 @@ int main(int argc, char* argv[]){
     c->SetLogy();
     TGraph* ratio_om0_r3 = lactel::ratio(getHistByName(hists_data, "amp_ch0_run3"), getHistByName(hists_mc, "mc_amp_ch0_run3"));
     TGraph* ratio_om0_r4 = lactel::ratio(getHistByName(hists_data, "amp_ch0_run4"), getHistByName(hists_mc, "mc_amp_ch0_run4"));
+    TGraph* ratio_om1_r3 = lactel::ratio(getHistByName(hists_data, "amp_ch1_run3"), getHistByName(hists_mc, "mc_amp_ch1_run3"));
+    TGraph* ratio_om1_r4 = lactel::ratio(getHistByName(hists_data, "amp_ch1_run4"), getHistByName(hists_mc, "mc_amp_ch1_run4"));
     ratio_om0_r3->SetTitle("MC(OM0) / Data (OM0); Amplitude [V]; Ratio");
     ratio_om0_r3->SetLineColor(1);
-    ratio_om0_r3->SetMarkerColor(2);
-    ratio_om0_r3->SetMarkerStyle(7);
+    ratio_om0_r3->SetMarkerColor(1);
+    ratio_om0_r3->SetMarkerStyle(20);
     ratio_om0_r4->SetLineColor(3);
-    ratio_om0_r4->SetMarkerColor(2);
-    ratio_om0_r4->SetMarkerStyle(7);
-    ratio_om0_r3->Draw("ALP");
-    ratio_om0_r4->Draw("LP same");
+    ratio_om0_r4->SetMarkerColor(3);
+    ratio_om0_r4->SetMarkerStyle(20);
+
+    ratio_om1_r3->SetLineColor(2);
+    ratio_om1_r3->SetMarkerColor(2);
+    ratio_om1_r3->SetMarkerStyle(20);
+    ratio_om1_r4->SetLineColor(4);
+    ratio_om1_r4->SetMarkerColor(4);
+    ratio_om1_r4->SetMarkerStyle(20);
+
+    ratio_om0_r3->Draw("AP");
+    ratio_om0_r4->Draw("P same");
+    ratio_om1_r3->Draw("P same");
+    ratio_om1_r4->Draw("P same");
+
+    BBox* del = new BBox(0, 2, 0.8, 1.2, 2, 2);
+    del->Draw();
 
     TCanvas *c1 = new TCanvas("c1", "Gen");
     genTree->Draw("cos(fGenTheta*3.14/180):log10(fGenEnergy/1e3)", "", "colz");

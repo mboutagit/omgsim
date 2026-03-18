@@ -21,13 +21,13 @@ namespace lactel
         BPrimaryGeneratorAction* bpga = BPrimaryGeneratorAction::getInstance();
         DAQManager* daqManager = DAQManager::getIt();
 
-        ana->Init(("run_" + std::to_string(run->GetRunID()) + ".root").c_str());
+        ana->Init(("run_" + std::to_string(ana->fRun.runNb) + ".root").c_str());
         bpga->init();
         daqManager->init();
         KM3RunAction::BeginOfRunAction(run);
 
         // ana->fRFile = new TFile(("run_" + std::to_string(run->GetRunID()) + ".root").c_str(), "recreate");
-        ana->fRun.runNb = run->GetRunID();
+        //ana->fRun.runNb = run->GetRunID();
 
         ana->fRun.acceptanceAngle = BDetectorConstruction::GetIt()->acceptanceAngle /deg;
         ana->fRun.generationSurface = BDetectorConstruction::GetIt()->AGen/cm2; // in cm2
@@ -36,7 +36,7 @@ namespace lactel
         ana->fRun.expectedRate = bpga->muonsFlux;
         ana->fRun.detName = BDetectorConstruction::GetIt()->detName;
 
-        cout << endl << "\r\033[10C" << "Begin of run: " << run->GetRunID() << endl;
+        cout << endl << "\r\033[10C" << "Begin of run: " << ana->fRun.runNb << endl;
         
         bpga->thetaMax = BDetectorConstruction::GetIt()->acceptanceAngle;
         bpga->getExpectedFlux();
@@ -72,8 +72,8 @@ namespace lactel
         ana->fRun.nGenEvent = 0;
         ana->fRun.runNb = -1;
 
-        std::cout << "\r\033[10CRun: " << run->GetRunID() << " -- nGen: " << bpga->nGen << " -- nDet: " << bpga->nDet << " -- Muons flux: " << bpga->muonsFlux << std::endl;
-        std::cout << "\r\033[10C" << "Lactel rate for run " << run->GetRunID() << " is: " << bpga->nDet * bpga->muonsFlux / bpga->nGen << " muons/s" << std::endl;
+        std::cout << "\r\033[10CRun: " << ana->fRun.runNb << " -- nGen: " << bpga->nGen << " -- nDet: " << bpga->nDet << " -- Muons flux: " << bpga->muonsFlux << std::endl;
+        std::cout << "\r\033[10C" << "Lactel rate for run " << ana->fRun.runNb << " is: " << bpga->nDet * bpga->muonsFlux / bpga->nGen << " muons/s" << std::endl;
 
         if(daqManager->isActive()){
             std::cout << "\r\033[55C \033[1;35m" << "DAQ ON ... Events size: " << daqManager->getEvents().size() << "\033[0m" << std::endl;

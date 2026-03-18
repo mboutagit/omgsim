@@ -1,0 +1,18 @@
+{
+   "define": {
+       "config"   : "script/lactel.mac",
+       "outs0" : [["2025-12-17_v12.5.2_xsec-atom-AR23_reso-spl_1ns" , 0, "", "No Constraint"]],
+       "nJ"       : 20,
+       "nEv"      : 100000/nJ
+   },
+   "rules": [
+       {
+           "command" : format("./OMGsim -fa %s -r %d", config, A),
+           "outputs" : [ format("run_%d.root", A) ],
+           "inputs"  : [  ]
+       } for A in range(nJ)
+   ]
+}
+
+# makeflow --jx -j 20 makeflow.jx
+# jx2json --pretty makeflow.jx
