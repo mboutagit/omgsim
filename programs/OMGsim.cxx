@@ -123,12 +123,15 @@ int main(int argc_,char** argv_)
           else if ( (option == "-of") && (iarg+1 <= argc_) )
             {
               srf=argv_[iarg+1];
+                iarg++;;
+
               //std::cout << "\r\033[20C" << "token: " << token << " ---- value: " << argv_[iarg+1] << std::endl;
             }
             else if ( (option == "-evtf") && (iarg+1 <= argc_) )
             {
               evtFileName=argv_[iarg+1];
               //std::cout << "\r\033[20C" << "token: " << token << " ---- value: " << argv_[iarg+1] << std::endl;
+              iarg++;;
             }
             else if ( (option == "-r" || option == "-run") && (iarg+1 <= argc_) )
             {
@@ -145,6 +148,8 @@ int main(int argc_,char** argv_)
                   std::cout << "\r\033[10C" << "Error: Check the run number." << std::endl;
                   exit(-1);
               }
+
+              iarg++;
               //std::cout << "\r\033[20C" << "token: " << token << " ---- value: " << argv_[iarg+1] << std::endl;
             }
            
@@ -156,10 +161,10 @@ int main(int argc_,char** argv_)
            *    ...
            *  }
            */
-                else
-                  {
-                    clog << "warning: ignoring option '" << option << "'!" << endl;
-                  }
+          else
+            {
+              clog << "warning: ignoring option " << option << " which does not have a meaning!" << endl;
+            }
         }
       else
         {

@@ -1276,4 +1276,8 @@ CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunAction.cc.o: \
  /home/bouta-mohammed/root/root_install/include/TH1F.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BAnalysisManager.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/DAQManager.hh \
- /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh
+ /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
+ /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4VVisManager.hh \
+ /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4UImanager.hh \
+ /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4VStateDependent.hh \
+ /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4UIcommandStatus.hh

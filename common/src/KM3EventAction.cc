@@ -70,7 +70,6 @@ namespace km3net
   {
     if(Ev->GetEventID() % 100 == 0)
       cout << "\r\033[15C" << "Start of event: "<< Ev->GetEventID()
-                            << "Run: "<< Ev->GetEventID()
                             << endl;
       cout.flush ();
     KM3AnalysisManager::getIt()->StartOfEvent (Ev);

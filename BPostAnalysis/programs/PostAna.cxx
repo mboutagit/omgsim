@@ -125,7 +125,7 @@ int main(int argc, char* argv[]){
     ratio_om1_r3->Draw("P same");
     ratio_om1_r4->Draw("P same");
 
-    BBox* del = new BBox(0, 2, 0.8, 1.2, 2, 2);
+    BBox* del = new BBox(0, ratio_om0_r3->GetXaxis()->GetXmax(), 0.8, 1.2, 2, 6);
     del->Draw();
 
     TCanvas *c1 = new TCanvas("c1", "Gen");

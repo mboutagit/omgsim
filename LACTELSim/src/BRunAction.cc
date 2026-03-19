@@ -5,6 +5,9 @@
 #include "BWaveCatcher.hh"
 #include "DAQManager.hh"
 
+#include "G4VVisManager.hh"
+#include "G4UImanager.hh"
+
 using namespace tools;
 using namespace DAQ;
 namespace lactel
@@ -17,14 +20,35 @@ namespace lactel
     }
 
     void BRunAction::BeginOfRunAction(const G4Run* run){
+
         BAnalysisManager * ana = BAnalysisManager::getIt();
         BPrimaryGeneratorAction* bpga = BPrimaryGeneratorAction::getInstance();
         DAQManager* daqManager = DAQManager::getIt();
+        if(ana->fRun.runNb == -1)
+            ana->fRun.runNb = run->GetRunID();
+
+        // overload : KM3RunAction::BeginOfRunAction(run);
+        G4int RunN = ana->fRun.runNb; //aRun->GetRunID();
+        //if ( RunN % 1000 == 0 )
+        G4cout << G4endl;
+        std::cout << std::endl << "### - Run : " << RunN << std::endl;
+
+        if (G4VVisManager::GetConcreteInstance())
+        {
+            G4UImanager* UI = G4UImanager::GetUIpointer();
+            // UI->ApplyCommand("/vis/clear/view");
+            // UI->ApplyCommand("/vis/draw/current");
+        }
+
+        if (KM3AnalysisManager::fEvtOutput) {
+            KM3AnalysisManager::evt_stream << "norma: 0 " << run->GetNumberOfEventToBeProcessed() << std::endl;
+            KM3AnalysisManager::evt_stream << "end_event:" << std::endl;
+        }
+        // overload : KM3RunAction::BeginOfRunAction(run);
 
         ana->Init(("run_" + std::to_string(ana->fRun.runNb) + ".root").c_str());
         bpga->init();
         daqManager->init();
-        KM3RunAction::BeginOfRunAction(run);
 
         // ana->fRFile = new TFile(("run_" + std::to_string(run->GetRunID()) + ".root").c_str(), "recreate");
         //ana->fRun.runNb = run->GetRunID();
@@ -54,7 +78,7 @@ namespace lactel
     }
 
     void BRunAction::EndOfRunAction(const G4Run* run){
-        KM3RunAction::EndOfRunAction(run);
+        // KM3RunAction::EndOfRunAction(run); // not needed does not do anything
 
         BAnalysisManager * ana = BAnalysisManager::getIt();
         BPrimaryGeneratorAction * bpga = BPrimaryGeneratorAction::getInstance();
@@ -62,15 +86,6 @@ namespace lactel
         BDetectorConstruction* det = BDetectorConstruction::GetIt();
 
         // det->PrintAllMaterialProperties();
-
-
-        ana->runTree->Fill();
-        ana->fTRunInfos->Fill();
-
-        //reset values
-        ana->fRun.nDetEvent = 0;
-        ana->fRun.nGenEvent = 0;
-        ana->fRun.runNb = -1;
 
         std::cout << "\r\033[10CRun: " << ana->fRun.runNb << " -- nGen: " << bpga->nGen << " -- nDet: " << bpga->nDet << " -- Muons flux: " << bpga->muonsFlux << std::endl;
         std::cout << "\r\033[10C" << "Lactel rate for run " << ana->fRun.runNb << " is: " << bpga->nDet * bpga->muonsFlux / bpga->nGen << " muons/s" << std::endl;
@@ -103,7 +118,15 @@ namespace lactel
         // daqManager->getDetectedEvents(ana->getDetectedEventsTree());
         // std::cout << "\r\033[22C" << "detected Events size: " << daqManager->getEvents().size() << std::endl;
         
+        // Fill treis; 
+        ana->runTree->Fill();
+        ana->fTRunInfos->Fill();
+        // write data
         ana->Write();
+        //reset values
+        ana->fRun.nDetEvent = 0;
+        ana->fRun.nGenEvent = 0;
+        ana->fRun.runNb = -1;
         // ana->fRFile->Close();
     }
 } // namespace lactel
