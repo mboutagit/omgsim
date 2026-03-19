@@ -1,7 +1,6 @@
 {
    "define": {
        "config"   : "scripts/lactel.mac",
-       "outs0" : [["2025-12-17_v12.5.2_xsec-atom-AR23_reso-spl_1ns" , 0, "", "No Constraint"]],
        "nJ"       : 20,
        "nEv"      : 100000/nJ
    },
@@ -9,7 +8,7 @@
        {
            "command" : format("./OMGsim -fa %s -r %d", config, A),
            "outputs" : [ format("run_%d.root", A) ],
-           "inputs"  : [  ]
+           "inputs"  : []
        } for A in range(nJ)
    ]
 }

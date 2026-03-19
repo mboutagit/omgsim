@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/libOMG.dir/BPostAnalysis/src/BPostAnalysis.cc.o.d"
   "CMakeFiles/libOMG.dir/BPostAnalysis/src/utils.cc.o"
   "CMakeFiles/libOMG.dir/BPostAnalysis/src/utils.cc.o.d"
+  "CMakeFiles/libOMG.dir/G__Dict.cxx.o"
+  "CMakeFiles/libOMG.dir/G__Dict.cxx.o.d"
   "CMakeFiles/libOMG.dir/K40/src/K40AnalysisManager.cc.o"
   "CMakeFiles/libOMG.dir/K40/src/K40AnalysisManager.cc.o.d"
   "CMakeFiles/libOMG.dir/LACTELSim/src/BAnalysisManager.cc.o"
@@ -115,6 +117,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/libOMG.dir/tools/src/DAQManager.cc.o.d"
   "CMakeFiles/libOMG.dir/utils/src/BLogger.cc.o"
   "CMakeFiles/libOMG.dir/utils/src/BLogger.cc.o.d"
+  "G__Dict.cxx"
+  "libDict.rootmap"
+  "libDict_rdict.pcm"
   "liblibOMG.pdb"
   "liblibOMG.so"
 )

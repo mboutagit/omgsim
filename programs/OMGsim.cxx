@@ -66,6 +66,8 @@
 
 #include "BAnalysisManager.hh"
 
+#include "BLogger.hh"
+
 
 #include <random>
 #include <iostream>
@@ -76,6 +78,7 @@
 
 using namespace std;
 using namespace km3net;
+using namespace utils;
 
 int main(int argc_,char** argv_)
 {
@@ -92,6 +95,7 @@ int main(int argc_,char** argv_)
   bool analyse_all = false;
   bool evt_output = false;
   int runNumber=-1;
+  int debugLevel=-1;
   int iarg = 1;
   while (iarg < argc_)
     {
@@ -152,6 +156,26 @@ int main(int argc_,char** argv_)
               iarg++;
               //std::cout << "\r\033[20C" << "token: " << token << " ---- value: " << argv_[iarg+1] << std::endl;
             }
+
+            else if ( (option == "-dl") && (iarg+1 <= argc_) )
+            {
+
+              try {
+                  debugLevel = std::stoi(argv_[iarg+1]);
+                  // success
+              } catch (const std::invalid_argument&) {
+                  // not a number
+                  std::cout << "\r\033[10C" << "Error: debug level (-dl) must be an integer." << std::endl;
+                  exit(-1);
+              } catch (const std::out_of_range&) {
+                  // too large/small for int
+                  std::cout << "\r\033[10C" << "Error: Check the debug level (-dl)." << std::endl;
+                  exit(-1);
+              }
+
+              iarg++;
+              //std::cout << "\r\033[20C" << "token: " << token << " ---- value: " << argv_[iarg+1] << std::endl;
+            }
            
            
 
@@ -199,6 +223,8 @@ int main(int argc_,char** argv_)
     lactel::BAnalysisManager::getIt()->evtFileName = evtFileName;
     lactel::BAnalysisManager::getIt()->fRun.runNb=runNumber;
 
+    BLogger::getInstance()->setDebugLevel(debugLevel);
+
     // random engine
     //CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);
     //CLHEP::HepRandom::setTheEngine(new CLHEP::Hurd160Engine);
@@ -237,20 +263,6 @@ int main(int argc_,char** argv_)
     // G4UIsession* win32session=0;
     // G4UIsession* sessionQt=0;
      G4VisManager* visManager=NULL;
-    if (session)
-      {
-        //session = new G4UIQt(0, argv_); // by Bouta it was: new G4UIXm(0,argv_);//new G4UIterminal();
-        //session = new G4UIXm(0,argv_);//new G4UIterminal()
-        //sessionQt = new G4UIQt(0, argv_);
-        //win32session = new G4UIWin32(0, argv_);
-        // visualization manager
-
-        visManager = new G4VisExecutive;
-        visManager->SetVerboseLevel(0); 
-        visManager->Initialize();
-      //  visManager->SessionStart();
-      }
-
 
     // Initialize G4 kernel
     // do this at run time so the geometry/physics can be changed
@@ -274,6 +286,10 @@ int main(int argc_,char** argv_)
     }
     else { 
       // interactive mode
+      visManager = new G4VisExecutive;
+      visManager->SetVerboseLevel(0); 
+      visManager->Initialize();
+
       cout << "\r\033[20C" << "With session -- " << endl;
       ui = new G4UIExecutive(argc_, argv_);
       UI->ApplyCommand(command+MacFileName);
@@ -316,12 +332,12 @@ int main(int argc_,char** argv_)
         delete ui;
       }
 
-
     std::default_random_engine generator;
     std::uniform_real_distribution<double> distribution(-17*2.54/2, 17*2.54/2);
 
     //delete ger;
-    delete ketm;
+    if(ketm)
+      delete ketm;
   }
   catch (const char* err)
     {

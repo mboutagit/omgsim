@@ -143,19 +143,6 @@ libOMG/fast:
 .PHONY : libOMG/fast
 
 #=============================================================================
-# Target rules for targets named BAnalysis
-
-# Build rule for target.
-BAnalysis: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BAnalysis
-.PHONY : BAnalysis
-
-# fast build rule for target.
-BAnalysis/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/build
-.PHONY : BAnalysis/fast
-
-#=============================================================================
 # Target rules for targets named BRateBuilder
 
 # Build rule for target.
@@ -343,7 +330,7 @@ G__Dict.o: G__Dict.cxx.o
 
 # target to build an object file
 G__Dict.cxx.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/G__Dict.cxx.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/G__Dict.cxx.o
 .PHONY : G__Dict.cxx.o
 
 G__Dict.i: G__Dict.cxx.i
@@ -351,7 +338,7 @@ G__Dict.i: G__Dict.cxx.i
 
 # target to preprocess a source file
 G__Dict.cxx.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/G__Dict.cxx.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/G__Dict.cxx.i
 .PHONY : G__Dict.cxx.i
 
 G__Dict.s: G__Dict.cxx.s
@@ -359,7 +346,7 @@ G__Dict.s: G__Dict.cxx.s
 
 # target to generate assembly for a file
 G__Dict.cxx.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/G__Dict.cxx.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/G__Dict.cxx.s
 .PHONY : G__Dict.cxx.s
 
 K40/src/K40AnalysisManager.o: K40/src/K40AnalysisManager.cc.o
@@ -392,7 +379,6 @@ LACTELSim/src/BAnalysisManager.o: LACTELSim/src/BAnalysisManager.cc.o
 # target to build an object file
 LACTELSim/src/BAnalysisManager.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BAnalysisManager.cc.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BAnalysisManager.cc.o
 .PHONY : LACTELSim/src/BAnalysisManager.cc.o
 
 LACTELSim/src/BAnalysisManager.i: LACTELSim/src/BAnalysisManager.cc.i
@@ -401,7 +387,6 @@ LACTELSim/src/BAnalysisManager.i: LACTELSim/src/BAnalysisManager.cc.i
 # target to preprocess a source file
 LACTELSim/src/BAnalysisManager.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BAnalysisManager.cc.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BAnalysisManager.cc.i
 .PHONY : LACTELSim/src/BAnalysisManager.cc.i
 
 LACTELSim/src/BAnalysisManager.s: LACTELSim/src/BAnalysisManager.cc.s
@@ -410,7 +395,6 @@ LACTELSim/src/BAnalysisManager.s: LACTELSim/src/BAnalysisManager.cc.s
 # target to generate assembly for a file
 LACTELSim/src/BAnalysisManager.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BAnalysisManager.cc.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BAnalysisManager.cc.s
 .PHONY : LACTELSim/src/BAnalysisManager.cc.s
 
 LACTELSim/src/BDetectorConstruction.o: LACTELSim/src/BDetectorConstruction.cc.o
@@ -419,7 +403,6 @@ LACTELSim/src/BDetectorConstruction.o: LACTELSim/src/BDetectorConstruction.cc.o
 # target to build an object file
 LACTELSim/src/BDetectorConstruction.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BDetectorConstruction.cc.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BDetectorConstruction.cc.o
 .PHONY : LACTELSim/src/BDetectorConstruction.cc.o
 
 LACTELSim/src/BDetectorConstruction.i: LACTELSim/src/BDetectorConstruction.cc.i
@@ -428,7 +411,6 @@ LACTELSim/src/BDetectorConstruction.i: LACTELSim/src/BDetectorConstruction.cc.i
 # target to preprocess a source file
 LACTELSim/src/BDetectorConstruction.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BDetectorConstruction.cc.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BDetectorConstruction.cc.i
 .PHONY : LACTELSim/src/BDetectorConstruction.cc.i
 
 LACTELSim/src/BDetectorConstruction.s: LACTELSim/src/BDetectorConstruction.cc.s
@@ -437,7 +419,6 @@ LACTELSim/src/BDetectorConstruction.s: LACTELSim/src/BDetectorConstruction.cc.s
 # target to generate assembly for a file
 LACTELSim/src/BDetectorConstruction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BDetectorConstruction.cc.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BDetectorConstruction.cc.s
 .PHONY : LACTELSim/src/BDetectorConstruction.cc.s
 
 LACTELSim/src/BDetectorMessenger.o: LACTELSim/src/BDetectorMessenger.cc.o
@@ -446,7 +427,6 @@ LACTELSim/src/BDetectorMessenger.o: LACTELSim/src/BDetectorMessenger.cc.o
 # target to build an object file
 LACTELSim/src/BDetectorMessenger.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BDetectorMessenger.cc.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BDetectorMessenger.cc.o
 .PHONY : LACTELSim/src/BDetectorMessenger.cc.o
 
 LACTELSim/src/BDetectorMessenger.i: LACTELSim/src/BDetectorMessenger.cc.i
@@ -455,7 +435,6 @@ LACTELSim/src/BDetectorMessenger.i: LACTELSim/src/BDetectorMessenger.cc.i
 # target to preprocess a source file
 LACTELSim/src/BDetectorMessenger.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BDetectorMessenger.cc.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BDetectorMessenger.cc.i
 .PHONY : LACTELSim/src/BDetectorMessenger.cc.i
 
 LACTELSim/src/BDetectorMessenger.s: LACTELSim/src/BDetectorMessenger.cc.s
@@ -464,7 +443,6 @@ LACTELSim/src/BDetectorMessenger.s: LACTELSim/src/BDetectorMessenger.cc.s
 # target to generate assembly for a file
 LACTELSim/src/BDetectorMessenger.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BDetectorMessenger.cc.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BDetectorMessenger.cc.s
 .PHONY : LACTELSim/src/BDetectorMessenger.cc.s
 
 LACTELSim/src/BDigi.o: LACTELSim/src/BDigi.cc.o
@@ -473,7 +451,6 @@ LACTELSim/src/BDigi.o: LACTELSim/src/BDigi.cc.o
 # target to build an object file
 LACTELSim/src/BDigi.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BDigi.cc.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BDigi.cc.o
 .PHONY : LACTELSim/src/BDigi.cc.o
 
 LACTELSim/src/BDigi.i: LACTELSim/src/BDigi.cc.i
@@ -482,7 +459,6 @@ LACTELSim/src/BDigi.i: LACTELSim/src/BDigi.cc.i
 # target to preprocess a source file
 LACTELSim/src/BDigi.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BDigi.cc.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BDigi.cc.i
 .PHONY : LACTELSim/src/BDigi.cc.i
 
 LACTELSim/src/BDigi.s: LACTELSim/src/BDigi.cc.s
@@ -491,7 +467,6 @@ LACTELSim/src/BDigi.s: LACTELSim/src/BDigi.cc.s
 # target to generate assembly for a file
 LACTELSim/src/BDigi.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BDigi.cc.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BDigi.cc.s
 .PHONY : LACTELSim/src/BDigi.cc.s
 
 LACTELSim/src/BDigitizerModule.o: LACTELSim/src/BDigitizerModule.cc.o
@@ -500,7 +475,6 @@ LACTELSim/src/BDigitizerModule.o: LACTELSim/src/BDigitizerModule.cc.o
 # target to build an object file
 LACTELSim/src/BDigitizerModule.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BDigitizerModule.cc.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BDigitizerModule.cc.o
 .PHONY : LACTELSim/src/BDigitizerModule.cc.o
 
 LACTELSim/src/BDigitizerModule.i: LACTELSim/src/BDigitizerModule.cc.i
@@ -509,7 +483,6 @@ LACTELSim/src/BDigitizerModule.i: LACTELSim/src/BDigitizerModule.cc.i
 # target to preprocess a source file
 LACTELSim/src/BDigitizerModule.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BDigitizerModule.cc.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BDigitizerModule.cc.i
 .PHONY : LACTELSim/src/BDigitizerModule.cc.i
 
 LACTELSim/src/BDigitizerModule.s: LACTELSim/src/BDigitizerModule.cc.s
@@ -518,7 +491,6 @@ LACTELSim/src/BDigitizerModule.s: LACTELSim/src/BDigitizerModule.cc.s
 # target to generate assembly for a file
 LACTELSim/src/BDigitizerModule.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BDigitizerModule.cc.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BDigitizerModule.cc.s
 .PHONY : LACTELSim/src/BDigitizerModule.cc.s
 
 LACTELSim/src/BEvent.o: LACTELSim/src/BEvent.cc.o
@@ -527,7 +499,6 @@ LACTELSim/src/BEvent.o: LACTELSim/src/BEvent.cc.o
 # target to build an object file
 LACTELSim/src/BEvent.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BEvent.cc.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BEvent.cc.o
 .PHONY : LACTELSim/src/BEvent.cc.o
 
 LACTELSim/src/BEvent.i: LACTELSim/src/BEvent.cc.i
@@ -536,7 +507,6 @@ LACTELSim/src/BEvent.i: LACTELSim/src/BEvent.cc.i
 # target to preprocess a source file
 LACTELSim/src/BEvent.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BEvent.cc.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BEvent.cc.i
 .PHONY : LACTELSim/src/BEvent.cc.i
 
 LACTELSim/src/BEvent.s: LACTELSim/src/BEvent.cc.s
@@ -545,7 +515,6 @@ LACTELSim/src/BEvent.s: LACTELSim/src/BEvent.cc.s
 # target to generate assembly for a file
 LACTELSim/src/BEvent.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BEvent.cc.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BEvent.cc.s
 .PHONY : LACTELSim/src/BEvent.cc.s
 
 LACTELSim/src/BEventAction.o: LACTELSim/src/BEventAction.cc.o
@@ -554,7 +523,6 @@ LACTELSim/src/BEventAction.o: LACTELSim/src/BEventAction.cc.o
 # target to build an object file
 LACTELSim/src/BEventAction.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BEventAction.cc.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BEventAction.cc.o
 .PHONY : LACTELSim/src/BEventAction.cc.o
 
 LACTELSim/src/BEventAction.i: LACTELSim/src/BEventAction.cc.i
@@ -563,7 +531,6 @@ LACTELSim/src/BEventAction.i: LACTELSim/src/BEventAction.cc.i
 # target to preprocess a source file
 LACTELSim/src/BEventAction.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BEventAction.cc.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BEventAction.cc.i
 .PHONY : LACTELSim/src/BEventAction.cc.i
 
 LACTELSim/src/BEventAction.s: LACTELSim/src/BEventAction.cc.s
@@ -572,7 +539,6 @@ LACTELSim/src/BEventAction.s: LACTELSim/src/BEventAction.cc.s
 # target to generate assembly for a file
 LACTELSim/src/BEventAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BEventAction.cc.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BEventAction.cc.s
 .PHONY : LACTELSim/src/BEventAction.cc.s
 
 LACTELSim/src/BHardwareManager.o: LACTELSim/src/BHardwareManager.cc.o
@@ -581,7 +547,6 @@ LACTELSim/src/BHardwareManager.o: LACTELSim/src/BHardwareManager.cc.o
 # target to build an object file
 LACTELSim/src/BHardwareManager.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BHardwareManager.cc.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BHardwareManager.cc.o
 .PHONY : LACTELSim/src/BHardwareManager.cc.o
 
 LACTELSim/src/BHardwareManager.i: LACTELSim/src/BHardwareManager.cc.i
@@ -590,7 +555,6 @@ LACTELSim/src/BHardwareManager.i: LACTELSim/src/BHardwareManager.cc.i
 # target to preprocess a source file
 LACTELSim/src/BHardwareManager.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BHardwareManager.cc.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BHardwareManager.cc.i
 .PHONY : LACTELSim/src/BHardwareManager.cc.i
 
 LACTELSim/src/BHardwareManager.s: LACTELSim/src/BHardwareManager.cc.s
@@ -599,7 +563,6 @@ LACTELSim/src/BHardwareManager.s: LACTELSim/src/BHardwareManager.cc.s
 # target to generate assembly for a file
 LACTELSim/src/BHardwareManager.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BHardwareManager.cc.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BHardwareManager.cc.s
 .PHONY : LACTELSim/src/BHardwareManager.cc.s
 
 LACTELSim/src/BHit.o: LACTELSim/src/BHit.cc.o
@@ -608,7 +571,6 @@ LACTELSim/src/BHit.o: LACTELSim/src/BHit.cc.o
 # target to build an object file
 LACTELSim/src/BHit.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BHit.cc.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BHit.cc.o
 .PHONY : LACTELSim/src/BHit.cc.o
 
 LACTELSim/src/BHit.i: LACTELSim/src/BHit.cc.i
@@ -617,7 +579,6 @@ LACTELSim/src/BHit.i: LACTELSim/src/BHit.cc.i
 # target to preprocess a source file
 LACTELSim/src/BHit.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BHit.cc.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BHit.cc.i
 .PHONY : LACTELSim/src/BHit.cc.i
 
 LACTELSim/src/BHit.s: LACTELSim/src/BHit.cc.s
@@ -626,7 +587,6 @@ LACTELSim/src/BHit.s: LACTELSim/src/BHit.cc.s
 # target to generate assembly for a file
 LACTELSim/src/BHit.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BHit.cc.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BHit.cc.s
 .PHONY : LACTELSim/src/BHit.cc.s
 
 LACTELSim/src/BPrimaryGeneratorAction.o: LACTELSim/src/BPrimaryGeneratorAction.cc.o
@@ -635,7 +595,6 @@ LACTELSim/src/BPrimaryGeneratorAction.o: LACTELSim/src/BPrimaryGeneratorAction.c
 # target to build an object file
 LACTELSim/src/BPrimaryGeneratorAction.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BPrimaryGeneratorAction.cc.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BPrimaryGeneratorAction.cc.o
 .PHONY : LACTELSim/src/BPrimaryGeneratorAction.cc.o
 
 LACTELSim/src/BPrimaryGeneratorAction.i: LACTELSim/src/BPrimaryGeneratorAction.cc.i
@@ -644,7 +603,6 @@ LACTELSim/src/BPrimaryGeneratorAction.i: LACTELSim/src/BPrimaryGeneratorAction.c
 # target to preprocess a source file
 LACTELSim/src/BPrimaryGeneratorAction.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BPrimaryGeneratorAction.cc.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BPrimaryGeneratorAction.cc.i
 .PHONY : LACTELSim/src/BPrimaryGeneratorAction.cc.i
 
 LACTELSim/src/BPrimaryGeneratorAction.s: LACTELSim/src/BPrimaryGeneratorAction.cc.s
@@ -653,7 +611,6 @@ LACTELSim/src/BPrimaryGeneratorAction.s: LACTELSim/src/BPrimaryGeneratorAction.c
 # target to generate assembly for a file
 LACTELSim/src/BPrimaryGeneratorAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BPrimaryGeneratorAction.cc.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BPrimaryGeneratorAction.cc.s
 .PHONY : LACTELSim/src/BPrimaryGeneratorAction.cc.s
 
 LACTELSim/src/BPrimaryGeneratorMessenger.o: LACTELSim/src/BPrimaryGeneratorMessenger.cc.o
@@ -662,7 +619,6 @@ LACTELSim/src/BPrimaryGeneratorMessenger.o: LACTELSim/src/BPrimaryGeneratorMesse
 # target to build an object file
 LACTELSim/src/BPrimaryGeneratorMessenger.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BPrimaryGeneratorMessenger.cc.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BPrimaryGeneratorMessenger.cc.o
 .PHONY : LACTELSim/src/BPrimaryGeneratorMessenger.cc.o
 
 LACTELSim/src/BPrimaryGeneratorMessenger.i: LACTELSim/src/BPrimaryGeneratorMessenger.cc.i
@@ -671,7 +627,6 @@ LACTELSim/src/BPrimaryGeneratorMessenger.i: LACTELSim/src/BPrimaryGeneratorMesse
 # target to preprocess a source file
 LACTELSim/src/BPrimaryGeneratorMessenger.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BPrimaryGeneratorMessenger.cc.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BPrimaryGeneratorMessenger.cc.i
 .PHONY : LACTELSim/src/BPrimaryGeneratorMessenger.cc.i
 
 LACTELSim/src/BPrimaryGeneratorMessenger.s: LACTELSim/src/BPrimaryGeneratorMessenger.cc.s
@@ -680,7 +635,6 @@ LACTELSim/src/BPrimaryGeneratorMessenger.s: LACTELSim/src/BPrimaryGeneratorMesse
 # target to generate assembly for a file
 LACTELSim/src/BPrimaryGeneratorMessenger.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BPrimaryGeneratorMessenger.cc.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BPrimaryGeneratorMessenger.cc.s
 .PHONY : LACTELSim/src/BPrimaryGeneratorMessenger.cc.s
 
 LACTELSim/src/BRunAction.o: LACTELSim/src/BRunAction.cc.o
@@ -689,7 +643,6 @@ LACTELSim/src/BRunAction.o: LACTELSim/src/BRunAction.cc.o
 # target to build an object file
 LACTELSim/src/BRunAction.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BRunAction.cc.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunAction.cc.o
 .PHONY : LACTELSim/src/BRunAction.cc.o
 
 LACTELSim/src/BRunAction.i: LACTELSim/src/BRunAction.cc.i
@@ -698,7 +651,6 @@ LACTELSim/src/BRunAction.i: LACTELSim/src/BRunAction.cc.i
 # target to preprocess a source file
 LACTELSim/src/BRunAction.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BRunAction.cc.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunAction.cc.i
 .PHONY : LACTELSim/src/BRunAction.cc.i
 
 LACTELSim/src/BRunAction.s: LACTELSim/src/BRunAction.cc.s
@@ -707,7 +659,6 @@ LACTELSim/src/BRunAction.s: LACTELSim/src/BRunAction.cc.s
 # target to generate assembly for a file
 LACTELSim/src/BRunAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BRunAction.cc.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunAction.cc.s
 .PHONY : LACTELSim/src/BRunAction.cc.s
 
 LACTELSim/src/BRunManager.o: LACTELSim/src/BRunManager.cc.o
@@ -716,7 +667,6 @@ LACTELSim/src/BRunManager.o: LACTELSim/src/BRunManager.cc.o
 # target to build an object file
 LACTELSim/src/BRunManager.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BRunManager.cc.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunManager.cc.o
 .PHONY : LACTELSim/src/BRunManager.cc.o
 
 LACTELSim/src/BRunManager.i: LACTELSim/src/BRunManager.cc.i
@@ -725,7 +675,6 @@ LACTELSim/src/BRunManager.i: LACTELSim/src/BRunManager.cc.i
 # target to preprocess a source file
 LACTELSim/src/BRunManager.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BRunManager.cc.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunManager.cc.i
 .PHONY : LACTELSim/src/BRunManager.cc.i
 
 LACTELSim/src/BRunManager.s: LACTELSim/src/BRunManager.cc.s
@@ -734,7 +683,6 @@ LACTELSim/src/BRunManager.s: LACTELSim/src/BRunManager.cc.s
 # target to generate assembly for a file
 LACTELSim/src/BRunManager.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BRunManager.cc.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BRunManager.cc.s
 .PHONY : LACTELSim/src/BRunManager.cc.s
 
 LACTELSim/src/BStackingAction.o: LACTELSim/src/BStackingAction.cc.o
@@ -743,7 +691,6 @@ LACTELSim/src/BStackingAction.o: LACTELSim/src/BStackingAction.cc.o
 # target to build an object file
 LACTELSim/src/BStackingAction.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BStackingAction.cc.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.o
 .PHONY : LACTELSim/src/BStackingAction.cc.o
 
 LACTELSim/src/BStackingAction.i: LACTELSim/src/BStackingAction.cc.i
@@ -752,7 +699,6 @@ LACTELSim/src/BStackingAction.i: LACTELSim/src/BStackingAction.cc.i
 # target to preprocess a source file
 LACTELSim/src/BStackingAction.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BStackingAction.cc.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.i
 .PHONY : LACTELSim/src/BStackingAction.cc.i
 
 LACTELSim/src/BStackingAction.s: LACTELSim/src/BStackingAction.cc.s
@@ -761,7 +707,6 @@ LACTELSim/src/BStackingAction.s: LACTELSim/src/BStackingAction.cc.s
 # target to generate assembly for a file
 LACTELSim/src/BStackingAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BStackingAction.cc.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BStackingAction.cc.s
 .PHONY : LACTELSim/src/BStackingAction.cc.s
 
 LACTELSim/src/BSteppingAction.o: LACTELSim/src/BSteppingAction.cc.o
@@ -770,7 +715,6 @@ LACTELSim/src/BSteppingAction.o: LACTELSim/src/BSteppingAction.cc.o
 # target to build an object file
 LACTELSim/src/BSteppingAction.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BSteppingAction.cc.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.o
 .PHONY : LACTELSim/src/BSteppingAction.cc.o
 
 LACTELSim/src/BSteppingAction.i: LACTELSim/src/BSteppingAction.cc.i
@@ -779,7 +723,6 @@ LACTELSim/src/BSteppingAction.i: LACTELSim/src/BSteppingAction.cc.i
 # target to preprocess a source file
 LACTELSim/src/BSteppingAction.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BSteppingAction.cc.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.i
 .PHONY : LACTELSim/src/BSteppingAction.cc.i
 
 LACTELSim/src/BSteppingAction.s: LACTELSim/src/BSteppingAction.cc.s
@@ -788,7 +731,6 @@ LACTELSim/src/BSteppingAction.s: LACTELSim/src/BSteppingAction.cc.s
 # target to generate assembly for a file
 LACTELSim/src/BSteppingAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BSteppingAction.cc.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/BSteppingAction.cc.s
 .PHONY : LACTELSim/src/BSteppingAction.cc.s
 
 LACTELSim/src/Utils.o: LACTELSim/src/Utils.cc.o
@@ -797,7 +739,6 @@ LACTELSim/src/Utils.o: LACTELSim/src/Utils.cc.o
 # target to build an object file
 LACTELSim/src/Utils.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/Utils.cc.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.o
 .PHONY : LACTELSim/src/Utils.cc.o
 
 LACTELSim/src/Utils.i: LACTELSim/src/Utils.cc.i
@@ -806,7 +747,6 @@ LACTELSim/src/Utils.i: LACTELSim/src/Utils.cc.i
 # target to preprocess a source file
 LACTELSim/src/Utils.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/Utils.cc.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.i
 .PHONY : LACTELSim/src/Utils.cc.i
 
 LACTELSim/src/Utils.s: LACTELSim/src/Utils.cc.s
@@ -815,7 +755,6 @@ LACTELSim/src/Utils.s: LACTELSim/src/Utils.cc.s
 # target to generate assembly for a file
 LACTELSim/src/Utils.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/Utils.cc.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BAnalysis.dir/build.make CMakeFiles/BAnalysis.dir/LACTELSim/src/Utils.cc.s
 .PHONY : LACTELSim/src/Utils.cc.s
 
 MottaSchonertSimulation/src/MottaAnalysisManager.o: MottaSchonertSimulation/src/MottaAnalysisManager.cc.o
@@ -1739,7 +1678,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... G__Dict"
-	@echo "... BAnalysis"
 	@echo "... BRateBuilder"
 	@echo "... OMGsim"
 	@echo "... PostAna"

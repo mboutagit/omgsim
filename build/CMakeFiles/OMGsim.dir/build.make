@@ -93,7 +93,6 @@ OMGsim_EXTERNAL_OBJECTS =
 OMGsim: CMakeFiles/OMGsim.dir/programs/OMGsim.cxx.o
 OMGsim: CMakeFiles/OMGsim.dir/build.make
 OMGsim: liblibOMG.so
-OMGsim: libBAnalysis.so
 OMGsim: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4Tree.so
 OMGsim: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4GMocren.so
 OMGsim: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4visHepRep.so

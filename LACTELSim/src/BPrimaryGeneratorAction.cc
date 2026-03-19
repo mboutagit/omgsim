@@ -565,7 +565,8 @@ namespace lactel
         theta_max /= rad;
         theta_steps /= rad;
 
-        std::cout << "BPrimaryGeneratorAction::integrate_muon_flux: " 
+        if(BLogger::getInstance()->getDebugLevel() > 2)
+            std::cout << "BPrimaryGeneratorAction::integrate_muon_flux: " 
                             << "\n Altitude in m: " << alt
                             << "\n E_min in GeV: " << Emin
                             << "\n E_max in GeV: " << Emax

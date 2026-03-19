@@ -93,7 +93,6 @@ PostAna_EXTERNAL_OBJECTS =
 PostAna: CMakeFiles/PostAna.dir/BPostAnalysis/programs/PostAna.cxx.o
 PostAna: CMakeFiles/PostAna.dir/build.make
 PostAna: liblibOMG.so
-PostAna: libBAnalysis.so
 PostAna: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4Tree.so
 PostAna: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4GMocren.so
 PostAna: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4visHepRep.so

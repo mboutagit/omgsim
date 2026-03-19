@@ -11,8 +11,8 @@ namespace utils
     BLogger::BLogger(){};
     BLogger* BLogger::getInstance(){
         if(!instance)
-            return new BLogger();
-        return (BLogger*)  instance;
+            instance = new BLogger();
+        return (BLogger*) instance;
     }
 
     void BLogger::setOutputFile(const std::string& filename) {
@@ -24,6 +24,19 @@ namespace utils
     // The main logging function
     void BLogger::log(Level level, const std::string& msg) {
        // std::lock_guard<std::mutex> lock(mutex_);
+            std::cout << "\r\033[10C" << " -- lev: " << debugLevel << std::endl;
+
+        if(debugLevel <= 0);
+            return;
+        if(debugLevel == 1 && level != Level::INFO){
+            std::cout << "\r\033[10C" << "lev: " << debugLevel << std::endl;
+            return;
+        }
+        // if(debugLevel >= 2 && (level == Level::INFO || level == Level::WARNING))
+        //     return;
+        // if(debugLevel >= 3 && (level == Level::INFO || level == Level::WARNING || level == Level::ERROR))
+        //     return;
+
 
         std::string levelStr = levelToString(level);
         std::string timestamp = timeStamp();

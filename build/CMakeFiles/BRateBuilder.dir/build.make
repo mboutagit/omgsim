@@ -93,7 +93,6 @@ BRateBuilder_EXTERNAL_OBJECTS =
 BRateBuilder: CMakeFiles/BRateBuilder.dir/BPostAnalysis/programs/BRateBuilder.cxx.o
 BRateBuilder: CMakeFiles/BRateBuilder.dir/build.make
 BRateBuilder: liblibOMG.so
-BRateBuilder: libBAnalysis.so
 BRateBuilder: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4Tree.so
 BRateBuilder: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4GMocren.so
 BRateBuilder: /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/lib/libG4visHepRep.so

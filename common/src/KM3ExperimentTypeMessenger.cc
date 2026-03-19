@@ -99,9 +99,9 @@ namespace km3net
     delete XPCommand;
     KM3AnalysisManager::getIt ()->Write ();
     BAnalysisManager::getIt() -> Write();
-    if (frunManager != NULL)
+    if (frunManager != nullptr)
       delete frunManager;
-    fInstance = NULL;
+    fInstance = nullptr;
   }
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

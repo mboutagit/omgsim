@@ -38,8 +38,12 @@ namespace utils
             void error(const std::string& msg)   { log(Level::ERROR, "\033[1;34m" + msg + "\033[0m"); }
             void debug(const std::string& msg)   { log(Level::DEBUG, "\033[1;34m" + msg + "\033[0m"); }
 
-            std::string timeStamp();
+            int debugLevel = -1;
 
+            void setDebugLevel(int lvl){debugLevel = lvl;}
+            int getDebugLevel(){return debugLevel;}
+
+            std::string timeStamp();
             bool writeToFile_;
             std::ofstream file_;
             std::mutex mutex_;

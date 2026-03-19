@@ -138,16 +138,11 @@ namespace lactel
     void BDetectorConstruction::autoWorldSize(){
 
         G4ThreeVector min, max;
-        std::cout << "\r\033[10C" << "I am OK" << std::endl;
-
         float zmax;
         zmax = (*G4PhysicalVolumeStore::GetInstance())[0]->GetTranslation().getZ() + 
                     dynamic_cast<G4Box*> ((*G4PhysicalVolumeStore::GetInstance())[0]->GetLogicalVolume()->GetSolid())->GetZHalfLength(); // initilize
 
         G4VPhysicalVolume* farVolume;
-
-            std::cout << "\r\033[10C" << "here as well" << std::endl;
-
         for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
                         
             if(dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid())){ // just for box kind volumes
@@ -156,8 +151,9 @@ namespace lactel
                     zmax = (abs(pv->GetTranslation().getZ()) + abs(dynamic_cast<G4Box*> (pv->GetLogicalVolume()->GetSolid())->GetZHalfLength()));
                     farVolume=pv;                     
                 }
-            
-                std::cout << "\r\033[10C" << "Check Volume: " << pv->GetName() << "  -- xpos: " << pv->GetTranslation().getX()
+                
+                if(BLogger::getInstance()->getDebugLevel() > 2)
+                    std::cout << "\r\033[10C" << "Check Volume: " << pv->GetName() << "  -- xpos: " << pv->GetTranslation().getX()
                                                                                  << "  -- ypos: " << pv->GetTranslation().getY()
                                                                                  << "  -- zpos: " << pv->GetTranslation().getZ()
                             << " -- halfZ size: " << dynamic_cast<G4Box*>  (dynamic_cast<G4Box*> (pv->GetLogicalVolume()->GetSolid())) ->GetZHalfLength()

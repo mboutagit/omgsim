@@ -1089,3 +1089,547 @@ events:
         
       exitCode: 2
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:22 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-UTnrqH"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-UTnrqH"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-UTnrqH'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_02da7/fast
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-UTnrqH'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_02da7.dir/build.make CMakeFiles/cmTC_02da7.dir/build
+        gmake[2]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-UTnrqH'
+        Building C object CMakeFiles/cmTC_02da7.dir/cmake_hdf5_test.c.o
+        /usr/bin/cc    -o CMakeFiles/cmTC_02da7.dir/cmake_hdf5_test.c.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[2]: *** [CMakeFiles/cmTC_02da7.dir/build.make:78: CMakeFiles/cmTC_02da7.dir/cmake_hdf5_test.c.o] Error 1
+        gmake[2]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-UTnrqH'
+        gmake[1]: *** [Makefile:127: cmTC_02da7/fast] Error 2
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-UTnrqH'
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:284 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:614 (_HDF5_test_regular_compiler_CXX)"
+      - "CMakeLists.txt:22 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-KG6X7S"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-KG6X7S"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+    buildResult:
+      variable: "HDF5_CXX_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-KG6X7S'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_7854c/fast
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-KG6X7S'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_7854c.dir/build.make CMakeFiles/cmTC_7854c.dir/build
+        gmake[2]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-KG6X7S'
+        Building CXX object CMakeFiles/cmTC_7854c.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++    -o CMakeFiles/cmTC_7854c.dir/cmake_hdf5_test.cxx.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: H5Cpp.h: No such file or directory
+            1 | #include <H5Cpp.h>
+              |          ^~~~~~~~~
+        compilation terminated.
+        gmake[2]: *** [CMakeFiles/cmTC_7854c.dir/build.make:78: CMakeFiles/cmTC_7854c.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[2]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-KG6X7S'
+        gmake[1]: *** [Makefile:127: cmTC_7854c/fast] Error 2
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-KG6X7S'
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:22 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-kFe8rX"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-kFe8rX"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-kFe8rX'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_b9bdc/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_b9bdc.dir/build.make CMakeFiles/cmTC_b9bdc.dir/build
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-kFe8rX'
+        Building C object CMakeFiles/cmTC_b9bdc.dir/cmake_hdf5_test.c.o
+        /usr/bin/cc    -o CMakeFiles/cmTC_b9bdc.dir/cmake_hdf5_test.c.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_b9bdc.dir/build.make:78: CMakeFiles/cmTC_b9bdc.dir/cmake_hdf5_test.c.o] Error 1
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-kFe8rX'
+        gmake: *** [Makefile:127: cmTC_b9bdc/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:284 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:614 (_HDF5_test_regular_compiler_CXX)"
+      - "CMakeLists.txt:22 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-ws014u"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-ws014u"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+    buildResult:
+      variable: "HDF5_CXX_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-ws014u'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_db70a/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_db70a.dir/build.make CMakeFiles/cmTC_db70a.dir/build
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-ws014u'
+        Building CXX object CMakeFiles/cmTC_db70a.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++    -o CMakeFiles/cmTC_db70a.dir/cmake_hdf5_test.cxx.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: H5Cpp.h: No such file or directory
+            1 | #include <H5Cpp.h>
+              |          ^~~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_db70a.dir/build.make:78: CMakeFiles/cmTC_db70a.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-ws014u'
+        gmake: *** [Makefile:127: cmTC_db70a/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:22 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-ooblpt"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-ooblpt"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-ooblpt'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_d4474/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_d4474.dir/build.make CMakeFiles/cmTC_d4474.dir/build
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-ooblpt'
+        Building C object CMakeFiles/cmTC_d4474.dir/cmake_hdf5_test.c.o
+        /usr/bin/cc    -o CMakeFiles/cmTC_d4474.dir/cmake_hdf5_test.c.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_d4474.dir/build.make:78: CMakeFiles/cmTC_d4474.dir/cmake_hdf5_test.c.o] Error 1
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-ooblpt'
+        gmake: *** [Makefile:127: cmTC_d4474/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:284 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:614 (_HDF5_test_regular_compiler_CXX)"
+      - "CMakeLists.txt:22 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-uvi6fm"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-uvi6fm"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+    buildResult:
+      variable: "HDF5_CXX_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-uvi6fm'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_ba4ae/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_ba4ae.dir/build.make CMakeFiles/cmTC_ba4ae.dir/build
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-uvi6fm'
+        Building CXX object CMakeFiles/cmTC_ba4ae.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++    -o CMakeFiles/cmTC_ba4ae.dir/cmake_hdf5_test.cxx.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: H5Cpp.h: No such file or directory
+            1 | #include <H5Cpp.h>
+              |          ^~~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_ba4ae.dir/build.make:78: CMakeFiles/cmTC_ba4ae.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-uvi6fm'
+        gmake: *** [Makefile:127: cmTC_ba4ae/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:22 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-Blc5yw"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-Blc5yw"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-Blc5yw'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_1449a/fast
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-Blc5yw'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_1449a.dir/build.make CMakeFiles/cmTC_1449a.dir/build
+        gmake[2]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-Blc5yw'
+        Building C object CMakeFiles/cmTC_1449a.dir/cmake_hdf5_test.c.o
+        /usr/bin/cc    -o CMakeFiles/cmTC_1449a.dir/cmake_hdf5_test.c.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[2]: *** [CMakeFiles/cmTC_1449a.dir/build.make:78: CMakeFiles/cmTC_1449a.dir/cmake_hdf5_test.c.o] Error 1
+        gmake[2]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-Blc5yw'
+        gmake[1]: *** [Makefile:127: cmTC_1449a/fast] Error 2
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-Blc5yw'
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:284 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:614 (_HDF5_test_regular_compiler_CXX)"
+      - "CMakeLists.txt:22 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-CHHgtq"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-CHHgtq"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+    buildResult:
+      variable: "HDF5_CXX_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-CHHgtq'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_ad345/fast
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-CHHgtq'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_ad345.dir/build.make CMakeFiles/cmTC_ad345.dir/build
+        gmake[2]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-CHHgtq'
+        Building CXX object CMakeFiles/cmTC_ad345.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++    -o CMakeFiles/cmTC_ad345.dir/cmake_hdf5_test.cxx.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: H5Cpp.h: No such file or directory
+            1 | #include <H5Cpp.h>
+              |          ^~~~~~~~~
+        compilation terminated.
+        gmake[2]: *** [CMakeFiles/cmTC_ad345.dir/build.make:78: CMakeFiles/cmTC_ad345.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[2]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-CHHgtq'
+        gmake[1]: *** [Makefile:127: cmTC_ad345/fast] Error 2
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-CHHgtq'
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:22 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-PU7etw"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-PU7etw"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-PU7etw'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_5edb5/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_5edb5.dir/build.make CMakeFiles/cmTC_5edb5.dir/build
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-PU7etw'
+        Building C object CMakeFiles/cmTC_5edb5.dir/cmake_hdf5_test.c.o
+        /usr/bin/cc    -o CMakeFiles/cmTC_5edb5.dir/cmake_hdf5_test.c.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_5edb5.dir/build.make:78: CMakeFiles/cmTC_5edb5.dir/cmake_hdf5_test.c.o] Error 1
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-PU7etw'
+        gmake: *** [Makefile:127: cmTC_5edb5/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:284 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:614 (_HDF5_test_regular_compiler_CXX)"
+      - "CMakeLists.txt:22 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-X4qVRR"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-X4qVRR"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+    buildResult:
+      variable: "HDF5_CXX_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-X4qVRR'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_5a8d8/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_5a8d8.dir/build.make CMakeFiles/cmTC_5a8d8.dir/build
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-X4qVRR'
+        Building CXX object CMakeFiles/cmTC_5a8d8.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++    -o CMakeFiles/cmTC_5a8d8.dir/cmake_hdf5_test.cxx.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: H5Cpp.h: No such file or directory
+            1 | #include <H5Cpp.h>
+              |          ^~~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_5a8d8.dir/build.make:78: CMakeFiles/cmTC_5a8d8.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-X4qVRR'
+        gmake: *** [Makefile:127: cmTC_5a8d8/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:22 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-qeNpXU"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-qeNpXU"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-qeNpXU'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_bd84e/fast
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-qeNpXU'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_bd84e.dir/build.make CMakeFiles/cmTC_bd84e.dir/build
+        gmake[2]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-qeNpXU'
+        Building C object CMakeFiles/cmTC_bd84e.dir/cmake_hdf5_test.c.o
+        /usr/bin/cc    -o CMakeFiles/cmTC_bd84e.dir/cmake_hdf5_test.c.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[2]: *** [CMakeFiles/cmTC_bd84e.dir/build.make:78: CMakeFiles/cmTC_bd84e.dir/cmake_hdf5_test.c.o] Error 1
+        gmake[2]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-qeNpXU'
+        gmake[1]: *** [Makefile:127: cmTC_bd84e/fast] Error 2
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-qeNpXU'
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:284 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:614 (_HDF5_test_regular_compiler_CXX)"
+      - "CMakeLists.txt:22 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-l5gQPE"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-l5gQPE"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+    buildResult:
+      variable: "HDF5_CXX_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-l5gQPE'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_e8f42/fast
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-l5gQPE'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_e8f42.dir/build.make CMakeFiles/cmTC_e8f42.dir/build
+        gmake[2]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-l5gQPE'
+        Building CXX object CMakeFiles/cmTC_e8f42.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++    -o CMakeFiles/cmTC_e8f42.dir/cmake_hdf5_test.cxx.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: H5Cpp.h: No such file or directory
+            1 | #include <H5Cpp.h>
+              |          ^~~~~~~~~
+        compilation terminated.
+        gmake[2]: *** [CMakeFiles/cmTC_e8f42.dir/build.make:78: CMakeFiles/cmTC_e8f42.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[2]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-l5gQPE'
+        gmake[1]: *** [Makefile:127: cmTC_e8f42/fast] Error 2
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-l5gQPE'
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:22 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-1TA9pZ"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-1TA9pZ"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-1TA9pZ'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_bba0c/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_bba0c.dir/build.make CMakeFiles/cmTC_bba0c.dir/build
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-1TA9pZ'
+        Building C object CMakeFiles/cmTC_bba0c.dir/cmake_hdf5_test.c.o
+        /usr/bin/cc    -o CMakeFiles/cmTC_bba0c.dir/cmake_hdf5_test.c.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_bba0c.dir/build.make:78: CMakeFiles/cmTC_bba0c.dir/cmake_hdf5_test.c.o] Error 1
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-1TA9pZ'
+        gmake: *** [Makefile:127: cmTC_bba0c/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:284 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:614 (_HDF5_test_regular_compiler_CXX)"
+      - "CMakeLists.txt:22 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-21wTz4"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-21wTz4"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+    buildResult:
+      variable: "HDF5_CXX_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-21wTz4'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_fe261/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_fe261.dir/build.make CMakeFiles/cmTC_fe261.dir/build
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-21wTz4'
+        Building CXX object CMakeFiles/cmTC_fe261.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++    -o CMakeFiles/cmTC_fe261.dir/cmake_hdf5_test.cxx.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: H5Cpp.h: No such file or directory
+            1 | #include <H5Cpp.h>
+              |          ^~~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_fe261.dir/build.make:78: CMakeFiles/cmTC_fe261.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-21wTz4'
+        gmake: *** [Makefile:127: cmTC_fe261/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:22 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-GwzC99"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-GwzC99"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-GwzC99'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_142f3/fast
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-GwzC99'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_142f3.dir/build.make CMakeFiles/cmTC_142f3.dir/build
+        gmake[2]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-GwzC99'
+        Building C object CMakeFiles/cmTC_142f3.dir/cmake_hdf5_test.c.o
+        /usr/bin/cc    -o CMakeFiles/cmTC_142f3.dir/cmake_hdf5_test.c.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[2]: *** [CMakeFiles/cmTC_142f3.dir/build.make:78: CMakeFiles/cmTC_142f3.dir/cmake_hdf5_test.c.o] Error 1
+        gmake[2]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-GwzC99'
+        gmake[1]: *** [Makefile:127: cmTC_142f3/fast] Error 2
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-GwzC99'
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:284 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:614 (_HDF5_test_regular_compiler_CXX)"
+      - "CMakeLists.txt:22 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-7CzR2M"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-7CzR2M"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+    buildResult:
+      variable: "HDF5_CXX_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-7CzR2M'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_6dfa9/fast
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-7CzR2M'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_6dfa9.dir/build.make CMakeFiles/cmTC_6dfa9.dir/build
+        gmake[2]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-7CzR2M'
+        Building CXX object CMakeFiles/cmTC_6dfa9.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++    -o CMakeFiles/cmTC_6dfa9.dir/cmake_hdf5_test.cxx.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: H5Cpp.h: No such file or directory
+            1 | #include <H5Cpp.h>
+              |          ^~~~~~~~~
+        compilation terminated.
+        gmake[2]: *** [CMakeFiles/cmTC_6dfa9.dir/build.make:78: CMakeFiles/cmTC_6dfa9.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[2]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-7CzR2M'
+        gmake[1]: *** [Makefile:127: cmTC_6dfa9/fast] Error 2
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-7CzR2M'
+        
+      exitCode: 2
+...

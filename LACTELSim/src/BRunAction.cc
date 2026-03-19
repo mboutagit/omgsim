@@ -8,8 +8,11 @@
 #include "G4VVisManager.hh"
 #include "G4UImanager.hh"
 
+#include "BLogger.hh"
+
 using namespace tools;
 using namespace DAQ;
+using namespace utils;
 namespace lactel
 {
     BRunAction::BRunAction(){
@@ -30,8 +33,13 @@ namespace lactel
         // overload : KM3RunAction::BeginOfRunAction(run);
         G4int RunN = ana->fRun.runNb; //aRun->GetRunID();
         //if ( RunN % 1000 == 0 )
-        G4cout << G4endl;
-        std::cout << std::endl << "### - Run : " << RunN << std::endl;
+        // G4cout << G4endl;
+
+        if(BLogger::getInstance()->getDebugLevel() > 1)
+            std::cout << std::endl << "Starting run: " << RunN << std::endl;
+
+        // std::cout << "\r\033[10C" << "--- Logger level: " << BLogger::getInstance()->debugLevel << std::endl;
+        // BLogger::getInstance()->log(utils::BLogger::Level::INFO, "Starting run : " + std::to_string(RunN) );
 
         if (G4VVisManager::GetConcreteInstance())
         {
@@ -87,12 +95,16 @@ namespace lactel
 
         // det->PrintAllMaterialProperties();
 
-        std::cout << "\r\033[10CRun: " << ana->fRun.runNb << " -- nGen: " << bpga->nGen << " -- nDet: " << bpga->nDet << " -- Muons flux: " << bpga->muonsFlux << std::endl;
-        std::cout << "\r\033[10C" << "Lactel rate for run " << ana->fRun.runNb << " is: " << bpga->nDet * bpga->muonsFlux / bpga->nGen << " muons/s" << std::endl;
+        if(BLogger::getInstance()->getDebugLevel() > 1){
+            std::cout << "\r\033[10CRun: " << ana->fRun.runNb << " -- nGen: " << bpga->nGen << " -- nDet: " << bpga->nDet << " -- Muons flux: " << bpga->muonsFlux << std::endl;
+            std::cout << "\r\033[10C" << "Lactel rate for run " << ana->fRun.runNb << " is: " << bpga->nDet * bpga->muonsFlux / bpga->nGen << " muons/s" << std::endl;
+        }
 
         if(daqManager->isActive()){
-            std::cout << "\r\033[55C \033[1;35m" << "DAQ ON ... Events size: " << daqManager->getEvents().size() << "\033[0m" << std::endl;
-            daqManager->dumpEvents(std::cout);
+            if(BLogger::getInstance()->getDebugLevel() > 1){
+                std::cout << "\r\033[55C \033[1;35m" << "DAQ ON ... Events size: " << daqManager->getEvents().size() << "\033[0m" << std::endl;
+                daqManager->dumpEvents(std::cout);
+            }
 
             OM oms0321("OMS0321");
             OM oms0304("OMS0304");
@@ -103,17 +115,21 @@ namespace lactel
             daqManager->dump();
             std::vector<BAnalysisManager::Hit*> hits = daqManager->getHitsByChannelID(wc1, 0);
             std::vector<BAnalysisManager::Hit*> hits1 = daqManager->getHitsByChannelID(wc1, 1);
-            std::cout << "\r\033[32C" << "hits vetor is: " << hits.size() << std::endl;
-            std::cout << "\r\033[32C" << "hits1 vetor is: " << hits1.size() << std::endl;
-            for(auto& hit : hits)
-                hit->dump();
             
-            for(auto& hit : hits1)
-                hit->dump();
+            if(BLogger::getInstance()->getDebugLevel() > 1){
+                std::cout << "\r\033[32C" << "hits vetor is: " << hits.size() << std::endl;
+                std::cout << "\r\033[32C" << "hits1 vetor is: " << hits1.size() << std::endl;
+                for(auto& hit : hits)
+                    hit->dump();
+                
+                for(auto& hit : hits1)
+                    hit->dump();
+            }
             
         }
         else{
-            std::cout << "\r\033[55C \033[1;31m" << "DAQ OFF ... Events size: " << daqManager->getEvents().size() << "\033[0m" << std::endl;
+            if(BLogger::getInstance()->getDebugLevel() > 1)
+                std::cout << "\r\033[55C \033[1;31m" << "DAQ OFF ... Events size: " << daqManager->getEvents().size() << "\033[0m" << std::endl;
         }
         // daqManager->getDetectedEvents(ana->getDetectedEventsTree());
         // std::cout << "\r\033[22C" << "detected Events size: " << daqManager->getEvents().size() << std::endl;
