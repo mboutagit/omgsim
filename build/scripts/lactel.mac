@@ -44,7 +44,7 @@
 # /vis/viewer/set/viewpointThetaPhi 105 -60  deg
 # /vis/scene/endOfEventAction accumulate
 
-/run/beamOn 40
+/run/beamOn 200
 
 # /run/beamOn 20000
 # /run/beamOn 20000

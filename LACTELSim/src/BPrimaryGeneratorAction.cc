@@ -736,11 +736,39 @@ namespace lactel
         double theta = par[0]; // Zenith angle (radians)
         double h = par[1] / km ;    // Altitude (km)
         double flux = norm * pow(E_mu, -2.7) *
-                    (1.0 / (1.1 + (E_mu * cos(theta) / epsilon_pi)) +
-                0.054 / (1.1 + (E_mu * cos(theta) / epsilon_K)));
+                    (1.0 / (1 + 1.1*(E_mu * cos(theta) / epsilon_pi)) +
+                0.054 / (1 + 1.1*(E_mu * cos(theta) / epsilon_K)));
 
-        flux *= exp(-h / H);  // Apply altitude correction
+        flux*= exp(-h / H);  // Apply altitude correction
 
+        return flux;
+    }
+
+    double BPrimaryGeneratorAction::ModifiedFormula(double *energy, double *par) 
+    {
+    // cout << "\r\033[5C" << "---- BPrimaryGeneratorAction::MuonFlux: " << energy[0] << " - " << par[0] << " - " << par[1] << endl;
+        const double epsilon_pi = 115.0; 
+        const double epsilon_K  = 850.0; 
+        const double H = 6.3; // in km   // Atmospheric scale height
+
+        double P1 = 0.102573,
+                P2 = -0.068287,
+                P3 = 0.958633,
+                P4 = 0.0407253,
+                P5 = 0.817285;
+        
+        
+
+        const double norm = 0.14; 
+        const double gamma = -2.7;       
+
+        double E_mu = energy[0];   // Muon energy (GeV)
+        double theta = par[0]*deg; // Zenith angle (radians)
+        double cosTheta = cos(theta);
+        double cosThetaStar = std::sqrt( (cosTheta*cosTheta + P1*P1 + P2*pow(cosTheta, P3) + P4*pow(cosTheta, P5))/(1+P1*P1+P2+P4) );
+        double flux = norm * pow(E_mu * (1 + 3.64/(E_mu*pow(cosThetaStar, 1.29))), gamma) *
+                    ( 1.0 / (1 + 1.1*(E_mu * cosThetaStar / epsilon_pi)) +
+                        0.054 / (1 + 1.1*(E_mu * cosThetaStar / epsilon_K)) );
         return flux;
     }
 
@@ -816,32 +844,33 @@ namespace lactel
         return theta; // In radians
     }
 
-    double BPrimaryGeneratorAction::gaisser_flux(double E) {
-        double cos_theta = 1.0; // vertical
-        double term1 = 1.0 / (1.0 + 1.1 * E * cos_theta / 115.0);
-        double term2 = 0.054 / (1.0 + 1.1 * E * cos_theta / 850.0);
-        return 0.14 * pow(E, -2.7) * (term1 + term2);
+    double BPrimaryGeneratorAction::gaisser_flux(double* E, double* pars) {
+        double theta = pars[0]*deg;
+        double cosTheta = cos(theta); // vertical
+        double term1 = 1.0 / (1.0 + 1.1 * E[0] * cosTheta / 115.0);
+        double term2 = 0.054 / (1.0 + 1.1 * E[0] * cosTheta / 850.0);
+        return 0.14 * pow(E[0], -2.7) * (term1 + term2);
     }
     
-    double BPrimaryGeneratorAction::integrate_gaisser_flux(double E_min, double E_max, int Nbins) {
-        double logE_min = std::log10(E_min);
-        double logE_max = std::log10(E_max);
-        double dlogE = (logE_max - logE_min) / Nbins;
+    // double BPrimaryGeneratorAction::integrate_gaisser_flux(double E_min, double E_max, int Nbins) {
+    //     double logE_min = std::log10(E_min);
+    //     double logE_max = std::log10(E_max);
+    //     double dlogE = (logE_max - logE_min) / Nbins;
     
-        double total_flux = 0.0;
+    //     double total_flux = 0.0;
     
-        for (int i = 0; i < Nbins; ++i) {
-            double logE1 = logE_min + i * dlogE;
-            double logE2 = logE_min + (i + 1) * dlogE;
-            double E1 = pow(10, logE1);
-            double E2 = pow(10, logE2);
-            double dE = E2 - E1;
+    //     for (int i = 0; i < Nbins; ++i) {
+    //         double logE1 = logE_min + i * dlogE;
+    //         double logE2 = logE_min + (i + 1) * dlogE;
+    //         double E1 = pow(10, logE1);
+    //         double E2 = pow(10, logE2);
+    //         double dE = E2 - E1;
     
-            double flux = gaisser_flux((E1 + E2) / 2.0); // midpoint value
-            total_flux += flux * dE;
-        }
+    //         // double flux = gaisser_flux((E1 + E2) / 2.0); // midpoint value
+    //         total_flux += flux * dE;
+    //     }
     
-        return total_flux; // [cm^-2 s^-1 sr^-1]
-    }
+    //     return total_flux; // [cm^-2 s^-1 sr^-1]
+    // }
 
 } // namespace lactel

@@ -16,6 +16,10 @@
 
 #include "G4ProductionCuts.hh"
 
+#include "G4GDMLParser.hh"
+
+#include "BLactelDetector.hh"
+
 
 using namespace std;
 using namespace km3net;
@@ -30,11 +34,14 @@ namespace lactel
         enum class DetGeoConf{M2, M4, M6, M8, M10};
         enum class DetectorState{ON, OFF, IDLE, RUN};
         //BDetectorConstruction();
+        BLactelDetector detector;
 
     public:        
         using KM3DetectorConstruction::Construct;
         BDetectorConstruction();
         ~BDetectorConstruction();
+
+        inline BLactelDetector& getDetector(){return detector;}
         
         G4ThreeVector targetPosition;
         void setTargetPosition(G4ThreeVector);
@@ -56,6 +63,9 @@ namespace lactel
 
         void ReadThisConfiguration (libconfig::Setting* cfg, // reads settings from KM3Det*.dat file
                                                        vector<PositionParameters>&  ConfList);
+
+        void ReadThisConfiguration (BLactelDetector& detector);
+        void BuildDetectorVolumes (BLactelDetector& detector, std::string matName = "WaterVolumeInWaterTank");
 
         G4VPhysicalVolume* PlaceThem (KM3ParametrizedVolume* theVolToPlace, PositionParameters& PosPar);
         std::vector<G4VPhysicalVolume*> getPhysicalVolumesByName(std::string name);
@@ -90,6 +100,8 @@ namespace lactel
         static std::map<OM*, G4VPhysicalVolume*> fOMPhysicalVolumes;
         
         void PrintAllMaterialProperties(ostream& out = std::cout);
+
+    
         
 
         void setGenerationShape(std::string shape);

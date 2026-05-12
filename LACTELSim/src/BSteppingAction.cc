@@ -232,7 +232,8 @@ namespace lactel
                     if (KM3DetectorConstruction::fOMNames.find(volname) != KM3DetectorConstruction::fOMNames.end()
                         || BDetectorConstruction::fOMIDs.find(volname) != BDetectorConstruction::fOMIDs.end()) {
                         BAnalysisManager::getIt()->getHit().om_id  = touch->GetCopyNumber(ihist);
-                        // BDetectorConstruction::GetIt()->getItsOM(touch->GetVolume(ihist))->dump();
+                        BAnalysisManager::getIt()->getHit().om_sid  = (BDetectorConstruction::GetIt()->getItsOM(touch->GetVolume(ihist)))->getOMID();
+                        // std::cout << "\r\033[10C" << "OM: " << om->getOMID() << std::endl;
                         // std::cout << "\r\033[11C" << "HowMany: " << OM::howMany() << std::endl;
                         // OM::dumpOMs();
                         // std::cout << "\r\033[10C" << "volume name: " << volname << std::endl;
@@ -241,6 +242,8 @@ namespace lactel
                     }
                 }
                 BAnalysisManager::getIt() ->AddDetectedParticule (info, detectedGamma);
+                // BAnalysisManager::getIt() ->AddOMEntranceInfo(step);
+                // BAnalysisManager::getIt() -
                 
                 //G4cout << " -------- Detected particle. From KM3SteppingAction::UserSteppingAction" << G4endl;
             }

@@ -13,6 +13,7 @@
 #include "BEvent.hh"
 #include "OM.hh"
 #include "BWaveCatcherInterface.hh"
+#include "BLactelDetector.hh"
 
 using namespace std;
 using namespace km3net;
@@ -125,7 +126,7 @@ namespace lactel
             {                    
                 // unsigned int event_ID;
                 std::vector<Hit> hits;
-                std::vector<DAQEvent> daqEvent;
+                // std::vector<DAQEvent> daqEvent;
                 // std::vector<HitInfos> pmHits;
                 // std::vector<HitInfos> hits;
                 float event_energy;
@@ -140,9 +141,9 @@ namespace lactel
                 float tmean=0.;
                 float time =0.;
                 float zenith;
-                G4ThreeVector OMPosition;
+                // G4ThreeVector OMPosition;
                 bool coincidence = false;
-                Waveform wf;
+                // Waveform wf;
 
                 // bool isDetected=false; // mainly used for Run managing
 
@@ -210,6 +211,7 @@ namespace lactel
                 float vrz;
 
                 int om_id;
+                std::string om_sid;
 
                 static float getMeanTime(std::vector<Hit> hits){
                     if(! hits.size())
@@ -274,6 +276,7 @@ namespace lactel
             TTree* runTree;
             TTree* detectedEventTree;
             TTree* DAQEventTree;
+            TTree* BLactelDetectorTree;
             GenerationParameters genPars;
 
             int ndet = 0;

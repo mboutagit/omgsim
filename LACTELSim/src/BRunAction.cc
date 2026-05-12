@@ -139,6 +139,7 @@ namespace lactel
         ana->fTRunInfos->Fill();
         // write data
         ana->Write();
+        ana->BLactelDetectorTree->Write();
         //reset values
         ana->fRun.nDetEvent = 0;
         ana->fRun.nGenEvent = 0;

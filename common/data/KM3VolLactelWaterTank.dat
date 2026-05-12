@@ -112,7 +112,7 @@ LactelWaterTank1:
     OperandVolume = "InnerCell";
     
     CheckOverlaps = false;
-    # SkinMaterial="LactelWaterTankSurf";
+    SkinMaterial="LactelWaterTankSurf";
 }
 
 LactelWaterTank2:
@@ -131,7 +131,7 @@ LactelWaterTank2:
     OperandVolume = "InnerCell";
 
     CheckOverlaps = false;
-    # SkinMaterial="LactelWaterTankSurf";
+    SkinMaterial="LactelWaterTankSurf";
 }
 
 

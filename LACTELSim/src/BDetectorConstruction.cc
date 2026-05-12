@@ -417,7 +417,12 @@ namespace lactel
 
         libconfig::Setting *sPsi=0;
         if (cfg->exists("Psi"))
-        sPsi = &(cfg->lookup("Psi"));
+            sPsi = &(cfg->lookup("Psi"));
+
+        if (cfg->exists("om_id")){
+            libconfig::Setting &som_id = cfg->lookup("om_id");
+            thePar.om_id =GetStringParameter  (som_id);
+        }
 
 
         vector <double>
@@ -515,6 +520,111 @@ namespace lactel
         ConfList.push_back(thePar);
     }
 
+    void BDetectorConstruction::ReadThisConfiguration (BLactelDetector& detector){
+        std::cout << "\r\033[10C" << "Try cell: " << detector.getID() << std::endl;
+
+        libconfig::Config cfg;
+        libconfig::Setting& root = cfg.getRoot();
+        libconfig::Setting& volumeDet = root.add("Volume_Det" + std::to_string(detector.getID()) , libconfig::Setting::TypeGroup);
+        // volume (cell)
+        volumeDet.add("ID", libconfig::Setting::TypeInt) = detector.getID();
+        volumeDet.add("Name", libconfig::Setting::TypeString) = detector.getName();
+        volumeDet.add("X", libconfig::Setting::TypeFloat) = detector.GetPosition().getX();
+        volumeDet.add("Y", libconfig::Setting::TypeFloat) = detector.GetPosition().getX();
+        volumeDet.add("Z", libconfig::Setting::TypeFloat) = detector.GetPosition().getY();
+        volumeDet.add("Theta", libconfig::Setting::TypeFloat) = detector.GetRotation().getTheta();
+        volumeDet.add("Phi", libconfig::Setting::TypeFloat) = detector.GetRotation().getPhi();
+        if(detector.getMotherVolName() != "")
+                    volumeDet.add("MotherVolume", libconfig::Setting::TypeString) = detector.getMotherVolName();
+
+        // if (root.isGroup ())
+            try
+            {
+               ReadThisConfiguration(&root, fVolumeList[detector.getName()]);
+            }
+            catch(const std::exception& e)
+            {
+                std::cerr << e.what() << '\n';
+                std::cout << " ###Error: " << e.what() << '\n';
+            }
+            
+            
+        
+        cfg.write(stdout);
+
+
+        for(auto& module : detector.GetObjects()){
+            for(auto& cell : module.GetObjects()){
+
+                
+                libconfig::Config cfg1;
+                libconfig::Setting& root1 = cfg1.getRoot();
+                libconfig::Config cfg2;
+                libconfig::Setting& root2 = cfg2.getRoot();
+
+                libconfig::Setting& volume = root1.add("Volume" + std::to_string(cell.getID()) , libconfig::Setting::TypeGroup);
+                libconfig::Setting& om = root2.add("OM" + std::to_string(cell.getID()) , libconfig::Setting::TypeGroup);
+
+                // volume (cell)
+                volume.add("ID", libconfig::Setting::TypeInt) = cell.getID();
+                volume.add("Name", libconfig::Setting::TypeString) = cell.getName();
+                volume.add("X", libconfig::Setting::TypeFloat) = cell.GetPosition().getX();
+                volume.add("Y", libconfig::Setting::TypeFloat) = cell.GetPosition().getX();
+                volume.add("Z", libconfig::Setting::TypeFloat) = cell.GetPosition().getY();
+                volume.add("Theta", libconfig::Setting::TypeFloat) = cell.GetRotation().getTheta();
+                volume.add("Phi", libconfig::Setting::TypeFloat) = cell.GetRotation().getPhi();
+                
+                if(cell.getVolumeProperties().getMotherVolName() != "")
+                    volume.add("MotherVolume", libconfig::Setting::TypeString) = cell.getVolumeProperties().getMotherVolName();
+                if(cell.getVolumeProperties().getBorderSurfName() != "")
+                    volume.add("BorderSurfaceWith", libconfig::Setting::TypeString) = cell.getVolumeProperties().getBorderSurfName();
+                if(cell.getVolumeProperties().getBorderSurfMatName() != "")
+                    volume.add("BorderSurfaceMaterial", libconfig::Setting::TypeString) = cell.getVolumeProperties().getBorderSurfMatName();
+
+                // OM 
+                om.add("ID", libconfig::Setting::TypeInt) = cell.getID();
+                om.add("Name", libconfig::Setting::TypeString) = cell.getOM().getName() + std::to_string(cell.getID());
+                om.add("X", libconfig::Setting::TypeFloat) = cell.getOM().getGeometry().getPosition().getX();
+                om.add("Y", libconfig::Setting::TypeFloat) = cell.getOM().getGeometry().getPosition().getY();
+                om.add("Z", libconfig::Setting::TypeFloat) = cell.getOM().getGeometry().getPosition().getZ();
+                om.add("Theta", libconfig::Setting::TypeFloat) = cell.getOM().getGeometry().getRotation().getTheta();
+                om.add("Phi", libconfig::Setting::TypeFloat) = cell.getOM().getGeometry().getRotation().getPhi();
+
+                if(cell.getOM().getOMID() != "")
+                    om.add("om_id", libconfig::Setting::TypeString) = cell.getOM().getOMID();
+                if(cell.getVolumeProperties().getMotherVolName() != "")
+                    om.add("MotherVolume", libconfig::Setting::TypeString) = cell.getName();
+
+                cfg1.write(stdout);
+                cfg2.write(stdout);
+
+                try
+                {
+                    ReadThisConfiguration(&root1, fVolumeList[cell.getName()]);
+                    ReadThisConfiguration(&root2, fOMList[cell.getName()]);
+                }
+                catch(const std::exception& e)
+                {
+                    std::cerr << e.what() << '\n';
+                    std::cout << " ###Error: " << e.what() << '\n';
+                }
+            }
+        }
+
+    }
+
+    void BDetectorConstruction::BuildDetectorVolumes (BLactelDetector& detector, std::string matName){
+
+        
+        for(auto& module : detector.GetObjects()){
+            for(auto& cell : module.GetObjects()){
+  
+                libconfig::Config cfg1;
+                libconfig::Setting& root1 = cfg1.getRoot();
+            }
+        }
+    }
+
 
     G4VPhysicalVolume* BDetectorConstruction::PlaceThem (KM3ParametrizedVolume* theVolToPlace, PositionParameters& PosPar) // place volume's from KM3Det*.dat 
     {
@@ -577,7 +687,7 @@ namespace lactel
         
         std::string name = PosPar.Name.data ();
         if(PosPar.Name == "AntaresOM")
-        name = PosPar.om_id;
+            name = PosPar.om_id;
 
         std::cout << "\r\033[55C" << "Name: " << name << std::endl;
 
@@ -589,6 +699,61 @@ namespace lactel
 
     G4VPhysicalVolume* BDetectorConstruction::Construct ()
     {
+
+        std::cout << "\r\033[10C" << "Try to write ...." << std::endl;
+        ElementaryCell cell;
+        Module module(1, 1, 2, G4ThreeVector(0*cm, 0*cm, 50*cm));
+        module.BuildGrid(cell);
+        BLactelDetector detector(3, 3, 1, G4ThreeVector(50*cm, 50*cm, 0*cm));
+        detector.setName("LacWaterDEtector"); //
+        detector.BuildGrid(module);
+        detector.setCellsRefVolName("WaterVolumeInWaterTank"); // 
+
+        ReadThisConfiguration(detector);
+
+        Module mod( {   ElementaryCell(G4ThreeVector(0, 0, -1*m), G4ThreeVector(2*m, 3*m, 2*m), OM("OMS0321")), 
+                        ElementaryCell(G4ThreeVector(0, 2*m, -1*m), G4ThreeVector(2*m, 3*m, 2*m), OM("OMS0402"))
+                    }
+                );
+        mod.BuildGrid(1, 1, 2);
+        mod.print(std::cout, 1);
+        std::cout << "\r\033[10C" << "Trying to constarct detector: " << fDetectorTypeName << std::endl;
+
+        BLactelDetector det({   Module({    ElementaryCell(G4ThreeVector(0, 0, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0321")), 
+                                            ElementaryCell(G4ThreeVector(0, 0*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0304"))
+                                     }),
+                                Module({    ElementaryCell(G4ThreeVector(0, 2.5*m, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0423")), 
+                                            ElementaryCell(G4ThreeVector(0, 2.5*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS1060"))
+                                     }),
+                                Module({    ElementaryCell(G4ThreeVector(0, -2.5*m, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0311")), 
+                                            ElementaryCell(G4ThreeVector(0, -2.5*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0302"))
+                                     }),
+                                Module({    ElementaryCell(G4ThreeVector(2.5*m, 2.5*m, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0648")), 
+                                            ElementaryCell(G4ThreeVector(2.5*m, 2.5*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0366"))
+                                     }),
+                                Module({    ElementaryCell(G4ThreeVector(2.5*m, -2.5*m, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0137")), 
+                                            ElementaryCell(G4ThreeVector(2.5*m, -2.5*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0298"))
+                                     }),
+                                Module({    ElementaryCell(G4ThreeVector(2.5*m, 2.5*m, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS1044")), 
+                                            ElementaryCell(G4ThreeVector(2.5*m, 2.5*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0501"))
+                                     }),
+                                Module({    ElementaryCell(G4ThreeVector(-2.5*m, -2.5*m, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0358")), 
+                                            ElementaryCell(G4ThreeVector(-2.5*m, -2.5*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0319"))
+                                     }),
+                                Module({    ElementaryCell(G4ThreeVector(-2.5*m, 2.5*m, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0790")), 
+                                            ElementaryCell(G4ThreeVector(-2.5*m, 2.5*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0293"))
+                                     }),
+                                Module({    ElementaryCell(G4ThreeVector(-2.5*m, -2.5*m, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0365")), 
+                                            ElementaryCell(G4ThreeVector(-2.5*m, -2.5*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0299"))
+                                     })  
+                            },
+                            G4ThreeVector(50*cm, 50*cm, 50*cm)
+                        );
+        det.print(std::cout, 1, 1);
+
+        for(auto& vol : fParametersDict)
+            std::cout << "Parameter name: " << vol.first << "\n";
+
         G4double z = 1.;  // Atomic number (Hydrogen)
         G4double a = 1.01 * g/mole;  // Atomic mass
         G4double density = 1.0e-25 * g/cm3;  // Extremely low density
@@ -785,6 +950,15 @@ namespace lactel
         } 
 
         autoWorldSize();
+
+        // for(auto& vol : fVolumeList)
+        //     std::cout << "\r\033[50C" << "Volume: " << vol.first 
+        //                                 // << " name: " << vol.second.at(0).Name
+        //                                 << std::endl;
+
+        // for(auto& oms : fOMList)
+        //     std::cout << "\r\033[50C" << "OM: " << oms.first  << " name: " << oms.second.at(0).Name << std::endl;
+
         return physiWorld;
     }
 

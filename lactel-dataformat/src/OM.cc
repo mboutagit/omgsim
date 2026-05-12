@@ -4,6 +4,12 @@ using namespace utils;
 namespace lactel
 {
     
+
+    std::ostream& operator<<(std::ostream& os, const OM& obj){
+        os << obj.om_id;
+        return os;
+    }
+
     std::set<std::string> OM::om_ids;
     std::set<OM*> OM::instances;
     int OM::nInstance = 0;
@@ -18,7 +24,8 @@ namespace lactel
 
     OM::OM(std::string id) : isOK(true), om_id(id){
         if(om_ids.count(id)){
-            std::cerr << "\033[1;31mError: OM with id " + id + " already defined!\033[0m" << std::endl;
+            // std::cerr << "\033[1;31mError: OM with id " + id + " already defined!\033[0m" << std::endl;
+            BLogger::getInstance()->log(BLogger::Level::WARNING, "OM with id " + id + " already defined!");
             return;
         }
         om_ids.insert(id);

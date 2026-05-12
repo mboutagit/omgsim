@@ -8,25 +8,25 @@ using namespace UTILS;
 
 int main(int argc, char* argv[]){
 
-  TApplication app("ROOTApp", &argc, argv);
-  gSystem->Load("liblibOMG.so");
-
-    if(argc < 1){
+   if(argc < 2){
     cout << "Syntax error: expected root file name" << endl;
+    cout << "Syntax: " << argv[0] << " file.root" << endl;
     return 1;
-    }
+  }
 
-    string rootfilename =   app.InputFiles()->At(0)->GetName(); //"../../default.root";
-      TFile* file = TFile::Open(rootfilename.c_str(), "READ");
+  TApplication app("PostAna", &argc, argv);
+  string rootfilename =   app.InputFiles()->At(0)->GetName(); //"../../default.root";
+  TFile* file = TFile::Open(rootfilename.c_str(), "READ");
 
-      if (!file || file->IsZombie()) {
-          std::cerr << "Error opening file: " << rootfilename << std::endl;
-          return 1;
-      }
-      else{
-        std::cout << "File " << rootfilename << " is open" << std::endl;
-      }
+  if (!file || file->IsZombie()) {
+      std::cerr << "Error opening file: " << rootfilename << std::endl;
+      return 1;
+  }
+  else{
+    std::cout << "File " << rootfilename << " is open" << std::endl;
+  }
     
+  // gSystem->Load("liblibOMG.so");
     // file->Print();
 
     TTree* genTree = (TTree*)file->Get("Gen");
@@ -36,20 +36,21 @@ int main(int argc, char* argv[]){
 
     BAnalysisManager::GenerationParameters* gps = nullptr;
     BAnalysisManager::DetectedEvent* evt = nullptr;
-    PhotonProduction pp;
-    Hit hit;
+    PhotonProduction* pp;
+    Hit* hit;
     BAnalysisManager::Run* run;
 
-    genTree->SetBranchAddress("gen", &gps);
-    hitTree->SetBranchAddress("Hit", &hit);
-    runTree->SetBranchAddress("Run", &run);
-    detEvtTree->SetBranchAddress("DetectedEvent", &evt);
+    // genTree->SetBranchAddress("gen", &gps);
+    // hitTree->SetBranchAddress("Hit", &hit);
+    // runTree->SetBranchAddress("Run", &run);
+    // detEvtTree->SetBranchAddress("DetectedEvent", &evt);
+    // detEvtTree->Print();
 
     float radius = 5; // in meters
     float gen_surface_m2  = TMath::Pi() * radius*radius; // pi*R² disk
     float gen_surface_cm2 = gen_surface_m2 * 1e4;
  
-    float expected_muons_per_m2_per_s = 140; // by m²
+    float expected_muons_per_m2_per_s = 120; // by m²
     float expected_muons_per_cm2_per_s = expected_muons_per_m2_per_s/1e4; // to cm²
     float expected_muons_per_gensurf = expected_muons_per_cm2_per_s * gen_surface_cm2;
     float number_of_generated_muons_per_gensurf = genTree->GetEntries(); // 100 000 events
@@ -75,13 +76,18 @@ int main(int argc, char* argv[]){
 
     histsByName hists_data;
     histsByName hists_mc;
-    std::vector<TCanvas*>  canvas_data =  getRealDataPlots(hists_data);
-    std::vector<TCanvas*>  canvas_mc =  getNPEPlot(detEvtTree, evt, hists_mc, exposure_time, 15);
+    std::vector<TCanvas*>  canvas_data =  getRealDataPlots(hists_data,
+                                                            "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_004/data.h5",
+                                                            "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_000020/data.h5"); 
 
+    std::vector<TCanvas*>  canvas_mc =  getNPEPlot(detEvtTree, hists_mc, exposure_time, 15, 0.080);
+    TCanvas* verPosition =  getVertexPositions(detEvtTree);
+    verPosition->Draw();
 
     // std::vector<TCanvas*> canvas = getNPEPlot(detEvtTree, evt, exposure_time, 1e7);
     // for(auto& c : canvas)
     //   c->Draw();
+
 
     TCanvas* cs = new TCanvas("cs");
     cs->SetLogy();
@@ -125,7 +131,7 @@ int main(int argc, char* argv[]){
     ratio_om1_r3->Draw("P same");
     ratio_om1_r4->Draw("P same");
 
-    BBox* del = new BBox(0, ratio_om0_r3->GetXaxis()->GetXmax(), 0.8, 1.2, 2, 6);
+    BSquare* del = new BSquare(0, ratio_om0_r3->GetXaxis()->GetXmax(), 0.8, 1.2, 2, 6);
     del->Draw();
 
     TCanvas *c1 = new TCanvas("c1", "Gen");
@@ -134,12 +140,78 @@ int main(int argc, char* argv[]){
     TCanvas *c2 = new TCanvas("c2", "Gen Detected");
     genTree->Draw("cos(fGenTheta*3.14/180):log10(fGenEnergy/1e3)", "isDetected==1", "colz");
 
+
     TIter next(gROOT->GetListOfCanvases());
     TCanvas* allCanvas;
     while ((allCanvas = (TCanvas*)next())) {
         cout << "Canvas: " << c->GetName() << endl;
     }
 
+
+    histsByName histDataRun003;
+    getRealDataByInFile(  histDataRun003,
+                          "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_004/data.h5",
+                          "channel_data/peak",
+                          0, 2.4, 10/1e3,
+                          1);
+
+
+    histsByName histDataRun000020;
+    getRealDataByInFile(  histDataRun000020,
+                          "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_000020/data.h5",
+                          "channel_data/peak",
+                          0, 2.4, 10/1e3,
+                          0.5);
+
+
+
+    TCanvas* checkCanvas_ch = new TCanvas("check", "check");
+    checkCanvas_ch->SetLogy();
+
+    // channel 0
+    TH1* ampCh0_run0003 = getHistByName(histDataRun003, "amp_ch0");
+    ampCh0_run0003->SetLineColor(1);
+    ampCh0_run0003->Draw("hist");
+    TH1* ampCh0_run000020 = getHistByName(histDataRun000020, "amp_ch0");
+    ampCh0_run000020->SetLineColor(1);
+    ampCh0_run000020->SetLineStyle(2);
+    ampCh0_run000020->Draw("hist same");
+
+    // channel 1
+    TH1* ampCh1_run0003 = getHistByName(histDataRun003, "amp_ch1");
+    ampCh1_run0003->SetLineColor(2);
+    ampCh1_run0003->Draw("hist same");
+    TH1* ampCh1_run000020 = getHistByName(histDataRun000020, "amp_ch1");
+    ampCh1_run000020->SetLineColor(2);
+    ampCh1_run000020->SetLineStyle(2);
+    ampCh1_run000020->Draw("hist same");
+
+    TCanvas* makeACustumPlot =  makeRatioPlot(ampCh0_run0003, ampCh1_run0003);
+    // TCanvas* makeACustumPlot1 =  makeRatioPlot(ampCh1_run0003, ampCh1_run0003);
+
+
+
+
+
+    TCanvas* ratioCanvas = new TCanvas("ratio", "Ratio");
+    ratioCanvas->SetLogy();
+    
+    ampCh0_run0003->Sumw2(1);
+    ampCh0_run000020->Sumw2(1);
+    TH1* ratio = (TH1*)ampCh0_run0003->Clone("ratio");
+    ratio->Divide(ampCh0_run000020);
+    ratio->SetLineColor(4);
+    ratio->Draw("hist same");
+
+    //channel 1
+
+    ampCh1_run0003->Sumw2(1);
+    ampCh1_run000020->Sumw2(1);
+    TH1* ratioCh1 = (TH1*)ampCh1_run0003->Clone("ratio");
+    ratioCh1->Divide(ampCh1_run000020);
+    ratioCh1->SetLineColor(4);
+    ratioCh1->SetLineStyle(2);
+    ratioCh1->Draw("hist same");
 
       
     // Run 3: rate: 1185 evt/s, dead time: 79%

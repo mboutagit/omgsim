@@ -143,6 +143,32 @@ libOMG/fast:
 .PHONY : libOMG/fast
 
 #=============================================================================
+# Target rules for targets named BDetector
+
+# Build rule for target.
+BDetector: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BDetector
+.PHONY : BDetector
+
+# fast build rule for target.
+BDetector/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BDetector.dir/build.make CMakeFiles/BDetector.dir/build
+.PHONY : BDetector/fast
+
+#=============================================================================
+# Target rules for targets named BFlux
+
+# Build rule for target.
+BFlux: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BFlux
+.PHONY : BFlux
+
+# fast build rule for target.
+BFlux/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BFlux.dir/build.make CMakeFiles/BFlux.dir/build
+.PHONY : BFlux/fast
+
+#=============================================================================
 # Target rules for targets named BRateBuilder
 
 # Build rule for target.
@@ -228,6 +254,54 @@ AA/src/XPPhSteppingAction.s: AA/src/XPPhSteppingAction.cc.s
 AA/src/XPPhSteppingAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/AA/src/XPPhSteppingAction.cc.s
 .PHONY : AA/src/XPPhSteppingAction.cc.s
+
+BPostAnalysis/programs/BDetector.o: BPostAnalysis/programs/BDetector.cxx.o
+.PHONY : BPostAnalysis/programs/BDetector.o
+
+# target to build an object file
+BPostAnalysis/programs/BDetector.cxx.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BDetector.dir/build.make CMakeFiles/BDetector.dir/BPostAnalysis/programs/BDetector.cxx.o
+.PHONY : BPostAnalysis/programs/BDetector.cxx.o
+
+BPostAnalysis/programs/BDetector.i: BPostAnalysis/programs/BDetector.cxx.i
+.PHONY : BPostAnalysis/programs/BDetector.i
+
+# target to preprocess a source file
+BPostAnalysis/programs/BDetector.cxx.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BDetector.dir/build.make CMakeFiles/BDetector.dir/BPostAnalysis/programs/BDetector.cxx.i
+.PHONY : BPostAnalysis/programs/BDetector.cxx.i
+
+BPostAnalysis/programs/BDetector.s: BPostAnalysis/programs/BDetector.cxx.s
+.PHONY : BPostAnalysis/programs/BDetector.s
+
+# target to generate assembly for a file
+BPostAnalysis/programs/BDetector.cxx.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BDetector.dir/build.make CMakeFiles/BDetector.dir/BPostAnalysis/programs/BDetector.cxx.s
+.PHONY : BPostAnalysis/programs/BDetector.cxx.s
+
+BPostAnalysis/programs/BFlux.o: BPostAnalysis/programs/BFlux.cxx.o
+.PHONY : BPostAnalysis/programs/BFlux.o
+
+# target to build an object file
+BPostAnalysis/programs/BFlux.cxx.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BFlux.dir/build.make CMakeFiles/BFlux.dir/BPostAnalysis/programs/BFlux.cxx.o
+.PHONY : BPostAnalysis/programs/BFlux.cxx.o
+
+BPostAnalysis/programs/BFlux.i: BPostAnalysis/programs/BFlux.cxx.i
+.PHONY : BPostAnalysis/programs/BFlux.i
+
+# target to preprocess a source file
+BPostAnalysis/programs/BFlux.cxx.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BFlux.dir/build.make CMakeFiles/BFlux.dir/BPostAnalysis/programs/BFlux.cxx.i
+.PHONY : BPostAnalysis/programs/BFlux.cxx.i
+
+BPostAnalysis/programs/BFlux.s: BPostAnalysis/programs/BFlux.cxx.s
+.PHONY : BPostAnalysis/programs/BFlux.s
+
+# target to generate assembly for a file
+BPostAnalysis/programs/BFlux.cxx.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BFlux.dir/build.make CMakeFiles/BFlux.dir/BPostAnalysis/programs/BFlux.cxx.s
+.PHONY : BPostAnalysis/programs/BFlux.cxx.s
 
 BPostAnalysis/programs/BRateBuilder.o: BPostAnalysis/programs/BRateBuilder.cxx.o
 .PHONY : BPostAnalysis/programs/BRateBuilder.o
@@ -396,6 +470,30 @@ LACTELSim/src/BAnalysisManager.s: LACTELSim/src/BAnalysisManager.cc.s
 LACTELSim/src/BAnalysisManager.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BAnalysisManager.cc.s
 .PHONY : LACTELSim/src/BAnalysisManager.cc.s
+
+LACTELSim/src/BDetector.o: LACTELSim/src/BDetector.cc.o
+.PHONY : LACTELSim/src/BDetector.o
+
+# target to build an object file
+LACTELSim/src/BDetector.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BDetector.cc.o
+.PHONY : LACTELSim/src/BDetector.cc.o
+
+LACTELSim/src/BDetector.i: LACTELSim/src/BDetector.cc.i
+.PHONY : LACTELSim/src/BDetector.i
+
+# target to preprocess a source file
+LACTELSim/src/BDetector.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BDetector.cc.i
+.PHONY : LACTELSim/src/BDetector.cc.i
+
+LACTELSim/src/BDetector.s: LACTELSim/src/BDetector.cc.s
+.PHONY : LACTELSim/src/BDetector.s
+
+# target to generate assembly for a file
+LACTELSim/src/BDetector.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BDetector.cc.s
+.PHONY : LACTELSim/src/BDetector.cc.s
 
 LACTELSim/src/BDetectorConstruction.o: LACTELSim/src/BDetectorConstruction.cc.o
 .PHONY : LACTELSim/src/BDetectorConstruction.o
@@ -589,6 +687,30 @@ LACTELSim/src/BHit.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BHit.cc.s
 .PHONY : LACTELSim/src/BHit.cc.s
 
+LACTELSim/src/BLactelDetector.o: LACTELSim/src/BLactelDetector.cc.o
+.PHONY : LACTELSim/src/BLactelDetector.o
+
+# target to build an object file
+LACTELSim/src/BLactelDetector.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BLactelDetector.cc.o
+.PHONY : LACTELSim/src/BLactelDetector.cc.o
+
+LACTELSim/src/BLactelDetector.i: LACTELSim/src/BLactelDetector.cc.i
+.PHONY : LACTELSim/src/BLactelDetector.i
+
+# target to preprocess a source file
+LACTELSim/src/BLactelDetector.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BLactelDetector.cc.i
+.PHONY : LACTELSim/src/BLactelDetector.cc.i
+
+LACTELSim/src/BLactelDetector.s: LACTELSim/src/BLactelDetector.cc.s
+.PHONY : LACTELSim/src/BLactelDetector.s
+
+# target to generate assembly for a file
+LACTELSim/src/BLactelDetector.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BLactelDetector.cc.s
+.PHONY : LACTELSim/src/BLactelDetector.cc.s
+
 LACTELSim/src/BPrimaryGeneratorAction.o: LACTELSim/src/BPrimaryGeneratorAction.cc.o
 .PHONY : LACTELSim/src/BPrimaryGeneratorAction.o
 
@@ -732,6 +854,30 @@ LACTELSim/src/BSteppingAction.s: LACTELSim/src/BSteppingAction.cc.s
 LACTELSim/src/BSteppingAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BSteppingAction.cc.s
 .PHONY : LACTELSim/src/BSteppingAction.cc.s
+
+LACTELSim/src/BVolumeManager.o: LACTELSim/src/BVolumeManager.cc.o
+.PHONY : LACTELSim/src/BVolumeManager.o
+
+# target to build an object file
+LACTELSim/src/BVolumeManager.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BVolumeManager.cc.o
+.PHONY : LACTELSim/src/BVolumeManager.cc.o
+
+LACTELSim/src/BVolumeManager.i: LACTELSim/src/BVolumeManager.cc.i
+.PHONY : LACTELSim/src/BVolumeManager.i
+
+# target to preprocess a source file
+LACTELSim/src/BVolumeManager.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BVolumeManager.cc.i
+.PHONY : LACTELSim/src/BVolumeManager.cc.i
+
+LACTELSim/src/BVolumeManager.s: LACTELSim/src/BVolumeManager.cc.s
+.PHONY : LACTELSim/src/BVolumeManager.s
+
+# target to generate assembly for a file
+LACTELSim/src/BVolumeManager.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/LACTELSim/src/BVolumeManager.cc.s
+.PHONY : LACTELSim/src/BVolumeManager.cc.s
 
 LACTELSim/src/Utils.o: LACTELSim/src/Utils.cc.o
 .PHONY : LACTELSim/src/Utils.o
@@ -1549,6 +1695,78 @@ programs/OMGsim.cxx.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/OMGsim.dir/build.make CMakeFiles/OMGsim.dir/programs/OMGsim.cxx.s
 .PHONY : programs/OMGsim.cxx.s
 
+tools/Geometry/src/Cube.o: tools/Geometry/src/Cube.cc.o
+.PHONY : tools/Geometry/src/Cube.o
+
+# target to build an object file
+tools/Geometry/src/Cube.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/Geometry/src/Cube.cc.o
+.PHONY : tools/Geometry/src/Cube.cc.o
+
+tools/Geometry/src/Cube.i: tools/Geometry/src/Cube.cc.i
+.PHONY : tools/Geometry/src/Cube.i
+
+# target to preprocess a source file
+tools/Geometry/src/Cube.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/Geometry/src/Cube.cc.i
+.PHONY : tools/Geometry/src/Cube.cc.i
+
+tools/Geometry/src/Cube.s: tools/Geometry/src/Cube.cc.s
+.PHONY : tools/Geometry/src/Cube.s
+
+# target to generate assembly for a file
+tools/Geometry/src/Cube.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/Geometry/src/Cube.cc.s
+.PHONY : tools/Geometry/src/Cube.cc.s
+
+tools/Geometry/src/GeometryGrid.o: tools/Geometry/src/GeometryGrid.cc.o
+.PHONY : tools/Geometry/src/GeometryGrid.o
+
+# target to build an object file
+tools/Geometry/src/GeometryGrid.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/Geometry/src/GeometryGrid.cc.o
+.PHONY : tools/Geometry/src/GeometryGrid.cc.o
+
+tools/Geometry/src/GeometryGrid.i: tools/Geometry/src/GeometryGrid.cc.i
+.PHONY : tools/Geometry/src/GeometryGrid.i
+
+# target to preprocess a source file
+tools/Geometry/src/GeometryGrid.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/Geometry/src/GeometryGrid.cc.i
+.PHONY : tools/Geometry/src/GeometryGrid.cc.i
+
+tools/Geometry/src/GeometryGrid.s: tools/Geometry/src/GeometryGrid.cc.s
+.PHONY : tools/Geometry/src/GeometryGrid.s
+
+# target to generate assembly for a file
+tools/Geometry/src/GeometryGrid.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/Geometry/src/GeometryGrid.cc.s
+.PHONY : tools/Geometry/src/GeometryGrid.cc.s
+
+tools/Geometry/src/GeometryObject.o: tools/Geometry/src/GeometryObject.cc.o
+.PHONY : tools/Geometry/src/GeometryObject.o
+
+# target to build an object file
+tools/Geometry/src/GeometryObject.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/Geometry/src/GeometryObject.cc.o
+.PHONY : tools/Geometry/src/GeometryObject.cc.o
+
+tools/Geometry/src/GeometryObject.i: tools/Geometry/src/GeometryObject.cc.i
+.PHONY : tools/Geometry/src/GeometryObject.i
+
+# target to preprocess a source file
+tools/Geometry/src/GeometryObject.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/Geometry/src/GeometryObject.cc.i
+.PHONY : tools/Geometry/src/GeometryObject.cc.i
+
+tools/Geometry/src/GeometryObject.s: tools/Geometry/src/GeometryObject.cc.s
+.PHONY : tools/Geometry/src/GeometryObject.s
+
+# target to generate assembly for a file
+tools/Geometry/src/GeometryObject.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/Geometry/src/GeometryObject.cc.s
+.PHONY : tools/Geometry/src/GeometryObject.cc.s
+
 tools/src/BWaveCatcher.o: tools/src/BWaveCatcher.cc.o
 .PHONY : tools/src/BWaveCatcher.o
 
@@ -1678,6 +1896,8 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... G__Dict"
+	@echo "... BDetector"
+	@echo "... BFlux"
 	@echo "... BRateBuilder"
 	@echo "... OMGsim"
 	@echo "... PostAna"
@@ -1688,6 +1908,12 @@ help:
 	@echo "... AA/src/XPPhSteppingAction.o"
 	@echo "... AA/src/XPPhSteppingAction.i"
 	@echo "... AA/src/XPPhSteppingAction.s"
+	@echo "... BPostAnalysis/programs/BDetector.o"
+	@echo "... BPostAnalysis/programs/BDetector.i"
+	@echo "... BPostAnalysis/programs/BDetector.s"
+	@echo "... BPostAnalysis/programs/BFlux.o"
+	@echo "... BPostAnalysis/programs/BFlux.i"
+	@echo "... BPostAnalysis/programs/BFlux.s"
 	@echo "... BPostAnalysis/programs/BRateBuilder.o"
 	@echo "... BPostAnalysis/programs/BRateBuilder.i"
 	@echo "... BPostAnalysis/programs/BRateBuilder.s"
@@ -1709,6 +1935,9 @@ help:
 	@echo "... LACTELSim/src/BAnalysisManager.o"
 	@echo "... LACTELSim/src/BAnalysisManager.i"
 	@echo "... LACTELSim/src/BAnalysisManager.s"
+	@echo "... LACTELSim/src/BDetector.o"
+	@echo "... LACTELSim/src/BDetector.i"
+	@echo "... LACTELSim/src/BDetector.s"
 	@echo "... LACTELSim/src/BDetectorConstruction.o"
 	@echo "... LACTELSim/src/BDetectorConstruction.i"
 	@echo "... LACTELSim/src/BDetectorConstruction.s"
@@ -1733,6 +1962,9 @@ help:
 	@echo "... LACTELSim/src/BHit.o"
 	@echo "... LACTELSim/src/BHit.i"
 	@echo "... LACTELSim/src/BHit.s"
+	@echo "... LACTELSim/src/BLactelDetector.o"
+	@echo "... LACTELSim/src/BLactelDetector.i"
+	@echo "... LACTELSim/src/BLactelDetector.s"
 	@echo "... LACTELSim/src/BPrimaryGeneratorAction.o"
 	@echo "... LACTELSim/src/BPrimaryGeneratorAction.i"
 	@echo "... LACTELSim/src/BPrimaryGeneratorAction.s"
@@ -1751,6 +1983,9 @@ help:
 	@echo "... LACTELSim/src/BSteppingAction.o"
 	@echo "... LACTELSim/src/BSteppingAction.i"
 	@echo "... LACTELSim/src/BSteppingAction.s"
+	@echo "... LACTELSim/src/BVolumeManager.o"
+	@echo "... LACTELSim/src/BVolumeManager.i"
+	@echo "... LACTELSim/src/BVolumeManager.s"
 	@echo "... LACTELSim/src/Utils.o"
 	@echo "... LACTELSim/src/Utils.i"
 	@echo "... LACTELSim/src/Utils.s"
@@ -1853,6 +2088,15 @@ help:
 	@echo "... programs/OMGsim.o"
 	@echo "... programs/OMGsim.i"
 	@echo "... programs/OMGsim.s"
+	@echo "... tools/Geometry/src/Cube.o"
+	@echo "... tools/Geometry/src/Cube.i"
+	@echo "... tools/Geometry/src/Cube.s"
+	@echo "... tools/Geometry/src/GeometryGrid.o"
+	@echo "... tools/Geometry/src/GeometryGrid.i"
+	@echo "... tools/Geometry/src/GeometryGrid.s"
+	@echo "... tools/Geometry/src/GeometryObject.o"
+	@echo "... tools/Geometry/src/GeometryObject.i"
+	@echo "... tools/Geometry/src/GeometryObject.s"
 	@echo "... tools/src/BWaveCatcher.o"
 	@echo "... tools/src/BWaveCatcher.i"
 	@echo "... tools/src/BWaveCatcher.s"

@@ -69,9 +69,10 @@ public:
     double cos2thetaPDF(double theta); // radians
     double generateZenithAngle();
 
-    double gaisser_flux(double E);
+    static double gaisser_flux(double* E, double* pars);
     double integrate_gaisser_flux(double E_min, double E_max, int Nbins);
     void getExpectedFlux();
+    static double ModifiedFormula(double *energy, double *par) ;
 
     void print(ostream& out);
     std::string getGeneratorName();

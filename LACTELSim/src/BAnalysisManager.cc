@@ -190,6 +190,9 @@ namespace lactel
         runTree = new TTree("Run", "Run parameters");
         detectedEventTree = new TTree("DetectedEvent", "DetectedEvents parameters");
         DAQEventTree = new TTree("DAQEvent", "DAQ parameters");
+        BLactelDetectorTree = new TTree("BLactelDetector", "Detector description");
+
+        BLactelDetectorTree->Branch("LactelDetector", &(BDetectorConstruction::GetIt()->getDetector()));
 
         
         genTree->Branch("gen", &genPars);
@@ -254,7 +257,7 @@ namespace lactel
         fPMID=0;
 
         // fDaqEvent.reset();
-        fDetectedEvent.daqEvent.clear();
+        // fDetectedEvent.daqEvent.clear();
     }
 
     void BAnalysisManager::EndOfEvent(const G4Event* EV) {
@@ -313,7 +316,7 @@ namespace lactel
         fDetectedEvent.event_id = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
         fDetectedEvent.runNb = fRun.runNb; // OK as fRun.runNb is set in the start of the run
         fDetectedEvent.zenith =  BDetectorConstruction::GetIt()->acceptanceAngle;
-        fDetectedEvent.OMPosition = BDetectorConstruction::GetIt()->OMPosition;
+        // fDetectedEvent.OMPosition = BDetectorConstruction::GetIt()->OMPosition;
 
 
         if(fDetectedEvent.nhit > 0){    // only detected events
@@ -341,7 +344,7 @@ namespace lactel
 
         
         genTree->Fill();
-        DAQEventTree->Fill();
+        // DAQEventTree->Fill();
         // std::cout << "\r\033[55C" << "Fill TEvent tree." << std::endl;
         //fTEvent->Fill(); used in BAnalysisManager::AddPhotoTubeEntranceInfo  to include PMT hit infos
 
@@ -425,18 +428,16 @@ namespace lactel
     // }
 
     void BAnalysisManager::Write(){
-    //     fMeasure_parameters.getGainVsHV()->Write();
-    //     fMeasure_parameters.getQEVsLambda()->Write();
-    //    if(fMeasure_parameters.getMuonFlux())
-    //        fMeasure_parameters.getMuonFlux()->Write();
+        if (fRFile == NULL) {
+            G4cout << "WARNING: fRFile not found." << G4endl;
+        return;
+        }
 
-        // genTree->Write();
-        // runTree->Write();
-        // if(fRFile) 
-        //     genTree->Write();
-        //     detectedEventTree->Write();
-        
-        AAAnalysisManager::Write();
+        fRFile->Write ();
+        fRFile->Close ();
+        delete (fRFile);
+        fRFile=0;
+        cout << "Analysis file was normaly closed." << endl;
     }
 
     //ClassImp(lactel::BAnalysisManager::Measure);
@@ -505,9 +506,6 @@ namespace lactel
     //                                             << fPhotoT
     //                                             << fPhotoT
     //                                             << std::endl;
-
-    fTEvent->Fill();
-    
   }
 
   //Vladimir: This function is outdated and not used currently. OMid is added at AddPhotoTubeEntranceInfo.
@@ -557,18 +555,18 @@ namespace lactel
     // fOMId = touch->GetVolume ()->GetCopyNo ();
     //fOMId = touch->GetCopyNumber (2);
 
-    fOMHitX = globalPoint.x ();
-    fOMHitY = globalPoint.y ();
-    fOMHitZ = globalPoint.z ();
-    fOMHitT = localpoint.theta ();
-    fOMHitP = localpoint.phi ();
+    // fOMHitX = globalPoint.x ();
+    // fOMHitY = globalPoint.y ();
+    // fOMHitZ = globalPoint.z ();
+    // fOMHitT = localpoint.theta ();
+    // fOMHitP = localpoint.phi ();
 
-    fHits.om_x=localpoint.x ();
-    fHits.om_y=localpoint.y ();
-    fHits.om_z=localpoint.z ();
-    fHits.om_t=localpoint.theta ();
-    fHits.om_p=localpoint.phi ();
-    
+    fHits.om_x = globalPoint.x ();
+    fHits.om_y = globalPoint.y ();
+    fHits.om_z = globalPoint.z ();
+    fHits.om_t = globalPoint.theta ();
+    fHits.om_p = globalPoint.phi ();
+    // std::cout << "\r\033[10C" << "OMEntrance: om_x=" << globalPoint.x () << std::endl;
   }
 
     bool BAnalysisManager::DetectedEvent::isACoincidence(float ctime){

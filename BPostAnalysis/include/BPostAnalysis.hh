@@ -11,9 +11,9 @@
 #include <TLeaf.h>
 #include <TCollection.h> 
 #include <TCanvas.h> 
-#include <TH1F.h> 
-#include <TH2F.h> 
-#include <TH3F.h> 
+#include <TH1.h> 
+#include <TH2.h> 
+#include <TH3.h> 
 #include <TApplication.h>
 #include <TPolyLine3D.h>
 #include <TArrow.h>
@@ -21,6 +21,8 @@
 #include <TView.h>
 #include <TBox.h>
 #include <TLegend.h>
+#include "TFrame.h"
+#include "TGrid.h"
 
 #include "TROOT.h"
 // #include "TIter.h"
@@ -37,8 +39,11 @@
 
 #include <H5Cpp.h>
 #include <variant>
+#include "utils.hh"
+#include "TGaxis.h"
 
 
+using namespace UTILS;
 namespace lactel{
 
     typedef unsigned int uint;
@@ -98,14 +103,41 @@ namespace lactel{
         std::map<std::string, TH2*> Hists2D;
         std::map<std::string, TGraph*> TGraphs;
 
+        std::map<std::string, std::vector<std::string>> files;
+
+    };
+
+    struct WaterTank {
+        int id;
+        float xo;
+        float yo;
+        float zo;
+        float xw;
+        float yw;
+        float zw;
+        WaterTank(int fid, float fxo, float fyo, float fzo, float fxw, float fyw, float fzw){
+            id = fid;
+            xo = fxo;
+            yo = fyo;
+            zo = fzo;
+            xw = fxw;
+            yw = fyw;
+            zw = fzw;
+        }
     };
     
+    
 
-    std::vector<TCanvas*>  getNPEPlot(TTree* tree, BAnalysisManager::DetectedEvent* evt, 
+    std::vector<TCanvas*>  getNPEPlot(TTree* tree,
                                         histsByName& hist, 
-                                        float exposure_time = 1, float t_coin = 16); // in second
+                                        float exposure_time = 1, float t_coin = 16, float thr = 0); // in second
     TCanvas* getDAQParameter(TTree* tree, BAnalysisManager::DetectedEvent* evt, std::string par); // in mV
-    std::vector<TCanvas*>  getRealDataPlots(histsByName& hist); 
+    TCanvas* getVertexPositions(TTree* tree);
+    std::vector<TCanvas*>  getRealDataPlots(histsByName& hist, std::string file1, std::string file2); 
+    void  getRealDataByInFile(histsByName& hists, std::string inFile, std::string dataset, 
+                                            float xmin, float xmax, float unitsPerBin, float attenuator = 1.); 
+
+    TCanvas* makeRatioPlot(TH1* h1, TH1* h2);
 
     using stack = std::variant<
                                 std::pair<std::string, TH1F*>,
@@ -114,7 +146,7 @@ namespace lactel{
                                 std::pair<std::string, TGraph*>
                             >;
     
-    std::vector<stack> container;
+    extern std::vector<stack> container;
 
     TGraph* ratio(TH1*, TH1*);
     TH1* getHistByName(const histsByName& vec, std::string key);

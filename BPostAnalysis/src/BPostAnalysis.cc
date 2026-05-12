@@ -3,15 +3,89 @@
 #include "OM.hh"
 #include "BWaveCatcher.hh"
 
+#include <iostream>
+#include <sstream>
+#include <iomanip>
+#include <ctime>
+
 
 using namespace tools;
 using namespace H5;
 
 namespace lactel
 {
-    std::vector<TCanvas*> getNPEPlot(TTree* tree, BAnalysisManager::DetectedEvent* evt, 
+    std::vector<stack> container;
+
+    // Parse ISO 8601 (UTC "Z")
+    std::time_t parse_iso8601(const std::string& s) {
+        std::tm tm = {};
+        std::istringstream ss(s);
+
+        ss >> std::get_time(&tm, "%Y-%m-%dT%H:%M:%S");
+
+        // Convert as UTC
+        #ifdef _WIN32
+            return _mkgmtime(&tm);
+        #else
+            return timegm(&tm);
+        #endif
+    }
+
+
+    #include <filesystem>
+    #include <stdexcept>
+
+    namespace fs = std::filesystem;
+
+    std::vector<std::string> find_h5_files(const std::string& path = ".") {
+        std::vector<std::string> h5_files;
+
+        try {
+            // 🔹 Check if path exists
+            if (!fs::exists(path)) {
+                throw std::runtime_error("Path does not exist: " + path);
+            }
+
+            // 🔹 Check if it's a directory
+            if (!fs::is_directory(path)) {
+                throw std::runtime_error("Path is not a directory: " + path);
+            }
+
+            // 🔹 Recursive traversal
+            for (const auto& entry : fs::recursive_directory_iterator(
+                    path, fs::directory_options::skip_permission_denied)) {
+
+                try {
+                    if (entry.is_regular_file()) {
+                        if (entry.path().extension() == ".h5") {
+                            h5_files.push_back(entry.path().string());
+                        }
+                    }
+                } catch (const fs::filesystem_error&) {
+                    // Skip problematic files silently
+                    continue;
+                }
+            }
+
+            // 🔹 No files found
+            if (h5_files.empty()) {
+                throw std::runtime_error("No .h5 files found in: " + path);
+            }
+
+        } catch (const fs::filesystem_error& e) {
+            throw std::runtime_error(std::string("Filesystem error: ") + e.what());
+        }
+
+        return h5_files;
+    }
+
+    std::vector<TCanvas*> getNPEPlot(TTree* tree, 
                                         histsByName& hists, 
-                                        float exposure_time, float t_coin){
+                                        float exposure_time, float t_coin, float thr){
+
+        auto* evt= static_cast<BAnalysisManager::DetectedEvent*>(nullptr);
+        tree->SetBranchAddress("DetectedEvent", &evt);
+
         std::vector<TCanvas*> vCanvas;
         float xmin=0.;
         float xmax=200.;
@@ -40,7 +114,6 @@ namespace lactel
         BWaveCatcher* wc1 = new BWaveCatcher("wc1");
         wc1->plugOM(0, om1);
         wc1->plugOM(1, om2);
-
 
         TH1F* npe_om1 = new TH1F("npe_om1", 
                                         "NPE; Number of PE; Rate for 1 PE per bin [Hz]",
@@ -114,9 +187,12 @@ namespace lactel
 
         for(long long i = 0; i < tree->GetEntries(); i++){
             tree->GetEntry(i);
+
             // apply DAQ
             std::vector<ADC_record> adcs_om1 = wc1->digitizeEvent(0, *evt);
             std::vector<ADC_record> adcs_om2 = wc1->digitizeEvent(1, *evt);
+
+            std::cout << "\r\033[10C" << "Processing event: " << evt->event_id << " Total Events: " << tree->GetEntries() << std::endl;
 
             std::vector<Waveform> wfs_om1 = wc1->waveformFromADC(adcs_om1);
             std::vector<Waveform> wfs_om2 = wc1->waveformFromADC(adcs_om2);
@@ -134,19 +210,23 @@ namespace lactel
             double xmin_a1, xmax_a1, ymin_a1, ymax_a1;
             totA1.ComputeRange(xmin_a1, ymin_a1, xmax_a1, ymax_a1);
 
-            amp_om1->Fill(abs(ymin_a0)/1e3, 1/exposure_time);
-            amp_om2->Fill(abs(ymin_a1)/1e3, 1/exposure_time);
+            if(abs(ymin_a0/1e3) >= thr)
+                amp_om1->Fill(abs(ymin_a0)/1e3, 1/exposure_time);
+            if(abs(ymin_a1/1e3) >= thr)
+                amp_om2->Fill(abs(ymin_a1)/1e3, 1/exposure_time);
 
             int nhits_om1 = 0;
             int nhits_om2 = 0;
 
             for(auto& hit : evt->hits){
                     if(hit.om_id == 1)
-                    nhits_om1++;
+                        nhits_om1++;
 
                     if(hit.om_id == 2)
-                    nhits_om2++;
+                        nhits_om2++;
             }
+            std::cout << string(20, '-') << " DebugTest " << string(20, '-') << " N° 1.5" << std::endl;
+
             npe_om1->Fill(nhits_om1, 1/exposure_time);
             npe_om2->Fill(nhits_om2, 1/exposure_time);
 
@@ -154,15 +234,17 @@ namespace lactel
                 int nhits_om1_coin = 0;
                 int nhits_om2_coin = 0;
 
-                ampCoin_om1->Fill(abs(ymin_a0)/1e3, 1/exposure_time);
-                ampCoin_om2->Fill(abs(ymin_a1)/1e3, 1/exposure_time);
+                if(abs(ymin_a0/1e3) >= thr)
+                    ampCoin_om1->Fill(abs(ymin_a0)/1e3, 1/exposure_time);
+                if(abs(ymin_a1/1e3) >= thr)
+                    ampCoin_om2->Fill(abs(ymin_a1)/1e3, 1/exposure_time);
 
                 for(auto& hit : evt->hits){
                     if(hit.om_id == 1)
-                    nhits_om1_coin++;
+                        nhits_om1_coin++;
 
                     if(hit.om_id == 2)
-                    nhits_om2_coin++;
+                        nhits_om2_coin++;
                 }
 
                 npeCoin_oms_cut->Fill(nhits_om1_coin, nhits_om2_coin, 1/exposure_time);
@@ -173,11 +255,14 @@ namespace lactel
                     npeCoin_om1_cut->Fill(nhits_om1_coin, 1/exposure_time);
                     npeCoin_om2_cut->Fill(nhits_om2_coin, 1/exposure_time); 
                     
-                    ampCoin_om1_cut->Fill(abs(ymin_a0)/1e3, 1/exposure_time);
-                    ampCoin_om2_cut->Fill(abs(ymin_a1)/1e3, 1/exposure_time);
+                    if(abs(ymin_a0/1e3) >= thr)
+                        ampCoin_om1_cut->Fill(abs(ymin_a0)/1e3, 1/exposure_time);
+                    if(abs(ymin_a1/1e3) >= thr)
+                        ampCoin_om2_cut->Fill(abs(ymin_a1)/1e3, 1/exposure_time);
                 }         
             }
         }
+
 
         TCanvas* canvas = new TCanvas("canvas", "Coincidence", 800, 600);
         canvas->Divide(2);
@@ -292,6 +377,7 @@ namespace lactel
 
         // plot npe with and without coincidence
         TCanvas* canvas_npe_wwCoin = new TCanvas("canvas_npe_wwCoin", "NPE", 800, 600);
+        canvas_npe_wwCoin->SetLogy();
         npe_om1->SetLineColor(1);
         npe_om2->SetLineColor(2);
         npeCoin_om1->SetLineColor(3);
@@ -369,7 +455,6 @@ namespace lactel
         hists.push_back(std::pair("mc_ampCut_ch1_run4", ampCoin_om2_cut)); 
         
         return vCanvas;
-
     }
 
     TCanvas* getDAQParameter(TTree* tree, BAnalysisManager::DetectedEvent* evt, std::string par){
@@ -415,12 +500,17 @@ namespace lactel
     }
 
 
-    std::vector<TCanvas*>  getRealDataPlots(histsByName& hists){
+    std::vector<TCanvas*>  getRealDataPlots(histsByName& hists, std::string file1, std::string file2){
         float xmin=0.;
         float xmax=2.4;
         float unitsPerBin=10/1e3;
         const int nbins= (int)((xmax - xmin)/unitsPerBin);
+
+        float attenuator=0.5;
         std::string prefix="data_";
+
+        std::vector<std::string> data ={"Amplitude", "NPE"};
+        std::vector<int> runs = {3, 4};
 
         std::cout << "\r\033[45C" << " -- xmin: " << xmin 
                                 << " -- xmax: " << xmax 
@@ -429,25 +519,71 @@ namespace lactel
                                 << std::endl;
 
         std::vector<TCanvas*> canvas;
-        H5File file_run3("/home/bouta-mohammed/work/cppm/lactel/realData/data/run_003/data.h5", H5F_ACC_RDONLY);
-        H5File file_run4("/home/bouta-mohammed/work/cppm/lactel/realData/data/run_004/data.h5", H5F_ACC_RDONLY);
+        H5File file_run3(file1, H5F_ACC_RDONLY);
+        H5File file_run4(file2, H5F_ACC_RDONLY);
+
+            // 🔹 Read start_time
+            H5::Attribute startAttr_run3 = file_run3.openAttribute("start_time");
+            H5::Attribute stopAttr_run3 = file_run3.openAttribute("stop_time");
+
+            H5::Attribute startAttr_run4 = file_run4.openAttribute("start_time");
+            H5::Attribute stopAttr_run4 = file_run4.openAttribute("stop_time");
+
+            std::string start_str_run3, stop_str_run3, start_str_run4, stop_str_run4;
+            startAttr_run3.read(startAttr_run3.getStrType(), start_str_run3);
+            stopAttr_run3.read(stopAttr_run3.getStrType(), stop_str_run3);
+
+            startAttr_run4.read(startAttr_run4.getStrType(), start_str_run4);
+            stopAttr_run4.read(stopAttr_run4.getStrType(), stop_str_run4);
+
+            // std::cout << "Start: " << start_str_run3 << "\n";
+            // std::cout << "End:   " << end_str_run3 << "\n";
+
+            // 🔹 Convert to time_t
+            std::time_t t1_run3 = parse_iso8601(start_str_run3);
+            std::time_t t2_run3 = parse_iso8601(stop_str_run3);
+
+            std::time_t t1_run4 = parse_iso8601(start_str_run4);
+            std::time_t t2_run4 = parse_iso8601(stop_str_run4);
+
+            // 🔹 Compute difference in seconds
+            double diff_run3 = std::difftime(t2_run3, t1_run3);
+            double diff_run4 = std::difftime(t2_run4, t1_run4);
+
+            std::cout << "Difference run3: " << diff_run3 << " seconds = " << diff_run3/60. << " min\n";
+            std::cout << "Difference run4: " << diff_run4 << " seconds = " << diff_run4/60. << " min\n";
 
         DataSet dataset_run3 = file_run3.openDataSet("channel_data/peak");
         DataSet dataset_run4 = file_run4.openDataSet("channel_data/peak");
 
+        DataSet charge_dataset_run3 = file_run3.openDataSet("channel_data/peak");
+        DataSet charge_dataset_run4 = file_run4.openDataSet("channel_data/peak");
+
         DataSpace dataspace_run3 = dataset_run3.getSpace();
         DataSpace dataspace_run4 = dataset_run4.getSpace();
+        
+        DataSpace charge_dataspace_run3 = charge_dataset_run3.getSpace();
+        DataSpace charge_dataspace_run4 = charge_dataset_run4.getSpace();
+
+
 
         hsize_t dims_run3[2], dims_run4[2];
-        dataspace_run3.getSimpleExtentDims(dims_run3, NULL);
+        dataspace_run3.getSimpleExtentDims(dims_run3, NULL); // same dim
         dataspace_run4.getSimpleExtentDims(dims_run4, NULL);
 
         // std::cout << "Dimensions: " << dims_run3[0] << " x " << dims_run3[1] << std::endl;
 
         std::vector<double> data_run3(dims_run3[0]*dims_run3[1]);
         std::vector<double> data_run4(dims_run4[0]*dims_run4[1]);
+        std::vector<double> charge_data_run3(dims_run3[0]*dims_run3[1]); // same dim
+        std::vector<double> charge_data_run4(dims_run4[0]*dims_run4[1]);
+
+
         dataset_run3.read(data_run3.data(), PredType::NATIVE_DOUBLE);
         dataset_run4.read(data_run4.data(), PredType::NATIVE_DOUBLE);
+
+        charge_dataset_run3.read(charge_data_run3.data(), PredType::NATIVE_DOUBLE);
+        charge_dataset_run4.read(charge_data_run4.data(), PredType::NATIVE_DOUBLE);
 
         TH1F* hist0_run3= new TH1F("hist0_run3", "hist0_run3 amp OM0 run003",
                                 nbins, xmin, xmax);
@@ -458,17 +594,37 @@ namespace lactel
                                 nbins, xmin, xmax);
         TH1F* hist1_run4= new TH1F("hist1_run4", "hist1_run4 amp OM1 run003",
                                 nbins, xmin, xmax);
+
+        const int nhists = runs.size() * data.size();
+        TH1* histograms[nhists];
+        for(int i = 0; i < runs.size(); i++){
+            for(int j = 0; j < data.size(); j++){
+                histograms[i+j] = new TH1F(("hist" + std::to_string(i) + "_" + std::to_string(j)).c_str(), 
+                                        "hist0_run3 amp OM0 run003",
+                                        nbins, xmin, xmax);
+            }
+        }
+        // TH1F* hist0_run3= new TH1F("hist0_run3", "hist0_run3 amp OM0 run003",
+        //                         nbins, xmin, xmax);
+        // TH1F* hist1_run3= new TH1F("hist1_run3", "hist1_run3 amp OM1 run003",
+        //                         nbins, xmin, xmax);
+
+        // TH1F* hist0_run4= new TH1F("hist0_run4", "hist0_run4 amp OM0 run003",
+        //                         nbins, xmin, xmax);
+        // TH1F* hist1_run4= new TH1F("hist1_run4", "hist1_run4 amp OM1 run003",
+        //                         nbins, xmin, xmax);
+
         
         for(long i = 0; i < dims_run3[0]; i++){
                 // std::cout << "line: " << i << " -- col0: " << data[i*dims_run3[1]] << endl; // " - col1: " << data[i*dims_run3[1]+1] << std::endl;
-                hist0_run3->Fill(abs(data_run3[i*dims_run3[1]]), 1./410);
-                hist1_run3->Fill(abs(data_run3[i*dims_run3[1]+1]), 1./410);
+                hist0_run3->Fill(abs(data_run3[i*dims_run3[1]])/ attenuator, 1./diff_run3); // weating 
+                hist1_run3->Fill(abs(data_run3[i*dims_run3[1]+1])/ attenuator, 1./diff_run3);
         }
 
         for(long i = 0; i < dims_run4[0]; i++){
                 // std::cout << "line: " << i << " -- col0: " << data[i*dims_run3[1]] << endl; // " - col1: " << data[i*dims_run3[1]+1] << std::endl;
-                hist0_run4->Fill(abs(data_run4[i*dims_run4[1]]), 1./301); // one minute of data
-                hist1_run4->Fill(abs(data_run4[i*dims_run4[1]+1]), 1./301); // one minute of data
+                hist0_run4->Fill(abs(data_run4[i*dims_run4[1]])/ attenuator, 1./diff_run4); // one minute of data
+                hist1_run4->Fill(abs(data_run4[i*dims_run4[1]+1])/ attenuator, 1./diff_run4); // one minute of data
         }
 
 
@@ -529,5 +685,228 @@ namespace lactel
         return std::find_if(vec.begin(), vec.end(),
                         [key](const auto& p) { return p.first == key; })->second;
     }
+
+    TCanvas* getVertexPositions(TTree* tree){
+
+        auto* evt= static_cast<BAnalysisManager::DetectedEvent*>(nullptr);
+        tree->SetBranchAddress("DetectedEvent", &evt);
+        
+        float xoWT1 = 0, // origin on axis 
+                yoWT1 = 0,
+                zoWT1 = -1500;
+        float xoWT2 = 0,
+                yoWT2 = 0,
+                zoWT2 = -4000;
+        float xw = 1000, // width on axis;
+                yw = 1000,
+                zw = 1000;
+        
+        const int nWT = 2;
+
+        // std::vector<WaterTank> WTs= {WaterTank(0, 0, 0, -1500, 1000, 1000, 1000),
+        //                             WaterTank(0, 0, 0, -3500, 1000, 1000, 1000)
+        //                         };
+
+        // const std::vector<string> plan = {"xy", "xz", "yz"};
+        // TH2* Hist[WTs.size()][plan.size()];
+        
+        BSquare* xySquareWT1 = new BSquare(xoWT1 - xw, xoWT1 + xw, yoWT1 - yw, yoWT1 + yw);
+        BSquare* xzSquareWT1 = new BSquare(xoWT1 - xw, xoWT1 + xw, zoWT1 - zw, zoWT1 + zw);
+        BSquare* yzSquareWT1 = new BSquare(yoWT1 - yw, yoWT1 + yw, zoWT1 - zw, zoWT1 + zw);
+
+        BSquare* xySquareWT2 = new BSquare(xoWT2 - xw, xoWT2 + xw, yoWT2 - yw, yoWT2 + yw);
+        BSquare* xzSquareWT2 = new BSquare(xoWT2 - xw, xoWT2 + xw, zoWT2 - zw, zoWT2 + zw);
+        BSquare* yzSquareWT2 = new BSquare(yoWT2 - yw, yoWT2 + yw, zoWT2 - zw, zoWT2 + zw);
+
+        // for(int i = 0; i < WTs.size(); i++){
+        //     for(int j=0; j < plan.size(); j++){
+        //         Hist[i][j] = new TH2 (plan[j] + "_" + WTs[i]; "Hist projection on " + axis[j]; 100, WTs[i].xo - WTs[i].xo)
+        //     }
+        // }
+
+        TH2F* xyHistWT1 = new TH2F("xyHistWT1", "Projection Vertex position XY plan - WT1; X (mm); Y(mm)", 300, -6000, 6000,
+                                                                300, -6000, 6000
+                                                            );
+        TH2F* xzHistWT1 = new TH2F("xzHistWT1", "Projection Vertex position XZ plan - WT1; X (mm); Z(mm)", 300, -6000, 6000,
+                                                                300, -6000, 0
+                                                            );
+        TH2F* yzHistWT1 = new TH2F("yzHistWT1", "Projection Vertex position YZ plan - WT1; Y (mm); Z(mm)", 300, -6000, 6000,
+                                                                300, -6000, 0
+                                                            );
+
+
+        TH2F* xyHistWT2 = new TH2F("xyHistWT2", "Projection Vertex position XY plan - WT2; X (mm); Y (mm)", 300, -6000, 6000,
+                                                                300, -6000, 6000
+                                                            );
+        TH2F* xzHistWT2 = new TH2F("xzHistWT2", "Projection Vertex position XZ plan - WT2; X (mm); Z (mm)", 300, -6000, 6000,
+                                                                300, -6000, 0
+                                                            );
+        TH2F* yzHistWT2 = new TH2F("yzHistWT2", "Projection Vertex position YZ plan - WT2; Y (mm); Z (mm)", 300, -6000, 6000,
+                                                                300, -6000, 0
+                                                            );
+
+
+        TGraph* xyGrWT1 = new TGraph();
+        TGraph* xzGrWT1 = new TGraph();
+        TGraph* yzGrWT1 = new TGraph();
+        TGraph* xyGrWT2 = new TGraph();
+        TGraph* xzGrWT2 = new TGraph();
+        TGraph* yzGrWT2 = new TGraph();
+
+
+        for(long long i = 0; i < tree->GetEntries(); i++){
+            // std::cout << "\r\033[20C" << "Entry: " << i << std::endl;
+            tree->GetEntry(i);
+            for(auto& hit : evt->hits){
+
+                int i_om1 = 0, i_om2 = 0;
+                if(hit.om_id == 1){
+                    xyHistWT1->Fill(hit.vrx, hit.vry);
+                    xzHistWT1->Fill(hit.vrx, hit.vrz);
+                    yzHistWT1->Fill(hit.vry, hit.vrz);
+                    // xyGrWT1->SetPoint(i_om1, hit.vry, hit.vrx);
+                    // xzGrWT1->SetPoint(i_om1, hit.vrz, hit.vrx);
+                    // yzGrWT1->SetPoint(i_om1, hit.vrz, hit.vry);
+                    i_om1++;
+                }
+                
+                if(hit.om_id == 2){
+                    xyHistWT2->Fill(hit.vrx, hit.vry);
+                    xzHistWT2->Fill(hit.vrx, hit.vrz);
+                    yzHistWT2->Fill(hit.vry, hit.vrz);
+                    // xyGrWT2->SetPoint(i_om2, hit.vry, hit.vrx);
+                    // xzGrWT2->SetPoint(i_om2, hit.vrz, hit.vrx);
+                    // yzGrWT2->SetPoint(i_om2, hit.vrz, hit.vry);
+                    i_om2++;
+                }
+            }
+        }
+
+
+        TCanvas* posCanvas = new TCanvas("PosCanvas", "Vertex position canvas");
+        posCanvas->Divide(3, 2);
+
+        posCanvas->cd(1);
+        xyHistWT1->Draw();
+        xySquareWT1->Draw();
+        posCanvas->cd(2);
+        xzHistWT1->Draw();
+        xzSquareWT1->Draw();
+        posCanvas->cd(3);
+        yzHistWT1->Draw();
+        yzSquareWT1->Draw();
+
+        posCanvas->cd(4);
+        xyHistWT2->Draw();
+        xySquareWT2->Draw();
+        posCanvas->cd(5);
+        xzHistWT2->Draw();
+        xzSquareWT2->Draw();
+        posCanvas->cd(6);
+        yzHistWT2->Draw();
+        yzSquareWT2->Draw();
+
+
+        return posCanvas;
+    }
+
+        void getRealDataByInFile(histsByName& hists, std::string inFile, std::string dataset, float xmin, float xmax, float unitsPerBin, float attenuator){
+            const int nbins= (int)((xmax - xmin)/unitsPerBin);
+
+            std::string prefix="data_";
+
+            std::cout << "\r\033[45C"   << " -- xmin: " << xmin 
+                                        << " -- xmax: " << xmax 
+                                        << " -- unitsPerBin: " << unitsPerBin 
+                                        << " -- nbins: " << nbins 
+                                        << std::endl;
+
+            std::vector<TCanvas*> canvas;
+            H5File file(inFile, H5F_ACC_RDONLY);
+
+            // 🔹 Read start_time
+            H5::Attribute startTime = file.openAttribute("start_time");
+            H5::Attribute endTime = file.openAttribute("stop_time");
+
+            std::string start, end;
+            startTime.read(startTime.getStrType(), start);
+            endTime.read(endTime.getStrType(), end);
+
+            // 🔹 Convert to time_t
+            std::time_t t1_file = parse_iso8601(start);
+            std::time_t t2_file = parse_iso8601(end);
+
+            // 🔹 Compute difference in seconds
+            double time = std::difftime(t2_file, t1_file);
+
+            std::cout << "Difference file: " << time << " seconds = " << time/60. << " min\n";
+
+            DataSet dataSet = file.openDataSet(dataset);
+            DataSpace dataspace = dataSet.getSpace(); // get shape
+        
+            hsize_t dims[2]; // 2D data, Nlines == values, NColumns == Channels
+            dataspace.getSimpleExtentDims(dims, NULL); // fill dimension vector
+
+            std::cout << "Dimensions: nlines: " << dims[0] << "  - ncolumns: " << dims[1] << std::endl;
+
+            std::vector<double> data(dims[0]*dims[1]); // data has a length of dim[0], => nLines
+            // std::vector<pair<double, double>> data(dims_file[0]);
+
+            dataSet.read(data.data(), PredType::NATIVE_DOUBLE);
+
+            
+            TH1F* hist_amp_ch0= new TH1F("hist_amp_ch0", "hist Amplitude amp channel 0",
+                                        nbins, xmin, xmax);
+
+            TH1F* hist_amp_ch1= new TH1F("hist_amp_ch1", "hist Amplitude amp channel 1",
+                                        nbins, xmin, xmax);
+
+            for(long i = 0; i < dims[0]; i++){
+                hist_amp_ch0->Fill(abs(data[ i*dims[1] + 0]) / attenuator, 1/time); // abs to positive signal convert to Vols and divide by the attenuator and scale with the time of data taking
+                hist_amp_ch1->Fill(abs(data[ i*dims[1] + 1]) / attenuator, 1/time);
+            }
+
+            hists.push_back(std::pair("amp_ch0", hist_amp_ch0));
+            hists.push_back(std::pair("amp_ch1", hist_amp_ch1));
+            
+
+            TCanvas* ccc = new TCanvas("ccc", "Test Plot");
+            ccc->SetLogy();
+            hist_amp_ch0->Draw("hist");
+            hist_amp_ch1->SetLineColor(2);
+            hist_amp_ch1->Draw("hist same");
+
+        }
+
+
+
+
+    TCanvas* makeRatioPlot(TH1* h1, TH1* h2){
+        TCanvas* canvas = new TCanvas("canvas", "Ratio Canvas", 900, 800);
+        canvas->Divide(1,2);
+        canvas->cd(1);
+        gPad->SetPad(0, 0, 1, 0.3);
+        canvas->cd(2);
+        gPad->SetPad(0, 0.3, 1, 1);
+        h1->Draw("hist");
+        h2->Draw("hist same");
+        gPad->SetFrameLineColor(0);
+        gPad->SetMargin(0.1, 0.1, 0.1, 0.1);      
+
+        canvas->cd(1);
+
+        h1->Sumw2(1);
+        h2->Sumw2(1);
+        TH1* ratio = (TH1*)h1->Clone("ratio");
+        ratio->Divide(h2);
+        ratio->Draw("hist same");
+        gPad->SetFrameLineColor(0);
+        gPad->SetMargin(0.1, 0.1, 0.1, 0.01);
+
+
+        return canvas;
+    }
+
+
 
 } // namespace lactel
