@@ -4521,6 +4521,10 @@ TPave.h
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/TPave.h
 TObject.h
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/TObject.h
+TCanvas.h
+/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/TCanvas.h
+TGraph.h
+/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/TGraph.h
 BLogger.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLogger.hh
 BVolumesManager.hh

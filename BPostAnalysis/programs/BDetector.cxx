@@ -9,13 +9,13 @@
 #include "TBox.h"
 #include "TF1.h"
 
-#include <vtkSmartPointer.h>
-#include <vtkCubeSource.h>
-#include <vtkPolyDataMapper.h>
-#include <vtkActor.h>
-#include <vtkRenderer.h>
-#include <vtkRenderWindow.h>
-#include <vtkRenderWindowInteractor.h>
+// #include <vtkSmartPointer.h>
+// #include <vtkCubeSource.h>
+// #include <vtkPolyDataMapper.h>
+// #include <vtkActor.h>
+// #include <vtkRenderer.h>
+// #include <vtkRenderWindow.h>
+// #include <vtkRenderWindowInteractor.h>
 
 #include "BPrimaryGeneratorAction.hh"
 

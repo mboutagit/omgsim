@@ -10,7 +10,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
 #---VTK
-find_package(VTK REQUIRED)
+# find_package(VTK REQUIRED)
 
 find_path(MYSQLCPPCONN_INCLUDE_DIR
     NAMES cppconn/driver.h
@@ -86,7 +86,7 @@ file(GLOB sources */src/[a-zA-Z0-9]*.cc
 
 file(GLOB headers ${CMAKE_SOURCE_DIR}/tools/Geometry/include
                   */include
-                  /usr/include/vtk-9.1/
+                  #/usr/include/vtk-9.1/
     )
 
 
@@ -125,7 +125,7 @@ file(GLOB TESTS tests/[a-zA-Z1-9]*.cxx)
 message("programs: ${PROGRAMS}")
 
 #bstr: set include directories, include ROOT
-include_directories (${headers} ${ROOT_INCLUDE_DIRS} ${Geant4_INCLUDE_DIRS} ${MYSQLCPPCONN_INCLUDE_DIR} ${HDF5_INCLUDE_DIRS} "/usr/include/vtk-9.1" ${VTK_INCLUDE_DIRS})
+include_directories (${headers} ${ROOT_INCLUDE_DIRS} ${Geant4_INCLUDE_DIRS} ${MYSQLCPPCONN_INCLUDE_DIR} ${HDF5_INCLUDE_DIRS}) # "/usr/include/vtk-9.1" ${VTK_INCLUDE_DIRS})
 if (DEFINED ENV{X11HEADERS_PATH})
     include_directories (/opt/X11/include)
 endif()
@@ -196,21 +196,21 @@ SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__CXX_MIN_VERSION=${CMAKE_CXX_COMPILE
 if(ENABLE_TESTING)
   add_library(libOMG SHARED ${sources} ${ba_sources} G__Dict.cxx)
   # add_library(BAnalysis SHARED ${ba_sources} G__Dict.cxx)
-  target_link_libraries(libOMG  ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB} ${HDF5_LIBRARIES} ${VTK_LIBRARIES} ${MYSQLCPPCONN_LIBRARY})
+  target_link_libraries(libOMG  ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB} ${HDF5_LIBRARIES} ${MYSQLCPPCONN_LIBRARY})
   SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DENABLE_TESTING=1")
   foreach(aprog IN LISTS TESTS)
     get_filename_component(aprogname ${aprog} NAME_WE)
     add_executable(${aprogname} ${aprog} ${headers} ${test_headers} ${test_sources})
-    target_link_libraries(${aprogname} libOMG ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB} ${HDF5_LIBRARIES} ${VTK_LIBRARIES} ${MYSQLCPPCONN_LIBRARY})
+    target_link_libraries(${aprogname} libOMG ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB} ${HDF5_LIBRARIES} ${MYSQLCPPCONN_LIBRARY})
   endforeach ()
 else(ENABLE_TESTING)
   add_library(libOMG SHARED ${sources} ${ba_sources} G__Dict.cxx)
   # add_library(BAnalysis SHARED ${ba_sources} G__Dict.cxx)
-  target_link_libraries(libOMG ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB} ${HDF5_LIBRARIES} ${VTK_LIBRARIES} ${MYSQLCPPCONN_LIBRARY})
+  target_link_libraries(libOMG ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB} ${HDF5_LIBRARIES} ${MYSQLCPPCONN_LIBRARY})
   foreach(aprog IN LISTS PROGRAMS)
     get_filename_component(aprogname ${aprog} NAME_WE)
     add_executable(${aprogname} ${aprog} ${headers})
-    target_link_libraries(${aprogname} libOMG ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB} ${HDF5_LIBRARIES} ${VTK_LIBRARIES} ${MYSQLCPPCONN_LIBRARY})
+    target_link_libraries(${aprogname} libOMG ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${LIBCONFLIB} ${HDF5_LIBRARIES} ${MYSQLCPPCONN_LIBRARY})
   endforeach ()
 endif(ENABLE_TESTING)
 

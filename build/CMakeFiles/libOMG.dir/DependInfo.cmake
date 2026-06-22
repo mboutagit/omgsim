@@ -34,8 +34,6 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_CXX
-  "DIY_NO_THREADS"
-  "FMT_SHARED"
   "G4INTY_USE_QT"
   "G4UI_USE"
   "G4UI_USE_QT"
@@ -45,19 +43,12 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
   "G4VIS_USE_OPENGL"
   "G4VIS_USE_OPENGLQT"
   "G4_STORE_TRAJECTORY"
-  "H5_BUILT_AS_DYNAMIC_LIB"
-  "MPICH_SKIP_MPICXX"
-  "MPI_NO_CPPBIND"
-  "OMPI_SKIP_MPICXX"
   "QT_CORE_LIB"
   "QT_GUI_LIB"
   "QT_NO_DEBUG"
   "QT_OPENGL_LIB"
   "QT_PRINTSUPPORT_LIB"
   "QT_WIDGETS_LIB"
-  "VTK_HAS_OGGTHEORA_SUPPORT"
-  "_MPICC_H"
-  "kiss_fft_scalar=double"
   "libOMG_EXPORTS"
   )
 
@@ -76,9 +67,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/utils/include"
-  "/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4"
   "/usr/include/hdf5/serial"
-  "/usr/include/vtk-9.1"
+  "/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4"
   "/usr/include/x86_64-linux-gnu/qt5"
   "/usr/include/x86_64-linux-gnu/qt5/QtWidgets"
   "/usr/include/x86_64-linux-gnu/qt5/QtGui"
@@ -86,17 +76,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"
   "/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport"
   "/usr/include/x86_64-linux-gnu/qt5/QtOpenGL"
-  "/usr/lib/jvm/default-java/include"
-  "/usr/lib/jvm/default-java/include/linux"
-  "/usr/include/freetype2"
-  "/usr/include/python3.12"
-  "/usr/lib/x86_64-linux-gnu/openmpi/include"
-  "/usr/lib/x86_64-linux-gnu/openmpi/include/openmpi"
-  "/usr/include/jsoncpp"
-  "/usr/include/libxml2"
-  "/usr/include/eigen3"
-  "/usr/include/double-conversion"
-  "/usr/include/utf8cpp"
   )
 
 # The set of dependency files which are needed:

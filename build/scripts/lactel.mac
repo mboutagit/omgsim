@@ -1,8 +1,6 @@
 /KM3/XP/Type BA
 /KM3/det/DetInit Lactel
-/KM3/det/DetectorTypeName LACTEL_9Modules
-# /KM3/det/DetectorTypeName LacWater
-# /KM3/det/DetectorTypeName LactelOneModule
+/KM3/det/DetectorTypeName LactelOneModule #KM3K40
 # /KM3/det/DetectorTypeName LactelOneCell 
 # /KM3/det/DetectorTypeName OMInCPPMBalckBox 
 /KM3/det/setMeanCapRadius 5 cm
@@ -25,12 +23,14 @@
 /LACTEL/BDet/autoGenSize true
 /LACTEL/BDet/genSurfShape disk
 /LACTEL/BDet/genSurfPosition 0 0 0 m
-/LACTEL/BDet/genSurfSize 0 7 0.001 m
+/LACTEL/BDet/genSurfSize 0 5 0.001 m
 /LACTEL/BDet/OMPosition 0 0 0. m
 /LACTEL/BDet/state RUN
 
 /LACTEL/DAQ/useDAQ 0
 /run/initialize
+
+
 
 # /vis/open OGL 1200x800-0+0
 # /vis/drawVolume
@@ -44,9 +44,17 @@
 # /vis/viewer/set/viewpointThetaPhi 105 -60  deg
 # /vis/scene/endOfEventAction accumulate
 
-/run/beamOn 300
+/run/beamOn 2
 
+# /run/beamOn 20000
+# /run/beamOn 20000
+# /run/beamOn 20000
+# /run/beamOn 10000
+# /run/beamOn 10000
+# /run/beamOn 10000
+# /run/beamOn 10000
 
+#/vis/verbose errors
 
 # /control/verbose 0
 # /tracking/verbose 0

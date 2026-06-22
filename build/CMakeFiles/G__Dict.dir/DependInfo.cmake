@@ -61,7 +61,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/utils/include"
   "/usr/include/hdf5/serial"
-  "/usr/include/vtk-9.1"
   "/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4"
   )
 
