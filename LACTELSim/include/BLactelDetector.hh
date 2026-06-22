@@ -22,6 +22,8 @@
 #include "TBox.h"
 #include "TPave.h"
 #include "TObject.h"
+#include "TCanvas.h"
+#include "TGraph.h"
 
 #include "BLogger.hh"
 
@@ -30,31 +32,33 @@
 #include <sys/types.h>
 #include <dirent.h>
 
-using namespace UTILS;
-using namespace utils;
-using namespace libconfig;
+
 
 namespace lactel
 {
+    using namespace UTILS;
+    using namespace utils;
+    using namespace libconfig;
    
     class ElementaryCell : public GeometryObject, public TObject
     {
         private:
-            static int gID; // global id
-            int id;
+            int id = -1;
             std::string name = "IdealWaterVolume";
-            OM om = OM("OMSXXXX");
+            OM om;
             int layer = 0; 
+            int module;
             VolumeProperties volProp;
-            
 
         public:
             ElementaryCell();
+            ElementaryCell(int uid);
             ElementaryCell(G4ThreeVector pos);
             ElementaryCell(OM& om);
             ElementaryCell(OM om);
             ElementaryCell(G4ThreeVector pos, G4ThreeVector dim);
             ElementaryCell(G4ThreeVector pos, G4ThreeVector dim, OM _om);
+            ElementaryCell(int uid, G4ThreeVector pos, G4ThreeVector dim, OM _om, int mdl, int lyr);
             ~ElementaryCell();
             ElementaryCell(const ElementaryCell& other) = default;
             // ElementaryCell(ElementaryCell&& other);
@@ -79,13 +83,15 @@ namespace lactel
             inline int getLayer() {return layer;}
             inline void setLayer(int lyr) {layer = lyr;}
 
+            inline int getModule() {return module;}
+            inline void setModule(int mdl) {module = mdl;}
+
             ClassDef(ElementaryCell, 0);
     }; // class ElementaryCell
 
     class Module : public GeometryObject, public GeometryGrid<ElementaryCell>, public TObject
     {
         protected:
-            static int gID;
             int id = -1; // no object yet
             std::string name;
             float VInterCellDistance; // vertical Inter Cells Distance 
@@ -93,7 +99,9 @@ namespace lactel
 
         public:
             Module();
+            Module(int uid);
             Module(std::vector<ElementaryCell> cells);
+            Module(int uid, std::vector<ElementaryCell> cells);
             Module(std::vector<ElementaryCell> cells, G4ThreeVector spacing);
             Module(int nx, int ny, int nz);
             Module(int nx, int ny, int nz, G4ThreeVector spacing);
@@ -103,6 +111,7 @@ namespace lactel
             void reset();
             void setName(std::string _name);
             std::string getName();
+            void setID(int id);
             int getID();
             void centerCellsX();
             void centerCellsY();
@@ -142,6 +151,65 @@ namespace lactel
             BLactelDetector(int nx, int ny, int nz, G4ThreeVector spacing);
             ~BLactelDetector();
 
+            struct VolumeInfo
+            {
+                std::string groupName;
+
+                std::string name;
+                int id = -1;
+
+                double x = 0.0;
+                double y = 0.0;
+                double z = 0.0;
+
+                double theta = 0.0;
+                double phi   = 0.0;
+
+                std::string motherVolume;
+
+                std::string om_id;
+            };
+
+            struct PassiveVolumeParameters
+            {
+                std::string Name;
+                std::string VolumeKind;
+
+                //predefined values are optional
+
+                std::string RefVolume;
+                std::string OperandVolume;
+                double RotTheta;
+                double RotPhi;
+
+                double X;
+                double Y;
+                double Z;
+
+                double RadiusMin;
+                double RadiusMax;
+                double PhiMin   ;
+                double PhiMax   ;
+                double ThetaMin ;
+                double ThetaMax ;
+
+                double SecondRadiusMin;
+                double SecondRadiusMax;
+
+                double ThirdRadiusMax;
+                double ZCutMin = 0;
+                double ZCutMax = 0;
+
+                //Material
+                std::string Material = "G4_AIR";
+                std::string SkinMaterial = "";
+
+                void CalculateParameters ()
+                {
+                }
+            };
+
+
             static std::string filesPath;
 
             void print(std::ostream& out = std::cout, bool printModules = false, bool printCells = false);
@@ -150,9 +218,9 @@ namespace lactel
             void dumpDetectorSummary(std::ostream& out = std::cout);
             void construct() override;
             void updatePosition();
-            void read(std::string fileName);
             void updateDimension();
             void updateGeometry();
+            TGraph* drawMZ();
             void drawModules(Option_t* options = "", bool drawModules = false, bool drawCells = false);
             void generateDetectorFiles(bool printSummary = true);
             
@@ -167,7 +235,8 @@ namespace lactel
 
             const G4ThreeVector getCellsPosition();
             const G4ThreeVector getCellsDimensions();
-            const int getNCells();
+            int getNModules() const;
+            int getNCells() const;
 
             inline void setMotherVolName(std::string name){motherVolume = name;}
             inline void setBorderSurfName(std::string name){borderSurafce = name;}
@@ -180,6 +249,28 @@ namespace lactel
             void centerOnItsCells(G4ThreeVector margin = G4ThreeVector());
 
             ElementaryCell readAVolume(libconfig::Setting& set);
+
+            VolumeInfo ReadVolume(const libconfig::Setting& s);
+            void PrintVolume(const VolumeInfo& v);
+            const libconfig::Setting* FindVolumeByName(const libconfig::Config& cfg, const std::string& volumeName);
+            void ReadOMHierarchy(const std::string& detectorFile);
+
+            std::vector<ElementaryCell*> getListOfECells();
+            void printListOfECells(std::ostream& out = std::cout);
+            std::vector<Module*> getListOfModules();
+            void printListOfModules(std::ostream& out = std::cout);
+            std::vector<OM*> getListOfOMs();
+            void printListOfOMs(std::ostream& out = std::cout);
+            ElementaryCell* getOMECell(OM&);
+            ElementaryCell* getOMECell(std::string om_id);
+            ElementaryCell* getOMECell(int oid);
+            Module* getOMModule(OM&);
+            Module* getOMModule(std::string om_id);
+            OM* getOMByID(int oid) const;
+            int getOMIDByRefID(std::string ref);
+
+
+
 
 
             // utilities:
@@ -219,6 +310,7 @@ namespace lactel
             ElementaryCell readECell(libconfig::Setting& posSet, libconfig::Config& volConf);
 
             void read(libconfig::Config& detConf, libconfig::Config& volConf);
+            void read(std::string detFile);
             
 
             G4ThreeVector interModuleDistance = G4ThreeVector(50*cm, 50*cm, 50*cm);

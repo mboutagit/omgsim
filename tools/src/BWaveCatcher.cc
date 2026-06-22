@@ -8,13 +8,10 @@ namespace tools
 {
 
     BWaveCatcherConf BWaveCatcher::config_ = BWaveCatcherConf();
-    std::map<int, OM*> BWaveCatcher::connectedOMs;
 
-    BWaveCatcher::BWaveCatcher(std::string n)
-    : acquiring_(false), rng_(std::random_device{}()), noiseDist_(-2, 2), TTSDist_(3.314, 0.1531*0.1531), AmpDist_(0, 0.1156) { // 0.1156 is to have 90% of amplitudes inside 30% fluctuation
-        name = n;
-        scope.resize(config_.NumChannels);
-        signalSource.resize(config_.NumChannels);
+    BWaveCatcher::BWaveCatcher(std::string nm, int uid) : name(nm), id(uid), acquiring_(false), rng_(std::random_device{}()), noiseDist_(-2, 2), TTSDist_(3.314, 0.1531*0.1531), AmpDist_(0, 0.1156) { // 0.1156 is to have 90% of amplitudes inside 30% fluctuation
+        // scope.resize(config_.NumChannels);
+        // signalSource.resize(config_.NumChannels);
 
         // canvas = new TCanvas("scope", "BWaveCatcher scope");
         // canvas->Divide(config_.NumChannels);
@@ -50,30 +47,27 @@ namespace tools
         return true;
     }
 
-    BWaveCatcherConf BWaveCatcher::getConfiguration(){
+    BWaveCatcherConf& BWaveCatcher::getConfiguration(){
         return config_;
     }
 
-    bool BWaveCatcher::plugOM(int channel, const OM& om){
+    bool BWaveCatcher::plugOM(int channel, OM& om){
         if(channel > config_.NumChannels -1){
             std::cout << "\033[1;35mChannel with index " << channel << " does not exists ..\033[0m" << std::endl;
             return false;
         }
 
         if(inputOMs[channel].isOK){
-            std::cout << "\033[1;35mInfo: Channel " << channel << " Already in use ..\033[0m" << std::endl;
+            std::cout << "\033[1;35mInfo: Channel " << channel 
+                                << " of wavecatcher: " << name 
+                                << " is already in use ..\033[0m" 
+                                << std::endl;
             return false;
         }
 
-        // std::cout << "\033[1;32mInfo: OM " << om.getOMID() << " is now plugged on channel " 
-        //                                     << channel << " - " 
-        //                                     << name 
-        //                                     << " ..\033[0m" 
-        //                                     << std::endl;
-
         OM ommm = om;
         if(om.isOK)
-            connectedOMs.insert({channel, &ommm});
+            connectedOMs.insert({channel, om});
             
         inputOMs[channel] = om;
         return true;
@@ -125,6 +119,15 @@ namespace tools
     //     });
     //     return true;
     // }
+
+    const void BWaveCatcher::print(std::ostream& out) const {
+        out << string(10, '-') << " WaveCatcher: " << name << " " << string(10, '-');
+        for(int i =0; i < BWaveCatcherConf::NumChannels; i++){
+            out << "\n\tchannel: " << i 
+                << " - OM connected: " << connectedOMs.at(i).getOMID();
+        }
+        out << "\n" <<string(30, '-') << "\n";
+    }
 
     bool BWaveCatcher::stopAcquisition() {}
     //     acquiring_ = false;
@@ -300,8 +303,61 @@ namespace tools
     //     return adcs;
     // }
 
+    void BWaveCatcher::digitizeEvent(BAnalysisManager::DetectedEvent& event){
+        for(int i=0; i<getConfiguration().NumChannels; i++){
+            ADCs[i] = digitizeEvent(i, event);
+            if(! ADCs[i].size())
+                return;
+            std::vector<Waveform> wfs = waveformFromADC(ADCs[i]);
+            // for(auto& wf : wfs){
+            //     TGraph gr = this->drawWaveform(wf, this->getConfiguration().eventBufferDepth);
+            //     string grName = "wf_" + connectedOMs[i].getOMID() + "_wc-" + to_string(this->getID())
+            //                         + "_Evt-" + to_string(event.event_id)
+            //                         + "_Run-" + to_string(event.runNb)
+            //                         ;
+            //     gr.SetName(grName.c_str());
+            //     gr.Write();
+            //     std::cout << "\r\033[10C" << "writing " << grName << std::endl;
+            // }
+
+            Waveform fullWF = joinWavefroms(i, wfs);
+            waveforms[i].push_back(fullWF);
+
+            TGraph a = this->drawWaveform(fullWF, this->getConfiguration().eventBufferDepth);
+            a.SetName(    "wf" + connectedOMs[i].getOMID() +  
+                                "_Ch-" + to_string(i) +
+                                "_wc-" + getID() +
+                                "_Evt-" + std::to_string(event.event_id)
+                    );
+            a.SetLineColor(2);
+            a.Write();
+            // if(fullWF.samples.size() > 0)
+                // a.Write();
+
+            double xmin_a, xmax_a, ymin_a, ymax_a;
+            a.ComputeRange(xmin_a, ymin_a, xmax_a, ymax_a);
+
+            // std::cout << "\r\033[10C" << "Event: " << event.event_id
+            //                             << " - nhits: " << event.nhit
+            //                             << " - on channel: " << i
+            //                             << " - Computed a: " << ymin_a
+            //                             << " - nADCs : " << ADCs[i].size()
+            //                             << std::endl;
+            BAnalysisManager::DAQEvent daqEvent;
+            daqEvent.channel = i;
+            daqEvent.a = ymin_a;
+            daqEvent.om_id = connectedOMs[i].getID();
+            // daqEvent.t = event.
+            event.daqEvent.push_back(daqEvent);
+        }  
+    }
+
+
     std::vector<ADC_record> BWaveCatcher::digitizeEvent(int channel, BAnalysisManager::DetectedEvent& event){
         std::vector<ADC_record> adcs;
+        // std::cout << "\r\033[10C" << "Digitizing evnet: " << event.event_id 
+        //                             << " - with nhits: " << event.hits.size()
+        //                             << std::endl;
         if(! event.hits.size())
             return adcs;
 
@@ -326,8 +382,11 @@ namespace tools
         // std::cout << "\r\033[10C" << "info: " << one_pe_charge << " - " << I_0 << " - " << I_peak << " - " << lsb << " - " << -e_SI << std::endl;
     
         for(auto& hit : event.hits){
-            if(hit.om_id != channel+1) // om id comes from copynumber in geant4 and channel is 0 or 1 while copy number starts from 1
+            // if(hit.om_id != channel+1) // om id comes from copynumber in geant4 and channel is 0 or 1 while copy number starts from 1
+            //     continue;
+            if(connectedOMs[channel].getID() != hit.om_id)
                 continue;
+
             ADC_record adc;
             adc.samples.resize(config_.recordLength);
             adc.channel = channel; // set channel
@@ -505,7 +564,7 @@ namespace tools
         }
 
         if(triggered){
-            waveforms[channel] = waveform;
+            waveforms[channel].push_back(waveform);
             return waveform;
         }
         else 

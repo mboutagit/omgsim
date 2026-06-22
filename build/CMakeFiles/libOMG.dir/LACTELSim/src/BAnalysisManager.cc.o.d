@@ -1234,6 +1234,9 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BAnalysisManager.cc.o: \
  /home/bouta-mohammed/root/root_install/include/TBox.h \
  /home/bouta-mohammed/root/root_install/include/TPave.h \
  /home/bouta-mohammed/root/root_install/include/TBox.h \
+ /home/bouta-mohammed/root/root_install/include/TCanvas.h \
+ /home/bouta-mohammed/root/root_install/include/TPad.h \
+ /home/bouta-mohammed/root/root_install/include/TAttCanvas.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BVolumesManager.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PassiveVolumeMgr.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhotoTubeMgr.hh \
@@ -1636,7 +1639,4 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BAnalysisManager.cc.o: \
  /usr/include/c++/13/bits/random.tcc /usr/include/c++/13/numeric \
  /usr/include/c++/13/bits/stl_numeric.h \
  /usr/include/c++/13/pstl/glue_numeric_defs.h \
- /home/bouta-mohammed/root/root_install/include/TCanvas.h \
- /home/bouta-mohammed/root/root_install/include/TPad.h \
- /home/bouta-mohammed/root/root_install/include/TAttCanvas.h \
  /home/bouta-mohammed/root/root_install/include/TH1F.h

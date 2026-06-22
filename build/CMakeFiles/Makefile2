@@ -68,6 +68,7 @@ all: CMakeFiles/BDetector.dir/all
 all: CMakeFiles/BFlux.dir/all
 all: CMakeFiles/BRateBuilder.dir/all
 all: CMakeFiles/PostAna.dir/all
+all: CMakeFiles/WaveCatcher.dir/all
 all: CMakeFiles/OMGsim.dir/all
 .PHONY : all
 
@@ -82,6 +83,7 @@ clean: CMakeFiles/BDetector.dir/clean
 clean: CMakeFiles/BFlux.dir/clean
 clean: CMakeFiles/BRateBuilder.dir/clean
 clean: CMakeFiles/PostAna.dir/clean
+clean: CMakeFiles/WaveCatcher.dir/clean
 clean: CMakeFiles/OMGsim.dir/clean
 .PHONY : clean
 
@@ -118,7 +120,7 @@ CMakeFiles/G__Dict.dir/clean:
 CMakeFiles/libOMG.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78 "Built target libOMG"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80 "Built target libOMG"
 .PHONY : CMakeFiles/libOMG.dir/all
 
 # Build rule for subdir invocation for target.
@@ -240,6 +242,32 @@ PostAna: CMakeFiles/PostAna.dir/rule
 CMakeFiles/PostAna.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PostAna.dir/build.make CMakeFiles/PostAna.dir/clean
 .PHONY : CMakeFiles/PostAna.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/WaveCatcher.dir
+
+# All Build rule for target.
+CMakeFiles/WaveCatcher.dir/all: CMakeFiles/libOMG.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaveCatcher.dir/build.make CMakeFiles/WaveCatcher.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaveCatcher.dir/build.make CMakeFiles/WaveCatcher.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles --progress-num=12,13 "Built target WaveCatcher"
+.PHONY : CMakeFiles/WaveCatcher.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/WaveCatcher.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles 69
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/WaveCatcher.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles 0
+.PHONY : CMakeFiles/WaveCatcher.dir/rule
+
+# Convenience name for target.
+WaveCatcher: CMakeFiles/WaveCatcher.dir/rule
+.PHONY : WaveCatcher
+
+# clean rule for target.
+CMakeFiles/WaveCatcher.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaveCatcher.dir/build.make CMakeFiles/WaveCatcher.dir/clean
+.PHONY : CMakeFiles/WaveCatcher.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/OMGsim.dir

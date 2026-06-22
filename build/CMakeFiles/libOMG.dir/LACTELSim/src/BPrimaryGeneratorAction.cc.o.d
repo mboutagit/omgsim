@@ -1389,6 +1389,9 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BPrimaryGeneratorAction.cc.o: \
  /home/bouta-mohammed/root/root_install/include/TBox.h \
  /home/bouta-mohammed/root/root_install/include/TPave.h \
  /home/bouta-mohammed/root/root_install/include/TBox.h \
+ /home/bouta-mohammed/root/root_install/include/TCanvas.h \
+ /home/bouta-mohammed/root/root_install/include/TPad.h \
+ /home/bouta-mohammed/root/root_install/include/TAttCanvas.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BVolumesManager.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PassiveVolumeMgr.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhotoTubeMgr.hh \
@@ -1457,9 +1460,6 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BPrimaryGeneratorAction.cc.o: \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3RunMessenger.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/Jurgen.hh \
  /home/bouta-mohammed/root/root_install/include/TH1D.h \
- /home/bouta-mohammed/root/root_install/include/TCanvas.h \
- /home/bouta-mohammed/root/root_install/include/TPad.h \
- /home/bouta-mohammed/root/root_install/include/TAttCanvas.h \
  /home/bouta-mohammed/root/root_install/include/TF2.h \
  /home/bouta-mohammed/root/root_install/include/TF1.h \
  /home/bouta-mohammed/root/root_install/include/RConfigure.h \

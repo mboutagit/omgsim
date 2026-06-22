@@ -67,19 +67,17 @@ namespace lactel
         bpga->getExpectedFlux(); // just to set up BPrimaryGeneratorAction::muonsFlux first;
         ana->fRun.expectedRate = bpga->muonsFlux;
         ana->fRun.detName = BDetectorConstruction::GetIt()->detName;
+        bpga->thetaMax = BDetectorConstruction::GetIt()->acceptanceAngle;
 
         cout << endl << "\r\033[10C" << "Begin of run: " << ana->fRun.runNb << endl;
         
-        bpga->thetaMax = BDetectorConstruction::GetIt()->acceptanceAngle;
-        bpga->getExpectedFlux();
-
         //Digi
-         static bool first = true;
-        if (first) {
-            G4DigiManager* digiMan = G4DigiManager::GetDMpointer();
-            digiMan->AddNewModule(new BDigitizerModule("DigitizerModule"));
-            first = false;
-        }
+        //  static bool first = true;
+        // if (first) {
+        //     G4DigiManager* digiMan = G4DigiManager::GetDMpointer();
+        //     digiMan->AddNewModule(new BDigitizerModule("DigitizerModule"));
+        //     first = false;
+        // }
 
         // BWaveCatcher* wc = new BWaveCatcher();
         // wc->startAcquisition();
@@ -108,7 +106,7 @@ namespace lactel
 
             OM oms0321("OMS0321");
             OM oms0304("OMS0304");
-            BWaveCatcher* wc1 = new BWaveCatcher("wc1");
+            BWaveCatcher* wc1 = new BWaveCatcher("wc1", 1);
             wc1->plugOM(0, oms0321);
             wc1->plugOM(1, oms0321);
             daqManager->addAWaveCatcher(wc1);
@@ -137,6 +135,7 @@ namespace lactel
         // Fill treis; 
         ana->runTree->Fill();
         ana->fTRunInfos->Fill();
+        ana->detectedEventTree->Fill();
         // write data
         ana->Write();
         ana->BLactelDetectorTree->Write();

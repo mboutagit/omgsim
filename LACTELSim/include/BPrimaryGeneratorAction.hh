@@ -73,6 +73,8 @@ public:
     double integrate_gaisser_flux(double E_min, double E_max, int Nbins);
     void getExpectedFlux();
     static double ModifiedFormula(double *energy, double *par) ;
+    static double ModifiedFormula2D(double *energy, double *pars);
+
 
     void print(ostream& out);
     std::string getGeneratorName();

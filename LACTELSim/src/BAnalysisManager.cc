@@ -192,7 +192,7 @@ namespace lactel
         DAQEventTree = new TTree("DAQEvent", "DAQ parameters");
         BLactelDetectorTree = new TTree("BLactelDetector", "Detector description");
 
-        BLactelDetectorTree->Branch("LactelDetector", &(BDetectorConstruction::GetIt()->getDetector()));
+        BLactelDetectorTree->Branch("LactelDetector", &(BDetectorConstruction::GetIt()->getDetector()) );
 
         
         genTree->Branch("gen", &genPars);

@@ -83,7 +83,7 @@ namespace DAQ{
         for(auto& wc : wavecatchers)
             if(wc->getName() == name)    
                 return wc;
-        return new BWaveCatcher("default");
+        return new BWaveCatcher("default", 1);
     }
 
     BWaveCatcher* DAQManager::getWavaCatcherByIndex(int index){
@@ -111,26 +111,21 @@ namespace DAQ{
     }   
 
     void DAQManager::dump(std::ostream& out){
-        for(auto& wc : wavecatchers)
-            out << "WaveCatcher: "
-                <<" name:" << wc->getName();
-
-        out << std::endl;
-
+        out << string(10, '-') <<  " WaveCatchers in use " << string(10, '-') << "\n\n";
         for(auto& wc : wavecatchers){
-            out << "WaveCatcher channels: "
-                <<" name:" << wc->getName() << "(";
+            out <<"\nWaveCatcher " << wc->getID() << " - Name: " << wc->getName() << "\n";
+            out << "OMs Conneceted: \n\t(";
             for(int i=0; i < wc->getConfiguration().NumChannels; i++){
-                out << wc->getOMByChannelID(i).getOMID();
+                out << "ch" + std::to_string(i) << " => " << wc->getOMByChannelID(i).getOMID();
                 if(i == wc->getConfiguration().NumChannels -1){
                     out << ")"; 
                 }  
                 else{
-                    out << ",";
+                    out << ", ";
                 }  
             }
+            out << std::endl;
         }
-        out << std::endl;
     }
 
 

@@ -27,20 +27,24 @@ namespace lactel
     }
     void BSteppingAction::UserSteppingAction(const G4Step* step){
         if( ! BDetectorConstruction::GetIt()->IsRunning()){
+            std::cout << "\r\033[10C" << "Reading step: " << std::endl;
             return;
         }
 
-        // G4VPhysicalVolume* vol = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
-        // auto particle = step->GetTrack()->GetDefinition();
-        // G4StepPoint* point = step->GetPreStepPoint();
-        // std::cout << "\r\033[22C" << "volume: " << vol->GetName() 
-        //                             << " -- particle: " << particle->GetParticleName()
-        //                             << " -- Lstep (mm): " << step->GetStepLength()/mm
-        //                             << " -- Pos: " << step->GetPreStepPoint()->GetPosition()
-        //                             << " -- Mat: " << point->GetMaterial()->GetName()
-        //                             << " -- Proc: " << step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName()
-        //                             << " -- Edep (MeV): " << step->GetTotalEnergyDeposit()/MeV
-        //                             << std::endl;
+        G4VPhysicalVolume* vol = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
+        auto particle = step->GetTrack()->GetDefinition();
+        
+        // if(vol->GetName().rfind("AntaresOM", 0) == 0){
+        //     G4StepPoint* point = step->GetPreStepPoint();
+        //     std::cout << "\r\033[22C" << "volume: " << vol->GetName() 
+        //                                 << " -- particle: " << particle->GetParticleName()
+        //                                 << " -- Lstep (mm): " << step->GetStepLength()/mm
+        //                                 << " -- Pos: " << step->GetPreStepPoint()->GetPosition()
+        //                                 << " -- Mat: " << point->GetMaterial()->GetName()
+        //                                 << " -- Proc: " << step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName()
+        //                                 << " -- Edep (MeV): " << step->GetTotalEnergyDeposit()/MeV
+        //                                 << std::endl;
+        // }
                                     
         // G4VPhysicalVolume* vol = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
         // if (vol->GetName() == "LacWater") {
@@ -217,7 +221,7 @@ namespace lactel
                     // }
                 // }
 
-            fTrack->SetTrackStatus(fStopAndKill); // kill e-
+            fTrack->SetTrackStatus(fStopAndKill); // kill e- detected
 
             fEnergy = info->GetOriginalEnergy ();
 
@@ -231,9 +235,28 @@ namespace lactel
                     G4String volname = touch->GetVolume(ihist)->GetName();
                     if (KM3DetectorConstruction::fOMNames.find(volname) != KM3DetectorConstruction::fOMNames.end()
                         || BDetectorConstruction::fOMIDs.find(volname) != BDetectorConstruction::fOMIDs.end()) {
-                        BAnalysisManager::getIt()->getHit().om_id  = touch->GetCopyNumber(ihist);
-                        BAnalysisManager::getIt()->getHit().om_sid  = (BDetectorConstruction::GetIt()->getItsOM(touch->GetVolume(ihist)))->getOMID();
-                        // std::cout << "\r\033[10C" << "OM: " << om->getOMID() << std::endl;
+
+                        // std::cout << "\r\033[10C" << "hit recieved in om: " <<  << std::endl;
+                        // BDetectorConstruction::GetIt()->getDetector();
+                        OM* om = BDetectorConstruction::GetIt()->getItsOM(touch->GetVolume(ihist));
+                        BLactelDetector det = BDetectorConstruction::GetIt()->getDetector();
+                        BAnalysisManager::getIt()->getHit().om_id  = det.getOMIDByRefID(om->getOMID());
+                        // det.dumpDetectorSummary();
+                        // if(det.getOMIDByRefID(om->getOMID()) == 1 || det.getOMIDByRefID(om->getOMID()) == 2)
+                        //     std::cout << "\r\033[10C" << "hit in om: " << om->getOMID() << " with id: " << det.getOMIDByRefID(om->getOMID()) << std::endl;
+
+                        BAnalysisManager::getIt()->getHit().module  = det.getOMECell(om->getOMID())->getModule();
+                        BAnalysisManager::getIt()->getHit().layer  = det.getOMECell(om->getOMID())->getLayer();
+
+                        // det.dumpDetectorSummary();
+                        // BAnalysisManager::getIt()->getHit().om_sid  = om->getOMID();
+                        // std::cout << "\r\033[10C" << "hit in OM: " << om->getOMID() 
+                        //                             << " - at module : " << det.getOMECell(om->getOMID())->getModule()
+                        //                             << " - which is at layer : " << det.getOMECell(om->getOMID())->getLayer()
+                        //                             << std::endl;
+                        
+                        // if(det == nullptr)
+                        //     std::cout << "\r\033[10C" << "Detector is not there! " << det << std::endl;
                         // std::cout << "\r\033[11C" << "HowMany: " << OM::howMany() << std::endl;
                         // OM::dumpOMs();
                         // std::cout << "\r\033[10C" << "volume name: " << volname << std::endl;
@@ -242,7 +265,7 @@ namespace lactel
                     }
                 }
                 BAnalysisManager::getIt() ->AddDetectedParticule (info, detectedGamma);
-                // BAnalysisManager::getIt() ->AddOMEntranceInfo(step);
+                BAnalysisManager::getIt() ->AddOMEntranceInfo(step);
                 // BAnalysisManager::getIt() -
                 
                 //G4cout << " -------- Detected particle. From KM3SteppingAction::UserSteppingAction" << G4endl;

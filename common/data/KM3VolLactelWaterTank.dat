@@ -12,7 +12,7 @@ OuterCell:
     Z = 1005;
 
     CheckOverlaps = false;
-    SkinMaterial="LactelWaterTankSurf";
+    SkinMaterial="LactelWaterTankOldSurf";
 }
 
 OuterCell1:
@@ -29,7 +29,7 @@ OuterCell1:
     Z = 1005;
 
     CheckOverlaps = false;
-    SkinMaterial="LactelWaterTankSurf";
+    SkinMaterial="LactelWaterTankOldSurf";
 }
 
 InnerCell:
@@ -64,9 +64,9 @@ LacWater:
     CheckOverlaps = false;
 }
 
-IdealWaterVolume1:
+IdealWaterVolumeOld1:
 {
-    Name = "IdealWaterVolume1";
+    Name = "IdealWaterVolumeOld1";
 
     Prefix = "IWV1";
 
@@ -80,9 +80,9 @@ IdealWaterVolume1:
     CheckOverlaps = false;
 }
 
-IdealWaterVolume2:
+IdealWaterVolumeOld2:
 {
-    Name = "IdealWaterVolume2";
+    Name = "IdealWaterVolumeOld2";
 
     Prefix = "IWV2";
 
@@ -96,9 +96,9 @@ IdealWaterVolume2:
     CheckOverlaps = false;
 }
 
-LactelWaterTank1:
+LactelWaterTankOld1:
 {
-    Name= "LactelWaterTank1";
+    Name= "LactelWaterTankOld1";
     Prefix = "LWT1"; # Lactel Weter Tank
     Material = "G4_POLYPROPYLENE";
 
@@ -112,12 +112,12 @@ LactelWaterTank1:
     OperandVolume = "InnerCell";
     
     CheckOverlaps = false;
-    SkinMaterial="LactelWaterTankSurf";
+    SkinMaterial="LactelWaterTankOldSurf";
 }
 
-LactelWaterTank2:
+LactelWaterTankOld2:
 {
-    Name= "LactelWaterTank2";
+    Name= "LactelWaterTankOld2";
     Prefix = "LWT2"; # Lactel Weter Tank
     Material = "G4_POLYPROPYLENE";
 
@@ -131,7 +131,7 @@ LactelWaterTank2:
     OperandVolume = "InnerCell";
 
     CheckOverlaps = false;
-    SkinMaterial="LactelWaterTankSurf";
+    SkinMaterial="LactelWaterTankOldSurf";
 }
 
 

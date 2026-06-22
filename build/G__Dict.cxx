@@ -44,6 +44,7 @@
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEvent.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEventAction.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHardwareManager.hh"
+#include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHeader.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHit.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLactelDetector.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorAction.hh"
@@ -340,7 +341,7 @@ namespace ROOT {
       ::lactel::ElementaryCell *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::lactel::ElementaryCell >(nullptr);
       static ::ROOT::TGenericClassInfo 
-         instance("lactel::ElementaryCell", ::lactel::ElementaryCell::Class_Version(), "BLactelDetector.hh", 40,
+         instance("lactel::ElementaryCell", ::lactel::ElementaryCell::Class_Version(), "BLactelDetector.hh", 43,
                   typeid(::lactel::ElementaryCell), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::lactel::ElementaryCell::Dictionary, isa_proxy, 4,
                   sizeof(::lactel::ElementaryCell) );
@@ -372,7 +373,7 @@ namespace ROOT {
       ::lactel::Module *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::lactel::Module >(nullptr);
       static ::ROOT::TGenericClassInfo 
-         instance("lactel::Module", ::lactel::Module::Class_Version(), "BLactelDetector.hh", 85,
+         instance("lactel::Module", ::lactel::Module::Class_Version(), "BLactelDetector.hh", 92,
                   typeid(::lactel::Module), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::lactel::Module::Dictionary, isa_proxy, 4,
                   sizeof(::lactel::Module) );
@@ -404,7 +405,7 @@ namespace ROOT {
       ::lactel::BLactelDetector *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::lactel::BLactelDetector >(nullptr);
       static ::ROOT::TGenericClassInfo 
-         instance("lactel::BLactelDetector", ::lactel::BLactelDetector::Class_Version(), "BLactelDetector.hh", 135,
+         instance("lactel::BLactelDetector", ::lactel::BLactelDetector::Class_Version(), "BLactelDetector.hh", 144,
                   typeid(::lactel::BLactelDetector), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::lactel::BLactelDetector::Dictionary, isa_proxy, 4,
                   sizeof(::lactel::BLactelDetector) );
@@ -507,6 +508,51 @@ namespace ROOT {
    }
    // Static variable to force the class initialization
    static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const ::lactel::BAnalysisManager::Measure*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
+} // end of namespace ROOT
+
+namespace ROOT {
+   static TClass *lactelcLcLBAnalysisManagercLcLHit_Dictionary();
+   static void lactelcLcLBAnalysisManagercLcLHit_TClassManip(TClass*);
+   static void *new_lactelcLcLBAnalysisManagercLcLHit(void *p = nullptr);
+   static void *newArray_lactelcLcLBAnalysisManagercLcLHit(Long_t size, void *p);
+   static void delete_lactelcLcLBAnalysisManagercLcLHit(void *p);
+   static void deleteArray_lactelcLcLBAnalysisManagercLcLHit(void *p);
+   static void destruct_lactelcLcLBAnalysisManagercLcLHit(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::lactel::BAnalysisManager::Hit*)
+   {
+      ::lactel::BAnalysisManager::Hit *ptr = nullptr;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::lactel::BAnalysisManager::Hit));
+      static ::ROOT::TGenericClassInfo 
+         instance("lactel::BAnalysisManager::Hit", "BAnalysisManager.hh", 189,
+                  typeid(::lactel::BAnalysisManager::Hit), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &lactelcLcLBAnalysisManagercLcLHit_Dictionary, isa_proxy, 4,
+                  sizeof(::lactel::BAnalysisManager::Hit) );
+      instance.SetNew(&new_lactelcLcLBAnalysisManagercLcLHit);
+      instance.SetNewArray(&newArray_lactelcLcLBAnalysisManagercLcLHit);
+      instance.SetDelete(&delete_lactelcLcLBAnalysisManagercLcLHit);
+      instance.SetDeleteArray(&deleteArray_lactelcLcLBAnalysisManagercLcLHit);
+      instance.SetDestructor(&destruct_lactelcLcLBAnalysisManagercLcLHit);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::lactel::BAnalysisManager::Hit*)
+   {
+      return GenerateInitInstanceLocal(static_cast<::lactel::BAnalysisManager::Hit*>(nullptr));
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const ::lactel::BAnalysisManager::Hit*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
+
+   // Dictionary for non-ClassDef classes
+   static TClass *lactelcLcLBAnalysisManagercLcLHit_Dictionary() {
+      TClass* theClass =::ROOT::GenerateInitInstanceLocal(static_cast<const ::lactel::BAnalysisManager::Hit*>(nullptr))->GetClass();
+      lactelcLcLBAnalysisManagercLcLHit_TClassManip(theClass);
+   return theClass;
+   }
+
+   static void lactelcLcLBAnalysisManagercLcLHit_TClassManip(TClass* ){
+   }
+
 } // end of namespace ROOT
 
 //______________________________________________________________________________
@@ -1278,6 +1324,27 @@ namespace ROOT {
 } // end of namespace ROOT for class ::lactel::BAnalysisManager::Measure
 
 namespace ROOT {
+   // Wrappers around operator new
+   static void *new_lactelcLcLBAnalysisManagercLcLHit(void *p) {
+      return  p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) ::lactel::BAnalysisManager::Hit : new ::lactel::BAnalysisManager::Hit;
+   }
+   static void *newArray_lactelcLcLBAnalysisManagercLcLHit(Long_t nElements, void *p) {
+      return p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) ::lactel::BAnalysisManager::Hit[nElements] : new ::lactel::BAnalysisManager::Hit[nElements];
+   }
+   // Wrapper around operator delete
+   static void delete_lactelcLcLBAnalysisManagercLcLHit(void *p) {
+      delete (static_cast<::lactel::BAnalysisManager::Hit*>(p));
+   }
+   static void deleteArray_lactelcLcLBAnalysisManagercLcLHit(void *p) {
+      delete [] (static_cast<::lactel::BAnalysisManager::Hit*>(p));
+   }
+   static void destruct_lactelcLcLBAnalysisManagercLcLHit(void *p) {
+      typedef ::lactel::BAnalysisManager::Hit current_t;
+      (static_cast<current_t*>(p))->~current_t();
+   }
+} // end of namespace ROOT for class ::lactel::BAnalysisManager::Hit
+
+namespace ROOT {
    static TClass *vectorlElactelcLcLModulegR_Dictionary();
    static void vectorlElactelcLcLModulegR_TClassManip(TClass*);
    static void *new_vectorlElactelcLcLModulegR(void *p = nullptr);
@@ -1484,6 +1551,7 @@ namespace {
 "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEvent.hh",
 "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEventAction.hh",
 "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHardwareManager.hh",
+"/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHeader.hh",
 "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHit.hh",
 "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLactelDetector.hh",
 "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorAction.hh",
@@ -1577,6 +1645,7 @@ namespace lactel{class __attribute__((annotate("$clingAutoload$/home/bouta-moham
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEvent.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEventAction.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHardwareManager.hh"
+#include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHeader.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHit.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLactelDetector.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorAction.hh"
@@ -1598,6 +1667,7 @@ namespace lactel{class __attribute__((annotate("$clingAutoload$/home/bouta-moham
 "GeometryGrid<lactel::Module>", payloadCode, "@",
 "GeometryObject", payloadCode, "@",
 "lactel::BAnalysisManager", payloadCode, "@",
+"lactel::BAnalysisManager::Hit", payloadCode, "@",
 "lactel::BAnalysisManager::Measure", payloadCode, "@",
 "lactel::BAnalysisManager::MeasureParameters", payloadCode, "@",
 "lactel::BLactelDetector", payloadCode, "@",

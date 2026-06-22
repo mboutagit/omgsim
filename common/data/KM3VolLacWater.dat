@@ -1,33 +1,33 @@
 # Generated using: BLactelDetector::dump function.                 
-# Date: 2026-05-12 09:58:39
+# Date: 2026-06-03 17:35:47
 # Detector ID: 1
 # Number of Modules: 9
 # Description: 
-# 1----------Module: 63 - Name: 
+# 1----------Module: 1 - Name: 
 #----------1----------cell: 1 - Name: IdealWaterVolume - Position: (0,0,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0321
 #----------2----------cell: 2 - Name: IdealWaterVolume - Position: (0,0,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0304
-# 2----------Module: 64 - Name: 
+# 2----------Module: 2 - Name: 
 #----------3----------cell: 3 - Name: IdealWaterVolume - Position: (0,2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0423
 #----------4----------cell: 4 - Name: IdealWaterVolume - Position: (0,2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS1060
-# 3----------Module: 65 - Name: 
+# 3----------Module: 3 - Name: 
 #----------5----------cell: 5 - Name: IdealWaterVolume - Position: (0,-2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0311
 #----------6----------cell: 6 - Name: IdealWaterVolume - Position: (0,-2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0302
-# 4----------Module: 66 - Name: 
+# 4----------Module: 4 - Name: 
 #----------7----------cell: 7 - Name: IdealWaterVolume - Position: (2500,-2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0648
 #----------8----------cell: 8 - Name: IdealWaterVolume - Position: (2500,-2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0366
-# 5----------Module: 67 - Name: 
+# 5----------Module: 5 - Name: 
 #----------9----------cell: 9 - Name: IdealWaterVolume - Position: (2500,0,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0137
 #----------10----------cell: 10 - Name: IdealWaterVolume - Position: (2500,0,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0298
-# 6----------Module: 68 - Name: 
+# 6----------Module: 6 - Name: 
 #----------11----------cell: 11 - Name: IdealWaterVolume - Position: (2500,2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS1044
 #----------12----------cell: 12 - Name: IdealWaterVolume - Position: (2500,2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0501
-# 7----------Module: 69 - Name: 
+# 7----------Module: 7 - Name: 
 #----------13----------cell: 13 - Name: IdealWaterVolume - Position: (-2500,-2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0358
 #----------14----------cell: 14 - Name: IdealWaterVolume - Position: (-2500,-2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0319
-# 8----------Module: 70 - Name: 
+# 8----------Module: 8 - Name: 
 #----------15----------cell: 15 - Name: IdealWaterVolume - Position: (-2500,0,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0790
 #----------16----------cell: 16 - Name: IdealWaterVolume - Position: (-2500,0,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0293
-# 9----------Module: 62 - Name: 
+# 9----------Module: 9 - Name: 
 #----------17----------cell: 17 - Name: IdealWaterVolume - Position: (-2500,2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0365
 #----------18----------cell: 18 - Name: IdealWaterVolume - Position: (-2500,2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0299
 
@@ -47,7 +47,7 @@ IdealWaterVolume_1:
 }
 LactelWaterTank1:
 {
-	Name= "LactelWaterTank1"
+	Name= "LactelWaterTank1";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -73,7 +73,7 @@ IdealWaterVolume_2:
 }
 LactelWaterTank2:
 {
-	Name= "LactelWaterTank2"
+	Name= "LactelWaterTank2";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -99,7 +99,7 @@ IdealWaterVolume_3:
 }
 LactelWaterTank3:
 {
-	Name= "LactelWaterTank3"
+	Name= "LactelWaterTank3";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -125,7 +125,7 @@ IdealWaterVolume_4:
 }
 LactelWaterTank4:
 {
-	Name= "LactelWaterTank4"
+	Name= "LactelWaterTank4";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -151,7 +151,7 @@ IdealWaterVolume_5:
 }
 LactelWaterTank5:
 {
-	Name= "LactelWaterTank5"
+	Name= "LactelWaterTank5";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -177,7 +177,7 @@ IdealWaterVolume_6:
 }
 LactelWaterTank6:
 {
-	Name= "LactelWaterTank6"
+	Name= "LactelWaterTank6";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -203,7 +203,7 @@ IdealWaterVolume_7:
 }
 LactelWaterTank7:
 {
-	Name= "LactelWaterTank7"
+	Name= "LactelWaterTank7";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -229,7 +229,7 @@ IdealWaterVolume_8:
 }
 LactelWaterTank8:
 {
-	Name= "LactelWaterTank8"
+	Name= "LactelWaterTank8";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -255,7 +255,7 @@ IdealWaterVolume_9:
 }
 LactelWaterTank9:
 {
-	Name= "LactelWaterTank9"
+	Name= "LactelWaterTank9";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -281,7 +281,7 @@ IdealWaterVolume_10:
 }
 LactelWaterTank10:
 {
-	Name= "LactelWaterTank10"
+	Name= "LactelWaterTank10";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -307,7 +307,7 @@ IdealWaterVolume_11:
 }
 LactelWaterTank11:
 {
-	Name= "LactelWaterTank11"
+	Name= "LactelWaterTank11";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -333,7 +333,7 @@ IdealWaterVolume_12:
 }
 LactelWaterTank12:
 {
-	Name= "LactelWaterTank12"
+	Name= "LactelWaterTank12";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -359,7 +359,7 @@ IdealWaterVolume_13:
 }
 LactelWaterTank13:
 {
-	Name= "LactelWaterTank13"
+	Name= "LactelWaterTank13";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -385,7 +385,7 @@ IdealWaterVolume_14:
 }
 LactelWaterTank14:
 {
-	Name= "LactelWaterTank14"
+	Name= "LactelWaterTank14";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -411,7 +411,7 @@ IdealWaterVolume_15:
 }
 LactelWaterTank15:
 {
-	Name= "LactelWaterTank15"
+	Name= "LactelWaterTank15";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -437,7 +437,7 @@ IdealWaterVolume_16:
 }
 LactelWaterTank16:
 {
-	Name= "LactelWaterTank16"
+	Name= "LactelWaterTank16";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -463,7 +463,7 @@ IdealWaterVolume_17:
 }
 LactelWaterTank17:
 {
-	Name= "LactelWaterTank17"
+	Name= "LactelWaterTank17";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 
@@ -489,7 +489,7 @@ IdealWaterVolume_18:
 }
 LactelWaterTank18:
 {
-	Name= "LactelWaterTank18"
+	Name= "LactelWaterTank18";
 	Prefix = "LWT1"; # Lactel Weter Tank 
 	Material = "G4_POLYPROPYLENE"; 
 	VolumeKind = "Box"; 

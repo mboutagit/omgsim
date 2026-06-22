@@ -1,28 +1,22 @@
 #include "BLactelDetector.hh"
 
+
 namespace lactel
 {
-
-    // ClassImp("ElementaryCell");
-    // ClassImp("Module");
-    // ClassImp("BLactelDetector");
-
-    int ElementaryCell::gID=0;
-
-    ElementaryCell::ElementaryCell(): GeometryObject(G4ThreeVector(), G4ThreeVector(2*m, 2*m, 2*m)), id(gID){gID++;}
+    ElementaryCell::ElementaryCell(): GeometryObject(G4ThreeVector(), G4ThreeVector(2*m, 2*m, 2*m)){}
+    ElementaryCell::ElementaryCell(int uid): id(uid), GeometryObject(G4ThreeVector(), G4ThreeVector(2*m, 2*m, 2*m)){}
     ElementaryCell::ElementaryCell(G4ThreeVector pos) : ElementaryCell(){SetPosition(pos);}
     ElementaryCell::ElementaryCell(OM& _om) : ElementaryCell(){om=_om;}
     ElementaryCell::ElementaryCell(OM _om) : ElementaryCell() {om = _om;}
     ElementaryCell::ElementaryCell(G4ThreeVector pos, G4ThreeVector dim): ElementaryCell(pos){SetDimensions(dim);}
     ElementaryCell::ElementaryCell(G4ThreeVector pos, G4ThreeVector dim, OM _om): ElementaryCell(pos, dim){ om = _om;}
+    ElementaryCell::ElementaryCell(int uid, G4ThreeVector pos, G4ThreeVector dim, OM _om, int mdl, int lyr): ElementaryCell(pos, dim){ 
+        id = uid;
+        om = _om;
+        module = mdl;
+        layer = lyr;
+    }
     ElementaryCell::~ElementaryCell(){}
-    // ElementaryCell::ElementaryCell(const ElementaryCell& other){
-    //     *this = other;
-    //     id=gID++;
-    // }
-
-    // ElementaryCell::ElementaryCell(const ElementaryCell& other) : id(other.id) {}
-    // ElementaryCell::ElementaryCell(ElementaryCell&& other) : id(other.id) {}
 
     GeometryObject& ElementaryCell::getTransform(){
         return static_cast<GeometryObject&>(*this);
@@ -55,6 +49,8 @@ namespace lactel
         out << "Cell: "      << id        << " - "
             << "Name: "      << name      << " - "
             << "OM: "        << om        << " - "
+            << "Module: "    << module        << " - "
+            << "Layer: "     << layer        << " - "
             << "position: "  << fPosition<< " - "
             << "dimension: " << fDimensions << " - "
             << std::endl;
@@ -69,26 +65,28 @@ namespace lactel
 
         //Container
         out << "\nVolumeWT" + std::to_string(id) + ": # Water tank volume\n{\n";
-        out << "\tName = \"LactelWaterTank" + std::to_string(id) + "\"\n";
+        out << "\tName = \"LactelWaterTank" + std::to_string(id) + "\";\n";
         out << "\tID   = " + std::to_string(id) + ";\n";
         out << "\tX      = " + std::to_string(fPosition.getX()) + ";\n";
         out << "\tY      = " + std::to_string(fPosition.getY()) + ";\n";
         out << "\tZ      = " + std::to_string(fPosition.getZ()) + "; # in mm\n";
-        out << "\tTheta  = 0; #3.14;\n";
-        out << "\tPhi    = 0.;\n";
-        out << "\tMotherVolume= \"" + volProp.motherVolume + "\";\n";
+        out << "\tModule  = " + std::to_string(module) + "; #Module number;\n";
+        out << "\tLayer  = " + std::to_string(layer) + "; #Layer number;\n";
+        out << "\tTheta  = 0.00; #3.14;\n";
+        out << "\tPhi    = 0.00;\n";
+        out << "\tMotherVolume = \"" + volProp.motherVolume + "\";\n";
         out << "}\n";
 
         // Water
         out << "\nVolumeWInside" + std::to_string(id) + ": # Water inside the water tank\n{\n";
         out << "\tName = \"" + name + "_" + std::to_string(id) + "\";\n";
         out << "\tID   = " + std::to_string(id) + ";\n";
-        out << "\tX      = 0;\n";
-        out << "\tY      = 0;\n";
-        out << "\tZ      = 0; # in mm\n";
-        out << "\tTheta  = 0; #3.14;\n";
-        out << "\tPhi    = 0.;\n";
-        out << "\tMotherVolume= \"LactelWaterTank" + std::to_string(id) + "\"\n";
+        out << "\tX      = 0.00;\n";
+        out << "\tY      = 0.00;\n";
+        out << "\tZ      = 0.00; # in mm\n";
+        out << "\tTheta  = 0.00; #3.14;\n";
+        out << "\tPhi    = 0.00;\n";
+        out << "\tMotherVolume = \"LactelWaterTank" + std::to_string(id) + "\";\n";
         out << "}\n";
         
         // OM
@@ -99,9 +97,9 @@ namespace lactel
         out << "\tX      = " + std::to_string(getOM().getPosition().getX()) + ";\n";
         out << "\tY      = " + std::to_string(getOM().getPosition().getX()) + ";\n";
         out << "\tZ      = " + std::to_string(getOM().getPosition().getX()) + "; # in mm\n";
-        out << "\tTheta  = 0.; #3.14;\n";
-        out << "\tPhi    = 0.;\n";
-        out << "\tMotherVolume=\"" + name + "_" + std::to_string(id) + "\";\n";
+        out << "\tTheta  = 0.00; #3.14;\n";
+        out << "\tPhi    = 0.00;\n";
+        out << "\tMotherVolume =\"" + name + "_" + std::to_string(id) + "\";\n";
         out << "}\n";
     }
 
@@ -112,18 +110,18 @@ namespace lactel
     void ElementaryCell::dumpMaterial(ostream& out){
 
         out <<  name + "_" + std::to_string(id) + ":\n{\n";
-        out << "\t Name = \"" + name + "_" + std::to_string(id) + "\";\n";
-        out << "\t Prefix = \"IWV\";\n";
-        out << "\t Material = \"IdealWater\";\n";
-        out << "\t VolumeKind = \"Box\";\n";
-        out << "\t X = 1000; // Half dim 2X2X2 m \n";
-        out << "\t Y = 1000;\n";
-        out << "\t Z = 1000;\n";
-        out << "\t CheckOverlaps = false;\n";
+        out << "\tName = \"" + name + "_" + std::to_string(id) + "\";\n";
+        out << "\tPrefix = \"IWV\";\n";
+        out << "\tMaterial = \"IdealWater\";\n";
+        out << "\tVolumeKind = \"Box\";\n";
+        out << "\tX = 1000; // Half dim 2X2X2 m \n";
+        out << "\tY = 1000;\n";
+        out << "\tZ = 1000;\n";
+        out << "\tCheckOverlaps = false;\n";
         out << "}\n";
 
         out << "LactelWaterTank" + std::to_string(id) + ":\n{\n";
-        out << "\tName= \"LactelWaterTank" + std::to_string(id) + "\"\n";
+        out << "\tName= \"LactelWaterTank" + std::to_string(id) + "\";\n";
         out << "\tPrefix = \"LWT1\"; # Lactel Weter Tank \n";
         out << "\tMaterial = \"G4_POLYPROPYLENE\"; \n";
         out << "\tVolumeKind = \"Box\"; \n";
@@ -132,11 +130,11 @@ namespace lactel
         out << "\tZ = 1005; \n";
         out << "\tRotTheta = 0; \n";
         out << "\tRotPhi = 0; \n";
-        out << "\t CheckOverlaps = true;\n";
+        out << "\tCheckOverlaps = true;\n";
         // out << "\tRefVolume = \"OuterCell\"; \n";
         // out << "\tOperandVolume = \"InnerCell\"; \n";
         // out << "\tCheckOverlaps = false; \n";
-        out << "\tSkinMaterial= \"LactelWaterTankSurf\"; \n";
+        out << "\tSkinMaterial = \"LactelWaterTankSurf\"; \n";
         out << "}\n\n";
     }
 
@@ -185,16 +183,22 @@ namespace lactel
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    int Module::gID=0;
 
-    Module::Module(): id(gID), GeometryObject(G4ThreeVector(0, 0, 0), G4ThreeVector(2*m, 2*m, 4.5*m)), GeometryGrid(1, 1, 2, G4ThreeVector(0, 0, VInterCellDistance)){
+    Module::Module(): GeometryObject(G4ThreeVector(0, 0, 0), G4ThreeVector(2*m, 2*m, 4.5*m)), GeometryGrid(1, 1, 2, G4ThreeVector(0, 0, VInterCellDistance)){
         updateGeometry();
-        gID++;
     };
+
+    Module::Module(int uid): id(uid), GeometryObject(G4ThreeVector(0, 0, 0), G4ThreeVector(2*m, 2*m, 4.5*m)), GeometryGrid(1, 1, 2, G4ThreeVector(0, 0, VInterCellDistance)) {}
 
     Module::Module(std::vector<ElementaryCell> cells){
         addObjects(cells);
     }
+
+    Module::Module(int uid, std::vector<ElementaryCell> cells){
+        id = uid;
+        addObjects(cells);
+    }
+
     Module::Module(std::vector<ElementaryCell> cells, G4ThreeVector spacing){
         addObjects(cells);
         SetSpacing(spacing);
@@ -212,7 +216,6 @@ namespace lactel
 
     Module::Module(const Module& other){
         *this = other;
-        id = gID++;
     }
 
     void Module::reset(){
@@ -332,6 +335,11 @@ namespace lactel
             addECell(axis);
         updateGeometry();
     }
+
+    void Module::setID(int uid){
+        id = uid;
+    }
+
 
     void Module::updatePosition(){
         G4ThreeVector pcum;
@@ -533,7 +541,7 @@ namespace lactel
     void BLactelDetector::dump(std::ostream& out){
 
         out << "\n# Main volume (detector name): " + getName() + "\n";
-        out << "Name: \"" << getName() << "\"\n\n" << std::endl;
+        out << "Name= \"" << getName() << "\";\n\n" << std::endl;
 
         out << "VolumeDet" + std::to_string(id) + ":\n{\n";
         out << "\t Name = \"" + name + "\";\n";
@@ -552,6 +560,20 @@ namespace lactel
     }
 
     void BLactelDetector::dumpMaterial(std::ostream& out){
+
+        out << "# Main Volume: Detector\n\n";
+        out <<  name + ":\n{\n";
+        out << "\tName = \"" + name + "\";\n";
+        out << "\tPrefix = \"MainVol\";\n";
+        out << "\tMaterial = \"IdealWater\";\n";
+        out << "\tVolumeKind = \"Box\";\n";
+        out << "\tX = 1.0; // Half dim 2X2X2 m \n";
+        out << "\tY = 1.0;\n";
+        out << "\tZ = 1.0;\n";
+        out << "\tCheckOverlaps = false;\n";
+        out << "}\n";
+
+
         out << "# Module and Cells Materials\n\n";
         for(auto mod : GetObjects())
             mod.dumpCellsMaterial(out);
@@ -563,6 +585,7 @@ namespace lactel
         int m=1, c=1; // counters
         out << "# Generated using: BLactelDetector::dump function. \
                 \n# Date: " <<  std::put_time(std::localtime(&t), "%Y-%m-%d %H:%M:%S")                
+                << "\n# Detector Name: " << name
                 << "\n# Detector ID: " << id
                 << "\n# Number of Modules: " << GetObjects().size()
                 << "\n# Description: \n";
@@ -588,6 +611,8 @@ namespace lactel
         std::ofstream detFile(detFileName, std::ios::out);
         std::ofstream matFile(matFileName, std::ios::out);
 
+        updateCellsMotherVolume();
+
         if(printSummary){
             dumpDetectorSummary(detFile);
             dumpDetectorSummary(matFile);
@@ -605,11 +630,11 @@ namespace lactel
         detFile.close();
         matFile.close();
 
-        TFile file((getName() + ".root").c_str(), "recreate");
-        TTree tree(getName().data(), "detector file");
-        tree.SetBranchAddress("detector", this);
-        tree.Write();
-        file.Close();
+        // TFile file((getName() + ".root").c_str(), "recreate");
+        // TTree tree(getName().data(), "detector file");
+        // tree.SetBranchAddress("detector", this);
+        // tree.Write();
+        // file.Close();
     }
 
     void BLactelDetector::construct() {
@@ -623,8 +648,7 @@ namespace lactel
     void BLactelDetector::updateDimension(){
         GetGridDimensions();
     }
-
-    void BLactelDetector::drawModules(Option_t* options, bool drawModules, bool drawCells){
+    void BLactelDetector::drawModules(Option_t* options, bool drawMod, bool drawCells){
         
         TPave* DetPave = new TPave(GetPosition().getX() - GetDimensions().getX()/2.,
                                     GetPosition().getY() - GetDimensions().getY()/2.,
@@ -637,21 +661,159 @@ namespace lactel
         DetPave->SetFillColorAlpha(5, 0.4);
         DetPave->Draw(options);
 
-        if(drawModules)
+        if(drawMod)
             for(auto& mod : GetObjects())
                     mod.draw("same", drawCells);
-        if(! drawModules && drawCells)
+        if(! drawMod && drawCells)
             for(auto& mod : GetObjects())
                 for(auto& cell : mod.GetObjects())
                         cell.draw("same");
     }
 
-    const int BLactelDetector::getNCells(){
+    TGraph* BLactelDetector::drawMZ(){
+        TGraph* gr = new TGraph();
+        int nc = 0;
+        for(auto& m : GetObjects()){
+            for(auto& cell : m.GetObjects()){
+                gr->SetPoint(nc, m.getID(), cell.getLayer());
+                nc++;
+            }
+        }
+        gr->SetTitle(
+                        ("Detector: " + name + 
+                            "; Module; Layer").data()
+                    );
+        return gr;
+    }
+
+    
+    /**
+     * @brief returns number of modules in this detector
+     * @see @class Module
+     * @example int nModules = detector.getNModules();
+     */
+    int BLactelDetector::getNModules() const {
+        return GetObjects().size();
+    }
+
+    /**
+     * @brief returns the number of cells used in that detector regardless the number of modules.
+     */
+    int BLactelDetector::getNCells() const {
         int nCells = 0;
         for(auto& module : GetObjects())
             for(auto& cell : module.GetObjects())
                 nCells++;
         return nCells;
+    }
+
+
+    /**
+     * @brief returns the OM of a given id 
+     * @param oid, the OM identifier in the detector int not string
+     */
+    OM* BLactelDetector::getOMByID(int oid) const{
+
+    }
+
+    int BLactelDetector::getOMIDByRefID(std::string ref){
+        for(auto& om : getListOfOMs())
+            if(om->om_id == ref)
+                return om->id;
+        return -99;
+    }
+
+    /**
+     * @brief return a vector of cell that are in this detector
+     */
+    std::vector<ElementaryCell*> BLactelDetector::getListOfECells(){
+        std::vector<ElementaryCell*> cells;
+        for(auto& m : getListOfModules())
+            for(auto& c : m->GetObjects())
+                cells.push_back(&c);
+        return cells;
+    }
+
+    void BLactelDetector::printListOfECells(std::ostream& out){
+        for(auto& c : getListOfECells())
+            c->print(out);
+    }
+
+    std::vector<Module*> BLactelDetector::getListOfModules(){
+        std::vector<Module*> modules;
+        for(auto& m : GetObjects())
+            modules.push_back(&m);
+        return modules;
+    }
+
+    void BLactelDetector::printListOfModules(std::ostream& out){
+        for(auto& m : GetObjects())
+            m.print(out);
+    }
+
+    std::vector<OM*> BLactelDetector::getListOfOMs(){
+        std::vector<OM*> OMs;
+        for(auto& c : getListOfECells())
+            OMs.push_back(&c->getOM());
+        return OMs;
+    }
+
+    void BLactelDetector::printListOfOMs(std::ostream& out){
+        for(auto& c : getListOfECells())
+            c->getOM().dump(out);
+    }
+
+    ElementaryCell* BLactelDetector::getOMECell(OM& om){
+        for(auto& c : getListOfECells()){
+            if(c->getOM() == om)
+                return c;
+        }
+        return nullptr;
+    }
+
+    ElementaryCell* BLactelDetector::getOMECell(std::string om_id){
+        for(auto& c : getListOfECells()){
+            if(c->getOM().getOMID() == om_id)
+                return c;
+        }
+        return nullptr;
+    }
+
+    /**
+     * @brief get the Elementary cell Correspoding to a given OM id
+     * @param oid: OM id 
+     * @return ElementaryCell*
+     * @see BLactelDetector
+     */
+    ElementaryCell* BLactelDetector::getOMECell(int oid){
+        for(auto& c : getListOfECells()){
+            // std::cout << "\r\033[10C" << "checking cell: " << c->getID() 
+            //                             << " - with OM: " << c->getOM().getOMID() 
+            //                             << " - with OM iid: " << c->getOM().getID() 
+            //                             << std::endl;
+            if(c->getOM().getID() == oid)
+                return c;
+        }
+        return nullptr;
+    }
+
+
+    Module* BLactelDetector::getOMModule(OM& om){
+        for(auto& m : getListOfModules()){
+            for(auto& c : getListOfECells())
+                if(c->getOM() == om)
+                    return m;
+        }
+        return nullptr;
+    }
+
+    Module* BLactelDetector::getOMModule(std::string om_id){
+        for(auto& m : getListOfModules()){
+            for(auto& c : getListOfECells())
+                if(c->getOM().getOMID() == om_id)
+                    return m;
+        }
+        return nullptr;
     }
 
     void BLactelDetector::updateGeometry(){
@@ -746,132 +908,132 @@ namespace lactel
             }
     }
 
-    /**
-     * @brief Read a detector from a detector file
-     * @param fileName the name of file to read from.
-     */
-    void BLactelDetector::read(std::string fileName){
+    // /**
+    //  * @brief Read a detector from a detector file
+    //  * @param fileName the name of file to read from.
+    //  */
+    // void BLactelDetector::read(std::string fileName){
 
-        struct dirent *de=NULL;
-        DIR *d=NULL;
-        d=opendir(filesPath.data ());
-        if(d == NULL)
-        {
-            cerr << "Couldn't open directory" << filesPath << endl;
-            return;
-        }
+    //     struct dirent *de=NULL;
+    //     DIR *d=NULL;
+    //     d=opendir(filesPath.data ());
+    //     if(d == NULL)
+    //     {
+    //         cerr << "Couldn't open directory" << filesPath << endl;
+    //         return;
+    //     }
 
-        libconfig::Config cfg;
-        cfg.setAutoConvert (true);
+    //     libconfig::Config cfg;
+    //     cfg.setAutoConvert (true);
 
-        try {
-                cfg.readFile(fileName.c_str());
-            }
-            catch(const FileIOException &e) {
-                std::cerr << "BLactelDetector::read: I/O error while reading the file" << "\n";
-                return;
-            }
-            catch(const ParseException &e) {
-                std::cerr << "BLactelDetector::read: Parse error at " << e.getFile()
-                        << ":" << e.getLine() << " - " << e.getError() << "\n";
-                return;
-            }
+    //     try {
+    //             cfg.readFile(fileName.c_str());
+    //         }
+    //         catch(const FileIOException &e) {
+    //             std::cerr << "BLactelDetector::read: I/O error while reading the file" << "\n";
+    //             return;
+    //         }
+    //         catch(const ParseException &e) {
+    //             std::cerr << "BLactelDetector::read: Parse error at " << e.getFile()
+    //                     << ":" << e.getLine() << " - " << e.getError() << "\n";
+    //             return;
+    //         }
 
-        try {
-            // Access values
+    //     try {
+    //         // Access values
 
-            // std::string detPattern="VolumeDet";
-            // std::string Module="Volume";
-            // std::string Cell="VolumeEC";
+    //         // std::string detPattern="VolumeDet";
+    //         // std::string Module="Volume";
+    //         // std::string Cell="VolumeEC";
 
-            // libconfig::Setting det;
-            // libconfig::Setting& Cell();
-            // libconfig::Setting& Module();
+    //         // libconfig::Setting det;
+    //         // libconfig::Setting& Cell();
+    //         // libconfig::Setting& Module();
 
-            libconfig::Setting& rootStg=cfg.getRoot();
+    //         libconfig::Setting& rootStg=cfg.getRoot();
 
-            std::string detfName = rootStg.lookup("Config.detectorFile");
-            std::string matfName = rootStg.lookup("Config.materialFile");
+    //         std::string detfName = rootStg.lookup("Config.detectorFile");
+    //         std::string matfName = rootStg.lookup("Config.materialFile");
 
-            if(detfName == "" || matfName == ""){
-                BLogger::getInstance()->log(BLogger::Level::ERROR, "BLactelDetector::read: Could not find configuration.");
-                return;
-            }
-            else{
-                BLogger::getInstance()->log(BLogger::Level::INFO, 
-                    "BLactelDetector::read: config found: \n\tDetector file name: " + detfName + \
-                        "\n\tMaterial file name: " + matfName  + "\n"
-                );
-            }
+    //         if(detfName == "" || matfName == ""){
+    //             BLogger::getInstance()->log(BLogger::Level::ERROR, "BLactelDetector::read: Could not find configuration.");
+    //             return;
+    //         }
+    //         else{
+    //             BLogger::getInstance()->log(BLogger::Level::INFO, 
+    //                 "BLactelDetector::read: config found: \n\tDetector file name: " + detfName + \
+    //                     "\n\tMaterial file name: " + matfName  + "\n"
+    //             );
+    //         }
 
-            libconfig::Config cfgMat;
-            std::string matFilePath = matfName;
-            cfgMat.readFile(matFilePath.data());   
-            libconfig::Setting& matRootStg=cfgMat.getRoot();          
+    //         libconfig::Config cfgMat;
+    //         std::string matFilePath = matfName;
+    //         cfgMat.readFile(matFilePath.data());   
+    //         libconfig::Setting& matRootStg=cfgMat.getRoot();          
 
 
-            std::string DetName;
+    //         std::string DetName;
 
-            if (!rootStg.lookupValue ("Name", DetName)){
-                BLogger::getInstance()->log(BLogger::Level::ERROR, "Could not find detector name");
-                return;
-            }
-            else{
-                BLogger::getInstance()->log(BLogger::Level::INFO, "Detector name found: " + DetName);
-            }
+    //         if (!rootStg.lookupValue ("Name", DetName)){
+    //             BLogger::getInstance()->log(BLogger::Level::ERROR, "Could not find detector name");
+    //             return;
+    //         }
+    //         else{
+    //             BLogger::getInstance()->log(BLogger::Level::INFO, "Detector name found: " + DetName);
+    //         }
 
-            read(cfg, cfgMat);
+    //         read(cfg, cfgMat);
 
-            // int configFileSize=rootStg.getLength ();
-            // for (int cfIt=0; cfIt < configFileSize; cfIt++)
-            // {
-            //     if (! rootStg[cfIt].isGroup ())
-            //         continue;
+    //         // int configFileSize=rootStg.getLength ();
+    //         // for (int cfIt=0; cfIt < configFileSize; cfIt++)
+    //         // {
+    //         //     if (! rootStg[cfIt].isGroup ())
+    //         //         continue;
  
-            //     string currentName=rootStg[cfIt].getName ();
-            //     libconfig::Setting& currentSetting = cfg.lookup(currentName);
+    //         //     string currentName=rootStg[cfIt].getName ();
+    //         //     libconfig::Setting& currentSetting = cfg.lookup(currentName);
                 
-            //     std::vector<OM> oms;
-            //     std::vector<ElementaryCell> cells;
+    //         //     std::vector<OM> oms;
+    //         //     std::vector<ElementaryCell> cells;
 
-            //     // read detector informations
-            //     if (currentName.find("VolumeDet") != string::npos){
-            //         // std::cout << "\r\033[10C" << "Det Volume found: " << currentName << std::endl;
-            //         currentSetting.lookupValue("Name", name);
-            //         // currentSetting.lookupValue("ID", id); // this should be auto
-            //         float x, y, z, t, p;
-            //         currentSetting.lookupValue("X", x);
-            //         currentSetting.lookupValue("Y", y);
-            //         currentSetting.lookupValue("Z", z);
-            //         currentSetting.lookupValue("Theta", t);
-            //         currentSetting.lookupValue("Phi", p);
-            //         SetPosition(G4ThreeVector(x, y, z));
-            //     }
+    //         //     // read detector informations
+    //         //     if (currentName.find("VolumeDet") != string::npos){
+    //         //         // std::cout << "\r\033[10C" << "Det Volume found: " << currentName << std::endl;
+    //         //         currentSetting.lookupValue("Name", name);
+    //         //         // currentSetting.lookupValue("ID", id); // this should be auto
+    //         //         float x, y, z, t, p;
+    //         //         currentSetting.lookupValue("X", x);
+    //         //         currentSetting.lookupValue("Y", y);
+    //         //         currentSetting.lookupValue("Z", z);
+    //         //         currentSetting.lookupValue("Theta", t);
+    //         //         currentSetting.lookupValue("Phi", p);
+    //         //         SetPosition(G4ThreeVector(x, y, z));
+    //         //     }
 
-            //     // read water tanks (ECells) information
-            //     else if (currentName.find("VolumeWT") != string::npos){
-            //         // std::cout << "\r\033[10C" << "Cell found: " << currentName << std::endl;
-            //         cells.push_back(readECell(currentSetting, cfgMat));
-            //     }
+    //         //     // read water tanks (ECells) information
+    //         //     else if (currentName.find("VolumeWT") != string::npos){
+    //         //         // std::cout << "\r\033[10C" << "Cell found: " << currentName << std::endl;
+    //         //         cells.push_back(readECell(currentSetting, cfgMat));
+    //         //     }
 
-            //     // read OMs information
-            //     else if (currentName.find("OM") != string::npos){
-            //         // currentSetting.lookupValue("Name", name);
-            //         // currentSetting.lookupValue("ID", id);
-            //         // float x, y, z, t, p;
-            //         // currentSetting.lookupValue("X", x);
-            //         // currentSetting.lookupValue("Y", y);
-            //         // currentSetting.lookupValue("Z", z);
-            //         // currentSetting.lookupValue("Theta", t);
-            //         // currentSetting.lookupValue("Phi", p);
-            //         // SetPosition(G4ThreeVector(x, y, z));
-            //     }    
-            // }
-        }
-        catch(const SettingNotFoundException &e) {
-            std::cerr << "Missing setting: " << e.getPath() << "\n";
-        }
-    }
+    //         //     // read OMs information
+    //         //     else if (currentName.find("OM") != string::npos){
+    //         //         // currentSetting.lookupValue("Name", name);
+    //         //         // currentSetting.lookupValue("ID", id);
+    //         //         // float x, y, z, t, p;
+    //         //         // currentSetting.lookupValue("X", x);
+    //         //         // currentSetting.lookupValue("Y", y);
+    //         //         // currentSetting.lookupValue("Z", z);
+    //         //         // currentSetting.lookupValue("Theta", t);
+    //         //         // currentSetting.lookupValue("Phi", p);
+    //         //         // SetPosition(G4ThreeVector(x, y, z));
+    //         //     }    
+    //         // }
+    //     }
+    //     catch(const SettingNotFoundException &e) {
+    //         std::cerr << "Missing setting: " << e.getPath() << "\n";
+    //     }
+    // }
 
     OM BLactelDetector::readOM(libconfig::Setting& set){
         
@@ -1101,5 +1263,378 @@ namespace lactel
     //                 module.drawCells();
     //         }
     // }
+
+
+    //======================================================
+    // Read one libconfig group into VolumeInfo
+    //======================================================
+    BLactelDetector::VolumeInfo BLactelDetector::ReadVolume(const libconfig::Setting& s)
+    {
+        BLactelDetector::VolumeInfo v;
+
+        v.groupName = s.getName();
+
+        if(s.exists("Name"))
+            v.name = (const char*)s["Name"];
+
+        if(s.exists("ID"))
+            v.id = s["ID"];
+
+        if(s.exists("X"))
+            v.x = s["X"];
+
+        if(s.exists("Y"))
+            v.y = s["Y"];
+
+        if(s.exists("Z"))
+            v.z = s["Z"];
+
+        if(s.exists("Theta"))
+            v.theta = s["Theta"];
+
+        if(s.exists("Phi"))
+            v.phi = s["Phi"];
+
+        if(s.exists("MotherVolume"))
+            v.motherVolume = (const char*)s["MotherVolume"];
+
+        if(s.exists("om_id"))
+            v.om_id = (const char*)s["om_id"];
+
+        return v;
+    }  
+
+    //======================================================
+    // Print volume info
+    //======================================================
+    void BLactelDetector::PrintVolume(const BLactelDetector::VolumeInfo& v)
+    {
+        cout << "----------------------------------" << endl;
+        cout << "Group Name     : " << v.groupName << endl;
+        cout << "Name           : " << v.name << endl;
+        cout << "ID             : " << v.id << endl;
+        cout << "Position       : (" << v.x << ", "
+                                    << v.y << ", "
+                                    << v.z << ")" << endl;
+
+        cout << "Theta          : " << v.theta << endl;
+        cout << "Phi            : " << v.phi << endl;
+
+        cout << "MotherVolume   : " << v.motherVolume << endl;
+
+        if(!v.om_id.empty())
+            cout << "OM ID          : " << v.om_id << endl;
+    }
+
+    //======================================================
+    // Find a group whose Name == volumeName
+    //======================================================
+    const libconfig::Setting* BLactelDetector::FindVolumeByName(const libconfig::Config& cfg,
+                                    const std::string& volumeName)
+    {
+        const libconfig::Setting& root = cfg.getRoot();
+
+        for(int i = 0; i < root.getLength(); ++i)
+        {
+            const libconfig::Setting& s = root[i];
+
+            if(s.getType() != libconfig::Setting::TypeGroup)
+                continue;
+
+            if(!s.exists("Name"))
+                continue;
+
+            std::string name = (const char*)s["Name"];
+            if(name == volumeName)
+                return &s;
+        }
+
+        return nullptr;
+    }
+
+    //======================================================
+    // Main function requested
+    //======================================================
+    void BLactelDetector::ReadOMHierarchy(const std::string& detectorFile)
+    {
+        libconfig::Config cfg;
+
+        try
+        {
+            cfg.readFile(detectorFile.c_str());
+        }
+        catch(const FileIOException& e)
+        {
+            cerr << "File I/O error" << endl;
+            return;
+        }
+        catch(const ParseException& e)
+        {
+            cerr << "Parse error at "
+                << e.getFile() << ":"
+                << e.getLine()
+                << " - " << e.getError()
+                << endl;
+
+            return;
+        }
+
+        const libconfig::Setting& root = cfg.getRoot();
+
+        //--------------------------------------------------
+        // Read detector name
+        //--------------------------------------------------
+        std::string detectorName;
+
+        if(root.exists("Name"))
+            detectorName = (const char*)root["Name"];
+
+        cout << "Detector Name = " << detectorName << endl;
+
+
+        //--------------------------------------------------
+        // Loop over all groups
+        //--------------------------------------------------
+        for(int i = 0; i < root.getLength(); ++i)
+        {
+            const libconfig::Setting& group = root[i];
+
+            if(group.getType() != libconfig::Setting::TypeGroup)
+                continue;
+
+            std::string groupName = group.getName();
+
+            //--------------------------------------------------
+            // Keep only groups containing "OM"
+            //--------------------------------------------------
+            if(groupName.find("OM") == std::string::npos)
+                continue;
+
+            cout << endl;
+            cout << "==================================" << endl;
+            cout << "Processing OM group: "
+                << groupName << endl;
+
+            //--------------------------------------------------
+            // Read OM
+            //--------------------------------------------------
+            BLactelDetector::VolumeInfo current = ReadVolume(group);
+
+            PrintVolume(current);
+
+            //--------------------------------------------------
+            // Walk through mother volumes
+            //--------------------------------------------------
+            std::string mother = current.motherVolume;
+
+            while(true)
+            {
+                //--------------------------------------------------
+                // Stop condition
+                //--------------------------------------------------
+                if(mother == detectorName)
+                {
+                    cout << endl;
+                    cout << "Reached detector volume: "
+                        << detectorName << endl;
+
+                    break;
+                }
+                
+                //--------------------------------------------------
+                // Find mother volume group
+                //--------------------------------------------------
+                const libconfig::Setting* motherGroup = FindVolumeByName(cfg, mother);
+
+                if(!motherGroup)
+                {
+                    cout << "Cannot find volume with Name = "
+                        << mother << endl;
+
+                    break;
+                }
+      
+                //--------------------------------------------------
+                // Read mother volume
+                //--------------------------------------------------
+                BLactelDetector::VolumeInfo motherVolume =
+                    ReadVolume(*motherGroup);
+
+                PrintVolume(motherVolume);
+
+                //--------------------------------------------------
+                // Continue climbing hierarchy
+                //--------------------------------------------------
+                mother = motherVolume.motherVolume;
+            }
+        }
+    }
+
+    //======================================================
+    // Read a detector from file
+    //======================================================
+
+    /**
+     * Routine to read a detector from a file.
+     * @brief read a BLactelDetector from a file
+     * @param detFile is the name of the file containing the detector description in a specefic format (libcinfig style)
+     */
+
+    void BLactelDetector::read(std::string detFile) {
+        libconfig::Config cfg;
+        libconfig::Config cfgMat; // materila conf
+
+        fObjects.clear();
+
+        std::vector<ElementaryCell> cells;
+        try{
+            cfg.readFile(detFile.c_str());
+        }
+        catch(const FileIOException& e){
+            cerr << "File I/O error" << endl;
+            return;
+        }
+        catch(const ParseException& e){
+            cerr << "Parse error at "
+                << e.getFile() << ":"
+                << e.getLine()
+                << " - " << e.getError()
+                << endl;
+
+            return;
+        }
+
+        const libconfig::Setting& root = cfg.getRoot();
+
+        std::string detectorName;
+
+        if(root.exists("Name"))
+            detectorName = (const char*)root["Name"];
+
+        cout << "Reading detector " << detectorName << "..." << endl;
+
+        
+
+        
+        if(root.exists("Config")){
+            const libconfig::Setting& conf = cfg.lookup("Config");
+            if(conf.getType() == libconfig::Setting::TypeGroup){
+                std::string materialFile = conf["materialFile"];
+                BLogger::getInstance()->log(BLogger::Level::INFO, "BLactelDetector::read(): material file Found: " + materialFile);
+                try{
+                    cfgMat.readFile(materialFile.c_str());
+                }
+                catch(const FileIOException& e){
+                    cerr << "File I/O error" << endl;
+                    return;
+                }
+                catch(const ParseException& e){
+                    cerr << "Parse error at "
+                        << e.getFile() << ":"
+                        << e.getLine()
+                        << " - " << e.getError()
+                        << endl;
+
+                    return;
+                }
+            }                
+            else{
+                std::cout << "\r\033[10C" << "Issue occured while reading materialFile" << std::endl;
+                return;
+            }
+        }
+        else{
+            std::cout << "\r\033[10C" << "Issue when looking for Config group" << std::endl;
+            return;
+        }
+
+
+
+        for(int i = 0; i < root.getLength(); ++i)
+        {
+            const libconfig::Setting& group = root[i];
+
+            if(group.getType() != libconfig::Setting::TypeGroup)
+                continue;
+
+            std::string groupName = group.getName();
+
+            if(groupName.find("OM") == std::string::npos)
+                continue;
+
+            BLactelDetector::VolumeInfo current = ReadVolume(group);
+            std::string mother = current.motherVolume;
+
+            while(true)
+            {
+                //--------------------------------------------------
+                // Stop condition
+                //--------------------------------------------------
+                const libconfig::Setting* motherGroup;
+                if(mother == detectorName)
+                {
+                    std::string lastMVName = motherGroup->lookup("Name");
+                    cout << endl;
+                    cout << "Reached detector volume: "
+                        << detectorName 
+                        << " Looking for : " << lastMVName
+                        << endl;
+
+                    if(cfgMat.exists(lastMVName)){
+                        const libconfig::Setting& matVolume = cfgMat.lookup(lastMVName);
+                        if(matVolume.getType() == libconfig::Setting::TypeGroup){
+                            G4ThreeVector pos((float)motherGroup->lookup("X"),
+                                                (float)motherGroup->lookup("Y"),
+                                                (float)motherGroup->lookup("Z")
+                                            );
+                            G4ThreeVector dim(static_cast<float>((int)matVolume["X"]),
+                                                static_cast<float>((int)matVolume["Y"]),
+                                                static_cast<float>((int)matVolume["Z"])
+                                            );
+                            OM om = OM((string) group["om_id"]);
+                            int module = (int)motherGroup->lookup("Module");
+                            int layer = (int)motherGroup->lookup("Layer");
+                            int id = (int)motherGroup->lookup("ID");
+                            om.setID(id);
+                            cells.push_back(ElementaryCell(id, pos, dim, om, module, layer));
+                        }
+                    }
+
+                    break;
+                }
+
+                motherGroup = FindVolumeByName(cfg, mother);
+
+                if(!motherGroup)
+                {
+                    cout << "Cannot find volume with Name = "
+                        << mother << endl;
+
+                    break;
+                }
+
+                BLactelDetector::VolumeInfo motherVolume =
+                    ReadVolume(*motherGroup);
+                mother = motherVolume.motherVolume;
+            }
+        }
+
+        setName(detectorName);
+        SetPosition(G4ThreeVector()); // set position at center
+
+        std::map<int, std::vector<ElementaryCell>> modulesMap;
+        for(auto& cell : cells){
+            modulesMap[cell.getModule()].push_back(cell);
+        }
+        
+        for(auto& module : modulesMap){
+            Module mod;
+            for(auto& cell : module.second){
+                mod.setID(cell.getModule());
+                mod.addObject(cell);
+            } 
+            addObject(mod);   
+        }
+    }
 
 } // namespace lactel

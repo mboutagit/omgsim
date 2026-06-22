@@ -1432,6 +1432,9 @@ CMakeFiles/OMGsim.dir/programs/OMGsim.cxx.o: \
  /home/bouta-mohammed/root/root_install/include/TBox.h \
  /home/bouta-mohammed/root/root_install/include/TPave.h \
  /home/bouta-mohammed/root/root_install/include/TBox.h \
+ /home/bouta-mohammed/root/root_install/include/TCanvas.h \
+ /home/bouta-mohammed/root/root_install/include/TPad.h \
+ /home/bouta-mohammed/root/root_install/include/TAttCanvas.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BVolumesManager.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PassiveVolumeMgr.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhotoTubeMgr.hh \

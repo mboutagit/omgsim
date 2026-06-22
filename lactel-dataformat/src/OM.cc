@@ -15,12 +15,12 @@ namespace lactel
     int OM::nInstance = 0;
     ConnectionInfos OM::con = ConnectionInfos("/home/bouta-mohammed/work/cppm/lactel/omTesting/include/config.ini");
 
-    OM::OM(): isOK (false), om_id("OMS0000"){
-        id = nInstance;
-        nInstance++;
-        om_ids.insert(om_id);
-        instances.insert(this);
-    } // default OM ref isOK should be false
+    // OM::OM(): isOK (false), om_id("OMS0000"){
+    //     id = nInstance;
+    //     nInstance++;
+    //     om_ids.insert(om_id);
+    //     instances.insert(this);
+    // } // default OM ref isOK should be false
 
     OM::OM(std::string id) : isOK(true), om_id(id){
         if(om_ids.count(id)){
@@ -34,9 +34,7 @@ namespace lactel
         instances.insert(this);
     }
 
-    // OM(OM& om){
-    //     om_id = om.om_id;
-    // }
+    OM::OM(){}
 
     OM::~OM(){
         om_ids.erase(this->om_id);
@@ -45,6 +43,10 @@ namespace lactel
 
     std::string OM::getOMID() const {
         return om_id;
+    }
+
+    int OM::getID() const {
+        return id;
     }
 
 

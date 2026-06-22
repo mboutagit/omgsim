@@ -22,7 +22,7 @@ namespace lactel
     double BEventAction::globalTime = 0. *ns;
 
     void BEventAction::BeginOfEventAction(const G4Event* anEvent){
-
+        // std::cout << "\r\033[10C" << "Start Event: " << anEvent->GetEventID() << std::endl;
         // Total muon rate hitting your generation surface
         G4double muonRate = 500. * hertz;  // <-- YOUR computed rate
         G4double dt = -std::log(G4UniformRand()) / muonRate;

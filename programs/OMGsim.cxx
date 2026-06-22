@@ -76,6 +76,8 @@
 #include "G4VisExecutive.hh"
 #endif
 
+#include "G4VisExecutive.hh"
+
 using namespace std;
 using namespace km3net;
 using namespace utils;
@@ -286,7 +288,7 @@ int main(int argc_,char** argv_)
     }
     else { 
       // interactive mode
-      visManager = new G4VisExecutive;
+      visManager = new G4VisExecutive();
       visManager->SetVerboseLevel(0); 
       visManager->Initialize();
 

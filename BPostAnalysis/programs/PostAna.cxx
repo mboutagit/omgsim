@@ -34,11 +34,11 @@ int main(int argc, char* argv[]){
     TTree* runTree = (TTree*)file->Get("Run");
     TTree* detEvtTree = (TTree*)file->Get("DetectedEvent");
 
-    BAnalysisManager::GenerationParameters* gps = nullptr;
-    BAnalysisManager::DetectedEvent* evt = nullptr;
-    PhotonProduction* pp;
-    Hit* hit;
-    BAnalysisManager::Run* run;
+    // BAnalysisManager::GenerationParameters* gps = nullptr;
+    // BAnalysisManager::DetectedEvent* evt = nullptr;
+    // PhotonProduction* pp;
+    // Hit* hit;
+    // BAnalysisManager::Run* run;
 
     // genTree->SetBranchAddress("gen", &gps);
     // hitTree->SetBranchAddress("Hit", &hit);

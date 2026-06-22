@@ -12,6 +12,7 @@
 #include "G4OpticalSurface.hh"
 #include "G4LogicalBorderSurface.hh"
 #include "KM3Material.hh"
+#include "BLogger.hh"
 
 
 
@@ -87,7 +88,7 @@ namespace lactel
 
     BDetectorConstruction::BDetectorConstruction(){
         detectorMessenger = new BDetectorMessenger(this);
-
+        
         std::cout << "\r\033[30C" << "OMPostion: " << getOMPosition() << std::endl;
         DefineOpticalProperties();
         std::cout << "\r\033[30C" << "---- Construct the Det" << std::endl;        
@@ -556,7 +557,6 @@ namespace lactel
         for(auto& module : detector.GetObjects()){
             for(auto& cell : module.GetObjects()){
 
-                
                 libconfig::Config cfg1;
                 libconfig::Setting& root1 = cfg1.getRoot();
                 libconfig::Config cfg2;
@@ -700,59 +700,29 @@ namespace lactel
     G4VPhysicalVolume* BDetectorConstruction::Construct ()
     {
 
-        std::cout << "\r\033[10C" << "Try to write ...." << std::endl;
-        ElementaryCell cell;
-        Module module(1, 1, 2, G4ThreeVector(0*cm, 0*cm, 50*cm));
-        module.BuildGrid(cell);
-        BLactelDetector detector(3, 3, 1, G4ThreeVector(50*cm, 50*cm, 0*cm));
-        detector.setName("LacWaterDEtector"); //
-        detector.BuildGrid(module);
-        detector.setCellsRefVolName("WaterVolumeInWaterTank"); // 
 
-        ReadThisConfiguration(detector);
+        // libconfig::Config conf;
+        // conf.readFile("/home/bouta-mohammed/work/cppm/lactel/trunk/common/data/KM3DetLacWater.dat");
 
-        Module mod( {   ElementaryCell(G4ThreeVector(0, 0, -1*m), G4ThreeVector(2*m, 3*m, 2*m), OM("OMS0321")), 
-                        ElementaryCell(G4ThreeVector(0, 2*m, -1*m), G4ThreeVector(2*m, 3*m, 2*m), OM("OMS0402"))
-                    }
-                );
-        mod.BuildGrid(1, 1, 2);
-        mod.print(std::cout, 1);
-        std::cout << "\r\033[10C" << "Trying to constarct detector: " << fDetectorTypeName << std::endl;
+        // BLactelDetector det;
+        // det.ReadOMHierarchy("/home/bouta-mohammed/work/cppm/lactel/trunk/common/data/KM3DetLacWater.dat");
 
-        BLactelDetector det({   Module({    ElementaryCell(G4ThreeVector(0, 0, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0321")), 
-                                            ElementaryCell(G4ThreeVector(0, 0*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0304"))
-                                     }),
-                                Module({    ElementaryCell(G4ThreeVector(0, 2.5*m, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0423")), 
-                                            ElementaryCell(G4ThreeVector(0, 2.5*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS1060"))
-                                     }),
-                                Module({    ElementaryCell(G4ThreeVector(0, -2.5*m, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0311")), 
-                                            ElementaryCell(G4ThreeVector(0, -2.5*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0302"))
-                                     }),
-                                Module({    ElementaryCell(G4ThreeVector(2.5*m, 2.5*m, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0648")), 
-                                            ElementaryCell(G4ThreeVector(2.5*m, 2.5*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0366"))
-                                     }),
-                                Module({    ElementaryCell(G4ThreeVector(2.5*m, -2.5*m, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0137")), 
-                                            ElementaryCell(G4ThreeVector(2.5*m, -2.5*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0298"))
-                                     }),
-                                Module({    ElementaryCell(G4ThreeVector(2.5*m, 2.5*m, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS1044")), 
-                                            ElementaryCell(G4ThreeVector(2.5*m, 2.5*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0501"))
-                                     }),
-                                Module({    ElementaryCell(G4ThreeVector(-2.5*m, -2.5*m, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0358")), 
-                                            ElementaryCell(G4ThreeVector(-2.5*m, -2.5*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0319"))
-                                     }),
-                                Module({    ElementaryCell(G4ThreeVector(-2.5*m, 2.5*m, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0790")), 
-                                            ElementaryCell(G4ThreeVector(-2.5*m, 2.5*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0293"))
-                                     }),
-                                Module({    ElementaryCell(G4ThreeVector(-2.5*m, -2.5*m, -1.5*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0365")), 
-                                            ElementaryCell(G4ThreeVector(-2.5*m, -2.5*m, -3*m), G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0299"))
-                                     })  
-                            },
-                            G4ThreeVector(50*cm, 50*cm, 50*cm)
-                        );
-        det.print(std::cout, 1, 1);
+        // BLactelDetector detector;
+        // detector.read("/home/bouta-mohammed/work/cppm/lactel/trunk/common/data/KM3DetLacWater.dat");
 
-        for(auto& vol : fParametersDict)
-            std::cout << "Parameter name: " << vol.first << "\n";
+        // detector.dump();
+        // for(auto& om : detector.getListOfOMs()){
+        //     om->dump();
+        //     ElementaryCell* cell = detector.getOMECell(om->getOMID());
+        //     std::cout << "\r\033[10C" << "Cell layer: " << cell->getLayer() 
+        //                                 << " - Cell module: " << cell->getModule() 
+        //                                 << std::endl;
+        // }
+
+        // // libconfig::setting
+        // det.readAVolume<ElementaryCell> (det);
+
+
 
         G4double z = 1.;  // Atomic number (Hydrogen)
         G4double a = 1.01 * g/mole;  // Atomic mass
@@ -812,12 +782,15 @@ namespace lactel
 
         targetRot->set (FOrientationPhi, FOrientationTheta, FOrientationPsi);
 
+        BLogger::getInstance()->log(BLogger::Level::INFO, "Constructing " + fDetectorTypeName + " ...");
+
         int waterTankID=0;
         for (auto& VolPar: fVolumeList [fDetectorTypeName])
         { 
             G4VPhysicalVolume* pv = PlaceThem (KM3PassiveVolumeMgr::GetIt (), VolPar);
             fPlacedVolumeDict[VolPar.Name] = pv;
             volumesMap.insert({VolPar.Name, {pv, VolPar}});
+            BLogger::getInstance()->log(BLogger::Level::INFO, "Volume " + VolPar.Name + " placed.");
             // if(fPlacedVolumeDict[VolPar.Name]->GetName().rfind("OuterCell", 0) == 0){
             //     // fPlacedVolumeDict[VolPar.Name]->SetName("OLC");
             // }
@@ -842,6 +815,7 @@ namespace lactel
         for (auto& PMPar: fPMList [fDetectorTypeName])
         {
             PlaceThem ( KM3PhotoTubeMgr::GetIt (), PMPar);
+            BLogger::getInstance()->log(BLogger::Level::INFO, "PM " + PMPar.Name + " placed.");
             pmID++;
         }
 
@@ -851,8 +825,10 @@ namespace lactel
             // ->SetName("OM"+std::to_string(omID));
             fOMNames.insert(OMPar.Name.data());
             fOMIDs.insert(OMPar.om_id.data());
-            fOMPhysicalVolumes.insert({new OM(OMPar.om_id.data()), PlaceThem ( KM3OpticalModuleMgr::GetIt (), OMPar)});
-
+            OM* om = new OM(OMPar.om_id.data());
+            om->setID(OMPar.ID);
+            fOMPhysicalVolumes.insert({om, PlaceThem ( KM3OpticalModuleMgr::GetIt (), OMPar)});
+            BLogger::getInstance()->log(BLogger::Level::INFO, "OM " + OMPar.Name + " placed.");
             omID++;
         }
 
@@ -860,7 +836,7 @@ namespace lactel
         G4RotationMatrix* rotZtoUp = new G4RotationMatrix();
         rotZtoUp->rotateX(90 * deg);  // Rotate 90 degrees about the X-axis
 
-        cout << "\r\033[20C" << "detector constructed .." << endl;
+        BLogger::getInstance()->log(BLogger::Level::INFO, "Detector constructed ...");
         // return physiWorld;
 
 
@@ -873,6 +849,7 @@ namespace lactel
         //BPrimaryGeneratorAction::getInstance()->genArea = (2*gen_half_length) * (2*gen_half_length); // generation area in mm2
         BPrimaryGeneratorAction::getInstance()->genArea = AGen;
         //recalculate the 
+    
         dynamic_cast<G4Box*> (solidWorld)->SetXHalfLength(gen_half_length);
         dynamic_cast<G4Box*> (solidWorld)->SetYHalfLength(gen_half_length);
         dynamic_cast<G4Box*> (solidWorld)->SetZHalfLength(5*m);
@@ -899,9 +876,9 @@ namespace lactel
 
         float maxX=0, maxY=0, maxZ=0;
         for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){      
-            if(pv->GetName().rfind("LacWater", 0) == 0){
-                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetXHalfLength(gen_half_length);
-                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetYHalfLength(gen_half_length);
+            if(pv->GetName().rfind("LACTEL", 0) == 0 || pv->GetName().rfind("LacWater", 0) == 0){
+                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetXHalfLength(genSurfSize.getY());
+                dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetYHalfLength(genSurfSize.getY());
                 dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(2.5*m);
                 pv->GetLogicalVolume()->SetVisAttributes(lw);
 
@@ -958,6 +935,27 @@ namespace lactel
 
         // for(auto& oms : fOMList)
         //     std::cout << "\r\033[50C" << "OM: " << oms.first  << " name: " << oms.second.at(0).Name << std::endl;
+
+        std::cout << "\r\033[10C" << "detector name: " << fDetectorTypeName << std::endl;
+        std::string detFilePath=(string(PROJECT_SOURCE_DIR)+"/common/data/");
+        std::string detFileName="KM3Det" + fDetectorTypeName + ".dat";
+        std::string fullDetFilePath=detFilePath + "/" + detFileName;
+        std::cout << "\r\033[10C" << "looking for the file name in : " << (string(PROJECT_SOURCE_DIR)+"/common/data/") << std::endl;
+        if(fs::exists(fullDetFilePath)){
+            std::cout << "\r\033[10C" << "det File found: " << fullDetFilePath << std::endl;
+            detector.read(fullDetFilePath);
+            // detector.PrintSummary();
+            // detector.dumpDetectorSummary();
+        } 
+        else
+            std::cout << "\r\033[10C" << "Could not find detfile: " << fullDetFilePath << std::endl;
+
+
+        // for(auto& omPhyVol : fOMPhysicalVolumes){
+        //     std::cout << "\r\033[10C" << "PV: " << omPhyVol.second->GetName() 
+        //                                 << " => OM: " << omPhyVol.first->getID() << " = " << omPhyVol.first->getOMID()
+        //              mm                   << std::endl;
+        // }
 
         return physiWorld;
     }
@@ -1024,6 +1022,17 @@ namespace lactel
         // Attach it to air
         air->SetMaterialPropertiesTable(airMPT);
     }
+
+    void BDetectorConstruction::ReadConfiguration (string ConfigFile) // reads KM3Det*.dat file base infos
+    {
+        // BLogger::getInstance()->log(BLogger::Level::INFO, "Reading detector from: " + ConfigFile);
+        std::cout << "\r\033[10C" << "Calling ReadConf from BDet" << std::endl;
+        if(ConfigFile.find(fDetectorTypeName))
+            BLogger::getInstance()->log(BLogger::Level::INFO, "Reading detector from: " + ConfigFile);
+
+        KM3DetectorConstruction::ReadConfiguration(ConfigFile);
+    }
+
 
 } // namespace lactel
 

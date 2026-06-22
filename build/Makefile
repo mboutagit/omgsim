@@ -195,6 +195,19 @@ PostAna/fast:
 .PHONY : PostAna/fast
 
 #=============================================================================
+# Target rules for targets named WaveCatcher
+
+# Build rule for target.
+WaveCatcher: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 WaveCatcher
+.PHONY : WaveCatcher
+
+# fast build rule for target.
+WaveCatcher/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaveCatcher.dir/build.make CMakeFiles/WaveCatcher.dir/build
+.PHONY : WaveCatcher/fast
+
+#=============================================================================
 # Target rules for targets named OMGsim
 
 # Build rule for target.
@@ -1767,6 +1780,30 @@ tools/Geometry/src/GeometryObject.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/Geometry/src/GeometryObject.cc.s
 .PHONY : tools/Geometry/src/GeometryObject.cc.s
 
+tools/programs/WaveCatcher.o: tools/programs/WaveCatcher.cxx.o
+.PHONY : tools/programs/WaveCatcher.o
+
+# target to build an object file
+tools/programs/WaveCatcher.cxx.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaveCatcher.dir/build.make CMakeFiles/WaveCatcher.dir/tools/programs/WaveCatcher.cxx.o
+.PHONY : tools/programs/WaveCatcher.cxx.o
+
+tools/programs/WaveCatcher.i: tools/programs/WaveCatcher.cxx.i
+.PHONY : tools/programs/WaveCatcher.i
+
+# target to preprocess a source file
+tools/programs/WaveCatcher.cxx.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaveCatcher.dir/build.make CMakeFiles/WaveCatcher.dir/tools/programs/WaveCatcher.cxx.i
+.PHONY : tools/programs/WaveCatcher.cxx.i
+
+tools/programs/WaveCatcher.s: tools/programs/WaveCatcher.cxx.s
+.PHONY : tools/programs/WaveCatcher.s
+
+# target to generate assembly for a file
+tools/programs/WaveCatcher.cxx.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaveCatcher.dir/build.make CMakeFiles/WaveCatcher.dir/tools/programs/WaveCatcher.cxx.s
+.PHONY : tools/programs/WaveCatcher.cxx.s
+
 tools/src/BWaveCatcher.o: tools/src/BWaveCatcher.cc.o
 .PHONY : tools/src/BWaveCatcher.o
 
@@ -1901,6 +1938,7 @@ help:
 	@echo "... BRateBuilder"
 	@echo "... OMGsim"
 	@echo "... PostAna"
+	@echo "... WaveCatcher"
 	@echo "... libOMG"
 	@echo "... AA/src/AAAnalysisManager.o"
 	@echo "... AA/src/AAAnalysisManager.i"
@@ -2097,6 +2135,9 @@ help:
 	@echo "... tools/Geometry/src/GeometryObject.o"
 	@echo "... tools/Geometry/src/GeometryObject.i"
 	@echo "... tools/Geometry/src/GeometryObject.s"
+	@echo "... tools/programs/WaveCatcher.o"
+	@echo "... tools/programs/WaveCatcher.i"
+	@echo "... tools/programs/WaveCatcher.s"
 	@echo "... tools/src/BWaveCatcher.o"
 	@echo "... tools/src/BWaveCatcher.i"
 	@echo "... tools/src/BWaveCatcher.s"

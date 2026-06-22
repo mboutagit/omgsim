@@ -142,6 +142,7 @@ namespace lactel
 
     void BPrimaryGeneratorAction::GeneratePrimaries(G4Event* event){
         if(fGunType == 3){
+            // std::cout << "\r\033[10C" << "Generating .." << std::endl;
             particle_name ="muons";
             init(BPrimaryGeneratorAction::gen_mode::GEANT4);
             ((G4ParticleGun*)particleGun)->GeneratePrimaryVertex(event);
@@ -151,25 +152,6 @@ namespace lactel
             // std::cout << "\r\033[10C" << "\033[1;35mInfo: Using costum particle gun. \033[0m" << std::endl;
             
              G4ParticleGun* gun = new G4ParticleGun(1);
-
-            // // Define the optical photon
-            // G4ParticleDefinition* photon = G4OpticalPhoton::Definition();
-            // gun->SetParticleDefinition(photon);
-
-            // // ---- Laser-like properties ----
-            // gun->SetParticleEnergy(3.5 * eV);               // ~620 nm (red laser)
-            // gun->SetParticlePosition(G4ThreeVector(0., 0., 0.)); // source position
-            // gun->SetParticleMomentumDirection(G4ThreeVector((0.01 + 0.01 * G4UniformRand()), 
-            //                                                     (0.01 + 0.02 * G4UniformRand()),
-            //                                                      -(0.9 + 0.1 * G4UniformRand()))); // +z direction (collimated)
-
-            // // Set linear polarization (unit vector orthogonal to momentum)
-            // G4ThreeVector pol(1., 0., 0.); // polarization along x-axis
-            // gun->SetParticlePolarization(pol);
-
-            // // Generate the event
-            // gun->GeneratePrimaryVertex(event);
-            // ((G4ParticleGun*)particleGun)->GeneratePrimaryVertex(event);
 
             G4ThreeVector hemisphereCenter(0., 0., -650.*mm);  // center position in world coordinates
             G4double R = 0.5 * m;                           // radius of hemisphere
@@ -346,7 +328,7 @@ namespace lactel
 
     void BPrimaryGeneratorAction::init(const gen_mode gen){
         if(particle_name == ""){
-            throw "ParametrizedGenerator::init: Particle name is not set.";
+            // std::cout << "ParametrizedGenerator::init: Particle name is not set.\n";
             return;
         }
 
@@ -377,9 +359,12 @@ namespace lactel
 
             double ctmin = -1;     // rad (pi/2)
             double ctmax = 0;     // rad (0)
+           
+            double Thetamin = 0;     // deg (0)
+            double Thetamax = TMath::Pi()/2.;     // deg (0)
 
             G4ThreeVector direction;
-            G4double energy;
+            double energy;
 
             if(genParsMode == GenParsMode::cos2){
                 direction = GenerateMuonDirection("down-going_cos2");
@@ -393,15 +378,33 @@ namespace lactel
                 energy = EGen;
                 direction = FixedThetaDirection(thetaGen);
             }
-                
-            TF2 generator = Jurgen::getFluxFunction(Emin, Emax, ctmin, ctmax);
-            double cost;
-            generator.GetRandom2(energy, cost);
+
+            TF2 genFunc = Jurgen::getFluxFunction(Emin, Emax, ctmin, ctmax);
+            TF2* generator = &genFunc;
+            // TF2* generator = new TF2("modFlux2D", 
+            //                     [](double* x, double* pars){
+            //                         return 
+            //                         lactel::BPrimaryGeneratorAction::ModifiedFormula2D(x, pars);
+            //                     },
+            //                     Emin, Emax, Thetamin, Thetamax
+            //                 );
+            double cost, theta;
+            // generator->GetRandom2(energy, theta);
+            generator->GetRandom2(energy, cost);
+            theta = acos(cost);
             energy=energy*GeV;
-            direction=FixedThetaDirection(acos(cost));
+            direction=FixedThetaDirection(theta);
+
+            // std::cout << "\r\033[10C" << "Generated: " << particle_name << " - energy: " << energy << std::endl;
             
-            // if(direction.getZ() > 0)
-            //     direction.setZ(- direction.getZ());
+            if(direction.getZ() > 0)
+                direction.setZ(- direction.getZ());
+
+            // std::cout << "\r\033[10C" << "E (GeV)" << energy << 
+            //                                 " -- theta in rad: " << cos(theta) << 
+            //                                 " -- direction: " << direction <<
+            //                                 " -- theta: " << acos(direction.getZ()) 
+            //                                 << std::endl;
 
             G4ThreeVector polarization(G4UniformRand(), G4UniformRand(), 0.0); 
             ((G4ParticleGun*)particleGun)->SetParticlePolarization(polarization);
@@ -416,6 +419,7 @@ namespace lactel
             ((G4ParticleGun*)particleGun)->SetParticlePosition(surfPoints);
             ((G4ParticleGun*)particleGun)->SetParticleEnergy(energy);
             ((G4ParticleGun*)particleGun)->SetParticleMomentumDirection(direction); // Toward the ground  
+            
             if(DAQ::DAQManager::getIt()->isActive())    
                 ((G4ParticleGun*)particleGun)->SetParticleTime(BEventAction::GetGlobalTime());
   
@@ -764,6 +768,33 @@ namespace lactel
 
         double E_mu = energy[0];   // Muon energy (GeV)
         double theta = par[0]*deg; // Zenith angle (radians)
+        double cosTheta = cos(theta);
+        double cosThetaStar = std::sqrt( (cosTheta*cosTheta + P1*P1 + P2*pow(cosTheta, P3) + P4*pow(cosTheta, P5))/(1+P1*P1+P2+P4) );
+        double flux = norm * pow(E_mu * (1 + 3.64/(E_mu*pow(cosThetaStar, 1.29))), gamma) *
+                    ( 1.0 / (1 + 1.1*(E_mu * cosThetaStar / epsilon_pi)) +
+                        0.054 / (1 + 1.1*(E_mu * cosThetaStar / epsilon_K)) );
+        return flux;
+    }
+
+
+    double BPrimaryGeneratorAction::ModifiedFormula2D(double *x, double *pars) 
+    {
+    // cout << "\r\033[5C" << "---- BPrimaryGeneratorAction::MuonFlux: " << energy[0] << " - " << par[0] << " - " << par[1] << endl;
+        const double epsilon_pi = 115.0; 
+        const double epsilon_K  = 850.0; 
+        const double H = 6.3; // in km   // Atmospheric scale height
+
+        double  P1 = 0.102573,
+                P2 = -0.068287,
+                P3 = 0.958633,
+                P4 = 0.0407253,
+                P5 = 0.817285;
+        
+        const double norm = 0.14; 
+        const double gamma = -2.7;       
+
+        double E_mu = x[0];   // Muon energy (GeV)
+        double theta = x[1] * deg; // Zenith angle (radians)
         double cosTheta = cos(theta);
         double cosThetaStar = std::sqrt( (cosTheta*cosTheta + P1*P1 + P2*pow(cosTheta, P3) + P4*pow(cosTheta, P5))/(1+P1*P1+P2+P4) );
         double flux = norm * pow(E_mu * (1 + 3.64/(E_mu*pow(cosThetaStar, 1.29))), gamma) *

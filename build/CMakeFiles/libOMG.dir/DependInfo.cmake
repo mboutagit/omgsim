@@ -17,6 +17,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEvent.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEventAction.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHardwareManager.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
+  "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHeader.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHit.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLactelDetector.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"
   "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorAction.hh" "/home/bouta-mohammed/work/cppm/lactel/trunk/build/G__Dict.cxx"

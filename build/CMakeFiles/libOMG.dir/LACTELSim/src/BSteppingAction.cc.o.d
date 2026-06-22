@@ -1464,6 +1464,10 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BSteppingAction.cc.o: \
  /home/bouta-mohammed/root/root_install/include/TBox.h \
  /home/bouta-mohammed/root/root_install/include/TPave.h \
  /home/bouta-mohammed/root/root_install/include/TBox.h \
+ /home/bouta-mohammed/root/root_install/include/TCanvas.h \
+ /home/bouta-mohammed/root/root_install/include/TPad.h \
+ /home/bouta-mohammed/root/root_install/include/TAttCanvas.h \
+ /home/bouta-mohammed/root/root_install/include/TGraph.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BVolumesManager.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PassiveVolumeMgr.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhotoTubeMgr.hh \
@@ -1484,7 +1488,6 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BSteppingAction.cc.o: \
  /home/bouta-mohammed/root/root_install/include/TH2.h \
  /home/bouta-mohammed/root/root_install/include/TH3F.h \
  /home/bouta-mohammed/root/root_install/include/TH3.h \
- /home/bouta-mohammed/root/root_install/include/TGraph.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BAnalysisManager.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/AA/include/AAAnalysisManager.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4Run.hh \

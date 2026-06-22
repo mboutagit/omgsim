@@ -15,6 +15,7 @@ class GeometryGrid<lactel::ElementaryCell>
 class GeometryGrid<lactel::Module>
 class GeometryObject
 class lactel::BAnalysisManager
+class lactel::BAnalysisManager::Hit
 class lactel::BAnalysisManager::Measure
 class lactel::BAnalysisManager::MeasureParameters
 class lactel::BLactelDetector

@@ -1253,6 +1253,9 @@ CMakeFiles/libOMG.dir/G__Dict.cxx.o: \
  /home/bouta-mohammed/root/root_install/include/TBox.h \
  /home/bouta-mohammed/root/root_install/include/TPave.h \
  /home/bouta-mohammed/root/root_install/include/TBox.h \
+ /home/bouta-mohammed/root/root_install/include/TCanvas.h \
+ /home/bouta-mohammed/root/root_install/include/TPad.h \
+ /home/bouta-mohammed/root/root_install/include/TAttCanvas.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BVolumesManager.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PassiveVolumeMgr.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhotoTubeMgr.hh \
@@ -1569,13 +1572,10 @@ CMakeFiles/libOMG.dir/G__Dict.cxx.o: \
  /usr/include/c++/13/bits/random.tcc /usr/include/c++/13/numeric \
  /usr/include/c++/13/bits/stl_numeric.h \
  /usr/include/c++/13/pstl/glue_numeric_defs.h \
- /home/bouta-mohammed/root/root_install/include/TCanvas.h \
- /home/bouta-mohammed/root/root_install/include/TPad.h \
- /home/bouta-mohammed/root/root_install/include/TAttCanvas.h \
  /home/bouta-mohammed/root/root_install/include/TH1F.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BAnalysisManager.hh \
- /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHit.hh \
- /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLactelDetector.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHeader.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetectorConstruction.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorAction.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PrimaryGeneratorAction.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4VUserPrimaryGeneratorAction.hh \
@@ -1590,14 +1590,15 @@ CMakeFiles/libOMG.dir/G__Dict.cxx.o: \
  /home/bouta-mohammed/root/root_install/include/TH2.h \
  /home/bouta-mohammed/root/root_install/include/TH3F.h \
  /home/bouta-mohammed/root/root_install/include/TH3.h \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHit.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLactelDetector.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorAction.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorMessenger.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4UIcmdWithAnInteger.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3RunMessenger.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunAction.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3RunAction.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4UserRunAction.hh \
- /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorAction.hh \
- /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetectorConstruction.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunManager.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4RunManager.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4RunManagerKernel.hh \

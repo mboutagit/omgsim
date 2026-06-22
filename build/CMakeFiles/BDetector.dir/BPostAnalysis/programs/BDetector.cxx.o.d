@@ -976,6 +976,10 @@ CMakeFiles/BDetector.dir/BPostAnalysis/programs/BDetector.cxx.o: \
  /home/bouta-mohammed/root/root_install/include/TBox.h \
  /home/bouta-mohammed/root/root_install/include/TPave.h \
  /home/bouta-mohammed/root/root_install/include/TBox.h \
+ /home/bouta-mohammed/root/root_install/include/TCanvas.h \
+ /home/bouta-mohammed/root/root_install/include/TPad.h \
+ /home/bouta-mohammed/root/root_install/include/TAttCanvas.h \
+ /home/bouta-mohammed/root/root_install/include/TGraph.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BVolumesManager.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3ParametrizedVolume.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4Types.hh \
@@ -994,9 +998,6 @@ CMakeFiles/BDetector.dir/BPostAnalysis/programs/BDetector.cxx.o: \
  /usr/include/x86_64-linux-gnu/bits/dirent_ext.h \
  /home/bouta-mohammed/root/root_install/include/TApplication.h \
  /home/bouta-mohammed/root/root_install/include/TApplicationImp.h \
- /home/bouta-mohammed/root/root_install/include/TCanvas.h \
- /home/bouta-mohammed/root/root_install/include/TPad.h \
- /home/bouta-mohammed/root/root_install/include/TAttCanvas.h \
  /home/bouta-mohammed/root/root_install/include/TGeoManager.h \
  /usr/include/c++/13/thread /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/bits/this_thread_sleep.h \
@@ -1360,5 +1361,4 @@ CMakeFiles/BDetector.dir/BPostAnalysis/programs/BDetector.cxx.o: \
  /home/bouta-mohammed/root/root_install/include/TH2F.h \
  /home/bouta-mohammed/root/root_install/include/TH2.h \
  /home/bouta-mohammed/root/root_install/include/TH3F.h \
- /home/bouta-mohammed/root/root_install/include/TH3.h \
- /home/bouta-mohammed/root/root_install/include/TGraph.h
+ /home/bouta-mohammed/root/root_install/include/TH3.h

@@ -4407,6 +4407,8 @@ G4GDMLParser.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/G4GDMLParser.hh
 BLactelDetector.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLactelDetector.hh
+BDetector.hh
+/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetector.hh
 
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetectorMessenger.hh
 KM3DetectorMessenger.hh
@@ -4465,6 +4467,12 @@ OM.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/OM.hh
 BWaveCatcher.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BWaveCatcher.hh
+
+/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHeader.hh
+BDetectorConstruction.hh
+/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetectorConstruction.hh
+BPrimaryGeneratorAction.hh
+/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorAction.hh
 
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHit.hh
 G4VHit.hh

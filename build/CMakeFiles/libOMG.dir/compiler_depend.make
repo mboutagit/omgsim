@@ -3432,6 +3432,7 @@ CMakeFiles/libOMG.dir/G__Dict.cxx.o: G__Dict.cxx \
   /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEvent.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEventAction.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHardwareManager.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHeader.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHit.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLactelDetector.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorAction.hh \
@@ -7672,6 +7673,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BDetectorConstruction.cc.o: /home/bouta-moha
   /home/bouta-mohammed/root/root_install/include/TAtt3D.h \
   /home/bouta-mohammed/root/root_install/include/TAttAxis.h \
   /home/bouta-mohammed/root/root_install/include/TAttBBox2D.h \
+  /home/bouta-mohammed/root/root_install/include/TAttCanvas.h \
   /home/bouta-mohammed/root/root_install/include/TAttFill.h \
   /home/bouta-mohammed/root/root_install/include/TAttLine.h \
   /home/bouta-mohammed/root/root_install/include/TAttMarker.h \
@@ -7682,6 +7684,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BDetectorConstruction.cc.o: /home/bouta-moha
   /home/bouta-mohammed/root/root_install/include/TBranch.h \
   /home/bouta-mohammed/root/root_install/include/TBranchCacheInfo.h \
   /home/bouta-mohammed/root/root_install/include/TBuffer.h \
+  /home/bouta-mohammed/root/root_install/include/TCanvas.h \
   /home/bouta-mohammed/root/root_install/include/TClass.h \
   /home/bouta-mohammed/root/root_install/include/TCollection.h \
   /home/bouta-mohammed/root/root_install/include/TColor.h \
@@ -9126,6 +9129,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BDetectorMessenger.cc.o: /home/bouta-mohamme
   /home/bouta-mohammed/root/root_install/include/TAtt3D.h \
   /home/bouta-mohammed/root/root_install/include/TAttAxis.h \
   /home/bouta-mohammed/root/root_install/include/TAttBBox2D.h \
+  /home/bouta-mohammed/root/root_install/include/TAttCanvas.h \
   /home/bouta-mohammed/root/root_install/include/TAttFill.h \
   /home/bouta-mohammed/root/root_install/include/TAttLine.h \
   /home/bouta-mohammed/root/root_install/include/TAttMarker.h \
@@ -9136,6 +9140,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BDetectorMessenger.cc.o: /home/bouta-mohamme
   /home/bouta-mohammed/root/root_install/include/TBranch.h \
   /home/bouta-mohammed/root/root_install/include/TBranchCacheInfo.h \
   /home/bouta-mohammed/root/root_install/include/TBuffer.h \
+  /home/bouta-mohammed/root/root_install/include/TCanvas.h \
   /home/bouta-mohammed/root/root_install/include/TClass.h \
   /home/bouta-mohammed/root/root_install/include/TCollection.h \
   /home/bouta-mohammed/root/root_install/include/TColor.h \
@@ -9147,6 +9152,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BDetectorMessenger.cc.o: /home/bouta-mohamme
   /home/bouta-mohammed/root/root_install/include/TFile.h \
   /home/bouta-mohammed/root/root_install/include/TFitResultPtr.h \
   /home/bouta-mohammed/root/root_install/include/TGenericClassInfo.h \
+  /home/bouta-mohammed/root/root_install/include/TGraph.h \
   /home/bouta-mohammed/root/root_install/include/TH1.h \
   /home/bouta-mohammed/root/root_install/include/TH2.h \
   /home/bouta-mohammed/root/root_install/include/TH3.h \
@@ -14658,6 +14664,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BLactelDetector.cc.o: /home/bouta-mohammed/w
   /home/bouta-mohammed/root/root_install/include/TAtt3D.h \
   /home/bouta-mohammed/root/root_install/include/TAttAxis.h \
   /home/bouta-mohammed/root/root_install/include/TAttBBox2D.h \
+  /home/bouta-mohammed/root/root_install/include/TAttCanvas.h \
   /home/bouta-mohammed/root/root_install/include/TAttFill.h \
   /home/bouta-mohammed/root/root_install/include/TAttLine.h \
   /home/bouta-mohammed/root/root_install/include/TAttMarker.h \
@@ -14668,6 +14675,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BLactelDetector.cc.o: /home/bouta-mohammed/w
   /home/bouta-mohammed/root/root_install/include/TBranch.h \
   /home/bouta-mohammed/root/root_install/include/TBranchCacheInfo.h \
   /home/bouta-mohammed/root/root_install/include/TBuffer.h \
+  /home/bouta-mohammed/root/root_install/include/TCanvas.h \
   /home/bouta-mohammed/root/root_install/include/TClass.h \
   /home/bouta-mohammed/root/root_install/include/TCollection.h \
   /home/bouta-mohammed/root/root_install/include/TColor.h \
@@ -14679,6 +14687,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BLactelDetector.cc.o: /home/bouta-mohammed/w
   /home/bouta-mohammed/root/root_install/include/TFile.h \
   /home/bouta-mohammed/root/root_install/include/TFitResultPtr.h \
   /home/bouta-mohammed/root/root_install/include/TGenericClassInfo.h \
+  /home/bouta-mohammed/root/root_install/include/TGraph.h \
   /home/bouta-mohammed/root/root_install/include/TH1.h \
   /home/bouta-mohammed/root/root_install/include/TH2.h \
   /home/bouta-mohammed/root/root_install/include/TH3.h \
@@ -20430,6 +20439,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BStackingAction.cc.o: /home/bouta-mohammed/w
   /home/bouta-mohammed/root/root_install/include/TAtt3D.h \
   /home/bouta-mohammed/root/root_install/include/TAttAxis.h \
   /home/bouta-mohammed/root/root_install/include/TAttBBox2D.h \
+  /home/bouta-mohammed/root/root_install/include/TAttCanvas.h \
   /home/bouta-mohammed/root/root_install/include/TAttFill.h \
   /home/bouta-mohammed/root/root_install/include/TAttLine.h \
   /home/bouta-mohammed/root/root_install/include/TAttMarker.h \
@@ -20440,6 +20450,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BStackingAction.cc.o: /home/bouta-mohammed/w
   /home/bouta-mohammed/root/root_install/include/TBranch.h \
   /home/bouta-mohammed/root/root_install/include/TBranchCacheInfo.h \
   /home/bouta-mohammed/root/root_install/include/TBuffer.h \
+  /home/bouta-mohammed/root/root_install/include/TCanvas.h \
   /home/bouta-mohammed/root/root_install/include/TClass.h \
   /home/bouta-mohammed/root/root_install/include/TCollection.h \
   /home/bouta-mohammed/root/root_install/include/TColor.h \
@@ -20451,6 +20462,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BStackingAction.cc.o: /home/bouta-mohammed/w
   /home/bouta-mohammed/root/root_install/include/TFile.h \
   /home/bouta-mohammed/root/root_install/include/TFitResultPtr.h \
   /home/bouta-mohammed/root/root_install/include/TGenericClassInfo.h \
+  /home/bouta-mohammed/root/root_install/include/TGraph.h \
   /home/bouta-mohammed/root/root_install/include/TH1.h \
   /home/bouta-mohammed/root/root_install/include/TH2.h \
   /home/bouta-mohammed/root/root_install/include/TH3.h \
@@ -22013,6 +22025,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BSteppingAction.cc.o: /home/bouta-mohammed/w
   /home/bouta-mohammed/root/root_install/include/TAtt3D.h \
   /home/bouta-mohammed/root/root_install/include/TAttAxis.h \
   /home/bouta-mohammed/root/root_install/include/TAttBBox2D.h \
+  /home/bouta-mohammed/root/root_install/include/TAttCanvas.h \
   /home/bouta-mohammed/root/root_install/include/TAttFill.h \
   /home/bouta-mohammed/root/root_install/include/TAttLine.h \
   /home/bouta-mohammed/root/root_install/include/TAttMarker.h \
@@ -22023,6 +22036,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BSteppingAction.cc.o: /home/bouta-mohammed/w
   /home/bouta-mohammed/root/root_install/include/TBranch.h \
   /home/bouta-mohammed/root/root_install/include/TBranchCacheInfo.h \
   /home/bouta-mohammed/root/root_install/include/TBuffer.h \
+  /home/bouta-mohammed/root/root_install/include/TCanvas.h \
   /home/bouta-mohammed/root/root_install/include/TClass.h \
   /home/bouta-mohammed/root/root_install/include/TCollection.h \
   /home/bouta-mohammed/root/root_install/include/TColor.h \
@@ -49451,6 +49465,8 @@ CMakeFiles/libOMG.dir/utils/src/BLogger.cc.o: /home/bouta-mohammed/work/cppm/lac
 
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4TauMinus.hh:
 
+/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4TableTemplate.hh:
+
 /usr/include/boost/multi_index/detail/bidir_node_iterator.hpp:
 
 /usr/include/boost/multi_index/detail/bad_archive_exception.hpp:
@@ -51771,8 +51787,6 @@ CMakeFiles/libOMG.dir/utils/src/BLogger.cc.o: /home/bouta-mohammed/work/cppm/lac
 
 /usr/include/c++/13/variant:
 
-/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4TableTemplate.hh:
-
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
 /usr/include/c++/13/cstddef:
@@ -52062,6 +52076,8 @@ CMakeFiles/libOMG.dir/utils/src/BLogger.cc.o: /home/bouta-mohammed/work/cppm/lac
 /usr/include/boost/mpl/aux_/config/compiler.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/stdio.h:
+
+/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHeader.hh:
 
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4VParticleChange.hh:
 

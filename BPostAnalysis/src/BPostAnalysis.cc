@@ -111,7 +111,7 @@ namespace lactel
         OM om1 = OM("OMS0321");
         OM om2 = OM("OMS0304");
 
-        BWaveCatcher* wc1 = new BWaveCatcher("wc1");
+        BWaveCatcher* wc1 = new BWaveCatcher("wc1", 1);
         wc1->plugOM(0, om1);
         wc1->plugOM(1, om2);
 
@@ -465,7 +465,7 @@ namespace lactel
         OM om1 = OM("OMS0321");
         OM om2 = OM("OMS0304");
 
-        BWaveCatcher* wc1 = new BWaveCatcher("wc1");
+        BWaveCatcher* wc1 = new BWaveCatcher("wc1", 1);
         wc1->plugOM(0, om1);
         wc1->plugOM(1, om2);
 

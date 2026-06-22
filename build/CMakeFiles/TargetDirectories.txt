@@ -4,6 +4,7 @@
 /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/BFlux.dir
 /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/BRateBuilder.dir
 /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/PostAna.dir
+/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/WaveCatcher.dir
 /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/OMGsim.dir
 /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/edit_cache.dir
 /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/rebuild_cache.dir

@@ -108,13 +108,15 @@ namespace lactel
             inline VolumeProperties getVolumeProperties(){return volumeProperties;}
             inline Geometery& getGeometry(){return geometry;}
             std::string getOMID() const;
+            int getID() const;
             int getOMNumber() const;
             inline const std::string getName() const {return name;}
             inline void setName(std::string na){name = na;}
             void uploadOMValuesFormDB();
-            bool isOK;
+            bool isOK = false;
 
             inline void setID(std::string id){om_id = id;}
+            inline void setID(int uid){id = uid;}
 
             bool operator<(const OM& om) const;
             bool operator>(const OM& om) const;
@@ -131,7 +133,7 @@ namespace lactel
             }
 
 
-            void dump(std::ostream& out = std::cout){
+            const void dump(std::ostream& out = std::cout) const {
                 out << "\033[1;35m" 
                 << left << setw(15) << "id" 
                 << left << setw(15) << "hv" 

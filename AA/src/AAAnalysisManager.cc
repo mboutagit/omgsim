@@ -79,14 +79,12 @@ namespace km3net
   {
     if (fRFile == NULL) {
 	    G4cout << "WARNING: fRFile not found." << G4endl;
-      	    return;
+      return;
     }
 
     //fTRunInfos->Fill ();
     //fTFastAnalysis->Fill ();
    // fTEvent->Fill();
-
-
 
     fRFile->Write ();
     fRFile->Close ();

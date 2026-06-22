@@ -19,6 +19,7 @@
 #include "G4GDMLParser.hh"
 
 #include "BLactelDetector.hh"
+#include "BDetector.hh"
 
 
 using namespace std;
@@ -34,7 +35,7 @@ namespace lactel
         enum class DetGeoConf{M2, M4, M6, M8, M10};
         enum class DetectorState{ON, OFF, IDLE, RUN};
         //BDetectorConstruction();
-        BLactelDetector detector;
+        BLactelDetector detector; // detector
 
     public:        
         using KM3DetectorConstruction::Construct;
@@ -60,6 +61,7 @@ namespace lactel
         
         void getOMIDbyVolumeName(std::string volumeName);
         void getOMsUsedbyVolumeName(std::string volumeName);
+        void ReadConfiguration (string ConfigFile);
 
         void ReadThisConfiguration (libconfig::Setting* cfg, // reads settings from KM3Det*.dat file
                                                        vector<PositionParameters>&  ConfList);
@@ -106,6 +108,7 @@ namespace lactel
 
         void setGenerationShape(std::string shape);
         void setGenSurfShape(std::string shape);
+        
         void setDetectorState(std::string state_){
             if(state_ == "ON")
                 state = DetectorState::ON;

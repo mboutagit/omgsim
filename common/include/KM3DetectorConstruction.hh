@@ -64,7 +64,7 @@ class G4VPhysicalVolume;
 class G4Material;
 class G4Region;
 class G4UserLimits;
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+//....oooOO0OOooo........oooOO0OReadConfigurationOooo........oooOO0OOooo........oooOO0OOooo......
 
 namespace lactel{ class BDetectorConstruction; } // 
 

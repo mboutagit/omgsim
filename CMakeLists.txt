@@ -118,6 +118,7 @@ file(GLOB test_headers tests/include/)
 
 file(GLOB PROGRAMS programs/[a-zA-Z1-9]*.cxx
                   ./BPostAnalysis/programs/[a-zA-Z1-9]*.cxx
+                  ./tools/programs/[a-zA-Z1-9]*.cxx
     )
 file(GLOB TESTS tests/[a-zA-Z1-9]*.cxx)
 
@@ -161,8 +162,9 @@ else(DEFINED ENV{LIBCONFIG_ROOT})
 endif(DEFINED ENV{LIBCONFIG_ROOT})
 
 
+# -O0 -fsanitize=address 
 # (5) set the needed cflags
-SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -fsanitize=address -fPIC -W -Wall  -pedantic -Wno-non-virtual-dtor -Wno-long-long -Wwrite-strings -Wpointer-arith -Woverloaded-virtual -Wno-variadic-macros -Wshadow -pipe -std=c++17 -DPROJECT_SOURCE_DIR=\\\"${PROJECT_SOURCE_DIR}\\\" -DGIT_VERSION=\\\"${GIT_VERSION}\\\" -DBUILD_DATE=\"${BUILD_DATE}\"")
+SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -W -Wall  -pedantic -Wno-non-virtual-dtor -Wno-long-long -Wwrite-strings -Wpointer-arith -Woverloaded-virtual -Wno-variadic-macros -Wshadow -pipe -std=c++17 -DPROJECT_SOURCE_DIR=\\\"${PROJECT_SOURCE_DIR}\\\" -DGIT_VERSION=\\\"${GIT_VERSION}\\\" -DBUILD_DATE=\"${BUILD_DATE}\"")
 
 
 

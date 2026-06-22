@@ -103,22 +103,22 @@ namespace lactel
             struct Hit;
             struct DAQEvent{
                 uint channel;
-                uint event_nb;
-                std::string om_id;
+                int om_id;
+                // std::string om_id;
                 float a; // amplitude in mV
                 float c; // charge in pC
                 float t; // in ns
 
-                DAQEvent() : channel(9999), event_nb(999999999), om_id("XXXXXXX"), a(-9999), t(-9999){}
+                DAQEvent() : channel(9999), a(-9999), t(-9999), c(-9999), om_id(-1){}
                 void reset(){
-                    channel = 9999; event_nb = 999999999; om_id = "XXXXXXX"; a = -9999; t = -9999;
+                    channel = 9999; a = -9999; t = -9999; c = -9999, om_id = -1;
                 }
 
-                DAQEvent(uint c, uint evtnb, std::string om, float _a, float _t){
-                    channel = c; event_nb = evtnb; om_id = om; a = _a; t = _t;
+                DAQEvent(uint c, float _a, float _t){
+                    channel = c; a = _a; t = _t;
                 }
-                void addEvent(uint c, uint evtnb, std::string om, float _a, float _t){
-                    channel = c; event_nb = evtnb; om_id = om; a = _a; t = _t;
+                void addEvent(uint c, float _a, float _t){
+                    channel = c; a = _a; t = _t;
                 }
             };
 
@@ -126,7 +126,7 @@ namespace lactel
             {                    
                 // unsigned int event_ID;
                 std::vector<Hit> hits;
-                // std::vector<DAQEvent> daqEvent;
+                std::vector<DAQEvent> daqEvent;
                 // std::vector<HitInfos> pmHits;
                 // std::vector<HitInfos> hits;
                 float event_energy;
@@ -147,10 +147,10 @@ namespace lactel
 
                 // bool isDetected=false; // mainly used for Run managing
 
-            //     friend class BAnalysisManager;
-            // public:
-            //     Event(){};
-            //     ~Event(){};
+                //     friend class BAnalysisManager;
+                // public:
+                //     Event(){};
+                //     ~Event(){};
 
                 bool isACoincidence(float ctime = 200); // default coincidence time of 16 ns
                 void dumpEvent(std::ostream& out = std::cout){
@@ -186,32 +186,36 @@ namespace lactel
                 }
             };
 
-            struct Hit{
-                long id = 0;
-                float time = 0;
-                float charge = 0;
-                float a = 0;
-                float a_f = 0;
-                float t_tts = 0;
-                
-                float pm_x; 
-                float pm_y; 
-                float pm_z; 
-                float pm_t; 
-                float pm_p; 
+            class Hit{
+                public:
+                    long id = 0;
+                    float time = 0;
+                    float charge = 0;
+                    float a = 0;
+                    float a_f = 0;
+                    float t_tts = 0;
+                    
+                    float pm_x; 
+                    float pm_y; 
+                    float pm_z; 
+                    float pm_t; 
+                    float pm_p; 
 
-                float om_x; 
-                float om_y; 
-                float om_z; 
-                float om_t; 
-                float om_p; 
+                    float om_x; 
+                    float om_y; 
+                    float om_z; 
+                    float om_t; 
+                    float om_p; 
 
-                float vrx;
-                float vry;
-                float vrz;
+                    float vrx;
+                    float vry;
+                    float vrz;
 
-                int om_id;
-                std::string om_sid;
+                    int om_id;
+                    short module;
+                    short layer;
+
+                    // std::string om_sid;
 
                 static float getMeanTime(std::vector<Hit> hits){
                     if(! hits.size())
@@ -306,7 +310,7 @@ namespace lactel
             std::string evtFileName = "output.evt";
             
 
-        ClassDef(BAnalysisManager, 1);
+        ClassDef(BAnalysisManager, 2);
 
         
     };

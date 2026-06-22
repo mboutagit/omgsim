@@ -22,7 +22,7 @@ using namespace lactel;
 namespace tools{
     class BWaveCatcher : public BWaveCatcherInterface {
         public:
-            BWaveCatcher(std::string name);
+            BWaveCatcher(std::string name, int id);
             virtual ~BWaveCatcher();
 
             bool initialize() override;
@@ -31,6 +31,11 @@ namespace tools{
             bool startAcquisition() override;
             bool stopAcquisition() override;
             bool isAcquiring() const override;
+
+            void inline setName(std::string nm){name = nm;}
+            const std::string& getName() const {return name;}
+            void inline setID(int uid){id = uid;}
+            const int& getID() const {return id;}
 
             bool readEventData() override;
             std::vector<Waveform> getWaveforms() const override;
@@ -42,15 +47,16 @@ namespace tools{
             Waveform getFakeWaveform(int channel);
             TGraph drawWaveform(Waveform wf, int buffer_size=1);
 
-            BWaveCatcherConf getConfiguration();
+            BWaveCatcherConf& getConfiguration();
 
             std::vector<ADC_record> digitizeEvent(int channel, BAnalysisManager::DetectedEvent& event);
+            void digitizeEvent(BAnalysisManager::DetectedEvent& event);
             Waveform waveformFromADC(ADC_record record);
             TGraph drawADCRecord(ADC_record record);
             std::vector<Waveform> waveformFromADC(std::vector<ADC_record> records);
             TCanvas* getCanvas(){return canvas;}
 
-            bool plugOM(int channel, const OM& om);
+            bool plugOM(int channel, OM& om);
             Waveform joinWavefroms(int channel, std::vector<Waveform> wfs);
 
             void setTriggerThreshold(int channel, double threshold); // in mV
@@ -62,8 +68,8 @@ namespace tools{
             void setTimeCorrection(bool state){timeCorrection = state;};
             void setAmplitudeCorrection(bool state) {amplitudeCorrection = state;};
 
-            std::string getName(){return name;};
             OM getOMByChannelID(int channel){return inputOMs[channel];}
+            const void print(std::ostream& out = std::cout) const;
 
             // Waveform digitizeEvent(int channel, lactel::BAnalysis::DetectedEvent event);
 
@@ -78,14 +84,16 @@ namespace tools{
             std::normal_distribution<> AmpDist_; // mean=0, sigma=1
             std::vector<OM> signalSource;
             std::string name;
+            int id;
 
-            static std::map<int, OM*> connectedOMs;
+            std::map<int, OM> connectedOMs;
 
             bool timeCorrection = true;
             bool amplitudeCorrection = true;
             
             std::array<OM, config_.NumChannels> inputOMs;    //
-            std::array<Waveform, config_.NumChannels> waveforms; 
+            std::array<std::vector<ADC_record>, config_.NumChannels> ADCs;    //
+            std::array<std::vector<Waveform>, config_.NumChannels> waveforms; 
 
 
             Waveform generateFakeWaveform(int channel);
