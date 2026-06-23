@@ -7,6 +7,8 @@
 *.eps
 *.pdf
 *.blend
+*.pcm
+*.so
 penv
 simOutputs
 results

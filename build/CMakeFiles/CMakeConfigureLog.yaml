@@ -14519,3 +14519,73 @@ events:
         
       exitCode: 2
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:24 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-vy9rXL"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-vy9rXL"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-vy9rXL'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_664b9/fast
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-vy9rXL'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_664b9.dir/build.make CMakeFiles/cmTC_664b9.dir/build
+        gmake[2]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-vy9rXL'
+        Building C object CMakeFiles/cmTC_664b9.dir/cmake_hdf5_test.c.o
+        /usr/bin/cc    -o CMakeFiles/cmTC_664b9.dir/cmake_hdf5_test.c.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.c:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[2]: *** [CMakeFiles/cmTC_664b9.dir/build.make:78: CMakeFiles/cmTC_664b9.dir/cmake_hdf5_test.c.o] Error 1
+        gmake[2]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-vy9rXL'
+        gmake[1]: *** [Makefile:127: cmTC_664b9/fast] Error 2
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-vy9rXL'
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:284 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:614 (_HDF5_test_regular_compiler_CXX)"
+      - "CMakeLists.txt:24 (find_package)"
+    directories:
+      source: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-QWnEDV"
+      binary: "/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-QWnEDV"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+    buildResult:
+      variable: "HDF5_CXX_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-QWnEDV'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_05800/fast
+        gmake[1]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-QWnEDV'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_05800.dir/build.make CMakeFiles/cmTC_05800.dir/build
+        gmake[2]: Entering directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-QWnEDV'
+        Building CXX object CMakeFiles/cmTC_05800.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++    -o CMakeFiles/cmTC_05800.dir/cmake_hdf5_test.cxx.o -c /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: H5Cpp.h: No such file or directory
+            1 | #include <H5Cpp.h>
+              |          ^~~~~~~~~
+        compilation terminated.
+        gmake[2]: *** [CMakeFiles/cmTC_05800.dir/build.make:78: CMakeFiles/cmTC_05800.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[2]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-QWnEDV'
+        gmake[1]: *** [Makefile:127: cmTC_05800/fast] Error 2
+        gmake[1]: Leaving directory '/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/CMakeScratch/TryCompile-QWnEDV'
+        
+      exitCode: 2
+...
