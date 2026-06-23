@@ -139,7 +139,7 @@ int main(int argc_,char** argv_)
               //std::cout << "\r\033[20C" << "token: " << token << " ---- value: " << argv_[iarg+1] << std::endl;
               iarg++;;
             }
-            else if ( (option == "-r" || option == "-run") && (iarg+1 <= argc_) )
+            else if ( (option == "-r" || option == "--run") && (iarg+1 <= argc_) )
             {
 
               try {
