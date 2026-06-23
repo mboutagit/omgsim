@@ -4,7 +4,14 @@
             "name": "Linux",
             "includePath": [
                 "${default}",
-                "${workspaceFolder}/lactel-dataformat/include"
+                "${workspaceFolder}/lactel-dataformat/**",
+                "${workspaceFolder}/LACTELSim/**",
+                "${workspaceFolder}/",
+                "${workspaceFolder}/**",
+                "/home/bouta-mohammed/root/root_install/**",
+                "/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/**",
+                "/usr/include/vtk-9.1/**",
+                "/usr/include/hdf5/openmpi"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
