@@ -309,46 +309,21 @@ namespace tools
             if(! ADCs[i].size())
                 return;
             std::vector<Waveform> wfs = waveformFromADC(ADCs[i]);
-            // for(auto& wf : wfs){
-            //     TGraph gr = this->drawWaveform(wf, this->getConfiguration().eventBufferDepth);
-            //     string grName = "wf_" + connectedOMs[i].getOMID() + "_wc-" + to_string(this->getID())
-            //                         + "_Evt-" + to_string(event.event_id)
-            //                         + "_Run-" + to_string(event.runNb)
-            //                         ;
-            //     gr.SetName(grName.c_str());
-            //     gr.Write();
-            //     std::cout << "\r\033[10C" << "writing " << grName << std::endl;
-            // }
 
             Waveform fullWF = joinWavefroms(i, wfs);
-            waveforms[i].push_back(fullWF);
+            waveforms[i].push_back(fullWF); // fill channel wavefroms
 
-            TGraph a = this->drawWaveform(fullWF, this->getConfiguration().eventBufferDepth);
-            a.SetName(    "wf" + connectedOMs[i].getOMID() +  
-                                "_Ch-" + to_string(i) +
-                                "_wc-" + getID() +
-                                "_Evt-" + std::to_string(event.event_id)
-                    );
-            a.SetLineColor(2);
-            a.Write();
-            // if(fullWF.samples.size() > 0)
-                // a.Write();
+            if(fullWF.getMinAmplitude() > getConfiguration().triggerThresholds[i])
+                return;
 
-            double xmin_a, xmax_a, ymin_a, ymax_a;
-            a.ComputeRange(xmin_a, ymin_a, xmax_a, ymax_a);
-
-            // std::cout << "\r\033[10C" << "Event: " << event.event_id
-            //                             << " - nhits: " << event.nhit
-            //                             << " - on channel: " << i
-            //                             << " - Computed a: " << ymin_a
-            //                             << " - nADCs : " << ADCs[i].size()
-            //                             << std::endl;
-            BAnalysisManager::DAQEvent daqEvent;
-            daqEvent.channel = i;
-            daqEvent.a = ymin_a;
-            daqEvent.om_id = connectedOMs[i].getID();
-            // daqEvent.t = event.
-            event.daqEvent.push_back(daqEvent);
+                BAnalysisManager::DAQEvent daqEvent;
+                daqEvent.channel = i;
+                daqEvent.a = fullWF.getMinAmplitude() * 1e-3; // ;
+                daqEvent.c = fullWF.integrate(1/getConfiguration().samplingFrequency); // mV*ns
+                daqEvent.c = daqEvent.c * 1e-3 * 1e-9 / getConfiguration().internalResistor; // convert to Columb
+                daqEvent.om_id = connectedOMs[i].getID();
+                daqEvent.t = fullWF.signalTimeF(getConfiguration().triggerThresholds[i], 1/getConfiguration().samplingFrequency) * 1e-9;
+                event.daqEvent.push_back(daqEvent);
         }  
     }
 

@@ -1,6 +1,6 @@
 /KM3/XP/Type BA
 /KM3/det/DetInit Lactel
-/KM3/det/DetectorTypeName LactelOneModule #KM3K40
+/KM3/det/DetectorTypeName LACTEL_9Modules #KM3K40
 # /KM3/det/DetectorTypeName LactelOneCell 
 # /KM3/det/DetectorTypeName OMInCPPMBalckBox 
 /KM3/det/setMeanCapRadius 5 cm
@@ -44,7 +44,7 @@
 # /vis/viewer/set/viewpointThetaPhi 105 -60  deg
 # /vis/scene/endOfEventAction accumulate
 
-/run/beamOn 2
+/run/beamOn 5000
 
 # /run/beamOn 20000
 # /run/beamOn 20000

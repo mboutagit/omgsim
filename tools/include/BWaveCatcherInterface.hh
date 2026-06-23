@@ -44,7 +44,14 @@ struct Waveform {
         return min;
     }
 
-    std::array<double, 2> signalTime(int threshold, double timeStep) const{
+    double signalTimeF(float threshold, float timeStep) const{
+        for(int i=0; i< samples.size(); i++)
+            if(samples[i] <= threshold)
+                return timeStep*i;
+        return 0;
+    }
+
+    std::array<double, 2> signalTime(float threshold, double timeStep) const{
         bool first = false;
         bool second = false;
         double tmin = 0, tmax = 0;
@@ -75,6 +82,17 @@ struct Waveform {
                 double avg_v = 0.5 * (samples[s+1] + samples[s]); 
                 integral += abs(avg_v) * timeStep;
             }
+        }
+        return integral;
+    }
+
+    double integrate(double timeStep) {
+        if(!samples.size())
+            return 0;
+        double integral = 0;
+        for(int s = 0; s < samples.size()-1; s++){
+                double avg_v = 0.5 * (samples[s+1] + samples[s]); // mV
+                integral += abs(avg_v) * timeStep; // mV ns
         }
         return integral;
     }
