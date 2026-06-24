@@ -354,8 +354,8 @@ namespace lactel
 
             //particleName="gamma";
 
-            double Emin = 1;     // GeV
-            double Emax = 1e2;     // GeV (10 TeV)
+            double Emin = 1e-3;     // GeV
+            double Emax = 1e3;     // GeV (10 TeV)
 
             double ctmin = -1;     // rad (pi/2)
             double ctmax = 0;     // rad (0)

@@ -318,7 +318,7 @@ namespace tools
 
                 BAnalysisManager::DAQEvent daqEvent;
                 daqEvent.channel = i;
-                daqEvent.a = fullWF.getMinAmplitude() * 1e-3; // ;
+                daqEvent.amp = fullWF.getMinAmplitude() * 1e-3; // ;
                 daqEvent.c = fullWF.integrate(1/getConfiguration().samplingFrequency); // mV*ns
                 daqEvent.c = daqEvent.c * 1e-3 * 1e-9 / getConfiguration().internalResistor; // convert to Columb
                 daqEvent.om_id = connectedOMs[i].getID();

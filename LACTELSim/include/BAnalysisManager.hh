@@ -105,20 +105,20 @@ namespace lactel
                 uint channel;
                 int om_id;
                 // std::string om_id;
-                float a; // amplitude in mV
+                float amp; // amplitude in mV
                 float c; // charge in pC
                 float t; // in ns
 
-                DAQEvent() : channel(9999), a(-9999), t(-9999), c(-9999), om_id(-1){}
+                DAQEvent() : channel(9999), amp(-9999), t(-9999), c(-9999), om_id(-1){}
                 void reset(){
-                    channel = 9999; a = -9999; t = -9999; c = -9999, om_id = -1;
+                    channel = 9999; amp = -9999; t = -9999; c = -9999, om_id = -1;
                 }
 
                 DAQEvent(uint c, float _a, float _t){
-                    channel = c; a = _a; t = _t;
+                    channel = c; amp = _a; t = _t;
                 }
                 void addEvent(uint c, float _a, float _t){
-                    channel = c; a = _a; t = _t;
+                    channel = c; amp = _a; t = _t;
                 }
             };
 
@@ -134,14 +134,11 @@ namespace lactel
                 int runNb = -1;
                 uint nhit=0;
                 float tota=0.; // cumulative charge
-                float a0 = 0; 
-                float a1 = 0; 
                 float tmin=0.;
                 float tmax=0.;
                 float tmean=0.;
                 float time =0.;
                 float zenith;
-                // G4ThreeVector OMPosition;
                 bool coincidence = false;
                 // Waveform wf;
 

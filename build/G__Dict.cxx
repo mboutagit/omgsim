@@ -525,7 +525,7 @@ namespace ROOT {
       ::lactel::BAnalysisManager::Hit *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::lactel::BAnalysisManager::Hit));
       static ::ROOT::TGenericClassInfo 
-         instance("lactel::BAnalysisManager::Hit", "BAnalysisManager.hh", 189,
+         instance("lactel::BAnalysisManager::Hit", "BAnalysisManager.hh", 186,
                   typeid(::lactel::BAnalysisManager::Hit), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &lactelcLcLBAnalysisManagercLcLHit_Dictionary, isa_proxy, 4,
                   sizeof(::lactel::BAnalysisManager::Hit) );
