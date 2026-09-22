@@ -47,7 +47,7 @@ namespace tools{
             Waveform getFakeWaveform(int channel);
             TGraph drawWaveform(Waveform wf, int buffer_size=1);
 
-            BWaveCatcherConf& getConfiguration();
+            BWaveCatcherConf& getConfiguration() const;
 
             std::vector<ADC_record> digitizeEvent(int channel, BAnalysisManager::DetectedEvent& event);
             void digitizeEvent(BAnalysisManager::DetectedEvent& event);
@@ -69,7 +69,7 @@ namespace tools{
             void setAmplitudeCorrection(bool state) {amplitudeCorrection = state;};
 
             OM getOMByChannelID(int channel){return inputOMs[channel];}
-            const void print(std::ostream& out = std::cout) const;
+            void print(std::ostream& out = std::cout) const;
 
             // Waveform digitizeEvent(int channel, lactel::BAnalysis::DetectedEvent event);
 

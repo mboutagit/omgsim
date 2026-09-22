@@ -8,6 +8,7 @@ using namespace lactel;
 struct Waveform {
     int channel;
     std::vector<float> samples; // float for negative & floating voltage values
+    std::vector<float> time; // float for negative & floating voltage values
     double timestamp;
 
     bool operator<(const Waveform& wf) const {return timestamp < wf.timestamp;}

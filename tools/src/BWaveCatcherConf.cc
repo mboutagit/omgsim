@@ -34,12 +34,40 @@ namespace lactel
 
     BWaveCatcherConf::~BWaveCatcherConf(){}
 
-    void BWaveCatcherConf::print(){
-        std::cout <<  "Sampling frequency: " << samplingFrequency << "\n"
-                    <<  "inputDynamicRange: " << inputDynamicRange << "\n"
-                    <<  "preTriggerTime: " << preTriggerTime << "\n"
-                    <<  "channelEnabled: " 
-                    << std::endl;
+    void BWaveCatcherConf::print(std::ostream& out) const {
+            out     <<  "\tSampling frequency: "      << samplingFrequency << "\n"
+                    <<  "\tinputDynamicRange: "     << inputDynamicRange << "\n"
+                    <<  "\tpreTriggerTime: "        << preTriggerTime << "\n"
+                    <<  "\tbandwidth: "             << bandwidth << "\n"
+                    <<  "\tresolution: "            << resolution << "\n"
+                    <<  "\trecordLength: "          << recordLength << "\n"
+                    <<  "\teventBufferDepth: "      << eventBufferDepth << "\n"
+                    <<  "\ttriggerSource: "         << triggerSource << "\n"
+                    <<  "\tpreTriggerTime: "        << preTriggerTime << "\n"
+                    <<  "\tpostTriggerTime: "       << postTriggerTime << "\n"
+                    <<  "\ttriggerLogic: "          << triggerLogic << "\n"
+                    <<  "\tgateLength: "            << gateLength << "\n"
+                    <<  "\tenableHitRateMonitor: "  << enableHitRateMonitor << "\n"
+                    <<  "\tOffset: \n";
+                    for(int i=0; i < NumChannels; i++)
+                            out << "\t\tCh" + to_string(i) << " : " << inputOffsets[i] << "\n";
+
+                    out <<  "\ttriggerThresholds: \n";
+                    for(int i=0; i < NumChannels; i++)
+                            out << "\t\tCh" + to_string(i) << " : " << triggerThresholds[i] << "\n";
+
+                    out <<  "\ttriggerEdges: \n";
+                    for(int i=0; i < NumChannels; i++)
+                            out << "\t\tCh" + to_string(i) << " : " << triggerEdges[i] << "\n";
+
+                    out <<  "\tpedestalOffsets: \n";
+                    for(int i=0; i < NumChannels; i++)
+                            out << "\t\tCh" + to_string(i) << " : " << pedestalOffsets[i] << "\n";
+                    
+                    out <<  "\ttriggerDACOffsets: \n";
+                    for(int i=0; i <NumChannels; i++)
+                            out << "\t\tCh" + to_string(i) << " : " << triggerDACOffsets[i] << "\n";
+                
 
     
     }

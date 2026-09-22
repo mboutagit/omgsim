@@ -282,6 +282,7 @@ CMakeFiles/BFlux.dir/BPostAnalysis/programs/BFlux.cxx.o
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3ParametrizedVolume.hh
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PrimaryGeneratorAction.hh
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh
+ /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/BGenerator.hh
  /usr/include/alloca.h
  /usr/include/asm-generic/errno-base.h
  /usr/include/asm-generic/errno.h

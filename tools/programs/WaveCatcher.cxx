@@ -60,6 +60,7 @@ int main(int argc, char* argv[]){
     BAnalysisManager::DetectedEvent* detectedEvent = nullptr;
 
     TTree* eventTree = (TTree*)inFile->Get("DetectedEvent");
+    TTree* genTree = (TTree*)inFile->Get("Gen");
     // eventTree->Print();
     eventTree->SetBranchAddress("DetectedEvent", &detectedEvent);
 
@@ -80,10 +81,12 @@ int main(int argc, char* argv[]){
         waveCatchers.push_back(wc);
     }
 
-    TFile* output = new TFile("output.root", "recreate");
-    TTree* outTree = new TTree("outTree", "DAQEvent");
+    std::filesystem::path p(input_file);
+    std::string output_name = "daq." + p.filename().string();
+    TFile* output = new TFile(output_name.c_str(), "recreate");
+    TTree* outTree = new TTree("DetectedEvent", "DAQEvent from DetectedEvent");
     BAnalysisManager::DetectedEvent outEvent;
-    outTree->Branch("daqEvent", &outEvent);
+    outTree->Branch("DetectedEvent", &outEvent);
 
     // plug OMs first to wcs
 
@@ -161,6 +164,8 @@ int main(int argc, char* argv[]){
 
     daqManager->dump();
     outTree->Write();
+    TTree *newTree = genTree->CloneTree(-1); // copy all entries
+    newTree->Write();
 
     new TCanvas();
 

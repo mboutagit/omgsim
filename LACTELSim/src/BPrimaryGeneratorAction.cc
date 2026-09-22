@@ -251,7 +251,7 @@ namespace lactel
         double  phi = 2 * CLHEP::pi * G4UniformRand(); // Uniform in azimuth
         return G4ThreeVector(std::sin(theta) * std::cos(phi), 
                                 std::sin(theta) * std::sin(phi),
-                                std::cos(theta)
+                                -std::cos(theta) // down going
                             );
     }
 
@@ -354,7 +354,7 @@ namespace lactel
 
             //particleName="gamma";
 
-            double Emin = 1e-3;     // GeV
+            double Emin = 2e-1;     // GeV
             double Emax = 1e3;     // GeV (10 TeV)
 
             double ctmin = -1;     // rad (pi/2)
@@ -379,8 +379,8 @@ namespace lactel
                 direction = FixedThetaDirection(thetaGen);
             }
 
-            TF2 genFunc = Jurgen::getFluxFunction(Emin, Emax, ctmin, ctmax);
-            TF2* generator = &genFunc;
+            // TF2 genFunc = Jurgen::getFluxFunction(Emin, Emax, ctmin, ctmax);
+            // TF2* generator = &genFunc;
             // TF2* generator = new TF2("modFlux2D", 
             //                     [](double* x, double* pars){
             //                         return 
@@ -388,17 +388,51 @@ namespace lactel
             //                     },
             //                     Emin, Emax, Thetamin, Thetamax
             //                 );
-            double cost, theta;
-            // generator->GetRandom2(energy, theta);
-            generator->GetRandom2(energy, cost);
-            theta = acos(cost);
-            energy=energy*GeV;
-            direction=FixedThetaDirection(theta);
+
+            TF2* generator = new TF2(
+                    "modFlux2D",
+                    [](double* x, double* pars) {
+
+                        const double E = x[0];
+                        const double costheta = x[1];
+
+                        const double thetaDeg = std::acos(costheta) / deg;
+
+                        double xx[2] = {E, thetaDeg};
+
+                        const double flux =
+                            lactel::BPrimaryGeneratorAction::ModifiedFormula2D(xx, pars);
+
+                        // Projection onto horizontal generation surface
+                        return flux * costheta;
+                    },
+                    Emin,
+                    Emax,
+                    std::cos(Thetamax),
+                    std::cos(Thetamin)
+                );
+
+            double energyGeV;
+            double costheta;
+
+            generator->GetRandom2(energyGeV, costheta);
+
+            double theta = std::acos(costheta);
+
+            energy = energyGeV * GeV;
+            direction = FixedThetaDirection(theta);
+
+            // double cost, theta;
+            // // generator->GetRandom2(energy, theta);
+            // generator->GetRandom2(energy, cost);
+            // theta = acos(cost);
+            // energy=energy*GeV;
+            // direction=FixedThetaDirection(theta);
 
             // std::cout << "\r\033[10C" << "Generated: " << particle_name << " - energy: " << energy << std::endl;
             
-            if(direction.getZ() > 0)
-                direction.setZ(- direction.getZ());
+            // if(direction.getZ() > 0)
+            //     direction.setZ(- direction.getZ());
 
             // std::cout << "\r\033[10C" << "E (GeV)" << energy << 
             //                                 " -- theta in rad: " << cos(theta) << 

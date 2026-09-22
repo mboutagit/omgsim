@@ -108,6 +108,7 @@ namespace lactel
                 float amp; // amplitude in mV
                 float c; // charge in pC
                 float t; // in ns
+                Waveform waveform; // Event WaveForm
 
                 DAQEvent() : channel(9999), amp(-9999), t(-9999), c(-9999), om_id(-1){}
                 void reset(){
@@ -149,7 +150,12 @@ namespace lactel
                 //     Event(){};
                 //     ~Event(){};
 
-                bool isACoincidence(float ctime = 200); // default coincidence time of 16 ns
+                /**
+                 * @brief function to check coincidence within a given time and threshould
+                 * @par ctime: coincidence time in ns
+                 * @par thr: threshould in mV
+                 */
+                bool isACoincidence(float ctime = 16, float thr = 5); // default coincidence time of 16 ns
                 void dumpEvent(std::ostream& out = std::cout){
                     out 
                         << "Run: " << runNb

@@ -1,9 +1,17 @@
 #include "BPostAnalysis.hh"
 #include "utils.hh"
+#include "BPrimaryGeneratorAction.hh"
+#include "TF2.h"
+#include "BGenerator.hh"
+#include "BLactelDetector.hh"
+
+#include <CLI/CLI.hpp>
+#include <sys/resource.h>
 
 using namespace km3net;
 using namespace lactel;
 using namespace UTILS;
+using namespace utils;
 
 
 int main(int argc, char* argv[]){
@@ -14,8 +22,22 @@ int main(int argc, char* argv[]){
     return 1;
   }
 
+ 
+
+  std::string input_file, om, detFile;
+  float thr;
+
+  CLI::App cmdApp{"Command-line parser"};
+
+  cmdApp.add_option("-f,--input-file", input_file, "input_file containing DetectedEvent")->required(); // directory containing test files
+  cmdApp.add_option("-d,--detector", detFile, "detector file")->required(); // directory containing test files
+  cmdApp.add_option("-t,--thr", thr, "threshold")->required(); // directory containing test files
+
+  CLI11_PARSE(cmdApp, argc, argv);
+
   TApplication app("PostAna", &argc, argv);
-  string rootfilename =   app.InputFiles()->At(0)->GetName(); //"../../default.root";
+
+  string rootfilename =   input_file; //app.InputFiles()->At(0)->GetName(); //"../../default.root";
   TFile* file = TFile::Open(rootfilename.c_str(), "READ");
 
   if (!file || file->IsZombie()) {
@@ -25,13 +47,18 @@ int main(int argc, char* argv[]){
   else{
     std::cout << "File " << rootfilename << " is open" << std::endl;
   }
-    
+
+  // BPostAnalysis::detector.read(detFile);
+  BLactelDetector& detector = BDetectorConstruction::GetIt()->getDetector();
+          std::cout << "\r\033[10C" << "DC 1 " << BDetectorConstruction::GetIt() << std::endl;
+  detector.read(detFile);
+  detector.dumpDetectorSummary();
   // gSystem->Load("liblibOMG.so");
     // file->Print();
 
     TTree* genTree = (TTree*)file->Get("Gen");
-    TTree* hitTree = (TTree*)file->Get("Hit");
-    TTree* runTree = (TTree*)file->Get("Run");
+    // TTree* hitTree = (TTree*)file->Get("Hit");
+    // TTree* runTree = (TTree*)file->Get("Run");
     TTree* detEvtTree = (TTree*)file->Get("DetectedEvent");
 
     // BAnalysisManager::GenerationParameters* gps = nullptr;
@@ -46,11 +73,30 @@ int main(int argc, char* argv[]){
     // detEvtTree->SetBranchAddress("DetectedEvent", &evt);
     // detEvtTree->Print();
 
-    float radius = 5; // in meters
+
+    // TF2* generator = new TF2("modFlux2D", 
+    //                           [](double* x, double* pars){
+    //                               return 
+    //                               lactel::BPrimaryGeneratorAction::ModifiedFormula2D(x, pars);
+    //                           },
+    //                           1e-3, 1e3, 0, 70
+    //                       );
+
+     TF2* generator = new TF2("modFlux2D", 
+                              [](double* x, double* pars){
+                                  return 
+                                  BGenerator::RateIntegrand(x, pars);
+                              },
+                              1e-3, 1e3, 0, TMath::Pi()/2.
+                          );
+            
+    
+
+    float radius = 5; // in meters    
     float gen_surface_m2  = TMath::Pi() * radius*radius; // pi*R² disk
     float gen_surface_cm2 = gen_surface_m2 * 1e4;
  
-    float expected_muons_per_m2_per_s = 120; // by m²
+    float expected_muons_per_m2_per_s = 130; //generator->Integral(1e-1, 1e3, 0, TMath::Pi()/2); // by m²
     float expected_muons_per_cm2_per_s = expected_muons_per_m2_per_s/1e4; // to cm²
     float expected_muons_per_gensurf = expected_muons_per_cm2_per_s * gen_surface_cm2;
     float number_of_generated_muons_per_gensurf = genTree->GetEntries(); // 100 000 events
@@ -77,10 +123,10 @@ int main(int argc, char* argv[]){
     histsByName hists_data;
     histsByName hists_mc;
     std::vector<TCanvas*>  canvas_data =  getRealDataPlots(hists_data,
-                                                            "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_004/data.h5",
-                                                            "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_000020/data.h5"); 
+                                                            "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_003/data.h5",
+                                                            "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_004/data.h5"); 
 
-    std::vector<TCanvas*>  canvas_mc =  getNPEPlot(detEvtTree, hists_mc, exposure_time, 15, 0.080);
+    std::vector<TCanvas*>  canvas_mc =  getNPEPlot(detEvtTree, hists_mc, exposure_time, 15, -0.005);
     TCanvas* verPosition =  getVertexPositions(detEvtTree);
     verPosition->Draw();
 
@@ -89,21 +135,111 @@ int main(int argc, char* argv[]){
     //   c->Draw();
 
 
-    TCanvas* cs = new TCanvas("cs");
+    new TCanvas();
+
+
+ ///////////////// Normal
+    TCanvas* cs = new TCanvas("cs", "Normal Trigger");
     cs->SetLogy();
     for(auto& entry : hists_data){
-      entry.second->SetLineStyle(7);
-      entry.second->Draw("hist same");
-      std::cout << "\r\033[10C" << "Integral for hist: " << entry.second->GetName() << " is: " << entry.second->Integral() << std::endl;
+      int pos = entry.first.find("amp_ch0_run3");
+      if(pos != std::string::npos){
+        entry.second->SetLineColor(1);
+        entry.second->Draw("E1 hist same");
+        std::cout << "\r\033[10C" << "Integral for hist: " << entry.second->GetName() << " is: " << entry.second->Integral() << std::endl;
+      }
+        
     }
 
     for(auto& entry : hists_mc){
-      int pos = entry.first.find("amp_ch"); // find amplitude hists
+      int pos = entry.first.find("mc_amp_ch0_run3"); // find amplitude hists
       if(pos != std::string::npos){
+        entry.second->SetLineColor(2);
         entry.second->Draw("hist same");
         std::cout << "\r\033[10C" << "Integral for hist: " << entry.second->GetName() << " is: " << entry.second->Integral() << std::endl;
       }
     }
+
+
+     ///////////////// Coin
+
+    TCanvas* cnCoin = new TCanvas("cnCoin", "Coinsidence");
+    cnCoin->SetLogy();
+    for(auto& entry : hists_data){
+      int pos = entry.first.find("amp_ch0_run4");
+      if(pos != std::string::npos){
+        entry.second->SetLineColor(1);
+        entry.second->Draw("E1 hist same");
+        std::cout << "\r\033[10C" << "Integral for hist: " << entry.second->GetName() << " is: " << entry.second->Integral() << std::endl;
+      }
+        
+    }
+
+    for(auto& entry : hists_mc){
+      int pos = entry.first.find("mc_amp_ch0_run4"); // find amplitude hists
+      if(pos != std::string::npos){
+        entry.second->SetLineColor(2);
+        entry.second->Draw("hist same");
+        std::cout << "\r\033[10C" << "Integral for hist: " << entry.second->GetName() << " is: " << entry.second->Integral() << std::endl;
+      }
+    }
+
+     ///////////////// Normal
+    TCanvas* cnNtrigCh1 = new TCanvas("cnNtrigCh1", "Normal Trigger ch1");
+    cnNtrigCh1->SetLogy();
+    for(auto& entry : hists_data){
+      int pos = entry.first.find("amp_ch1_run3");
+      if(pos != std::string::npos){
+        entry.second->SetLineColor(1);
+        entry.second->Draw("E1 hist same");
+        std::cout << "\r\033[10C" << "Integral for hist: " << entry.second->GetName() << " is: " << entry.second->Integral() << std::endl;
+      }
+        
+    }
+
+    for(auto& entry : hists_mc){
+      int pos = entry.first.find("mc_amp_ch1_run3"); // find amplitude hists
+      if(pos != std::string::npos){
+        entry.second->SetLineColor(2);
+        entry.second->Draw("hist same");
+        std::cout << "\r\033[10C" << "Integral for hist: " << entry.second->GetName() << " is: " << entry.second->Integral() << std::endl;
+      }
+    }
+
+    ///////////////// Coin
+
+    TCanvas* cnCoinCh1 = new TCanvas("cnCoinCh1", "Coinsidence ch1");
+    cnCoinCh1->SetLogy();
+    for(auto& entry : hists_data){
+      int pos = entry.first.find("amp_ch1_run4");
+      if(pos != std::string::npos){
+        entry.second->SetLineColor(1);
+        entry.second->Draw("E1 hist same");
+        std::cout << "\r\033[10C" << "Integral for hist: " << entry.second->GetName() << " is: " << entry.second->Integral() << std::endl;
+      }
+        
+    }
+
+    for(auto& entry : hists_mc){
+      int pos = entry.first.find("mc_amp_ch1_run4"); // find amplitude hists
+      if(pos != std::string::npos){
+        entry.second->SetLineColor(2);
+        entry.second->Draw("hist same");
+        std::cout << "\r\033[10C" << "Integral for hist: " << entry.second->GetName() << " is: " << entry.second->Integral() << std::endl;
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     TCanvas *c = new TCanvas("c", "Ratio Canvas");
     c->SetLogy();
@@ -115,6 +251,7 @@ int main(int argc, char* argv[]){
     ratio_om0_r3->SetLineColor(1);
     ratio_om0_r3->SetMarkerColor(1);
     ratio_om0_r3->SetMarkerStyle(20);
+
     ratio_om0_r4->SetLineColor(3);
     ratio_om0_r4->SetMarkerColor(3);
     ratio_om0_r4->SetMarkerStyle(20);
@@ -122,13 +259,17 @@ int main(int argc, char* argv[]){
     ratio_om1_r3->SetLineColor(2);
     ratio_om1_r3->SetMarkerColor(2);
     ratio_om1_r3->SetMarkerStyle(20);
+
     ratio_om1_r4->SetLineColor(4);
     ratio_om1_r4->SetMarkerColor(4);
     ratio_om1_r4->SetMarkerStyle(20);
 
     ratio_om0_r3->Draw("AP");
     ratio_om0_r4->Draw("P same");
-    ratio_om1_r3->Draw("P same");
+
+        TCanvas *rch1 = new TCanvas("rch1", "Ratio Canvas ch1");
+
+    ratio_om1_r3->Draw("AP");
     ratio_om1_r4->Draw("P same");
 
     BSquare* del = new BSquare(0, ratio_om0_r3->GetXaxis()->GetXmax(), 0.8, 1.2, 2, 6);
@@ -150,19 +291,25 @@ int main(int argc, char* argv[]){
 
     histsByName histDataRun003;
     getRealDataByInFile(  histDataRun003,
-                          "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_004/data.h5",
+                          "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_003/data.h5",
                           "channel_data/peak",
-                          0, 2.4, 10/1e3,
+                          0, 2.4, BPostAnalysis::mVperBin/1e3,
                           1);
 
+
+    histsByName histDataRun004;
+    getRealDataByInFile(  histDataRun004,
+                          "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_004/data.h5",
+                          "channel_data/peak",
+                          0, 2.4, BPostAnalysis::mVperBin/1e3,
+                          0.5);
 
     histsByName histDataRun000020;
     getRealDataByInFile(  histDataRun000020,
                           "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_000020/data.h5",
                           "channel_data/peak",
-                          0, 2.4, 10/1e3,
+                          0, 2.4, BPostAnalysis::mVperBin/1e3,
                           0.5);
-
 
 
     TCanvas* checkCanvas_ch = new TCanvas("check", "check");
@@ -172,7 +319,7 @@ int main(int argc, char* argv[]){
     TH1* ampCh0_run0003 = getHistByName(histDataRun003, "amp_ch0");
     ampCh0_run0003->SetLineColor(1);
     ampCh0_run0003->Draw("hist");
-    TH1* ampCh0_run000020 = getHistByName(histDataRun000020, "amp_ch0");
+    TH1* ampCh0_run000020 = getHistByName(histDataRun004, "amp_ch0");
     ampCh0_run000020->SetLineColor(1);
     ampCh0_run000020->SetLineStyle(2);
     ampCh0_run000020->Draw("hist same");
@@ -181,13 +328,29 @@ int main(int argc, char* argv[]){
     TH1* ampCh1_run0003 = getHistByName(histDataRun003, "amp_ch1");
     ampCh1_run0003->SetLineColor(2);
     ampCh1_run0003->Draw("hist same");
-    TH1* ampCh1_run000020 = getHistByName(histDataRun000020, "amp_ch1");
+    TH1* ampCh1_run000020 = getHistByName(histDataRun004, "amp_ch1");
     ampCh1_run000020->SetLineColor(2);
     ampCh1_run000020->SetLineStyle(2);
     ampCh1_run000020->Draw("hist same");
 
-    TCanvas* makeACustumPlot =  makeRatioPlot(ampCh0_run0003, ampCh1_run0003);
+    // TCanvas* makeACustumPlot =  makeRatioPlot(ampCh0_run0003, ampCh0_run0003);
     // TCanvas* makeACustumPlot1 =  makeRatioPlot(ampCh1_run0003, ampCh1_run0003);
+
+    DrawWithRatio(getHistByName(hists_mc, "mc_amp_ch0_run4"), ampCh0_run000020, "r.coin.ch0");
+    DrawWithRatio(getHistByName(hists_mc, "mc_amp_ch1_run4"), ampCh1_run000020, "r.coin.ch1");
+    DrawWithRatio(getHistByName(hists_mc, "mc_amp_ch0_run3"), 
+                                  getHistByName(histDataRun000020, "amp_ch0"), 
+                                  "rtr.Amp.ch1"
+                                );
+
+    DrawWithRatio( {
+                      {getHistByName(hists_mc, "mc_amp_ch0_run4"), ampCh0_run000020},
+                      {getHistByName(hists_mc, "mc_amp_ch1_run4"), ampCh1_run000020},
+                    },
+                  "r.coinComp.ch0ch1"
+                );
+
+              
 
 
 
@@ -425,9 +588,6 @@ int main(int argc, char* argv[]){
     // }
 
     // TCanvas c3;
-
-
-
 
     cout << "Info: Waiting for user action! ..." << endl;
     app.Run();

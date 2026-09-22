@@ -10,6 +10,7 @@
 #include "TStyle.h"
 
 #include "BPrimaryGeneratorAction.hh"
+#include "BGenerator.hh"
 
 
 using namespace std;
@@ -74,16 +75,17 @@ int main(int argc, char* argv[]){
 
         if(style == 0){
             flux->SetTitle("muons flux; E_{#mu} (GeV); E_{#mu}^{2.7} * I_{#mu} (GeV^{1.7}cm^{-2}S^{-1}Sr^{-1})");
-            flux->Draw();
-            modFlux->Draw("same");
-            leg->AddEntry(flux, ("Gaiser - " + std::to_string(angle) + "^{°}").c_str(), "l");
-            leg->AddEntry(modFlux, ("Modified - " + std::to_string(angle) + "^{°}").c_str(), "l");
+            modFlux->SetTitle("muons flux; E_{#mu} (GeV); E_{#mu}^{2.7} * I_{#mu} (GeV^{1.7}cm^{-2}S^{-1}Sr^{-1})");
+            // flux->Draw();
+            modFlux->Draw("");
+            // leg->AddEntry(flux, ("Gaiser - " + std::to_string(angle) + "^{°}").c_str(), "l");
+            leg->AddEntry(modFlux, ("#theta= " + std::to_string(angle) + "^{°}").c_str(), "l");
         }
         else{
-            flux->Draw("same");
+            // flux->Draw("same");
             modFlux->Draw("same");
-            leg->AddEntry(flux, ("Gaiser - " + std::to_string(angle) + "^{°}").c_str(), "l");
-            leg->AddEntry(modFlux, ("Modified - " + std::to_string(angle) + "^{°}").c_str(), "l");
+            // leg->AddEntry(flux, ("Gaiser - " + std::to_string(angle) + "^{°}").c_str(), "l");
+            leg->AddEntry(modFlux, ("#theta= " + std::to_string(angle) + "^{°}").c_str(), "l");
         }
 
         style++;
@@ -294,6 +296,60 @@ int main(int argc, char* argv[]){
     // grInt1.Draw("PC");
     // grInt2.SetLineColor(3);
     // grInt2.Draw("PC");
+
+
+    //#############################################################################################""
+
+
+
+    TCanvas* can0 = new TCanvas("can0", "Muon Flux", 1700, 1000);
+    can0->Divide(2,2);
+    can0->cd(1);
+    gPad->SetLogx();
+    gPad->SetLogy();
+    gPad->SetGrid();
+
+    TF1* fun = new TF1("fun", 
+                            [](double* x, double* pars)
+                            { return utils::BGenerator::ModifiedGaisser(x, pars);},
+                            0.001, 1e4, 0
+                        );
+    style = 0;
+    TLegend* leg2 = new TLegend(0.5, 0.1, 0.7, 0.5);
+    for(auto& angle : angles){
+        TF1* flux = new TF1("flux_" + (int)angle, [](double* x, double* pars){ return pow(x[0], 2.7) *lactel::BPrimaryGeneratorAction::gaisser_flux(x, pars);}, 0.1, 1e4, 1);
+        
+        TF1* modFlux = new TF1("modFlux_"+ (int)angle, 
+                                [fun, angle](double* x, double* pars){ return pow(x[0], 2.7) * fun->Eval(x[0], angle);}, 
+                                0.001, 1e4, 0
+                            );
+
+        flux->SetParameter(0, angle);
+        modFlux->SetParameter(0, angle);
+
+        flux->SetLineColor(style+1);
+        modFlux->SetLineColor(style+1);
+
+        flux->SetLineStyle(7);
+        // modFlux->SetLineStyle(7);
+
+        if(style == 0){
+            flux->SetTitle("muons flux; E_{#mu} (GeV); E_{#mu}^{2.7} * I_{#mu} (GeV^{1.7}cm^{-2}S^{-1}Sr^{-1})");
+            flux->Draw();
+            modFlux->Draw("same");
+            leg2->AddEntry(flux, ("Gaiser - " + std::to_string(angle) + "^{°}").c_str(), "l");
+            leg2->AddEntry(modFlux, ("Modified - " + std::to_string(angle) + "^{°}").c_str(), "l");
+        }
+        else{
+            flux->Draw("same");
+            modFlux->Draw("same");
+            leg2->AddEntry(flux, ("Gaiser - " + std::to_string(angle) + "^{°}").c_str(), "l");
+            leg2->AddEntry(modFlux, ("Modified - " + std::to_string(angle) + "^{°}").c_str(), "l");
+        }
+
+        style++;
+    }
+    leg2->Draw("same");
 
 
 

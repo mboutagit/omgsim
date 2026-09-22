@@ -13,7 +13,12 @@ namespace lactel
     std::set<std::string> OM::om_ids;
     std::set<OM*> OM::instances;
     int OM::nInstance = 0;
-    ConnectionInfos OM::con = ConnectionInfos("/home/bouta-mohammed/work/cppm/lactel/omTesting/include/config.ini");
+    ConnectionInfos OM::con = ConnectionInfos(string(DATABASE_CONFIGFILE));
+
+    std::mt19937 OM::rng_ = std::mt19937(std::random_device{}());
+    std::uniform_int_distribution<int> OM::noiseDist_(-2, 2);
+    std::normal_distribution<> OM::TTSDist_(3.314, 0.1531*0.1531);
+    std::normal_distribution<> OM::AmpDist_(0, 0.1156);
 
     // OM::OM(): isOK (false), om_id("OMS0000"){
     //     id = nInstance;
@@ -64,7 +69,9 @@ namespace lactel
     }
 
     bool OM::operator==(const OM& om) const {
-        return getOMNumber() == om.getOMNumber();
+        return getOMNumber() == om.getOMNumber() &&
+                id == om.id &&
+                om_id == om.om_id;
     }
 
     void OM::uploadOMValuesFormDB(){

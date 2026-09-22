@@ -47,7 +47,7 @@ namespace tools
         return true;
     }
 
-    BWaveCatcherConf& BWaveCatcher::getConfiguration(){
+    BWaveCatcherConf& BWaveCatcher::getConfiguration() const {
         return config_;
     }
 
@@ -65,7 +65,6 @@ namespace tools
             return false;
         }
 
-        OM ommm = om;
         if(om.isOK)
             connectedOMs.insert({channel, om});
             
@@ -120,12 +119,17 @@ namespace tools
     //     return true;
     // }
 
-    const void BWaveCatcher::print(std::ostream& out) const {
+    void BWaveCatcher::print(std::ostream& out) const {
         out << string(10, '-') << " WaveCatcher: " << name << " " << string(10, '-');
         for(int i =0; i < BWaveCatcherConf::NumChannels; i++){
             out << "\n\tchannel: " << i 
-                << " - OM connected: " << connectedOMs.at(i).getOMID();
+                << " - OM connected: " << connectedOMs.at(i).getOMID()
+                << " - ID: " << connectedOMs.at(i).getID();
         }
+        out << "\n\n" << string(10, '+') << " Configuration " << string(10, '+') << "\n";
+        getConfiguration().print();
+        out << string(30, '+');
+
         out << "\n" <<string(30, '-') << "\n";
     }
 
@@ -304,35 +308,42 @@ namespace tools
     // }
 
     void BWaveCatcher::digitizeEvent(BAnalysisManager::DetectedEvent& event){
-        for(int i=0; i<getConfiguration().NumChannels; i++){
+        for(int i=0; i < getConfiguration().NumChannels; i++){
+            // std::cout << "\r\033[10C" << "trying to digitize event " << event.event_id 
+            //                                 << " on run: " << event.runNb
+            //                                 << " on wavecatcher: " << getName()
+            //                                 << " on channel: " << i 
+            //                                 << std::endl;
             ADCs[i] = digitizeEvent(i, event);
             if(! ADCs[i].size())
                 return;
             std::vector<Waveform> wfs = waveformFromADC(ADCs[i]);
 
             Waveform fullWF = joinWavefroms(i, wfs);
-            waveforms[i].push_back(fullWF); // fill channel wavefroms
+            // TGraph totA0 = drawWaveform(fullWF, getConfiguration().eventBufferDepth);
+            // totA0.SetName(("totA_evt" + std::to_string(event.event_id) + "_Channel" + to_string(i)).c_str());
+            // totA0.SetLineColor(1);
+            // // if(fullWF.samples.size() > 0 && i > 0)
+            // //     totA0.Write();
 
-            if(fullWF.getMinAmplitude() > getConfiguration().triggerThresholds[i])
-                return;
+            // double xmin_a0, xmax_a0, ymin_a0, ymax_a0;
+            // totA0.ComputeRange(xmin_a0, ymin_a0, xmax_a0, ymax_a0);
 
-                BAnalysisManager::DAQEvent daqEvent;
-                daqEvent.channel = i;
-                daqEvent.amp = fullWF.getMinAmplitude() * 1e-3; // ;
-                daqEvent.c = fullWF.integrate(1/getConfiguration().samplingFrequency); // mV*ns
-                daqEvent.c = daqEvent.c * 1e-3 * 1e-9 / getConfiguration().internalResistor; // convert to Columb
-                daqEvent.om_id = connectedOMs[i].getID();
-                daqEvent.t = fullWF.signalTimeF(getConfiguration().triggerThresholds[i], 1/getConfiguration().samplingFrequency) * 1e-9;
-                event.daqEvent.push_back(daqEvent);
+            BAnalysisManager::DAQEvent daqEvent;
+            daqEvent.waveform = fullWF;
+            daqEvent.channel = i;
+            daqEvent.amp = fullWF.getMinAmplitude(); // to mV;
+            daqEvent.c = fullWF.integrate(1/getConfiguration().samplingFrequency) * 
+                            1e-3 * 1e-9 / getConfiguration().internalResistor; // convert to Columb
+            daqEvent.om_id = connectedOMs[i].getID();
+            daqEvent.t = fullWF.signalTimeF(getConfiguration().triggerThresholds[i], 1/getConfiguration().samplingFrequency);
+            event.daqEvent.push_back(daqEvent);
         }  
     }
 
 
     std::vector<ADC_record> BWaveCatcher::digitizeEvent(int channel, BAnalysisManager::DetectedEvent& event){
         std::vector<ADC_record> adcs;
-        // std::cout << "\r\033[10C" << "Digitizing evnet: " << event.event_id 
-        //                             << " - with nhits: " << event.hits.size()
-        //                             << std::endl;
         if(! event.hits.size())
             return adcs;
 
@@ -355,10 +366,11 @@ namespace tools
         std::normal_distribution<> pedDist_(0, 0.30*I_peak/lsb); 
         double t_jutter = 0.;
         // std::cout << "\r\033[10C" << "info: " << one_pe_charge << " - " << I_0 << " - " << I_peak << " - " << lsb << " - " << -e_SI << std::endl;
-    
+
         for(auto& hit : event.hits){
             // if(hit.om_id != channel+1) // om id comes from copynumber in geant4 and channel is 0 or 1 while copy number starts from 1
             //     continue;
+            // std::cout << "\r\033[10C" << "OM: " << connectedOMs[channel].getID() << "  -- OM id = " << hit.om_id << std::endl;
             if(connectedOMs[channel].getID() != hit.om_id)
                 continue;
 
@@ -462,6 +474,7 @@ namespace tools
         config_.inputOffsets.fill(offset);
     }
 
+    
     std::vector<Waveform> BWaveCatcher::waveformFromADC(std::vector<ADC_record> records){
         std::vector<Waveform> wfs;
         if( ! records.size())
@@ -484,6 +497,7 @@ namespace tools
         Waveform waveform;
         waveform.channel = wfs[0].channel;
         waveform.samples.resize(length);
+        waveform.time.resize(length);
         bool triggered = false;
         double lsb = config_.inputDynamicRange / (pow(2, config_.resolution) - 1); // in Volts
         std::normal_distribution<> pedDist_(0, 500*lsb); 
@@ -496,6 +510,7 @@ namespace tools
             int ref_sample=0;
             bool flag = true;
             while(sample < length){
+            waveform.time[sample] = sample * dt;
                 if(sample > wf.samples.size() -1 ) // sample beyond the wf samples
                     break;
 

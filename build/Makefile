@@ -1900,6 +1900,30 @@ tools/src/DAQManager.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/src/DAQManager.cc.s
 .PHONY : tools/src/DAQManager.cc.s
 
+utils/src/BGenerator.o: utils/src/BGenerator.cc.o
+.PHONY : utils/src/BGenerator.o
+
+# target to build an object file
+utils/src/BGenerator.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/utils/src/BGenerator.cc.o
+.PHONY : utils/src/BGenerator.cc.o
+
+utils/src/BGenerator.i: utils/src/BGenerator.cc.i
+.PHONY : utils/src/BGenerator.i
+
+# target to preprocess a source file
+utils/src/BGenerator.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/utils/src/BGenerator.cc.i
+.PHONY : utils/src/BGenerator.cc.i
+
+utils/src/BGenerator.s: utils/src/BGenerator.cc.s
+.PHONY : utils/src/BGenerator.s
+
+# target to generate assembly for a file
+utils/src/BGenerator.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/utils/src/BGenerator.cc.s
+.PHONY : utils/src/BGenerator.cc.s
+
 utils/src/BLogger.o: utils/src/BLogger.cc.o
 .PHONY : utils/src/BLogger.o
 
@@ -2150,6 +2174,9 @@ help:
 	@echo "... tools/src/DAQManager.o"
 	@echo "... tools/src/DAQManager.i"
 	@echo "... tools/src/DAQManager.s"
+	@echo "... utils/src/BGenerator.o"
+	@echo "... utils/src/BGenerator.i"
+	@echo "... utils/src/BGenerator.s"
 	@echo "... utils/src/BLogger.o"
 	@echo "... utils/src/BLogger.i"
 	@echo "... utils/src/BLogger.s"

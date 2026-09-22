@@ -569,19 +569,72 @@ namespace lactel
     // std::cout << "\r\033[10C" << "OMEntrance: om_x=" << globalPoint.x () << std::endl;
   }
 
-    bool BAnalysisManager::DetectedEvent::isACoincidence(float ctime){
+    // bool BAnalysisManager::DetectedEvent::isACoincidence(float ctime){
+    //     bool coincidence = false;
+    //     for(auto& hita: hits){
+    //         for(auto& hitb : hits){
+    //             if(hita.om_id == hitb.om_id) // check on different OMs 
+    //                 continue;
+    //             if(abs(hita.time - hitb.time) <= ctime){ // coincidence
+    //                 coincidence = true;
+    //                 break;
+    //             }
+    //         }
+    //         if(coincidence)
+    //             break;
+    //     }
+    //     return coincidence;
+    // }
+
+    /**
+     * @brief temp function to compute coinsidence by locally applying tts to hits
+     */
+    bool BAnalysisManager::DetectedEvent::isACoincidence(float ctime, float thr){
         bool coincidence = false;
+        double sigma_tts = OM::TTSDist_(OM::rng_)/2.355; // FWHM /2*sqrt(2*ln(2))
+        double t_jutter = 0.;
+        std::normal_distribution<> TTSFDist_(t_jutter, sigma_tts*sigma_tts);  // sample from TTS FWHM dist. with time jutter
         for(auto& hita: hits){
             for(auto& hitb : hits){
                 if(hita.om_id == hitb.om_id) // check on different OMs 
                     continue;
-                if(abs(hita.time - hitb.time) <= ctime){ // coincidence
+                
+                double hitatime = hita.time + TTSFDist_(OM::rng_); // hit time + tts in ns
+                double hitbtime = hitb.time + TTSFDist_(OM::rng_); // hit time + tts in ns
+                if(abs(hitatime- hitbtime) < ctime){ // coincidence
                     coincidence = true;
+                    break;
                 }
             }
+            if(coincidence)
+                break;
         }
         return coincidence;
     }
+
+
+    // /**
+    //  * @brief temp function to compute coinsidence by locally applying tts to hits
+    //  */
+    // bool BAnalysisManager::DetectedEvent::isACoincidence(float ctime, float thr){
+    //     BLactelDetector& det = BDetectorConstruction::GetIt()->getDetector();
+    //     bool coincidence = false;
+    //     for(auto& hita: daqEvent){
+    //         for(auto& hitb : daqEvent){
+    //             if( hita.om_id == hitb.om_id) // check different OMs on the same module 
+    //                 continue;
+                
+    //             if(abs(hita.t - hitb.t) < ctime && hita.amp >= thr && hitb.amp >= thr){ // coincidence
+    //                 coincidence = true;
+    //                 break;
+    //             }
+    //         }
+    //         if(coincidence)
+    //             break;
+    //     }
+    //     return coincidence;
+    // }
+
 
 
 } // namespace lactel

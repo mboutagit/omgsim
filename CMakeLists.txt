@@ -2,6 +2,8 @@
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 project(OMGsim)
 
+#Set path of database config file
+set (DATABASE_CONFIGFILE "/home/bouta-mohammed/work/cppm/lactel/omTesting/include/config.ini")
 # By Bouta basically for Qt5
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_STANDARD 17)
@@ -164,7 +166,7 @@ endif(DEFINED ENV{LIBCONFIG_ROOT})
 
 # -O0 -fsanitize=address 
 # (5) set the needed cflags
-SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -W -Wall  -pedantic -Wno-non-virtual-dtor -Wno-long-long -Wwrite-strings -Wpointer-arith -Woverloaded-virtual -Wno-variadic-macros -Wshadow -pipe -std=c++17 -DPROJECT_SOURCE_DIR=\\\"${PROJECT_SOURCE_DIR}\\\" -DGIT_VERSION=\\\"${GIT_VERSION}\\\" -DBUILD_DATE=\"${BUILD_DATE}\"")
+SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -W -Wall  -pedantic -Wno-non-virtual-dtor -Wno-long-long -Wwrite-strings -Wpointer-arith -Woverloaded-virtual -Wno-variadic-macros -Wshadow -pipe -std=c++17 -DPROJECT_SOURCE_DIR=\\\"${PROJECT_SOURCE_DIR}\\\" -DGIT_VERSION=\\\"${GIT_VERSION}\\\" -DBUILD_DATE=\"${BUILD_DATE}\" -DDATABASE_CONFIGFILE=\\\"${DATABASE_CONFIGFILE}\\\"")
 
 
 

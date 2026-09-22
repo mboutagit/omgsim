@@ -127,6 +127,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/libOMG.dir/tools/src/BWaveCatcherMessenger.cc.o.d"
   "CMakeFiles/libOMG.dir/tools/src/DAQManager.cc.o"
   "CMakeFiles/libOMG.dir/tools/src/DAQManager.cc.o.d"
+  "CMakeFiles/libOMG.dir/utils/src/BGenerator.cc.o"
+  "CMakeFiles/libOMG.dir/utils/src/BGenerator.cc.o.d"
   "CMakeFiles/libOMG.dir/utils/src/BLogger.cc.o"
   "CMakeFiles/libOMG.dir/utils/src/BLogger.cc.o.d"
   "G__Dict.cxx"

@@ -9,6 +9,10 @@
 
 #include "G4ThreeVector.hh"
 #include "G4SystemOfUnits.hh"
+#include <random>
+#include <numeric>
+
+
 
 namespace lactel
 {
@@ -99,6 +103,10 @@ namespace lactel
             static std::set<OM*> instances;
             static std::set<std::string> om_ids;
             static OMsParameters parameters;
+            static std::mt19937 rng_;
+            static std::uniform_int_distribution<int> noiseDist_;
+            static std::normal_distribution<> TTSDist_; // mean=0, sigma=1
+            static std::normal_distribution<> AmpDist_; // mean=0, sigma=1
             OMProperties properties; 
             Geometery geometry;
             VolumeProperties volumeProperties;

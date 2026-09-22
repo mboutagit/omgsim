@@ -46,7 +46,7 @@ namespace lactel
         void setTriggerLogic(std::string trig);
         void setGateLEngth(int);
 
-        void print();
+        void print(std::ostream& out = std::cout) const;
 
 
 

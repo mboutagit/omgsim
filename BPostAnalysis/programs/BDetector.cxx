@@ -71,8 +71,6 @@ int main(int argc, char* argv[]){
     BLactelDetector det_prototype({M1, M2, M3, M4, M5, M6, M7, M8, M9},
                             G4ThreeVector(0*cm, 0*cm, 0*cm)
                         );
-    // det_prototype.drawModules("", 0, 1);
-    // det_prototype.print(std::cout, 1, 1);
     det_prototype.setName("LACTEL_9Modules");
     det_prototype.centerOnItsCells(G4ThreeVector(2*m, 2*m, 2*m));
     det_prototype.setCellsPositionRelativeToDetector();
@@ -80,11 +78,7 @@ int main(int argc, char* argv[]){
     det_prototype.dumpDetectorSummary();
 
     // Generate real Detector file
-    BLactelDetector det_true({M1},
-                            G4ThreeVector(0*cm, 0*cm, 0*cm)
-                        );
-    // det_prototype.drawModules("", 0, 1);
-    // det_prototype.print(std::cout, 1, 1);
+    BLactelDetector det_true({M1}, G4ThreeVector(0*cm, 0*cm, 0*cm));
     det_true.setName("LACTELTrue");
     det_true.centerOnItsCells(G4ThreeVector(2*m, 2*m, 2*m));
     det_true.setCellsPositionRelativeToDetector();

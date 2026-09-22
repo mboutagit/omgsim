@@ -14,7 +14,7 @@ using namespace H5;
 
 namespace lactel
 {
-    std::vector<stack> container;
+    // std::vector<stack> container;
 
     // Parse ISO 8601 (UTC "Z")
     std::time_t parse_iso8601(const std::string& s) {
@@ -94,7 +94,8 @@ namespace lactel
 
         float xmin_amp=0.;
         float xmax_amp=2.4;
-        float unitsPerBin_amp=10./1e3;
+        // float unitsPerBin_amp=20./1e3;
+        float unitsPerBin_amp = BPostAnalysis::mVperBin/1e3;
         const int nbins_amp= (int)((xmax_amp - xmin_amp)/unitsPerBin_amp);
 
         std::cout << "\r\033[45C" << " -- xmin: " << xmin 
@@ -109,11 +110,17 @@ namespace lactel
                                 << std::endl;
 
         OM om1 = OM("OMS0321");
+        om1.setID(1);
         OM om2 = OM("OMS0304");
+        om2.setID(2);
+
 
         BWaveCatcher* wc1 = new BWaveCatcher("wc1", 1);
         wc1->plugOM(0, om1);
         wc1->plugOM(1, om2);
+        wc1->setTriggerThreshold(thr);
+        wc1->getConfiguration().setInputDynamicRange(6);
+        wc1->print();
 
         TH1F* npe_om1 = new TH1F("npe_om1", 
                                         "NPE; Number of PE; Rate for 1 PE per bin [Hz]",
@@ -192,13 +199,17 @@ namespace lactel
             std::vector<ADC_record> adcs_om1 = wc1->digitizeEvent(0, *evt);
             std::vector<ADC_record> adcs_om2 = wc1->digitizeEvent(1, *evt);
 
-            std::cout << "\r\033[10C" << "Processing event: " << evt->event_id << " Total Events: " << tree->GetEntries() << std::endl;
+            // std::cout << "\r\033[10C" << "Processing event: " << evt->event_id << " Total Events: " << tree->GetEntries() << std::endl;
 
             std::vector<Waveform> wfs_om1 = wc1->waveformFromADC(adcs_om1);
             std::vector<Waveform> wfs_om2 = wc1->waveformFromADC(adcs_om2);
 
             Waveform wf_om1 = wc1->joinWavefroms(0, wfs_om1);
             Waveform wf_om2 = wc1->joinWavefroms(1, wfs_om2);
+
+            // std::cout << "\r\033[10C" << "wf1 min " << wf_om1.getMinAmplitude() << "  ---  " 
+            //                             << "wf2 min " << wf_om2.getMinAmplitude() << "  ---  " 
+            //                             << std::endl;
 
             TGraph totA0 = wc1->drawWaveform(wf_om1, wc1->getConfiguration().eventBufferDepth);
             TGraph totA1 = wc1->drawWaveform(wf_om2, wc1->getConfiguration().eventBufferDepth);
@@ -209,11 +220,18 @@ namespace lactel
 
             double xmin_a1, xmax_a1, ymin_a1, ymax_a1;
             totA1.ComputeRange(xmin_a1, ymin_a1, xmax_a1, ymax_a1);
+            
 
-            if(abs(ymin_a0/1e3) >= thr)
+            // std::cout << "\r\033[10C" << "ymina0: " << ymin_a0 << "  -- ymina1: " << ymin_a1 << std::endl;
+            if(abs(ymin_a0/1e3) >= thr){
                 amp_om1->Fill(abs(ymin_a0)/1e3, 1/exposure_time);
-            if(abs(ymin_a1/1e3) >= thr)
+                // std::cout << "\r\033[10C" << "amp ch0: " << abs(ymin_a0)/1e3 << " - nEntries: " << totA0.GetN() << std::endl;
+            }
+                
+            if(abs(ymin_a1/1e3) >= thr){
                 amp_om2->Fill(abs(ymin_a1)/1e3, 1/exposure_time);
+                // std::cout << "\r\033[10C" << "amp ch1: " << abs(ymin_a1)/1e3 <<" - nEntries: " << totA0.GetN() << std::endl;
+            }
 
             int nhits_om1 = 0;
             int nhits_om2 = 0;
@@ -225,7 +243,7 @@ namespace lactel
                     if(hit.om_id == 2)
                         nhits_om2++;
             }
-            std::cout << string(20, '-') << " DebugTest " << string(20, '-') << " N° 1.5" << std::endl;
+            // std::cout << string(20, '-') << " DebugTest " << string(20, '-') << " N° 1.5" << std::endl;
 
             npe_om1->Fill(nhits_om1, 1/exposure_time);
             npe_om2->Fill(nhits_om2, 1/exposure_time);
@@ -303,7 +321,6 @@ namespace lactel
         ampCoin_om1->Draw("hist");
         ampCoin_om2->Draw("hist same");
 
-        ampCoin_om1->SetStats(0);
         TLegend* leg1 = new TLegend(.6, .8, .8, .9);
         leg1->AddEntry(ampCoin_om1, "OM0 - Upper", "l");
         leg1->AddEntry(ampCoin_om2, "OM1 - Lower", "l");
@@ -316,7 +333,6 @@ namespace lactel
         ampCoin_om1_cut->Draw("hist");
         ampCoin_om2_cut->Draw("hist same");
 
-        ampCoin_om1_cut->SetStats(0);
         TLegend* leg1_cut = new TLegend(.6, .8, .8, .9);
         leg1_cut->AddEntry(ampCoin_om1_cut, "OM0 - Upper", "l");
         leg1_cut->AddEntry(ampCoin_om2_cut, "OM1 - Lower", "l");
@@ -349,7 +365,6 @@ namespace lactel
         amp_om1->Draw("hist");
         amp_om2->Draw("hist same");
 
-        amp_om1->SetStats(0);
         TLegend* leg_amp = new TLegend(.6, .8, .8, .9);
         leg_amp->AddEntry(npeCoin_om1, "OM0 - Upper", "l");
         leg_amp->AddEntry(amp_om1, "OM1 - Upper", "l");
@@ -367,7 +382,6 @@ namespace lactel
         ampCoin_om1->Draw("hist same");
         ampCoin_om2->Draw("hist same");
 
-        amp_om1->SetStats(0);
         TLegend* leg_amp_wwCoin = new TLegend(.6, .8, .8, .9);
         leg_amp_wwCoin->AddEntry(amp_om1, "OM0 - Upper", "l");
         leg_amp_wwCoin->AddEntry(amp_om2, "OM1 - Lower", "l");
@@ -503,7 +517,7 @@ namespace lactel
     std::vector<TCanvas*>  getRealDataPlots(histsByName& hists, std::string file1, std::string file2){
         float xmin=0.;
         float xmax=2.4;
-        float unitsPerBin=10/1e3;
+        float unitsPerBin = BPostAnalysis::mVperBin/1e3;
         const int nbins= (int)((xmax - xmin)/unitsPerBin);
 
         float attenuator=0.5;
@@ -590,9 +604,9 @@ namespace lactel
         TH1F* hist1_run3= new TH1F("hist1_run3", "hist1_run3 amp OM1 run003",
                                 nbins, xmin, xmax);
 
-        TH1F* hist0_run4= new TH1F("hist0_run4", "hist0_run4 amp OM0 run003",
+        TH1F* hist0_run4= new TH1F("hist0_run4", "hist0_run4 amp OM0 run004",
                                 nbins, xmin, xmax);
-        TH1F* hist1_run4= new TH1F("hist1_run4", "hist1_run4 amp OM1 run003",
+        TH1F* hist1_run4= new TH1F("hist1_run4", "hist1_run4 amp OM1 run004",
                                 nbins, xmin, xmax);
 
         const int nhists = runs.size() * data.size();
@@ -656,10 +670,11 @@ namespace lactel
         hists.push_back(std::pair("amp_ch0_run4", hist0_run4));
         hists.push_back(std::pair("amp_ch1_run4", hist1_run4));
 
-        container.push_back(std::pair("amp_ch0_run3", hist0_run3));
-        container.push_back(std::pair("amp_ch1_run3", hist1_run3));
-        container.push_back(std::pair("amp_ch0_run4", hist0_run4));
-        container.push_back(std::pair("amp_ch1_run4", hist1_run4));
+        // container.h1["amp_ch0_run3"] = hist0_run3;
+        // container.h1["amp_ch0_run3"] = hist0_run3;
+        // container.h1["amp_ch1_run3"] = hist1_run3;
+        // container.h1["amp_ch0_run4"] = hist0_run4;
+        // container.h1["amp_ch1_run4"] = hist1_run4;
 
         return canvas;
     }
@@ -884,6 +899,7 @@ namespace lactel
     TCanvas* makeRatioPlot(TH1* h1, TH1* h2){
         TCanvas* canvas = new TCanvas("canvas", "Ratio Canvas", 900, 800);
         canvas->Divide(1,2);
+
         canvas->cd(1);
         gPad->SetPad(0, 0, 1, 0.3);
         canvas->cd(2);
@@ -891,10 +907,9 @@ namespace lactel
         h1->Draw("hist");
         h2->Draw("hist same");
         gPad->SetFrameLineColor(0);
-        gPad->SetMargin(0.1, 0.1, 0.1, 0.1);      
+        gPad->SetMargin(0.1, 0.1, 0.1, 0.01);      
 
         canvas->cd(1);
-
         h1->Sumw2(1);
         h2->Sumw2(1);
         TH1* ratio = (TH1*)h1->Clone("ratio");
@@ -906,6 +921,287 @@ namespace lactel
 
         return canvas;
     }
+
+
+    TCanvas* DrawWithRatio(TH1* h1, TH1* h2, const char* canvasName){
+        if (!h1 || !h2)
+            return nullptr;
+
+        // Canvas
+        TCanvas* c = new TCanvas(canvasName, canvasName, 800, 800);
+
+        //--------------------------------------------------
+        // Pads
+        //--------------------------------------------------
+        TPad* padTop = new TPad("padTop", "", 0.0, 0.40, 1.0, 1.0);
+        TPad* padBot = new TPad("padBot", "", 0.0, 0.00, 1.0, 0.40);
+
+        padTop->SetBottomMargin(0.02);
+
+        padBot->SetTopMargin(0.03);
+        padBot->SetBottomMargin(0.30);
+
+        padTop->Draw();
+        padBot->Draw();
+
+        //--------------------------------------------------
+        // Top pad
+        //--------------------------------------------------
+        padTop->cd();
+
+        TH1* h1Draw = (TH1*)h1->Clone("h1Draw");
+        TH1* h2Draw = (TH1*)h2->Clone("h2Draw");
+
+        h1Draw->SetDirectory(nullptr);
+        h2Draw->SetDirectory(nullptr);
+
+        h1Draw->SetLineColor(kBlack);
+        h1Draw->SetLineWidth(2);
+
+        h2Draw->SetLineColor(kRed + 1);
+        h2Draw->SetLineWidth(2);
+
+        double ymax = std::max(h1Draw->GetMaximum(), h2Draw->GetMaximum());
+        h1Draw->SetMaximum(1.25 * ymax);
+
+        h1Draw->Draw("HIST");
+        h2Draw->Draw("HIST SAME");
+
+        // Hide x-axis
+        h1Draw->GetXaxis()->SetLabelSize(0.);
+        h1Draw->GetXaxis()->SetTitleSize(0.);
+
+        TLegend* leg = new TLegend(0.65, 0.75, 0.88, 0.88);
+        leg->AddEntry(h1Draw, h1Draw->GetTitle(), "l");
+        leg->AddEntry(h2Draw, h2Draw->GetTitle(), "l");
+        leg->Draw();
+
+        //--------------------------------------------------
+        // Bottom pad
+        //--------------------------------------------------
+        padBot->cd();
+
+        TH1* ratio = (TH1*)h1->Clone("ratio");
+        ratio->SetDirectory(nullptr);
+        ratio->Divide(h2);
+
+        ratio->SetStats(false);
+        ratio->SetLineColor(kBlack);
+        ratio->SetMarkerStyle(20);
+        ratio->SetMarkerSize(0.9);
+
+        ratio->GetYaxis()->SetTitle("Ratio");
+        ratio->GetYaxis()->CenterTitle();
+
+        ratio->GetYaxis()->SetNdivisions(505);
+
+        ratio->GetYaxis()->SetTitleSize(0.09);
+        ratio->GetYaxis()->SetTitleOffset(0.55);
+        ratio->GetYaxis()->SetLabelSize(0.08);
+
+        ratio->GetXaxis()->SetTitleSize(0.10);
+        ratio->GetXaxis()->SetLabelSize(0.09);
+        ratio->GetXaxis()->SetTitleOffset(1.1);
+
+        ratio->SetMinimum(0.5);
+        ratio->SetMaximum(1.5);
+
+        ratio->Draw("EP");
+
+        TLine* line = new TLine(
+            ratio->GetXaxis()->GetXmin(),
+            1.0,
+            ratio->GetXaxis()->GetXmax(),
+            1.0);
+
+        line->SetLineStyle(2);
+        line->Draw();
+
+        int nbins = ratio->GetNbinsX();
+        TGraphAsymmErrors *ratioBand = new TGraphAsymmErrors(nbins);
+        for (int i = 1; i <= nbins; ++i) {
+            double c = ratio->GetBinContent(i);
+            double e = ratio->GetBinError(i);
+
+            ratioBand->SetPoint(i-1, ratio->GetBinCenter(i), 1.0);
+
+            double rel = (c > 0.) ? e/c : 0.0;
+
+            ratioBand->SetPointError(i-1,
+                                    ratio->GetBinWidth(i)/2.,
+                                    ratio->GetBinWidth(i)/2.,
+                                    rel, rel);
+        }
+
+        ratioBand->Draw("E2 same");
+
+        c->cd();
+        c->Update();
+
+        return c;
+    }
+
+    TCanvas* DrawWithRatio(std::vector<std::pair<TH1*, TH1*>> hists, const char* canvasName, bool errorBand){
+        for (auto& hist : hists)
+            if (!hist.first || !hist.second)
+                return nullptr;
+
+        // Canvas
+        TCanvas* c = new TCanvas(canvasName, canvasName, 800, 800);
+
+        //--------------------------------------------------
+        // Pads
+        //--------------------------------------------------
+        TPad* padTop = new TPad("padTop", "", 0.0, 0.40, 1.0, 1.0);
+        TPad* padBot = new TPad("padBot", "", 0.0, 0.00, 1.0, 0.40);
+
+        padTop->SetBottomMargin(0.02);
+
+        padBot->SetTopMargin(0.03);
+        padBot->SetBottomMargin(0.30);
+
+        padTop->Draw();
+        padBot->Draw();
+
+        //--------------------------------------------------
+        // Top pad
+        //--------------------------------------------------
+        padTop->cd();
+        padTop->SetLogy();
+
+        int i=0;
+        TH1* h1Draw[hists.size()];
+        TH1* h2Draw[hists.size()];
+        
+        TLegend* leg = new TLegend(0.65, 0.75, 0.88, 0.88);
+        for(auto& hist : hists){
+            h1Draw[i] = (TH1*)hist.first->Clone(("h1Draw" + to_string(i)).c_str());
+            h2Draw[i] = (TH1*)hist.second->Clone(("h2Draw" + to_string(i)).c_str());
+
+            h1Draw[i]->SetDirectory(nullptr);
+            h2Draw[i]->SetDirectory(nullptr);
+
+            h1Draw[i]->SetLineColor(i+1);
+            h1Draw[i]->SetLineWidth(2);
+            h1Draw[i]->SetFillColorAlpha(i+1, 0.4);
+
+            h2Draw[i]->SetLineColor(i+1);
+            h2Draw[i]->SetMarkerColor(i+1);
+            h2Draw[i]->SetLineWidth(2);
+            h2Draw[i]->SetMarkerStyle(20);
+            h2Draw[i]->SetMarkerSize(0.8);
+
+            double ymax = std::max(h1Draw[i]->GetMaximum(), h2Draw[i]->GetMaximum());
+            h1Draw[i]->SetMaximum(1.25 * ymax);
+
+            if(i == 0)
+                h1Draw[i]->Draw("HIST");
+            else
+                h1Draw[i]->Draw("HIST same");
+            h2Draw[i]->Draw("P SAME E");
+
+            // Hide x-axis
+            h1Draw[i]->GetXaxis()->SetLabelSize(0.);
+            h1Draw[i]->GetXaxis()->SetTitleSize(0.);
+
+            leg->AddEntry(h1Draw[i], h1Draw[i]->GetTitle(), "l");
+            leg->AddEntry(h2Draw[i], h2Draw[i]->GetTitle(), "P");
+            i++;
+        }
+        leg->Draw();
+        
+
+        //--------------------------------------------------
+        // Bottom pad
+        //--------------------------------------------------
+        padBot->cd();
+
+        i=0;
+        TH1* ratio[hists.size()];
+        TGraphAsymmErrors *ratioBand[hists.size()];
+
+        for(auto& hist : hists){
+            ratio[i] = (TH1*)hist.first->Clone(("ratio" + to_string(i)).c_str());
+            ratio[i]->SetDirectory(nullptr);
+            ratio[i]->Divide(hist.second);
+
+            ratio[i]->SetStats(false);
+            ratio[i]->SetLineColor(i+1);
+            ratio[i]->SetMarkerColor(i+1);
+            ratio[i]->SetMarkerStyle(20);
+            ratio[i]->SetMarkerSize(0.9);
+
+            ratio[i]->GetYaxis()->SetTitle("Ratio");
+            ratio[i]->GetYaxis()->CenterTitle();
+
+            ratio[i]->GetYaxis()->SetNdivisions(505);
+
+            ratio[i]->GetYaxis()->SetTitleSize(0.09);
+            ratio[i]->GetYaxis()->SetTitleOffset(0.55);
+            ratio[i]->GetYaxis()->SetLabelSize(0.08);
+
+            ratio[i]->GetXaxis()->SetTitleSize(0.10);
+            ratio[i]->GetXaxis()->SetLabelSize(0.09);
+            ratio[i]->GetXaxis()->SetTitleOffset(1.1);
+
+            ratio[i]->SetMinimum(0);
+            ratio[i]->SetMaximum(2);
+
+            ratio[i]->Draw("EP same");
+
+            if(errorBand){
+                int nbins = ratio[i]->GetNbinsX();
+                ratioBand[i] = new TGraphAsymmErrors(nbins);
+                for (int j = 1; j <= nbins; j++) {
+                    double c = ratio[i]->GetBinContent(j);
+                    double e = ratio[i]->GetBinError(j);
+
+                    ratioBand[i]->SetPoint(j-1, ratio[i]->GetBinCenter(j), 1.0);
+
+                    double rel = (c > 0.) ? e/c : 0.0;
+
+                    ratioBand[i]->SetPointError(j-1,
+                                            ratio[i]->GetBinWidth(j)/2.,
+                                            ratio[i]->GetBinWidth(j)/2.,
+                                            rel, rel);
+                }
+
+                ratioBand[i]->SetFillColorAlpha(i+1, 0.2);
+                ratioBand[i]->Draw("E2 same");
+            }
+            
+
+            i++;
+        }
+        
+        // TLine* line = new TLine(
+        //     ratio->GetXaxis()->GetXmin(),
+        //     1.0,
+        //     ratio->GetXaxis()->GetXmax(),
+        //     1.0);
+
+        // line->SetLineStyle(2);
+        // line->Draw();
+
+
+   
+
+        c->cd();
+        c->Update();
+
+        return c;
+    }
+
+
+
+    // TH1* getHistByName(histsByName container, std::string hist_name){
+    //     for(auto a : container){
+    //         if(a.first == hist_name)
+    //             return a.second;
+    //     }
+    //     return nullptr;
+    // }
+
 
 
 
