@@ -1281,6 +1281,7 @@ CMakeFiles/libOMG.dir/BPostAnalysis/src/BPostAnalysis.cc.o: \
  /usr/include/c++/13/pstl/glue_numeric_defs.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLactelDetector.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetector.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
@@ -1651,6 +1652,4 @@ CMakeFiles/libOMG.dir/BPostAnalysis/src/BPostAnalysis.cc.o: \
  /home/bouta-mohammed/root/root_install/include/TGaxis.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/DAQManager.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
- /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
- /home/bouta-mohammed/root/root_install/include/TH1F.h \
- /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh
+ /home/bouta-mohammed/root/root_install/include/TH1F.h

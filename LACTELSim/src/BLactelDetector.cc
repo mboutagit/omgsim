@@ -340,6 +340,15 @@ namespace lactel
         id = uid;
     }
 
+    std::vector<ElementaryCell> Module::getElementaryCells(){
+        std::vector<ElementaryCell> cells;
+        for(auto& cell : GetObjects())
+            cells.push_back(cell);
+
+        return cells;
+    }
+
+
 
     void Module::updatePosition(){
         G4ThreeVector pcum;

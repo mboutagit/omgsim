@@ -120,6 +120,7 @@ namespace lactel
             void addECell(std::string axis);
             int getNCells();
             int getNLayers(int axis);
+            std::vector<ElementaryCell> getElementaryCells();
             void print(std::ostream& out = std::cout, bool printCells = false);
             void dumpCells(std::ostream& out = std::cout, bool dumpName = false);
             void dumpCellsMaterial(std::ostream& out = std::cout);

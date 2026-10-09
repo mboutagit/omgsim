@@ -1281,6 +1281,7 @@ CMakeFiles/PostAna.dir/BPostAnalysis/programs/PostAna.cxx.o: \
  /usr/include/c++/13/pstl/glue_numeric_defs.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLactelDetector.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetector.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \

@@ -11,6 +11,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
+find_package(CLI11 REQUIRED)
+
 #---VTK
 # find_package(VTK REQUIRED)
 
@@ -136,7 +138,7 @@ endif()
 set(LINKDEF LACTELSim/include/LinkDef.hh)
 
 file(GLOB ba_sources LACTELSim/src/[a-zA-Z0-9]*.cc)
-file(GLOB ba_headers LACTELSim/include/*.hh)
+file(GLOB ba_headers LACTELSim/include/*.hh tools/include/*.hh)
 
 list(REMOVE_ITEM ba_headers "${CMAKE_CURRENT_SOURCE_DIR}/LACTELSim/include/LinkDef.hh")
 list(APPEND ba_headers "${CMAKE_CURRENT_SOURCE_DIR}/LACTELSim/include/LinkDef.hh")

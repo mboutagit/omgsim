@@ -861,9 +861,10 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BHardwareManager.cc.o: \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh \
- /home/bouta-mohammed/root/root_install/include/TCanvas.h \
- /home/bouta-mohammed/root/root_install/include/TPad.h \
- /home/bouta-mohammed/root/root_install/include/TVirtualPad.h \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh \
+ /home/bouta-mohammed/root/root_install/include/TROOT.h \
+ /home/bouta-mohammed/root/root_install/include/TDirectory.h \
+ /home/bouta-mohammed/root/root_install/include/TNamed.h \
  /home/bouta-mohammed/root/root_install/include/TObject.h \
  /home/bouta-mohammed/root/root_install/include/Rtypes.h \
  /home/bouta-mohammed/root/root_install/include/RtypesCore.h \
@@ -883,29 +884,40 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BHardwareManager.cc.o: \
  /home/bouta-mohammed/root/root_install/include/TStorage.h \
  /home/bouta-mohammed/root/root_install/include/TVersionCheck.h \
  /home/bouta-mohammed/root/root_install/include/RVersion.h \
- /home/bouta-mohammed/root/root_install/include/TAttLine.h \
- /home/bouta-mohammed/root/root_install/include/TAttFill.h \
- /home/bouta-mohammed/root/root_install/include/TAttPad.h \
- /home/bouta-mohammed/root/root_install/include/TQObject.h \
- /home/bouta-mohammed/root/root_install/include/TList.h \
- /home/bouta-mohammed/root/root_install/include/TSeqCollection.h \
- /home/bouta-mohammed/root/root_install/include/TCollection.h \
- /home/bouta-mohammed/root/root_install/include/TIterator.h \
  /home/bouta-mohammed/root/root_install/include/TString.h \
  /home/bouta-mohammed/root/root_install/include/TMathBase.h \
  /home/bouta-mohammed/root/root_install/include/ROOT/TypeTraits.hxx \
  /usr/include/c++/13/cstdarg \
+ /home/bouta-mohammed/root/root_install/include/TClass.h \
+ /home/bouta-mohammed/root/root_install/include/TDictionary.h \
+ /home/bouta-mohammed/root/root_install/include/ESTLType.h \
+ /home/bouta-mohammed/root/root_install/include/TObjArray.h \
+ /home/bouta-mohammed/root/root_install/include/TSeqCollection.h \
+ /home/bouta-mohammed/root/root_install/include/TCollection.h \
+ /home/bouta-mohammed/root/root_install/include/TIterator.h \
  /home/bouta-mohammed/root/root_install/include/TVirtualRWMutex.h \
  /home/bouta-mohammed/root/root_install/include/TVirtualMutex.h \
  /home/bouta-mohammed/root/root_install/include/ROOT/RRangeCast.hxx \
  /home/bouta-mohammed/root/root_install/include/ROOT/RSpan.hxx \
  /home/bouta-mohammed/root/root_install/include/ROOT/span.hxx \
+ /usr/include/c++/13/unordered_set \
+ /usr/include/c++/13/bits/unordered_set.h \
+ /home/bouta-mohammed/root/root_install/include/TUUID.h \
+ /home/bouta-mohammed/root/root_install/include/TList.h \
+ /home/bouta-mohammed/root/root_install/include/TBuffer.h \
+ /home/bouta-mohammed/root/root_install/include/TDataType.h \
+ /home/bouta-mohammed/root/root_install/include/Bytes.h \
+ /home/bouta-mohammed/root/root_install/include/Byteswap.h \
+ /home/bouta-mohammed/root/root_install/include/Rtypes.h \
+ /home/bouta-mohammed/root/root_install/include/TCanvas.h \
+ /home/bouta-mohammed/root/root_install/include/TPad.h \
+ /home/bouta-mohammed/root/root_install/include/TVirtualPad.h \
+ /home/bouta-mohammed/root/root_install/include/TAttLine.h \
+ /home/bouta-mohammed/root/root_install/include/TAttFill.h \
+ /home/bouta-mohammed/root/root_install/include/TAttPad.h \
+ /home/bouta-mohammed/root/root_install/include/TQObject.h \
  /home/bouta-mohammed/root/root_install/include/TVirtualQConnection.h \
  /home/bouta-mohammed/root/root_install/include/TInterpreter.h \
- /home/bouta-mohammed/root/root_install/include/TDataType.h \
- /home/bouta-mohammed/root/root_install/include/TDictionary.h \
- /home/bouta-mohammed/root/root_install/include/TNamed.h \
- /home/bouta-mohammed/root/root_install/include/ESTLType.h \
  /home/bouta-mohammed/root/root_install/include/TInterpreterValue.h \
  /home/bouta-mohammed/root/root_install/include/GuiTypes.h \
  /home/bouta-mohammed/root/root_install/include/Buttons.h \
@@ -1199,21 +1211,10 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BHardwareManager.cc.o: \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEvent.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHit.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4VHit.hh \
- /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLactelDetector.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetector.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4RotationMatrix.hh \
- /home/bouta-mohammed/root/root_install/include/TROOT.h \
- /home/bouta-mohammed/root/root_install/include/TDirectory.h \
- /home/bouta-mohammed/root/root_install/include/TClass.h \
- /home/bouta-mohammed/root/root_install/include/TObjArray.h \
- /usr/include/c++/13/unordered_set \
- /usr/include/c++/13/bits/unordered_set.h \
- /home/bouta-mohammed/root/root_install/include/TUUID.h \
- /home/bouta-mohammed/root/root_install/include/TBuffer.h \
- /home/bouta-mohammed/root/root_install/include/Bytes.h \
- /home/bouta-mohammed/root/root_install/include/Byteswap.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/BPostAnalysis/include/utils.hh \
@@ -1226,7 +1227,6 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BHardwareManager.cc.o: \
  /home/bouta-mohammed/root/root_install/include/TDatime.h \
  /home/bouta-mohammed/root/root_install/include/TUrl.h \
  /home/bouta-mohammed/root/root_install/include/ROOT/RConcurrentHashColl.hxx \
- /home/bouta-mohammed/root/root_install/include/Rtypes.h \
  /home/bouta-mohammed/root/root_install/include/ROOT/TRWSpinLock.hxx \
  /home/bouta-mohammed/root/root_install/include/ROOT/TSpinMutex.hxx \
  /usr/include/c++/13/condition_variable \

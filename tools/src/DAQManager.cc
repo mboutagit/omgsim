@@ -57,6 +57,11 @@ namespace DAQ{
     void DAQManager::addAWaveCatcher(BWaveCatcher* wc){
         wavecatchers.push_back(wc);
     }
+    void DAQManager::addAWaveCatcher(std::vector<BWaveCatcher*> wcs){
+        for(auto& wc : wcs)
+            addAWaveCatcher(wc);
+    }
+
 
     std::vector<BAnalysisManager::DetectedEvent*> DAQManager::getEvents(){
         return Events;

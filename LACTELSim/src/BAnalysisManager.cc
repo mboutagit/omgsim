@@ -8,15 +8,18 @@
 
 #include "BHit.hh"
 
+#include "Rtypes.h"
+
 #include "BRunManager.hh"
 #include "BEvent.hh"
 
 #include "TTree.h"
 #include "DAQManager.hh"
 
+ClassImp(lactel::BAnalysisManager::DAQEvent);
+
 namespace lactel
 {
-
     // std::map<float, float> BAnalysisManager::MeasureParameters::quantum_efficiency = {
     //                         {290., 0.},
     //                         {293., 0.05},
@@ -589,7 +592,7 @@ namespace lactel
     /**
      * @brief temp function to compute coinsidence by locally applying tts to hits
      */
-    bool BAnalysisManager::DetectedEvent::isACoincidence(float ctime, float thr){
+    bool BAnalysisManager::DetectedEvent::isACoincidence(float ctime){
         bool coincidence = false;
         double sigma_tts = OM::TTSDist_(OM::rng_)/2.355; // FWHM /2*sqrt(2*ln(2))
         double t_jutter = 0.;
@@ -610,6 +613,20 @@ namespace lactel
                 break;
         }
         return coincidence;
+    }
+
+    bool BAnalysisManager::DetectedEvent::checkCoincidence(float ctime){ // default coincidence time of 16 ns
+    
+    //     for(auto& de1: daqEvent){
+    //         for(auto& de2 : daqEvent){
+    //             if(de1.channel == de2.channel)
+    //                 continue;
+                
+    //             if( abs(de1.waveform.leadingEdge - de2.waveform.leadingEdge) <= ctime)
+    //                 return true;
+    //         }
+    //     }
+        return false;
     }
 
 

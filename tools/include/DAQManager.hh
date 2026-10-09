@@ -57,6 +57,7 @@ namespace DAQ {
             void dumpEvents(std::vector<BAnalysisManager::DetectedEvent*>& events, std::ostream& out);
             void addEvent(BAnalysisManager::DetectedEvent* event);
             void addAWaveCatcher(BWaveCatcher* wc);
+            void addAWaveCatcher(std::vector<BWaveCatcher*> wcs);
             void init();
             std::vector<BAnalysisManager::DetectedEvent*> getEvents();
             BWaveCatcher* getWavaCatcherByName(std::string name);

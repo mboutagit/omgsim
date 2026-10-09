@@ -1635,6 +1635,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BSteppingAction.cc.o: \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4VHit.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhysicsList.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4VUserPhysicsList.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/rundefs.hh \

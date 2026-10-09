@@ -46,8 +46,8 @@ int main(int argc, char* argv[]){
 
 
 
-    TCanvas* can = new TCanvas("can", "Muon Flux", 1700, 1000);
-    can->Divide(2,2);
+    TCanvas* can = new TCanvas("can", "Muon Flux", 1200, 1000);
+    can->Divide(2,3);
     can->cd(1);
     gPad->SetLogx();
     gPad->SetLogy();
@@ -58,14 +58,19 @@ int main(int argc, char* argv[]){
     double style = 0;
     TLegend* leg = new TLegend(0.5, 0.1, 0.7, 0.5);
     for(auto& angle : angles){
-        TF1* flux = new TF1("flux_" + (int)angle, [](double* x, double* pars){ return pow(x[0], 2.7) *lactel::BPrimaryGeneratorAction::gaisser_flux(x, pars);}, 0.1, 1e4, 1);
-        TF1* modFlux = new TF1("modFlux_"+ (int)angle, 
+        TF1* flux = new TF1("flux_" + (int)angle, 
                                 [](double* x, double* pars){ return pow(x[0], 2.7) *
-                                    lactel::BPrimaryGeneratorAction::ModifiedFormula(x, pars);}, 
-                                0.1, 1e4, 1
+                                lactel::BPrimaryGeneratorAction::gaisser_flux(x, pars);}, 
+                                0.1, 1e7, 1);
+        TF1* modFlux = new TF1("modFlux_"+ (int)angle, 
+                                [angle](double* x, double* pars){ 
+                                double xx[] = {x[0], angle};
+                                return pow(x[0], 2.7) *
+                                lactel::BPrimaryGeneratorAction::ModifiedFormula2D(xx, pars);}, 
+                                0.1, 1e7, 1
                             );
         flux->SetParameter(0, angle);
-        modFlux->SetParameter(0, angle);
+        // modFlux->SetParameter(0, angle);
 
         flux->SetLineColor(style+1);
         modFlux->SetLineColor(style+1);
@@ -100,29 +105,27 @@ int main(int argc, char* argv[]){
     gPad->SetGrid();
     TLegend* leg1 = new TLegend(0.7, 0.7, 0.85, 0.85);
 
-    int angle = 0;
-    TF1* modFlux = new TF1("modFlux_0", [](double* x, double* pars){ return pow(x[0], 2.7) * 1/1e3 * lactel::BPrimaryGeneratorAction::ModifiedFormula(x, pars);}, 1e-3, 1e5, 1);
-    TF1* modFlux30 = new TF1("modFlux_30", [](double* x, double* pars){ return pow(x[0], 2.7) * 1/1e3 * lactel::BPrimaryGeneratorAction::ModifiedFormula(x, pars);}, 1e-3, 1e5, 1);
-    TF1* modFlux60 = new TF1("modFlux_60", [](double* x, double* pars){ return pow(x[0], 2.7) * 1/1e3 * lactel::BPrimaryGeneratorAction::ModifiedFormula(x, pars);}, 1e-3, 1e5, 1);
-    TF1* modFlux90 = new TF1("modFlux_90", [](double* x, double* pars){ return pow(x[0], 2.7) * 1/1e3 * lactel::BPrimaryGeneratorAction::ModifiedFormula(x, pars);}, 1e-3, 1e5, 1);
-    modFlux->SetParameter(0, 0);
-    modFlux30->SetParameter(0, 30);
-    modFlux60->SetParameter(0, 60);
-    modFlux90->SetParameter(0, 90);
-    modFlux->SetLineColor(2);
-    modFlux30->SetLineColor(3);
-    modFlux60->SetLineColor(4);
-    modFlux90->SetLineColor(6);
-    modFlux->Draw();
-    modFlux30->Draw("same");
-    modFlux60->Draw("same");
-    modFlux90->Draw("same");
-    leg1->AddEntry(modFlux, ("Modified - " + std::to_string(0) + "^{°}").c_str(), "l");
-    leg1->AddEntry(modFlux30, ("Modified - " + std::to_string(30) + "^{°}").c_str(), "l");
-    leg1->AddEntry(modFlux60, ("Modified - " + std::to_string(60) + "^{°}").c_str(), "l");
-    leg1->AddEntry(modFlux90, ("Modified - " + std::to_string(90) + "^{°}").c_str(), "l");
+    int nval = 4;
 
-    modFlux->SetTitle("muons flux; E_{#mu} (GeV); E_{#mu}^{2.7} * I_{#mu} (MeV^{-1}cm^{-2}S^{-1}Sr^{-1})");
+    TF1* funcs[nval];
+    // funcs
+    for(int i = 0; i < nval; i++){
+        double angle = i * 30;
+        funcs[i] = new TF1("modFlux_" + int(angle), 
+                [angle](double* x, double* pars){ 
+                double xx[] = {x[0], angle};
+                return pow(x[0], 2.7) * 1/1e3 * // transform to MeV
+                lactel::BPrimaryGeneratorAction::ModifiedFormula2D(xx, pars);}, 
+                1e-4, 1e5, 1);
+        funcs[i]->SetLineColor(i+1);
+        if(i==0){
+            funcs[i]->SetTitle("muons flux; E_{#mu} (GeV); E_{#mu}^{2.7} * I_{#mu} (MeV^{-1}cm^{-2}S^{-1}Sr^{-1})");
+            funcs[i]->Draw();
+        } 
+        else 
+            funcs[i]->Draw("same");      
+        leg1->AddEntry(funcs[i], ("Modified - " + std::to_string((int)angle) + " deg").c_str(), "l");
+    }
 
 
     pair<double, double> data[] = { {0.2827795772525707, 0.0000017378008287493763}, // data extarcted from Grieder book using https://automeris.io/ / Already in MeV MeV^{-1}cm^{-2}S^{-1}Sr^{-1}
@@ -145,33 +148,31 @@ int main(int argc, char* argv[]){
         gr->SetPoint(j, val.first, pow(val.first, 2.7) * val.second);
         j++;
     }
-    gr->SetMarkerColor(6);
+    gr->SetMarkerColor(funcs[0]->GetLineColor());
     gr->SetMarkerStyle(20);
     
-    leg1->AddEntry(gr, "Measurements at 0°", "P");
+    leg1->AddEntry(gr, "Measurements at 0 deg", "P");
 
     gr->Draw("samep");
     leg1->Draw();
 
     can->cd(3);
 
-    double Emin = 1e-3;
-    double Emax = 1e5;
+    double Emin = 3e-3;
+    double Emax = 1e4;
     double Thetamin = 0.;
-    double Thetamax = TMath::Pi()/2;
+    double Thetamax = 90;
+
+    std::cout << "\r\033[10C" << "E: [" << Emin << "," << Emax << "] GeV, " 
+                                << " - Angle: [" << Thetamin << "," << Thetamax << "] Deg" 
+                                << std::endl;
 
 
     TF2* modFlux2D = new TF2("modFlux2D", 
-                                    [](double* x, double* pars){
-                                        return 
-                                        lactel::BPrimaryGeneratorAction::ModifiedFormula2D(x, pars);
-                                    },
-                                    Emin, Emax, Thetamin, Thetamax
-                                );
-
-    double fixedAngle = 60;
-    
-
+                                [](double* x, double* pars){ return pow(x[0], 2.7) *
+                                    lactel::BPrimaryGeneratorAction::ModifiedFormula2D(x, pars);}, 
+                                Emin, Emax, Thetamin, Thetamax
+                            );
     
     gPad->SetLogx();
     modFlux2D->Draw("colz");
@@ -179,177 +180,179 @@ int main(int argc, char* argv[]){
     std::cout << "\r\033[10C" << "Dist. Max: " << disMax << std::endl;
 
     can->cd(4);
-
     TH2D* dist = new TH2D("dist", "test Modified 2D sampling; Log_{10}(Energy) [GeV]; Angle [deg]",
-            500, Emin, Emax,
-            500, Thetamin, Thetamax
+            100, Emin, Emax,
+            100, Thetamin, Thetamax
         );
 
     TH1D* ene = new TH1D("ene", "Energy; Eneregy in GeV; Count", 100, Emin, Emax);
     TH1D* theta = new TH1D("theta", "Theta; Theta in deg; Count", 100, Thetamin, Thetamax);
 
-    TH3D* dist3D = new TH3D("dist3D", "test Modified 2D sampling; Log_{10}(Energy) [GeV]; Angle [deg]; Intensity ",
-            100, Emin, Emax,
-            100, Thetamin, Thetamax,
-            100, 0, 1
-        );
+    // TH3D* dist3D = new TH3D("dist3D", "test Modified 2D sampling; Log_{10}(Energy) [GeV]; Angle [deg]; Intensity ",
+    //         100, Emin, Emax,
+    //         100, Thetamin, Thetamax,
+    //         100, 0, 1
+    //     );
 
-    TH1D* distcheck = new TH1D("distcheck", "Eval check; Events ",
-        100, -5, 2
-    );
+    // TH1D* distcheck = new TH1D("distcheck", "Eval check; Events ",
+    //     100, -5, 2
+    // );
     
 
-    for(int i = 0; i < 10e6; i++){
+    for(int i = 0; i < 10e5; i++){
         double x, y;
         modFlux2D->GetRandom2(x, y);
+        // std::cout << "\r\033[10C" << "E= " << x << " - theta= " << y << std::endl;
         dist->Fill(x, y);
-        dist3D->Fill(x, y, modFlux2D->Eval(x, y)/disMax);
-        distcheck->Fill(log10(modFlux2D->Eval(x, 0)/disMax));
+        // dist3D->Fill(x, y, modFlux2D->Eval(x, y)/disMax);
+        // distcheck->Fill(log10(modFlux2D->Eval(x, 0)/disMax));
         ene->Fill(x);
         theta->Fill(y);
-
     }
 
     gPad->SetLogx();
     dist->Draw("colz");
 
-    new TCanvas();
+    can->cd(5);
     ene->Draw();
-    new TCanvas();
+
+    can->cd(6);
     theta->Draw();
 
-    new TCanvas();
-    gPad->SetLogz();
-    gPad->SetLogx();
-    dist3D->Draw();
+    // new TCanvas();
+    // gPad->SetLogz();
+    // gPad->SetLogx();
+    // dist3D->Draw();
 
-    new TCanvas();
-    gPad->SetLogx();
-    distcheck->Draw();
+    // new TCanvas();
+    // gPad->SetLogx();
+    // distcheck->Draw();
 
-    new TCanvas();
-    gPad->SetLogx();
-    gPad->SetLogy();
-    bool firstDraw = true;
-    for(int i = 0; i < 90; i++){
-        double ang = i * rad;
+    // new TCanvas();
+    // gPad->SetLogx();
+    // gPad->SetLogy();
+    // bool firstDraw = true;
+    // for(int i = 0; i < 90; i++){
+    //     double ang = i;
 
-        TF1* test60 = new TF1("modFlux_70", [modFlux2D, ang](double* x, double* pars)
-                                { return modFlux2D->Eval(x[0], ang); }, 
-                                1e-3, 1e5, 0
-                            );
-        test60->SetLineColor(i);
-        if(firstDraw){
-            test60->Draw();
-            firstDraw = false;
-        }
-        else{
-            test60->Draw("same");
-        }
+    //     TF1* test60 = new TF1("modFlux_70", [modFlux2D, ang](double* x, double* pars)
+    //                             { return modFlux2D->Eval(x[0], ang); }, 
+    //                             1e-3, 1e5, 0
+    //                         );
+    //     test60->SetLineColor(i);
+    //     if(firstDraw){
+    //         test60->Draw();
+    //         firstDraw = false;
+    //     }
+    //     else{
+    //         test60->Draw("same");
+    //     }
 
-    }
+    // }
 
-    new TCanvas();
-    gPad->SetLogy();
-    bool firstDrawEne = true;
-    for(int i = 1; i < 30; i++){
-        double ene =  i*100/1e3;
+    // new TCanvas();
+    // gPad->SetLogy();
+    // bool firstDrawEne = true;
+    // for(int i = 1; i < 30; i++){
+    //     double ene =  i*100/1e3;
 
-        TF1* testEne = new TF1("Ene", [modFlux2D, ene](double* x, double* pars)
-                                { return modFlux2D->Eval(ene, x[0]); }, 
-                                0, 90, 0
-                            );
-        // testEne->SetTitle(("Energy: " + to_string(ene) + "; Energy [MeV]; Abundance").c_str());               
-        testEne->SetLineColor(i);
-        if(firstDrawEne){
-            testEne->Draw();
-            firstDrawEne = false;
-        }
-        else{
-            testEne->Draw("same");
-        }
+    //     TF1* testEne = new TF1("Ene", [modFlux2D, ene](double* x, double* pars)
+    //                             { return modFlux2D->Eval(ene, x[0]); }, 
+    //                             0, 90, 0
+    //                         );
+    //     // testEne->SetTitle(("Energy: " + to_string(ene) + "; Energy [MeV]; Abundance").c_str());               
+    //     testEne->SetLineColor(i);
+    //     if(firstDrawEne){
+    //         testEne->Draw();
+    //         firstDrawEne = false;
+    //     }
+    //     else{
+    //         testEne->Draw("same");
+    //     }
 
-    }
-
-
-    new TCanvas();
-    gPad->SetLogy();
-    TGraph grInt;
-    TGraph grInt1;
-    TGraph grInt2;
-    for(int i = 0; i < 90; i++){
-        double ang = i * rad;
-
-        TF1* test60 = new TF1("test", [modFlux2D, ang](double* x, double* pars)
-                                { return modFlux2D->Eval(x[0], ang); }, 
-                                1e-3, 1e5, 0
-                            );
-        test60->SetLineColor(i);
-        grInt.SetPoint(i, pow(cos(ang*deg), 2), test60->Integral(1e-3, 1e5));
-        // grInt1.SetPoint(i, ang, test60->Integral(1e-3, 1e2));
-        // grInt2.SetPoint(i, ang, test60->Integral(1e-3, 1e1));
-
-    }
-
-    grInt.Draw("APC");
-    // grInt1.SetLineColor(2);
-    // grInt1.Draw("PC");
-    // grInt2.SetLineColor(3);
-    // grInt2.Draw("PC");
+    // }
 
 
-    //#############################################################################################""
+    // new TCanvas();
+    // gPad->SetLogy();
+    // TGraph grInt;
+    // TGraph grInt1;
+    // TGraph grInt2;
+    // for(int i = 0; i < 90; i++){
+    //     double ang = i;
+
+    //     TF1* test60 = new TF1("test", [modFlux2D, ang](double* x, double* pars)
+    //                             { return modFlux2D->Eval(x[0], ang); }, 
+    //                             1e-3, 1e5, 0
+    //                         );
+    //     test60->SetLineColor(i);
+    //     grInt.SetPoint(i, pow(cos(ang * rad), 2), test60->Integral(1e-3, 1e5));
+    //     // grInt1.SetPoint(i, ang, test60->Integral(1e-3, 1e2));
+    //     // grInt2.SetPoint(i, ang, test60->Integral(1e-3, 1e1));
+
+    // }
+
+    // grInt.Draw("APC");
+    // // grInt1.SetLineColor(2);
+    // // grInt1.Draw("PC");
+    // // grInt2.SetLineColor(3);
+    // // grInt2.Draw("PC");
+
+
+    // //#############################################################################################""
 
 
 
-    TCanvas* can0 = new TCanvas("can0", "Muon Flux", 1700, 1000);
-    can0->Divide(2,2);
-    can0->cd(1);
-    gPad->SetLogx();
-    gPad->SetLogy();
-    gPad->SetGrid();
+    // TCanvas* can0 = new TCanvas("can0", "Muon Flux Canvas -- ", 1700, 1000);
+    // can0->Divide(2,2);
+    // can0->cd(1);
+    // gPad->SetLogx();
+    // gPad->SetLogy();
+    // gPad->SetGrid();
 
-    TF1* fun = new TF1("fun", 
-                            [](double* x, double* pars)
-                            { return utils::BGenerator::ModifiedGaisser(x, pars);},
-                            0.001, 1e4, 0
-                        );
-    style = 0;
-    TLegend* leg2 = new TLegend(0.5, 0.1, 0.7, 0.5);
-    for(auto& angle : angles){
-        TF1* flux = new TF1("flux_" + (int)angle, [](double* x, double* pars){ return pow(x[0], 2.7) *lactel::BPrimaryGeneratorAction::gaisser_flux(x, pars);}, 0.1, 1e4, 1);
+    // TF1* fun = new TF1("fun", 
+    //                         [](double* x, double* pars)
+    //                         {return lactel::BPrimaryGeneratorAction::ModifiedFormula2D(x, pars);},
+    //                         0.001, 1e4, 0
+    //                     );
+    // style = 0;
+    // TLegend* leg2 = new TLegend(0.5, 0.1, 0.7, 0.5);
+    // for(auto& angle : angles){
+    //     TF1* flux = new TF1("flux_" + (int)angle, 
+    //                             [](double* x, double* pars){ return pow(x[0], 2.7) *
+    //                             lactel::BPrimaryGeneratorAction::gaisser_flux(x, pars);}, 0.1, 1e4, 1);
         
-        TF1* modFlux = new TF1("modFlux_"+ (int)angle, 
-                                [fun, angle](double* x, double* pars){ return pow(x[0], 2.7) * fun->Eval(x[0], angle);}, 
-                                0.001, 1e4, 0
-                            );
+    //     TF1* modFlux = new TF1("modFlux_"+ (int)angle, 
+    //                             [fun, angle](double* x, double* pars){ return pow(x[0], 2.7) * fun->Eval(x[0], angle);}, 
+    //                             0.001, 1e4, 0
+    //                         );
 
-        flux->SetParameter(0, angle);
-        modFlux->SetParameter(0, angle);
+    //     flux->SetParameter(0, angle);
+    //     modFlux->SetParameter(0, angle);
 
-        flux->SetLineColor(style+1);
-        modFlux->SetLineColor(style+1);
+    //     flux->SetLineColor(style+1);
+    //     modFlux->SetLineColor(style+1);
 
-        flux->SetLineStyle(7);
-        // modFlux->SetLineStyle(7);
+    //     flux->SetLineStyle(7);
+    //     // modFlux->SetLineStyle(7);
 
-        if(style == 0){
-            flux->SetTitle("muons flux; E_{#mu} (GeV); E_{#mu}^{2.7} * I_{#mu} (GeV^{1.7}cm^{-2}S^{-1}Sr^{-1})");
-            flux->Draw();
-            modFlux->Draw("same");
-            leg2->AddEntry(flux, ("Gaiser - " + std::to_string(angle) + "^{°}").c_str(), "l");
-            leg2->AddEntry(modFlux, ("Modified - " + std::to_string(angle) + "^{°}").c_str(), "l");
-        }
-        else{
-            flux->Draw("same");
-            modFlux->Draw("same");
-            leg2->AddEntry(flux, ("Gaiser - " + std::to_string(angle) + "^{°}").c_str(), "l");
-            leg2->AddEntry(modFlux, ("Modified - " + std::to_string(angle) + "^{°}").c_str(), "l");
-        }
+    //     if(style == 0){
+    //         flux->SetTitle("muons flux; E_{#mu} (GeV); E_{#mu}^{2.7} * I_{#mu} (GeV^{1.7}cm^{-2}S^{-1}Sr^{-1})");
+    //         flux->Draw();
+    //         modFlux->Draw("same");
+    //         leg2->AddEntry(flux, ("Gaiser - " + std::to_string(angle) + "^{°}").c_str(), "l");
+    //         leg2->AddEntry(modFlux, ("Modified - " + std::to_string(angle) + "^{°}").c_str(), "l");
+    //     }
+    //     else{
+    //         flux->Draw("same");
+    //         modFlux->Draw("same");
+    //         leg2->AddEntry(flux, ("Gaiser - " + std::to_string(angle) + "^{°}").c_str(), "l");
+    //         leg2->AddEntry(modFlux, ("Modified - " + std::to_string(angle) + "^{°}").c_str(), "l");
+    //     }
 
-        style++;
-    }
-    leg2->Draw("same");
+    //     style++;
+    // }
+    // leg2->Draw("same");
 
 
 

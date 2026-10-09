@@ -123,70 +123,70 @@ namespace lactel
         wc1->print();
 
         TH1F* npe_om1 = new TH1F("npe_om1", 
-                                        "NPE; Number of PE; Rate for 1 PE per bin [Hz]",
+                                        "MC - NPE; Number of PE; Rate for 1 PE per bin [Hz]",
                                         nbins, xmin, xmax
                                     );
         TH1F* npe_om2 = new TH1F("npe_om2", 
-                                        "NPE; Number of PE; Rate for 1 PE per bin [Hz]",
+                                        "MC - NPE; Number of PE; Rate for 1 PE per bin [Hz]",
                                         nbins, xmin, xmax
                                     );
 
         TH1F* npeCoin_om1 = new TH1F("npeCoin_om1", 
-                                        ("Coincidence #Deltat=" + std::to_string((int)t_coin) + " ns; Number of PE; Rate for 1 PE per bin [Hz]").c_str(),
+                                        ("MC - Coincidence #Deltat=" + std::to_string((int)t_coin) + " ns; Number of PE; Rate for 1 PE per bin [Hz]").c_str(),
                                         nbins, xmin, xmax
                                     );
         TH1F* npeCoin_om2 = new TH1F("npeCoin_om2", 
-                                        ("Coincidence #Deltat=" + std::to_string((int)t_coin) + " ns; Number of PE; Rate for 1 PE per bin [Hz]").c_str(),
+                                        ("MC - Coincidence #Deltat=" + std::to_string((int)t_coin) + " ns; Number of PE; Rate for 1 PE per bin [Hz]").c_str(),
                                         nbins, xmin, xmax
                                     );
                                
         TH1F* npe_om1_cut = new TH1F("npe_om1_cut", 
-                                        ("Coincidence #Deltat=" + std::to_string((int)t_coin) + " ns; Number of PE; Rate for 1 PE per bin [Hz]").c_str(),
+                                        ("MC - Coincidence #Deltat=" + std::to_string((int)t_coin) + " ns; Number of PE; Rate for 1 PE per bin [Hz]").c_str(),
                                         nbins, xmin, xmax
                                     );
         TH1F* npe_om2_cut = new TH1F("npe_om2_cut", 
-                                        ("Coincidence #Deltat=" + std::to_string((int)t_coin) + " ns; Number of PE; Rate for 1 PE per bin [Hz]").c_str(),
+                                        ("MC - Coincidence #Deltat=" + std::to_string((int)t_coin) + " ns; Number of PE; Rate for 1 PE per bin [Hz]").c_str(),
                                         nbins, xmin, xmax
                                     );
         TH1F* npeCoin_om1_cut = new TH1F("npeCoin_om1_cut", 
-                                        ("Coincidence #Deltat=" + std::to_string((int)t_coin) + " ns; Number of PE; Rate for 1 PE per bin [Hz]").c_str(),
+                                        ("MC - Coincidence #Deltat=" + std::to_string((int)t_coin) + " ns; Number of PE; Rate for 1 PE per bin [Hz]").c_str(),
                                         nbins, xmin, xmax
                                     );
         TH1F* npeCoin_om2_cut = new TH1F("npeCoin_om2_cut", 
-                                        ("Coincidence #Deltat=" + std::to_string((int)t_coin) + " ns; Number of PE; Rate for 1 PE per bin [Hz]").c_str(),
+                                        ("MC - Coincidence #Deltat=" + std::to_string((int)t_coin) + " ns; Number of PE; Rate for 1 PE per bin [Hz]").c_str(),
                                         nbins, xmin, xmax
                                     );
 
 
         TH1F* amp_om1 = new TH1F("amp_om1", 
-                                        "Amplitude; Amplitude [V]; Rate for 10 mV per bin [Hz]",
+                                        " MC - Amplitude; Amplitude [V]; Rate for 10 mV per bin [Hz]",
                                         nbins_amp, xmin_amp, xmax_amp
                                     );
         TH1F* amp_om2 = new TH1F("amp_om2", 
-                                        "Amplitude; Amplitude [V]; Rate for 10 mV per bin [Hz]",
+                                        " MC - Amplitude; Amplitude [V]; Rate for 10 mV per bin [Hz]",
                                         nbins_amp, xmin_amp, xmax_amp
                                     );
 
         TH1F* ampCoin_om1 = new TH1F("ampCoin_om1", 
-                                        ("Amplitude Coincidence #Deltat"+ std::to_string((int)t_coin) +" ns; Amplitude [V]; Rate for 10 mV per bin [Hz]").c_str(),
+                                        (" MC - Amplitude Coincidence #Deltat"+ std::to_string((int)t_coin) +" ns; Amplitude [V]; Rate for 10 mV per bin [Hz]").c_str(),
                                         nbins_amp, xmin_amp, xmax_amp
                                     );
         TH1F* ampCoin_om2 = new TH1F("ampCoin_om2", 
-                                        ("Amplitude Coincidence #Deltat"+ std::to_string((int)t_coin) +" ns; Amplitude [V]; Rate for 10 mV per bin [Hz]").c_str(),
+                                        (" MC - Amplitude Coincidence #Deltat"+ std::to_string((int)t_coin) +" ns; Amplitude [V]; Rate for 10 mV per bin [Hz]").c_str(),
                                         nbins_amp, xmin_amp, xmax_amp
                                     );
         
         TH1F* ampCoin_om1_cut = new TH1F("ampCoin_om1_cut", 
-                                        ("Amplitude Coincidence #Deltat"+ std::to_string((int)t_coin) +" ns; Amplitude [V]; Rate for 10 mV per bin [Hz]").c_str(),
+                                        (" MC - Amplitude Coincidence #Deltat"+ std::to_string((int)t_coin) +" ns; Amplitude [V]; Rate for 10 mV per bin [Hz]").c_str(),
                                         nbins_amp, xmin_amp, xmax_amp
                                     );
         TH1F* ampCoin_om2_cut = new TH1F("ampCoin_om2_cut", 
-                                        ("Amplitude Coincidence #Deltat"+ std::to_string((int)t_coin) +" ns; Amplitude [V]; Rate for 10 mV per bin [Hz]").c_str(),
+                                        (" MC - Amplitude Coincidence #Deltat"+ std::to_string((int)t_coin) +" ns; Amplitude [V]; Rate for 10 mV per bin [Hz]").c_str(),
                                         nbins_amp, xmin_amp, xmax_amp
                                     );
 
         TH2F* npeCoin_oms_cut = new TH2F("npeCoin_oms_cut", 
-                                        ("NPE - Coincidence #Deltat"+ std::to_string((int)t_coin) +" ns; nPE OM0; nPE OM1").c_str(),
+                                        ("MC - NPE - Coincidence #Deltat"+ std::to_string((int)t_coin) +" ns; nPE OM0; nPE OM1").c_str(),
                                         nbins, xmin, xmax,
                                         nbins, xmin, xmax
                                     );
@@ -195,32 +195,43 @@ namespace lactel
         for(long long i = 0; i < tree->GetEntries(); i++){
             tree->GetEntry(i);
 
-            // apply DAQ
-            std::vector<ADC_record> adcs_om1 = wc1->digitizeEvent(0, *evt);
-            std::vector<ADC_record> adcs_om2 = wc1->digitizeEvent(1, *evt);
+            // // apply DAQ
+            // std::vector<ADC_record> adcs_om1 = wc1->digitizeEvent(0, *evt);
+            // std::vector<ADC_record> adcs_om2 = wc1->digitizeEvent(1, *evt);
 
-            // std::cout << "\r\033[10C" << "Processing event: " << evt->event_id << " Total Events: " << tree->GetEntries() << std::endl;
+            // // std::cout << "\r\033[10C" << "Processing event: " << evt->event_id << " Total Events: " << tree->GetEntries() << std::endl;
 
-            std::vector<Waveform> wfs_om1 = wc1->waveformFromADC(adcs_om1);
-            std::vector<Waveform> wfs_om2 = wc1->waveformFromADC(adcs_om2);
+            // std::vector<Waveform> wfs_om1 = wc1->waveformFromADC(adcs_om1);
+            // std::vector<Waveform> wfs_om2 = wc1->waveformFromADC(adcs_om2);
 
-            Waveform wf_om1 = wc1->joinWavefroms(0, wfs_om1);
-            Waveform wf_om2 = wc1->joinWavefroms(1, wfs_om2);
+            // Waveform wf_om1 = wc1->joinWavefroms(0, wfs_om1);
+            // Waveform wf_om2 = wc1->joinWavefroms(1, wfs_om2);
 
-            // std::cout << "\r\033[10C" << "wf1 min " << wf_om1.getMinAmplitude() << "  ---  " 
-            //                             << "wf2 min " << wf_om2.getMinAmplitude() << "  ---  " 
-            //                             << std::endl;
+            // // std::cout << "\r\033[10C" << "wf1 min " << wf_om1.getMinAmplitude() << "  ---  " 
+            // //                             << "wf2 min " << wf_om2.getMinAmplitude() << "  ---  " 
+            // //                             << std::endl;
 
-            TGraph totA0 = wc1->drawWaveform(wf_om1, wc1->getConfiguration().eventBufferDepth);
-            TGraph totA1 = wc1->drawWaveform(wf_om2, wc1->getConfiguration().eventBufferDepth);
+            // TGraph totA0 = wc1->drawWaveform(wf_om1, wc1->getConfiguration().eventBufferDepth);
+            // TGraph totA1 = wc1->drawWaveform(wf_om2, wc1->getConfiguration().eventBufferDepth);
         
+            wc1->digitizeEvent(*evt);
 
-            double xmin_a0, xmax_a0, ymin_a0, ymax_a0;
-            totA0.ComputeRange(xmin_a0, ymin_a0, xmax_a0, ymax_a0);
+            // double xmin_a0, xmax_a0, ymin_a0, ymax_a0;
+            // totA0.ComputeRange(xmin_a0, ymin_a0, xmax_a0, ymax_a0);
 
-            double xmin_a1, xmax_a1, ymin_a1, ymax_a1;
-            totA1.ComputeRange(xmin_a1, ymin_a1, xmax_a1, ymax_a1);
+            // double xmin_a1, xmax_a1, ymin_a1, ymax_a1;
+            // totA1.ComputeRange(xmin_a1, ymin_a1, xmax_a1, ymax_a1);
             
+            double ymin_a0, ymin_a1;
+            // if(evt->daqEvent[0].waveform.peakAmplitude)
+            //     ymin_a0 = evt->daqEvent[0].waveform.peakAmplitude;
+            // else 
+            //     continue;
+
+            // if(evt->daqEvent[1].waveform.peakAmplitude)
+            //     ymin_a1 = evt->daqEvent[1].waveform.peakAmplitude;
+            // else
+            //     continue;
 
             // std::cout << "\r\033[10C" << "ymina0: " << ymin_a0 << "  -- ymina1: " << ymin_a1 << std::endl;
             if(abs(ymin_a0/1e3) >= thr){
@@ -248,7 +259,7 @@ namespace lactel
             npe_om1->Fill(nhits_om1, 1/exposure_time);
             npe_om2->Fill(nhits_om2, 1/exposure_time);
 
-            if(evt->isACoincidence(t_coin)){
+            if( evt->checkCoincidence(t_coin) ){ //evt->isACoincidence(t_coin)){
                 int nhits_om1_coin = 0;
                 int nhits_om2_coin = 0;
 
@@ -599,14 +610,14 @@ namespace lactel
         charge_dataset_run3.read(charge_data_run3.data(), PredType::NATIVE_DOUBLE);
         charge_dataset_run4.read(charge_data_run4.data(), PredType::NATIVE_DOUBLE);
 
-        TH1F* hist0_run3= new TH1F("hist0_run3", "hist0_run3 amp OM0 run003",
+        TH1F* hist0_run3= new TH1F("hist0_run3", "data - hist0_run3 amp OM0 run003",
                                 nbins, xmin, xmax);
-        TH1F* hist1_run3= new TH1F("hist1_run3", "hist1_run3 amp OM1 run003",
+        TH1F* hist1_run3= new TH1F("hist1_run3", "data - hist1_run3 amp OM1 run003",
                                 nbins, xmin, xmax);
 
-        TH1F* hist0_run4= new TH1F("hist0_run4", "hist0_run4 amp OM0 run004",
+        TH1F* hist0_run4= new TH1F("hist0_run4", "data - hist0_run4 amp OM0 run004",
                                 nbins, xmin, xmax);
-        TH1F* hist1_run4= new TH1F("hist1_run4", "hist1_run4 amp OM1 run004",
+        TH1F* hist1_run4= new TH1F("hist1_run4", "data - hist1_run4 amp OM1 run004",
                                 nbins, xmin, xmax);
 
         const int nhists = runs.size() * data.size();
@@ -614,7 +625,7 @@ namespace lactel
         for(int i = 0; i < runs.size(); i++){
             for(int j = 0; j < data.size(); j++){
                 histograms[i+j] = new TH1F(("hist" + std::to_string(i) + "_" + std::to_string(j)).c_str(), 
-                                        "hist0_run3 amp OM0 run003",
+                                        "data - hist0_run3 amp OM0 run003",
                                         nbins, xmin, xmax);
             }
         }

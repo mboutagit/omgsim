@@ -1,5 +1,4 @@
-#ifndef BWaveCatcherConf_hh
-#define BWaveCatcherConf_hh
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -8,13 +7,18 @@
 
 namespace lactel
 {
+    enum class TriggerLogic {
+        OR = 0,
+        AND = 1,
+        MAJORITY = 2
+    };
+
     class BWaveCatcherConf
     {
     private:
         /* data */
     public: 
 
-        
         BWaveCatcherConf(/* args */);
         ~BWaveCatcherConf();
 
@@ -43,7 +47,7 @@ namespace lactel
         bool enableAllChannels();
         bool disableAllChannels();
 
-        void setTriggerLogic(std::string trig);
+        void setTriggerLogic(TriggerLogic trig);
         void setGateLEngth(int);
 
         void print(std::ostream& out = std::cout) const;
@@ -74,7 +78,7 @@ namespace lactel
         double postTriggerTime;                          // Post-trigger window in microseconds
 
         std::array<bool, NumChannels> channelEnabled;    // Enable/disable channels for triggering
-        std::string triggerLogic;                        // e.g. "OR", "AND", "MAJORITY"
+        TriggerLogic triggerLogic;                        // e.g. "OR", "AND", "MAJORITY"
         int gateLength;                                  // Gate width for trigger primitives (in ns or samples)
 
         // Calibration / Correction
@@ -98,8 +102,3 @@ namespace lactel
     };
  
 } // namespace lactel
-
-
-
-
-#endif // BWaveCatcherConf_hh

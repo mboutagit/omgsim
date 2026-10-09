@@ -288,6 +288,7 @@ CMakeFiles/WaveCatcher.dir/tools/programs/WaveCatcher.cxx.o: /home/bouta-mohamme
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/DAQManager.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/BLogger.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/dbRoutines.hh \
   /usr/include/alloca.h \
@@ -1759,11 +1760,7 @@ CMakeFiles/WaveCatcher.dir/tools/programs/WaveCatcher.cxx.o: /home/bouta-mohamme
 
 /usr/include/stdio.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/include/avxneconvertintrin.h:
-
-/usr/include/boost/mpl/iter_fold.hpp:
-
-/usr/include/boost/mpl/vector/aux_/preprocessed/typeof_based/vector20.hpp:
+/usr/include/signal.h:
 
 /usr/include/boost/mpl/integral_c_tag.hpp:
 
@@ -2119,10 +2116,6 @@ CMakeFiles/WaveCatcher.dir/tools/programs/WaveCatcher.cxx.o: /home/bouta-mohamme
 
 /usr/include/boost/config/detail/cxx_composite.hpp:
 
-/usr/include/cppconn/config.h:
-
-/usr/include/c++/13/bits/istream.tcc:
-
 /usr/lib/gcc/x86_64-linux-gnu/13/include/cldemoteintrin.h:
 
 /home/bouta-mohammed/root/root_install/include/VecCore/Common.h:
@@ -2200,6 +2193,10 @@ CMakeFiles/WaveCatcher.dir/tools/programs/WaveCatcher.cxx.o: /home/bouta-mohamme
 /usr/include/asm-generic/errno-base.h:
 
 /usr/include/alloca.h:
+
+/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh:
+
+/usr/include/c++/13/bits/stl_algo.h:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
@@ -3243,6 +3240,16 @@ CMakeFiles/WaveCatcher.dir/tools/programs/WaveCatcher.cxx.o: /home/bouta-mohamme
 
 /home/bouta-mohammed/root/root_install/include/VecCore/Types.h:
 
+/usr/lib/gcc/x86_64-linux-gnu/13/include/avxneconvertintrin.h:
+
+/usr/include/boost/mpl/iter_fold.hpp:
+
+/usr/include/boost/mpl/vector/aux_/preprocessed/typeof_based/vector20.hpp:
+
+/usr/include/c++/13/bits/istream.tcc:
+
+/usr/include/cppconn/config.h:
+
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
 /usr/include/boost/mpl/iterator_category.hpp:
@@ -3967,8 +3974,6 @@ CMakeFiles/WaveCatcher.dir/tools/programs/WaveCatcher.cxx.o: /home/bouta-mohamme
 
 /usr/include/c++/13/bits/std_function.h:
 
-/usr/include/c++/13/bits/stl_algo.h:
-
 /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
 
 /usr/include/c++/13/bits/parse_numbers.h:
@@ -4146,8 +4151,6 @@ CMakeFiles/WaveCatcher.dir/tools/programs/WaveCatcher.cxx.o: /home/bouta-mohamme
 /usr/include/c++/13/bits/locale_facets.h:
 
 /usr/include/c++/13/tr1/hypergeometric.tcc:
-
-/usr/include/signal.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
 

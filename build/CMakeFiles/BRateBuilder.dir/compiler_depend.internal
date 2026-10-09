@@ -451,6 +451,7 @@ CMakeFiles/BRateBuilder.dir/BPostAnalysis/programs/BRateBuilder.cxx.o
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh
+ /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh
  /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/BLogger.hh
  /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/dbRoutines.hh
  /usr/include/alloca.h

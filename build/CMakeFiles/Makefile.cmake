@@ -69,6 +69,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake"
+  "/usr/local/share/cmake/CLI11/CLI11Config.cmake"
+  "/usr/local/share/cmake/CLI11/CLI11ConfigVersion.cmake"
   "/usr/share/cmake-3.28/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake"
@@ -110,6 +112,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/G__Dict.dir/DependInfo.cmake"
   "CMakeFiles/libOMG.dir/DependInfo.cmake"
+  "CMakeFiles/BDAQProcessor.dir/DependInfo.cmake"
   "CMakeFiles/BDetector.dir/DependInfo.cmake"
   "CMakeFiles/BFlux.dir/DependInfo.cmake"
   "CMakeFiles/BRateBuilder.dir/DependInfo.cmake"

@@ -27,7 +27,7 @@ namespace lactel
     }
     void BSteppingAction::UserSteppingAction(const G4Step* step){
         if( ! BDetectorConstruction::GetIt()->IsRunning()){
-            std::cout << "\r\033[10C" << "Reading step: " << std::endl;
+            // std::cout << "\r\033[10C" << "Reading step ------- : " << std::endl;
             return;
         }
 

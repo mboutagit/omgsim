@@ -9,29 +9,7 @@ namespace tools
 
     BWaveCatcherConf BWaveCatcher::config_ = BWaveCatcherConf();
 
-    BWaveCatcher::BWaveCatcher(std::string nm, int uid) : name(nm), id(uid), acquiring_(false), rng_(std::random_device{}()), noiseDist_(-2, 2), TTSDist_(3.314, 0.1531*0.1531), AmpDist_(0, 0.1156) { // 0.1156 is to have 90% of amplitudes inside 30% fluctuation
-        // scope.resize(config_.NumChannels);
-        // signalSource.resize(config_.NumChannels);
-
-        // canvas = new TCanvas("scope", "BWaveCatcher scope");
-        // canvas->Divide(config_.NumChannels);
-        // canvas->SetTitle("Oscil");
-        // for(int c = 0; c < config_.NumChannels; c++){
-        //     canvas->cd(c);
-        //     scope[c] = new TGraph();
-        //     scope[c]->SetTitle(("Channel " + std::to_string(c) + "; Time (ns); Amplitude (mV)").c_str());
-        //     scope[c]->Draw("APL");
-        // }
-
-        // TH1F tts = TH1F("tts", "TTS", 100, 2, 5);
-        // TH1F amp = TH1F("amp", "TTS", 100, -2, 2);
-
-        // for(int i=0; i<10000; i++){
-        //     // tts.Fill(TTSDist_(rng_));
-        //     amp.Fill(AmpDist_(rng_));
-        // }
-        // // tts.Write();
-        // amp.Write();
+    BWaveCatcher::BWaveCatcher(std::string nm, int uid) : name(nm), id(uid), acquiring_(false), rng_(std::random_device{}()), noiseDist_(-2, 2), TTSDist_(3.314, 0.1531), AmpDist_(0, 0.1156) { // 0.1156 is to have 90% of amplitudes inside 30% fluctuation
         
     }
 
@@ -308,37 +286,60 @@ namespace tools
     // }
 
     void BWaveCatcher::digitizeEvent(BAnalysisManager::DetectedEvent& event){
+
+        Waveform channelWaveform[getConfiguration().NumChannels];
         for(int i=0; i < getConfiguration().NumChannels; i++){
-            // std::cout << "\r\033[10C" << "trying to digitize event " << event.event_id 
-            //                                 << " on run: " << event.runNb
-            //                                 << " on wavecatcher: " << getName()
-            //                                 << " on channel: " << i 
-            //                                 << std::endl;
             ADCs[i] = digitizeEvent(i, event);
             if(! ADCs[i].size())
                 return;
             std::vector<Waveform> wfs = waveformFromADC(ADCs[i]);
-
             Waveform fullWF = joinWavefroms(i, wfs);
-            // TGraph totA0 = drawWaveform(fullWF, getConfiguration().eventBufferDepth);
-            // totA0.SetName(("totA_evt" + std::to_string(event.event_id) + "_Channel" + to_string(i)).c_str());
-            // totA0.SetLineColor(1);
-            // // if(fullWF.samples.size() > 0 && i > 0)
-            // //     totA0.Write();
+            fullWF.extractWaveformParameters(config_.triggerThresholds[i], 
+                                                PulsePolarity::Negative,
+                                                config_.internalResistor,
+                                                20
+                                            );
+            channelWaveform[i] = fullWF;
 
-            // double xmin_a0, xmax_a0, ymin_a0, ymax_a0;
-            // totA0.ComputeRange(xmin_a0, ymin_a0, xmax_a0, ymax_a0);
+            
 
-            BAnalysisManager::DAQEvent daqEvent;
-            daqEvent.waveform = fullWF;
-            daqEvent.channel = i;
-            daqEvent.amp = fullWF.getMinAmplitude(); // to mV;
-            daqEvent.c = fullWF.integrate(1/getConfiguration().samplingFrequency) * 
-                            1e-3 * 1e-9 / getConfiguration().internalResistor; // convert to Columb
-            daqEvent.om_id = connectedOMs[i].getID();
-            daqEvent.t = fullWF.signalTimeF(getConfiguration().triggerThresholds[i], 1/getConfiguration().samplingFrequency);
-            event.daqEvent.push_back(daqEvent);
-        }  
+            // BAnalysisManager::DAQEvent daqEvent;
+            // daqEvent.waveform = fullWF;
+            // daqEvent.channel = i;
+            // daqEvent.amp = fullWF.getMinAmplitude(); // to mV;
+            // daqEvent.c = fullWF.integrate(1/getConfiguration().samplingFrequency) * 
+            //                 1e-3 * 1e-9 / getConfiguration().internalResistor; // convert to Columb
+            // daqEvent.om_id = connectedOMs[i].getID();
+            // daqEvent.t = fullWF.signalTimeF(getConfiguration().triggerThresholds[i], 1/getConfiguration().samplingFrequency);
+            // event.daqEvent.push_back(daqEvent);
+        }
+
+        std::vector<double> times;
+        for(auto& wf : channelWaveform)
+            times.push_back(wf.leadingEdge);
+        
+        event.tmin = *std::min_element(times.begin(), times.end());
+        event.tmax = *std::max_element(times.begin(), times.end());
+        event.time = event.tmin;
+        event.dt = event.tmax - event.tmin;
+        event.coincidence = event.isACoincidence(15);
+        // event.wCoincidence = event.checkCoincidence(15);
+    }
+
+    void BWaveCatcher::setTriggerThreshold(int channel, double threshold){
+        config_.triggerThresholds[channel] = threshold; // mV
+    }
+
+    void BWaveCatcher::setTriggerThreshold(double threshold){
+        config_.triggerThresholds.fill(threshold);
+    }
+
+    void BWaveCatcher::setInputOffset(int channel, double offset){
+        config_.inputOffsets[channel] = offset;
+    }
+
+    void BWaveCatcher::setInputOffset(double offset){
+        config_.inputOffsets.fill(offset);
     }
 
 
@@ -361,7 +362,7 @@ namespace tools
         double dt = 1. / (config_.samplingFrequency); // ns per sample
         double one_pe_charge = omp.g * (-1) * e_SI; // in C
         double I_0 = (one_pe_charge/((omp.ft/2.2 - omp.rt/2.2)*1e-9));
-        double I_peak = (one_pe_charge/(omp.ft/2.2*1e-9)) * pow((omp.rt/2.2/omp.ft/2.2), (omp.rt/2.2/(omp.ft/2.2-omp.rt/2.2))); // A
+        double I_peak = (one_pe_charge/(omp.ft/2.2*1e-9)) * pow((omp.rt/2.2/omp.ft/2.2), (omp.rt/2.2/(omp.ft/2.2-omp.rt/2.2))); // in A
         double lsb = config_.inputDynamicRange / (pow(2, config_.resolution) - 1); // in Volts
         std::normal_distribution<> pedDist_(0, 0.30*I_peak/lsb); 
         double t_jutter = 0.;
@@ -379,22 +380,21 @@ namespace tools
             adc.channel = channel; // set channel
 
             double I_peak_stat;
-            if(amplitudeCorrection){
+            // if(amplitudeCorrection){
                 I_peak_stat = I_peak*(1 + AmpDist_(rng_)) ;
-            }
-            else{
-                I_peak_stat = I_peak;
-            }
+            // }
+            // else{
+            //     I_peak_stat = I_peak;
+            // }
             
             hit.a = I_peak * config_.internalResistor * 1e3; // mV
             hit.a_f = I_peak_stat * config_.internalResistor * 1e3; // mV
 
             double sigma_tts = TTSDist_(rng_)/2.355; // FWHM /2*sqrt(2*ln(2))
-            std::normal_distribution<> TTSFDist_(t_jutter, sigma_tts*sigma_tts);  // sample from TTS FWHM dist. with time jutter
-            hit.t_tts = hit.time + TTSFDist_(rng_); // hit time + tts in ns
-            if(hit.t_tts < 0 )
-                hit.t_tts == 0;
-            double t=0; // time in nsx
+            std::normal_distribution<> TTSFDist_(t_jutter, sigma_tts);  // sample from TTS FWHM dist. with time jutter
+            hit.t_tts = std::max(0.0, hit.time + TTSFDist_(rng_)); // hit time + tts in ns
+
+            double t=0; // time in ns
             for (size_t i = 0; i < config_.recordLength; ++i) {
                 t = i * dt;
                 double ped=pedDist_(rng_);
@@ -410,12 +410,12 @@ namespace tools
                 double count = std::clamp(std::round(pre_count),  - pow(2, config_.resolution-1), pow(2, config_.resolution-1) -1); // + noiseDist_(rng_); // mV
 
                 adc.samples[i] = count;  
-                if(timeCorrection){
+                // if(timeCorrection){
                     adc.timestamp=hit.t_tts; 
-                }
-                else{
-                    adc.timestamp=hit.time; 
-                }
+                // }
+                // else{
+                //     adc.timestamp=hit.time; 
+                // }
                            
             }
             adcs.push_back(adc);
@@ -429,51 +429,20 @@ namespace tools
         Waveform wf;
         wf.channel = record.channel;
         wf.samples.resize(record.samples.size());
-        double vStep=(config_.inputDynamicRange*1e3/pow(2, config_.resolution));
         double dt = 1/config_.samplingFrequency; // in ns
         int shift = 0;
-        bool useShift=false;
-        bool trigger = false;
         double inputOffset=config_.inputOffsets[record.channel];
         double lsb = config_.inputDynamicRange / (pow(2, config_.resolution) - 1); // in Volts
         std::normal_distribution<> pedDist_(0, 500*lsb); 
         for(int i=0; i<record.samples.size(); i++){
             double ped=pedDist_(rng_);  
-            if(i*dt < record.timestamp || 
-                i-shift > record.samples.size() || 
-                i+inputOffset > record.samples.size()
-            ){    // check range
-                // wf.samples[i] = ped; // always add basline noise;
+            if(i*dt < record.timestamp)
                 continue; 
-            }
-            if(!useShift){ // determine time shift sample
-                shift=i; 
-                useShift=true;
-            }
-              
-            // wf.samples[i+inputOffset] = (record.samples[(i-shift)] - ped) * lsb *1e3 ; // +  noiseDist_(rng_) % 2;  mV
-            wf.samples[i+inputOffset] = (record.samples[(i-shift)]) * lsb *1e3 ; // +  noiseDist_(rng_) % 2;  mV   
+            wf.samples[i] = (record.samples[i]) * lsb *1e3 ; // +  noiseDist_(rng_) % 2;  mV   
         }
         wf.timestamp=record.timestamp;
         return wf;  
     }
-
-    void BWaveCatcher::setTriggerThreshold(int channel, double threshold){
-        config_.triggerThresholds[channel] = threshold; // mV
-    }
-
-    void BWaveCatcher::setTriggerThreshold(double threshold){
-        config_.triggerThresholds.fill(threshold);
-    }
-
-    void BWaveCatcher::setInputOffset(int channel, double offset){
-        config_.inputOffsets[channel] = offset;
-    }
-
-    void BWaveCatcher::setInputOffset(double offset){
-        config_.inputOffsets.fill(offset);
-    }
-
     
     std::vector<Waveform> BWaveCatcher::waveformFromADC(std::vector<ADC_record> records){
         std::vector<Waveform> wfs;
@@ -488,7 +457,6 @@ namespace tools
     Waveform BWaveCatcher::joinWavefroms(int channel, std::vector<Waveform> wfs){
         if(wfs.size() == 0)
             return Waveform();
-        // std::cout << "\r\033[10C" << "SSSSSSSSize: " << wfs.size() << std::endl;
         std::sort(wfs.begin(), wfs.end());
        
         double length = config_.eventBufferDepth*config_.recordLength;
@@ -497,10 +465,10 @@ namespace tools
         Waveform waveform;
         waveform.channel = wfs[0].channel;
         waveform.samples.resize(length);
-        waveform.time.resize(length);
+        waveform.setTimeStep(dt);
         bool triggered = false;
         double lsb = config_.inputDynamicRange / (pow(2, config_.resolution) - 1); // in Volts
-        std::normal_distribution<> pedDist_(0, 500*lsb); 
+        std::normal_distribution<> pedDist_(0, 10*lsb); 
 
 
         for(auto& wf : wfs){
@@ -510,7 +478,6 @@ namespace tools
             int ref_sample=0;
             bool flag = true;
             while(sample < length){
-            waveform.time[sample] = sample * dt;
                 if(sample > wf.samples.size() -1 ) // sample beyond the wf samples
                     break;
 
@@ -531,28 +498,23 @@ namespace tools
                     waveform.samples[sample] = config_.inputDynamicRange*1e3/2; // positive saturation  np noise
                 if(waveform.samples[sample] < - config_.inputDynamicRange*1e3/2)
                     waveform.samples[sample] = - config_.inputDynamicRange*1e3/2; // negative saturation  no noise
-                
-                // std::cout << "\r\033[10C" << "time is: " << sample*dt << " - sample is: " << sample 
-                //                                                         << " - sample non cum: " << waveform.samples.at(sample) 
-                //                                                         << " - sample cumm: " << wf.samples.at(sample-ref_sample) 
-                //                                                         << std::endl;
+
                 sample++;
             }
         }
+
         int itr=0;
         for(auto& sample : waveform.samples){
             sample += pedDist_(rng_); // adding basline noise to the waveform
             if(sample <= config_.triggerThresholds[channel] && ! triggered){
                 triggered = true;
+                waveform.triggered = true;
                 waveform.timestamp = itr*dt; // timestamp when the trigger is fired
-                // std::cout << "\r\033[10C \033[1,35m" << "Trigger: " << waveform.samples[itr] << " on channel "<< channel 
-                //                                         << " : set to: " << config_.triggerThresholds[channel] 
-                //                                         << " : timestamp: " << itr*dt
-                //                                         << std::endl;
             }
             itr++;
         }
 
+        // return only triggered waveform.
         if(triggered){
             waveforms[channel].push_back(waveform);
             return waveform;

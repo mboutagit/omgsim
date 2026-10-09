@@ -2,8 +2,7 @@
 
 namespace lactel
 {
-
-        // Constructor with defaults
+    // Constructor with defaults
     BWaveCatcherConf::BWaveCatcherConf()
         : samplingFrequency(3.2), // 3.2 Gs/s 
           inputDynamicRange(4.70), // true WaveCatcher range / using attinuator
@@ -18,7 +17,7 @@ namespace lactel
           preTriggerTime(10.0),
           postTriggerTime(5.0),
           channelEnabled{true, true},
-          triggerLogic("OR"),
+          triggerLogic(TriggerLogic::OR),
           gateLength(10),
           applyBaselineCorrection(true),
           pedestalOffsets{0.0, 0.0},
@@ -45,10 +44,11 @@ namespace lactel
                     <<  "\ttriggerSource: "         << triggerSource << "\n"
                     <<  "\tpreTriggerTime: "        << preTriggerTime << "\n"
                     <<  "\tpostTriggerTime: "       << postTriggerTime << "\n"
-                    <<  "\ttriggerLogic: "          << triggerLogic << "\n"
+                    // <<  "\ttriggerLogic: "          << triggerLogic << "\n"
                     <<  "\tgateLength: "            << gateLength << "\n"
                     <<  "\tenableHitRateMonitor: "  << enableHitRateMonitor << "\n"
                     <<  "\tOffset: \n";
+
                     for(int i=0; i < NumChannels; i++)
                             out << "\t\tCh" + to_string(i) << " : " << inputOffsets[i] << "\n";
 
@@ -67,13 +67,11 @@ namespace lactel
                     out <<  "\ttriggerDACOffsets: \n";
                     for(int i=0; i <NumChannels; i++)
                             out << "\t\tCh" + to_string(i) << " : " << triggerDACOffsets[i] << "\n";
-                
-
     
     }
 
     void BWaveCatcherConf::setSimplingFrequenct(double f){
-        samplingFrequency =f;
+        samplingFrequency = f;
     }
 
     void BWaveCatcherConf::setChannelInputOffset(int c, double offset){
@@ -99,6 +97,7 @@ namespace lactel
     void BWaveCatcherConf::setChannelTriggerThreshold(int c, int thr){
         triggerThresholds[c] = thr;
     }
+
     void BWaveCatcherConf::setAllChannelTriggerThreshold(int thr){
         triggerThresholds.fill(thr);
     }
@@ -139,7 +138,7 @@ namespace lactel
         return true;
     }
 
-    void BWaveCatcherConf::setTriggerLogic(std::string triglog){
+    void BWaveCatcherConf::setTriggerLogic(TriggerLogic triglog){
         triggerLogic = triglog;
     }
 
@@ -147,5 +146,15 @@ namespace lactel
         gateLength = gl;
     }
     
+    std::ostream& operator<<(std::ostream& os, TriggerLogic logic){
+        switch (logic) {
+            case TriggerLogic::OR:        return os << "OR";
+            case TriggerLogic::AND:       return os << "AND";
+            case TriggerLogic::MAJORITY:  return os << "MAJORITY";
+        }
+
+        return os << "UNKNOWN";
+    }
+
 } // namespace lactel
 

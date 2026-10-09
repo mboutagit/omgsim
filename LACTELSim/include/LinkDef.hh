@@ -11,6 +11,10 @@
 #pragma link C++ class lactel::BAnalysisManager::Measure+;
 #pragma link C++ class lactel::BAnalysisManager::Hit+;
 
+#pragma link C++ class Waveform+;
+#pragma link C++ class lactel::BAnalysisManager::DAQEvent+;
+#pragma link C++ class std::vector<lactel::BAnalysisManager::DAQEvent>+;
+
 
 #pragma link C++ class GeometryGrid+;
 #pragma link C++ class GeometryObject+;

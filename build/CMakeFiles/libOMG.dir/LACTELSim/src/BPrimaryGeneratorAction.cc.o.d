@@ -1613,8 +1613,8 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BPrimaryGeneratorAction.cc.o: \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4VHit.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/DAQManager.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
- /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
  /home/bouta-mohammed/root/root_install/include/TH1F.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BAnalysisManager.hh

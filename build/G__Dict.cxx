@@ -55,6 +55,12 @@
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BSteppingAction.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BVolumesManager.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/Utils.hh"
+#include "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh"
+#include "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh"
+#include "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh"
+#include "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherMessenger.hh"
+#include "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/DAQManager.hh"
+#include "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh"
 
 // Header files passed via #pragma extra_include
 
@@ -131,6 +137,38 @@ namespace ROOT {
    static void CLHEPcLcLHep3Vector_TClassManip(TClass* ){
    }
 
+} // end of namespace ROOT
+
+namespace ROOT {
+   static void *new_Waveform(void *p = nullptr);
+   static void *newArray_Waveform(Long_t size, void *p);
+   static void delete_Waveform(void *p);
+   static void deleteArray_Waveform(void *p);
+   static void destruct_Waveform(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::Waveform*)
+   {
+      ::Waveform *ptr = nullptr;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::Waveform >(nullptr);
+      static ::ROOT::TGenericClassInfo 
+         instance("Waveform", ::Waveform::Class_Version(), "tools/include/Waveform.hh", 30,
+                  typeid(::Waveform), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &::Waveform::Dictionary, isa_proxy, 4,
+                  sizeof(::Waveform) );
+      instance.SetNew(&new_Waveform);
+      instance.SetNewArray(&newArray_Waveform);
+      instance.SetDelete(&delete_Waveform);
+      instance.SetDeleteArray(&deleteArray_Waveform);
+      instance.SetDestructor(&destruct_Waveform);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::Waveform*)
+   {
+      return GenerateInitInstanceLocal(static_cast<::Waveform*>(nullptr));
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const ::Waveform*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
 } // end of namespace ROOT
 
 namespace ROOT {
@@ -405,7 +443,7 @@ namespace ROOT {
       ::lactel::BLactelDetector *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::lactel::BLactelDetector >(nullptr);
       static ::ROOT::TGenericClassInfo 
-         instance("lactel::BLactelDetector", ::lactel::BLactelDetector::Class_Version(), "BLactelDetector.hh", 144,
+         instance("lactel::BLactelDetector", ::lactel::BLactelDetector::Class_Version(), "BLactelDetector.hh", 145,
                   typeid(::lactel::BLactelDetector), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::lactel::BLactelDetector::Dictionary, isa_proxy, 4,
                   sizeof(::lactel::BLactelDetector) );
@@ -511,6 +549,51 @@ namespace ROOT {
 } // end of namespace ROOT
 
 namespace ROOT {
+   static TClass *lactelcLcLBAnalysisManagercLcLDAQEvent_Dictionary();
+   static void lactelcLcLBAnalysisManagercLcLDAQEvent_TClassManip(TClass*);
+   static void *new_lactelcLcLBAnalysisManagercLcLDAQEvent(void *p = nullptr);
+   static void *newArray_lactelcLcLBAnalysisManagercLcLDAQEvent(Long_t size, void *p);
+   static void delete_lactelcLcLBAnalysisManagercLcLDAQEvent(void *p);
+   static void deleteArray_lactelcLcLBAnalysisManagercLcLDAQEvent(void *p);
+   static void destruct_lactelcLcLBAnalysisManagercLcLDAQEvent(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::lactel::BAnalysisManager::DAQEvent*)
+   {
+      ::lactel::BAnalysisManager::DAQEvent *ptr = nullptr;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::lactel::BAnalysisManager::DAQEvent));
+      static ::ROOT::TGenericClassInfo 
+         instance("lactel::BAnalysisManager::DAQEvent", "BAnalysisManager.hh", 104,
+                  typeid(::lactel::BAnalysisManager::DAQEvent), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &lactelcLcLBAnalysisManagercLcLDAQEvent_Dictionary, isa_proxy, 4,
+                  sizeof(::lactel::BAnalysisManager::DAQEvent) );
+      instance.SetNew(&new_lactelcLcLBAnalysisManagercLcLDAQEvent);
+      instance.SetNewArray(&newArray_lactelcLcLBAnalysisManagercLcLDAQEvent);
+      instance.SetDelete(&delete_lactelcLcLBAnalysisManagercLcLDAQEvent);
+      instance.SetDeleteArray(&deleteArray_lactelcLcLBAnalysisManagercLcLDAQEvent);
+      instance.SetDestructor(&destruct_lactelcLcLBAnalysisManagercLcLDAQEvent);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::lactel::BAnalysisManager::DAQEvent*)
+   {
+      return GenerateInitInstanceLocal(static_cast<::lactel::BAnalysisManager::DAQEvent*>(nullptr));
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const ::lactel::BAnalysisManager::DAQEvent*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
+
+   // Dictionary for non-ClassDef classes
+   static TClass *lactelcLcLBAnalysisManagercLcLDAQEvent_Dictionary() {
+      TClass* theClass =::ROOT::GenerateInitInstanceLocal(static_cast<const ::lactel::BAnalysisManager::DAQEvent*>(nullptr))->GetClass();
+      lactelcLcLBAnalysisManagercLcLDAQEvent_TClassManip(theClass);
+   return theClass;
+   }
+
+   static void lactelcLcLBAnalysisManagercLcLDAQEvent_TClassManip(TClass* ){
+   }
+
+} // end of namespace ROOT
+
+namespace ROOT {
    static TClass *lactelcLcLBAnalysisManagercLcLHit_Dictionary();
    static void lactelcLcLBAnalysisManagercLcLHit_TClassManip(TClass*);
    static void *new_lactelcLcLBAnalysisManagercLcLHit(void *p = nullptr);
@@ -525,7 +608,7 @@ namespace ROOT {
       ::lactel::BAnalysisManager::Hit *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::lactel::BAnalysisManager::Hit));
       static ::ROOT::TGenericClassInfo 
-         instance("lactel::BAnalysisManager::Hit", "BAnalysisManager.hh", 192,
+         instance("lactel::BAnalysisManager::Hit", "BAnalysisManager.hh", 196,
                   typeid(::lactel::BAnalysisManager::Hit), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &lactelcLcLBAnalysisManagercLcLHit_Dictionary, isa_proxy, 4,
                   sizeof(::lactel::BAnalysisManager::Hit) );
@@ -554,6 +637,41 @@ namespace ROOT {
    }
 
 } // end of namespace ROOT
+
+//______________________________________________________________________________
+atomic_TClass_ptr Waveform::fgIsA(nullptr);  // static to hold class pointer
+
+//______________________________________________________________________________
+const char *Waveform::Class_Name()
+{
+   return "Waveform";
+}
+
+//______________________________________________________________________________
+const char *Waveform::ImplFileName()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::Waveform*)nullptr)->GetImplFileName();
+}
+
+//______________________________________________________________________________
+int Waveform::ImplFileLine()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::Waveform*)nullptr)->GetImplFileLine();
+}
+
+//______________________________________________________________________________
+TClass *Waveform::Dictionary()
+{
+   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::Waveform*)nullptr)->GetClass();
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+TClass *Waveform::Class()
+{
+   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::Waveform*)nullptr)->GetClass(); }
+   return fgIsA;
+}
 
 //______________________________________________________________________________
 atomic_TClass_ptr GeometryObject::fgIsA(nullptr);  // static to hold class pointer
@@ -974,6 +1092,39 @@ namespace ROOT {
 } // end of namespace ROOT for class ::CLHEP::Hep3Vector
 
 //______________________________________________________________________________
+void Waveform::Streamer(TBuffer &R__b)
+{
+   // Stream an object of class Waveform.
+
+   if (R__b.IsReading()) {
+      R__b.ReadClassBuffer(Waveform::Class(),this);
+   } else {
+      R__b.WriteClassBuffer(Waveform::Class(),this);
+   }
+}
+
+namespace ROOT {
+   // Wrappers around operator new
+   static void *new_Waveform(void *p) {
+      return  p ? new(p) ::Waveform : new ::Waveform;
+   }
+   static void *newArray_Waveform(Long_t nElements, void *p) {
+      return p ? new(p) ::Waveform[nElements] : new ::Waveform[nElements];
+   }
+   // Wrapper around operator delete
+   static void delete_Waveform(void *p) {
+      delete (static_cast<::Waveform*>(p));
+   }
+   static void deleteArray_Waveform(void *p) {
+      delete [] (static_cast<::Waveform*>(p));
+   }
+   static void destruct_Waveform(void *p) {
+      typedef ::Waveform current_t;
+      (static_cast<current_t*>(p))->~current_t();
+   }
+} // end of namespace ROOT for class ::Waveform
+
+//______________________________________________________________________________
 void GeometryObject::Streamer(TBuffer &R__b)
 {
    // Stream an object of class GeometryObject.
@@ -1325,6 +1476,27 @@ namespace ROOT {
 
 namespace ROOT {
    // Wrappers around operator new
+   static void *new_lactelcLcLBAnalysisManagercLcLDAQEvent(void *p) {
+      return  p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) ::lactel::BAnalysisManager::DAQEvent : new ::lactel::BAnalysisManager::DAQEvent;
+   }
+   static void *newArray_lactelcLcLBAnalysisManagercLcLDAQEvent(Long_t nElements, void *p) {
+      return p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) ::lactel::BAnalysisManager::DAQEvent[nElements] : new ::lactel::BAnalysisManager::DAQEvent[nElements];
+   }
+   // Wrapper around operator delete
+   static void delete_lactelcLcLBAnalysisManagercLcLDAQEvent(void *p) {
+      delete (static_cast<::lactel::BAnalysisManager::DAQEvent*>(p));
+   }
+   static void deleteArray_lactelcLcLBAnalysisManagercLcLDAQEvent(void *p) {
+      delete [] (static_cast<::lactel::BAnalysisManager::DAQEvent*>(p));
+   }
+   static void destruct_lactelcLcLBAnalysisManagercLcLDAQEvent(void *p) {
+      typedef ::lactel::BAnalysisManager::DAQEvent current_t;
+      (static_cast<current_t*>(p))->~current_t();
+   }
+} // end of namespace ROOT for class ::lactel::BAnalysisManager::DAQEvent
+
+namespace ROOT {
+   // Wrappers around operator new
    static void *new_lactelcLcLBAnalysisManagercLcLHit(void *p) {
       return  p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) ::lactel::BAnalysisManager::Hit : new ::lactel::BAnalysisManager::Hit;
    }
@@ -1539,6 +1711,136 @@ namespace ROOT {
    }
 } // end of namespace ROOT for class vector<lactel::BLactelDetector>
 
+namespace ROOT {
+   static TClass *vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR_Dictionary();
+   static void vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR_TClassManip(TClass*);
+   static void *new_vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR(void *p = nullptr);
+   static void *newArray_vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR(Long_t size, void *p);
+   static void delete_vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR(void *p);
+   static void deleteArray_vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR(void *p);
+   static void destruct_vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const vector<lactel::BAnalysisManager::DAQEvent>*)
+   {
+      vector<lactel::BAnalysisManager::DAQEvent> *ptr = nullptr;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<lactel::BAnalysisManager::DAQEvent>));
+      static ::ROOT::TGenericClassInfo 
+         instance("vector<lactel::BAnalysisManager::DAQEvent>", -2, "vector", 428,
+                  typeid(vector<lactel::BAnalysisManager::DAQEvent>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR_Dictionary, isa_proxy, 4,
+                  sizeof(vector<lactel::BAnalysisManager::DAQEvent>) );
+      instance.SetNew(&new_vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR);
+      instance.SetNewArray(&newArray_vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR);
+      instance.SetDelete(&delete_vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR);
+      instance.SetDeleteArray(&deleteArray_vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR);
+      instance.SetDestructor(&destruct_vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR);
+      instance.AdoptCollectionProxyInfo(TCollectionProxyInfo::Generate(TCollectionProxyInfo::Pushback< vector<lactel::BAnalysisManager::DAQEvent> >()));
+
+      instance.AdoptAlternate(::ROOT::AddClassAlternate("vector<lactel::BAnalysisManager::DAQEvent>","std::vector<lactel::BAnalysisManager::DAQEvent, std::allocator<lactel::BAnalysisManager::DAQEvent> >"));
+      return &instance;
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const vector<lactel::BAnalysisManager::DAQEvent>*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
+
+   // Dictionary for non-ClassDef classes
+   static TClass *vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR_Dictionary() {
+      TClass* theClass =::ROOT::GenerateInitInstanceLocal(static_cast<const vector<lactel::BAnalysisManager::DAQEvent>*>(nullptr))->GetClass();
+      vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR_TClassManip(theClass);
+   return theClass;
+   }
+
+   static void vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR_TClassManip(TClass* ){
+   }
+
+} // end of namespace ROOT
+
+namespace ROOT {
+   // Wrappers around operator new
+   static void *new_vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR(void *p) {
+      return  p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<lactel::BAnalysisManager::DAQEvent> : new vector<lactel::BAnalysisManager::DAQEvent>;
+   }
+   static void *newArray_vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR(Long_t nElements, void *p) {
+      return p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<lactel::BAnalysisManager::DAQEvent>[nElements] : new vector<lactel::BAnalysisManager::DAQEvent>[nElements];
+   }
+   // Wrapper around operator delete
+   static void delete_vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR(void *p) {
+      delete (static_cast<vector<lactel::BAnalysisManager::DAQEvent>*>(p));
+   }
+   static void deleteArray_vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR(void *p) {
+      delete [] (static_cast<vector<lactel::BAnalysisManager::DAQEvent>*>(p));
+   }
+   static void destruct_vectorlElactelcLcLBAnalysisManagercLcLDAQEventgR(void *p) {
+      typedef vector<lactel::BAnalysisManager::DAQEvent> current_t;
+      (static_cast<current_t*>(p))->~current_t();
+   }
+} // end of namespace ROOT for class vector<lactel::BAnalysisManager::DAQEvent>
+
+namespace ROOT {
+   static TClass *vectorlEfloatgR_Dictionary();
+   static void vectorlEfloatgR_TClassManip(TClass*);
+   static void *new_vectorlEfloatgR(void *p = nullptr);
+   static void *newArray_vectorlEfloatgR(Long_t size, void *p);
+   static void delete_vectorlEfloatgR(void *p);
+   static void deleteArray_vectorlEfloatgR(void *p);
+   static void destruct_vectorlEfloatgR(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const vector<float>*)
+   {
+      vector<float> *ptr = nullptr;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<float>));
+      static ::ROOT::TGenericClassInfo 
+         instance("vector<float>", -2, "vector", 428,
+                  typeid(vector<float>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &vectorlEfloatgR_Dictionary, isa_proxy, 0,
+                  sizeof(vector<float>) );
+      instance.SetNew(&new_vectorlEfloatgR);
+      instance.SetNewArray(&newArray_vectorlEfloatgR);
+      instance.SetDelete(&delete_vectorlEfloatgR);
+      instance.SetDeleteArray(&deleteArray_vectorlEfloatgR);
+      instance.SetDestructor(&destruct_vectorlEfloatgR);
+      instance.AdoptCollectionProxyInfo(TCollectionProxyInfo::Generate(TCollectionProxyInfo::Pushback< vector<float> >()));
+
+      instance.AdoptAlternate(::ROOT::AddClassAlternate("vector<float>","std::vector<float, std::allocator<float> >"));
+      return &instance;
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const vector<float>*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
+
+   // Dictionary for non-ClassDef classes
+   static TClass *vectorlEfloatgR_Dictionary() {
+      TClass* theClass =::ROOT::GenerateInitInstanceLocal(static_cast<const vector<float>*>(nullptr))->GetClass();
+      vectorlEfloatgR_TClassManip(theClass);
+   return theClass;
+   }
+
+   static void vectorlEfloatgR_TClassManip(TClass* ){
+   }
+
+} // end of namespace ROOT
+
+namespace ROOT {
+   // Wrappers around operator new
+   static void *new_vectorlEfloatgR(void *p) {
+      return  p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<float> : new vector<float>;
+   }
+   static void *newArray_vectorlEfloatgR(Long_t nElements, void *p) {
+      return p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<float>[nElements] : new vector<float>[nElements];
+   }
+   // Wrapper around operator delete
+   static void delete_vectorlEfloatgR(void *p) {
+      delete (static_cast<vector<float>*>(p));
+   }
+   static void deleteArray_vectorlEfloatgR(void *p) {
+      delete [] (static_cast<vector<float>*>(p));
+   }
+   static void destruct_vectorlEfloatgR(void *p) {
+      typedef vector<float> current_t;
+      (static_cast<current_t*>(p))->~current_t();
+   }
+} // end of namespace ROOT for class vector<float>
+
 namespace {
   void TriggerDictionaryInitialization_libDict_Impl() {
     static const char* headers[] = {
@@ -1562,6 +1864,12 @@ namespace {
 "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BSteppingAction.hh",
 "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BVolumesManager.hh",
 "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/Utils.hh",
+"/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh",
+"/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh",
+"/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh",
+"/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherMessenger.hh",
+"/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/DAQManager.hh",
+"/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh",
 nullptr
     };
     static const char* includePaths[] = {
@@ -1593,6 +1901,7 @@ nullptr
 #pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
 extern int __Cling_AutoLoading_Map;
 namespace CLHEP{class __attribute__((annotate("$clingAutoload$CLHEP/Vector/ThreeVector.h")))  __attribute__((annotate("$clingAutoload$/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BAnalysisManager.hh")))  Hep3Vector;}
+class __attribute__((annotate("$clingAutoload$Waveform.hh")))  __attribute__((annotate("$clingAutoload$/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BAnalysisManager.hh")))  Waveform;
 class __attribute__((annotate("$clingAutoload$GeometryObject.hh")))  __attribute__((annotate("$clingAutoload$/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BAnalysisManager.hh")))  GeometryObject;
 namespace lactel{class __attribute__((annotate("$clingAutoload$BLactelDetector.hh")))  __attribute__((annotate("$clingAutoload$/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BAnalysisManager.hh")))  ElementaryCell;}
 template <typename T> class __attribute__((annotate("$clingAutoload$GeometryGrid.hh")))  __attribute__((annotate("$clingAutoload$/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BAnalysisManager.hh")))  GeometryGrid;
@@ -1655,6 +1964,12 @@ namespace lactel{class __attribute__((annotate("$clingAutoload$/home/bouta-moham
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BSteppingAction.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BVolumesManager.hh"
 #include "/home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/Utils.hh"
+#include "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh"
+#include "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh"
+#include "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh"
+#include "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherMessenger.hh"
+#include "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/DAQManager.hh"
+#include "/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh"
 
 #undef  _BACKWARD_BACKWARD_WARNING_H
 )DICTPAYLOAD";
@@ -1665,7 +1980,9 @@ namespace lactel{class __attribute__((annotate("$clingAutoload$/home/bouta-moham
 "GeometryGrid<lactel::ElementaryCell>", payloadCode, "@",
 "GeometryGrid<lactel::Module>", payloadCode, "@",
 "GeometryObject", payloadCode, "@",
+"Waveform", payloadCode, "@",
 "lactel::BAnalysisManager", payloadCode, "@",
+"lactel::BAnalysisManager::DAQEvent", payloadCode, "@",
 "lactel::BAnalysisManager::Hit", payloadCode, "@",
 "lactel::BAnalysisManager::Measure", payloadCode, "@",
 "lactel::BAnalysisManager::MeasureParameters", payloadCode, "@",

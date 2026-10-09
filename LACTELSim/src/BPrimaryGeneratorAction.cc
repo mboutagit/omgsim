@@ -247,6 +247,11 @@ namespace lactel
 
     }
 
+    /**
+     * @brief Get a fixed theta angle direction with random phi angle
+     * @param theta: theta angle that is fixed
+     * @return a G4ThreeVector with a direction vector.
+     */
     G4ThreeVector BPrimaryGeneratorAction::FixedThetaDirection(double theta){
         double  phi = 2 * CLHEP::pi * G4UniformRand(); // Uniform in azimuth
         return G4ThreeVector(std::sin(theta) * std::cos(phi), 
@@ -354,30 +359,27 @@ namespace lactel
 
             //particleName="gamma";
 
-            double Emin = 2e-1;     // GeV
-            double Emax = 1e3;     // GeV (10 TeV)
+            double Emin = 3e-1;     // GeV
+            double Emax = 1e4;     // GeV (10 TeV)
 
-            double ctmin = -1;     // rad (pi/2)
-            double ctmax = 0;     // rad (0)
-           
             double Thetamin = 0;     // deg (0)
-            double Thetamax = TMath::Pi()/2.;     // deg (0)
+            double Thetamax = BDetectorConstruction::GetIt()->acceptanceAngle;     // deg (0)
 
             G4ThreeVector direction;
             double energy;
 
-            if(genParsMode == GenParsMode::cos2){
-                direction = GenerateMuonDirection("down-going_cos2");
-                energy = GenerateMuonEnergy(Emin * GeV, Emax * GeV, direction.getTheta());
-            }
-            else if(genParsMode == GenParsMode::integral){
-                direction = GenerateMuonDirection("down-going_cos2");
-                energy = GenerateMuonEnergy(Emin * GeV, Emax * GeV, direction.getTheta());
-            }
-            else if(genParsMode == GenParsMode::fixed){
-                energy = EGen;
-                direction = FixedThetaDirection(thetaGen);
-            }
+            // if(genParsMode == GenParsMode::cos2){
+            //     direction = GenerateMuonDirection("down-going_cos2");
+            //     energy = GenerateMuonEnergy(Emin * GeV, Emax * GeV, direction.getTheta());
+            // }
+            // else if(genParsMode == GenParsMode::integral){
+            //     direction = GenerateMuonDirection("down-going_cos2");
+            //     energy = GenerateMuonEnergy(Emin * GeV, Emax * GeV, direction.getTheta());
+            // }
+            // else if(genParsMode == GenParsMode::fixed){
+            //     energy = EGen;
+            //     direction = FixedThetaDirection(thetaGen);
+            // }
 
             // TF2 genFunc = Jurgen::getFluxFunction(Emin, Emax, ctmin, ctmax);
             // TF2* generator = &genFunc;
@@ -393,33 +395,40 @@ namespace lactel
                     "modFlux2D",
                     [](double* x, double* pars) {
 
-                        const double E = x[0];
-                        const double costheta = x[1];
+                        // const double E = x[0];
+                        // const double costheta = x[1];
 
-                        const double thetaDeg = std::acos(costheta) / deg;
+                        // const double thetaDeg = std::acos(costheta) / deg;
 
-                        double xx[2] = {E, thetaDeg};
+                        // double xx[2] = {E, thetaDeg};
 
-                        const double flux =
-                            lactel::BPrimaryGeneratorAction::ModifiedFormula2D(xx, pars);
+                        const double flux = pow(x[0], 2.7) *
+                            lactel::BPrimaryGeneratorAction::ModifiedFormula2D(x, pars);
 
                         // Projection onto horizontal generation surface
-                        return flux * costheta;
+                        return flux;
                     },
                     Emin,
                     Emax,
-                    std::cos(Thetamax),
-                    std::cos(Thetamin)
+                    Thetamin,
+                    Thetamax
+                    // std::cos(Thetamax), // assuming theta in 0 -> pi/2.
+                    // std::cos(Thetamin)
                 );
 
             double energyGeV;
-            double costheta;
+            double costheta, inTheta;
 
-            generator->GetRandom2(energyGeV, costheta);
+            generator->GetRandom2(energyGeV, inTheta);
 
-            double theta = std::acos(costheta);
+            double theta = inTheta; //std::acos(costheta);
 
             energy = energyGeV * GeV;
+            
+            // std::cout << "\r\033[10C" << "Energy 1: " << energy << " - In GeV: " << energyGeV
+            //                             << " - Angle: " << theta / deg 
+            //                             << std::endl;
+
             direction = FixedThetaDirection(theta);
 
             // double cost, theta;
@@ -801,8 +810,8 @@ namespace lactel
         const double gamma = -2.7;       
 
         double E_mu = energy[0];   // Muon energy (GeV)
-        double theta = par[0]*deg; // Zenith angle (radians)
-        double cosTheta = cos(theta);
+        double theta = par[0] ; // Zenith angle (deg)
+        double cosTheta = cos(theta * deg);
         double cosThetaStar = std::sqrt( (cosTheta*cosTheta + P1*P1 + P2*pow(cosTheta, P3) + P4*pow(cosTheta, P5))/(1+P1*P1+P2+P4) );
         double flux = norm * pow(E_mu * (1 + 3.64/(E_mu*pow(cosThetaStar, 1.29))), gamma) *
                     ( 1.0 / (1 + 1.1*(E_mu * cosThetaStar / epsilon_pi)) +
@@ -827,9 +836,9 @@ namespace lactel
         const double norm = 0.14; 
         const double gamma = -2.7;       
 
-        double E_mu = x[0];   // Muon energy (GeV)
-        double theta = x[1] * deg; // Zenith angle (radians)
-        double cosTheta = cos(theta);
+        double E_mu = x[0];   // Muon energy (GeV expected)
+        double theta = x[1]; // theta angle (deg expected)
+        double cosTheta = cos(theta * deg);
         double cosThetaStar = std::sqrt( (cosTheta*cosTheta + P1*P1 + P2*pow(cosTheta, P3) + P4*pow(cosTheta, P5))/(1+P1*P1+P2+P4) );
         double flux = norm * pow(E_mu * (1 + 3.64/(E_mu*pow(cosThetaStar, 1.29))), gamma) *
                     ( 1.0 / (1 + 1.1*(E_mu * cosThetaStar / epsilon_pi)) +

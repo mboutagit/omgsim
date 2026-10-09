@@ -1167,10 +1167,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BAnalysisManager.cc.o: \
  /usr/include/c++/13/pstl/glue_numeric_defs.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh \
- /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLactelDetector.hh \
- /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetector.hh \
- /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
- /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4RotationMatrix.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh \
  /home/bouta-mohammed/root/root_install/include/TROOT.h \
  /home/bouta-mohammed/root/root_install/include/TDirectory.h \
  /home/bouta-mohammed/root/root_install/include/TClass.h \
@@ -1188,6 +1185,11 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BAnalysisManager.cc.o: \
  /home/bouta-mohammed/root/root_install/include/TBuffer.h \
  /home/bouta-mohammed/root/root_install/include/Bytes.h \
  /home/bouta-mohammed/root/root_install/include/Byteswap.h \
+ /home/bouta-mohammed/root/root_install/include/Rtypes.h \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLactelDetector.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetector.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
+ /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4RotationMatrix.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/BPostAnalysis/include/utils.hh \
@@ -1202,7 +1204,6 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BAnalysisManager.cc.o: \
  /home/bouta-mohammed/root/root_install/include/TDatime.h \
  /home/bouta-mohammed/root/root_install/include/TUrl.h \
  /home/bouta-mohammed/root/root_install/include/ROOT/RConcurrentHashColl.hxx \
- /home/bouta-mohammed/root/root_install/include/Rtypes.h \
  /home/bouta-mohammed/root/root_install/include/ROOT/TRWSpinLock.hxx \
  /home/bouta-mohammed/root/root_install/include/ROOT/TSpinMutex.hxx \
  /usr/include/c++/13/condition_variable \
@@ -1638,5 +1639,4 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BAnalysisManager.cc.o: \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEvent.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/DAQManager.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
- /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
  /home/bouta-mohammed/root/root_install/include/TH1F.h

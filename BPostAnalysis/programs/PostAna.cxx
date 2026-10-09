@@ -82,13 +82,13 @@ int main(int argc, char* argv[]){
     //                           1e-3, 1e3, 0, 70
     //                       );
 
-     TF2* generator = new TF2("modFlux2D", 
-                              [](double* x, double* pars){
-                                  return 
-                                  BGenerator::RateIntegrand(x, pars);
-                              },
-                              1e-3, 1e3, 0, TMath::Pi()/2.
-                          );
+    //  TF2* generator = new TF2("modFlux2D", 
+    //                           [](double* x, double* pars){
+    //                               return 
+    //                               BGenerator::RateIntegrand(x, pars);
+    //                           },
+    //                           1e-3, 1e3, 0, TMath::Pi()/2.
+    //                       );
             
     
 
@@ -96,7 +96,7 @@ int main(int argc, char* argv[]){
     float gen_surface_m2  = TMath::Pi() * radius*radius; // pi*R² disk
     float gen_surface_cm2 = gen_surface_m2 * 1e4;
  
-    float expected_muons_per_m2_per_s = 130; //generator->Integral(1e-1, 1e3, 0, TMath::Pi()/2); // by m²
+    float expected_muons_per_m2_per_s = 134.8; //generator->Integral(1e-1, 1e3, 0, TMath::Pi()/2); // by m²
     float expected_muons_per_cm2_per_s = expected_muons_per_m2_per_s/1e4; // to cm²
     float expected_muons_per_gensurf = expected_muons_per_cm2_per_s * gen_surface_cm2;
     float number_of_generated_muons_per_gensurf = genTree->GetEntries(); // 100 000 events
@@ -123,10 +123,10 @@ int main(int argc, char* argv[]){
     histsByName hists_data;
     histsByName hists_mc;
     std::vector<TCanvas*>  canvas_data =  getRealDataPlots(hists_data,
-                                                            "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_003/data.h5",
+                                                            "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_000020/data.h5",
                                                             "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_004/data.h5"); 
 
-    std::vector<TCanvas*>  canvas_mc =  getNPEPlot(detEvtTree, hists_mc, exposure_time, 15, -0.005);
+    std::vector<TCanvas*>  canvas_mc =  getNPEPlot(detEvtTree, hists_mc, exposure_time, 15, thr);
     TCanvas* verPosition =  getVertexPositions(detEvtTree);
     verPosition->Draw();
 

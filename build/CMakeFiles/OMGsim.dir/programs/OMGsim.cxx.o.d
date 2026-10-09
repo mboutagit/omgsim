@@ -1391,11 +1391,12 @@ CMakeFiles/OMGsim.dir/programs/OMGsim.cxx.o: \
  /usr/include/c++/13/pstl/glue_numeric_defs.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh \
+ /home/bouta-mohammed/root/root_install/include/TROOT.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLactelDetector.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BDetector.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4RotationMatrix.hh \
- /home/bouta-mohammed/root/root_install/include/TROOT.h \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/BPostAnalysis/include/utils.hh \

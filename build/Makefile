@@ -143,6 +143,19 @@ libOMG/fast:
 .PHONY : libOMG/fast
 
 #=============================================================================
+# Target rules for targets named BDAQProcessor
+
+# Build rule for target.
+BDAQProcessor: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BDAQProcessor
+.PHONY : BDAQProcessor
+
+# fast build rule for target.
+BDAQProcessor/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BDAQProcessor.dir/build.make CMakeFiles/BDAQProcessor.dir/build
+.PHONY : BDAQProcessor/fast
+
+#=============================================================================
 # Target rules for targets named BDetector
 
 # Build rule for target.
@@ -267,6 +280,30 @@ AA/src/XPPhSteppingAction.s: AA/src/XPPhSteppingAction.cc.s
 AA/src/XPPhSteppingAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/AA/src/XPPhSteppingAction.cc.s
 .PHONY : AA/src/XPPhSteppingAction.cc.s
+
+BPostAnalysis/programs/BDAQProcessor.o: BPostAnalysis/programs/BDAQProcessor.cxx.o
+.PHONY : BPostAnalysis/programs/BDAQProcessor.o
+
+# target to build an object file
+BPostAnalysis/programs/BDAQProcessor.cxx.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BDAQProcessor.dir/build.make CMakeFiles/BDAQProcessor.dir/BPostAnalysis/programs/BDAQProcessor.cxx.o
+.PHONY : BPostAnalysis/programs/BDAQProcessor.cxx.o
+
+BPostAnalysis/programs/BDAQProcessor.i: BPostAnalysis/programs/BDAQProcessor.cxx.i
+.PHONY : BPostAnalysis/programs/BDAQProcessor.i
+
+# target to preprocess a source file
+BPostAnalysis/programs/BDAQProcessor.cxx.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BDAQProcessor.dir/build.make CMakeFiles/BDAQProcessor.dir/BPostAnalysis/programs/BDAQProcessor.cxx.i
+.PHONY : BPostAnalysis/programs/BDAQProcessor.cxx.i
+
+BPostAnalysis/programs/BDAQProcessor.s: BPostAnalysis/programs/BDAQProcessor.cxx.s
+.PHONY : BPostAnalysis/programs/BDAQProcessor.s
+
+# target to generate assembly for a file
+BPostAnalysis/programs/BDAQProcessor.cxx.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BDAQProcessor.dir/build.make CMakeFiles/BDAQProcessor.dir/BPostAnalysis/programs/BDAQProcessor.cxx.s
+.PHONY : BPostAnalysis/programs/BDAQProcessor.cxx.s
 
 BPostAnalysis/programs/BDetector.o: BPostAnalysis/programs/BDetector.cxx.o
 .PHONY : BPostAnalysis/programs/BDetector.o
@@ -1900,6 +1937,30 @@ tools/src/DAQManager.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/src/DAQManager.cc.s
 .PHONY : tools/src/DAQManager.cc.s
 
+tools/src/Waveform.o: tools/src/Waveform.cc.o
+.PHONY : tools/src/Waveform.o
+
+# target to build an object file
+tools/src/Waveform.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/src/Waveform.cc.o
+.PHONY : tools/src/Waveform.cc.o
+
+tools/src/Waveform.i: tools/src/Waveform.cc.i
+.PHONY : tools/src/Waveform.i
+
+# target to preprocess a source file
+tools/src/Waveform.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/src/Waveform.cc.i
+.PHONY : tools/src/Waveform.cc.i
+
+tools/src/Waveform.s: tools/src/Waveform.cc.s
+.PHONY : tools/src/Waveform.s
+
+# target to generate assembly for a file
+tools/src/Waveform.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/tools/src/Waveform.cc.s
+.PHONY : tools/src/Waveform.cc.s
+
 utils/src/BGenerator.o: utils/src/BGenerator.cc.o
 .PHONY : utils/src/BGenerator.o
 
@@ -1957,6 +2018,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... G__Dict"
+	@echo "... BDAQProcessor"
 	@echo "... BDetector"
 	@echo "... BFlux"
 	@echo "... BRateBuilder"
@@ -1970,6 +2032,9 @@ help:
 	@echo "... AA/src/XPPhSteppingAction.o"
 	@echo "... AA/src/XPPhSteppingAction.i"
 	@echo "... AA/src/XPPhSteppingAction.s"
+	@echo "... BPostAnalysis/programs/BDAQProcessor.o"
+	@echo "... BPostAnalysis/programs/BDAQProcessor.i"
+	@echo "... BPostAnalysis/programs/BDAQProcessor.s"
 	@echo "... BPostAnalysis/programs/BDetector.o"
 	@echo "... BPostAnalysis/programs/BDetector.i"
 	@echo "... BPostAnalysis/programs/BDetector.s"
@@ -2174,6 +2239,9 @@ help:
 	@echo "... tools/src/DAQManager.o"
 	@echo "... tools/src/DAQManager.i"
 	@echo "... tools/src/DAQManager.s"
+	@echo "... tools/src/Waveform.o"
+	@echo "... tools/src/Waveform.i"
+	@echo "... tools/src/Waveform.s"
 	@echo "... utils/src/BGenerator.o"
 	@echo "... utils/src/BGenerator.i"
 	@echo "... utils/src/BGenerator.s"

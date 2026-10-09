@@ -81,7 +81,7 @@
 #/gps/pos/radius 21.59 cm
 #/gps/pos/centre 0 0 2.3 m
 #/gps/direction 0. 0. -1.
-#  /gps/particle mu-
+#/gps/particle mu-
 #/gps/particle mu+
 #/gps/particle mu-
 #/gps/particle opticalphoton

@@ -450,6 +450,7 @@ CMakeFiles/BRateBuilder.dir/BPostAnalysis/programs/BRateBuilder.cxx.o: /home/bou
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/BLogger.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/dbRoutines.hh \
   /usr/include/alloca.h \
@@ -2483,8 +2484,6 @@ CMakeFiles/BRateBuilder.dir/BPostAnalysis/programs/BRateBuilder.cxx.o: /home/bou
 
 /usr/include/c++/13/bits/std_abs.h:
 
-/usr/include/boost/mpl/arg.hpp:
-
 /usr/include/boost/mpl/apply_fwd.hpp:
 
 /home/bouta-mohammed/root/root_install/include/TGraph.h:
@@ -2618,6 +2617,8 @@ CMakeFiles/BRateBuilder.dir/BPostAnalysis/programs/BRateBuilder.cxx.o: /home/bou
 /usr/include/asm-generic/errno-base.h:
 
 /usr/include/alloca.h:
+
+/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
@@ -3693,6 +3694,10 @@ CMakeFiles/BRateBuilder.dir/BPostAnalysis/programs/BRateBuilder.cxx.o: /home/bou
 
 /home/bouta-mohammed/root/root_install/include/TArrow.h:
 
+/usr/include/c++/13/bits/shared_ptr_atomic.h:
+
+/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4NavigationHistoryPool.hh:
+
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4DataVector.icc:
 
 /usr/include/boost/mpl/vector/aux_/clear.hpp:
@@ -4136,6 +4141,8 @@ CMakeFiles/BRateBuilder.dir/BPostAnalysis/programs/BRateBuilder.cxx.o: /home/bou
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4NavigationLevelRep.hh:
 
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/UBox.hh:
+
+/usr/include/boost/mpl/arg.hpp:
 
 /usr/include/boost/mpl/arg_fwd.hpp:
 
@@ -5182,7 +5189,3 @@ CMakeFiles/BRateBuilder.dir/BPostAnalysis/programs/BRateBuilder.cxx.o: /home/bou
 /usr/include/c++/13/bits/random.h:
 
 /usr/include/c++/13/bits/refwrap.h:
-
-/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4NavigationHistoryPool.hh:
-
-/usr/include/c++/13/bits/shared_ptr_atomic.h:

@@ -594,5 +594,8 @@ G__Dict.cxx: \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherMessenger.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/DAQManager.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/BLogger.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/dbRoutines.hh

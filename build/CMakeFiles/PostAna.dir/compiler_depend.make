@@ -459,6 +459,7 @@ CMakeFiles/PostAna.dir/BPostAnalysis/programs/PostAna.cxx.o: /home/bouta-mohamme
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/BGenerator.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/BLogger.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/dbRoutines.hh \
@@ -2561,6 +2562,8 @@ CMakeFiles/PostAna.dir/BPostAnalysis/programs/PostAna.cxx.o: /home/bouta-mohamme
 
 /usr/include/c++/13/bits/predefined_ops.h:
 
+/usr/include/c++/13/bits/postypes.h:
+
 /usr/include/boost/move/utility.hpp:
 
 /usr/include/boost/multi_index/ordered_index.hpp:
@@ -2684,6 +2687,8 @@ CMakeFiles/PostAna.dir/BPostAnalysis/programs/PostAna.cxx.o: /home/bouta-mohamme
 /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/BGenerator.hh:
 
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4VPVParameterisation.hh:
+
+/home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/Waveform.hh:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
@@ -2834,8 +2839,6 @@ CMakeFiles/PostAna.dir/BPostAnalysis/programs/PostAna.cxx.o: /home/bouta-mohamme
 /usr/include/boost/call_traits.hpp:
 
 /usr/include/c++/13/bits/new_allocator.h:
-
-/usr/include/boost/move/utility_core.hpp:
 
 /usr/include/boost/config/compiler/gcc.hpp:
 
@@ -4251,6 +4254,8 @@ CMakeFiles/PostAna.dir/BPostAnalysis/programs/PostAna.cxx.o: /home/bouta-mohamme
 
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/UBox.hh:
 
+/usr/include/boost/move/utility_core.hpp:
+
 /usr/include/xercesc/util/Hashers.hpp:
 
 /usr/include/boost/mpl/O1_size.hpp:
@@ -5298,5 +5303,3 @@ CMakeFiles/PostAna.dir/BPostAnalysis/programs/PostAna.cxx.o: /home/bouta-mohamme
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4SmartVoxelNode.hh:
 
 /usr/include/c++/13/bits/parse_numbers.h:
-
-/usr/include/c++/13/bits/postypes.h:

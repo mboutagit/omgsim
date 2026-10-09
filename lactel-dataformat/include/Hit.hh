@@ -1,22 +1,17 @@
 #pragma once
 
-namespace lactel
-{
-    class Hit
-    {
+#include "OM.hh"
+
+using namespace lactel;
+
+class Hit {
     private:
-        /* data */
+        long id = 0;
+        float time;
+        float charge;
+        OM om;
+
     public:
         Hit(/* args */);
         ~Hit();
-    };
-    
-    Hit::Hit(/* args */)
-    {
-    }
-    
-    Hit::~Hit()
-    {
-    }
-    
-} // namespace lactel
+};

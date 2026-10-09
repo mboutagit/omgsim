@@ -1,5 +1,4 @@
-#ifndef BWaveCatcher_hh
-#define BWaveCatcher_hh
+#pragma once
 
 #include <iostream>
 #include "BWaveCatcherInterface.hh"
@@ -16,6 +15,8 @@
 #include "BAnalysisManager.hh"
 #include "OM.hh"
 #include "BLogger.hh"
+#include <algorithm>
+#include <vector>
 
 using namespace lactel;
 
@@ -107,4 +108,3 @@ namespace tools{
             std::vector<TGraph*> scope;
     };
 } // namespace tools
-#endif // BWaveCatcher_hh

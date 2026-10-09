@@ -53,7 +53,7 @@ namespace lactel
             {
                 double hv = 1800;
                 double g  = 5e7;
-                double rt = 4.;
+                double rt = 4.5;
                 double ft = 11.; 
                 double wt = 10.;
                 double dc = 1000.;

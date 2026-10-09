@@ -1,5 +1,6 @@
 /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/G__Dict.dir
 /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/libOMG.dir
+/home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/BDAQProcessor.dir
 /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/BDetector.dir
 /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/BFlux.dir
 /home/bouta-mohammed/work/cppm/lactel/trunk/build/CMakeFiles/BRateBuilder.dir

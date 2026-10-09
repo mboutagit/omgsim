@@ -104,11 +104,10 @@ namespace lactel
             struct DAQEvent{
                 uint channel;
                 int om_id;
-                // std::string om_id;
                 float amp; // amplitude in mV
                 float c; // charge in pC
                 float t; // in ns
-                Waveform waveform; // Event WaveForm
+               Waveform waveform; // Event WaveForm
 
                 DAQEvent() : channel(9999), amp(-9999), t(-9999), c(-9999), om_id(-1){}
                 void reset(){
@@ -121,13 +120,15 @@ namespace lactel
                 void addEvent(uint c, float _a, float _t){
                     channel = c; amp = _a; t = _t;
                 }
+                
+                // ClassDef(DAQEvent, 1)
             };
 
             struct DetectedEvent
             {                    
                 // unsigned int event_ID;
                 std::vector<Hit> hits;
-                std::vector<DAQEvent> daqEvent;
+                // std::vector<DAQEvent> daqEvent;
                 // std::vector<HitInfos> pmHits;
                 // std::vector<HitInfos> hits;
                 float event_energy;
@@ -141,6 +142,8 @@ namespace lactel
                 float time =0.;
                 float zenith;
                 bool coincidence = false;
+                // bool wCoincidence = false;
+                double dt = 0; // time between the first and the last hit.
                 // Waveform wf;
 
                 // bool isDetected=false; // mainly used for Run managing
@@ -155,7 +158,8 @@ namespace lactel
                  * @par ctime: coincidence time in ns
                  * @par thr: threshould in mV
                  */
-                bool isACoincidence(float ctime = 16, float thr = 5); // default coincidence time of 16 ns
+                bool isACoincidence(float ctime = 16); // default coincidence time of 16 ns
+                bool checkCoincidence(float ctime = 16); // default coincidence time of 16 ns
                 void dumpEvent(std::ostream& out = std::cout){
                     out 
                         << "Run: " << runNb
@@ -279,8 +283,8 @@ namespace lactel
         protected:
             BAnalysisManager();
             ~BAnalysisManager();
-            TTree* genTree;
-            TTree* runTree;
+            TTree* genTree; // generation tree
+            TTree* runTree; // run tree
             TTree* detectedEventTree;
             TTree* DAQEventTree;
             TTree* BLactelDetectorTree;
@@ -313,7 +317,7 @@ namespace lactel
             std::string evtFileName = "output.evt";
             
 
-        ClassDef(BAnalysisManager, 2);
+        ClassDef(BAnalysisManager, 3);
 
         
     };

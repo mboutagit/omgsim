@@ -1,4 +1,5 @@
 { decls }
+namespace std {  }
 namespace CLHEP {  }
 namespace lactel { class ElementaryCell; }
 template <typename T> class GeometryGrid;
@@ -14,16 +15,20 @@ class GeometryGrid<lactel::BLactelDetector>
 class GeometryGrid<lactel::ElementaryCell>
 class GeometryGrid<lactel::Module>
 class GeometryObject
+class Waveform
 class lactel::BAnalysisManager
+class lactel::BAnalysisManager::DAQEvent
 class lactel::BAnalysisManager::Hit
 class lactel::BAnalysisManager::Measure
 class lactel::BAnalysisManager::MeasureParameters
 class lactel::BLactelDetector
 class lactel::ElementaryCell
 class lactel::Module
+class vector<lactel::BAnalysisManager::DAQEvent>
 header BDetector.hh
 header CLHEP/Vector/ThreeVector.h
 header GeometryObject.hh
+header tools/include/Waveform.hh
 header BAnalysisManager.hh
 header BLactelDetector.hh
 # List of selected namespaces
