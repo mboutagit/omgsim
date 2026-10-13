@@ -619,7 +619,7 @@ CMakeFiles/libOMG.dir/G__Dict.cxx.o: \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BEvent.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BHit.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4VHit.hh \
- /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/dbRoutines.hh \
  /usr/include/cppconn/driver.h /usr/include/cppconn/connection.h \
  /usr/include/cppconn/build_config.h /usr/include/cppconn/warning.h \

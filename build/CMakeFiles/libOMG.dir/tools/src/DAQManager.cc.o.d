@@ -163,7 +163,7 @@ CMakeFiles/libOMG.dir/tools/src/DAQManager.cc.o: \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherInterface.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh \
  /usr/include/c++/13/array /usr/include/c++/13/compare \
- /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
  /usr/include/c++/13/set /usr/include/c++/13/bits/stl_tree.h \
  /usr/include/c++/13/ext/aligned_buffer.h \
  /usr/include/c++/13/bits/node_handle.h \

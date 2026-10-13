@@ -1576,7 +1576,7 @@ CMakeFiles/libOMG.dir/BPostAnalysis/src/BPostAnalysis.cc.o: /home/bouta-mohammed
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PassiveVolumeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhotoTubeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
@@ -3739,7 +3739,7 @@ CMakeFiles/libOMG.dir/G__Dict.cxx.o: G__Dict.cxx \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3RunMessenger.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3SteppingAction.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
@@ -5973,7 +5973,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BAnalysisManager.cc.o: /home/bouta-mohammed/
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PrimaryGeneratorAction.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/ParametrizedGenerator.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
@@ -8041,7 +8041,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BDetectorConstruction.cc.o: /home/bouta-moha
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhotoTubeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PrimaryGeneratorAction.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/BLogger.hh \
@@ -9496,7 +9496,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BDetectorMessenger.cc.o: /home/bouta-mohamme
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3ParametrizedVolume.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PassiveVolumeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhotoTubeMgr.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/BLogger.hh \
@@ -12073,7 +12073,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BEventAction.cc.o: /home/bouta-mohammed/work
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PassiveVolumeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhotoTubeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
@@ -13551,7 +13551,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BHardwareManager.cc.o: /home/bouta-mohammed/
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PassiveVolumeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhotoTubeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
@@ -15036,7 +15036,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BLactelDetector.cc.o: /home/bouta-mohammed/w
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3ParametrizedVolume.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PassiveVolumeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhotoTubeMgr.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/BLogger.hh \
@@ -16481,7 +16481,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BPrimaryGeneratorAction.cc.o: /home/bouta-mo
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PrimaryGeneratorAction.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3RunMessenger.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
@@ -18696,7 +18696,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BRunAction.cc.o: /home/bouta-mohammed/work/c
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PrimaryGeneratorAction.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3RunAction.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
@@ -20823,7 +20823,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BStackingAction.cc.o: /home/bouta-mohammed/w
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3ParametrizedVolume.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PassiveVolumeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhotoTubeMgr.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/BLogger.hh \
@@ -22457,7 +22457,7 @@ CMakeFiles/libOMG.dir/LACTELSim/src/BSteppingAction.cc.o: /home/bouta-mohammed/w
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PrimaryGeneratorAction.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3SteppingAction.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh \
@@ -29607,7 +29607,7 @@ CMakeFiles/libOMG.dir/common/src/KM3ExperimentTypeMessenger.cc.o: /home/bouta-mo
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackingAction.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/ParametrizedGenerator.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
@@ -42225,7 +42225,7 @@ CMakeFiles/libOMG.dir/common/src/ParametrizedGenerator.cc.o: /home/bouta-mohamme
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h
 
-CMakeFiles/libOMG.dir/lactel-dataformat/src/OM.cc.o: /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/src/OM.cc \
+CMakeFiles/libOMG.dir/lactel-dataformat/online/src/OM.cc.o: /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/src/OM.cc \
   /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/CLHEP/Units/SystemOfUnits.h \
   /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/CLHEP/Utility/defs.h \
   /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/CLHEP/Vector/ThreeVector.h \
@@ -42240,7 +42240,7 @@ CMakeFiles/libOMG.dir/lactel-dataformat/src/OM.cc.o: /home/bouta-mohammed/work/c
   /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/globals.hh \
   /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/templates.hh \
   /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/tls.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/BLogger.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/dbRoutines.hh \
   /usr/include/alloca.h \
@@ -44207,7 +44207,7 @@ CMakeFiles/libOMG.dir/tools/src/BWaveCatcher.cc.o: /home/bouta-mohammed/work/cpp
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PassiveVolumeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhotoTubeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
@@ -45286,7 +45286,7 @@ CMakeFiles/libOMG.dir/tools/src/BWaveCatcherConf.cc.o: /home/bouta-mohammed/work
   /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/globals.hh \
   /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/templates.hh \
   /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/tls.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcherConf.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/BLogger.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/utils/include/dbRoutines.hh \
@@ -46517,7 +46517,7 @@ CMakeFiles/libOMG.dir/tools/src/BWaveCatcherMessenger.cc.o: /home/bouta-mohammed
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PassiveVolumeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhotoTubeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
@@ -47866,7 +47866,7 @@ CMakeFiles/libOMG.dir/tools/src/DAQManager.cc.o: /home/bouta-mohammed/work/cppm/
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PassiveVolumeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhotoTubeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
@@ -49919,6 +49919,8 @@ CMakeFiles/libOMG.dir/utils/src/BLogger.cc.o: /home/bouta-mohammed/work/cppm/lac
 
 /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/Cube.hh:
 
+/home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/src/OM.cc:
+
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4VisManager.hh:
 
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4VisExtent.hh:
@@ -50385,7 +50387,9 @@ CMakeFiles/libOMG.dir/utils/src/BLogger.cc.o: /home/bouta-mohammed/work/cppm/lac
 
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BVolumesManager.hh:
 
-/home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh:
+/home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh:
+
+/home/bouta-mohammed/root/root_install/include/TUrl.h:
 
 /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BLactelDetector.hh:
 
@@ -50540,10 +50544,6 @@ CMakeFiles/libOMG.dir/utils/src/BLogger.cc.o: /home/bouta-mohammed/work/cppm/lac
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/CLHEP/Random/RanluxEngine.h:
 
 /usr/include/boost/config/user.hpp:
-
-/usr/include/boost/mpl/set/aux_/has_key_impl.hpp:
-
-/usr/include/boost/iterator/detail/config_def.hpp:
 
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4VCSGfaceted.hh:
 
@@ -51254,8 +51254,6 @@ CMakeFiles/libOMG.dir/utils/src/BLogger.cc.o: /home/bouta-mohammed/work/cppm/lac
 /usr/include/xercesc/sax/SAXParseException.hpp:
 
 /usr/include/xercesc/framework/XMLNotationDecl.hpp:
-
-/home/bouta-mohammed/root/root_install/include/TUrl.h:
 
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4TouchableHistoryHandle.hh:
 
@@ -52804,6 +52802,10 @@ CMakeFiles/libOMG.dir/utils/src/BLogger.cc.o: /home/bouta-mohammed/work/cppm/lac
 /usr/include/boost/mpl/set/aux_/empty_impl.hpp:
 
 /usr/include/boost/mpl/set/aux_/erase_impl.hpp:
+
+/usr/include/boost/iterator/detail/config_def.hpp:
+
+/usr/include/boost/mpl/set/aux_/has_key_impl.hpp:
 
 /usr/include/boost/mpl/set/aux_/insert_impl.hpp:
 
@@ -54838,8 +54840,6 @@ G__Dict.cxx:
 /home/bouta-mohammed/root/root_install/include/ROOT/RRangeCast.hxx:
 
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4ProcTblElement.hh:
-
-/home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/src/OM.cc:
 
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4Upsilon.hh:
 

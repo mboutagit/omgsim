@@ -1,6 +1,6 @@
 /KM3/XP/Type BA
 /KM3/det/DetInit Lactel
-/KM3/det/DetectorTypeName LACTELTrue #KM3K40
+/KM3/det/DetectorTypeName LactelOneModule #KM3K40
 # /KM3/det/DetectorTypeName LactelOneCell 
 # /KM3/det/DetectorTypeName OMInCPPMBalckBox 
 /KM3/det/setMeanCapRadius 5 cm
@@ -44,7 +44,7 @@
 # /vis/viewer/set/viewpointThetaPhi 105 -60  deg
 # /vis/scene/endOfEventAction accumulate
 
-/run/beamOn 1000
+/run/beamOn 100
 
 # /run/beamOn 20000
 # /run/beamOn 20000
@@ -81,7 +81,7 @@
 #/gps/pos/radius 21.59 cm
 #/gps/pos/centre 0 0 2.3 m
 #/gps/direction 0. 0. -1.
-#/gps/particle mu-
+#  /gps/particle mu-
 #/gps/particle mu+
 #/gps/particle mu-
 #/gps/particle opticalphoton

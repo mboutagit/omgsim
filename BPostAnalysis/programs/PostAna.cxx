@@ -96,7 +96,8 @@ int main(int argc, char* argv[]){
     float gen_surface_m2  = TMath::Pi() * radius*radius; // pi*R² disk
     float gen_surface_cm2 = gen_surface_m2 * 1e4;
  
-    float expected_muons_per_m2_per_s = 134.8; //generator->Integral(1e-1, 1e3, 0, TMath::Pi()/2); // by m²
+    TF2* flux = new TF2("flux", lactel::BPrimaryGeneratorAction::ModifiedFormula2D, 1e-2, 1e5, 0, 60);
+    float expected_muons_per_m2_per_s = 146.23; // flux->Integral(3e-1, 1e4, 0, 60); //generator->Integral(1e-1, 1e3, 0, TMath::Pi()/2); // by m²
     float expected_muons_per_cm2_per_s = expected_muons_per_m2_per_s/1e4; // to cm²
     float expected_muons_per_gensurf = expected_muons_per_cm2_per_s * gen_surface_cm2;
     float number_of_generated_muons_per_gensurf = genTree->GetEntries(); // 100 000 events

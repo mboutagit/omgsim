@@ -300,18 +300,16 @@ namespace tools
                                                 20
                                             );
             channelWaveform[i] = fullWF;
-
-            
-
+            BAnalysisManager::DAQEvent daqEvent;
             // BAnalysisManager::DAQEvent daqEvent;
-            // daqEvent.waveform = fullWF;
-            // daqEvent.channel = i;
-            // daqEvent.amp = fullWF.getMinAmplitude(); // to mV;
-            // daqEvent.c = fullWF.integrate(1/getConfiguration().samplingFrequency) * 
-            //                 1e-3 * 1e-9 / getConfiguration().internalResistor; // convert to Columb
-            // daqEvent.om_id = connectedOMs[i].getID();
-            // daqEvent.t = fullWF.signalTimeF(getConfiguration().triggerThresholds[i], 1/getConfiguration().samplingFrequency);
-            // event.daqEvent.push_back(daqEvent);
+            daqEvent.waveform = fullWF;
+            daqEvent.channel = i;
+            daqEvent.amp = fullWF.getMinAmplitude(); // to mV;
+            daqEvent.c = fullWF.integrate(1/getConfiguration().samplingFrequency) * 
+                            1e-3 * 1e-9 / getConfiguration().internalResistor; // convert to Columb
+            daqEvent.om_id = connectedOMs[i].getID();
+            daqEvent.t = fullWF.signalTimeF(getConfiguration().triggerThresholds[i], 1/getConfiguration().samplingFrequency);
+            event.daqEvents.push_back(daqEvent);
         }
 
         std::vector<double> times;

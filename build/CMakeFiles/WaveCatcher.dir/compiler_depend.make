@@ -281,7 +281,7 @@ CMakeFiles/WaveCatcher.dir/tools/programs/WaveCatcher.cxx.o: /home/bouta-mohamme
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PassiveVolumeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3PhotoTubeMgr.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh \
-  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+  /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
   /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \
@@ -2440,10 +2440,6 @@ CMakeFiles/WaveCatcher.dir/tools/programs/WaveCatcher.cxx.o: /home/bouta-mohamme
 
 /home/bouta-mohammed/root/root_install/include/TDirectoryFile.h:
 
-/usr/local/include/CLI/CLI.hpp:
-
-/usr/include/boost/mpl/vector/aux_/clear.hpp:
-
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4DynamicParticle.hh:
 
 /usr/include/boost/current_function.hpp:
@@ -2869,6 +2865,8 @@ CMakeFiles/WaveCatcher.dir/tools/programs/WaveCatcher.cxx.o: /home/bouta-mohamme
 /usr/include/boost/mpl/aux_/yes_no.hpp:
 
 /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/CLHEP/Vector/RotationInterfaces.h:
+
+/home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh:
 
 /home/bouta-mohammed/root/root_install/include/TUrl.h:
 
@@ -3366,8 +3364,6 @@ CMakeFiles/WaveCatcher.dir/tools/programs/WaveCatcher.cxx.o: /home/bouta-mohamme
 
 /usr/include/boost/mpl/set/aux_/erase_key_impl.hpp:
 
-/home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh:
-
 /usr/include/boost/mpl/set/aux_/has_key_impl.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/FILE.h:
@@ -3411,6 +3407,10 @@ CMakeFiles/WaveCatcher.dir/tools/programs/WaveCatcher.cxx.o: /home/bouta-mohamme
 /usr/include/boost/mpl/value_type_fwd.hpp:
 
 /usr/include/boost/mpl/vector/aux_/begin_end.hpp:
+
+/usr/local/include/CLI/CLI.hpp:
+
+/usr/include/boost/mpl/vector/aux_/clear.hpp:
 
 /usr/include/boost/mpl/vector/aux_/empty.hpp:
 

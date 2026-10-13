@@ -86,9 +86,13 @@ file(GLOB sources */src/[a-zA-Z0-9]*.cc
                   ./utils/src/*.cc
                   ./tools/src/*.cc
                   ${CMAKE_SOURCE_DIR}/tools/Geometry/src/*.cc
+                  ${CMAKE_SOURCE_DIR}/lactel-dataformat/online/src/*.cc
+                  ${CMAKE_SOURCE_DIR}/lactel-dataformat/offline/src/*.cc
     )
 
 file(GLOB headers ${CMAKE_SOURCE_DIR}/tools/Geometry/include
+                  ${CMAKE_SOURCE_DIR}/lactel-dataformat/online/include
+                  ${CMAKE_SOURCE_DIR}/lactel-dataformat/offline/include
                   */include
                   #/usr/include/vtk-9.1/
     )

@@ -42,6 +42,33 @@ namespace lactel
         BDetectorConstruction();
         ~BDetectorConstruction();
 
+        bool isADetectorState(DetectorState state){
+            switch (state)
+            {
+            case DetectorState::ON:
+            case DetectorState::OFF:
+            case DetectorState::IDLE:
+            case DetectorState::RUN:
+                return true;
+            
+            default:
+                return false;
+            }
+        }
+
+        DetectorState strToDetectorState(std::string val){
+            if(val == "ON" || val == "on")
+                return DetectorState::ON;
+            if(val == "OFF" || val == "off")
+                return DetectorState::OFF;
+            if(val == "IDLE" || val == "idle")
+                return DetectorState::IDLE;
+            if(val == "RUN" || val == "run")
+                return DetectorState::RUN;
+            
+            throw runtime_error("Unkown Detector state " + val);
+        }
+
         inline BLactelDetector& getDetector(){return detector;}
         
         G4ThreeVector targetPosition;

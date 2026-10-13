@@ -1697,29 +1697,29 @@ common/src/ParametrizedGenerator.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/common/src/ParametrizedGenerator.cc.s
 .PHONY : common/src/ParametrizedGenerator.cc.s
 
-lactel-dataformat/src/OM.o: lactel-dataformat/src/OM.cc.o
-.PHONY : lactel-dataformat/src/OM.o
+lactel-dataformat/online/src/OM.o: lactel-dataformat/online/src/OM.cc.o
+.PHONY : lactel-dataformat/online/src/OM.o
 
 # target to build an object file
-lactel-dataformat/src/OM.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/lactel-dataformat/src/OM.cc.o
-.PHONY : lactel-dataformat/src/OM.cc.o
+lactel-dataformat/online/src/OM.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/lactel-dataformat/online/src/OM.cc.o
+.PHONY : lactel-dataformat/online/src/OM.cc.o
 
-lactel-dataformat/src/OM.i: lactel-dataformat/src/OM.cc.i
-.PHONY : lactel-dataformat/src/OM.i
+lactel-dataformat/online/src/OM.i: lactel-dataformat/online/src/OM.cc.i
+.PHONY : lactel-dataformat/online/src/OM.i
 
 # target to preprocess a source file
-lactel-dataformat/src/OM.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/lactel-dataformat/src/OM.cc.i
-.PHONY : lactel-dataformat/src/OM.cc.i
+lactel-dataformat/online/src/OM.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/lactel-dataformat/online/src/OM.cc.i
+.PHONY : lactel-dataformat/online/src/OM.cc.i
 
-lactel-dataformat/src/OM.s: lactel-dataformat/src/OM.cc.s
-.PHONY : lactel-dataformat/src/OM.s
+lactel-dataformat/online/src/OM.s: lactel-dataformat/online/src/OM.cc.s
+.PHONY : lactel-dataformat/online/src/OM.s
 
 # target to generate assembly for a file
-lactel-dataformat/src/OM.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/lactel-dataformat/src/OM.cc.s
-.PHONY : lactel-dataformat/src/OM.cc.s
+lactel-dataformat/online/src/OM.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libOMG.dir/build.make CMakeFiles/libOMG.dir/lactel-dataformat/online/src/OM.cc.s
+.PHONY : lactel-dataformat/online/src/OM.cc.s
 
 programs/OMGsim.o: programs/OMGsim.cxx.o
 .PHONY : programs/OMGsim.o
@@ -2209,9 +2209,9 @@ help:
 	@echo "... common/src/ParametrizedGenerator.o"
 	@echo "... common/src/ParametrizedGenerator.i"
 	@echo "... common/src/ParametrizedGenerator.s"
-	@echo "... lactel-dataformat/src/OM.o"
-	@echo "... lactel-dataformat/src/OM.i"
-	@echo "... lactel-dataformat/src/OM.s"
+	@echo "... lactel-dataformat/online/src/OM.o"
+	@echo "... lactel-dataformat/online/src/OM.i"
+	@echo "... lactel-dataformat/online/src/OM.s"
 	@echo "... programs/OMGsim.o"
 	@echo "... programs/OMGsim.i"
 	@echo "... programs/OMGsim.s"

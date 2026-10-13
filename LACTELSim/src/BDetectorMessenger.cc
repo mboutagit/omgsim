@@ -131,7 +131,8 @@ namespace lactel
             std::cout << "\r\033[20C \033[1;33m" << "Generation surface size is: " << BDetector->genSurfSize << "\033[0m" << std::endl;
         }
         else if (cmd == detectorState_cmd){
-            BDetector->setDetectorState(value);
+            if(BDetector->isADetectorState(BDetector->strToDetectorState(value)))
+                BDetector->setDetectorState(value);
             // std::cout << "\r\033[20C \033[1;33m" << "Detector state is: " << value << "\033[0m" << std::endl;
         }
         else if (cmd == autoGenSize_cmd){

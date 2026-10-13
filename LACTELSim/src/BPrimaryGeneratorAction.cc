@@ -360,7 +360,7 @@ namespace lactel
             //particleName="gamma";
 
             double Emin = 3e-1;     // GeV
-            double Emax = 1e4;     // GeV (10 TeV)
+            double Emax = 8e2;     // GeV (10 TeV)
 
             double Thetamin = 0;     // deg (0)
             double Thetamax = BDetectorConstruction::GetIt()->acceptanceAngle;     // deg (0)
@@ -393,27 +393,9 @@ namespace lactel
 
             TF2* generator = new TF2(
                     "modFlux2D",
-                    [](double* x, double* pars) {
-
-                        // const double E = x[0];
-                        // const double costheta = x[1];
-
-                        // const double thetaDeg = std::acos(costheta) / deg;
-
-                        // double xx[2] = {E, thetaDeg};
-
-                        const double flux = pow(x[0], 2.7) *
-                            lactel::BPrimaryGeneratorAction::ModifiedFormula2D(x, pars);
-
-                        // Projection onto horizontal generation surface
-                        return flux;
-                    },
-                    Emin,
-                    Emax,
-                    Thetamin,
-                    Thetamax
-                    // std::cos(Thetamax), // assuming theta in 0 -> pi/2.
-                    // std::cos(Thetamin)
+                    lactel::BPrimaryGeneratorAction::ModifiedFormula2D,
+                    Emin, Emax,
+                    Thetamin, Thetamax
                 );
 
             double energyGeV;

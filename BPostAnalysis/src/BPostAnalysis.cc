@@ -196,33 +196,33 @@ namespace lactel
             tree->GetEntry(i);
 
             // // apply DAQ
-            // std::vector<ADC_record> adcs_om1 = wc1->digitizeEvent(0, *evt);
-            // std::vector<ADC_record> adcs_om2 = wc1->digitizeEvent(1, *evt);
+            std::vector<ADC_record> adcs_om1 = wc1->digitizeEvent(0, *evt);
+            std::vector<ADC_record> adcs_om2 = wc1->digitizeEvent(1, *evt);
 
-            // // std::cout << "\r\033[10C" << "Processing event: " << evt->event_id << " Total Events: " << tree->GetEntries() << std::endl;
+            // std::cout << "\r\033[10C" << "Processing event: " << evt->event_id << " Total Events: " << tree->GetEntries() << std::endl;
 
-            // std::vector<Waveform> wfs_om1 = wc1->waveformFromADC(adcs_om1);
-            // std::vector<Waveform> wfs_om2 = wc1->waveformFromADC(adcs_om2);
+            std::vector<Waveform> wfs_om1 = wc1->waveformFromADC(adcs_om1);
+            std::vector<Waveform> wfs_om2 = wc1->waveformFromADC(adcs_om2);
 
-            // Waveform wf_om1 = wc1->joinWavefroms(0, wfs_om1);
-            // Waveform wf_om2 = wc1->joinWavefroms(1, wfs_om2);
+            Waveform wf_om1 = wc1->joinWavefroms(0, wfs_om1);
+            Waveform wf_om2 = wc1->joinWavefroms(1, wfs_om2);
 
-            // // std::cout << "\r\033[10C" << "wf1 min " << wf_om1.getMinAmplitude() << "  ---  " 
-            // //                             << "wf2 min " << wf_om2.getMinAmplitude() << "  ---  " 
-            // //                             << std::endl;
+            // std::cout << "\r\033[10C" << "wf1 min " << wf_om1.getMinAmplitude() << "  ---  " 
+            //                             << "wf2 min " << wf_om2.getMinAmplitude() << "  ---  " 
+            //                             << std::endl;
 
-            // TGraph totA0 = wc1->drawWaveform(wf_om1, wc1->getConfiguration().eventBufferDepth);
-            // TGraph totA1 = wc1->drawWaveform(wf_om2, wc1->getConfiguration().eventBufferDepth);
+            TGraph totA0 = wc1->drawWaveform(wf_om1, wc1->getConfiguration().eventBufferDepth);
+            TGraph totA1 = wc1->drawWaveform(wf_om2, wc1->getConfiguration().eventBufferDepth);
         
-            wc1->digitizeEvent(*evt);
+            // wc1->digitizeEvent(*evt);
 
-            // double xmin_a0, xmax_a0, ymin_a0, ymax_a0;
-            // totA0.ComputeRange(xmin_a0, ymin_a0, xmax_a0, ymax_a0);
+            double xmin_a0, xmax_a0, ymin_a0, ymax_a0;
+            totA0.ComputeRange(xmin_a0, ymin_a0, xmax_a0, ymax_a0);
 
-            // double xmin_a1, xmax_a1, ymin_a1, ymax_a1;
-            // totA1.ComputeRange(xmin_a1, ymin_a1, xmax_a1, ymax_a1);
+            double xmin_a1, xmax_a1, ymin_a1, ymax_a1;
+            totA1.ComputeRange(xmin_a1, ymin_a1, xmax_a1, ymax_a1);
             
-            double ymin_a0, ymin_a1;
+            // double ymin_a0, ymin_a1;
             // if(evt->daqEvent[0].waveform.peakAmplitude)
             //     ymin_a0 = evt->daqEvent[0].waveform.peakAmplitude;
             // else 

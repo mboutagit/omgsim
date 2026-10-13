@@ -588,7 +588,7 @@ G__Dict.cxx: \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3RunMessenger.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3SteppingAction.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3TrackInformation.hh \
- /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/include/OM.hh \
+ /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/OM.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryGrid.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/Geometry/include/GeometryObject.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/tools/include/BWaveCatcher.hh \

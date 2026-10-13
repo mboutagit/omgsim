@@ -128,7 +128,7 @@ namespace lactel
             {                    
                 // unsigned int event_ID;
                 std::vector<Hit> hits;
-                // std::vector<DAQEvent> daqEvent;
+                std::vector<DAQEvent> daqEvents;
                 // std::vector<HitInfos> pmHits;
                 // std::vector<HitInfos> hits;
                 float event_energy;
