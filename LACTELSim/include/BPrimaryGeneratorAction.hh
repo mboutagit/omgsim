@@ -76,7 +76,7 @@ public:
     static double ModifiedFormula2D(double *energy, double *pars);
 
 
-    void print(ostream& out);
+    void print(ostream& out = std::cout);
     std::string getGeneratorName();
     void write(bool write);
 
@@ -103,11 +103,11 @@ public:
     TGraph* nMuonsGr;
 
     // generation pars
-    static float EMax; // maximum energy
-    static float EMin; // minimum energy
+    static float EMax; // maximum energy GeV
+    static float EMin; // minimum energy GeV
     static float dE; // energy step
-    static float thetaMin; // minimum theta
-    static float thetaMax; // maximum theta
+    static float thetaMin; // minimum theta deg
+    static float thetaMax; // maximum theta deg
     static float phiMin; // minumum phi
     static float phiMax; // maximum phi
     static float dTheta; // theta steps
@@ -118,6 +118,8 @@ public:
 
     double thetaGen;
     double EGen;
+
+
     static GenParsMode genParsMode;
 
 

@@ -1595,6 +1595,7 @@ CMakeFiles/libOMG.dir/G__Dict.cxx.o: \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorAction.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BPrimaryGeneratorMessenger.hh \
  /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4UIcmdWithAnInteger.hh \
+ /home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/Geant4/G4UIcmdWithADouble.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3RunMessenger.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/LACTELSim/include/BRunAction.hh \
  /home/bouta-mohammed/work/cppm/lactel/trunk/common/include/KM3RunAction.hh \

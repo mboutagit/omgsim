@@ -21,11 +21,11 @@ namespace lactel
 
     BPrimaryGeneratorAction::GenParsMode BPrimaryGeneratorAction::genParsMode=GenParsMode::integral;
 
-    float BPrimaryGeneratorAction::EMin        = 1 *GeV; // maximum energy
-    float BPrimaryGeneratorAction::EMax        = 1 *TeV; // minimum energy
-    float BPrimaryGeneratorAction::dE          = .1 *GeV; // energy step
-    float BPrimaryGeneratorAction::thetaMin    = 0.*deg; // minimum theta
-    float BPrimaryGeneratorAction::thetaMax    = 60 *deg; //60. *deg;; // maximum theta
+    float BPrimaryGeneratorAction::EMin        = .3 *GeV; // maximum energy GeV
+    float BPrimaryGeneratorAction::EMax        = .5 *TeV; // minimum energy GeV
+    float BPrimaryGeneratorAction::dE          = .1 *GeV; // energy step 
+    float BPrimaryGeneratorAction::thetaMin    = 0.*deg; // minimum theta deg
+    float BPrimaryGeneratorAction::thetaMax    = 60 *deg; //60. *deg;; // maximum theta deg
     float BPrimaryGeneratorAction::phiMin      = 0. *deg; // minumum phi
     float BPrimaryGeneratorAction::phiMax      = 360. *deg; // maximum phi
     float BPrimaryGeneratorAction::dTheta      = .5 *deg; // theta steps
@@ -101,6 +101,8 @@ namespace lactel
             }
         }
         hisET->Write();
+
+        print();
        
     }
 
@@ -249,14 +251,15 @@ namespace lactel
 
     /**
      * @brief Get a fixed theta angle direction with random phi angle
-     * @param theta: theta angle that is fixed
+     * @param theta: theta angle that is fixed in deg
      * @return a G4ThreeVector with a direction vector.
      */
     G4ThreeVector BPrimaryGeneratorAction::FixedThetaDirection(double theta){
         double  phi = 2 * CLHEP::pi * G4UniformRand(); // Uniform in azimuth
-        return G4ThreeVector(std::sin(theta) * std::cos(phi), 
-                                std::sin(theta) * std::sin(phi),
-                                -std::cos(theta) // down going
+        double theta_rad = theta/rad;
+        return G4ThreeVector(std::sin(theta_rad) * std::cos(phi), 
+                                std::sin(theta_rad) * std::sin(phi),
+                                - std::cos(theta_rad) // down going
                             );
     }
 
@@ -268,10 +271,14 @@ namespace lactel
                 + std::pow(min, 1-_alpha), 1/(1-_alpha));
     }
 
-    void BPrimaryGeneratorAction::print(std::ostream& out = std::cout){
+    void BPrimaryGeneratorAction::print(std::ostream& out){
         out << "event id: " << event_id << std::endl;        
         out << "generator: " << getGeneratorName() << std::endl;
         out << "particle name: " << particle_name << std::endl;
+        out << "EMin: " << EMin << std::endl;
+        out << "EMax: " << EMax << std::endl;
+        out << "thetaMin: " << thetaMin << std::endl;
+        out << "thetaMax: " << thetaMax << std::endl;
         out << "particle position (m): " << particle_position / CLHEP::m << std::endl;
         out << "particle direction (mm): " << particle_direction / CLHEP::mm << std::endl;
         out << "particle theta (deg): " << particle_direction.getTheta() / CLHEP::deg << std::endl;
@@ -359,15 +366,6 @@ namespace lactel
 
             //particleName="gamma";
 
-            double Emin = 3e-1;     // GeV
-            double Emax = 8e2;     // GeV (10 TeV)
-
-            double Thetamin = 0;     // deg (0)
-            double Thetamax = BDetectorConstruction::GetIt()->acceptanceAngle;     // deg (0)
-
-            G4ThreeVector direction;
-            double energy;
-
             // if(genParsMode == GenParsMode::cos2){
             //     direction = GenerateMuonDirection("down-going_cos2");
             //     energy = GenerateMuonEnergy(Emin * GeV, Emax * GeV, direction.getTheta());
@@ -392,26 +390,24 @@ namespace lactel
             //                 );
 
             TF2* generator = new TF2(
-                    "modFlux2D",
-                    lactel::BPrimaryGeneratorAction::ModifiedFormula2D,
-                    Emin, Emax,
-                    Thetamin, Thetamax
+                    "modFlux2D",[](double* x, double* pars){
+                        double xx[] = {x[0] * GeV, x[1] * deg};
+                       return lactel::BPrimaryGeneratorAction::ModifiedFormula2D(xx, pars);
+                    },
+                    EMin/GeV, EMax/GeV,
+                    thetaMin/deg, thetaMax/deg
                 );
 
-            double energyGeV;
-            double costheta, inTheta;
+            double energy, theta;
 
-            generator->GetRandom2(energyGeV, inTheta);
+            generator->GetRandom2(energy, theta);
 
-            double theta = inTheta; //std::acos(costheta);
-
-            energy = energyGeV * GeV;
             
-            // std::cout << "\r\033[10C" << "Energy 1: " << energy << " - In GeV: " << energyGeV
-            //                             << " - Angle: " << theta / deg 
+            // std::cout << "\r\033[10C" << "Energy in GeV: " << energy 
+            //                             << " - Angle in deg: " << theta 
             //                             << std::endl;
 
-            direction = FixedThetaDirection(theta);
+            G4ThreeVector direction = FixedThetaDirection(theta * deg);
 
             // double cost, theta;
             // // generator->GetRandom2(energy, theta);
@@ -442,7 +438,7 @@ namespace lactel
 
             ((G4ParticleGun*)particleGun)->SetParticleDefinition(particle);
             ((G4ParticleGun*)particleGun)->SetParticlePosition(surfPoints);
-            ((G4ParticleGun*)particleGun)->SetParticleEnergy(energy);
+            ((G4ParticleGun*)particleGun)->SetParticleEnergy(energy * GeV);
             ((G4ParticleGun*)particleGun)->SetParticleMomentumDirection(direction); // Toward the ground  
             
             if(DAQ::DAQManager::getIt()->isActive())    
@@ -451,7 +447,7 @@ namespace lactel
             
             particle_position = surfPoints;
             particle_direction = direction;
-            particle_energy = energy;
+            particle_energy = energy * GeV;
 
             if(write_generation_data)
                 print(gen_data);
@@ -802,30 +798,48 @@ namespace lactel
     }
 
 
-    double BPrimaryGeneratorAction::ModifiedFormula2D(double *x, double *pars) 
-    {
-    // cout << "\r\033[5C" << "---- BPrimaryGeneratorAction::MuonFlux: " << energy[0] << " - " << par[0] << " - " << par[1] << endl;
-        const double epsilon_pi = 115.0; 
-        const double epsilon_K  = 850.0; 
-        const double H = 6.3; // in km   // Atmospheric scale height
+    double BPrimaryGeneratorAction::ModifiedFormula2D(double* x, double* /*pars*/){
+        // Critical energies of charged pions and kaons (GeV)
+        constexpr double epsilonPi = 115.0;
+        constexpr double epsilonK  = 850.0;
 
-        double  P1 = 0.102573,
-                P2 = -0.068287,
-                P3 = 0.958633,
-                P4 = 0.0407253,
-                P5 = 0.817285;
-        
-        const double norm = 0.14; 
-        const double gamma = -2.7;       
+        // Muon flux parameterization constants
+        constexpr double norm  = 0.14;
+        constexpr double gamma = -2.7;
 
-        double E_mu = x[0];   // Muon energy (GeV expected)
-        double theta = x[1]; // theta angle (deg expected)
-        double cosTheta = cos(theta * deg);
-        double cosThetaStar = std::sqrt( (cosTheta*cosTheta + P1*P1 + P2*pow(cosTheta, P3) + P4*pow(cosTheta, P5))/(1+P1*P1+P2+P4) );
-        double flux = norm * pow(E_mu * (1 + 3.64/(E_mu*pow(cosThetaStar, 1.29))), gamma) *
-                    ( 1.0 / (1 + 1.1*(E_mu * cosThetaStar / epsilon_pi)) +
-                        0.054 / (1 + 1.1*(E_mu * cosThetaStar / epsilon_K)) );
-        return flux;
+        constexpr double P1 =  0.102573;
+        constexpr double P2 = -0.068287;
+        constexpr double P3 =  0.958633;
+        constexpr double P4 =  0.0407253;
+        constexpr double P5 =  0.817285;
+
+        // Input variables converted to GeV and radians
+        const double energy = x[0] / GeV;
+        const double theta  = x[1] / rad;
+        const double cosTheta = std::cos(theta);
+
+        // std::cout << "\r\033[10C" << "Energy in GeV: " << energy << " - angle in deg: " << theta << std::endl;
+        // Effective cosine to account for the curvature of the atmosphere
+        const double cosThetaStar = std::sqrt(
+            (cosTheta * cosTheta
+            + P1 * P1
+            + P2 * std::pow(cosTheta, P3)
+            + P4 * std::pow(cosTheta, P5))
+            / (1.0 + P1 * P1 + P2 + P4)
+        );
+
+        // Muon differential flux
+        const double energyCorrection =
+            energy * (1.0 + 3.64 / (energy * std::pow(cosThetaStar, 1.29)));
+
+        const double pionContribution =
+            1.0 / (1.0 + 1.1 * energy * cosThetaStar / epsilonPi);
+
+        const double kaonContribution =
+            0.054 / (1.0 + 1.1 * energy * cosThetaStar / epsilonK);
+
+        return norm * std::pow(energyCorrection, gamma)
+                * (pionContribution + kaonContribution);
     }
 
 
@@ -900,12 +914,30 @@ namespace lactel
         return theta; // In radians
     }
 
-    double BPrimaryGeneratorAction::gaisser_flux(double* E, double* pars) {
-        double theta = pars[0]*deg;
-        double cosTheta = cos(theta); // vertical
-        double term1 = 1.0 / (1.0 + 1.1 * E[0] * cosTheta / 115.0);
-        double term2 = 0.054 / (1.0 + 1.1 * E[0] * cosTheta / 850.0);
-        return 0.14 * pow(E[0], -2.7) * (term1 + term2);
+    double BPrimaryGeneratorAction::gaisser_flux(double* x, double* pars){
+        // Convert energy to GeV and angle to radians
+        const double energy = x[0] / GeV;
+        const double theta  = pars[0] / rad;
+
+        const double cosTheta = std::cos(theta);
+
+        // Critical energies of charged pions and kaons (GeV)
+        constexpr double epsilonPi = 115.0;
+        constexpr double epsilonK  = 850.0;
+
+        // Pion and kaon contributions
+        const double pionContribution =
+            1.0 / (1.0 + 1.1 * energy * cosTheta / epsilonPi);
+
+        const double kaonContribution =
+            0.054 / (1.0 + 1.1 * energy * cosTheta / epsilonK);
+
+        // Differential muon flux
+        constexpr double norm  = 0.14;
+        constexpr double gamma = -2.7;
+
+        return norm * std::pow(energy, gamma)
+                    * (pionContribution + kaonContribution);
     }
     
     // double BPrimaryGeneratorAction::integrate_gaisser_flux(double E_min, double E_max, int Nbins) {

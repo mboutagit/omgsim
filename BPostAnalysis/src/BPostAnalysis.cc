@@ -234,12 +234,12 @@ namespace lactel
             //     continue;
 
             // std::cout << "\r\033[10C" << "ymina0: " << ymin_a0 << "  -- ymina1: " << ymin_a1 << std::endl;
-            if(abs(ymin_a0/1e3) >= thr){
+            if(abs(ymin_a0/1e3) >= abs(thr)){
                 amp_om1->Fill(abs(ymin_a0)/1e3, 1/exposure_time);
                 // std::cout << "\r\033[10C" << "amp ch0: " << abs(ymin_a0)/1e3 << " - nEntries: " << totA0.GetN() << std::endl;
             }
                 
-            if(abs(ymin_a1/1e3) >= thr){
+            if(abs(ymin_a1/1e3) >= abs(thr)){
                 amp_om2->Fill(abs(ymin_a1)/1e3, 1/exposure_time);
                 // std::cout << "\r\033[10C" << "amp ch1: " << abs(ymin_a1)/1e3 <<" - nEntries: " << totA0.GetN() << std::endl;
             }
@@ -259,7 +259,9 @@ namespace lactel
             npe_om1->Fill(nhits_om1, 1/exposure_time);
             npe_om2->Fill(nhits_om2, 1/exposure_time);
 
-            if( evt->checkCoincidence(t_coin) ){ //evt->isACoincidence(t_coin)){
+            if( evt->isACoincidence(t_coin) ){ //evt->isACoincidence(t_coin)){
+                // std::cout << "\r\033[10C" << "We have a coincidence !" << std::endl;
+
                 int nhits_om1_coin = 0;
                 int nhits_om2_coin = 0;
 

@@ -39,6 +39,26 @@ namespace lactel
         genType_cmd->SetParameterName("choice", false);
         genType_cmd->AvailableForStates(G4State_PreInit);
 
+        genEmin_cmd = new G4UIcmdWithADoubleAndUnit("/LACTEL/BPGA/Emin", this);
+        genEmin_cmd->SetGuidance("Generator minimum energy with its unit");
+        genEmin_cmd->SetParameterName("Emin", false);
+        genEmin_cmd->AvailableForStates(G4State_PreInit);
+
+        genEmax_cmd = new G4UIcmdWithADoubleAndUnit("/LACTEL/BPGA/Emax", this);
+        genEmax_cmd->SetGuidance("Generator maximum energy with its unit");
+        genEmax_cmd->SetParameterName("Emax", false);
+        genEmax_cmd->AvailableForStates(G4State_PreInit);
+
+        genThetaMin_cmd = new G4UIcmdWithADoubleAndUnit("/LACTEL/BPGA/thetaMin", this);
+        genThetaMin_cmd->SetGuidance("Generator minimum zenith angle with its unit");
+        genThetaMin_cmd->SetParameterName("thetaMin", false);
+        genThetaMin_cmd->AvailableForStates(G4State_PreInit);
+
+        genThetaMax_cmd = new G4UIcmdWithADoubleAndUnit("/LACTEL/BPGA/thetaMax", this);
+        genThetaMax_cmd->SetGuidance("Generator maximum zenith angle with its unit");
+        genThetaMax_cmd->SetParameterName("thetaMax", false);
+        genThetaMax_cmd->AvailableForStates(G4State_PreInit);
+
         cout << "\r\033[20C" << "---->>>> Calling BPG Messenger" << endl;
     };
 
@@ -49,6 +69,8 @@ namespace lactel
         delete EGen_cmd;
         delete genParsMode_cmd;
         delete genType_cmd;
+        delete genEmin_cmd;
+        delete genEmax_cmd;
     };
 
     void BPrimaryGeneratorMessenger::SetNewValue(G4UIcommand* cmd, G4String value){
@@ -77,6 +99,26 @@ namespace lactel
                 exit(-1);
             }
         } 
+
+        else if(cmd == genEmin_cmd){
+            BPGA->EMin = genEmin_cmd->GetNewDoubleValue(value);
+        } 
+
+        else if(cmd == genEmax_cmd){
+            BPGA->EMax = genEmin_cmd->GetNewDoubleValue(value);
+        }
+
+        else if(cmd == genThetaMin_cmd){
+            BPGA->thetaMin = genThetaMin_cmd->GetNewDoubleValue(value);
+        } 
+
+        else if(cmd == genThetaMax_cmd){
+            BPGA->thetaMax = genThetaMax_cmd->GetNewDoubleValue(value);
+        }
+
+        else{
+            throw runtime_error ("Unkown commande from BPGA");
+        }
     }
 
 

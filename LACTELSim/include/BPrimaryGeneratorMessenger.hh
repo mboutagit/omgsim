@@ -10,6 +10,7 @@
 #include "G4UIcmdWithAString.hh"
 #include "G4UIcmdWithABool.hh"
 #include "G4UIcmdWithAnInteger.hh"
+#include "G4UIcmdWithADouble.hh"
 
 #include "KM3RunMessenger.hh"
 
@@ -31,6 +32,13 @@ namespace lactel
             G4UIcmdWithADoubleAndUnit* EGen_cmd;
             G4UIcmdWithAString* genParsMode_cmd;
             G4UIcmdWithAnInteger* genType_cmd;
+
+            G4UIcmdWithADoubleAndUnit* genEmin_cmd; // Emin and Emax in GeV
+            G4UIcmdWithADoubleAndUnit* genEmax_cmd;
+
+            G4UIcmdWithADoubleAndUnit* genThetaMin_cmd; // thetamax and thetamin in deg
+            G4UIcmdWithADoubleAndUnit* genThetaMax_cmd;
+
 
             BPrimaryGeneratorAction* BPGA;
 

@@ -292,7 +292,7 @@ namespace lactel
         genPars.fGenZDir   = particle->GetMomentum().unit().getZ() / mm;
         genPars.fGenTheta  = particle->GetMomentum().theta() / deg;
         genPars.fGenPhi    = particle->GetMomentum().phi() /deg;
-        genPars.fGenEnergy = particle->GetTotalEnergy() / MeV; 
+        genPars.fGenEnergy = particle->GetTotalEnergy() / GeV; 
         // genPars.fGenEnergy = BPrimaryGeneratorAction::getInstance()->particle_energy / GeV; 
         
         /////////////////////////////////
@@ -636,12 +636,12 @@ namespace lactel
     // bool BAnalysisManager::DetectedEvent::isACoincidence(float ctime, float thr){
     //     BLactelDetector& det = BDetectorConstruction::GetIt()->getDetector();
     //     bool coincidence = false;
-    //     for(auto& hita: daqEvent){
-    //         for(auto& hitb : daqEvent){
+    //     for(auto& hita: daqEvents){
+    //         for(auto& hitb : daqEvents){
     //             if( hita.om_id == hitb.om_id) // check different OMs on the same module 
     //                 continue;
                 
-    //             if(abs(hita.t - hitb.t) < ctime && hita.amp >= thr && hitb.amp >= thr){ // coincidence
+    //             if(abs(hita.t - hitb.t) < ctime && abs(hita.amp) >= thr && abs(hitb.amp) >= thr){ // coincidence
     //                 coincidence = true;
     //                 break;
     //             }
