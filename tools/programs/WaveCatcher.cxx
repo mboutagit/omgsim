@@ -77,7 +77,7 @@ int main(int argc, char* argv[]){
     std::vector<BWaveCatcher> waveCatchers;
 
     for(auto&m : detector.getListOfModules()){
-        BWaveCatcher wc("wc_M" + std::to_string(m->getID()), m->getID());
+        BWaveCatcher wc("wc_M" + std::to_string(m->getID()));
         waveCatchers.push_back(wc);
     }
 

@@ -13,7 +13,7 @@ namespace lactel
           eventBufferDepth(7),
           triggerThresholds{-10, -10}, // mv threshold;
           triggerSource("self"),
-          triggerEdges{"rising", "rising"},
+          triggerEdges{TriggerEdge::Rising, TriggerEdge::Rising},
           preTriggerTime(10.0),
           postTriggerTime(5.0),
           channelEnabled{true, true},
@@ -32,6 +32,19 @@ namespace lactel
     {}
 
     BWaveCatcherConf::~BWaveCatcherConf(){}
+
+    std::ostream& operator<<(std::ostream& os, BWaveCatcherConf::TriggerEdge edge)
+        {
+            switch (edge) {
+                case BWaveCatcherConf::TriggerEdge::Rising:
+                    return os << "Rising";
+
+                case BWaveCatcherConf::TriggerEdge::Falling:
+                    return os << "Falling";
+            }
+
+            return os << "Unknown";
+        }
 
     void BWaveCatcherConf::print(std::ostream& out) const {
             out     <<  "\tSampling frequency: "      << samplingFrequency << "\n"
@@ -106,7 +119,7 @@ namespace lactel
         triggerSource = src;
     }
 
-    void BWaveCatcherConf::setChannelTriggerEdge(int c, std::string te){
+    void BWaveCatcherConf::setChannelTriggerEdge(int c, TriggerEdge te){
         triggerEdges[c] = te;
     }
 

@@ -1,36 +1,36 @@
 # Generated using: BLactelDetector::dump function.                 
-# Date: 2026-09-22 14:22:32
+# Date: 2026-10-23 20:09:00
 # Detector Name: LACTEL_9Modules
 # Detector ID: 0
 # Number of Modules: 9
 # Description: 
 # 1----------Module: 1 - Name: 
-#----------1----------cell: 1 - Name: IdealWaterVolume - Position: (0,0,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0321
-#----------2----------cell: 2 - Name: IdealWaterVolume - Position: (0,0,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0304
+#----------1----------cell: 1 - Name: IdealWaterVolume - Position: (0,0,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0321 - OM pos: (0,0,-250)
+#----------2----------cell: 2 - Name: IdealWaterVolume - Position: (0,0,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0304 - OM pos: (0,0,-250)
 # 2----------Module: 2 - Name: 
-#----------3----------cell: 3 - Name: IdealWaterVolume - Position: (0,2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0423
-#----------4----------cell: 4 - Name: IdealWaterVolume - Position: (0,2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS1060
+#----------3----------cell: 3 - Name: IdealWaterVolume - Position: (0,2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0423 - OM pos: (0,0,-250)
+#----------4----------cell: 4 - Name: IdealWaterVolume - Position: (0,2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS1060 - OM pos: (0,0,-250)
 # 3----------Module: 3 - Name: 
-#----------5----------cell: 5 - Name: IdealWaterVolume - Position: (0,-2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0311
-#----------6----------cell: 6 - Name: IdealWaterVolume - Position: (0,-2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0302
+#----------5----------cell: 5 - Name: IdealWaterVolume - Position: (0,-2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0311 - OM pos: (0,0,-250)
+#----------6----------cell: 6 - Name: IdealWaterVolume - Position: (0,-2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0302 - OM pos: (0,0,-250)
 # 4----------Module: 4 - Name: 
-#----------7----------cell: 7 - Name: IdealWaterVolume - Position: (2500,-2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0648
-#----------8----------cell: 8 - Name: IdealWaterVolume - Position: (2500,-2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0366
+#----------7----------cell: 7 - Name: IdealWaterVolume - Position: (2500,-2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0648 - OM pos: (0,0,-250)
+#----------8----------cell: 8 - Name: IdealWaterVolume - Position: (2500,-2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0366 - OM pos: (0,0,-250)
 # 5----------Module: 5 - Name: 
-#----------9----------cell: 9 - Name: IdealWaterVolume - Position: (2500,0,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0137
-#----------10----------cell: 10 - Name: IdealWaterVolume - Position: (2500,0,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0298
+#----------9----------cell: 9 - Name: IdealWaterVolume - Position: (2500,0,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0137 - OM pos: (0,0,-250)
+#----------10----------cell: 10 - Name: IdealWaterVolume - Position: (2500,0,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0298 - OM pos: (0,0,-250)
 # 6----------Module: 6 - Name: 
-#----------11----------cell: 11 - Name: IdealWaterVolume - Position: (2500,2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS1044
-#----------12----------cell: 12 - Name: IdealWaterVolume - Position: (2500,2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0501
+#----------11----------cell: 11 - Name: IdealWaterVolume - Position: (2500,2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS1044 - OM pos: (0,0,-250)
+#----------12----------cell: 12 - Name: IdealWaterVolume - Position: (2500,2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0501 - OM pos: (0,0,-250)
 # 7----------Module: 7 - Name: 
-#----------13----------cell: 13 - Name: IdealWaterVolume - Position: (-2500,-2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0358
-#----------14----------cell: 14 - Name: IdealWaterVolume - Position: (-2500,-2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0319
+#----------13----------cell: 13 - Name: IdealWaterVolume - Position: (-2500,-2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0358 - OM pos: (0,0,-250)
+#----------14----------cell: 14 - Name: IdealWaterVolume - Position: (-2500,-2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0319 - OM pos: (0,0,-250)
 # 8----------Module: 8 - Name: 
-#----------15----------cell: 15 - Name: IdealWaterVolume - Position: (-2500,0,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0790
-#----------16----------cell: 16 - Name: IdealWaterVolume - Position: (-2500,0,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0293
+#----------15----------cell: 15 - Name: IdealWaterVolume - Position: (-2500,0,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0790 - OM pos: (0,0,-250)
+#----------16----------cell: 16 - Name: IdealWaterVolume - Position: (-2500,0,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0293 - OM pos: (0,0,-250)
 # 9----------Module: 9 - Name: 
-#----------17----------cell: 17 - Name: IdealWaterVolume - Position: (-2500,2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0365
-#----------18----------cell: 18 - Name: IdealWaterVolume - Position: (-2500,2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0299
+#----------17----------cell: 17 - Name: IdealWaterVolume - Position: (-2500,2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0365 - OM pos: (0,0,-250)
+#----------18----------cell: 18 - Name: IdealWaterVolume - Position: (-2500,2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0299 - OM pos: (0,0,-250)
 
 
 # Main Volume: Detector

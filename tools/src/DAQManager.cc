@@ -88,7 +88,7 @@ namespace DAQ{
         for(auto& wc : wavecatchers)
             if(wc->getName() == name)    
                 return wc;
-        return new BWaveCatcher("default", 1);
+        return new BWaveCatcher("default");
     }
 
     BWaveCatcher* DAQManager::getWavaCatcherByIndex(int index){

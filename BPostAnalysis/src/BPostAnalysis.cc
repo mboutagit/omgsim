@@ -115,7 +115,8 @@ namespace lactel
         om2.setID(2);
 
 
-        BWaveCatcher* wc1 = new BWaveCatcher("wc1", 1);
+        BWaveCatcher* wc1 = new BWaveCatcher("wc1");
+        wc1->activate();
         wc1->plugOM(0, om1);
         wc1->plugOM(1, om2);
         wc1->setTriggerThreshold(thr);
@@ -492,7 +493,7 @@ namespace lactel
         OM om1 = OM("OMS0321");
         OM om2 = OM("OMS0304");
 
-        BWaveCatcher* wc1 = new BWaveCatcher("wc1", 1);
+        BWaveCatcher* wc1 = new BWaveCatcher("wc1");
         wc1->plugOM(0, om1);
         wc1->plugOM(1, om2);
 
@@ -530,10 +531,10 @@ namespace lactel
     std::vector<TCanvas*>  getRealDataPlots(histsByName& hists, std::string file1, std::string file2){
         float xmin=0.;
         float xmax=2.4;
-        float unitsPerBin = BPostAnalysis::mVperBin/1e3;
+        float unitsPerBin = BPostAnalysis::mVperBin/1e3; // V to mV
         const int nbins= (int)((xmax - xmin)/unitsPerBin);
 
-        float attenuator=0.5;
+        float attenuator=.5;
         std::string prefix="data_";
 
         std::vector<std::string> data ={"Amplitude", "NPE"};
@@ -643,20 +644,20 @@ namespace lactel
 
         
         for(long i = 0; i < dims_run3[0]; i++){
-                // std::cout << "line: " << i << " -- col0: " << data[i*dims_run3[1]] << endl; // " - col1: " << data[i*dims_run3[1]+1] << std::endl;
-                hist0_run3->Fill(abs(data_run3[i*dims_run3[1]])/ attenuator, 1./diff_run3); // weating 
-                hist1_run3->Fill(abs(data_run3[i*dims_run3[1]+1])/ attenuator, 1./diff_run3);
+            // std::cout << "line: " << i << " -- col0: " << data[i*dims_run3[1]] << endl; // " - col1: " << data[i*dims_run3[1]+1] << std::endl;
+            hist0_run3->Fill(abs(data_run3[i*dims_run3[1]])/ attenuator, 1./diff_run3); // weating 
+            hist1_run3->Fill(abs(data_run3[i*dims_run3[1]+1])/ attenuator, 1./diff_run3);
         }
 
         for(long i = 0; i < dims_run4[0]; i++){
-                // std::cout << "line: " << i << " -- col0: " << data[i*dims_run3[1]] << endl; // " - col1: " << data[i*dims_run3[1]+1] << std::endl;
-                hist0_run4->Fill(abs(data_run4[i*dims_run4[1]])/ attenuator, 1./diff_run4); // one minute of data
-                hist1_run4->Fill(abs(data_run4[i*dims_run4[1]+1])/ attenuator, 1./diff_run4); // one minute of data
+            // std::cout << "line: " << i << " -- col0: " << data[i*dims_run3[1]] << endl; // " - col1: " << data[i*dims_run3[1]+1] << std::endl;
+            hist0_run4->Fill(abs(data_run4[i*dims_run4[1]])/ attenuator, 1./diff_run4); // one minute of data
+            hist1_run4->Fill(abs(data_run4[i*dims_run4[1]+1])/ attenuator, 1./diff_run4); // one minute of data
         }
 
 
 
-        TCanvas* can = new TCanvas("can", "can ", 800, 600);
+        TCanvas* can = new TCanvas("can", "Real data - amplitude", 800, 600);
         can->SetLogy();
         hist0_run3->SetLineColor(1);
         hist1_run3->SetLineColor(2);
@@ -682,12 +683,6 @@ namespace lactel
         hists.push_back(std::pair("amp_ch1_run3", hist1_run3));
         hists.push_back(std::pair("amp_ch0_run4", hist0_run4));
         hists.push_back(std::pair("amp_ch1_run4", hist1_run4));
-
-        // container.h1["amp_ch0_run3"] = hist0_run3;
-        // container.h1["amp_ch0_run3"] = hist0_run3;
-        // container.h1["amp_ch1_run3"] = hist1_run3;
-        // container.h1["amp_ch0_run4"] = hist0_run4;
-        // container.h1["amp_ch1_run4"] = hist1_run4;
 
         return canvas;
     }

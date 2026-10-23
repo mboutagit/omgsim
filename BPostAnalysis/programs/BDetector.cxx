@@ -56,6 +56,7 @@ int main(int argc, char* argv[]){
     ElementaryCell EC17 = ElementaryCell(17, G4ThreeVector(-2.5*m, 2.5*m, -1.5*m),  G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0365"), 9, 1);
     ElementaryCell EC18 = ElementaryCell(18, G4ThreeVector(-2.5*m, 2.5*m, -4*m),    G4ThreeVector(2*m, 2*m, 2*m), OM("OMS0299"), 9, 2);
 
+
     // define modules
     Module M1 = Module(1, {EC1, EC2});
     Module M2 = Module(2, {EC3, EC4});
@@ -67,10 +68,21 @@ int main(int argc, char* argv[]){
     Module M8 = Module(8, {EC15, EC16});
     Module M9 = Module(9, {EC17, EC18});
 
+    G4ThreeVector OMsPosition(0, 0, -0.25*m);
+
+    // std::vector<Module&> modules;
+    // modules.push_back(M1, Mé);
+
+
+
     // Generate lactel prototype Detector file
     BLactelDetector det_prototype({M1, M2, M3, M4, M5, M6, M7, M8, M9},
                             G4ThreeVector(0*cm, 0*cm, 0*cm)
                         );
+    for(auto& module : det_prototype.GetObjects())
+        for(auto& cell : module.GetObjects())
+            cell.getOM().setPoition(OMsPosition);
+                        
     det_prototype.setName("LACTEL_9Modules");
     det_prototype.centerOnItsCells(G4ThreeVector(2*m, 2*m, 2*m));
     det_prototype.setCellsPositionRelativeToDetector();
@@ -78,7 +90,10 @@ int main(int argc, char* argv[]){
     det_prototype.dumpDetectorSummary();
 
     // Generate real Detector file
-    BLactelDetector det_true({M1}, G4ThreeVector(0*cm, 0*cm, 0*cm));
+    BLactelDetector det_true({M1}, G4ThreeVector(0*cm, 0*cm, 0*cm)); 
+    for(auto& module : det_true.GetObjects())
+        for(auto& cell : module.GetObjects())
+            cell.getOM().setPoition(OMsPosition);
     det_true.setName("LACTELTrue");
     det_true.centerOnItsCells(G4ThreeVector(2*m, 2*m, 2*m));
     det_true.setCellsPositionRelativeToDetector();

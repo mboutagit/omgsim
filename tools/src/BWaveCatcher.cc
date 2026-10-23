@@ -7,9 +7,10 @@
 namespace tools
 {
 
+    int BWaveCatcher::id = 0;
     BWaveCatcherConf BWaveCatcher::config_ = BWaveCatcherConf();
 
-    BWaveCatcher::BWaveCatcher(std::string nm, int uid) : name(nm), id(uid), acquiring_(false), rng_(std::random_device{}()), noiseDist_(-2, 2), TTSDist_(3.314, 0.1531), AmpDist_(0, 0.1156) { // 0.1156 is to have 90% of amplitudes inside 30% fluctuation
+    BWaveCatcher::BWaveCatcher(std::string nm) : name(nm), acquiring_(false), rng_(std::random_device{}()), noiseDist_(-2, 2), TTSDist_(3.314, 0.1531), AmpDist_(0, 0.1156) { // 0.1156 is to have 90% of amplitudes inside 30% fluctuation
         
     }
 
@@ -157,6 +158,15 @@ namespace tools
         lastWaveforms_.clear();
     }
 
+    void BWaveCatcher::setChannelTriggerEdge(int channel, BWaveCatcherConf::TriggerEdge te){
+        config_.triggerEdges[channel] = te;
+    }
+
+    void BWaveCatcher::setTriggerEdge(BWaveCatcherConf::TriggerEdge te){
+        for(int channel = 0; channel < config_.NumChannels; channel ++)
+            setChannelTriggerEdge(channel, te);
+    }
+
     Waveform BWaveCatcher::generateFakeWaveform(int channel) {
         Waveform wf;
         wf.channel = channel;
@@ -287,6 +297,11 @@ namespace tools
 
     void BWaveCatcher::digitizeEvent(BAnalysisManager::DetectedEvent& event){
 
+        if(! isActive()){
+            BLogger::getInstance()->log(BLogger::Level::WARNING, "WaveCatcher " + name + " is not active!");
+            return;
+        }
+            
         Waveform channelWaveform[getConfiguration().NumChannels];
         for(int i=0; i < getConfiguration().NumChannels; i++){
             ADCs[i] = digitizeEvent(i, event);
@@ -297,7 +312,7 @@ namespace tools
             fullWF.extractWaveformParameters(config_.triggerThresholds[i], 
                                                 PulsePolarity::Negative,
                                                 config_.internalResistor,
-                                                20
+                                                15
                                             );
             channelWaveform[i] = fullWF;
             BAnalysisManager::DAQEvent daqEvent;
@@ -311,6 +326,11 @@ namespace tools
             daqEvent.t = fullWF.signalTimeF(getConfiguration().triggerThresholds[i], 1/getConfiguration().samplingFrequency);
             event.daqEvents.push_back(daqEvent);
         }
+
+        // for(int i = 0; i < getConfiguration().NumChannels -1 ; i++){
+        //     if( abs(channelWaveform[i]. - channelWaveform[i+1]) )
+        // }
+
 
         std::vector<double> times;
         for(auto& wf : channelWaveform)
@@ -343,6 +363,10 @@ namespace tools
 
     std::vector<ADC_record> BWaveCatcher::digitizeEvent(int channel, BAnalysisManager::DetectedEvent& event){
         std::vector<ADC_record> adcs;
+
+        if(! isActive())
+            BLogger::getInstance()->log(BLogger::Level::WARNING, "WaveCatcher " + name + " is not active!");
+
         if(! event.hits.size())
             return adcs;
 
@@ -498,27 +522,50 @@ namespace tools
                     waveform.samples[sample] = - config_.inputDynamicRange*1e3/2; // negative saturation  no noise
 
                 sample++;
-            }
+            }    
         }
 
-        int itr=0;
-        for(auto& sample : waveform.samples){
-            sample += pedDist_(rng_); // adding basline noise to the waveform
-            if(sample <= config_.triggerThresholds[channel] && ! triggered){
-                triggered = true;
-                waveform.triggered = true;
-                waveform.timestamp = itr*dt; // timestamp when the trigger is fired
-            }
-            itr++;
-        }
+        // int itr=0;
+        // for(auto& sample : waveform.samples){
+        //     sample += pedDist_(rng_); // adding basline noise to the waveform
+        //     if(sample <= config_.triggerThresholds[channel] && ! triggered){
+        //         triggered = true;
+        //         waveform.triggered = true;
+        //         waveform.timestamp = itr*dt; // timestamp when the trigger is fired
+        //     }
+        //     itr++;
+        // }
 
-        // return only triggered waveform.
-        if(triggered){
-            waveforms[channel].push_back(waveform);
+        // // return only triggered waveform.
+        // if(triggered){
+        //     waveforms[channel].push_back(waveform);
+
+        if(checkTrigger(waveform, channel))
             return waveform;
-        }
         else 
             return Waveform();
+    }
+
+    bool BWaveCatcher::checkTrigger(Waveform waveform, int channel){
+        for (std::size_t i = 1; i < waveform.samples.size(); i++) {
+            if (config_.triggerEdges[channel] == BWaveCatcherConf::TriggerEdge::Rising) {
+                if (waveform.samples[i - 1] < config_.triggerThresholds[channel] &&
+                    waveform.samples[i] >= config_.triggerThresholds[channel]) {
+                    waveform.timestamp = i * 1./config_.samplingFrequency;
+                    waveform.triggered = true;
+                    return true;
+                }
+            }
+            else if(config_.triggerEdges[channel] == BWaveCatcherConf::TriggerEdge::Falling) {
+                if (waveform.samples[i - 1] > config_.triggerThresholds[channel] &&
+                    waveform.samples[i] <= config_.triggerThresholds[channel]) {
+                    return true;
+                }
+            }
+            else 
+                BLogger::getInstance()->log(BLogger::Level::ERROR, "Error in trigger Edge");
+        }
+        return false;
     }
 
 

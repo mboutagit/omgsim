@@ -69,11 +69,11 @@ namespace lactel
 
         fMessenger = new BPrimaryGeneratorMessenger(this);
 
-        double Emin = 10*GeV, Emax=10*TeV, dE = 500*MeV;
-        double Tmin = 0 * deg, Tmax = 70 *deg, dT = .1 * deg;
+        double dE = 500*MeV;
+        double Tmin = thetaMin * deg, Tmax = thetaMax *deg, dT = .1 * deg;
         double alt = 274 * m;
 
-        TH2F* hisET = new TH2F("hisET", "Muons flux; log10(E) (GeV); #theta (Deg)", 500, log10(Emin/GeV), log10(Emax/GeV), 200, Tmin/deg, Tmax/deg);
+        TH2F* hisET = new TH2F("hisET", "Muons flux; log10(E) (GeV); #theta (Deg)", 500, log10(EMin/GeV), log10(EMax/GeV), 200, Tmin/deg, Tmax/deg);
 
         vector<double> angles = {0*deg, 10*deg , 20*deg , 30*deg, 40*deg, 50*deg, 60*deg};
         vector<TGraph*> FEGraphes;
@@ -84,8 +84,8 @@ namespace lactel
             gr->SetName(("gr_" + std::to_string((int)(angle/deg))).c_str());
 
             int p = 0;
-            std::cout << "\r\033[10C" << "energy min in GeV: " << Emin/GeV << " angle in rad: " << angle/rad << std::endl;
-            for(double E = Emin; E <= Emax; E+=dE){
+            std::cout << "\r\033[10C" << "energy min in GeV: " << EMin/GeV << " angle in rad: " << angle/rad << std::endl;
+            for(double E = EMax; E <= EMax; E+=dE){
                 gr->SetPoint(p, E/GeV, muon_flux(E/GeV, angle/rad, alt/m) * 100 * 100 );
                 p++;
             }
@@ -95,15 +95,14 @@ namespace lactel
 
 
 
-        for(double E = Emin; E <= Emax; E+=dE){
+        for(double E = EMin; E <= EMax; E+=dE){
             for(double T = Tmin; T <= Tmax; T+=dT){
                 hisET->Fill(log10(E/GeV), T/deg, muon_flux(E/GeV, T/rad, alt/m));
             }
         }
-        hisET->Write();
+        hisET->Write();      
+        print(); 
 
-        print();
-       
     }
 
     BPrimaryGeneratorAction::~BPrimaryGeneratorAction(){
@@ -115,6 +114,31 @@ namespace lactel
 
         if(nMuonsGr && gFile && gFile->IsWritable())
             nMuonsGr->Write();
+
+
+        TH2F *h2 = new TH2F("h2", "EneTheta; log10(E) in GeV; theta in deg", 100, log10(EMin/GeV), log(EMax/GeV), 90, thetaMin*deg, thetaMax*deg);
+        TH1F *hEne = new TH1F("hEne", "hEne; log10(E) in GeV; counts", 100, log10(EMin/GeV), log(EMax/GeV));
+        TH1F *hAng = new TH1F("hAng", "hAng; theta in deg; counts", 90, thetaMin*deg, thetaMax*deg);
+
+        TRandom3 rng(123456);
+
+        int nEvents = 1e4;
+
+        TF2* samplFunc = new TF2("samplFunc", [](double*x, double* arg){
+                                            return BPrimaryGeneratorAction::samplingFunction(x, arg, BPrimaryGeneratorAction::ModifiedFormula2D);
+                                        },
+                                    log10(EMin/GeV), log(EMax/GeV), 0);
+        for(int i = 0; i < nEvents; i++){
+            double E, theta;
+            samplFunc->GetRandom2(E, theta, &rng);
+            h2->Fill(E, theta);
+            hEne->Fill(E);
+            hAng->Fill(theta);
+        }
+
+        h2->Write();
+        hEne->Write();
+        hAng->Write();
     
         gen_data.close();
     }
@@ -251,13 +275,13 @@ namespace lactel
 
     /**
      * @brief Get a fixed theta angle direction with random phi angle
-     * @param theta: theta angle that is fixed in deg
+     * @param theta: theta angle that is fixed in deg (5, 20 , 60 )
      * @return a G4ThreeVector with a direction vector.
      */
     G4ThreeVector BPrimaryGeneratorAction::FixedThetaDirection(double theta){
-        double  phi = 2 * CLHEP::pi * G4UniformRand(); // Uniform in azimuth
-        double theta_rad = theta/rad;
-        return G4ThreeVector(std::sin(theta_rad) * std::cos(phi), 
+        double phi = 2 * CLHEP::pi * G4UniformRand(); // Uniform in azimuth
+        double theta_rad = theta*deg;
+        return G4ThreeVector(   std::sin(theta_rad) * std::cos(phi), 
                                 std::sin(theta_rad) * std::sin(phi),
                                 - std::cos(theta_rad) // down going
                             );
@@ -272,19 +296,13 @@ namespace lactel
     }
 
     void BPrimaryGeneratorAction::print(std::ostream& out){
-        out << "event id: " << event_id << std::endl;        
-        out << "generator: " << getGeneratorName() << std::endl;
-        out << "particle name: " << particle_name << std::endl;
-        out << "EMin: " << EMin << std::endl;
-        out << "EMax: " << EMax << std::endl;
-        out << "thetaMin: " << thetaMin << std::endl;
-        out << "thetaMax: " << thetaMax << std::endl;
-        out << "particle position (m): " << particle_position / CLHEP::m << std::endl;
-        out << "particle direction (mm): " << particle_direction / CLHEP::mm << std::endl;
-        out << "particle theta (deg): " << particle_direction.getTheta() / CLHEP::deg << std::endl;
-        out << "particle phi (deg): " << particle_direction.getPhi() / CLHEP::deg << std::endl;
-        out << "particle enegry (MeV): " << particle_energy / CLHEP::MeV << std::endl;
-        out << std::endl;
+        out << "\n>>>> Generator paramters\n";
+        out << "\tgenerator: " << getGeneratorName() << std::endl;
+        out << "\tEMin: " << EMin << std::endl;
+        out << "\tEMax: " << EMax << std::endl;
+        out << "\tthetaMin: " << thetaMin << std::endl;
+        out << "\tthetaMax: " << thetaMax << std::endl;
+        out << "<<<< Generator paramters\n\n";
     }
 
     std::string BPrimaryGeneratorAction::getGeneratorName(){
@@ -389,25 +407,43 @@ namespace lactel
             //                     Emin, Emax, Thetamin, Thetamax
             //                 );
 
+            // TF2* generator = new TF2(
+            //         "modFlux2D",[](double* x, double* pars){
+            //             double xx[] = {x[0] * GeV, x[1] * deg};
+            //            return lactel::BPrimaryGeneratorAction::ModifiedFormula2D(xx, pars);
+            //         },
+            //         EMin/GeV, EMax/GeV,
+            //         thetaMin/deg, thetaMax/deg
+            //     );
+
             TF2* generator = new TF2(
-                    "modFlux2D",[](double* x, double* pars){
-                        double xx[] = {x[0] * GeV, x[1] * deg};
-                       return lactel::BPrimaryGeneratorAction::ModifiedFormula2D(xx, pars);
+                    "modFlux2D",[](double* x, double* pars) -> double{
+                        double u = pow(10, x[0]);
+                        double theta = x[1] * deg; // to rad
+                        double xx[] = {u, theta};
+                       return lactel::BPrimaryGeneratorAction::ModifiedFormula2D(xx, pars)
+                             * u * log10(10)
+                             * cos(theta)
+                             * sin(theta);
                     },
-                    EMin/GeV, EMax/GeV,
+                    log10(EMin/GeV), log10(EMax/GeV),
                     thetaMin/deg, thetaMax/deg
                 );
 
             double energy, theta;
 
             generator->GetRandom2(energy, theta);
+            energy = pow(10, energy);
 
             
             // std::cout << "\r\033[10C" << "Energy in GeV: " << energy 
-            //                             << " - Angle in deg: " << theta 
+            //                             << " - Angle deg: " << theta 
+            //                             << " - Angle in rad: " << theta*deg 
             //                             << std::endl;
 
-            G4ThreeVector direction = FixedThetaDirection(theta * deg);
+            G4ThreeVector direction = FixedThetaDirection(theta);
+            theta = theta*deg; // to rad
+
 
             // double cost, theta;
             // // generator->GetRandom2(energy, theta);
@@ -421,10 +457,10 @@ namespace lactel
             // if(direction.getZ() > 0)
             //     direction.setZ(- direction.getZ());
 
-            // std::cout << "\r\033[10C" << "E (GeV)" << energy << 
-            //                                 " -- theta in rad: " << cos(theta) << 
+            // std::cout << "\r\033[10C" << "E (GeV): " << energy << 
+            //                                 " -- theta in rad: " << theta << 
             //                                 " -- direction: " << direction <<
-            //                                 " -- theta: " << acos(direction.getZ()) 
+            //                                 " -- theta: " << std::acos(std::clamp(-direction.z(), -1.0, 1.0))
             //                                 << std::endl;
 
             G4ThreeVector polarization(G4UniformRand(), G4UniformRand(), 0.0); 
@@ -452,6 +488,23 @@ namespace lactel
             if(write_generation_data)
                 print(gen_data);
         }
+    }
+
+    /**
+     * @brief helper function to transform flux function to sampling function acrous 
+     * @param muon_Energy in GeV
+     * @param muon_theta zenith in deg
+     * @return dN/d(log10E)d(thtat) with Effective area correction
+     */
+    double BPrimaryGeneratorAction::samplingFunction(double* x, double* pars, double (*func)(double*, double*)){
+        double u = pow(10, x[0]);
+        double theta = x[1];
+        double xx[] = {u, theta};
+        return func(xx, pars)
+                * u * log(10) // var change
+                * sin(theta) // solid angle
+                * cos(theta) // horizental surf projection
+                ;
     }
 
     G4ThreeVector BPrimaryGeneratorAction::generateOnGenSurf(){
@@ -814,8 +867,8 @@ namespace lactel
         constexpr double P5 =  0.817285;
 
         // Input variables converted to GeV and radians
-        const double energy = x[0] / GeV;
-        const double theta  = x[1] / rad;
+        const double energy = x[0];
+        const double theta  = x[1];
         const double cosTheta = std::cos(theta);
 
         // std::cout << "\r\033[10C" << "Energy in GeV: " << energy << " - angle in deg: " << theta << std::endl;

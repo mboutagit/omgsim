@@ -1,15 +1,15 @@
 # Generated using: BLactelDetector::dump function.                 
-# Date: 2026-09-22 14:22:32
+# Date: 2026-10-23 20:09:00
 # Detector Name: LACTEL_2Modules
 # Detector ID: 0
 # Number of Modules: 2
 # Description: 
 # 1----------Module: 1 - Name: 
-#----------1----------cell: 1 - Name: IdealWaterVolume - Position: (0,-1250,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0321
-#----------2----------cell: 2 - Name: IdealWaterVolume - Position: (0,-1250,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0304
+#----------1----------cell: 1 - Name: IdealWaterVolume - Position: (0,-1250,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0321 - OM pos: (0,0,0)
+#----------2----------cell: 2 - Name: IdealWaterVolume - Position: (0,-1250,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0304 - OM pos: (0,0,0)
 # 2----------Module: 2 - Name: 
-#----------3----------cell: 3 - Name: IdealWaterVolume - Position: (0,1250,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0423
-#----------4----------cell: 4 - Name: IdealWaterVolume - Position: (0,1250,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS1060
+#----------3----------cell: 3 - Name: IdealWaterVolume - Position: (0,1250,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0423 - OM pos: (0,0,0)
+#----------4----------cell: 4 - Name: IdealWaterVolume - Position: (0,1250,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS1060 - OM pos: (0,0,0)
 
 
 # Main Volume: Detector

@@ -8,6 +8,8 @@
 #include "TH3F.h"
 #include "TGraph.h"
 
+#include "TRandom3.h"
+
 
 
 using namespace std;
@@ -74,6 +76,9 @@ public:
     void getExpectedFlux();
     static double ModifiedFormula(double *energy, double *par) ;
     static double ModifiedFormula2D(double *energy, double *pars);
+
+    static double samplingFunction(double* x, double* pars, double (*func)(double*, double*));
+
 
 
     void print(ostream& out = std::cout);

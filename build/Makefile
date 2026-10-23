@@ -182,6 +182,19 @@ BFlux/fast:
 .PHONY : BFlux/fast
 
 #=============================================================================
+# Target rules for targets named BGenFlux
+
+# Build rule for target.
+BGenFlux: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BGenFlux
+.PHONY : BGenFlux
+
+# fast build rule for target.
+BGenFlux/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BGenFlux.dir/build.make CMakeFiles/BGenFlux.dir/build
+.PHONY : BGenFlux/fast
+
+#=============================================================================
 # Target rules for targets named BRateBuilder
 
 # Build rule for target.
@@ -193,6 +206,19 @@ BRateBuilder: cmake_check_build_system
 BRateBuilder/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BRateBuilder.dir/build.make CMakeFiles/BRateBuilder.dir/build
 .PHONY : BRateBuilder/fast
+
+#=============================================================================
+# Target rules for targets named MCCheck
+
+# Build rule for target.
+MCCheck: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 MCCheck
+.PHONY : MCCheck
+
+# fast build rule for target.
+MCCheck/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MCCheck.dir/build.make CMakeFiles/MCCheck.dir/build
+.PHONY : MCCheck/fast
 
 #=============================================================================
 # Target rules for targets named PostAna
@@ -353,6 +379,30 @@ BPostAnalysis/programs/BFlux.cxx.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BFlux.dir/build.make CMakeFiles/BFlux.dir/BPostAnalysis/programs/BFlux.cxx.s
 .PHONY : BPostAnalysis/programs/BFlux.cxx.s
 
+BPostAnalysis/programs/BGenFlux.o: BPostAnalysis/programs/BGenFlux.cxx.o
+.PHONY : BPostAnalysis/programs/BGenFlux.o
+
+# target to build an object file
+BPostAnalysis/programs/BGenFlux.cxx.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BGenFlux.dir/build.make CMakeFiles/BGenFlux.dir/BPostAnalysis/programs/BGenFlux.cxx.o
+.PHONY : BPostAnalysis/programs/BGenFlux.cxx.o
+
+BPostAnalysis/programs/BGenFlux.i: BPostAnalysis/programs/BGenFlux.cxx.i
+.PHONY : BPostAnalysis/programs/BGenFlux.i
+
+# target to preprocess a source file
+BPostAnalysis/programs/BGenFlux.cxx.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BGenFlux.dir/build.make CMakeFiles/BGenFlux.dir/BPostAnalysis/programs/BGenFlux.cxx.i
+.PHONY : BPostAnalysis/programs/BGenFlux.cxx.i
+
+BPostAnalysis/programs/BGenFlux.s: BPostAnalysis/programs/BGenFlux.cxx.s
+.PHONY : BPostAnalysis/programs/BGenFlux.s
+
+# target to generate assembly for a file
+BPostAnalysis/programs/BGenFlux.cxx.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BGenFlux.dir/build.make CMakeFiles/BGenFlux.dir/BPostAnalysis/programs/BGenFlux.cxx.s
+.PHONY : BPostAnalysis/programs/BGenFlux.cxx.s
+
 BPostAnalysis/programs/BRateBuilder.o: BPostAnalysis/programs/BRateBuilder.cxx.o
 .PHONY : BPostAnalysis/programs/BRateBuilder.o
 
@@ -376,6 +426,30 @@ BPostAnalysis/programs/BRateBuilder.s: BPostAnalysis/programs/BRateBuilder.cxx.s
 BPostAnalysis/programs/BRateBuilder.cxx.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BRateBuilder.dir/build.make CMakeFiles/BRateBuilder.dir/BPostAnalysis/programs/BRateBuilder.cxx.s
 .PHONY : BPostAnalysis/programs/BRateBuilder.cxx.s
+
+BPostAnalysis/programs/MCCheck.o: BPostAnalysis/programs/MCCheck.cxx.o
+.PHONY : BPostAnalysis/programs/MCCheck.o
+
+# target to build an object file
+BPostAnalysis/programs/MCCheck.cxx.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MCCheck.dir/build.make CMakeFiles/MCCheck.dir/BPostAnalysis/programs/MCCheck.cxx.o
+.PHONY : BPostAnalysis/programs/MCCheck.cxx.o
+
+BPostAnalysis/programs/MCCheck.i: BPostAnalysis/programs/MCCheck.cxx.i
+.PHONY : BPostAnalysis/programs/MCCheck.i
+
+# target to preprocess a source file
+BPostAnalysis/programs/MCCheck.cxx.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MCCheck.dir/build.make CMakeFiles/MCCheck.dir/BPostAnalysis/programs/MCCheck.cxx.i
+.PHONY : BPostAnalysis/programs/MCCheck.cxx.i
+
+BPostAnalysis/programs/MCCheck.s: BPostAnalysis/programs/MCCheck.cxx.s
+.PHONY : BPostAnalysis/programs/MCCheck.s
+
+# target to generate assembly for a file
+BPostAnalysis/programs/MCCheck.cxx.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MCCheck.dir/build.make CMakeFiles/MCCheck.dir/BPostAnalysis/programs/MCCheck.cxx.s
+.PHONY : BPostAnalysis/programs/MCCheck.cxx.s
 
 BPostAnalysis/programs/PostAna.o: BPostAnalysis/programs/PostAna.cxx.o
 .PHONY : BPostAnalysis/programs/PostAna.o
@@ -2021,7 +2095,9 @@ help:
 	@echo "... BDAQProcessor"
 	@echo "... BDetector"
 	@echo "... BFlux"
+	@echo "... BGenFlux"
 	@echo "... BRateBuilder"
+	@echo "... MCCheck"
 	@echo "... OMGsim"
 	@echo "... PostAna"
 	@echo "... WaveCatcher"
@@ -2041,9 +2117,15 @@ help:
 	@echo "... BPostAnalysis/programs/BFlux.o"
 	@echo "... BPostAnalysis/programs/BFlux.i"
 	@echo "... BPostAnalysis/programs/BFlux.s"
+	@echo "... BPostAnalysis/programs/BGenFlux.o"
+	@echo "... BPostAnalysis/programs/BGenFlux.i"
+	@echo "... BPostAnalysis/programs/BGenFlux.s"
 	@echo "... BPostAnalysis/programs/BRateBuilder.o"
 	@echo "... BPostAnalysis/programs/BRateBuilder.i"
 	@echo "... BPostAnalysis/programs/BRateBuilder.s"
+	@echo "... BPostAnalysis/programs/MCCheck.o"
+	@echo "... BPostAnalysis/programs/MCCheck.i"
+	@echo "... BPostAnalysis/programs/MCCheck.s"
 	@echo "... BPostAnalysis/programs/PostAna.o"
 	@echo "... BPostAnalysis/programs/PostAna.i"
 	@echo "... BPostAnalysis/programs/PostAna.s"

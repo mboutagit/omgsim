@@ -18,26 +18,26 @@ using namespace tools;
 namespace DAQ {
 
     /**
-     * @brief DAQ Manager class to manage the DetectedEvent and the Digitizers.
+     * @brief DAQ Manager class to manage LAC-TEL Digitizer.
      * @param vector of detectedEvent
      * @param vector of wavecatcher assigned
      */
 
-    class DAQEvent
-    {
-    private:
-        /* data */
-        int channel;
-        int om_id;
-        int event_id;
-        float amplitude;
-        float tot;
-        float time;
+    // class DAQEvent
+    // {
+    // private:
+    //     /* data */
+    //     int channel;
+    //     int om_id;
+    //     int event_id;
+    //     float amplitude;
+    //     float tot;
+    //     float time;
 
-    public:
-        DAQEvent(/* args */){};
-        ~DAQEvent(){};
-    };
+    // public:
+    //     DAQEvent(/* args */){};
+    //     ~DAQEvent(){};
+    // };
 
     class DAQManager
     {            
@@ -55,11 +55,15 @@ namespace DAQ {
             void deactivate();
             void dumpEvents(std::ostream& out);
             void dumpEvents(std::vector<BAnalysisManager::DetectedEvent*>& events, std::ostream& out);
-            void addEvent(BAnalysisManager::DetectedEvent* event);
             void addAWaveCatcher(BWaveCatcher* wc);
-            void addAWaveCatcher(std::vector<BWaveCatcher*> wcs);
+            void addAWaveCatchers(std::vector<BWaveCatcher*> wcs);
             void init();
+
+            void addEvent(BAnalysisManager::DetectedEvent* event);
+            void addAWaveCatcher(std::vector<BWaveCatcher*> wcs);
             std::vector<BAnalysisManager::DetectedEvent*> getEvents();
+
+
             BWaveCatcher* getWavaCatcherByName(std::string name);
             BWaveCatcher* getWavaCatcherByIndex(int index);
 

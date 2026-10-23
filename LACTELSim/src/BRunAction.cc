@@ -106,7 +106,7 @@ namespace lactel
 
             OM oms0321("OMS0321");
             OM oms0304("OMS0304");
-            BWaveCatcher* wc1 = new BWaveCatcher("wc1", 1);
+            BWaveCatcher* wc1 = new BWaveCatcher("wc1");
             wc1->plugOM(0, oms0321);
             wc1->plugOM(1, oms0321);
             daqManager->addAWaveCatcher(wc1);

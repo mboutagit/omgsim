@@ -6,6 +6,10 @@
 
 using namespace lactel;
 class BWaveCatcherInterface {
+
+    private:
+        bool state = false;
+
     public:
         virtual ~BWaveCatcherInterface() = default;
 
@@ -22,4 +26,8 @@ class BWaveCatcherInterface {
         virtual bool forceSoftwareTrigger() = 0;
         virtual std::string getStatus() const = 0;
         virtual void reset() = 0;
+
+        virtual bool isActive() {return state;}
+        virtual void activate() {state = true;}
+        virtual void deactivate() {state = false;}
 };

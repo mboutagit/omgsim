@@ -41,78 +41,79 @@ int main(int argc, char* argv[]){
         return 1;
     }
     else{
-    std::cout << "File " << rootfilename << " is open" << std::endl;
+        std::cout << "File " << rootfilename << " is open" << std::endl;
     }
 
     BLactelDetector& detector = BDetectorConstruction::GetIt()->getDetector();
     detector.read(detFile);
     detector.dumpDetectorSummary();
 
-    TTree* genTree = ((TTree*)file->Get("Gen"))->CloneTree();
-    TTree* detEvtTree = ((TTree*)file->Get("DetectedEvent"))->CloneTree();
-    if(! genTree || !detEvtTree)
-        throw runtime_error("Could not find necessary trees.");
+    TTree* genTree = ((TTree*)file->Get("Gen"));
+    TTree* detEvtTree = ((TTree*)file->Get("DetectedEvent"));
+
+    if(!genTree || !detEvtTree)
+        throw runtime_error("Sorry, Could not find necessary trees.");
     
     if(thr == -1){
         cout << "Threshold not spiecified. using 10 mV." << endl;
         thr = 10;
     }
 
-    if(outFile == "")
-        outFile = "BDAQ." + input_file;
+    if(outFile == ""){
+        std::string filename = std::filesystem::path(input_file).filename();
+        outFile = "BDAQ." + filename;
+    }
+        
 
-    auto* event= static_cast<BAnalysisManager::DetectedEvent*>(nullptr);
+    auto* event = static_cast<BAnalysisManager::DetectedEvent*>(nullptr);
     detEvtTree->SetBranchAddress("DetectedEvent", &event);
-
-    std::vector<BAnalysisManager::DAQEvent> daqEventVect;
-    TBranch* branch = detEvtTree->Branch("AdaqEvent", &daqEventVect);
 
     // >>>>  prepare waveCatchers.
     int m = 0;
     BWaveCatcher* waveCatchers[detector.getListOfModules().size()];
     for(auto& module : detector.getListOfModules()){
-        waveCatchers[m] = new BWaveCatcher("wc_" + to_string(m), m);
+        waveCatchers[m] = new BWaveCatcher("wc_" + to_string(m));
         waveCatchers[m]->setTriggerThreshold(thr);
         waveCatchers[m]->getConfiguration().setInputDynamicRange(6);
+        waveCatchers[m]->setTriggerEdge(BWaveCatcherConf::TriggerEdge::Falling);
+        waveCatchers[m]->activate();
         int c = 0;
         for(auto& cell : module->getElementaryCells()){
             waveCatchers[m]->plugOM(c, cell.getOM());
             c++;
         }
-        // waveCatchers[m]->print();
+        waveCatchers[m]->print();
         m++;
     }
 
     // <<<< prepare waveCatchers.
 
     TFile* output = new TFile(outFile.c_str(), "RECREATE");
-
     output->cd();
+    
+    TTree* physicEventTree = new TTree("physicsEvent", "DAQ and detected Event");
+    TTree* genTreeCopy = ((TTree*)file->Get("Gen"))->CloneTree();
+
+
+    auto* physicsEvent = static_cast<BAnalysisManager::DetectedEvent*>(nullptr);
+    TBranch* branch = physicEventTree->Branch("DAQ", &physicsEvent);
 
     for(long long i =0; i < detEvtTree->GetEntries(); i++){
         detEvtTree->GetEntry(i);
-        daqEventVect.clear();
+        // daqEventVect.clear();
+        physicsEvent = new BAnalysisManager::DetectedEvent(*event);
         for(auto& wc : waveCatchers){
-            wc->digitizeEvent(*event);
-            
-            for(int i = 0; i < wc->getConfiguration().NumChannels; i++){
-                BAnalysisManager::DAQEvent daqEvt;
-                daqEvt.channel = i;
-                if(i < wc->getWaveforms().size()){
-                    daqEvt.amp = wc->getWaveforms()[i].minimum;
-                    daqEvt.t = wc->getWaveforms()[i].leadingEdge;
-                    daqEvt.c = wc->getWaveforms()[i].charge;
-                    daqEventVect.push_back(daqEvt);  
-                }           
-            }
+            wc->digitizeEvent(*physicsEvent);
         }
-        branch->Fill();
+        physicEventTree->Fill();
+
+        delete physicsEvent;
+        physicsEvent = nullptr;
     }
+    physicEventTree->Write();
+    genTreeCopy->Write();
 
-    detEvtTree->Write();
-    genTree->Write();
-
-    // detEvtTree->Write();
+    file->Close();
     output->Close();
 
     cout << "Info: Waiting for user action! ..." << endl;

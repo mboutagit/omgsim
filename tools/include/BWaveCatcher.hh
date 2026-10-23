@@ -23,7 +23,7 @@ using namespace lactel;
 namespace tools{
     class BWaveCatcher : public BWaveCatcherInterface {
         public:
-            BWaveCatcher(std::string name, int id);
+            BWaveCatcher(std::string name);
             virtual ~BWaveCatcher();
 
             bool initialize() override;
@@ -63,11 +63,18 @@ namespace tools{
             void setTriggerThreshold(int channel, double threshold); // in mV
             void setTriggerThreshold(double threshold); // for all channels;
 
+            void setChannelTriggerEdge(int channel, BWaveCatcherConf::TriggerEdge te);
+            void setTriggerEdge(BWaveCatcherConf::TriggerEdge te);
+
+
             void setInputOffset(int channel, double offset);
             void setInputOffset(double offset); // for all channels;
 
             void setTimeCorrection(bool state){timeCorrection = state;};
             void setAmplitudeCorrection(bool state) {amplitudeCorrection = state;};
+
+            bool checkTrigger(Waveform waveform, int channel);
+
 
             OM getOMByChannelID(int channel){return inputOMs[channel];}
             void print(std::ostream& out = std::cout) const;
@@ -85,7 +92,7 @@ namespace tools{
             std::normal_distribution<> AmpDist_; // mean=0, sigma=1
             std::vector<OM> signalSource;
             std::string name;
-            int id;
+            static int id;
 
             std::map<int, OM> connectedOMs;
 

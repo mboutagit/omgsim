@@ -156,7 +156,6 @@ public:
                     );
 
                     obj.SetPosition(fOrigin + pos);
-
                     fObjects.push_back(obj);
                 }
             }

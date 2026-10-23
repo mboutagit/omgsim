@@ -411,7 +411,7 @@ namespace ROOT {
       ::lactel::Module *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::lactel::Module >(nullptr);
       static ::ROOT::TGenericClassInfo 
-         instance("lactel::Module", ::lactel::Module::Class_Version(), "BLactelDetector.hh", 92,
+         instance("lactel::Module", ::lactel::Module::Class_Version(), "BLactelDetector.hh", 93,
                   typeid(::lactel::Module), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::lactel::Module::Dictionary, isa_proxy, 4,
                   sizeof(::lactel::Module) );
@@ -443,7 +443,7 @@ namespace ROOT {
       ::lactel::BLactelDetector *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::lactel::BLactelDetector >(nullptr);
       static ::ROOT::TGenericClassInfo 
-         instance("lactel::BLactelDetector", ::lactel::BLactelDetector::Class_Version(), "BLactelDetector.hh", 145,
+         instance("lactel::BLactelDetector", ::lactel::BLactelDetector::Class_Version(), "BLactelDetector.hh", 146,
                   typeid(::lactel::BLactelDetector), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::lactel::BLactelDetector::Dictionary, isa_proxy, 4,
                   sizeof(::lactel::BLactelDetector) );

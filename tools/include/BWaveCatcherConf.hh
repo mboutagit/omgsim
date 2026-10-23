@@ -19,6 +19,8 @@ namespace lactel
         /* data */
     public: 
 
+        enum class TriggerEdge{Rising, Falling};
+
         BWaveCatcherConf(/* args */);
         ~BWaveCatcherConf();
 
@@ -37,7 +39,7 @@ namespace lactel
         void setAllChannelTriggerThreshold(int thr);
         
         void setTriggerSource(std::string src);
-        void setChannelTriggerEdge(int c, std::string te);
+        void setChannelTriggerEdge(int c, TriggerEdge te);
 
         void setPreTriggerTime(double);
         void setPostTriggerTime(double);
@@ -51,7 +53,6 @@ namespace lactel
         void setGateLEngth(int);
 
         void print(std::ostream& out = std::cout) const;
-
 
 
          // Constants
@@ -72,7 +73,7 @@ namespace lactel
         // Trigger Configuration
         std::array<double, NumChannels> triggerThresholds;  // Discriminator thresholds (DAC values)
         std::string triggerSource;                       // "external", "self", "software", etc.
-        std::array<std::string, NumChannels> triggerEdges; // "rising" or "falling"
+        std::array<TriggerEdge, NumChannels> triggerEdges; // "rising" or "falling"
 
         double preTriggerTime;                           // Pre-trigger window in microseconds
         double postTriggerTime;                          // Post-trigger window in microseconds

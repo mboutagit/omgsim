@@ -15,7 +15,6 @@
 #pragma link C++ class lactel::BAnalysisManager::DAQEvent+;
 #pragma link C++ class std::vector<lactel::BAnalysisManager::DAQEvent>+;
 
-
 #pragma link C++ class GeometryGrid+;
 #pragma link C++ class GeometryObject+;
 #pragma link C++ class BDetector+;

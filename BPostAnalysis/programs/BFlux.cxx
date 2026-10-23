@@ -55,33 +55,33 @@ int main(int argc, char* argv[]){
     gPad->SetLogy();
     gPad->SetGrid();
 
-    double angles[] = {0 * deg, 30 * deg, 60 * deg, 75 * deg, 90 * deg}; // angles in degree
-    double Emin = 5e-1 * GeV;
-    double Emax = 5e2 * GeV;
-    double Thetamin = 0. * deg;
-    double Thetamax = 60 * deg;
+    double angles[] = {0, 30, 60, 75, 90}; // angles in degree
+    double Emin = 5e-1;
+    double Emax = 1e4;
+    double Thetamin = 0.;
+    double Thetamax = 60;
 
     double style = 0;
     TLegend* leg = new TLegend(0.5, 0.1, 0.7, 0.5);
     leg->SetNColumns(2);
     for(auto& angle : angles){
 
-        std::cout << "\r\033[10C" << "angle: " << angle << " angle in deg: " << angle/deg << std::endl;
-        TF1* flux = new TF1("flux_" + (int)(angle/deg), 
+        std::cout << "\r\033[10C" << "angle: " << angle << " angle in deg: " << angle << std::endl;
+        TF1* flux = new TF1("flux_" + (int)(angle), 
                                 [angle](double* x, double* pars){ 
-                                    double xx[] = {x[0] * GeV};
+                                    double xx[] = {x[0]};
                                     return pow(x[0], 2.7) * 
                                         lactel::BPrimaryGeneratorAction::gaisser_flux(xx, pars);}, 
-                                Emin/GeV, Emax/GeV, 1);
+                                Emin, Emax, 1);
 
-        TF1* modFlux = new TF1("modFlux_"+ (int)(angle/deg), 
+        TF1* modFlux = new TF1("modFlux_"+ (int)(angle), 
                                 [angle](double* x, double* pars){ 
-                                    double xx[] = {x[0] * GeV, angle};
+                                    double xx[] = {x[0], angle*deg};
                                     return pow(x[0], 2.7) * 
                                         lactel::BPrimaryGeneratorAction::ModifiedFormula2D(xx, pars);}, 
-                                Emin/GeV, Emax/GeV, 0
+                                Emin, Emax, 0
                             );
-        flux->SetParameter(0, angle);
+        flux->SetParameter(0, angle*deg);
         // modFlux->SetParameter(0, angle);
 
         flux->SetLineColor(style+1);
@@ -96,14 +96,14 @@ int main(int argc, char* argv[]){
             // flux->Draw();
             modFlux->Draw();
             flux->Draw("same");
-            leg->AddEntry(flux, ("Gaiser - " + std::to_string(static_cast<int>(angle/deg)) + "^{°}").c_str(), "l");
-            leg->AddEntry(modFlux, ("#theta= " + std::to_string(static_cast<int>(angle/deg)) + "^{°}").c_str(), "l");
+            leg->AddEntry(flux, ("Gaiser - " + std::to_string(static_cast<int>(angle)) + "^{°}").c_str(), "l");
+            leg->AddEntry(modFlux, ("#theta= " + std::to_string(static_cast<int>(angle)) + "^{°}").c_str(), "l");
         }
         else{
             flux->Draw("same");
             modFlux->Draw("same");
-            leg->AddEntry(flux, ("Gaiser - " + std::to_string(static_cast<int> (angle/deg)) + "^{°}").c_str(), "l");
-            leg->AddEntry(modFlux, ("#theta= " + std::to_string(static_cast<int>(angle/deg)) + "^{°}").c_str(), "l");
+            leg->AddEntry(flux, ("Gaiser - " + std::to_string(static_cast<int> (angle)) + "^{°}").c_str(), "l");
+            leg->AddEntry(modFlux, ("#theta= " + std::to_string(static_cast<int>(angle)) + "^{°}").c_str(), "l");
         }
 
         style++;
@@ -123,13 +123,13 @@ int main(int argc, char* argv[]){
     TF1* funcs[nval];
     // funcs
     for(int i = 0; i < nval; i++){
-        double angle = i * 15 * deg;
-        funcs[i] = new TF1("modFlux_" + int(angle/deg), 
+        double angle = i * 15;
+        funcs[i] = new TF1("modFlux_" + int(angle), 
                 [angle](double* x, double* pars){ 
-                double xx[] = {x[0] * GeV, angle};
+                double xx[] = {x[0], angle*deg};
                 return pow(x[0], 2.7) *
                 lactel::BPrimaryGeneratorAction::ModifiedFormula2D(xx, pars);}, 
-                Emin/GeV, Emax/GeV, 1);
+                Emin, Emax, 1);
         funcs[i]->SetLineColor(i+1);
         if(i==0){
             funcs[i]->SetTitle("muons flux; E_{#mu} (GeV); E_{#mu}^{2.7} * I_{#mu} (GeV^{1.7}cm^{-2}S^{-1}Sr^{-1})");
@@ -137,23 +137,23 @@ int main(int argc, char* argv[]){
         } 
         else 
             funcs[i]->Draw("same");      
-        leg1->AddEntry(funcs[i], ("Modified - " + std::to_string(static_cast<int>(angle/deg)) + " deg").c_str(), "l");
+        leg1->AddEntry(funcs[i], ("Modified - " + std::to_string(static_cast<int>(angle)) + " deg").c_str(), "l");
     }
 
 
-// pair<double, double> data[] = { {0.2827795772525707, 0.0000017378008287493763}, // data extarcted from Grieder book using https://automeris.io/ / Already in MeV MeV^{-1}cm^{-2}S^{-1}Sr^{-1}
-//                                     {0.6196743835946624, 0.0000033113112148259145},
-//                                     {0.39468637057618516, 0.000002754228703338169},
-//                                     {0.9729151303675503, 0.0000032111949093648306},
-//                                     {2.050003888503319, 0.0000018478497974222944},
-//                                     {4.581293070324709, 6.118805757518225e-7},
-//                                     {14.289780363661004, 6.30957344480193e-8},
-//                                     {29.524829173516423, 1e-8},
-//                                     {81.86863451230586, 6.309573444801942e-10},
-//                                     {214.03955406243756, 3.9810717055349857e-11},
-//                                     {459.92990903830207, 3.1141055844467772e-12},
-//                                     {1202.4530910643005, 1.0311772745930601e-13}
-//                                     };
+pair<double, double> data0[] = { {0.2827795772525707, 0.0000017378008287493763}, // data extarcted from Grieder book using https://automeris.io/ / Already in MeV MeV^{-1}cm^{-2}S^{-1}Sr^{-1}
+                                    {0.6196743835946624, 0.0000033113112148259145},
+                                    {0.39468637057618516, 0.000002754228703338169},
+                                    {0.9729151303675503, 0.0000032111949093648306},
+                                    {2.050003888503319, 0.0000018478497974222944},
+                                    {4.581293070324709, 6.118805757518225e-7},
+                                    {14.289780363661004, 6.30957344480193e-8},
+                                    {29.524829173516423, 1e-8},
+                                    {81.86863451230586, 6.309573444801942e-10},
+                                    {214.03955406243756, 3.9810717055349857e-11},
+                                    {459.92990903830207, 3.1141055844467772e-12},
+                                    {1202.4530910643005, 1.0311772745930601e-13}
+                                    };
 
 
 pair<double, double> data[] = {  // this in GeV^{1.7}
@@ -180,34 +180,52 @@ pair<double, double> data[] = {  // this in GeV^{1.7}
                             };
 
 
+    TGraph* gr0 = new TGraph();
     TGraph* gr = new TGraph();
     int j=0;
+    for(auto& val : data0){
+        gr0->SetPoint(j, val.first, val.second);
+        j++;
+    }
+
+    j=0;
     for(auto& val : data){
         gr->SetPoint(j, val.first, val.second);
         j++;
     }
-    gr->SetMarkerColor(funcs[0]->GetLineColor());
+
+    gr0->SetMarkerColor(funcs[0]->GetLineColor());
+    gr0->SetMarkerStyle(20);
+
+    gr->SetMarkerColor(funcs[4]->GetLineColor());
     gr->SetMarkerStyle(20);
     
-    leg1->AddEntry(gr, "Measurements at 0 deg", "P");
+    leg1->AddEntry(gr0, "Measurements at 0 deg", "P");
+    leg1->AddEntry(gr, "Measurements at 75 deg", "P");
 
+    gr0->Draw("samep");
     gr->Draw("samep");
     leg1->Draw();
 
     can->cd(3);
 
-    std::cout << "\r\033[10C" << "E: [" << Emin/GeV << "," << Emax/GeV << "] GeV, " 
-                                << " - Angle: [" << Thetamin/deg << "," << Thetamax/deg << "] Deg" 
+    std::cout << "\r\033[10C" << "E: [" << Emin << "," << Emax << "] GeV, " 
+                                << " - Angle: [" << Thetamin << "," << Thetamax << "] Deg" 
                                 << std::endl;
 
 
     TF2* modFlux2D = new TF2("modFlux2D", 
                                 [](double* x, double* pars){
-                                    double xx[] ={x[0] * GeV, x[1] * deg};
+                                    double theta = x[1]*deg;
+                                    double xx[] ={x[0], theta};
                                     return lactel::BPrimaryGeneratorAction::ModifiedFormula2D(xx, pars);
                                 }, 
-                                Emin/GeV, Emax/GeV, Thetamin/deg, Thetamax/deg
+                                Emin, Emax, Thetamin, Thetamax
                             );
+
+    
+
+
 
     // TF2* fluxSolidAngle = new TF2("fluxSolidAngle",
     //                                 [](double* x, double* pars) {
@@ -261,15 +279,15 @@ pair<double, double> data[] = {  // this in GeV^{1.7}
     std::cout << "\r\033[10C" << "Dist. Max: " << disMax << std::endl;
 
 
-    int nEvents = 1e6;
+    int nEvents = 1e8;
     can->cd(4);
     TH2D* dist = new TH2D("dist", "test Modified 2D sampling; Log_{10}(Energy) [GeV]; Angle [deg]",
-            100, Emin/GeV, Emax/GeV,
-            100, Thetamin/deg, Thetamax/deg
+            100, Emin, Emax,
+            100, Thetamin, Thetamax
         );
 
-    TH1D* ene = new TH1D("ene", "Energy; Eneregy in GeV; Counts", (int)((Emax-Emin)/GeV/5), Emin/GeV, Emax/GeV);
-    TH1D* theta = new TH1D("theta", "Theta; Theta in deg; Counts", (int)((Thetamax-Thetamin)/deg/0.5), Thetamin/deg, Thetamax/deg);
+    TH1D* ene = new TH1D("ene", "Energy; Eneregy in GeV; Counts", (int)((Emax-Emin)/5), Emin, Emax);
+    TH1D* theta = new TH1D("theta", "Theta; Theta in deg; Counts", (int)((Thetamax-Thetamin)/0.5), Thetamin, Thetamax);
 
     // TH3D* dist3D = new TH3D("dist3D", "test Modified 2D sampling; Log_{10}(Energy) [GeV]; Angle [deg]; Intensity ",
     //         100, Emin, Emax,

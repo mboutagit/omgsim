@@ -97,7 +97,7 @@ int main(int argc, char* argv[]){
     float gen_surface_cm2 = gen_surface_m2 * 1e4;
  
     TF2* flux = new TF2("flux", lactel::BPrimaryGeneratorAction::ModifiedFormula2D, 1e-2, 1e5, 0, 60);
-    float expected_muons_per_m2_per_s = 146.23; // flux->Integral(3e-1, 1e4, 0, 60); //generator->Integral(1e-1, 1e3, 0, TMath::Pi()/2); // by m²
+    float expected_muons_per_m2_per_s = 126; // flux->Integral(3e-1, 1e4, 0, 60); //generator->Integral(1e-1, 1e3, 0, TMath::Pi()/2); // by m²
     float expected_muons_per_cm2_per_s = expected_muons_per_m2_per_s/1e4; // to cm²
     float expected_muons_per_gensurf = expected_muons_per_cm2_per_s * gen_surface_cm2;
     float number_of_generated_muons_per_gensurf = genTree->GetEntries(); // 100 000 events
@@ -290,12 +290,12 @@ int main(int argc, char* argv[]){
     }
 
 
-    histsByName histDataRun003;
-    getRealDataByInFile(  histDataRun003,
-                          "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_003/data.h5",
-                          "channel_data/peak",
-                          0, 2.4, BPostAnalysis::mVperBin/1e3,
-                          1);
+    // histsByName histDataRun003;
+    // getRealDataByInFile(  histDataRun003,
+    //                       "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_003/data.h5",
+    //                       "channel_data/peak",
+    //                       0, 2.4, BPostAnalysis::mVperBin/1e3,
+    //                       1);
 
 
     histsByName histDataRun004;
@@ -317,18 +317,20 @@ int main(int argc, char* argv[]){
     checkCanvas_ch->SetLogy();
 
     // channel 0
-    TH1* ampCh0_run0003 = getHistByName(histDataRun003, "amp_ch0");
+    TH1* ampCh0_run0003 = getHistByName(histDataRun000020, "amp_ch0");
     ampCh0_run0003->SetLineColor(1);
     ampCh0_run0003->Draw("hist");
+
     TH1* ampCh0_run000020 = getHistByName(histDataRun004, "amp_ch0");
     ampCh0_run000020->SetLineColor(1);
     ampCh0_run000020->SetLineStyle(2);
     ampCh0_run000020->Draw("hist same");
 
     // channel 1
-    TH1* ampCh1_run0003 = getHistByName(histDataRun003, "amp_ch1");
+    TH1* ampCh1_run0003 = getHistByName(histDataRun000020, "amp_ch1");
     ampCh1_run0003->SetLineColor(2);
     ampCh1_run0003->Draw("hist same");
+
     TH1* ampCh1_run000020 = getHistByName(histDataRun004, "amp_ch1");
     ampCh1_run000020->SetLineColor(2);
     ampCh1_run000020->SetLineStyle(2);
@@ -363,6 +365,7 @@ int main(int argc, char* argv[]){
     ampCh0_run0003->Sumw2(1);
     ampCh0_run000020->Sumw2(1);
     TH1* ratio = (TH1*)ampCh0_run0003->Clone("ratio");
+
     ratio->Divide(ampCh0_run000020);
     ratio->SetLineColor(4);
     ratio->Draw("hist same");
@@ -372,6 +375,7 @@ int main(int argc, char* argv[]){
     ampCh1_run0003->Sumw2(1);
     ampCh1_run000020->Sumw2(1);
     TH1* ratioCh1 = (TH1*)ampCh1_run0003->Clone("ratio");
+
     ratioCh1->Divide(ampCh1_run000020);
     ratioCh1->SetLineColor(4);
     ratioCh1->SetLineStyle(2);

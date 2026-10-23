@@ -1,12 +1,12 @@
 # Generated using: BLactelDetector::dump function.                 
-# Date: 2026-09-22 14:22:32
+# Date: 2026-10-23 20:09:00
 # Detector Name: LACTELTrue
 # Detector ID: 0
 # Number of Modules: 1
 # Description: 
 # 1----------Module: 1 - Name: 
-#----------1----------cell: 1 - Name: IdealWaterVolume - Position: (0,0,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0321
-#----------2----------cell: 2 - Name: IdealWaterVolume - Position: (0,0,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0304
+#----------1----------cell: 1 - Name: IdealWaterVolume - Position: (0,0,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0321 - OM pos: (0,0,-250)
+#----------2----------cell: 2 - Name: IdealWaterVolume - Position: (0,0,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0304 - OM pos: (0,0,-250)
 
 
 # This part is used to construct the detector. Please do not remove it
@@ -68,7 +68,7 @@ OM1: # OM inside the water volume
 	om_id = "OMS0321";
 	X      = 0.000000;
 	Y      = 0.000000;
-	Z      = 0.000000; # in mm
+	Z      = -250.000000; # in mm
 	Theta  = 0.00; #3.14;
 	Phi    = 0.00;
 	MotherVolume ="IdealWaterVolume_1";
@@ -107,7 +107,7 @@ OM2: # OM inside the water volume
 	om_id = "OMS0304";
 	X      = 0.000000;
 	Y      = 0.000000;
-	Z      = 0.000000; # in mm
+	Z      = -250.000000; # in mm
 	Theta  = 0.00; #3.14;
 	Phi    = 0.00;
 	MotherVolume ="IdealWaterVolume_2";

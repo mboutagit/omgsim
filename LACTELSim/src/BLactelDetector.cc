@@ -28,6 +28,10 @@ namespace lactel
     OM& ElementaryCell::getOM(){return om;}
     void ElementaryCell::setOM(OM& _om){om = _om;}
 
+    void ElementaryCell::setOMPosition(G4ThreeVector new_pos){
+        om.setPoition(new_pos);
+    }
+
     void ElementaryCell::centerX(){
         fPosition = G4ThreeVector(0, fPosition.getY(), fPosition.getZ());
     }
@@ -95,8 +99,8 @@ namespace lactel
         out << "\tID   = " + std::to_string(id) + ";\n";
         out << "\tom_id = \"" + getOM().getOMID() + "\";\n";
         out << "\tX      = " + std::to_string(getOM().getPosition().getX()) + ";\n";
-        out << "\tY      = " + std::to_string(getOM().getPosition().getX()) + ";\n";
-        out << "\tZ      = " + std::to_string(getOM().getPosition().getX()) + "; # in mm\n";
+        out << "\tY      = " + std::to_string(getOM().getPosition().getY()) + ";\n";
+        out << "\tZ      = " + std::to_string(getOM().getPosition().getZ()) + "; # in mm\n";
         out << "\tTheta  = 0.00; #3.14;\n";
         out << "\tPhi    = 0.00;\n";
         out << "\tMotherVolume =\"" + name + "_" + std::to_string(id) + "\";\n";
@@ -340,12 +344,8 @@ namespace lactel
         id = uid;
     }
 
-    std::vector<ElementaryCell> Module::getElementaryCells(){
-        std::vector<ElementaryCell> cells;
-        for(auto& cell : GetObjects())
-            cells.push_back(cell);
-
-        return cells;
+    std::vector<ElementaryCell>& Module::getElementaryCells(){
+        return GetObjects();
     }
 
 
@@ -604,7 +604,9 @@ namespace lactel
                         out << "#" << string(10, '-') << c << string(10, '-') << "cell: " << cell.getID() << " - Name: " << cell.getName() 
                                                         << " - Position: " << cell.GetPosition()
                                                         << " - Dimensions: " << cell.GetDimensions()
-                                                        << " - Assigned OM: " << cell.getOM().getOMID() << "\n";
+                                                        << " - Assigned OM: " << cell.getOM().getOMID() 
+                                                        << " - OM pos: " << cell.getOM().position 
+                                                        << "\n";
                     c++;
                     } 
                 m++;   

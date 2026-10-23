@@ -317,7 +317,7 @@ namespace lactel
             std::string evtFileName = "output.evt";
             
 
-        ClassDef(BAnalysisManager, 3);
+        ClassDef(BAnalysisManager, 4);
 
         
     };

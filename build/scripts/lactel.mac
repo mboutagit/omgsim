@@ -28,9 +28,9 @@
 /LACTEL/BDet/autoGenSize true
 /LACTEL/BDet/genSurfShape disk
 /LACTEL/BDet/genSurfPosition 0 0 0 m
-/LACTEL/BDet/genSurfSize 0 5 0.001 m
+/LACTEL/BDet/genSurfSize 0 4.83 0.001 m
 /LACTEL/BDet/OMPosition 0 0 0. m
-/LACTEL/BDet/state IDLE
+/LACTEL/BDet/state RUN
 
 /LACTEL/DAQ/useDAQ 0
 /run/initialize
@@ -49,7 +49,7 @@
 # /vis/viewer/set/viewpointThetaPhi 105 -60  deg
 # /vis/scene/endOfEventAction accumulate
 
-/run/beamOn 200
+/run/beamOn 1000
 
 # /run/beamOn 20000
 # /run/beamOn 20000

@@ -69,6 +69,7 @@ namespace lactel
             int getID();
             OM& getOM();
             void setOM(OM& _om);
+            void setOMPosition(G4ThreeVector new_pos);
             void centerX();
             void centerY();
             void centerZ();
@@ -120,7 +121,7 @@ namespace lactel
             void addECell(std::string axis);
             int getNCells();
             int getNLayers(int axis);
-            std::vector<ElementaryCell> getElementaryCells();
+            std::vector<ElementaryCell>& getElementaryCells();
             void print(std::ostream& out = std::cout, bool printCells = false);
             void dumpCells(std::ostream& out = std::cout, bool dumpName = false);
             void dumpCellsMaterial(std::ostream& out = std::cout);

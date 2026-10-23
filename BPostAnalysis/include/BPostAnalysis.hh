@@ -111,7 +111,7 @@ namespace lactel{
         std::map<std::string, std::vector<std::string>> files;
         // TH* getRealDataPlots(std::string file1)
 
-        inline static constexpr int mVperBin = 20;
+        inline static constexpr int mVperBin = 10;
         static BLactelDetector detector;
 
 
