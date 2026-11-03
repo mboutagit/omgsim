@@ -55,7 +55,6 @@ namespace lactel
     G4VPhysicalVolume* BDetectorConstruction::getPhysicalVolumeByName(std::string name){
         for(auto& v : volumesMap)
             if(v.first == name){
-                // std::cout << "\r\033[10C" << string(22, '#') << " "<< name << " found! its Z pos: " << v.second.second.Z << std::endl;
                return v.second.first; 
             }
         return nullptr;
@@ -64,7 +63,7 @@ namespace lactel
     void BDetectorConstruction::getOMIDbyVolumeName(std::string volumeName){
         for(auto& volume : KM3DetectorConstruction::GetIt()->getOMsMap()){
             for(auto& par : volume.second){
-                std::cout << "\r\033[10C" << "volumes: om_id: " << par.om_id << std::endl;
+                BLOG_INFO(Form("Volumes: om_id: %s", par.om_id.c_str()));
             }
         }
     }
@@ -73,7 +72,7 @@ namespace lactel
     void BDetectorConstruction::getOMsUsedbyVolumeName(std::string volumeName){
         std::set<std::string> oms =  KM3DetectorConstruction::GetIt()->getOMsList();
         for(auto& om : oms){
-            std::cout << "\r\033[10C" << "volumes: om_id: " << om << std::endl;
+            BLOG_INFO(Form("Volumes: om_id: %s", om.c_str()));
         }
     }
 
@@ -87,11 +86,10 @@ namespace lactel
     }
 
     BDetectorConstruction::BDetectorConstruction(){
+        BLOG_INFO("Construct the Det ..");      
         detectorMessenger = new BDetectorMessenger(this);
-        
-        std::cout << "\r\033[30C" << "OMPostion: " << getOMPosition() << std::endl;
+        BLOG_INFO(Form("OMPosition: %.2f", getOMPosition()));
         DefineOpticalProperties();
-        std::cout << "\r\033[30C" << "---- Construct the Det" << std::endl;        
     }
 
     BDetectorConstruction::~BDetectorConstruction(){
@@ -153,12 +151,12 @@ namespace lactel
                     farVolume=pv;                     
                 }
                 
-                if(BLogger::getInstance()->getDebugLevel() > 2)
-                    std::cout << "\r\033[10C" << "Check Volume: " << pv->GetName() << "  -- xpos: " << pv->GetTranslation().getX()
-                                                                                 << "  -- ypos: " << pv->GetTranslation().getY()
-                                                                                 << "  -- zpos: " << pv->GetTranslation().getZ()
-                            << " -- halfZ size: " << dynamic_cast<G4Box*>  (dynamic_cast<G4Box*> (pv->GetLogicalVolume()->GetSolid())) ->GetZHalfLength()
-                            << std::endl;   
+                BLOG_INFO(Form("Check volume %s at (%.2f, %.2f, %2.f) - Half Z size: %.2f", pv->GetName().c_str(),
+                                                            pv->GetTranslation().getX(),
+                                                            pv->GetTranslation().getY(),
+                                                            pv->GetTranslation().getZ(),
+                                                            dynamic_cast<G4Box*> (pv->GetLogicalVolume()->GetSolid()) ->GetZHalfLength()
+                                                        ));
             }
         }
 
@@ -180,89 +178,9 @@ namespace lactel
         dynamic_cast<G4Box*> (solidWorld)->SetYHalfLength(autoZ + worldSizeOffset);
         dynamic_cast<G4Box*> (solidWorld)->SetZHalfLength(autoZ + worldSizeOffset);
 
-
-        std::cout << "\r\033[10C" << "zmin: " << " zmin " << " -- zmax: " << zmax << " -- worldsizeOffSet " 
-                    << worldSizeOffset << " -- zmin + offset: " << autoZ << std::endl;
+        BLOG_INFO(Form("zmax: %.2f, world size offset: %.2f, zmin+offset:", zmax, 
+                                                                        worldSizeOffset, autoZ));
     }
-
-   // G4LogicalVolume* BDetectorConstruction::Construct(const VolumeParameters* = NULL) {return 0;}
-    
-    // G4VPhysicalVolume* BDetectorConstruction::Construct(){
-
-    //     G4VPhysicalVolume* pv = KM3DetectorConstruction::Construct();
-
-    //     //recalculate the size for the world and generation valume based on the target length (accept 60° events that would hit the target)
-    //     double gen_half_length = 2*target_half_length * tan(acceptanceAngle/rad) + target_half_length; // (c+d)*tg(theta) + d/2
-    //     AGen = 2*gen_half_length/cm * 2*gen_half_length/cm; // generation volume above the cell cm²
-
-
-    //     // for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
-    //     //     if(pv->GetName() == "LACTEL_Cell_Outer"){
-    //     //         gen_half_length = 2*dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->GetXHalfLength() * tan(acceptanceAngle/rad)
-    //     //                             + dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->GetXHalfLength();
-    //     //     }
-    //     // } 
-
-    //     BPrimaryGeneratorAction::getInstance()->genArea = (2*gen_half_length) * (2*gen_half_length); // generation area in mm2
-
-    //     //recalculate the 
-    //     dynamic_cast<G4Box*> (solidWorld)->SetXHalfLength(gen_half_length);
-    //     dynamic_cast<G4Box*> (solidWorld)->SetYHalfLength(gen_half_length);
-    //     dynamic_cast<G4Box*> (solidWorld)->SetZHalfLength(target_half_length);
-
-    //     dynamic_cast<G4Box*> (genSolid)->SetXHalfLength(gen_half_length);
-    //     dynamic_cast<G4Box*> (genSolid)->SetYHalfLength(gen_half_length);
-    //     dynamic_cast<G4Box*> (genSolid)->SetZHalfLength(0.1*mm);
-
-    //     // dynamic_cast<G4Box*> (solidTarget)->SetXHalfLength(target_half_length);
-    //     // dynamic_cast<G4Box*> (solidTarget)->SetYHalfLength(target_half_length);
-    //     // dynamic_cast<G4Box*> (solidTarget)->SetZHalfLength(target_half_length);
-
-    //     // physiTarget->SetTranslation(G4ThreeVector(0, 0, -target_half_length));
-        
-    //     G4VisAttributes* inner_vol = new G4VisAttributes(G4Colour(0.1, 0.1, 0.9, 0.1));
-    //     G4VisAttributes* outer_vol = new G4VisAttributes(G4Colour(.1, 0.8, 0.2, 0.1));
-     
-    //     inner_vol->SetVisibility(true); 
-    //     inner_vol->SetForceSolid(true); 
-
-    //     outer_vol->SetVisibility(true); 
-    //     outer_vol->SetForceSolid(true);     
-        
-    //     for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){
-    //         //place the OM 50 cm above the target volume
-    //         // if(pv->GetName() == "AntaresOM"){
-    //         //     pv->SetTranslation(G4ThreeVector(0, 0, - target_half_length + 50 *cm));
-    //         // }
-                
-    //         if(pv->GetName() == "LACTEL_Cell_Outer"){
-    //             // dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetXHalfLength(target_half_length);
-    //             // dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetYHalfLength(target_half_length);
-    //             // dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(target_half_length);
-    //             // pv->SetTranslation(G4ThreeVector(0, 0, - target_half_length));
-    //             pv->GetLogicalVolume()->SetVisAttributes(outer_vol);
-    //         }
-
-    //         if(pv->GetName() == "LACTEL_Cell_Inner"){
-    //             dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetXHalfLength(target_half_length - 5*mm ); // 
-    //             dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetYHalfLength(target_half_length - 5*mm );
-    //             dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(target_half_length - 5*mm );
-    //             pv->GetLogicalVolume()->SetVisAttributes(inner_vol);
-    //         }
-    //     } 
-
-    //     autoWorldSize();
-
-    //     cout << "\r\033[20C" << "New generation surface for a detector of volume " 
-    //                             << 2*target_half_length/m * 2*target_half_length/m * 2*target_half_length/m 
-    //                             << " m^3 is: "  
-    //                             <<" length = " << 2*gen_half_length/m << " m - s = "
-    //                             << 2*gen_half_length/m * 2*gen_half_length/m << " m² - s = "
-    //                             << AGen << " cm²"
-    //                             << "\nAcceptance angle in deg: " << acceptanceAngle/deg
-    //                             << endl;
-    //     return pv; 
-    // }
 
     void BDetectorConstruction::setTargetType(G4String type){
         std::string functionName="BDetectorConstruction::setTargetType: ";
@@ -319,29 +237,9 @@ namespace lactel
 
         //  (*G4PhysicalVolumeStore::GetInstance())[0]->GetTranslation().getZ()
             
-        // std::cout << "\r\033[10C\033[1;35m" << "From here :) \033[0m" <<  endl;
-        // double GVCz = genPhysic->GetTranslation().getZ(); // Generation Volume Center on z
-        // double MCCz = 0; //getPhysicalVolumesByName("LacWater")[0]->GetTranslation().getZ(); // Module Container Center on z
-        // double d = 0; //dynamic_cast<G4Box*>  (genPhysic->GetLogicalVolume()->GetSolid()) ->GetZHalfLength();
-        // double a = 0; //dynamic_cast<G4Box*>  (getPhysicalVolumesByName("LacWater")[0]) ->GetZHalfLength();
-        // double c = abs( (MCCz+a) - (GVCz-d) );
-        // double e = 2*a+c;
-
-        // std::cout << "\r\033[10C\033[1;35m" << "values: " <<  
-        //                             GVCz    <<
-        //                             MCCz    <<
-        //                             d       <<
-        //                             a       <<
-        //                             c       <<
-        //                             e       <<
-        //                             "\033[0m" <<
-        //                             std::endl;
-
-        
-        // double radius = e * tan(acceptanceAngle/rad);
-        // double radius = 5.96*m;
         double radius = genSurfSize.getY();
-        std::cout << "\r\033[10C\033[1;31m" << "autoGenSize: " << autoGenSize << "\033[0m" << std::endl;
+        BLOG_INFO(Form("AutoGenSize: %.2f", autoGenSize));
+        
 
         G4Material* myVacuum = new G4Material("CustomVacuum", z, am, density, kStateGas, temperature, pressure);
     
@@ -398,7 +296,7 @@ namespace lactel
         genAttributes->SetForceSolid(true);  // Force solid rendering mode
         genLogic->SetVisAttributes(genAttributes);
 
-        std::cout << "\r\033[10C" << "gen volume has been created !!" << std::endl;
+        BLOG_INFO("gen volume has been created!");
     }
 
 
@@ -522,7 +420,7 @@ namespace lactel
     }
 
     void BDetectorConstruction::ReadThisConfiguration (BLactelDetector& detector){
-        std::cout << "\r\033[10C" << "Try cell: " << detector.getID() << std::endl;
+        BLOG_INFO(Form("Try cell: %d ..", detector.getID()));
 
         libconfig::Config cfg;
         libconfig::Setting& root = cfg.getRoot();
@@ -537,20 +435,14 @@ namespace lactel
         volumeDet.add("Phi", libconfig::Setting::TypeFloat) = detector.GetRotation().getPhi();
         if(detector.getMotherVolName() != "")
                     volumeDet.add("MotherVolume", libconfig::Setting::TypeString) = detector.getMotherVolName();
-
-        // if (root.isGroup ())
-            try
-            {
+        try{
                ReadThisConfiguration(&root, fVolumeList[detector.getName()]);
             }
-            catch(const std::exception& e)
-            {
+        catch(const std::exception& e){
                 std::cerr << e.what() << '\n';
-                std::cout << " ###Error: " << e.what() << '\n';
+                BLOG_ERROR(e.what());
             }
             
-            
-        
         cfg.write(stdout);
 
 
@@ -606,7 +498,7 @@ namespace lactel
                 catch(const std::exception& e)
                 {
                     std::cerr << e.what() << '\n';
-                    std::cout << " ###Error: " << e.what() << '\n';
+                    BLOG_ERROR(e.what());
                 }
             }
         }
@@ -689,7 +581,7 @@ namespace lactel
         if(PosPar.Name == "AntaresOM")
             name = PosPar.om_id;
 
-        std::cout << "\r\033[55C" << "Name: " << name << std::endl;
+        BLOG_INFO(Form("Name: ", name.c_str()));
 
         return new G4PVPlacement(theRot, thePos, logicVolume, name, // add identifier to distinguish volumes
                         WhereToPlace, true, PosPar.ID);
@@ -697,32 +589,7 @@ namespace lactel
     }
 
 
-    G4VPhysicalVolume* BDetectorConstruction::Construct ()
-    {
-
-
-        // libconfig::Config conf;
-        // conf.readFile("/home/bouta-mohammed/work/cppm/lactel/trunk/common/data/KM3DetLacWater.dat");
-
-        // BLactelDetector det;
-        // det.ReadOMHierarchy("/home/bouta-mohammed/work/cppm/lactel/trunk/common/data/KM3DetLacWater.dat");
-
-        // BLactelDetector detector;
-        // detector.read("/home/bouta-mohammed/work/cppm/lactel/trunk/common/data/KM3DetLacWater.dat");
-
-        // detector.dump();
-        // for(auto& om : detector.getListOfOMs()){
-        //     om->dump();
-        //     ElementaryCell* cell = detector.getOMECell(om->getOMID());
-        //     std::cout << "\r\033[10C" << "Cell layer: " << cell->getLayer() 
-        //                                 << " - Cell module: " << cell->getModule() 
-        //                                 << std::endl;
-        // }
-
-        // // libconfig::setting
-        // det.readAVolume<ElementaryCell> (det);
-
-
+    G4VPhysicalVolume* BDetectorConstruction::Construct (){
 
         G4double z = 1.;  // Atomic number (Hydrogen)
         G4double a = 1.01 * g/mole;  // Atomic mass
@@ -750,11 +617,6 @@ namespace lactel
                                     0,               // its mother  volume
                                     false,           // no boolean operations
                                     0);              // no field specific to volume
-    
-        // genSolid = new G4Box("genSolid", fWorldLength, fWorldLength, fWorldLength/2);
-        // genLogic = new G4LogicalVolume(genSolid,
-        //                                  Air,  //myVacuum, 
-        //                                 "genLogic", 0, 0, 0);
                                         
         G4VisAttributes* worldCol = new G4VisAttributes(G4Colour(0.1, 0.1, 0.9, 0.1));
         G4VisAttributes* genAttributes = new G4VisAttributes(G4Colour(.1, 0.0, 0.7, 0.1));
@@ -782,7 +644,7 @@ namespace lactel
 
         targetRot->set (FOrientationPhi, FOrientationTheta, FOrientationPsi);
 
-        BLogger::getInstance()->log(BLogger::Level::INFO, "Constructing " + fDetectorTypeName + " ...");
+        BLOG_INFO(Form("Constructing %s ..", fDetectorTypeName.c_str()));
 
         int waterTankID=0;
         for (auto& VolPar: fVolumeList [fDetectorTypeName])
@@ -790,7 +652,10 @@ namespace lactel
             G4VPhysicalVolume* pv = PlaceThem (KM3PassiveVolumeMgr::GetIt (), VolPar);
             fPlacedVolumeDict[VolPar.Name] = pv;
             volumesMap.insert({VolPar.Name, {pv, VolPar}});
-            BLogger::getInstance()->log(BLogger::Level::INFO, "Volume " + VolPar.Name + " placed.");
+            BLOG_INFO(Form("Volume %s placed!", VolPar.Name.c_str()));
+
+
+
             // if(fPlacedVolumeDict[VolPar.Name]->GetName().rfind("OuterCell", 0) == 0){
             //     // fPlacedVolumeDict[VolPar.Name]->SetName("OLC");
             // }
@@ -815,7 +680,7 @@ namespace lactel
         for (auto& PMPar: fPMList [fDetectorTypeName])
         {
             PlaceThem ( KM3PhotoTubeMgr::GetIt (), PMPar);
-            BLogger::getInstance()->log(BLogger::Level::INFO, "PM " + PMPar.Name + " placed.");
+            BLOG_INFO(Form("PM %s placed!", PMPar.Name.c_str()));
             pmID++;
         }
 
@@ -828,19 +693,15 @@ namespace lactel
             OM* om = new OM(OMPar.om_id.data());
             om->setID(OMPar.ID);
             fOMPhysicalVolumes.insert({om, PlaceThem ( KM3OpticalModuleMgr::GetIt (), OMPar)});
-            BLogger::getInstance()->log(BLogger::Level::INFO, "OM " + OMPar.Name + " placed.");
+            BLOG_INFO(Form("OM %s placed!", OMPar.Name.c_str()));
+
             omID++;
         }
 
         setGenSurfShape(generationShape);
         G4RotationMatrix* rotZtoUp = new G4RotationMatrix();
         rotZtoUp->rotateX(90 * deg);  // Rotate 90 degrees about the X-axis
-
-        BLogger::getInstance()->log(BLogger::Level::INFO, "Detector constructed ...");
-        // return physiWorld;
-
-
-
+        BLOG_INFO("Detector Constructed ..");
 
         //recalculate the size for the world and generation valume based on the target length (accept 60° events that would hit the target)
         double gen_half_length = 2*target_half_length * tan(acceptanceAngle/rad) + target_half_length; // (c+d)*tg(theta) + d/2
@@ -853,10 +714,6 @@ namespace lactel
         dynamic_cast<G4Box*> (solidWorld)->SetXHalfLength(gen_half_length);
         dynamic_cast<G4Box*> (solidWorld)->SetYHalfLength(gen_half_length);
         dynamic_cast<G4Box*> (solidWorld)->SetZHalfLength(5*m);
-
-        // dynamic_cast<G4Box*> (genSolid)->SetXHalfLength(gen_half_length);
-        // dynamic_cast<G4Box*> (genSolid)->SetYHalfLength(gen_half_length);
-        // dynamic_cast<G4Box*> (genSolid)->SetZHalfLength(0.1*mm);
         
         G4VisAttributes* inner_vol = new G4VisAttributes(G4Colour(0.1, 0.1, 0.9, 0.1));
         G4VisAttributes* outer_vol = new G4VisAttributes(G4Colour(.1, 0.8, 0.2, 0.1));
@@ -870,10 +727,7 @@ namespace lactel
         
         lw->SetVisibility(true); 
         lw->SetForceSolid(true);  
-        
-        //costum colors
-        
-
+  
         float maxX=0, maxY=0, maxZ=0;
         for (auto& pv : *G4PhysicalVolumeStore::GetInstance()){      
             if(pv->GetName().rfind("LACTEL", 0) == 0 || pv->GetName().rfind("LacWater", 0) == 0){
@@ -881,91 +735,46 @@ namespace lactel
                 dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetYHalfLength(genSurfSize.getY());
                 dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(2.5*m);
                 pv->GetLogicalVolume()->SetVisAttributes(lw);
-
-                // if(pv->GetLogicalVolume()) {
-               
-                //     lakeWaterRegion = new G4Region("lakeWaterRegion");
-                //     lakeWaterRegion->AddRootLogicalVolume(pv->GetLogicalVolume()); 
-
-                //     lakeRegionCuts = new G4ProductionCuts();
-
-                //     lakeRegionCuts->SetProductionCut(10.0*mm, "gamma");
-                //     lakeRegionCuts->SetProductionCut(300.0*mm, "opticalphoton");
-                //     lakeRegionCuts->SetProductionCut(300.0*mm, "mu+");
-                //     lakeRegionCuts->SetProductionCut(300.0*mm, "mu-");
-                //     lakeRegionCuts->SetProductionCut(10.0*mm, "e-");
-                //     lakeRegionCuts->SetProductionCut(10.0*mm, "e+");
-                //     lakeRegionCuts->SetProductionCut(10.0*mm, "proton");
-
-                //     lakeWaterRegion->SetProductionCuts(lakeRegionCuts);
-                // }
             }
 
             if(pv->GetName().rfind("CPPMBlackBox", 0) == 0)
                 pv->GetLogicalVolume()->SetVisAttributes(outer_vol);
 
             if(pv->GetName().rfind("LactelWaterTank", 0) == 0){
-                // dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetXHalfLength(target_half_length);
-                // dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetYHalfLength(target_half_length);
-                // dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(target_half_length);
-                // pv->SetTranslation(G4ThreeVector(0, 0, - target_half_length));
                 pv->GetLogicalVolume()->SetVisAttributes(outer_vol);
-                // if(maxX < pv->GetLogicalVolume()->GetSolid()->GetXHalfLength())
-                //     maxX=pv->GetLogicalVolume()->GetSolid()->GetXHalfLength();
-                // if(maxY < pv->GetLogicalVolume()->GetSolid()->GetYHalfLength())
-                //     maxY=pv->GetLogicalVolume()->GetSolid()->GetYHalfLength();
-                // if(maxZ < pv->GetLogicalVolume()->GetSolid()->GetZHalfLength())
-                //     maxZ=pv->GetLogicalVolume()->GetSolid()->GetZHalfLength();
             }
 
             if(pv->GetName().rfind("IdealWaterVolume", 0) == 0){
-                // dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetXHalfLength(target_half_length - 5*mm ); // set World size according to 
-                // dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetYHalfLength(target_half_length - 5*mm );
-                // dynamic_cast<G4Box*>  (pv->GetLogicalVolume()->GetSolid()) ->SetZHalfLength(target_half_length - 5*mm );
                 pv->GetLogicalVolume()->SetVisAttributes(inner_vol);
             }
         } 
 
+        BLOG_INFO("Auto world size ..");
         autoWorldSize();
 
-        // for(auto& vol : fVolumeList)
-        //     std::cout << "\r\033[50C" << "Volume: " << vol.first 
-        //                                 // << " name: " << vol.second.at(0).Name
-        //                                 << std::endl;
-
-        // for(auto& oms : fOMList)
-        //     std::cout << "\r\033[50C" << "OM: " << oms.first  << " name: " << oms.second.at(0).Name << std::endl;
-
-        std::cout << "\r\033[10C" << "detector name: " << fDetectorTypeName << std::endl;
+        BLOG_INFO(Form("Detector name: %s", fDetectorTypeName.c_str()));
         std::string detFilePath=(string(PROJECT_SOURCE_DIR)+"/common/data/");
         std::string detFileName="KM3Det" + fDetectorTypeName + ".dat";
         std::string fullDetFilePath=detFilePath + "/" + detFileName;
-        std::cout << "\r\033[10C" << "looking for the file name in : " << (string(PROJECT_SOURCE_DIR)+"/common/data/") << std::endl;
+        BLOG_INFO(Form("looking for the file name in :", (string(PROJECT_SOURCE_DIR)+"/common/data/")));
         if(fs::exists(fullDetFilePath)){
-            std::cout << "\r\033[10C" << "det File found: " << fullDetFilePath << std::endl;
+            BLOG_INFO(Form("Detector file found: ", fullDetFilePath));
             detector.read(fullDetFilePath);
             // detector.PrintSummary();
             // detector.dumpDetectorSummary();
         } 
-        else
-            std::cout << "\r\033[10C" << "Could not find detfile: " << fullDetFilePath << std::endl;
-
-
-        // for(auto& omPhyVol : fOMPhysicalVolumes){
-        //     std::cout << "\r\033[10C" << "PV: " << omPhyVol.second->GetName() 
-        //                                 << " => OM: " << omPhyVol.first->getID() << " = " << omPhyVol.first->getOMID()
-        //              mm                   << std::endl;
-        // }
+        else{
+            BLOG_ERROR(Form("Could not find detfile: ", fullDetFilePath));
+            throw std::runtime_error("Could not find detector file.");
+        }
+            
 
         return physiWorld;
     }
 
 
-    void BDetectorConstruction::PrintAllMaterialProperties(ostream& out)
-    {
-        // if(out != std::cout)
-        //     if(! out == ofstream)
-
+    void BDetectorConstruction::PrintAllMaterialProperties(ostream& out){
+ 
         const G4MaterialTable* matTable = G4Material::GetMaterialTable();
 
         for (size_t i = 0; i < matTable->size(); i++)
@@ -977,13 +786,11 @@ namespace lactel
 
             G4MaterialPropertiesTable* mpt = mat->GetMaterialPropertiesTable();
 
-            if (mpt)
-            {
+            if (mpt){
                 mpt->DumpTable();
             }
-            else
-            {
-                G4cout << "No MaterialPropertiesTable" << G4endl;
+            else{
+                BLOG_WARNING("No MaterialPropertiesTable");
             }
         }
     }
@@ -1025,12 +832,13 @@ namespace lactel
 
     void BDetectorConstruction::ReadConfiguration (string ConfigFile) // reads KM3Det*.dat file base infos
     {
-        // BLogger::getInstance()->log(BLogger::Level::INFO, "Reading detector from: " + ConfigFile);
-        std::cout << "\r\033[10C" << "Calling ReadConf from BDet" << std::endl;
-        if(ConfigFile.find(fDetectorTypeName))
-            BLogger::getInstance()->log(BLogger::Level::INFO, "Reading detector from: " + ConfigFile);
-
-        KM3DetectorConstruction::ReadConfiguration(ConfigFile);
+        if(ConfigFile.find(fDetectorTypeName)){
+            BLOG_INFO(Form("Reading detector from %s ..", ConfigFile.c_str()));
+            KM3DetectorConstruction::ReadConfiguration(ConfigFile);
+        }else{
+            BLOG_ERROR(("Could not find %s", ConfigFile.c_str()));
+        }
+            
     }
 
 

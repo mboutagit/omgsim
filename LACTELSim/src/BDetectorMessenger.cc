@@ -104,40 +104,47 @@ namespace lactel
                 //place the OM 60 cm above the target volume
                 if(pv->GetName() == "AntaresOM"){
                     pv->SetTranslation(BDetector->OMPosition);
-                    std::cout << "\r\033[10C" << "PV: " << pv->GetName() << " Found! " << std::endl;
-                    // G4UImanager::GetUIpointer()->ApplyCommand("/run/initialize");
+                    BLOG_INFO(Form("Physical Volume: %s found!", pv->GetName().c_str()));
                     G4UImanager::GetUIpointer()->ApplyCommand("/vis/drawVolume");
                 }
             }
-            std::cout << "\r\033[10C \033[1;33m" << "Set new OM Position: " << BDetector->OMPosition << "\033[0m" << std::endl;
+            BLOG_INFO(Form("Setting new OM position: (%.2f, %.2f, %.2f)", BDetector->OMPosition.getX(),
+                                                                                BDetector->OMPosition.getY(),
+                                                                                BDetector->OMPosition.getZ()
+                                                                            ));
         }
         else if (cmd == acceptanceAngle_cmd){
             BDetector->acceptanceAngle = targetLength_cmd->GetNewDoubleValue(value);
-            std::cout << "\r\033[20C \033[1;33m" << "Set new acceptance angle (deg): " << BDetector->acceptanceAngle/deg << "\033[0m" << std::endl;
-
+            BLOG_INFO(Form("Set new acceptance angle (deg): %.2f", BDetector->acceptanceAngle/deg));
         }
         else if (cmd == genSurfShape_cmd){
             BDetector->setGenerationShape(value);
-            std::cout << "\r\033[20C \033[1;33m" << "Generation surface Shape is: " << value << "\033[0m" << std::endl;
+            BLOG_INFO(Form("Generation surface Shape is: %s",value.c_str()));
+
         }
 
         else if (cmd == genSurfPosition_cmd){
             BDetector->genSurfPosition = genSurfPosition_cmd->GetNew3VectorValue(value);
-            std::cout << "\r\033[20C \033[1;33m" << "Generation surface position: " << BDetector->genSurfPosition  << "\033[0m" << std::endl;
+            BLOG_INFO(Form("Generation surface position: (%.2f, %.2f, %.2f)", BDetector->genSurfPosition.getX(),
+                                                                                    BDetector->genSurfPosition.getY(),
+                                                                                    BDetector->genSurfPosition.getZ()
+                                                                            ));
         }
 
         else if (cmd == genSurfSize_cmd){
             BDetector->genSurfSize = genSurfSize_cmd->GetNew3VectorValue(value);
-            std::cout << "\r\033[20C \033[1;33m" << "Generation surface size is: " << BDetector->genSurfSize << "\033[0m" << std::endl;
+            BLOG_INFO(Form("Generation surface position: (%.2f, %.2f, %.2f)", BDetector->genSurfSize.getX(),
+                                                                                    BDetector->genSurfSize.getY(),
+                                                                                    BDetector->genSurfSize.getZ()
+                                                                            ));
         }
         else if (cmd == detectorState_cmd){
             if(BDetector->isADetectorState(BDetector->strToDetectorState(value)))
                 BDetector->setDetectorState(value);
-            // std::cout << "\r\033[20C \033[1;33m" << "Detector state is: " << value << "\033[0m" << std::endl;
         }
         else if (cmd == autoGenSize_cmd){
             BDetector->autoGenSize = autoGenSize_cmd->GetNewBoolValue(value);
-            // std::cout << "\r\033[20C \033[1;33m" << "Detector state is: " << value << "\033[0m" << std::endl;
+            BLOG_INFO(Form("AutoGenSize: ", BDetector->autoGenSize ? "True" : "False"));
         }
     }
 

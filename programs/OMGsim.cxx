@@ -213,6 +213,34 @@ int main(int argc_,char** argv_)
     }
 
   try {
+    
+    BLogger::getInstance()->setDebugLevel(debugLevel);
+
+    // preparing outputs
+    std::string programName = std::filesystem::path(argv_[0]).filename().string();
+    std::string path = "results/" + programName;
+    std::string logsPath = path + "/logs";
+    std::string plotsPath =  path + "/plots";
+
+    std::string paths[] = {path, logsPath, plotsPath};
+
+    for(auto& ipath : paths)
+        if(!fs::exists(ipath)){
+            fs::create_directories(ipath);
+            BLOG_INFO(Form("Path %s not found; creating it ..", ipath.c_str()));
+        }else{
+            BLOG_INFO(Form("Path %s already exists ..", ipath.c_str()));
+        }
+
+    std::string filesTimeStamp = BLogger::getCurrentTimestampForFileNaming();
+    std::string logFile = logsPath + "/" + programName + filesTimeStamp + ".log";
+    if(debugLevel >= 0)
+      BLogger::getInstance()->setOutputFile(std::ofstream(logFile));
+
+    if(BLogger::getInstance()->writeToFile_){
+        BLOG_INFO(Form("Logging in %s", logFile.c_str())); 
+    }
+
 
     // Creation of the analysis manager as soon as possible to be sure to get the daugther
     //KM3AnalysisManager* analysis = K40AnalysisManager::getIt();
@@ -224,8 +252,6 @@ int main(int argc_,char** argv_)
 
     lactel::BAnalysisManager::getIt()->evtFileName = evtFileName;
     lactel::BAnalysisManager::getIt()->fRun.runNb=runNumber;
-
-    BLogger::getInstance()->setDebugLevel(debugLevel);
 
     // random engine
     //CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);

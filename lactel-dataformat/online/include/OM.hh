@@ -7,12 +7,16 @@
 #include "dbRoutines.hh"
 #include "BLogger.hh"
 
+#include "TString.h"
+
 #include "G4ThreeVector.hh"
 #include "G4SystemOfUnits.hh"
 #include <random>
 #include <numeric>
 
 
+
+using namespace std;
 
 namespace lactel
 {
@@ -139,7 +143,6 @@ namespace lactel
             void setPoition(G4ThreeVector pos){
                 position = pos;
             }
-
 
             const void dump(std::ostream& out = std::cout) const {
                 out << "\033[1;35m" 

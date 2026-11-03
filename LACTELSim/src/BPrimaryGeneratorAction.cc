@@ -84,7 +84,7 @@ namespace lactel
             gr->SetName(("gr_" + std::to_string((int)(angle/deg))).c_str());
 
             int p = 0;
-            std::cout << "\r\033[10C" << "energy min in GeV: " << EMin/GeV << " angle in rad: " << angle/rad << std::endl;
+            BLOG_INFO(Form("Energy min in GeV: %.2f and angle in rad: %.2f", EMin/GeV, angle/rad));
             for(double E = EMax; E <= EMax; E+=dE){
                 gr->SetPoint(p, E/GeV, muon_flux(E/GeV, angle/rad, alt/m) * 100 * 100 );
                 p++;
@@ -146,38 +146,35 @@ namespace lactel
     void BPrimaryGeneratorAction::SetGenParsMode(std::string mode){
         if(mode == "fixed"){
             genParsMode = GenParsMode::fixed;
-            std::cout << "\r\033[10C" << ">>>> GenParsMode is: " << "fixed" << std::endl;
+            BLOG_INFO("GenParsMode is: fixed");
         }
         else if(mode == "integral"){
             genParsMode = GenParsMode::integral;        
-            std::cout << "\r\033[10C" << ">>>> GenParsMode is: " << "integral" << std::endl;
+            BLOG_INFO("GenParsMode is: integral");
         }
         else if(mode == "random"){
             genParsMode = GenParsMode::random;
-            std::cout << "\r\033[10C" << ">>>> GenParsMode is: " << "random" << std::endl;
+            BLOG_INFO("GenParsMode is: random");
         }
         else if(mode == "cos2"){
             genParsMode = GenParsMode::cos2;
-            std::cout << "\r\033[10C" << ">>>> GenParsMode is: " << "cos2" << std::endl;
+            BLOG_INFO("GenParsMode is: cos2");
         }
         else{
-            std::cerr << "\r\033[10C" << "Unkown generation parameter mode " << mode << std::endl;
+            BLOG_ERROR(Form("Unkown generation parameter mode %s", mode.c_str()));
         }
 
     }
 
     void BPrimaryGeneratorAction::GeneratePrimaries(G4Event* event){
         if(fGunType == 3){
-            // std::cout << "\r\033[10C" << "Generating .." << std::endl;
             particle_name ="muons";
             init(BPrimaryGeneratorAction::gen_mode::GEANT4);
             ((G4ParticleGun*)particleGun)->GeneratePrimaryVertex(event);
             return;
         }
         else if(fGunType == 4){
-            // std::cout << "\r\033[10C" << "\033[1;35mInfo: Using costum particle gun. \033[0m" << std::endl;
-            
-             G4ParticleGun* gun = new G4ParticleGun(1);
+            G4ParticleGun* gun = new G4ParticleGun(1);
 
             G4ThreeVector hemisphereCenter(0., 0., -650.*mm);  // center position in world coordinates
             G4double R = 0.5 * m;                           // radius of hemisphere
@@ -216,12 +213,10 @@ namespace lactel
 
     void BPrimaryGeneratorAction::getExpectedFlux(){
         double nMuons = integrate_muon_flux(genAltitude, EMin, EMax, dE, thetaMin, thetaMax, dTheta); // muon/second/cm^2
-        std::cout << "Estimated muon rate per " << genArea << " cm2 per " << tExposure/s << " seconds: " 
-                    << std::setprecision(4) << nMuons * genArea * tExposure/s
-                    <<  "\nExpected muons /cm2: "
-                    << std::setprecision(4) <<   nMuons
-
-                    << std::endl;
+        BLOG_INFO(Form("Estimated muon rate per: %.3f per %.2f seconds: %.3f, Expected muons: ", genArea, 
+                                                                    tExposure/s, 
+                                                                    nMuons * genArea * tExposure/s, 
+                                                                    nMuons));
 
         muonsFlux = nMuons * genArea * tExposure; // nMuons is a number, genArea in cm2 and and tExposure is in s 
     }
@@ -358,7 +353,6 @@ namespace lactel
 
     void BPrimaryGeneratorAction::init(const gen_mode gen){
         if(particle_name == ""){
-            // std::cout << "ParametrizedGenerator::init: Particle name is not set.\n";
             return;
         }
 
@@ -435,33 +429,8 @@ namespace lactel
             generator->GetRandom2(energy, theta);
             energy = pow(10, energy);
 
-            
-            // std::cout << "\r\033[10C" << "Energy in GeV: " << energy 
-            //                             << " - Angle deg: " << theta 
-            //                             << " - Angle in rad: " << theta*deg 
-            //                             << std::endl;
-
             G4ThreeVector direction = FixedThetaDirection(theta);
             theta = theta*deg; // to rad
-
-
-            // double cost, theta;
-            // // generator->GetRandom2(energy, theta);
-            // generator->GetRandom2(energy, cost);
-            // theta = acos(cost);
-            // energy=energy*GeV;
-            // direction=FixedThetaDirection(theta);
-
-            // std::cout << "\r\033[10C" << "Generated: " << particle_name << " - energy: " << energy << std::endl;
-            
-            // if(direction.getZ() > 0)
-            //     direction.setZ(- direction.getZ());
-
-            // std::cout << "\r\033[10C" << "E (GeV): " << energy << 
-            //                                 " -- theta in rad: " << theta << 
-            //                                 " -- direction: " << direction <<
-            //                                 " -- theta: " << std::acos(std::clamp(-direction.z(), -1.0, 1.0))
-            //                                 << std::endl;
 
             G4ThreeVector polarization(G4UniformRand(), G4UniformRand(), 0.0); 
             ((G4ParticleGun*)particleGun)->SetParticlePolarization(polarization);
@@ -469,8 +438,6 @@ namespace lactel
             G4ParticleDefinition* particle = particleTable->FindParticle(particleName);
             if(!particle)
               return;        
-
-            // std::cout << "\r\033[10C \033[1;31m" << "Generation: cost=" << cost << " - energy=" << energy  << "\033[0m" << std::endl;
 
             ((G4ParticleGun*)particleGun)->SetParticleDefinition(particle);
             ((G4ParticleGun*)particleGun)->SetParticlePosition(surfPoints);
@@ -643,19 +610,18 @@ namespace lactel
         theta_max /= rad;
         theta_steps /= rad;
 
-        if(BLogger::getInstance()->getDebugLevel() > 2)
-            std::cout << "BPrimaryGeneratorAction::integrate_muon_flux: " 
-                            << "\n Altitude in m: " << alt
-                            << "\n E_min in GeV: " << Emin
-                            << "\n E_max in GeV: " << Emax
-                            << "\n E_steps in GeV: " << Esteps
-                            << "\n Theta_min in deg: " << theta_min /deg
-                            << "\n Theta_max in deg: " << theta_max /deg
-                            << "\n Theta_steps in deg: " << theta_steps /deg
-                            << "\n (Emax - Emin) /Esteps: " << (Emax - Emin) /Esteps
-                            << "\n (theta_max - theta_min)/theta_steps: " << (theta_max - theta_min)/theta_steps
-                            << std::endl;
-        // Emin + dE + dE +... = Emax => Emin + n*dE = Emax =>  n*dE = Emax -Emin => n = (Emax-Emin)/dE 
+        BLOG_INFO(Form("Altitude in m: %.2f \
+                            \n E_min in GeV: %.2f \
+                            \n E_max in GeV: %.2f \
+                            \n E_steps in GeV: %.2f \
+                            \n Theta_min in deg: %.2f \
+                            \n Theta_max in deg: %.2f \
+                            \n Theta_steps in deg: %.2f \
+                            \n (Emax - Emin) /Esteps: %.2f \
+                            \n (theta_max - theta_min)/theta_steps: %.2f", 
+                                alt, Emin, Emax, Esteps, theta_min, theta_max, theta_steps,
+                                (Emax - Emin) /Esteps, (theta_max - theta_min)/theta_steps));
+
         double Ensteps = (Esteps > 0) ? (Emax - Emin) / Esteps : Emax; // 
         double thetansteps = (theta_steps > 0) ? (theta_max - theta_min)/theta_steps : theta_max/deg;
 
@@ -669,9 +635,6 @@ namespace lactel
                         (int) Ensteps, log10(Emin)-1, log10(Emax)+1,
                         500, -7, 3
                     );
-
-        //nMuonsGr = new TGraph((int) Ensteps);
-
 
         double dE = (Emax - Emin) / Ensteps;
         double dTheta = (theta_max - theta_min) / thetansteps;
@@ -741,14 +704,13 @@ namespace lactel
         E_steps = pars[2];
         theta_steps = pars[3];
         altitude = pars[4];
-        
-        std::cout << "BPrimaryGeneratorAction::integrate_flux: " 
-        << "\n Altitude in m: " << altitude / m
-        << "\n E_min in GeV: " << E_min / GeV
-        << "\n E_max in GeV: " << E_max / GeV
-        << "\n E_steps in GeV: " << E_steps / GeV
-        << "\n theta_steps in deg: " << theta_steps / deg
-        << std::endl;
+ 
+        BLOG_INFO(Form("Altitude in m: %.2f \
+                            \nE_min in GeV: %.2f \
+                            \nE_max in GeV: %.2f \
+                            \nE_steps in GeV: %.2f \
+                            \ntheta_steps in deg: %.2f", 
+                            altitude/m, E_min/GeV, E_max/GeV, E_steps/GeV, theta_steps/deg));
 
                             
         double dE = (E_max - E_min) / E_steps;
@@ -871,8 +833,6 @@ namespace lactel
         const double theta  = x[1];
         const double cosTheta = std::cos(theta);
 
-        // std::cout << "\r\033[10C" << "Energy in GeV: " << energy << " - angle in deg: " << theta << std::endl;
-        // Effective cosine to account for the curvature of the atmosphere
         const double cosThetaStar = std::sqrt(
             (cosTheta * cosTheta
             + P1 * P1

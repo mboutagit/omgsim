@@ -29,8 +29,7 @@ namespace lactel
 
     OM::OM(std::string id) : isOK(true), om_id(id){
         if(om_ids.count(id)){
-            // std::cerr << "\033[1;31mError: OM with id " + id + " already defined!\033[0m" << std::endl;
-            BLogger::getInstance()->log(BLogger::Level::WARNING, "OM with id " + id + " already defined!");
+            BLOG_WARNING(Form("OM with id %s already defined!", id.c_str()));
             return;
         }
         om_ids.insert(id);
@@ -101,10 +100,10 @@ namespace lactel
                     size++;
                 }
                 if(! size){
-                    BLogger::getInstance()->log(BLogger::Level::WARNING, "No data found for " + om_id + " in the database." );
+                    BLOG_WARNING(Form("No data found for %s in the database.", om_id.c_str()));
                 }
                 else    
-                    BLogger::getInstance()->log(BLogger::Level::INFO, "Data for " + om_id + " has been loaded from database." );
+                    BLOG_WARNING(Form("Data for %s has been loaded from database.", om_id.c_str()));
         }
         catch(const std::exception& e){
                 std::cerr << e.what() << '\n';

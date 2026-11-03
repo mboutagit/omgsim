@@ -9,11 +9,11 @@
 #include "TGraph.h"
 
 #include "TRandom3.h"
-
-
+#include "BLogger.hh"
 
 using namespace std;
 using namespace km3net;
+using namespace utils;
 
 
 namespace BUnits

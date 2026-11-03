@@ -1,0 +1,110 @@
+Bootstrap: docker
+From: ubuntu:20.04
+
+%labels
+    Author Bouta
+    Version 1.0
+    Description Geant4 10.01.p03 + ROOT 6.32.10 container
+
+%environment
+    # Geant4 environment
+    export GEANT4_DIR=/opt/geant4.10.01.p03
+    export PATH=$GEANT4_DIR/bin:$PATH
+    export LD_LIBRARY_PATH=$GEANT4_DIR/lib64:$LD_LIBRARY_PATH
+
+    # ROOT environment
+    export ROOT_DIR=/opt/root/root-6.32.10
+    export PATH=$ROOT_DIR/bin:$PATH
+    export LD_LIBRARY_PATH=$ROOT_DIR/lib:$LD_LIBRARY_PATH
+    export ROOTSYS=$ROOT_DIR
+
+    export TMPDIR=/opt/tmp
+    mkdir -p $TMPDIR
+
+%post
+
+    # # ---- Non-interactive timezone to avoid tzdata prompt ----
+    # export DEBIAN_FRONTEND=noninteractive
+    # ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime
+
+    export DEBIAN_FRONTEND=noninteractive
+    export TZ=Europe/Paris
+
+        # ---- Install required system packages ----
+    apt-get update && apt-get install -y --no-install-recommends \
+        build-essential cmake git wget curl sed grep nano neovim tar gzip bzip2 \
+        libx11-dev libxpm-dev libxft-dev libxext-dev libboost-dev \
+        libgl1-mesa-dev libglew-dev g++ libmysqlclient-dev \
+        qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools \
+        libftgl-dev libfftw3-dev libcfitsio-dev \
+        python3 python3-dev python3-pip python3-numpy \
+        tcl-dev tk-dev libssl-dev tzdata libxerces-c-dev \
+        libxi-dev libglu1-mesa-dev libxmu-dev libhdf5-dev libhdf5-cpp-103 libconfig++-dev \
+        libffi-dev libuuid1 uuid-dev libfuse2 libkrb5-dev \
+        && rm -rf /var/lib/apt/lists/*
+
+    ldconfig
+
+    # ---- Create installation directories ----
+    mkdir -p /opt/geant4 /opt/root /opt/mysqlcppconn
+
+    git clone https://github.com/mysql/mysql-connector-cpp.git
+    cd mysql-connector-cpp
+    mkdir build && cd build
+
+    cmake .. \
+    -DCMAKE_INSTALL_PREFIX=/opt/mysqlcppconn \
+    -DWITH_JDBC=ON \
+    -DWITH_XDEVAPI=OFF \
+    -DWITH_MYSQL=/usr \
+    -DCMAKE_BUILD_TYPE=Release
+
+    cmake --build . --target install -j10
+
+    # ---- Install Geant4 10.1.3 ----
+    g4name="geant4.10.01.p03"
+    cd /tmp
+    rm -fr /tmp/${g4name}
+    wget http://cern.ch/geant4-data/releases/${g4name}.tar.gz
+    tar xf ${g4name}.tar.gz
+    rm -fr ${g4name}-build
+    mkdir ${g4name}-build
+    cd ${g4name}-build
+    cmake ../${g4name} \
+        -DCMAKE_INSTALL_PREFIX=/opt/${g4name} \
+        -DCMAKE_CXX_STANDARD=14 \
+        -DCMAKE_CXX_FLAGS=-fpermissive \
+        -DGEANT4_INSTALL_DATA=ON \
+        -DGEANT4_USE_OPENGL_X11=ON \
+        -DGEANT4_USE_QT=OFF \
+        -DGEANT4_USE_GDML=ON \
+        -DGEANT4_USE_HEPREP=OFF \
+        -DGEANT4_BUILD_MULTITHREADED=ON
+    make -j$(nproc)
+    make install
+
+
+        # ---- Install ROOT 6.32.10 ----
+    cd /tmp
+    wget https://root.cern/download/root_v6.32.10.source.tar.gz
+    tar -xzf root_v6.32.10.source.tar.gz
+    rm -fr root-build
+    mkdir root-build
+    cd root-build
+    cmake ../root-6.32.10 \
+    -DCMAKE_INSTALL_PREFIX=/opt/root/root-6.32.10 \
+    -Dx11=ON \
+    -Dbuiltin_xrootd=OFF \
+    -Dbuiltin_ssl=OFF \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DTESTBUILD_JOBS=1
+
+    make -j$(nproc)
+    make install
+
+    # ---- Clean up temporary files ----
+
+%runscript
+    echo "Container ready. Launching interactive shell..."
+    export PATH=/opt/root/root-6.32.10/bin:/opt/geant4.10.01.p03/bin:$PATH
+    exec /bin/bash "$@"

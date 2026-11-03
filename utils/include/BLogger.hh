@@ -11,43 +11,60 @@
 
 using namespace std;
 
-namespace utils
+namespace utils // LACTEL
 {
+
+    /**
+     * @brief class for logging
+     * @author M. Bouta bouta@cppm.in2p3.fr
+     */
+    
     class BLogger{
         private:
             BLogger();
-            static BLogger* instance;    
+            static BLogger* instance; 
+            std::string filename;
+            std::string filePath;   
         public:
 
-            enum class Level {
-                    DEBUG,
-                    INFO,
-                    WARNING,
-                    ERROR
-            };
+            enum class Level {DEBUG, INFO, WARNING, ERROR};
 
-            ~BLogger();
+            ~BLogger(){};
             static BLogger* getInstance();
 
             void setOutputFile(const std::string& filename);
+            void setOutputFile(std::ofstream&& file);
             std::string levelToString(Level lvl);
-            void log(Level level, const std::string& msg);
-                // Convenience macros
-            void info(const std::string& msg)    { log(Level::INFO, "\033[1;34m" + msg + "\033[0m"); }
-            void warn(const std::string& msg)    { log(Level::WARNING, ("Wa33" + msg + "\033[0m").c_str());}
-            void error(const std::string& msg)   { log(Level::ERROR, "\033[1;34m" + msg + "\033[0m"); }
-            void debug(const std::string& msg)   { log(Level::DEBUG, "\033[1;34m" + msg + "\033[0m"); }
+            void log(Level level, const std::string& msg, const char* function, int line);
 
-            int debugLevel = -1;
+            int debugLevel = 0;
+            std::ostream* out = &std::cout;
 
-            void setDebugLevel(int lvl){debugLevel = lvl;}
-            int getDebugLevel(){return debugLevel;}
+            void setDebugLevel(int dl){debugLevel = dl;}
+            int getDebugLevel() {return debugLevel;}
+            void setOutput(std::ostream& output){out = &output;}
+            void printOutput() const;
+            static std::string getCurrentTimestampForFileNaming();
+            static const Level getLevel(); 
 
             std::string timeStamp();
             bool writeToFile_;
             std::ofstream file_;
             std::mutex mutex_;
+
     };    
 } // namespace utils
+
+#define BLOG_DEBUG(msg) \
+    utils::BLogger::getInstance()->log(utils::BLogger::Level::DEBUG, msg, __func__, __LINE__)
+
+#define BLOG_INFO(msg) \
+    utils::BLogger::getInstance()->log(utils::BLogger::Level::INFO, msg, __func__, __LINE__)
+
+#define BLOG_WARNING(msg) \
+    utils::BLogger::getInstance()->log(utils::BLogger::Level::WARNING, msg, __func__, __LINE__)
+
+#define BLOG_ERROR(msg) \
+    utils::BLogger::getInstance()->log(utils::BLogger::Level::ERROR, msg, __func__, __LINE__)
 
 #endif

@@ -144,28 +144,6 @@ namespace lactel
 
 
     void ElementaryCell::draw(Option_t* options, std::string axis){
-        // double x1, x2, y1, y2;
-        // if(axis == "XY" || axis == "Xy" || axis == "Xy" || axis == "xy"){
-        //     double x1 = GetPosition().getX() - GetDimensions().getX()/2.;
-        //     double x2 = GetPosition().getX() + GetDimensions().getX()/2.;
-        //     double y1 = GetPosition().getY() - GetDimensions().getY()/2.;
-        //     double y2 = GetPosition().getY() - GetDimensions().getY()/2.;
-        // }
-        // else if(axis == "XZ" || axis == "Xz" || axis == "xZ" || axis == "xz"){
-        //     double x1 = GetPosition().getX() - GetDimensions().getX()/2.;
-        //     double x2 = GetPosition().getX() + GetDimensions().getX()/2.;
-        //     double y1 = GetPosition().getZ() - GetDimensions().getZ()/2.;
-        //     double y2 = GetPosition().getZ() - GetDimensions().getZ()/2.;
-        // }
-        // else if(axis == "YZ" || axis == "Yz" || axis == "yZ" || axis == "yz"){
-        //     double x1 = GetPosition().getY() - GetDimensions().getY()/2.;
-        //     double x2 = GetPosition().getY() + GetDimensions().getY()/2.;
-        //     double y1 = GetPosition().getZ() - GetDimensions().getZ()/2.;
-        //     double y2 = GetPosition().getZ() - GetDimensions().getZ()/2.;
-        // }
-        // else{
-        //     BLogger::getInstance()->log(BLogger::Level::ERROR, "ElementaryCell::draw: Unkown axis!");
-        // }
         TPave* cellPave = new TPave(    GetPosition().getX() - GetDimensions().getX()/2.,
                                         GetPosition().getY() - GetDimensions().getY()/2.,
                                         GetPosition().getX() + GetDimensions().getX()/2.,
@@ -258,8 +236,11 @@ namespace lactel
             fNy++;
         else if(axis == "Z" || axis == "z")
             fNz++;
-        else
-            BLogger::getInstance()->log(BLogger::Level::WARNING, "Module::addCell: Unkown axis " + axis);
+        else{
+            BLOG_WARNING(Form("Unkown axis %s, return", axis.c_str()));
+            return;
+        }
+        
         updateGeometry();
     }
 
@@ -286,7 +267,7 @@ namespace lactel
                 break;
             
             default:
-                std::cout << "\r\033[10C" << "Error axis" << std::endl;
+                BLOG_ERROR("Error axis");
                 break;
         }
 
@@ -294,7 +275,7 @@ namespace lactel
     }
 
     void Module::print(std::ostream& out, bool printCells){
-        std::cout << "Module: " << id 
+        out << "Module: " << id 
                             << " - name: " << name 
                             << " - pos: " <<  GetPosition()
                             << " - dim: " <<  GetDimensions()
@@ -369,13 +350,13 @@ namespace lactel
             minDim = std::min(minDim, cell.GetDimensions());
             maxDim = std::max(maxDim, cell.GetDimensions());
 
-            std::cout << "\r\033[10C" << "cell: " << cell.getID() << 
-                                        " - Pos: " << cell.GetPosition() <<
-                                        " - minPos: " << minPos <<
-                                        " - maxPos: " << maxPos <<
-                                        " - minDim: " << minDim <<
-                                        " - maxDim: " << maxDim <<
-                                        std::endl;
+            BLOG_INFO(Form("cell: %d, pos: (%.2f, %.2f, %.2f), minPos: %.2f, \
+                                        maxPos: %.2f, minDim: %.2f, maxDim: %.2f", 
+                                        cell.getID(), 
+                                        cell.GetPosition().getX(), 
+                                        cell.GetPosition().getY(), 
+                                        cell.GetPosition().getZ(),
+                                        minPos, maxPos, minDim, maxDim));
         }
         SetPosition((maxPos+maxDim/2 - minPos+minDim/2)/GetObjects().size());
     }
@@ -401,10 +382,6 @@ namespace lactel
             minDim = std::min(minDim, cell.GetDimensions());
             maxDim = std::max(maxDim, cell.GetDimensions());
         }
-
-        std::cout << "\r\033[10C" << "Old Dim: " << GetDimensions() 
-                                    << " -- New Dim: " << maxPos + maxDim - (minPos - minDim)
-                                    << std::endl;
         SetDimensions((maxPos + maxDim )/2. + (minPos + minDim)/2. );
     }
 
@@ -440,7 +417,7 @@ namespace lactel
 
     const ElementaryCell& Module::getECellsPrototype() const {
         if(! GetObjects().size()){
-            BLogger::getInstance()->log(BLogger::Level::WARNING, "Module::getECellsPrototype: No object has been assigned yet.");
+            BLOG_WARNING("No object has been assigned yet.");
             return ElementaryCell();
         }
         return GetObjects()[0]; // return the first object as prototype;
@@ -798,10 +775,6 @@ namespace lactel
      */
     ElementaryCell* BLactelDetector::getOMECell(int oid){
         for(auto& c : getListOfECells()){
-            // std::cout << "\r\033[10C" << "checking cell: " << c->getID() 
-            //                             << " - with OM: " << c->getOM().getOMID() 
-            //                             << " - with OM iid: " << c->getOM().getID() 
-            //                             << std::endl;
             if(c->getOM().getID() == oid)
                 return c;
         }
@@ -919,133 +892,6 @@ namespace lactel
             }
     }
 
-    // /**
-    //  * @brief Read a detector from a detector file
-    //  * @param fileName the name of file to read from.
-    //  */
-    // void BLactelDetector::read(std::string fileName){
-
-    //     struct dirent *de=NULL;
-    //     DIR *d=NULL;
-    //     d=opendir(filesPath.data ());
-    //     if(d == NULL)
-    //     {
-    //         cerr << "Couldn't open directory" << filesPath << endl;
-    //         return;
-    //     }
-
-    //     libconfig::Config cfg;
-    //     cfg.setAutoConvert (true);
-
-    //     try {
-    //             cfg.readFile(fileName.c_str());
-    //         }
-    //         catch(const FileIOException &e) {
-    //             std::cerr << "BLactelDetector::read: I/O error while reading the file" << "\n";
-    //             return;
-    //         }
-    //         catch(const ParseException &e) {
-    //             std::cerr << "BLactelDetector::read: Parse error at " << e.getFile()
-    //                     << ":" << e.getLine() << " - " << e.getError() << "\n";
-    //             return;
-    //         }
-
-    //     try {
-    //         // Access values
-
-    //         // std::string detPattern="VolumeDet";
-    //         // std::string Module="Volume";
-    //         // std::string Cell="VolumeEC";
-
-    //         // libconfig::Setting det;
-    //         // libconfig::Setting& Cell();
-    //         // libconfig::Setting& Module();
-
-    //         libconfig::Setting& rootStg=cfg.getRoot();
-
-    //         std::string detfName = rootStg.lookup("Config.detectorFile");
-    //         std::string matfName = rootStg.lookup("Config.materialFile");
-
-    //         if(detfName == "" || matfName == ""){
-    //             BLogger::getInstance()->log(BLogger::Level::ERROR, "BLactelDetector::read: Could not find configuration.");
-    //             return;
-    //         }
-    //         else{
-    //             BLogger::getInstance()->log(BLogger::Level::INFO, 
-    //                 "BLactelDetector::read: config found: \n\tDetector file name: " + detfName + \
-    //                     "\n\tMaterial file name: " + matfName  + "\n"
-    //             );
-    //         }
-
-    //         libconfig::Config cfgMat;
-    //         std::string matFilePath = matfName;
-    //         cfgMat.readFile(matFilePath.data());   
-    //         libconfig::Setting& matRootStg=cfgMat.getRoot();          
-
-
-    //         std::string DetName;
-
-    //         if (!rootStg.lookupValue ("Name", DetName)){
-    //             BLogger::getInstance()->log(BLogger::Level::ERROR, "Could not find detector name");
-    //             return;
-    //         }
-    //         else{
-    //             BLogger::getInstance()->log(BLogger::Level::INFO, "Detector name found: " + DetName);
-    //         }
-
-    //         read(cfg, cfgMat);
-
-    //         // int configFileSize=rootStg.getLength ();
-    //         // for (int cfIt=0; cfIt < configFileSize; cfIt++)
-    //         // {
-    //         //     if (! rootStg[cfIt].isGroup ())
-    //         //         continue;
- 
-    //         //     string currentName=rootStg[cfIt].getName ();
-    //         //     libconfig::Setting& currentSetting = cfg.lookup(currentName);
-                
-    //         //     std::vector<OM> oms;
-    //         //     std::vector<ElementaryCell> cells;
-
-    //         //     // read detector informations
-    //         //     if (currentName.find("VolumeDet") != string::npos){
-    //         //         // std::cout << "\r\033[10C" << "Det Volume found: " << currentName << std::endl;
-    //         //         currentSetting.lookupValue("Name", name);
-    //         //         // currentSetting.lookupValue("ID", id); // this should be auto
-    //         //         float x, y, z, t, p;
-    //         //         currentSetting.lookupValue("X", x);
-    //         //         currentSetting.lookupValue("Y", y);
-    //         //         currentSetting.lookupValue("Z", z);
-    //         //         currentSetting.lookupValue("Theta", t);
-    //         //         currentSetting.lookupValue("Phi", p);
-    //         //         SetPosition(G4ThreeVector(x, y, z));
-    //         //     }
-
-    //         //     // read water tanks (ECells) information
-    //         //     else if (currentName.find("VolumeWT") != string::npos){
-    //         //         // std::cout << "\r\033[10C" << "Cell found: " << currentName << std::endl;
-    //         //         cells.push_back(readECell(currentSetting, cfgMat));
-    //         //     }
-
-    //         //     // read OMs information
-    //         //     else if (currentName.find("OM") != string::npos){
-    //         //         // currentSetting.lookupValue("Name", name);
-    //         //         // currentSetting.lookupValue("ID", id);
-    //         //         // float x, y, z, t, p;
-    //         //         // currentSetting.lookupValue("X", x);
-    //         //         // currentSetting.lookupValue("Y", y);
-    //         //         // currentSetting.lookupValue("Z", z);
-    //         //         // currentSetting.lookupValue("Theta", t);
-    //         //         // currentSetting.lookupValue("Phi", p);
-    //         //         // SetPosition(G4ThreeVector(x, y, z));
-    //         //     }    
-    //         // }
-    //     }
-    //     catch(const SettingNotFoundException &e) {
-    //         std::cerr << "Missing setting: " << e.getPath() << "\n";
-    //     }
-    // }
-
     OM BLactelDetector::readOM(libconfig::Setting& set){
         
         OM om;
@@ -1085,14 +931,13 @@ namespace lactel
 
         cell.setName(tname);
         cell.SetPosition(G4ThreeVector(x, y, z));
-        if(volConf.exists(tname))
-            BLogger::getInstance()->log(BLogger::Level::WARNING, tname + " does not exists!"); 
+        if(!volConf.exists(tname))
+            BLOG_WARNING(("%s does not exist!", tname.c_str()));
             
         libconfig::Setting& root = volConf.getRoot();
         libconfig::Setting& volume = root.lookup(tname);
         if(! volume.isGroup())
-            BLogger::getInstance()->log(BLogger::Level::WARNING, tname + " group not found!");
-            
+            BLOG_WARNING(Form("%s greoup not found", tname.c_str()));            
 
         G4ThreeVector cellDim = G4ThreeVector(static_cast<float>((int)volume["X"]), 
                                                 static_cast<float>((int)volume["Y"]), 
@@ -1105,7 +950,8 @@ namespace lactel
     ElementaryCell BLactelDetector::readAVolume(libconfig::Setting& set){
         ElementaryCell obj;
         obj.setName(set["Name"]);
-        std::cout << "\r\033[10C" << "Reading EC .." << std::endl;
+        BLOG_INFO(Form("Reading EC %s", set["Name"].c_str()));
+
         obj.SetPosition(G4ThreeVector ( static_cast<float>( (int) set["X"]),
                                             static_cast<float>( (int) set["Y"]),
                                             static_cast<float> ((int) set["Z"])
@@ -1132,7 +978,7 @@ namespace lactel
         if(detSet.exists("Name"))
             std::string detName = detSet["Name"];
         else    
-            BLogger::getInstance()->log(BLogger::Level::WARNING, "Could not find the detector Volume.");
+            BLOG_WARNING(Form("Could not find the detector Volume."));
 
         for(int i = 0; i < detFileSize; i++){
             if(! detSet[i].isGroup())
@@ -1143,20 +989,19 @@ namespace lactel
             OM om;
             ElementaryCell cell;
             if(detSetName.find("OM") != string::npos){
-                // om = readAVolume<OM>(currDetSet);
                 cell = readAVolume(currDetSet);
-                std::cout << "\r\033[10C" << "found and read OM: " << cell.getOM().getOMID()
-                                        << " - Its mother: " << cell.getVolumeProperties().getMotherVolName()
-                                        << " - Name: " << cell.getName()
-                                        << std::endl;
+                BLOG_INFO(Form("Found and read OM: %s, Its Mother: %s, its name: ",
+                                                cell.getOM().getOMID().c_str(),
+                                                cell.getVolumeProperties().getMotherVolName().c_str(),
+                                                cell.getName().c_str()
+                                            ));
                 std::string omMotherVolumeName = cell.getVolumeProperties().getMotherVolName();
                 ElementaryCell waterVolume;
                 if(omMotherVolumeName != "" && omMotherVolumeName.find("IdealWaterVolume") != string::npos){  
-                    std::cout << "\r\033[10C" << " Check its Mother found: " << (string)detSet.lookup(omMotherVolumeName) << std::endl;
+                    BLOG_DEBUG(Form("Check its Mother found: %s", (string)detSet.lookup(omMotherVolumeName).c_str()));
                     if(detSet.exists(omMotherVolumeName)){
-                        std::cout << "\r\033[10C" << " --- its Mother found: " << (string)detSet.lookup(omMotherVolumeName) << std::endl;
                         libconfig::Setting& waterSet = detSet.lookup(omMotherVolumeName);
-                        std::cout << "\r\033[10C" << "its Mother found: " << (string)detSet.lookup(omMotherVolumeName) << std::endl;
+                        BLOG_DEBUG(Form("its Mother found: %s", (string)detSet.lookup(omMotherVolumeName).c_str()));
                         if(waterSet.isGroup()){
                             if(waterSet.exists("MotherVolume")){
                                 std::string tankVolumeName = waterSet.lookup("MotherVolume");
@@ -1172,109 +1017,6 @@ namespace lactel
         }
 
     }
-
-
-
-    // void BLactelDetector::print(std::ostream& out = std::cout, bool printCells = false){
-    //     out     << string(25, '+') 
-    //             << " BLactelDetector " 
-    //             << " Pos: " << GetPosition()
-    //             << " Dim: " << GetDimensions()
-    //             << string(25, '+') 
-    //             << endl << endl;
-
-    //     for(auto& module : GetObjects())
-    //         module.print(out, printCells);
-    // }
-
-    // virtual void BLactelDetector::construct() override {
-    //     std::cout << "\r\033[10C" << "Construct" << std::endl;
-    // }
-
-    // void BLactelDetector::setInterModuleDistance(G4ThreeVector dv = interModuleDistance){
-    //     setInterModuleDistanceX(dv.getX());
-    //     setInterModuleDistanceY(dv.getY());
-    //     setInterModuleDistanceZ(dv.getZ());
-    //     update();
-    // }
-
-    // void BLactelDetector::setInterModuleDistanceX(int d = interModuleDistance.getX()){
-    //     for(int i = 0; i < GetObjects().size()-1; i++){
-    //         GetObjects()[i+1].Translate(GetObjects()[i].GetPosition().getX() + GetObjects()[i].GetDimensions().getX() + d, 0, 0);
-    //     }   
-    //     update();
-    // }
-    // void BLactelDetector::setInterModuleDistanceY(int d = interModuleDistance.getY()){
-    //     for(int i = 0; i < GetObjects().size()-1; i++){
-    //         // GetObjects()[i+1].Translate(0, GetObjects()[i].GetPosition().getY() + GetObjects()[i].GetDimensions().getY()/2 + d, 0);
-    //         GetObjects()[i+1].Translate(0, GetObjects()[i].GetPosition().getY() + GetObjects()[i].GetDimensions().getY() + d, 0);                            
-    //     }
-    //     update();
-    // }
-    // void BLactelDetector::setInterModuleDistanceZ(int d = interModuleDistance.getZ()){
-    //     for(int i = 0; i < GetObjects().size()-1; i++){
-    //         // GetObjects()[i+1].Translate(0, 0, GetObjects()[i].GetPosition().getZ() + GetObjects()[i].GetDimensions().getZ()/2 + d);
-    //         GetObjects()[i+1].Translate(0, 0, GetObjects()[i].GetPosition().getZ() + GetObjects()[i].GetDimensions().getZ() + d);
-    //     }
-    //     update();
-    // }
-
-    // void BLactelDetector::updatePosition(){
-    //     G4ThreeVector pcum;
-    //     for (size_t i = 0; i < modules.GetObjects().size(); i++)
-    //     {
-    //         pcum += modules.GetObjects()[i].GetPosition();
-    //     }
-    //     SetPosition(pcum/modules.GetObjects().size());
-    // }
-
-    // void BLactelDetector::updateDimension(){
-    //     if(modules.GetObjects().size() == 0) // no cell yet
-    //         return;
-
-    //     G4ThreeVector dup = modules.GetObjects()[0].GetDimensions();
-    //     for (size_t i = 0; i < modules.GetObjects().size(); i++)
-    //     {
-    //         if(abs(dup.getX()) < abs(modules.GetObjects()[i].GetPosition().getX() + modules.GetObjects()[i].GetDimensions().getX()))
-    //             dup.setX(modules.GetObjects()[i].GetPosition().getX() + modules.GetObjects()[i].GetDimensions().getX());
-
-    //         if(abs(dup.getY()) < abs(modules.GetObjects()[i].GetPosition().getY() + modules.GetObjects()[i].GetDimensions().getY()))
-    //             dup.setY(modules.GetObjects()[i].GetPosition().getY() + modules.GetObjects()[i].GetDimensions().getY());
-
-    //         if(abs(dup.getZ()) < abs(modules.GetObjects()[i].GetPosition().getZ() + modules.GetObjects()[i].GetDimensions().getZ()))
-    //             dup.setZ(modules.GetObjects()[i].GetPosition().getZ() + modules.GetObjects()[i].GetDimensions().getZ());
-
-    //     }
-    //     SetDimensions(dup);
-    // }
-
-    // void BLactelDetector::update(){
-    //             updatePosition();
-    //             updateDimension();
-    //         }
-
-    // void BLactelDetector::drawModules(Option_t* options = "", bool drawCells = false){
-    //     int color = 1;
-    //     const int size = modules.GetObjects().size();
-    //     TPave * moduleBox[size];
-    //     for(int itr = 0; itr < modules.GetObjects().size(); itr++){
-    //             Module module = modules.GetObjects()[itr];
-    //             moduleBox[itr] = new TPave( module.GetPosition().getX() - module.GetDimensions().getX(),
-    //                                         module.GetPosition().getZ() - module.GetDimensions().getZ(),
-    //                                         module.GetPosition().getX() + module.GetDimensions().getX(),
-    //                                         module.GetPosition().getZ() + module.GetDimensions().getZ(),
-    //                                         1, 
-    //                                         ""
-    //                                     );
-    //             moduleBox[itr]->SetName(("Detector_" + std::to_string(id) + "-Module_" + std::to_string(module.getID())).c_str());
-    //             moduleBox[itr]->SetFillColorAlpha(color, 0.4);
-    //             moduleBox[itr]->Draw(options);
-    //             color++;
-    //             if(drawCells)
-    //                 module.drawCells();
-    //         }
-    // }
-
 
     //======================================================
     // Read one libconfig group into VolumeInfo
@@ -1531,7 +1273,8 @@ namespace lactel
             const libconfig::Setting& conf = cfg.lookup("Config");
             if(conf.getType() == libconfig::Setting::TypeGroup){
                 std::string materialFile = conf["materialFile"];
-                BLogger::getInstance()->log(BLogger::Level::INFO, "BLactelDetector::read(): material file Found: " + materialFile);
+                BLOG_INFO(Form("material file Found: %s", materialFile.c_str()));
+
                 try{
                     cfgMat.readFile(materialFile.c_str());
                 }
@@ -1540,26 +1283,19 @@ namespace lactel
                     return;
                 }
                 catch(const ParseException& e){
-                    cerr << "Parse error at "
-                        << e.getFile() << ":"
-                        << e.getLine()
-                        << " - " << e.getError()
-                        << endl;
-
+                    BLOG_ERROR(Form("Parse error at file %s in line %d", e.getFile(), e.getLine()));
                     return;
                 }
             }                
             else{
-                std::cout << "\r\033[10C" << "Issue occured while reading materialFile" << std::endl;
+                BLOG_ERROR("Issue occured while reading materialFile ..");
                 return;
             }
         }
         else{
-            std::cout << "\r\033[10C" << "Issue when looking for Config group" << std::endl;
+            BLOG_ERROR("Issue when looking for Config group ..");
             return;
         }
-
-
 
         for(int i = 0; i < root.getLength(); ++i)
         {

@@ -284,7 +284,7 @@ namespace lactel
                 obj.setName(set["Name"]);
                 
                 if constexpr (std::is_same_v<T, ElementaryCell>){
-                    std::cout << "\r\033[10C" << "Reading EC .." << std::endl;
+                    BLOG_INFO(Form("Reading EC %s ..", (string)set["Name"].c_str()));
 
                     obj.SetPosition(G4ThreeVector ( static_cast<float>( (int) set["X"]),
                                                     static_cast<float>( (int) set["Y"]),
@@ -300,7 +300,7 @@ namespace lactel
                     // obj.GetRotation().setPhi(static_cast<float> ((int) set["Phi"]));
                 }
                 if(set.exists("om_id")){
-                    std::cout << "\r\033[10C" << "Reading OM: " << (string)set["om_id"] << std::endl;
+                    BLOG_INFO(Form("Reading OM %s ..", set["om_id"].c_str()));
                     if constexpr (std::is_same_v<T, OM>)
                           obj.setID(set["om_id"]); 
                 }  

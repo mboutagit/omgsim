@@ -146,10 +146,10 @@ namespace lactel
             else if(state_ == "RUN")
                 state = DetectorState::RUN;
             else {
-                BLogger::getInstance()->log(BLogger::Level::ERROR, "Unkown detector state !");  
+                BLOG_INFO(Form("Unkown detector state %s! Exiting", state_.c_str()));  
                 return;
             }
-            BLogger::getInstance()->log(BLogger::Level::INFO, "Detector state: " + state_);
+            BLOG_INFO(Form("Detector state: %s", state_.c_str()));
         }
 
         DetGeoConf detGeoConf;

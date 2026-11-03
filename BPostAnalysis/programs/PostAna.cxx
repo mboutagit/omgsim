@@ -92,12 +92,12 @@ int main(int argc, char* argv[]){
             
     
 
-    float radius = 5; // in meters    
+    float radius = 4.83; // in meters    
     float gen_surface_m2  = TMath::Pi() * radius*radius; // pi*R² disk
     float gen_surface_cm2 = gen_surface_m2 * 1e4;
  
     TF2* flux = new TF2("flux", lactel::BPrimaryGeneratorAction::ModifiedFormula2D, 1e-2, 1e5, 0, 60);
-    float expected_muons_per_m2_per_s = 126; // flux->Integral(3e-1, 1e4, 0, 60); //generator->Integral(1e-1, 1e3, 0, TMath::Pi()/2); // by m²
+    float expected_muons_per_m2_per_s = 50; // flux->Integral(3e-1, 1e4, 0, 60); //generator->Integral(1e-1, 1e3, 0, TMath::Pi()/2); // by m²
     float expected_muons_per_cm2_per_s = expected_muons_per_m2_per_s/1e4; // to cm²
     float expected_muons_per_gensurf = expected_muons_per_cm2_per_s * gen_surface_cm2;
     float number_of_generated_muons_per_gensurf = genTree->GetEntries(); // 100 000 events
@@ -303,7 +303,7 @@ int main(int argc, char* argv[]){
                           "/home/bouta-mohammed/work/cppm/lactel/realData/data/run_004/data.h5",
                           "channel_data/peak",
                           0, 2.4, BPostAnalysis::mVperBin/1e3,
-                          0.5);
+                          1);
 
     histsByName histDataRun000020;
     getRealDataByInFile(  histDataRun000020,
@@ -342,9 +342,9 @@ int main(int argc, char* argv[]){
     DrawWithRatio(getHistByName(hists_mc, "mc_amp_ch0_run4"), ampCh0_run000020, "r.coin.ch0");
     DrawWithRatio(getHistByName(hists_mc, "mc_amp_ch1_run4"), ampCh1_run000020, "r.coin.ch1");
     DrawWithRatio(getHistByName(hists_mc, "mc_amp_ch0_run3"), 
-                                  getHistByName(histDataRun000020, "amp_ch0"), 
-                                  "rtr.Amp.ch1"
-                                );
+                  getHistByName(histDataRun000020, "amp_ch0"), 
+                  "rtr.Amp.ch1"
+                  );
 
     DrawWithRatio( {
                       {getHistByName(hists_mc, "mc_amp_ch0_run4"), ampCh0_run000020},

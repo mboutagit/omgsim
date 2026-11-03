@@ -168,8 +168,7 @@ namespace lactel
 
         if (rfn.size ())
         fRootFileName=rfn;
-
-        std::cout << "\r\033[20C" << "Creating an Analysis root files: " << fRootFileName << std::endl;
+        BLOG_INFO(Form("Creating an Analysis root files: %s", fRootFileName.c_str()));
         fRFile = new TFile (fRootFileName.data (), "RECREATE");
 
         fTRunInfos = new TTree("RunInfo","Infos about the simulation.");
@@ -264,9 +263,6 @@ namespace lactel
     }
 
     void BAnalysisManager::EndOfEvent(const G4Event* EV) {
-        #ifdef DEBUG
-            std::cout << "\r\033[10C" << "From : BAnalysisManager::EndOfEvent(const G4Event* EV)" << std::endl;
-        #endif
 
         fRun.nGenEvent += 1; 
         
@@ -342,18 +338,12 @@ namespace lactel
                 DAQ::DAQManager::getIt()->addEvent(&fDetectedEvent);
             genPars.isDetected = true;
             ndet+=1;
-            // std::cout << "\r\033[10C" << "-- Detected event: nhit=" << fDetectedEvent.nhit << std::endl;  
         }
 
-        
+        BLOG_DEBUG(Form("Filling genTree: Event %d", EV->GetEventID()));
         genTree->Fill();
-        // DAQEventTree->Fill();
-        // std::cout << "\r\033[55C" << "Fill TEvent tree." << std::endl;
-        //fTEvent->Fill(); used in BAnalysisManager::AddPhotoTubeEntranceInfo  to include PMT hit infos
 
-        // AAAnalysisManager::EndOfEvent();
-        // std::cout << "\r\033[10C" << "End of Event: " << EV->GetEventID() << std::endl;
-
+        BLOG_INFO(Form("End of event %d", EV->GetEventID()));
     }
 
     BAnalysisManager::MeasureParameters BAnalysisManager::getMeasurePars(){
@@ -382,7 +372,6 @@ namespace lactel
         
         Measure measure;
         measure.fEnergy = info->GetOriginalEnergy ();
-        // eventMeasure_map.insert({G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID(), measure});
 
         fMeasure.fId += 1;
         measure.fId += 1;
@@ -417,18 +406,8 @@ namespace lactel
 
         fDetectedEvent.tota += info->GetOriginalEnergy() /eV;
 
-        
-           //fDetectedEvent.a = info->GetOriginalEnergy() / CLHEP::eV;
-        //fDetectedEvent.runNb = fRun.runNb; // OK as fRun.runNb is set in the start of the run
         nhit+=1;
-        //fTEvent->Fill();    
     } 
-
-    // void BAnalysisManager::AddPhotoTubeEntranceInfo (const G4Step* fStep){
-    //     AAAnalysisManager::AddOMEntranceInfo(fStep);
-    //     AAAnalysisManager::AddPhotoTubeEntranceInfo(fStep);
-    //     fTEvent->Fill();        
-    // }
 
     void BAnalysisManager::Write(){
         if (fRFile == NULL) {
@@ -442,15 +421,6 @@ namespace lactel
         fRFile=0;
         cout << "Analysis file was normaly closed." << endl;
     }
-
-    //ClassImp(lactel::BAnalysisManager::Measure);
-   //ClassImp(BAnalysisManager);
-
-
-
-
-
-
 
  void BAnalysisManager::AddPhotoTubeEntranceInfo (const G4Step* STEP)
   {
@@ -475,11 +445,6 @@ namespace lactel
         if (volname.find(KM3PhotoTubeMgr::fPMTContainerName) != std::string::npos) {
              fPMID=touchpost->GetCopyNumber(ihist); // OK for OM and DOM
 
-            //  std::cout << "\r\033[10C" << " touchpost->GetCopyNumber(ihist): " 
-            //                             <<  touchpost->GetCopyNumber(ihist) 
-            //                             << " -- touchpost->GetVolume(ihist)->GetName(): "
-            //                             << touchpost->GetVolume(ihist)->GetName()
-            //                             << std::endl;
         } else if (KM3DetectorConstruction::fOMNames.find(volname) != KM3DetectorConstruction::fOMNames.end()) {
              fOMId=touchpost->GetCopyNumber(ihist);
         }
@@ -502,13 +467,6 @@ namespace lactel
     fHits.pm_z=localpoint.z ();
     fHits.pm_t=localpoint.theta ();
     fHits.pm_p=localpoint.phi ();
-
-    // std::cout << "\r\033[55C" << "PMT infos: "  << fPhotoX
-    //                                             << fPhotoY
-    //                                             << fPhotoZ
-    //                                             << fPhotoT
-    //                                             << fPhotoT
-    //                                             << std::endl;
   }
 
   //Vladimir: This function is outdated and not used currently. OMid is added at AddPhotoTubeEntranceInfo.
@@ -533,7 +491,6 @@ namespace lactel
         cout.flush ();
       }
     fNbOM++;
-    // std::cout << "\r\033[55C" << "RFile: " << fRFile << "  --  fFastAnalysisOnly: " << fFastAnalysisOnly << std::endl;
     if (fRFile == NULL)
       return;
     if (fFastAnalysisOnly)
@@ -543,54 +500,17 @@ namespace lactel
     const G4VTouchable*   touch = poststep->GetTouchable();
     const G4ThreeVector& localpoint=touch->GetHistory ()->GetTopTransform().TransformPoint(globalPoint);
 
-    /*
-     * G4int copyNo = theTouchable->GetCopyNumber(); 
-     * G4int motherCopyNo = theTouchable->GetCopyNumber(1); 
-     * where Copy here stays for any duplicated instance of a physical volume, 
-     * either if it is a G4PVPlacement (multiple placements of the same logical volume) 
-     * or a G4PVReplica/G4PVParameterised. 
-     * The method GetCopyNo()is meant to return only the serial number of placements not duplicated in the geometry tree. 
-     *
-     * So, it seems, GetCopyNumber should be used instead of GetCopyNo since we do different placements of the same logical volume.
-     */
-
-   // cout <<" replica: " << touch->GetVolume ()->GetCopyNo () << endl;
-    // fOMId = touch->GetVolume ()->GetCopyNo ();
-    //fOMId = touch->GetCopyNumber (2);
-
-    // fOMHitX = globalPoint.x ();
-    // fOMHitY = globalPoint.y ();
-    // fOMHitZ = globalPoint.z ();
-    // fOMHitT = localpoint.theta ();
-    // fOMHitP = localpoint.phi ();
-
     fHits.om_x = globalPoint.x ();
     fHits.om_y = globalPoint.y ();
     fHits.om_z = globalPoint.z ();
     fHits.om_t = globalPoint.theta ();
     fHits.om_p = globalPoint.phi ();
-    // std::cout << "\r\033[10C" << "OMEntrance: om_x=" << globalPoint.x () << std::endl;
   }
-
-    // bool BAnalysisManager::DetectedEvent::isACoincidence(float ctime){
-    //     bool coincidence = false;
-    //     for(auto& hita: hits){
-    //         for(auto& hitb : hits){
-    //             if(hita.om_id == hitb.om_id) // check on different OMs 
-    //                 continue;
-    //             if(abs(hita.time - hitb.time) <= ctime){ // coincidence
-    //                 coincidence = true;
-    //                 break;
-    //             }
-    //         }
-    //         if(coincidence)
-    //             break;
-    //     }
-    //     return coincidence;
-    // }
 
     /**
      * @brief temp function to compute coinsidence by locally applying tts to hits
+     * @remark This is a temporary function used for testing
+     * @param ctime, the coincidence time
      */
     bool BAnalysisManager::DetectedEvent::isACoincidence(float ctime){
         bool coincidence = false;
@@ -616,16 +536,6 @@ namespace lactel
     }
 
     bool BAnalysisManager::DetectedEvent::checkCoincidence(float ctime){ // default coincidence time of 16 ns
-    
-    //     for(auto& de1: daqEvent){
-    //         for(auto& de2 : daqEvent){
-    //             if(de1.channel == de2.channel)
-    //                 continue;
-                
-    //             if( abs(de1.waveform.leadingEdge - de2.waveform.leadingEdge) <= ctime)
-    //                 return true;
-    //         }
-    //     }
         return false;
     }
 

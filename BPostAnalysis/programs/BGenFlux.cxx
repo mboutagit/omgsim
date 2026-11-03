@@ -68,8 +68,8 @@ void SampleModifiedFlux()
         0
     );
 
-    const double angRes = 0.5; // deg
-    const double eneRes = 10; // GeV
+    const double angRes = .5; // deg
+    const double eneRes = 20; // GeV
 
     const int nEnergyBins = (Emax - Emin)/eneRes;
     const int nThetaBins = (thetaMax - thetaMin)/angRes;
@@ -198,15 +198,15 @@ void SampleModifiedFlux()
     // ---- Main heatmap ----
     p1->cd();
 
-    h2->GetXaxis()->SetTitle("Muon energy log10(E) [GeV]");
-    h2->GetYaxis()->SetTitle("Zenith angle #theta [degrees]");
+    h2->GetXaxis()->SetTitle("Log10(E) [GeV]");
+    h2->GetYaxis()->SetTitle("#theta [deg]");
     h2->GetXaxis()->SetTitleSize(0.045);
     h2->GetYaxis()->SetTitleSize(0.045);
     h2->GetXaxis()->SetLabelSize(0.035);
     h2->GetYaxis()->SetLabelSize(0.035);
     h2->SetTitle("Sampled muon distribution");
-
-    h2->Draw("COLZ");
+    h2->Draw("CONT4Z");
+    h2->SetContour(90);
 
     // ---- Angular projection ----
     p2->cd();
@@ -215,7 +215,7 @@ void SampleModifiedFlux()
     hTheta->SetLineColor(kBlue + 2);
     hTheta->SetLineWidth(2);
 
-    hTheta->GetXaxis()->SetTitle("Zenith angle [degrees]");
+    hTheta->GetXaxis()->SetTitle("#theta [deg]");
     hTheta->GetYaxis()->SetTitle("Sample count");
     hTheta->GetXaxis()->SetTitleSize(0.045);
     hTheta->GetYaxis()->SetTitleSize(0.045);
@@ -223,7 +223,7 @@ void SampleModifiedFlux()
     hTheta->GetYaxis()->SetLabelSize(0.035);
 
     // Horizontal bars: count on x-axis, angle on y-axis.
-    hTheta->Draw("BAR");
+    hTheta->Draw("HIST");
 
     // ---- Energy projection ----
     p3->cd();
@@ -232,7 +232,7 @@ void SampleModifiedFlux()
     hEnergy->SetLineColor(kBlue + 2);
     hEnergy->SetLineWidth(2);
 
-    hEnergy->GetXaxis()->SetTitle("Muon energy log10(E) [GeV]");
+    hEnergy->GetXaxis()->SetTitle("Log10(E) [GeV]");
     hEnergy->GetYaxis()->SetTitle("Sample count");
     hEnergy->GetXaxis()->SetTitleSize(0.065);
     hEnergy->GetYaxis()->SetTitleSize(0.065);
@@ -243,17 +243,24 @@ void SampleModifiedFlux()
 
     // ---- Information panel ----
     p4->cd();
+    p4->SetFillColorAlpha(4, 0.1);
+    // p4->SetFillStyle(3004);
 
     TLatex text;
     text.SetNDC();
     text.SetTextSize(0.075);
-
+    text.SetTextColor(kBlue);
     text.DrawLatex(0.08, 0.85, "Modified muon flux");
-    text.DrawLatex(0.08, 0.68, Form("Samples: %d", N));
-    text.DrawLatex(0.08, 0.52, Form("E: %.0f - %.0f GeV", Emin, Emax));
-    text.DrawLatex(0.08, 0.36, "#theta: 0 - 90 degrees");
-    text.DrawLatex(0.08, 0.20, "Horizontal detector");
-    text.DrawLatex(0.08, 0.08, "#Phi(E,#theta) sin#theta cos#theta");
+
+    TLatex text2;
+    text2.SetTextSize(0.065);
+    text2.SetTextColor(kBlue);
+    text2.DrawLatex(0.08, 0.75, Form("Samples: %d", N));
+    text2.DrawLatex(0.08, 0.65, Form("E: %.0f - %.0f GeV", Emin, Emax));
+    text2.DrawLatex(0.08, 0.55, "#theta: 0 - 90 degrees");
+    text2.DrawLatex(0.08, 0.45, Form("Ang. bins: %.2f deg/bin", angRes));
+    text2.DrawLatex(0.08, 0.35, Form("Energy bins: %.2f GeV/bin", eneRes));
+    text2.DrawLatex(0.08, 0.25, "#Phi(E,#theta) sin#theta cos#theta");
 
     // --------------------------------------------------------
     // 5. Save the output.
@@ -276,7 +283,8 @@ void SampleModifiedFlux()
 
 int main(int argc, char* argv[]){
 
-    gStyle->SetPalette(53);
+    gStyle->SetPalette(kBird);
+    // TColor::InvertPalette();
     
     TApplication app("ROOTApp", &argc, argv);
 

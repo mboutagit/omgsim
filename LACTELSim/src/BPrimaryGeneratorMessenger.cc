@@ -87,15 +87,15 @@ namespace lactel
             int thetype=genType_cmd->GetNewIntValue(value);
 
             if(thetype == 3){ // for muons sim
-                std::cout << "\r\033[10C" << "\033[1;35mInfo: BPrimaryGeneratorMessenger, muons mode.\033[0m" << std::endl;
+                BLOG_INFO("Muons mode.");
                 BPGA->initMuons ();
             }
             else if(thetype == 4){ // for dark box tests
-                std::cout << "\r\033[10C" << "\033[1;35mInfo: BPrimaryGeneratorMessenger, test mode.\033[0m" << std::endl;
+                BLOG_INFO("Test mode.");
                 BPGA->initTest (); 
             }
             else{ // for KM3 modes
-                std::cout << "\r\033[10C" << "\033[1;35mInfo: BPrimaryGeneratorMessenger, mode not supported. Please switch to KM3RunMessenger modes. \nExiting ...\033[0m" << std::endl;
+                BLOG_INFO("Mode not supported. Please switch to KM3RunMessenger modes");
                 exit(-1);
             }
         } 

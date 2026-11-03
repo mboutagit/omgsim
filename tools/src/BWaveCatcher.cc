@@ -53,50 +53,9 @@ namespace tools
 
     void BWaveCatcher::signalHandler(int signum) {
         std::cout << "\nCtrl-C pressed. Stopping...\n";
-        // isRunning = false;
     }
 
     bool BWaveCatcher::startAcquisition() {}
-    //     acquiring_ = true;
-        
-    //     if (isRunning) { // avoid multiple starts
-    //         std::cout << "\r\033[10C" << "Already acquiring ..." << std::endl;
-    //         return true;
-    //     }
-    //     isRunning = true;
-
-    //     acquisitionThread = std::thread([this]() {
-    //         size_t sampleIndex = 0;
-    //         double period = 1.0 / (config_.samplingFrequency*1e9);
-            
-    //         while (true)
-    //         {
-    //             std::cout << "\r\033[10C" << "acquiring ...: sample Index: " << sampleIndex << std::endl;
-    //                             // simulate one ADC sample
-
-    //             // circular buffer
-
-    //             for(int c = 0; c < config_.NumChannels; c++){
-    //                 sampleIndex = (sampleIndex + 1) % config_.recordLength;
-    //                 double signal = 2048 + 1000 * std::cos(2.* 3.14159 * sampleIndex / config_.recordLength);
-    //                 double noise = noiseDist_(rng_) % 100;
-
-                    
-    //                 scope[c]->SetPoint(sampleIndex, sampleIndex*config_.samplingFrequency, signal+noise);
-    //                 if(sampleIndex == config_.recordLength -1){
-    //                     std::cout << "\r\033[50C" << "Update" << std::endl;
-    //                     scope[c]->Draw("APL");
-    //                     canvas->Draw();
-    //                     canvas->Modified();
-    //                     canvas->Update();
-    //                 }
-    //             }      
-    //             // wait for next sample
-    //             std::this_thread::sleep_for(std::chrono::duration<double>(period));
-    //         }   
-    //     });
-    //     return true;
-    // }
 
     void BWaveCatcher::print(std::ostream& out) const {
         out << string(10, '-') << " WaveCatcher: " << name << " " << string(10, '-');
@@ -113,18 +72,6 @@ namespace tools
     }
 
     bool BWaveCatcher::stopAcquisition() {}
-    //     acquiring_ = false;
-
-    //     if (!isRunning) {
-    //         std::cout << "\r\033[10C" << "Already Stopped ..." << std::endl;
-    //         return true;
-    //     }
-    //     isRunning = false;
-    //     if (acquisitionThread.joinable())
-    //         acquisitionThread.join();
-
-    //     return true;
-    // }
 
     bool BWaveCatcher::isAcquiring() const {
         return acquiring_;
@@ -226,79 +173,10 @@ namespace tools
         return gr;
      }
 
-    // std::vector<ADC_record> BWaveCatcher::digitizeEvent(int channel, BAnalysisManager::DetectedEvent& event){
-    //     std::vector<ADC_record> adcs;
-    //     if(! event.hits.size())
-    //         return adcs;
-
-    //     OM om = inputOMs[channel];
-    //     if(! om){
-    //         std::cout << "\r\033[20C" << "\033[1;31mError: " + name + ",  Invalid channel input ..\033[0m" 
-    //                                             << om.getOMID() 
-    //                                             << " -- " << om.isOK
-    //                                             << " -- " << ! om
-    //                                             << std::endl;
-    //         return adcs;
-    //     }
-    //     double dt = 1. / (config_.samplingFrequency); // ns per sample
-    //     double t_r = 4;
-    //     double t_f = 11;
-    //     double tau_r = t_r/2.2; // rise time  ns
-    //     double tau_f = t_f/2.2; // fall time ns
-    //     double pmt_gain = 5e7;
-    //     double electron_charge = 1.602e-19; // in Coulomb
-    //     double R = 50; // in Ohm
-    //     double one_pe_charge = pmt_gain * electron_charge; // in C
-    //     // double I_peak = one_pe_charge/((tau_f - tau_r)*1e-9) ; // charge in C and time in s => A 
-    //     // double t_peak=tau_r*tau_f/(tau_f-tau_r)*TMath::ln(tau_f/tau_r);
-    //     double I_0 = (one_pe_charge/((tau_f - tau_r)*1e-9));
-    //     // double I_peak = I_0*(1-exp())
-    //     double I_peak = (one_pe_charge/(tau_f*1e-9)) * pow((tau_r/tau_f), (tau_r/(tau_f-tau_r))); // A
-    //     double lsb = config_.inputDynamicRange / (pow(2, config_.resolution) - 1); // in Volts
-    //     std::normal_distribution<> pedDist_(0, 0.30*I_peak/lsb); 
-    //     double t_jutter = 0.;
-    
-    //     for(auto& hit : event.hits){
-    //         if(hit.om_id != channel+1) // om id comes from copynumber in geant4 and channel is 0 or 1 while copy number starts from 1
-    //             continue;
-    //         ADC_record adc;
-    //         adc.samples.resize(config_.recordLength);
-    //         adc.channel = channel; // set channel
-
-    //         double I_peak_stat = I_peak*(1 + AmpDist_(rng_)) ;
-    //         hit.a = I_peak * R * 1e3; // mV
-    //         hit.a_f = I_peak_stat * R * 1e3; // mV
-
-    //         double sigma_tts = TTSDist_(rng_)/2.355; // FWHM /2*sqrt(2*ln(2))
-    //         std::normal_distribution<> TTSFDist_(t_jutter, sigma_tts*sigma_tts);  // sample from TTS FWHM dist. with time jutter
-    //         hit.t_tts = hit.time + TTSFDist_(rng_); // hit time + tts in ns
-    //         double t=0; // time in nsx
-    //         for (size_t i = 0; i < config_.recordLength; ++i) {
-    //             t = i * dt;
-    //             double ped=pedDist_(rng_);
-                
-    //             if (t < hit.t_tts){
-    //                 adc.samples[i] = ped; // + noiseDist_(rng_); // set to 0 and always add basline noise;
-    //                continue; 
-    //             } 
-                
-    //             double i_t = - I_peak_stat* (1 - exp(-(t - hit.t_tts)/tau_r)) * exp(-(t - hit.t_tts) / tau_f); // i(t) = I*(1 - exp(..))*exp(..) model hit i pulse shape // current
-    //             double v_t = R * i_t; // + analog noise // u(t)=Ri(t) in V 
-    //             double pre_count = v_t/lsb + ped; // + ped;
-    //             double count = std::clamp(std::round(pre_count),  - pow(2, config_.resolution-1), pow(2, config_.resolution-1) -1); // + noiseDist_(rng_); // mV
-
-    //             adc.samples[i] = count;    
-    //             adc.timestamp=hit.time;            
-    //         }
-    //         adcs.push_back(adc);
-    //     }
-    //     return adcs;
-    // }
-
     void BWaveCatcher::digitizeEvent(BAnalysisManager::DetectedEvent& event){
 
         if(! isActive()){
-            BLogger::getInstance()->log(BLogger::Level::WARNING, "WaveCatcher " + name + " is not active!");
+            BLOG_WARNING(Form("WaveCatcher %s is not active!", name.c_str()));
             return;
         }
             
@@ -365,7 +243,7 @@ namespace tools
         std::vector<ADC_record> adcs;
 
         if(! isActive())
-            BLogger::getInstance()->log(BLogger::Level::WARNING, "WaveCatcher " + name + " is not active!");
+            BLOG_WARNING(Form("WaveCatcher %s is not active!", name.c_str()));
 
         if(! event.hits.size())
             return adcs;
@@ -374,11 +252,7 @@ namespace tools
         // om.dump();
         OM::OMProperties omp = om.properties; 
         if(! om){
-            std::cout << "\r\033[20C" << "\033[1;31mError: " + name + ",  Invalid channel input ..\033[0m" 
-                                                << om.getOMID() 
-                                                << " -- " << om.isOK
-                                                << " -- " << ! om
-                                                << std::endl;
+            BLOG_ERROR(Form("Invalid channel input %s", om.getOMID().c_str()));
             return adcs;
         }
         double dt = 1. / (config_.samplingFrequency); // ns per sample
@@ -525,21 +399,6 @@ namespace tools
             }    
         }
 
-        // int itr=0;
-        // for(auto& sample : waveform.samples){
-        //     sample += pedDist_(rng_); // adding basline noise to the waveform
-        //     if(sample <= config_.triggerThresholds[channel] && ! triggered){
-        //         triggered = true;
-        //         waveform.triggered = true;
-        //         waveform.timestamp = itr*dt; // timestamp when the trigger is fired
-        //     }
-        //     itr++;
-        // }
-
-        // // return only triggered waveform.
-        // if(triggered){
-        //     waveforms[channel].push_back(waveform);
-
         if(checkTrigger(waveform, channel))
             return waveform;
         else 
@@ -563,57 +422,10 @@ namespace tools
                 }
             }
             else 
-                BLogger::getInstance()->log(BLogger::Level::ERROR, "Error in trigger Edge");
+                BLOG_ERROR("Error in trigger Edge");
         }
         return false;
     }
-
-
-
-    // Waveform BWaveCatcher::digitizeEvent(int c, BAnalysis::DetectedEvent event){
-    //     std::cout << "\r\033[10C" << "---->>>> Call Degitizer " << std::endl; 
-    //     Waveform wf;
-
-    //     if(!config_.channelEnabled[c] || ! event.hits.size()){
-    //         std::cout << "\r\033[10C" << "Could not digitize: channel "
-    //                                     << c 
-    //                                     << " is disabled." 
-    //                                     << " - status: "
-    //                                     << config_.channelEnabled[c]
-    //                                     << std::endl;
-    //         return wf;
-    //     }
-    //     int i=0;
-    //     double tmin =0, tmax=1/(config_.samplingFrequency*1e9); // sampling frequency in GS/s 3.2 GS/s
-
-    //     int ihit=0;
-    //     while(ihit < event.hits.size()){
-
-            
-    //         ihit++;
-    //     }
-
-
-
-        // while(){ 
-        //     for(auto& hit : event.hits){
-        //         if(hit.time < tmax && hit.time > tmin)
-        //             std::cout << "\r\033[10C" << "event" << std::endl;
-        //             // wf.samples[i] = hit.charge;
-        //         // std::cout << "\r\033[55C" << "event dd: " << hit.time*1e9 << std::endl;
-        //     }
-        //     std::cout << "\r\033[10C" << "slice: " << i 
-        //                                 << " - tmin: " << tmin
-        //                                 << " - tmax: " << tmax 
-        //                                 << std::endl; //wf.samples[i] << std::endl;
-        //     tmin+= 1/(config_.samplingFrequency*1e9);
-        //     tmax+= 1/(config_.samplingFrequency*1e9);
-        // }
-        
-    //     std::cout << "\r\033[10C" << "----<<<< Call Degitizer " << std::endl;
-    //     return wf;
-    // }
-
 } // namespace tools
 
 

@@ -48,7 +48,7 @@ int main(int argc, char* argv[]){
     TTree* genTree = (TTree*)file->Get("Gen");
     TTree* detEvtTree = (TTree*)file->Get("physicsEvent");
 
-    float radius = 5; // in meters    
+    float radius = 4.83; // in meters    
     float gen_surface_m2  = TMath::Pi() * radius*radius; // pi*R² disk
     float gen_surface_cm2 = gen_surface_m2 * 1e4;
  
@@ -117,7 +117,7 @@ int main(int argc, char* argv[]){
     c->cd(4);
     genTree->Draw("fGenTheta");
     c->cd(5);
-    genTree->Draw("fGenTheta:fGenEnergy", "", "colz1");
+    genTree->Draw("fGenTheta:log10(fGenEnergy)", "", "colz1");
 
 
     cout << "Info: Waiting for user action! ..." << endl;

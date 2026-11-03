@@ -121,6 +121,7 @@ namespace lactel
         wc1->plugOM(1, om2);
         wc1->setTriggerThreshold(thr);
         wc1->getConfiguration().setInputDynamicRange(6);
+        wc1->setTriggerEdge(BWaveCatcherConf::TriggerEdge::Falling);
         wc1->print();
 
         TH1F* npe_om1 = new TH1F("npe_om1", 
@@ -235,12 +236,13 @@ namespace lactel
             //     continue;
 
             // std::cout << "\r\033[10C" << "ymina0: " << ymin_a0 << "  -- ymina1: " << ymin_a1 << std::endl;
-            if(abs(ymin_a0/1e3) >= abs(thr)){
+
+            if(ymin_a0 <= thr){
                 amp_om1->Fill(abs(ymin_a0)/1e3, 1/exposure_time);
                 // std::cout << "\r\033[10C" << "amp ch0: " << abs(ymin_a0)/1e3 << " - nEntries: " << totA0.GetN() << std::endl;
             }
                 
-            if(abs(ymin_a1/1e3) >= abs(thr)){
+            if(ymin_a1 <= thr){
                 amp_om2->Fill(abs(ymin_a1)/1e3, 1/exposure_time);
                 // std::cout << "\r\033[10C" << "amp ch1: " << abs(ymin_a1)/1e3 <<" - nEntries: " << totA0.GetN() << std::endl;
             }
@@ -534,7 +536,7 @@ namespace lactel
         float unitsPerBin = BPostAnalysis::mVperBin/1e3; // V to mV
         const int nbins= (int)((xmax - xmin)/unitsPerBin);
 
-        float attenuator=.5;
+        float attenuator=0.5;
         std::string prefix="data_";
 
         std::vector<std::string> data ={"Amplitude", "NPE"};

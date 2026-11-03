@@ -110,13 +110,11 @@ public:
 
     void BuildGrid(int nx, int ny, int nz) {
         if(nx*ny*nz > fObjects.size()){
-            BLogger::getInstance()->log(BLogger::Level::WARNING, 
-                "required grid size is higher than the current objects number. Building anyway!");
+            BLOG_WARNING("required grid size is higher than the current objects number. Building anyway!");
         }
         
         if(nx*ny*nz < fObjects.size()){
-            BLogger::getInstance()->log(BLogger::Level::WARNING, 
-                "required grid size is lower than the current objects number. Building anyway!");
+            BLOG_WARNING("required grid size is lower than the current objects number. Building anyway!");
         }
 
         int ii = 0;
