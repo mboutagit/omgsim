@@ -1,0 +1,32 @@
+<map id="LACTELSim/src/BDigitizerModule.cc" name="LACTELSim/src/BDigitizerModule.cc">
+<area shape="rect" id="Node000001" title=" " alt="" coords="574,5,761,45"/>
+<area shape="rect" id="Node000002" href="$BDigitizerModule_8hh.html" title=" " alt="" coords="321,93,475,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="604,48,451,92,450,87,602,43"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="596,93,739,119"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="670,46,670,79,665,79,665,46"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="763,93,921,119"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="710,43,805,85,803,90,708,48"/>
+<area shape="rect" id="Node000011" href="$BHit_8hh.html" title=" " alt="" coords="569,167,640,192"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="633,47,607,68,587,94,583,109,584,124,594,154,589,155,579,125,578,108,582,92,603,64,630,43"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="945,93,1080,119"/>
+<area shape="poly" id="edge16_Node000001_Node000014" title=" " alt="" coords="751,43,949,88,948,93,749,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="188,167,360,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="379,121,307,162,305,157,377,116"/>
+<area shape="rect" id="Node000004" href="$BDigi_8hh.html" title=" " alt="" coords="435,167,513,192"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="412,117,453,155,450,159,408,121"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="313,240,403,265"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="397,120,367,227,362,226,392,118"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="5,167,164,192"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="348,121,149,166,148,161,347,116"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="427,240,521,265"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="477,192,477,226,471,226,471,192"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="546,240,663,265"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="496,190,573,231,570,236,494,194"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="457,194,390,235,387,230,454,190"/>
+<area shape="poly" id="edge14_Node000011_Node000006" title=" " alt="" coords="607,192,607,226,602,226,602,192"/>
+<area shape="poly" id="edge15_Node000011_Node000007" title=" " alt="" coords="570,193,411,239,410,234,569,188"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="850,240,938,265"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="641,187,837,235,836,240,640,192"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="688,240,825,265"/>
+<area shape="poly" id="edge13_Node000011_Node000013" title=" " alt="" coords="630,190,721,232,719,237,628,194"/>
+</map>

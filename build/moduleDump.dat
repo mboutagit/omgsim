@@ -1,0 +1,414 @@
+
+Volume_2:{
+	Name =  IdealWaterVolume_2;
+	ID   = 2;
+	X      = -2500.000000;
+	Y      = 0.000000;
+	Z      = -1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_2:{
+	Name = "AntaresOM";
+	ID   = 2;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_2;
+};
+
+Volume_4:{
+	Name =  IdealWaterVolume_4;
+	ID   = 4;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = -1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_4:{
+	Name = "AntaresOM";
+	ID   = 4;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_4;
+};
+
+Volume_6:{
+	Name =  IdealWaterVolume_6;
+	ID   = 6;
+	X      = 2500.000000;
+	Y      = 0.000000;
+	Z      = -1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_6:{
+	Name = "AntaresOM";
+	ID   = 6;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_6;
+};
+
+Volume_8:{
+	Name =  IdealWaterVolume_8;
+	ID   = 8;
+	X      = -2500.000000;
+	Y      = 0.000000;
+	Z      = -1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_8:{
+	Name = "AntaresOM";
+	ID   = 8;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_8;
+};
+
+Volume_10:{
+	Name =  IdealWaterVolume_10;
+	ID   = 10;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = -1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_10:{
+	Name = "AntaresOM";
+	ID   = 10;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_10;
+};
+
+Volume_12:{
+	Name =  IdealWaterVolume_12;
+	ID   = 12;
+	X      = 2500.000000;
+	Y      = 0.000000;
+	Z      = -1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_12:{
+	Name = "AntaresOM";
+	ID   = 12;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_12;
+};
+
+Volume_14:{
+	Name =  IdealWaterVolume_14;
+	ID   = 14;
+	X      = -2500.000000;
+	Y      = 0.000000;
+	Z      = -1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_14:{
+	Name = "AntaresOM";
+	ID   = 14;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_14;
+};
+
+Volume_16:{
+	Name =  IdealWaterVolume_16;
+	ID   = 16;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = -1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_16:{
+	Name = "AntaresOM";
+	ID   = 16;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_16;
+};
+
+Volume_18:{
+	Name =  IdealWaterVolume_18;
+	ID   = 18;
+	X      = 2500.000000;
+	Y      = 0.000000;
+	Z      = -1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_18:{
+	Name = "AntaresOM";
+	ID   = 18;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_18;
+};
+
+Volume_20:{
+	Name =  IdealWaterVolume_20;
+	ID   = 20;
+	X      = -2500.000000;
+	Y      = 0.000000;
+	Z      = 1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_20:{
+	Name = "AntaresOM";
+	ID   = 20;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_20;
+};
+
+Volume_22:{
+	Name =  IdealWaterVolume_22;
+	ID   = 22;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_22:{
+	Name = "AntaresOM";
+	ID   = 22;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_22;
+};
+
+Volume_24:{
+	Name =  IdealWaterVolume_24;
+	ID   = 24;
+	X      = 2500.000000;
+	Y      = 0.000000;
+	Z      = 1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_24:{
+	Name = "AntaresOM";
+	ID   = 24;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_24;
+};
+
+Volume_26:{
+	Name =  IdealWaterVolume_26;
+	ID   = 26;
+	X      = -2500.000000;
+	Y      = 0.000000;
+	Z      = 1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_26:{
+	Name = "AntaresOM";
+	ID   = 26;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_26;
+};
+
+Volume_28:{
+	Name =  IdealWaterVolume_28;
+	ID   = 28;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_28:{
+	Name = "AntaresOM";
+	ID   = 28;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_28;
+};
+
+Volume_30:{
+	Name =  IdealWaterVolume_30;
+	ID   = 30;
+	X      = 2500.000000;
+	Y      = 0.000000;
+	Z      = 1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_30:{
+	Name = "AntaresOM";
+	ID   = 30;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_30;
+};
+
+Volume_32:{
+	Name =  IdealWaterVolume_32;
+	ID   = 32;
+	X      = -2500.000000;
+	Y      = 0.000000;
+	Z      = 1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_32:{
+	Name = "AntaresOM";
+	ID   = 32;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_32;
+};
+
+Volume_34:{
+	Name =  IdealWaterVolume_34;
+	ID   = 34;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_34:{
+	Name = "AntaresOM";
+	ID   = 34;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_34;
+};
+
+Volume_36:{
+	Name =  IdealWaterVolume_36;
+	ID   = 36;
+	X      = 2500.000000;
+	Y      = 0.000000;
+	Z      = 1250.000000; # in mm
+	Theta  = 0; #3.14;
+	Phi    = 0.;
+	MotherVolume= LactelWaterTank;
+};
+
+OM_36:{
+	Name = "AntaresOM";
+	ID   = 36;
+	om_id = OMSXXXX;
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.; #3.14;
+	Phi    = 0.;
+	MotherVolume=IdealWaterVolume_36;
+};

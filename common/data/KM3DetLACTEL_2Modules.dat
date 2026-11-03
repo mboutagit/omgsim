@@ -1,0 +1,195 @@
+# Generated using: BLactelDetector::dump function.                 
+# Date: 2026-10-24 12:49:35
+# Detector Name: LACTEL_2Modules
+# Detector ID: 0
+# Number of Modules: 2
+# Description: 
+# 1----------Module: 1 - Name: 
+#----------1----------cell: 1 - Name: IdealWaterVolume - Position: (0,-1250,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0321 - OM pos: (0,0,0)
+#----------2----------cell: 2 - Name: IdealWaterVolume - Position: (0,-1250,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0304 - OM pos: (0,0,0)
+# 2----------Module: 2 - Name: 
+#----------3----------cell: 3 - Name: IdealWaterVolume - Position: (0,1250,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0423 - OM pos: (0,0,0)
+#----------4----------cell: 4 - Name: IdealWaterVolume - Position: (0,1250,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS1060 - OM pos: (0,0,0)
+
+
+# This part is used to construct the detector. Please do not remove it
+Config:
+{
+	 detectorFile = "/home/bouta-mohammed/work/cppm/lactel/trunk/common/data//KM3DetLACTEL_2Modules.dat";
+	 materialFile = "/home/bouta-mohammed/work/cppm/lactel/trunk/common/data//KM3VolLACTEL_2Modules.dat";
+}
+
+
+# Main volume (detector name): LACTEL_2Modules
+Name= "LACTEL_2Modules";
+
+
+VolumeDet0:
+{
+	 Name = "LACTEL_2Modules";
+	 ID = 0
+	 X = 0.000000; # generic size 
+	 Y = 1250.000000;
+	 Z = -2750.000000;
+	 Theta = 0.000000;
+	 Phi = 0.000000;
+}
+
+# Module and Cells
+
+
+VolumeWT1: # Water tank volume
+{
+	Name = "LactelWaterTank1";
+	ID   = 1;
+	X      = 0.000000;
+	Y      = -1250.000000;
+	Z      = 1250.000000; # in mm
+	Module  = 1; #Module number;
+	Layer  = 1; #Layer number;
+	Theta  = 0.00; #3.14;
+	Phi    = 0.00;
+	MotherVolume = "LACTEL_2Modules";
+}
+
+VolumeWInside1: # Water inside the water tank
+{
+	Name = "IdealWaterVolume_1";
+	ID   = 1;
+	X      = 0.00;
+	Y      = 0.00;
+	Z      = 0.00; # in mm
+	Theta  = 0.00; #3.14;
+	Phi    = 0.00;
+	MotherVolume = "LactelWaterTank1";
+}
+
+OM1: # OM inside the water volume
+{
+	Name = "AntaresOM";
+	ID   = 1;
+	om_id = "OMS0321";
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.00; #3.14;
+	Phi    = 0.00;
+	MotherVolume ="IdealWaterVolume_1";
+}
+
+VolumeWT2: # Water tank volume
+{
+	Name = "LactelWaterTank2";
+	ID   = 2;
+	X      = 0.000000;
+	Y      = -1250.000000;
+	Z      = -1250.000000; # in mm
+	Module  = 1; #Module number;
+	Layer  = 2; #Layer number;
+	Theta  = 0.00; #3.14;
+	Phi    = 0.00;
+	MotherVolume = "LACTEL_2Modules";
+}
+
+VolumeWInside2: # Water inside the water tank
+{
+	Name = "IdealWaterVolume_2";
+	ID   = 2;
+	X      = 0.00;
+	Y      = 0.00;
+	Z      = 0.00; # in mm
+	Theta  = 0.00; #3.14;
+	Phi    = 0.00;
+	MotherVolume = "LactelWaterTank2";
+}
+
+OM2: # OM inside the water volume
+{
+	Name = "AntaresOM";
+	ID   = 2;
+	om_id = "OMS0304";
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.00; #3.14;
+	Phi    = 0.00;
+	MotherVolume ="IdealWaterVolume_2";
+}
+
+VolumeWT3: # Water tank volume
+{
+	Name = "LactelWaterTank3";
+	ID   = 3;
+	X      = 0.000000;
+	Y      = 1250.000000;
+	Z      = 1250.000000; # in mm
+	Module  = 2; #Module number;
+	Layer  = 1; #Layer number;
+	Theta  = 0.00; #3.14;
+	Phi    = 0.00;
+	MotherVolume = "LACTEL_2Modules";
+}
+
+VolumeWInside3: # Water inside the water tank
+{
+	Name = "IdealWaterVolume_3";
+	ID   = 3;
+	X      = 0.00;
+	Y      = 0.00;
+	Z      = 0.00; # in mm
+	Theta  = 0.00; #3.14;
+	Phi    = 0.00;
+	MotherVolume = "LactelWaterTank3";
+}
+
+OM3: # OM inside the water volume
+{
+	Name = "AntaresOM";
+	ID   = 3;
+	om_id = "OMS0423";
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.00; #3.14;
+	Phi    = 0.00;
+	MotherVolume ="IdealWaterVolume_3";
+}
+
+VolumeWT4: # Water tank volume
+{
+	Name = "LactelWaterTank4";
+	ID   = 4;
+	X      = 0.000000;
+	Y      = 1250.000000;
+	Z      = -1250.000000; # in mm
+	Module  = 2; #Module number;
+	Layer  = 2; #Layer number;
+	Theta  = 0.00; #3.14;
+	Phi    = 0.00;
+	MotherVolume = "LACTEL_2Modules";
+}
+
+VolumeWInside4: # Water inside the water tank
+{
+	Name = "IdealWaterVolume_4";
+	ID   = 4;
+	X      = 0.00;
+	Y      = 0.00;
+	Z      = 0.00; # in mm
+	Theta  = 0.00; #3.14;
+	Phi    = 0.00;
+	MotherVolume = "LactelWaterTank4";
+}
+
+OM4: # OM inside the water volume
+{
+	Name = "AntaresOM";
+	ID   = 4;
+	om_id = "OMS1060";
+	X      = 0.000000;
+	Y      = 0.000000;
+	Z      = 0.000000; # in mm
+	Theta  = 0.00; #3.14;
+	Phi    = 0.00;
+	MotherVolume ="IdealWaterVolume_4";
+}

@@ -1,0 +1,243 @@
+# Generated using: BLactelDetector::dump function.                 
+# Date: 2026-10-24 12:49:35
+# Detector Name: LACTEL_4Modules
+# Detector ID: 0
+# Number of Modules: 4
+# Description: 
+# 1----------Module: 4 - Name: 
+#----------1----------cell: 7 - Name: IdealWaterVolume - Position: (2500,-2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0648 - OM pos: (0,0,0)
+#----------2----------cell: 8 - Name: IdealWaterVolume - Position: (2500,-2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0366 - OM pos: (0,0,0)
+# 2----------Module: 6 - Name: 
+#----------3----------cell: 11 - Name: IdealWaterVolume - Position: (2500,2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS1044 - OM pos: (0,0,0)
+#----------4----------cell: 12 - Name: IdealWaterVolume - Position: (2500,2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0501 - OM pos: (0,0,0)
+# 3----------Module: 7 - Name: 
+#----------5----------cell: 13 - Name: IdealWaterVolume - Position: (-2500,-2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0358 - OM pos: (0,0,0)
+#----------6----------cell: 14 - Name: IdealWaterVolume - Position: (-2500,-2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0319 - OM pos: (0,0,0)
+# 4----------Module: 9 - Name: 
+#----------7----------cell: 17 - Name: IdealWaterVolume - Position: (-2500,2500,1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0365 - OM pos: (0,0,0)
+#----------8----------cell: 18 - Name: IdealWaterVolume - Position: (-2500,2500,-1250) - Dimensions: (2000,2000,2000) - Assigned OM: OMS0299 - OM pos: (0,0,0)
+
+
+# Main Volume: Detector
+
+LACTEL_4Modules:
+{
+	Name = "LACTEL_4Modules";
+	Prefix = "MainVol";
+	Material = "IdealWater";
+	VolumeKind = "Box";
+	X = 1.0; // Half dim 2X2X2 m 
+	Y = 1.0;
+	Z = 1.0;
+	CheckOverlaps = false;
+}
+# Module and Cells Materials
+
+IdealWaterVolume_7:
+{
+	Name = "IdealWaterVolume_7";
+	Prefix = "IWV";
+	Material = "IdealWater";
+	VolumeKind = "Box";
+	X = 1000; // Half dim 2X2X2 m 
+	Y = 1000;
+	Z = 1000;
+	CheckOverlaps = false;
+}
+LactelWaterTank7:
+{
+	Name= "LactelWaterTank7";
+	Prefix = "LWT1"; # Lactel Weter Tank 
+	Material = "G4_POLYPROPYLENE"; 
+	VolumeKind = "Box"; 
+	X = 1005; 
+	Y = 1005; 
+	Z = 1005; 
+	RotTheta = 0; 
+	RotPhi = 0; 
+	CheckOverlaps = true;
+	SkinMaterial = "LactelWaterTankSurf"; 
+}
+
+IdealWaterVolume_8:
+{
+	Name = "IdealWaterVolume_8";
+	Prefix = "IWV";
+	Material = "IdealWater";
+	VolumeKind = "Box";
+	X = 1000; // Half dim 2X2X2 m 
+	Y = 1000;
+	Z = 1000;
+	CheckOverlaps = false;
+}
+LactelWaterTank8:
+{
+	Name= "LactelWaterTank8";
+	Prefix = "LWT1"; # Lactel Weter Tank 
+	Material = "G4_POLYPROPYLENE"; 
+	VolumeKind = "Box"; 
+	X = 1005; 
+	Y = 1005; 
+	Z = 1005; 
+	RotTheta = 0; 
+	RotPhi = 0; 
+	CheckOverlaps = true;
+	SkinMaterial = "LactelWaterTankSurf"; 
+}
+
+IdealWaterVolume_11:
+{
+	Name = "IdealWaterVolume_11";
+	Prefix = "IWV";
+	Material = "IdealWater";
+	VolumeKind = "Box";
+	X = 1000; // Half dim 2X2X2 m 
+	Y = 1000;
+	Z = 1000;
+	CheckOverlaps = false;
+}
+LactelWaterTank11:
+{
+	Name= "LactelWaterTank11";
+	Prefix = "LWT1"; # Lactel Weter Tank 
+	Material = "G4_POLYPROPYLENE"; 
+	VolumeKind = "Box"; 
+	X = 1005; 
+	Y = 1005; 
+	Z = 1005; 
+	RotTheta = 0; 
+	RotPhi = 0; 
+	CheckOverlaps = true;
+	SkinMaterial = "LactelWaterTankSurf"; 
+}
+
+IdealWaterVolume_12:
+{
+	Name = "IdealWaterVolume_12";
+	Prefix = "IWV";
+	Material = "IdealWater";
+	VolumeKind = "Box";
+	X = 1000; // Half dim 2X2X2 m 
+	Y = 1000;
+	Z = 1000;
+	CheckOverlaps = false;
+}
+LactelWaterTank12:
+{
+	Name= "LactelWaterTank12";
+	Prefix = "LWT1"; # Lactel Weter Tank 
+	Material = "G4_POLYPROPYLENE"; 
+	VolumeKind = "Box"; 
+	X = 1005; 
+	Y = 1005; 
+	Z = 1005; 
+	RotTheta = 0; 
+	RotPhi = 0; 
+	CheckOverlaps = true;
+	SkinMaterial = "LactelWaterTankSurf"; 
+}
+
+IdealWaterVolume_13:
+{
+	Name = "IdealWaterVolume_13";
+	Prefix = "IWV";
+	Material = "IdealWater";
+	VolumeKind = "Box";
+	X = 1000; // Half dim 2X2X2 m 
+	Y = 1000;
+	Z = 1000;
+	CheckOverlaps = false;
+}
+LactelWaterTank13:
+{
+	Name= "LactelWaterTank13";
+	Prefix = "LWT1"; # Lactel Weter Tank 
+	Material = "G4_POLYPROPYLENE"; 
+	VolumeKind = "Box"; 
+	X = 1005; 
+	Y = 1005; 
+	Z = 1005; 
+	RotTheta = 0; 
+	RotPhi = 0; 
+	CheckOverlaps = true;
+	SkinMaterial = "LactelWaterTankSurf"; 
+}
+
+IdealWaterVolume_14:
+{
+	Name = "IdealWaterVolume_14";
+	Prefix = "IWV";
+	Material = "IdealWater";
+	VolumeKind = "Box";
+	X = 1000; // Half dim 2X2X2 m 
+	Y = 1000;
+	Z = 1000;
+	CheckOverlaps = false;
+}
+LactelWaterTank14:
+{
+	Name= "LactelWaterTank14";
+	Prefix = "LWT1"; # Lactel Weter Tank 
+	Material = "G4_POLYPROPYLENE"; 
+	VolumeKind = "Box"; 
+	X = 1005; 
+	Y = 1005; 
+	Z = 1005; 
+	RotTheta = 0; 
+	RotPhi = 0; 
+	CheckOverlaps = true;
+	SkinMaterial = "LactelWaterTankSurf"; 
+}
+
+IdealWaterVolume_17:
+{
+	Name = "IdealWaterVolume_17";
+	Prefix = "IWV";
+	Material = "IdealWater";
+	VolumeKind = "Box";
+	X = 1000; // Half dim 2X2X2 m 
+	Y = 1000;
+	Z = 1000;
+	CheckOverlaps = false;
+}
+LactelWaterTank17:
+{
+	Name= "LactelWaterTank17";
+	Prefix = "LWT1"; # Lactel Weter Tank 
+	Material = "G4_POLYPROPYLENE"; 
+	VolumeKind = "Box"; 
+	X = 1005; 
+	Y = 1005; 
+	Z = 1005; 
+	RotTheta = 0; 
+	RotPhi = 0; 
+	CheckOverlaps = true;
+	SkinMaterial = "LactelWaterTankSurf"; 
+}
+
+IdealWaterVolume_18:
+{
+	Name = "IdealWaterVolume_18";
+	Prefix = "IWV";
+	Material = "IdealWater";
+	VolumeKind = "Box";
+	X = 1000; // Half dim 2X2X2 m 
+	Y = 1000;
+	Z = 1000;
+	CheckOverlaps = false;
+}
+LactelWaterTank18:
+{
+	Name= "LactelWaterTank18";
+	Prefix = "LWT1"; # Lactel Weter Tank 
+	Material = "G4_POLYPROPYLENE"; 
+	VolumeKind = "Box"; 
+	X = 1005; 
+	Y = 1005; 
+	Z = 1005; 
+	RotTheta = 0; 
+	RotPhi = 0; 
+	CheckOverlaps = true;
+	SkinMaterial = "LactelWaterTankSurf"; 
+}
+

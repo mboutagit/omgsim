@@ -1,0 +1,13 @@
+<map id="km3net::KM3ParametrizedVolume" name="km3net::KM3ParametrizedVolume">
+<area shape="rect" id="Node000001" title=" " alt="" coords="383,5,619,1045"/>
+<area shape="rect" id="Node000002" href="$classkm3net_1_1KM3DetectorConstruction.html" title=" " alt="" coords="5,1093,244,2039"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="380,794,317,942,259,1094,247,1131,242,1129,254,1092,312,940,375,792"/>
+<area shape="rect" id="Node000004" href="$classkm3net_1_1KM3OpticalModuleMgr.html" title=" " alt="" coords="268,1463,488,1669"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="440,1059,393,1464,387,1463,435,1059"/>
+<area shape="rect" id="Node000005" href="$classkm3net_1_1KM3PassiveVolumeMgr.html" title="Manage the automatic volume generator, configured in common/data/KM3Vol*.dat, see VolumeParameters." alt="" coords="512,1393,737,1739"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="567,1059,607,1393,602,1394,562,1059"/>
+<area shape="rect" id="Node000006" href="$classkm3net_1_1KM3PhotoTubeMgr.html" title=" " alt="" coords="761,1413,955,1719"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="627,779,693,932,753,1093,799,1257,833,1412,828,1414,794,1258,747,1094,688,934,622,781"/>
+<area shape="rect" id="Node000003" href="$classlactel_1_1BDetectorConstruction.html" title=" " alt="" coords="22,2087,227,2692"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="127,2052,127,2087,122,2087,122,2052"/>
+</map>

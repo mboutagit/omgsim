@@ -1,0 +1,6 @@
+<map id="km3net::KM3PassiveVolumeMgr" name="km3net::KM3PassiveVolumeMgr">
+<area shape="rect" id="Node000001" title="Manage the automatic volume generator, configured in common/data/KM3Vol*.dat, see VolumeParameters." alt="" coords="11,1108,236,1433"/>
+<area shape="rect" id="Node000002" href="$classkm3net_1_1KM3ParametrizedVolume.html" title=" " alt="" coords="5,5,241,1045"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,1059,123,1084,124,1108,118,1108,118,1084,118,1059"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="126,1046,126,1091,121,1091,121,1046"/>
+</map>

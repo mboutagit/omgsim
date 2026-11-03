@@ -1,0 +1,47 @@
+\chapter{Authors}
+\hypertarget{md_README}{}\label{md_README}\index{Authors@{Authors}}
+\label{md_README_autotoc_md0}%
+\Hypertarget{md_README_autotoc_md0}%
+
+\begin{DoxyItemize}
+\item Christophe Hugon -\/ CPPM (CNRS)
+\item Vladimir Kulikovskiy -\/ INFN Genova
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md1}{}\doxysection{\texorpdfstring{Modification}{Modification}}\label{md_README_autotoc_md1}
+
+\begin{DoxyItemize}
+\item Mohammed Bouta -\/ CPPM (CNRS) 
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md2}{}\doxysubsection{\texorpdfstring{Some traces}{Some traces}}\label{md_README_autotoc_md2}
+
+\begin{DoxyItemize}
+\item Modification in KM3\+Primary\+Generator\+Action\+: KM3\+Primary\+Generator\+Action\+::\+Initialize\+Custum\+Muon\+Type()
+\item Modification in KM3\+Detector\+Construction\+::\+Construct()\+: World and target volumes solid. ~\newline
+
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md3}{}\doxysection{\texorpdfstring{Containers and modules}{Containers and modules}}\label{md_README_autotoc_md3}
+Docker and singularity containers are build in in the gitlab and stored in sftp (singularity). On Lyon {\ttfamily omgsim} modules are available
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{module\ load\ omgsim}
+\DoxyCodeLine{OMGsim}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md4}{}\doxysection{\texorpdfstring{Documentation}{Documentation}}\label{md_README_autotoc_md4}
+The online documentation can be accessed here\+: \href{https://simulation.pages.km3net.de/omgsim/html/}{\texttt{ https\+://simulation.\+pages.\+km3net.\+de/omgsim/html/}}.
+
+Locally, the doxygen documentation is provided in the folder {\ttfamily documentation} (including installation guides). It is easier to use it at your local machine.\hypertarget{md_README_autotoc_md5}{}\doxysubsection{\texorpdfstring{Compile with\+:}{Compile with:}}\label{md_README_autotoc_md5}
+\begin{DoxyVerb}cd [your checkout path]/trunk
+doxygen documentation/config.dox
+cd documentation/latex
+make
+\end{DoxyVerb}
+ \hypertarget{md_README_autotoc_md6}{}\doxysubsection{\texorpdfstring{Open (on linux)\+:}{Open (on linux):}}\label{md_README_autotoc_md6}
+\begin{DoxyVerb}firefox documentation/html/index.html
+gnome-open latex/refman.pdf
+\end{DoxyVerb}
+ \hypertarget{md_README_autotoc_md7}{}\doxysubsection{\texorpdfstring{Open (on Mac)\+:}{Open (on Mac):}}\label{md_README_autotoc_md7}
+\begin{DoxyVerb}open documentation/html/index.html 
+open latex/refman.pdf
+\end{DoxyVerb}
+ Note that the Doxygen needs to be installed. On Mac\+OS type\+: \begin{DoxyVerb}brew install doxygen  
+\end{DoxyVerb}
+ 

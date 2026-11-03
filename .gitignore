@@ -1,0 +1,16 @@
+*.root
+*.png
+*.db
+*.log
+*.evt
+*.svg
+*.eps
+*.pdf
+*.blend
+*.pcm
+*.so
+penv
+simOutputs
+results
+.vscode/**
+sim*

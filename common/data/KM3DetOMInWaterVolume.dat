@@ -1,0 +1,29 @@
+Name = "OMInWaterVolume"
+
+
+   Volume1:
+  {
+        Name = "IdealWaterVolume1";
+        ID   = 2;
+        X      = 0;
+        Y      = 0;
+        Z      = -1000; # in mm
+        Theta  = 0; #3.14;
+        Phi    = 0.;
+      #   MotherVolume="LactelWaterTank1";
+  };
+
+
+  OM1:
+  {
+        Name = "AntaresOM";
+        ID   = 1;
+        X      = 0;
+        Y      = 0;
+        Z      = -750; # in mm
+        Theta  = 0.; #3.14;
+        Phi    = 0.;
+        MotherVolume="IdealWaterVolume1";
+   };
+
+

@@ -1,0 +1,7 @@
+<map id="km3net::KM3PMTOpticalModel" name="km3net::KM3PMTOpticalModel">
+<area shape="rect" id="Node000001" title=" " alt="" coords="21,119,273,859"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,124,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,84,82,118,77,119,70,85"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="149,5,311,71"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="224,85,218,119,213,118,219,84"/>
+</map>

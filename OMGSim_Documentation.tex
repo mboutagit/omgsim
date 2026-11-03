@@ -1,0 +1,273 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{pifont}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{multicol}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{amsfonts}
+\usepackage{array} % Optional: for more control over column alignment
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{svg}
+
+
+%\usepackage{siunitx}
+
+%\usepackage[backend=bibtex, sorting=none, style=nature]{biblatex}
+%\addbibresource{refs}
+\usepackage[colorlinks = true,
+linkcolor = blue,
+urlcolor  = blue,
+citecolor = blue,
+anchorcolor = blue]{hyperref}
+
+
+\pagestyle{fancy}
+\fancyhf{} % Clear default header and footer
+\fancyhead[L]{\includegraphics[width=0.05\textwidth]{/home/bouta-mohammed/work/documents/cppm/projetLactel/figures/CPPM_RVB.png}} % Left header
+\fancyhead[C]{} % Center header
+\fancyhead[R]{\textcolor{red}{\textbf{LACTEL}}\textcolor{blue}{escope}} % Right header
+\fancyfoot[C]{\thepage} % Page number in center footer
+
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headsep}{1.4cm}
+
+
+
+\geometry{
+	top=2.5cm,       % Top margin
+	bottom=2cm,  % Bottom margin
+	left=1cm,    % Left margin
+	right=1cm    % Right margin
+}
+
+\setlength{\abovecaptionskip}{5pt}  % Space above the caption
+\setlength{\belowcaptionskip}{10pt}  % Space below the caption
+
+
+%\newcommand{\cmark}{\textcolor{green}{\ding{51}}}  % Green checkmark
+%\newcommand{\xmark}{\textcolor{red}{\ding{55}}}    % Red cross
+
+\newcommand{\bluetext}[1]{\textcolor{blue}{#1}}    % Red cross
+
+%\newcommand{\bbox}[2]{\fbox{\makebox[#1cm][l]{\rule{0cm}{#2cm}}}}
+
+%\newcommand{\bbox}[2][0.5]{\fbox{\makebox[#1cm][l]{\rule{0cm}{#2cm}}}}
+\newcommand{\bbox}[2]{\fbox{\makebox[#1cm][l]{\rule{0cm}{#2cm}}}}
+\newcommand{\checkedbox}[2]{%
+	\fbox{%
+		\makebox[#1cm][l]{%
+			\rule[0cm]{#1cm}{#2cm}%
+			%\hspace*{-#1cm}%
+			%\rule[0.1ex]{0.5cm}{0.1ex}%
+			%	\hspace*{0.5cm}%
+			%	\rule[-0.1cm]{#1cm}{0.1ex}%
+		}%
+	}%
+}
+
+\newcommand{\cmark}{\fbox{\textcolor{green}{\ding{51}}}}  % Green checkmark in a box
+\newcommand{\xmark}{\fbox{\textcolor{red}{\ding{55}}}}    % Red cross in a box
+
+\newcommand{\bvl}{\textcolor{green}{\ding{51}}}  % Green checkmark in a box
+\newcommand{\bnvl}{\textcolor{red}{\ding{55}}}  % Green checkmark in a box
+
+\title{PMT Test Checklist}
+\author{Your Name}
+\date{\today}
+
+\newcommand{\OM}{OMS0108}
+
+\begin{document}
+	
+	\begin{tcolorbox}[colframe=blue, colback=blue!10, sharp corners, width=\textwidth]
+		\centering \textbf{\Large OM Key Test Results} \\
+		\centering \textbf{\scriptsize CPPM site}
+	\end{tcolorbox}
+	\begin{center}
+		\large \textbf{OM: OMS0108}\\
+		\small \today
+	\end{center}
+	
+	\vspace{1cm}
+	
+	This document highlights the results obtained for the OMS0108 at the CPPM site. It is a condensed version of the test report document, \textbf{OMS0108\_TR}, which contains a detailed description of the OM test procedure. This document includes two figures and two tables: the first figure shows the visual characteristics of the OM under consideration, while the second figure presents the measured values for the OM. The first table is for the visual inspection of the OM and the second one for the measurements results.
+	
+	
+	\subsection*{Visual aspect} 
+	Figure \ref{fig:pictures} depicts some of the pictures taken of the OMS0108 during testing. The aim is to document the visual condition of important components of the OM. This is crucial to ensure that the OMs are well-qualified for use in LACTEL. Figure \ref{fig:visual_images} shows:
+	
+	\begin{itemize}
+		\setlength\itemsep{1pt}  % Adjusts space between items
+		% \item Picture \ref{fig:OM} shows the general status of the OM, including the OM's glass sphere and the PMT inside it.
+		% \item Picture \ref{fig:support} shows the OM's support structure.
+		% \item Picture \ref{fig:manometer} shows the OM's manometer and the internal pressure value.
+		% \item Picture \ref{fig:connector} shows the condition of the OM's connector.
+		% \item Picture \ref{fig:OM_ref} shows the OM's penetrator.
+		% \item Picture \ref{fig:omPackage} shows the OM in its packaging box, ready for delivery.
+		<<VISIAL_IMAGES_DESCRIPTION>>
+	\end{itemize}
+	
+	
+	\subsection*{Measured values} 
+	Figure \ref{fig:analysis_images} presents the values obtained for the \OM. Several parameters are shown, including rise time, fall time, and FWHM, as well as waveforms for the internal LED. Charge integration and measured gain are also depicted. These values are essential for confirming and characterizing the OM's response to light sources and for determining its qualification for the LACTEL project.
+	
+	
+	
+	\begin{itemize}
+		\setlength\itemsep{1pt}  % Adjusts space between items
+		% \item Figure \ref{fig:timeChar} shows the OM's measured time characteristics along with the limits previously set by ANTARES. 
+		% \item Figure \ref{fig:ledSig} displays the OM's typical response to the internal LED at different high voltage values, demonstrating the proper operation of the LED.
+		% \item Figure \ref{fig:charIntFit1650} presents the OM charge integration for a high voltage of 1650 V. 
+		% \item Figure \ref{fig:charIntFit1850} presents the OM charge integration for a high voltage of 1850 V. 
+		% \item Figure \ref{fig:spePlot} shows the OM's single photoelectron spectrum across all HV values. 
+		% \item Figure \ref{fig:gainPlot} illustrates the OM gain versus HV, with the fit function: $exp(p_1 + p_2 x)$, where $p_1 = -0.93$ and $p_2 = 0.01$.
+		<<ANALYSIS_IMAGES_DESCRIPTION>>
+	\end{itemize}
+	
+	% visual images
+	\newpage
+	\begin{figure}[h]
+		\begin{subfigure}{0.49\textwidth} 
+			\includegraphics[height=6cm, width=\textwidth]{/var/www/lactel/storage/app/public/om_images/yO5I4jnHgopPyMVpgQ269M94jy9r7Xw3vTGHssiV.jpg} 
+			\caption{null}
+			\label{fig:connector}
+		\end{subfigure}
+		\begin{subfigure}{0.49\textwidth} 
+			\includegraphics[height=6cm, width=\textwidth]{/var/www/lactel/storage/app/public/om_images/W9be3vYVIGJpTqfhmOhPBGlwixTIj2CqkBS8p4fA.jpg} 
+			\caption{null}
+			\label{fig:manometer}
+		\end{subfigure}
+		\begin{subfigure}{0.49\textwidth} 
+			\includegraphics[height=6cm, width=\textwidth]{/var/www/lactel/storage/app/public/om_images/sIrw9bYM61eTuHncYGKqDYC8v7iNUom8nVxonTvj.jpg} 
+			\caption{}
+			\label{fig:Penetrator}
+		\end{subfigure}
+		\begin{subfigure}{0.49\textwidth} 
+			\includegraphics[height=6cm, width=\textwidth]{/var/www/lactel/storage/app/public/om_images/NJQRirnoY81otcEqt7k2X9NdthPJU1QpNWIqf88F.jpg} 
+			\caption{Picture taken to the OM PMT}
+			\label{fig:pmt}
+		\end{subfigure}
+		\begin{subfigure}{0.49\textwidth} 
+			\includegraphics[height=6cm, width=\textwidth]{/var/www/lactel/storage/app/public/om_images/Cfup5WWzuwqBseVH3GyxqXPDAsY48y7gfuYSH0tk.jpg} 
+			\caption{OM in the shipping box}
+			\label{fig:ship_box}
+		\end{subfigure}
+		\begin{subfigure}{0.49\textwidth} 
+			\includegraphics[height=6cm, width=\textwidth]{/var/www/lactel/storage/app/public/om_images/JLczBuxyH38PtWXjNNf6Lic9LphiRyQz79Jim3iS.jpg} 
+			\caption{null}
+			\label{fig:support_structure}
+		\end{subfigure}
+		
+		\caption{Visual images for OMS0108}
+		\label{fig:visual_images}
+	\end{figure}
+	
+	% Analysis images
+	\newpage
+	\begin{figure}[h]
+		\begin{subfigure}{0.49\textwidth} 
+			\includegraphics[height=6cm, width=\textwidth]{/var/www/lactel/storage/app/public/om_images/zSCPiVBiH4lcKgY5Ww799tVu6dU503DCSRjbBGRE.png} 
+			\caption{Charge Integration for all the test high voltage value for OMS0302.}
+			\label{fig:charInt_all_plot}
+		\end{subfigure}
+		\begin{subfigure}{0.49\textwidth} 
+			\includegraphics[height=6cm, width=\textwidth]{/var/www/lactel/storage/app/public/om_images/49sO8DPy6n33i9KjC4OdKXJ4X7AlHTEWIf7sg5KM.png} 
+			\caption{Charge Integtration for the highest high voltage value for OMS0302.}
+			\label{fig:charInt_hhv_plot}
+		\end{subfigure}
+		\begin{subfigure}{0.49\textwidth} 
+			\includegraphics[height=6cm, width=\textwidth]{/var/www/lactel/storage/app/public/om_images/7QszqsDmVCPqWGvY6uANAMst26r1pKNVMFgrpVal.png} 
+			\caption{Charge Integration for the lowest high voltage value for OMS0302.}
+			\label{fig:charInt_lhv_plot}
+		\end{subfigure}
+		\begin{subfigure}{0.49\textwidth} 
+			\includegraphics[height=6cm, width=\textwidth]{/var/www/lactel/storage/app/public/om_images/koyoY9YAqiHQNFwpNdTDU7E0owg85zSRyhXYOQ6D.png} 
+			\caption{Gain versus high voltage for OMS0108. The plot shows also exponential fit as well as the fit parameters. The high voltage for the nominal gain is also shown.}
+			\label{fig:gain_plot}
+		\end{subfigure}
+		\begin{subfigure}{0.49\textwidth} 
+			\includegraphics[height=6cm, width=\textwidth]{/var/www/lactel/storage/app/public/om_images/xj5OBWd1dMYniOausVyBPxzdCwjBnb6prPRXaHZj.png} 
+			\caption{Time characteristics for OMS0108. All the computed values are within the required limit set by ANTARES.}
+			\label{fig:times_plot}
+		\end{subfigure}
+		\begin{subfigure}{0.49\textwidth} 
+			\includegraphics[height=6cm, width=\textwidth]{/var/www/lactel/storage/app/public/om_images/hX3csgx7gFPXjVRGbfvlolyJgAhzMGgvbbA1BoBu.png} 
+			\caption{Plot showing random waveform for each high voltage value. This waveform were taken using laser light source.}
+			\label{fig:waveform_laser_plot}
+		\end{subfigure}
+		
+		\caption{Analysis images for OMS0108}
+		\label{fig:analysis_images}
+	\end{figure}
+	
+	
+	
+	\newpage
+	\clearpage
+	
+	\begin{table}[H]
+		\centering
+		\small
+		\begin{tabularx}{\textwidth}{l|c|c|>{\centering\arraybackslash}X}
+			\toprule
+			\rowcolor{green!20}
+			\textbf{Component} & \textbf{Checked} & \textbf{Check OK?} & \textbf{Notes} \\
+			\midrule
+			\vspace{1pt}	
+			Glass Sphere & \bvl \checkedbox{0.2}{0.2} \quad \bnvl \bbox{0.2}{0.2} &  \checkedbox{0.2}{0.2} & \makebox[0.40\textwidth][l]{\dotfill} \\	
+			\vspace{1pt}	
+			PMT & \bvl \checkedbox{0.2}{0.2} \quad \bnvl \bbox{0.2}{0.2} &  \checkedbox{0.2}{0.2} & \makebox[0.40\textwidth][l]{\dotfill} \\
+			\vspace{1pt}		
+			Glass $\mu$-metal cage &\bvl \checkedbox{0.2}{0.2} \quad \bnvl \bbox{0.2}{0.2} &  \checkedbox{0.2}{0.2} &\makebox[0.40\textwidth][l]{\dotfill} \\
+			\vspace{1pt}
+			Manometer & \bvl \checkedbox{0.2}{0.2} \quad \bnvl \bbox{0.2}{0.2} &  \checkedbox{0.2}{0.2} & \makebox[0.40\textwidth][l]{\dotfill} \\
+			\vspace{1pt}
+			Cable & \bvl \checkedbox{0.2}{0.2} \quad \bnvl \bbox{0.2}{0.2} &  \checkedbox{0.2}{0.2} & \makebox[0.40\textwidth][l]{\dotfill} \\
+			\vspace{1pt}
+			Connectors & \bvl \checkedbox{0.2}{0.2} \quad \bnvl \bbox{0.2}{0.2} &  \checkedbox{0.2}{0.2} & \makebox[0.40\textwidth][l]{\dotfill} \\
+			\vspace{1pt}
+			Support Structure & \bvl \checkedbox{0.2}{0.2} \quad \bnvl \bbox{0.2}{0.2} &  \checkedbox{0.2}{0.2} & \makebox[0.40\textwidth][l]{\dotfill} \\
+			
+			\bottomrule
+			
+			\midrule
+			Internal LED & \bvl \checkedbox{0.2}{0.2} \quad \bnvl \bbox{0.2}{0.2} &  \checkedbox{0.2}{0.2} & Waveforms are taken with led light \\
+			\bottomrule
+		\end{tabularx}
+		\caption{Visual Inspection Checklist. Each component is checked carefully before checking the corresponding box. This table contribute significantly to the OM qualification.}
+		\label{tab:OMCheck}
+	\end{table}
+	
+	
+	\begin{table}[H]
+		\centering
+		\begin{tabularx}{\textwidth}{>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c}
+			\toprule
+			\rowcolor{yellow!20}
+			\textbf{HV (V)} & \textbf{Gain} & \textbf{$T_{rise}$ (ns)} & \textbf{$T_{fall}$ (ns)} & \textbf{$T_{width}$(ns)} & \textbf{P/V} & \textbf{DC (kHz)} \\
+			\midrule
+			1600 &             1.83e+07 &             5.11 &             12.19 &             9.52 &             2.97 &  \dotfill \\
+			1650 &             3.18e+07 &             4.77 &             11.94 &             9.40 &             3.21 &  \dotfill \\
+			1700 &             5.94e+07 &             4.68 &             11.46 &             8.92 &             3.14 &  \dotfill \\
+			1750 &             9.74e+07 &             4.31 &             11.19 &             8.77 &             3.63 &  \dotfill \\
+			1800 &             1.65e+08 &             4.22 &             10.74 &             8.44 &             3.63 &  \dotfill \\
+			1850 &             2.71e+08 &             4.16 &             10.56 &             8.22 &             6.13 &  \dotfill \\
+			
+			\bottomrule
+		\end{tabularx}
+		\caption{Results of measured parameters for each HV setting. At 1600 V, the pulse amplitude was too low to be included by the timing computation algorithm, as lowering the selection threshold further would compromise measurement consistency. Dark count measurements are not available for this OM and will be investigated in future tests.}
+		\label{tab:measurments}
+	\end{table}
+	
+	
+	
+	%	\tableofcontents
+	
+\end{document}

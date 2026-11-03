@@ -1,0 +1,23 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,176,31"/>
+<area shape="rect" id="Node000001" href="$classkm3net_1_1KM3PMTOpticalModel.html" title=" " alt="" coords="239,5,461,31"/>
+<area shape="poly" id="edge4_Node000000_Node000001" title=" " alt="" coords="190,15,238,15,238,21,190,21"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="27,193,154,219"/>
+<area shape="poly" id="edge9_Node000002_Node000001" title=" " alt="" coords="102,180,121,147,148,109,182,71,223,40,247,28,249,33,225,44,186,75,152,112,126,150,107,183"/>
+<area shape="rect" id="Node000003" href="$classkm3net_1_1KM3DetectorMessenger.html" title=" " alt="" coords="232,55,468,80"/>
+<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="110,181,158,134,189,110,223,90,257,78,259,83,225,95,192,115,162,138,114,185"/>
+<area shape="rect" id="Node000005" href="$classkm3net_1_1KM3ExperimentTypeMessenger.html" title=" " alt="" coords="243,105,457,145"/>
+<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="135,186,223,154,265,142,266,147,225,159,137,191"/>
+<area shape="rect" id="Node000006" href="$classkm3net_1_1KM3MaterialMessenger.html" title=" " alt="" coords="233,169,467,195"/>
+<area shape="poly" id="edge8_Node000002_Node000006" title=" " alt="" coords="168,196,232,190,233,196,168,202"/>
+<area shape="rect" id="Node000007" href="$classkm3net_1_1KM3PhysicsListMessenger.html" title=" " alt="" coords="224,219,476,244"/>
+<area shape="poly" id="edge10_Node000002_Node000007" title=" " alt="" coords="168,211,224,216,223,222,168,216"/>
+<area shape="rect" id="Node000008" href="$classkm3net_1_1KM3RunMessenger.html" title=" " alt="" coords="247,268,453,293"/>
+<area shape="poly" id="edge11_Node000002_Node000008" title=" " alt="" coords="135,221,225,253,277,265,276,271,223,258,134,226"/>
+<area shape="rect" id="Node000009" href="$classlactel_1_1BPrimaryGeneratorMessenger.html" title=" " alt="" coords="255,318,445,358"/>
+<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="117,226,165,265,225,302,258,315,256,320,223,307,162,269,114,230"/>
+<area shape="rect" id="Node000010" href="$classtools_1_1BWaveCatcherMessenger.html" title=" " alt="" coords="236,383,464,408"/>
+<area shape="poly" id="edge13_Node000002_Node000010" title=" " alt="" coords="107,229,126,262,153,299,186,337,225,368,253,380,250,385,223,372,182,341,148,303,121,265,102,232"/>
+<area shape="rect" id="Node000004" href="$classlactel_1_1BDetectorMessenger.html" title=" " alt="" coords="524,55,727,80"/>
+<area shape="poly" id="edge6_Node000003_Node000004" title=" " alt="" coords="482,65,524,65,524,70,482,70"/>
+</map>

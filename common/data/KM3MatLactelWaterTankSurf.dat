@@ -1,0 +1,23 @@
+CREATE LactelWaterTankSurf
+
+DENSITY 1.3
+
+COMPONENTS
+G4_C 2
+G4_H 3
+G4_O 1
+COMPONENTS
+
+CREATE
+
+PROPERTY ground
+OPTION constant
+1
+
+PROPERTY unified
+OPTION constant
+1
+
+PROPERTY sigmaalpha
+OPTION constant
+1

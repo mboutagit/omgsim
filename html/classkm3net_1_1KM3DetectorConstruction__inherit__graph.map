@@ -1,0 +1,9 @@
+<map id="km3net::KM3DetectorConstruction" name="km3net::KM3DetectorConstruction">
+<area shape="rect" id="Node000001" title=" " alt="" coords="113,1093,352,2039"/>
+<area shape="rect" id="Node000004" href="$classlactel_1_1BDetectorConstruction.html" title=" " alt="" coords="130,2087,335,2692"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="235,2052,235,2087,230,2087,230,2052"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,493,215,558"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,572,180,1093,174,1094,113,572"/>
+<area shape="rect" id="Node000003" href="$classkm3net_1_1KM3ParametrizedVolume.html" title=" " alt="" coords="239,5,475,1045"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="296,1059,292,1093,286,1093,290,1059"/>
+</map>

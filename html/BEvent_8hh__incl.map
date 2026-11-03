@@ -1,0 +1,15 @@
+<map id="LACTELSim/include/BEvent.hh" name="LACTELSim/include/BEvent.hh">
+<area shape="rect" id="Node000001" title=" " alt="" coords="99,5,317,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="106,79,203,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="201,33,174,69,169,66,197,29"/>
+<area shape="rect" id="Node000003" href="$BHit_8hh.html" title=" " alt="" coords="227,79,298,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="219,29,248,66,243,69,215,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,152,93,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="229,107,98,150,96,145,228,101"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="118,152,255,177"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="252,106,211,144,207,141,249,102"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="280,152,397,177"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="277,102,318,141,314,144,273,106"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="422,152,511,177"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="296,102,422,145,420,150,295,107"/>
+</map>

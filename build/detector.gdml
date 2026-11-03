@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://service-spi.web.cern.ch/service-spi/app/releases/GDML/schema/gdml.xsd">
+
+  <define>
+    <matrix coldim="2" name="REFLECTIVITY0x57fba30ff7a0" values="2e-06 0.03 6e-06 0.03"/>
+    <constant name="groundfrontpainted" value="1"/>
+    <constant name="sigmaalpha" value="1"/>
+    <constant name="unified" value="1"/>
+    <matrix coldim="2" name="ABSLENGTH0x57fba30daec0" values="1.79687e-06 530 1.8233e-06 530 1.85051e-06 530 1.87855e-06 530 1.90745e-06 530 1.93725e-06 530 1.968"/>
+    <matrix coldim="2" name="RINDEX0x57fba30db580" values="2.034e-06 1.48212 2.068e-06 1.48246 2.103e-06 1.48282 2.139e-06 1.48319 2.177e-06 1.48359 2.216e-06 "/>
+    <matrix coldim="2" name="RINDEX0x57fba30c1a50" values="2e-06 1 6e-06 1"/>
+    <constant name="electronSensitive" value="1"/>
+    <matrix coldim="2" name="RINDEX0x57fba30c2a10" values="2e-06 1 6e-06 1"/>
+    <matrix coldim="2" name="ABSLENGTH0x57fba30e5610" values="1.79818e-06 2047.4 1.81131e-06 2018.28 1.82464e-06 1959.48 1.83816e-06 1797.34 1.85189e-06 1488.15 1"/>
+    <matrix coldim="2" name="RINDEX0x57fba30e5400" values="1.69841e-06 1.46745 1.722e-06 1.46764 1.74626e-06 1.46784 1.7712e-06 1.46805 1.79687e-06 1.46827 1.8"/>
+    <matrix coldim="2" name="RINDEX0x57fba30fe840" values="2.034e-06 1.3429 2.068e-06 1.3432 2.103e-06 1.3435 2.139e-06 1.3438 2.177e-06 1.3441 2.216e-06 1.344"/>
+  </define>
+
+  <materials>
+    <isotope N="12" Z="6" name="C120x57fba30787b0">
+      <atom unit="g/mole" value="12"/>
+    </isotope>
+    <isotope N="13" Z="6" name="C130x57fba30775f0">
+      <atom unit="g/mole" value="13.0034"/>
+    </isotope>
+    <element name="C0x57fba2ba8e30">
+      <fraction n="0.9893" ref="C120x57fba30787b0"/>
+      <fraction n="0.0107" ref="C130x57fba30775f0"/>
+    </element>
+    <isotope N="1" Z="1" name="H10x57fba30aa9b0">
+      <atom unit="g/mole" value="1.00782503081372"/>
+    </isotope>
+    <isotope N="2" Z="1" name="H20x57fba30ab360">
+      <atom unit="g/mole" value="2.01410199966617"/>
+    </isotope>
+    <element name="H0x57fba30b05c0">
+      <fraction n="0.999885" ref="H10x57fba30aa9b0"/>
+      <fraction n="0.000115" ref="H20x57fba30ab360"/>
+    </element>
+    <isotope N="35" Z="17" name="Cl350x57fba30b07a0">
+      <atom unit="g/mole" value="34.9689"/>
+    </isotope>
+    <isotope N="37" Z="17" name="Cl370x57fba30b07f0">
+      <atom unit="g/mole" value="36.9659"/>
+    </isotope>
+    <element name="Cl0x57fba30b0860">
+      <fraction n="0.7578" ref="Cl350x57fba30b07a0"/>
+      <fraction n="0.2422" ref="Cl370x57fba30b07f0"/>
+    </element>
+    <material name="AbsorberPVC0x57fba30feb60" state="solid">
+      <property name="REFLECTIVITY" ref="REFLECTIVITY0x57fba30ff7a0"/>
+      <property name="groundfrontpainted" ref="groundfrontpainted"/>
+      <property name="sigmaalpha" ref="sigmaalpha"/>
+      <property name="unified" ref="unified"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="106.238800944005"/>
+      <D unit="g/cm3" value="1.3"/>
+      <fraction n="0.384356672764272" ref="C0x57fba2ba8e30"/>
+      <fraction n="0.0483828062386325" ref="H0x57fba30b05c0"/>
+      <fraction n="0.567260520997095" ref="Cl0x57fba30b0860"/>
+    </material>
+    <isotope N="27" Z="13" name="Al270x57fba30a3430">
+      <atom unit="g/mole" value="26.9815"/>
+    </isotope>
+    <element name="Al0x57fba30a3480">
+      <fraction n="1" ref="Al270x57fba30a3430"/>
+    </element>
+    <isotope N="10" Z="5" name="B100x57fba30a3890">
+      <atom unit="g/mole" value="10.0129"/>
+    </isotope>
+    <isotope N="11" Z="5" name="B110x57fba30a3840">
+      <atom unit="g/mole" value="11.0093"/>
+    </isotope>
+    <element name="B0x57fba30a3e80">
+      <fraction n="0.199" ref="B100x57fba30a3890"/>
+      <fraction n="0.801" ref="B110x57fba30a3840"/>
+    </element>
+    <isotope N="23" Z="11" name="Na230x57fba30a47c0">
+      <atom unit="g/mole" value="22.9898"/>
+    </isotope>
+    <element name="Na0x57fba30a4810">
+      <fraction n="1" ref="Na230x57fba30a47c0"/>
+    </element>
+    <isotope N="16" Z="8" name="O160x57fba3085eb0">
+      <atom unit="g/mole" value="15.9949"/>
+    </isotope>
+    <isotope N="17" Z="8" name="O170x57fba3085f50">
+      <atom unit="g/mole" value="16.9991"/>
+    </isotope>
+    <isotope N="18" Z="8" name="O180x57fba3085fc0">
+      <atom unit="g/mole" value="17.9992"/>
+    </isotope>
+    <element name="O0x57fba2959090">
+      <fraction n="0.99757" ref="O160x57fba3085eb0"/>
+      <fraction n="0.00038" ref="O170x57fba3085f50"/>
+      <fraction n="0.00205" ref="O180x57fba3085fc0"/>
+    </element>
+    <isotope N="28" Z="14" name="Si280x57fba30a5310">
+      <atom unit="g/mole" value="27.9769"/>
+    </isotope>
+    <isotope N="29" Z="14" name="Si290x57fba30a52c0">
+      <atom unit="g/mole" value="28.9765"/>
+    </isotope>
+    <isotope N="30" Z="14" name="Si300x57fba30a5870">
+      <atom unit="g/mole" value="29.9738"/>
+    </isotope>
+    <element name="Si0x57fba30a58f0">
+      <fraction n="0.922296077703922" ref="Si280x57fba30a5310"/>
+      <fraction n="0.0468319531680468" ref="Si290x57fba30a52c0"/>
+      <fraction n="0.0308719691280309" ref="Si300x57fba30a5870"/>
+    </element>
+    <material name="PMTGlass0x57fba30d1fc0" state="solid">
+      <property name="ABSLENGTH" ref="ABSLENGTH0x57fba30daec0"/>
+      <property name="RINDEX" ref="RINDEX0x57fba30db580"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="119.817461864904"/>
+      <D unit="g/cm3" value="2.23"/>
+      <fraction n="0.011" ref="Al0x57fba30a3480"/>
+      <fraction n="0.04" ref="B0x57fba30a3e80"/>
+      <fraction n="0.017" ref="Na0x57fba30a4810"/>
+      <fraction n="0.554" ref="O0x57fba2959090"/>
+      <fraction n="0.378" ref="Si0x57fba30a58f0"/>
+    </material>
+    <material name="PMTVacuum0x57fba30bf090" state="solid">
+      <property name="RINDEX" ref="RINDEX0x57fba30c1a50"/>
+      <property name="electronSensitive" ref="electronSensitive"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="19.2"/>
+      <D unit="g/cm3" value="1.29e-06"/>
+      <fraction n="1" ref="H0x57fba30b05c0"/>
+    </material>
+    <isotope N="14" Z="7" name="N140x57fba3077720">
+      <atom unit="g/mole" value="14.0031"/>
+    </isotope>
+    <isotope N="15" Z="7" name="N150x57fba3077770">
+      <atom unit="g/mole" value="15.0001"/>
+    </isotope>
+    <element name="N0x57fba2b94d70">
+      <fraction n="0.99632" ref="N140x57fba3077720"/>
+      <fraction n="0.00368" ref="N150x57fba3077770"/>
+    </element>
+    <material name="Air0x57fba30c1b60" state="gas">
+      <property name="RINDEX" ref="RINDEX0x57fba30c2a10"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="82"/>
+      <D unit="g/cm3" value="0.001225"/>
+      <fraction n="1" ref="N0x57fba2b94d70"/>
+    </material>
+    <material name="AntaresGlass0x57fba30e1600" state="solid">
+      <property name="ABSLENGTH" ref="ABSLENGTH0x57fba30e5610"/>
+      <property name="RINDEX" ref="RINDEX0x57fba30e5400"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="119.817461864904"/>
+      <D unit="g/cm3" value="2.23"/>
+      <fraction n="0.011" ref="Al0x57fba30a3480"/>
+      <fraction n="0.04" ref="B0x57fba30a3e80"/>
+      <fraction n="0.017" ref="Na0x57fba30a4810"/>
+      <fraction n="0.554" ref="O0x57fba2959090"/>
+      <fraction n="0.378" ref="Si0x57fba30a58f0"/>
+    </material>
+    <isotope N="24" Z="12" name="Mg240x57fba30f93e0">
+      <atom unit="g/mole" value="23.985"/>
+    </isotope>
+    <isotope N="25" Z="12" name="Mg250x57fba30f5d00">
+      <atom unit="g/mole" value="24.9858"/>
+    </isotope>
+    <isotope N="26" Z="12" name="Mg260x57fba30f5d70">
+      <atom unit="g/mole" value="25.9826"/>
+    </isotope>
+    <element name="Mg0x57fba30f5df0">
+      <fraction n="0.7899" ref="Mg240x57fba30f93e0"/>
+      <fraction n="0.1" ref="Mg250x57fba30f5d00"/>
+      <fraction n="0.1101" ref="Mg260x57fba30f5d70"/>
+    </element>
+    <material name="IdealWater0x57fba30fd8c0" state="solid">
+      <property name="RINDEX" ref="RINDEX0x57fba30fe840"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="71.0597058300778"/>
+      <D unit="g/cm3" value="1.039"/>
+      <fraction n="0.0237023702370237" ref="Cl0x57fba30b0860"/>
+      <fraction n="0.107410741074107" ref="H0x57fba30b05c0"/>
+      <fraction n="0.0015001500150015" ref="Mg0x57fba30f5df0"/>
+      <fraction n="0.0132013201320132" ref="Na0x57fba30a4810"/>
+      <fraction n="0.854185418541854" ref="O0x57fba2959090"/>
+    </material>
+    <material name="G4_POLYPROPYLENE0x57fba84335c0" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="56.5"/>
+      <D unit="g/cm3" value="0.9"/>
+      <fraction n="0.856281712255198" ref="C0x57fba2ba8e30"/>
+      <fraction n="0.143718287744802" ref="H0x57fba30b05c0"/>
+    </material>
+    <isotope N="1" Z="1" name="H10x57fbac456790">
+      <atom unit="g/mole" value="1.00782503081372"/>
+    </isotope>
+    <isotope N="2" Z="1" name="H20x57fbac457630">
+      <atom unit="g/mole" value="2.01410199966617"/>
+    </isotope>
+    <element name="H0x57fbac457570">
+      <fraction n="0.999885" ref="H10x57fbac456790"/>
+      <fraction n="0.000115" ref="H20x57fbac457630"/>
+    </element>
+    <material name="CustomVacuum0x57fbaa404050" state="gas">
+      <T unit="K" value="2.73"/>
+      <P unit="pascal" value="3e-18"/>
+      <MEE unit="eV" value="19.2"/>
+      <D unit="g/cm3" value="1e-25"/>
+      <fraction n="1" ref="H0x57fbac457570"/>
+    </material>
+    <isotope N="1" Z="1" name="H10x57fbac442720">
+      <atom unit="g/mole" value="1.00782503081372"/>
+    </isotope>
+    <isotope N="2" Z="1" name="H20x57fbac442770">
+      <atom unit="g/mole" value="2.01410199966617"/>
+    </isotope>
+    <element name="H0x57fbac442660">
+      <fraction n="0.999885" ref="H10x57fbac442720"/>
+      <fraction n="0.000115" ref="H20x57fbac442770"/>
+    </element>
+    <material name="CustomVacuum0x57fbab99ddc0" state="gas">
+      <T unit="K" value="2.73"/>
+      <P unit="pascal" value="3e-18"/>
+      <MEE unit="eV" value="19.2"/>
+      <D unit="g/cm3" value="1e-25"/>
+      <fraction n="1" ref="H0x57fbac442660"/>
+    </material>
+  </materials>
+
+  <solids>
+    <sphere aunit="deg" deltaphi="360" deltatheta="92.851955177356" lunit="mm" name="OM11NoticeableOpticalModuleAbsorberfull0x57fbac4555b0" rmax="200.9" rmin="199.9" startphi="0" starttheta="87.148044822644"/>
+    <opticalsurface finish="4" model="1" name="AbsorberPVC_surface" type="1" value="1"/>
+    <sphere aunit="deg" deltaphi="360" deltatheta="53.5795347336238" lunit="mm" name="REFLEXPMTGlassExt0x57fbac4524c0" rmax="136.7" rmin="0" startphi="0" starttheta="0"/>
+    <ellipsoid ax="126.5" by="126.5" cz="81.0014833819574" lunit="mm" name="REFLEXPhotoEllipseExt0x57fbac452660" zcut1="0" zcut2="40"/>
+    <union name="REFLEXNoticeablePhotoCathodeRegion0x57fbac452700">
+      <first ref="REFLEXPMTGlassExt0x57fbac4524c0"/>
+      <second ref="REFLEXPhotoEllipseExt0x57fbac452660"/>
+      <position name="REFLEXNoticeablePhotoCathodeRegion0x57fbac452700_pos" unit="mm" x="0" y="0" z="41.1596574660095"/>
+    </union>
+    <sphere aunit="deg" deltaphi="360" deltatheta="53.2691495446962" lunit="mm" name="REFLEXPMTGlassInt0x57fbac453100" rmax="135.7" rmin="0" startphi="0" starttheta="0"/>
+    <ellipsoid ax="125.5" by="125.5" cz="80.1574834921073" lunit="mm" name="REFLEXEllipseInt0x57fbac453270" zcut1="-40" zcut2="40"/>
+    <union name="REFLEXInternalPMTStep10x57fbac453400">
+      <first ref="REFLEXPMTGlassInt0x57fbac453100"/>
+      <second ref="REFLEXEllipseInt0x57fbac453270"/>
+      <position name="REFLEXInternalPMTStep10x57fbac453400_pos" unit="mm" x="0" y="0" z="41.1596574660095"/>
+    </union>
+    <cone aunit="deg" deltaphi="360" lunit="mm" name="REFLEXConeiNT0x57fbabf360e0" rmax1="41.25" rmax2="108.757272727273" rmin1="0" rmin2="0" startphi="0" z="40"/>
+    <union name="REFLEXInternalPMTStep20x57fbac4535d0">
+      <first ref="REFLEXInternalPMTStep10x57fbac453400"/>
+      <second ref="REFLEXConeiNT0x57fbabf360e0"/>
+      <position name="REFLEXInternalPMTStep20x57fbac4535d0_pos" unit="mm" x="0" y="0" z="-18.8403425339905"/>
+    </union>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="REFLEXTubeiNT0x57fbac453310" rmax="41.25" rmin="0" startphi="0" z="67.4596574660096"/>
+    <union name="REFLEXInternalPMT0x57fbac4537a0">
+      <first ref="REFLEXInternalPMTStep20x57fbac4535d0"/>
+      <second ref="REFLEXTubeiNT0x57fbac453310"/>
+      <position name="REFLEXInternalPMT0x57fbac4537a0_pos" unit="mm" x="0" y="0" z="-72.5701712669952"/>
+    </union>
+    <subtraction name="REFLEXNoticeablePhotoCathode0x57fbac453970">
+      <first ref="REFLEXNoticeablePhotoCathodeRegion0x57fbac452700"/>
+      <second ref="REFLEXInternalPMT0x57fbac4537a0"/>
+    </subtraction>
+    <opticalsurface finish="0" model="0" name="REFLEXPhotocathode_opsurf" type="1" value="1"/>
+    <ellipsoid ax="126.5" by="126.5" cz="81.0014833819574" lunit="mm" name="REFLEXGlassEllipseExt0x57fbac452930" zcut1="-40" zcut2="0"/>
+    <cone aunit="deg" deltaphi="360" lunit="mm" name="REFLEXConeExt0x57fbabf35fe0" rmax1="42.25" rmax2="110" rmin1="0" rmin2="0" startphi="0" z="40"/>
+    <union name="REFLEXFullGlassStep10x57fbac452ac0">
+      <first ref="REFLEXGlassEllipseExt0x57fbac452930"/>
+      <second ref="REFLEXConeExt0x57fbabf35fe0"/>
+      <position name="REFLEXFullGlassStep10x57fbac452ac0_pos" unit="mm" x="0" y="0" z="-60"/>
+    </union>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="REFLEXTubeExt0x57fbac4529d0" rmax="42.25" rmin="0" startphi="0" z="69.4596574660096"/>
+    <union name="REFLEXFullGlass0x57fbac452c90">
+      <first ref="REFLEXFullGlassStep10x57fbac452ac0"/>
+      <second ref="REFLEXTubeExt0x57fbac4529d0"/>
+      <position name="REFLEXFullGlass0x57fbac452c90_pos" unit="mm" x="0" y="0" z="-114.729828733005"/>
+    </union>
+    <subtraction name="REFLEXGlass0x57fbac453b70">
+      <first ref="REFLEXFullGlass0x57fbac452c90"/>
+      <second ref="REFLEXInternalPMT0x57fbac4537a0"/>
+      <position name="REFLEXGlass0x57fbac453b70_pos" unit="mm" x="0" y="0" z="-41.1596574660095"/>
+    </subtraction>
+    <opticalsurface finish="3" model="0" name="PMTInternalSurface_surface" type="0" value="0.95"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="REFLEXDinods0x57fbac453d40" rmax="32.5" rmin="31.5" startphi="0" z="70"/>
+    <opticalsurface finish="4" model="0" name="DinodsSurface_surface" type="1" value="0.7"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="REFLEXCapDinods0x57fbac453e30" rmax="31.5" rmin="0" startphi="0" z="1"/>
+    <opticalsurface finish="4" model="0" name="CapDinodsSurface_surface" type="1" value="0.8"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="REFLEXGridDinods0x57fbac453f20" rmax="17.67465" rmin="0" startphi="0" z="0.2"/>
+    <opticalsurface finish="4" model="0" name="GridDinodsSurface_surface" type="1" value="0.3"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="REFLEXBackCapDinods0x57fbac454010" rmax="32.5" rmin="0" startphi="0" z="1"/>
+    <union name="REFLEXPMTContainer0x57fbac452e60">
+      <first ref="REFLEXNoticeablePhotoCathodeRegion0x57fbac452700"/>
+      <second ref="REFLEXFullGlass0x57fbac452c90"/>
+      <position name="REFLEXPMTContainer0x57fbac452e60_pos" unit="mm" x="0" y="0" z="41.1596574660095"/>
+    </union>
+    <sphere aunit="deg" deltaphi="360" deltatheta="180" lunit="mm" name="OM11OM0x57fbac455440" rmax="200.9" rmin="0" startphi="0" starttheta="0"/>
+    <sphere aunit="deg" deltaphi="360" deltatheta="180" lunit="mm" name="OM11NoticeableOpticalBentoGlass0x57fbac455270" rmax="215.9" rmin="0" startphi="0" starttheta="0"/>
+    <box lunit="mm" name="IdealWaterVolume10x57fbac451320" x="2000" y="2000" z="2000"/>
+    <box lunit="mm" name="OuterCell0x57fbac441a10" x="2010" y="2010" z="2010"/>
+    <box lunit="mm" name="InnerCell0x57fbac441b30" x="2000" y="2000" z="2000"/>
+    <subtraction name="LactelWaterTank10x57fbac450de0">
+      <first ref="OuterCell0x57fbac441a10"/>
+      <second ref="InnerCell0x57fbac441b30"/>
+    </subtraction>
+    <box lunit="mm" name="IdealWaterVolume20x57fbac451e20" x="2000" y="2000" z="2000"/>
+    <subtraction name="LactelWaterTank20x57fbac451820">
+      <first ref="OuterCell0x57fbac441a10"/>
+      <second ref="InnerCell0x57fbac441b30"/>
+    </subtraction>
+    <box lunit="mm" name="LacWater0x57fbac442e20" x="8928.20369653036" y="8928.20369653036" z="5000"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="disk0x57fbac4567e0" rmax="5000" rmin="0" startphi="0" z="2"/>
+    <box lunit="mm" name="world0x57fbac442b10" x="10100" y="10100" z="10100"/>
+  </solids>
+
+  <structure>
+    <volume name="OM11NoticeableOpticalModuleAbsorber0x57fbac455ea0">
+      <materialref ref="AbsorberPVC0x57fba30feb60"/>
+      <solidref ref="OM11NoticeableOpticalModuleAbsorberfull0x57fbac4555b0"/>
+    </volume>
+    <volume name="REFLEXNoticeablePhotoCathode0x57fbac454100">
+      <materialref ref="PMTGlass0x57fba30d1fc0"/>
+      <solidref ref="REFLEXNoticeablePhotoCathode0x57fbac453970"/>
+    </volume>
+    <volume name="REFLEXPMTGlass0x57fbac4541a0">
+      <materialref ref="PMTGlass0x57fba30d1fc0"/>
+      <solidref ref="REFLEXGlass0x57fbac453b70"/>
+    </volume>
+    <volume name="REFLEXDinods0x57fbac454310">
+      <materialref ref="AbsorberPVC0x57fba30feb60"/>
+      <solidref ref="REFLEXDinods0x57fbac453d40"/>
+    </volume>
+    <volume name="REFLEXCapDinods0x57fbac454420">
+      <materialref ref="AbsorberPVC0x57fba30feb60"/>
+      <solidref ref="REFLEXCapDinods0x57fbac453e30"/>
+    </volume>
+    <volume name="REFLEXGridDinods0x57fbac4544c0">
+      <materialref ref="AbsorberPVC0x57fba30feb60"/>
+      <solidref ref="REFLEXGridDinods0x57fbac453f20"/>
+    </volume>
+    <volume name="REFLEXBackCapDinods0x57fbac454590">
+      <materialref ref="AbsorberPVC0x57fba30feb60"/>
+      <solidref ref="REFLEXBackCapDinods0x57fbac454010"/>
+    </volume>
+    <volume name="REFLEXVaccumOfPmt0x57fbac454240">
+      <materialref ref="PMTVacuum0x57fba30bf090"/>
+      <solidref ref="REFLEXInternalPMT0x57fbac4537a0"/>
+      <physvol name="REFLEXDinods0x57fbac454f40">
+        <volumeref ref="REFLEXDinods0x57fbac454310"/>
+        <position name="REFLEXDinods0x57fbac454f40_pos" unit="mm" x="0" y="0" z="-45"/>
+      </physvol>
+      <physvol name="REFLEXCapDinods0x57fbac454f90">
+        <volumeref ref="REFLEXCapDinods0x57fbac454420"/>
+        <position name="REFLEXCapDinods0x57fbac454f90_pos" unit="mm" x="0" y="0" z="-9.5"/>
+      </physvol>
+      <physvol name="REFLEXGridDinods0x57fbac454fe0">
+        <volumeref ref="REFLEXGridDinods0x57fbac4544c0"/>
+        <position name="REFLEXGridDinods0x57fbac454fe0_pos" unit="mm" x="0" y="0" z="-8.9"/>
+      </physvol>
+      <physvol name="REFLEXBackCapDinods0x57fbac455060">
+        <volumeref ref="REFLEXBackCapDinods0x57fbac454590"/>
+        <position name="REFLEXBackCapDinods0x57fbac455060_pos" unit="mm" x="0" y="0" z="-80.5"/>
+      </physvol>
+    </volume>
+    <volume name="REFLEXNoticeablePMTContainer0x57fbac453030">
+      <materialref ref="Air0x57fba30c1b60"/>
+      <solidref ref="REFLEXPMTContainer0x57fbac452e60"/>
+      <physvol name="REFLEXNoticeablePhotoCathode0x57fbac454e50">
+        <volumeref ref="REFLEXNoticeablePhotoCathode0x57fbac454100"/>
+      </physvol>
+      <physvol name="REFLEXGlass0x57fbac454ea0">
+        <volumeref ref="REFLEXPMTGlass0x57fbac4541a0"/>
+        <position name="REFLEXGlass0x57fbac454ea0_pos" unit="mm" x="0" y="0" z="41.1596574660095"/>
+      </physvol>
+      <physvol name="REFLEXVaccumInPmt0x57fbac454ef0">
+        <volumeref ref="REFLEXVaccumOfPmt0x57fbac454240"/>
+      </physvol>
+    </volume>
+    <volume name="OM11OM0x57fbac455e00">
+      <materialref ref="Air0x57fba30c1b60"/>
+      <solidref ref="OM11OM0x57fbac455440"/>
+      <physvol name="OM11NoticeableOpticalModuleAbsorber0x57fbac456010">
+        <volumeref ref="OM11NoticeableOpticalModuleAbsorber0x57fbac455ea0"/>
+      </physvol>
+      <physvol name="OM11NoticeablePMTContainer0x57fbac4560f0">
+        <volumeref ref="REFLEXNoticeablePMTContainer0x57fbac453030"/>
+        <position name="OM11NoticeablePMTContainer0x57fbac4560f0_pos" unit="mm" x="0" y="0" z="59.2"/>
+      </physvol>
+    </volume>
+    <volume name="OM11NoticeableOpticalBentoGlass0x57fbac455d00">
+      <materialref ref="AntaresGlass0x57fba30e1600"/>
+      <solidref ref="OM11NoticeableOpticalBentoGlass0x57fbac455270"/>
+      <physvol name="OM11OMAir0x57fbac455720">
+        <volumeref ref="OM11OM0x57fbac455e00"/>
+      </physvol>
+    </volume>
+    <volume name="IdealWaterVolume10x57fbac4513a0">
+      <materialref ref="IdealWater0x57fba30fd8c0"/>
+      <solidref ref="IdealWaterVolume10x57fbac451320"/>
+      <physvol name="OMS03210x57fbac456490">
+        <volumeref ref="OM11NoticeableOpticalBentoGlass0x57fbac455d00"/>
+      </physvol>
+    </volume>
+    <volume name="LactelWaterTank10x57fbac450f50">
+      <materialref ref="G4_POLYPROPYLENE0x57fba84335c0"/>
+      <solidref ref="LactelWaterTank10x57fbac450de0"/>
+      <physvol name="IdealWaterVolume10x57fbac4514f0">
+        <volumeref ref="IdealWaterVolume10x57fbac4513a0"/>
+      </physvol>
+    </volume>
+    <volume name="IdealWaterVolume20x57fbac451ea0">
+      <materialref ref="IdealWater0x57fba30fd8c0"/>
+      <solidref ref="IdealWaterVolume20x57fbac451e20"/>
+      <physvol name="OMS03040x57fbac456700">
+        <volumeref ref="OM11NoticeableOpticalBentoGlass0x57fbac455d00"/>
+      </physvol>
+    </volume>
+    <volume name="LactelWaterTank20x57fbac4519f0">
+      <materialref ref="G4_POLYPROPYLENE0x57fba84335c0"/>
+      <solidref ref="LactelWaterTank20x57fbac451820"/>
+      <physvol name="IdealWaterVolume20x57fbac451ff0">
+        <volumeref ref="IdealWaterVolume20x57fbac451ea0"/>
+      </physvol>
+    </volume>
+    <volume name="LacWater0x57fbac442ea0">
+      <materialref ref="IdealWater0x57fba30fd8c0"/>
+      <solidref ref="LacWater0x57fbac442e20"/>
+      <physvol name="LactelWaterTank10x57fbac451040">
+        <volumeref ref="LactelWaterTank10x57fbac450f50"/>
+        <position name="LactelWaterTank10x57fbac451040_pos" unit="mm" x="0" y="0" z="1000"/>
+      </physvol>
+      <physvol name="LactelWaterTank20x57fbac451b40">
+        <volumeref ref="LactelWaterTank20x57fbac4519f0"/>
+        <position name="LactelWaterTank20x57fbac451b40_pos" unit="mm" x="0" y="0" z="-1500"/>
+      </physvol>
+    </volume>
+    <volume name="genLogic0x57fbac4568d0">
+      <materialref ref="CustomVacuum0x57fbaa404050"/>
+      <solidref ref="disk0x57fbac4567e0"/>
+    </volume>
+    <volume name="World0x57fbac440380">
+      <materialref ref="CustomVacuum0x57fbab99ddc0"/>
+      <solidref ref="world0x57fbac442b10"/>
+      <physvol name="LacWater0x57fbac442fc0">
+        <volumeref ref="LacWater0x57fbac442ea0"/>
+        <position name="LacWater0x57fbac442fc0_pos" unit="mm" x="0" y="0" z="-2500"/>
+      </physvol>
+      <physvol name="genPhysic0x57fbac457af0">
+        <volumeref ref="genLogic0x57fbac4568d0"/>
+      </physvol>
+    </volume>
+    <skinsurface name="AbsorberSurface" surfaceproperty="AbsorberPVC_surface">
+      <volumeref ref="OM11NoticeableOpticalModuleAbsorber0x57fbac455ea0"/>
+    </skinsurface>
+    <skinsurface name="REFLEXMirrorDinods" surfaceproperty="DinodsSurface_surface">
+      <volumeref ref="REFLEXDinods0x57fbac454310"/>
+    </skinsurface>
+    <skinsurface name="REFLEXMirrorCapDinods" surfaceproperty="CapDinodsSurface_surface">
+      <volumeref ref="REFLEXCapDinods0x57fbac454420"/>
+    </skinsurface>
+    <skinsurface name="REFLEXMirrorGridDinods" surfaceproperty="GridDinodsSurface_surface">
+      <volumeref ref="REFLEXGridDinods0x57fbac4544c0"/>
+    </skinsurface>
+    <skinsurface name="REFLEXMirrorBackCapDinods" surfaceproperty="GridDinodsSurface_surface">
+      <volumeref ref="REFLEXBackCapDinods0x57fbac454590"/>
+    </skinsurface>
+    <bordersurface name="REFLEXphotocathodeGlass" surfaceproperty="REFLEXPhotocathode_opsurf">
+      <physvolref ref="REFLEXNoticeablePhotoCathode0x57fbac454e50"/>
+      <physvolref ref="REFLEXVaccumInPmt0x57fbac454ef0"/>
+    </bordersurface>
+    <bordersurface name="REFLEXMirrorGlass" surfaceproperty="PMTInternalSurface_surface">
+      <physvolref ref="REFLEXGlass0x57fbac454ea0"/>
+      <physvolref ref="REFLEXVaccumInPmt0x57fbac454ef0"/>
+    </bordersurface>
+    <bordersurface name="REFLEXphotocathodeGlass" surfaceproperty="REFLEXPhotocathode_opsurf">
+      <physvolref ref="REFLEXVaccumInPmt0x57fbac454ef0"/>
+      <physvolref ref="REFLEXNoticeablePhotoCathode0x57fbac454e50"/>
+    </bordersurface>
+  </structure>
+
+  <setup name="Default" version="1.0">
+    <world ref="World0x57fbac440380"/>
+  </setup>
+
+</gdml>

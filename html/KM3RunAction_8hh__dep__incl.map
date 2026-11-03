@@ -1,0 +1,16 @@
+<map id="common/include/KM3RunAction.hh" name="common/include/KM3RunAction.hh">
+<area shape="rect" id="Node000001" title=" " alt="" coords="358,5,607,31"/>
+<area shape="rect" id="Node000002" href="$BRunAction_8hh.html" title=" " alt="" coords="130,86,377,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="437,38,288,89,286,83,435,33"/>
+<area shape="rect" id="Node000004" href="$KM3ExperimentTypeMessenger_8cc.html" title=" " alt="" coords="245,167,456,207"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="467,43,368,168,364,165,463,40"/>
+<area shape="rect" id="Node000005" href="$KM3ActionInitialization_8hh.html" title=" " alt="" coords="451,79,655,119"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="504,39,538,77,534,80,500,43"/>
+<area shape="rect" id="Node000007" href="$KM3RunAction_8cc.html" title=" " alt="" coords="680,86,899,111"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="541,31,745,83,744,89,540,37"/>
+<area shape="rect" id="Node000003" href="$BRunAction_8cc.html" title=" " alt="" coords="5,174,221,199"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="224,121,134,176,131,171,221,116"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="278,118,331,165,327,169,275,122"/>
+<area shape="rect" id="Node000006" href="$KM3ActionInitialization_8cc.html" title=" " alt="" coords="480,174,755,199"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="578,128,611,172,606,175,574,131"/>
+</map>

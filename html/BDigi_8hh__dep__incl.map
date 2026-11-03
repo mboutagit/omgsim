@@ -1,0 +1,11 @@
+<map id="LACTELSim/include/BDigi.hh" name="LACTELSim/include/BDigi.hh">
+<area shape="rect" id="Node000001" title=" " alt="" coords="217,5,423,31"/>
+<area shape="rect" id="Node000002" href="$BDigitizerModule_8hh.html" title=" " alt="" coords="103,79,318,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="295,41,239,81,235,76,291,36"/>
+<area shape="rect" id="Node000005" href="$BDigi_8cc.html" title=" " alt="" coords="343,86,519,111"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="349,37,416,84,413,88,346,41"/>
+<area shape="rect" id="Node000003" href="$BDigitizerModule_8cc.html" title=" " alt="" coords="5,167,192,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="176,129,125,169,122,164,173,125"/>
+<area shape="rect" id="Node000004" href="$BRunAction_8cc.html" title=" " alt="" coords="216,174,432,199"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="248,125,310,171,307,176,245,129"/>
+</map>

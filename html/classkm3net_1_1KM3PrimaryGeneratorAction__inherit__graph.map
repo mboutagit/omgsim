@@ -1,0 +1,9 @@
+<map id="km3net::KM3PrimaryGeneratorAction" name="km3net::KM3PrimaryGeneratorAction">
+<area shape="rect" id="Node000001" title=" " alt="" coords="121,119,357,459"/>
+<area shape="rect" id="Node000003" href="$classkm3net_1_1ParametrizedGenerator.html" title=" " alt="" coords="5,694,228,1239"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="209,473,169,694,163,693,204,472"/>
+<area shape="rect" id="Node000004" href="$classlactel_1_1BPrimaryGeneratorAction.html" title=" " alt="" coords="253,507,474,1427"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="275,472,282,506,276,507,270,473"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="125,5,353,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,84,242,118,237,118,237,84"/>
+</map>

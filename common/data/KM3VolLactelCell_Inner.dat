@@ -1,0 +1,31 @@
+InnerCell1:
+{
+    Name = "InnerCell1";
+
+    Prefix = "InnerCell";
+
+    Material = "IdealWater";
+
+    VolumeKind = "Box";
+    X = 1000; // 2X2X2 m 
+    Y = 1000;
+    Z = 1000;
+
+    CheckOverlaps = false;
+}
+
+InnerCell2:
+{
+    Name = "InnerCell2";
+
+    Prefix = "InnerCell";
+
+    Material = "IdealWater";
+
+    VolumeKind = "Box";
+    X = 1000; // 2X2X2 m 
+    Y = 1000;
+    Z = 1000;
+
+    CheckOverlaps = false;
+}

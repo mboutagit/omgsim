@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${default}",
+                "${workspaceFolder}/lactel-dataformat/**/include",
+                "${workspaceFolder}/LACTELSim/**",
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/**/include",
+                "/home/bouta-mohammed/root/root_install/**",
+                "/home/bouta-mohammed/geant4/geant4.10.01.p03/geant4_install/include/**",
+                "/usr/include/vtk-9.1/**",
+                "/usr/include/hdf5/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}

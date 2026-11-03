@@ -1,0 +1,13 @@
+CPPM_Black_box:
+{
+    Name = "CPPMBlackBox";
+    Prefix = "BB";
+    Material = "G4_AIR";
+
+    VolumeKind = "Box";
+    X = 500; // 1X1X1 m 
+    Y = 500;
+    Z = 500;
+
+    CheckOverlaps = false;
+}

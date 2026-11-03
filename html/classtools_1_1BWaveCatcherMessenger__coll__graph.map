@@ -1,0 +1,9 @@
+<map id="tools::BWaveCatcherMessenger" name="tools::BWaveCatcherMessenger">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,120,225,265"/>
+<area shape="rect" id="Node000003" href="$classDAQ_1_1DAQManager.html" title="DAQ Manager class to manage the DetectedEvent and the Digitizers." alt="" coords="34,328,197,673"/>
+<area shape="poly" id="edge4_Node000003_Node000001" title=" " alt="" coords="22,267,16,285,17,304,30,346,25,347,11,304,11,284,17,265"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="56,5,175,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,84,118,120,113,120,113,84"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="188,328,182,290,179,281,184,279,187,289,193,327"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="199,463,216,476,223,501,221,517,213,529,209,526,216,515,218,501,212,479,195,467"/>
+</map>

@@ -1,0 +1,152 @@
+OuterCell:
+{
+    Name = "OuterCell";
+
+    Prefix = "OuterCell";
+
+    Material = "G4_POLYPROPYLENE";
+
+    VolumeKind = "Box";
+    X = 1005; // 2X2X2 m 
+    Y = 1005;
+    Z = 1005;
+
+    CheckOverlaps = false;
+    SkinMaterial="LactelWaterTankOldSurf";
+}
+
+OuterCell1:
+{
+    Name = "OuterCell1";
+
+    Prefix = "OuterCell1";
+
+    Material = "G4_POLYPROPYLENE";
+
+    VolumeKind = "Box";
+    X = 1005; // 2X2X2 m 
+    Y = 1005;
+    Z = 1005;
+
+    CheckOverlaps = false;
+    SkinMaterial="LactelWaterTankOldSurf";
+}
+
+InnerCell:
+{
+    Name = "InnerCell";
+
+    Prefix = "InnerCell";
+
+    Material = "G4_AIR";
+
+    VolumeKind = "Box";
+    X = 1000; // 2X2X2 m 
+    Y = 1000;
+    Z = 1000;
+
+    CheckOverlaps = false;
+}
+
+LacWater:
+{
+    Name = "LacWater";
+
+    Prefix = "LacWater";
+
+    Material = "IdealWater";
+
+    VolumeKind = "Box";
+    X = 10000; // 2X2X2 m 
+    Y = 10000;
+    Z = 5000;
+
+    CheckOverlaps = false;
+}
+
+IdealWaterVolumeOld1:
+{
+    Name = "IdealWaterVolumeOld1";
+
+    Prefix = "IWV1";
+
+    Material = "IdealWater";
+
+    VolumeKind = "Box";
+    X = 1000; // 2X2X2 m 
+    Y = 1000;
+    Z = 1000;
+
+    CheckOverlaps = false;
+}
+
+IdealWaterVolumeOld2:
+{
+    Name = "IdealWaterVolumeOld2";
+
+    Prefix = "IWV2";
+
+    Material = "IdealWater";
+
+    VolumeKind = "Box";
+    X = 1000; // 2X2X2 m 
+    Y = 1000;
+    Z = 1000;
+
+    CheckOverlaps = false;
+}
+
+LactelWaterTankOld1:
+{
+    Name= "LactelWaterTankOld1";
+    Prefix = "LWT1"; # Lactel Weter Tank
+    Material = "G4_POLYPROPYLENE";
+
+    VolumeKind = "Subtraction";
+    X = 0;
+    Y = 0;
+    Z = 0; #211;
+    RotTheta = 0;
+    RotPhi = 0;
+    RefVolume = "OuterCell";
+    OperandVolume = "InnerCell";
+    
+    CheckOverlaps = false;
+    SkinMaterial="LactelWaterTankOldSurf";
+}
+
+LactelWaterTankOld2:
+{
+    Name= "LactelWaterTankOld2";
+    Prefix = "LWT2"; # Lactel Weter Tank
+    Material = "G4_POLYPROPYLENE";
+
+    VolumeKind = "Subtraction";
+    X = 0;
+    Y = 0;
+    Z = 0; #211;
+    RotTheta = 0;
+    RotPhi = 0;
+    RefVolume = "OuterCell";
+    OperandVolume = "InnerCell";
+
+    CheckOverlaps = false;
+    SkinMaterial="LactelWaterTankOldSurf";
+}
+
+
+sampleWaterTank:
+{
+    Name= "sampleWaterTank";
+    Prefix = "SWT"; # Lactel Weter Tank
+    Material = "IdealWater";
+
+    VolumeKind = "Box";
+    X = 0;
+    Y = 0;
+    Z = 0; #211;
+    RotTheta = 0;
+    RotPhi = 0;
+    CheckOverlaps = false;
+    SkinMaterial="AbsorberSurf";
+}

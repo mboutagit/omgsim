@@ -1,0 +1,25 @@
+{
+    "name":"LACTEL",
+    "detector_id":"LAC001",
+    "DetectorTypeName":"LACTEL_LAC001",
+    "modules": {
+        "M1":{
+            "volumeKind": "Box",
+            "EC1":{
+                "position":{
+                    "x":0,
+                    "y":0,
+                    "z":0
+                },
+                "OM1":{
+                    "id": "OMS0321",
+                    "position":[0, 0, 0]
+                }
+                },
+            "EC2"{
+                "OM2":"OMS0323"
+                }
+            },
+    }
+
+}

@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$structkm3net_1_1KM3ParametrizedVolume_1_1VolumeParameters.html" title=" " alt="" coords="5,101,249,141"/>
+<area shape="rect" id="Node000001" href="$structkm3net_1_1KM3DetectorConstruction_1_1PositionParameters.html" title=" " alt="" coords="297,5,544,45"/>
+<area shape="poly" id="edge43_Node000000_Node000001" title=" " alt="" coords="189,94,297,55,337,43,338,48,298,60,191,99"/>
+<area shape="rect" id="Node000002" href="$structkm3net_1_1KM3OpticalModuleMgr_1_1OpticalModuleParameters.html" title=" " alt="" coords="309,69,532,109"/>
+<area shape="poly" id="edge44_Node000000_Node000002" title=" " alt="" coords="263,104,309,99,309,104,263,109"/>
+<area shape="rect" id="Node000003" href="$structkm3net_1_1KM3PassiveVolumeMgr_1_1PassiveVolumeParameters.html" title="Contains the Volume parameter, managed by KM3PassiveVolumeMgr and configured in common/data/KM3Vol*...." alt="" coords="307,133,534,173"/>
+<area shape="poly" id="edge45_Node000000_Node000003" title=" " alt="" coords="263,133,307,138,307,144,263,139"/>
+<area shape="rect" id="Node000004" href="$structkm3net_1_1KM3PhotoTubeMgr_1_1PhotoTubeParameters.html" title=" " alt="" coords="320,197,521,237"/>
+<area shape="poly" id="edge46_Node000000_Node000004" title=" " alt="" coords="191,144,298,183,338,195,337,200,297,188,189,149"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="lactel::BPrimaryGeneratorMessenger" name="lactel::BPrimaryGeneratorMessenger">
+<area shape="rect" id="Node000001" title=" " alt="" coords="266,180,511,400"/>
+<area shape="rect" id="Node000003" href="$classlactel_1_1BPrimaryGeneratorAction.html" title=" " alt="" coords="162,523,383,1403"/>
+<area shape="poly" id="edge6_Node000003_Node000001" title=" " alt="" coords="309,402,287,442,271,485,265,507,260,506,266,483,282,440,304,399"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="329,5,448,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="391,84,391,179,386,179,386,84"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="353,522,357,498,369,416,375,416,362,499,358,523"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="386,884,396,897,403,914,410,963,406,1001,396,1028,391,1026,401,999,405,963,398,916,391,899,382,887"/>
+<area shape="rect" id="Node000004" href="$classkm3net_1_1KM3PrimaryGeneratorAction.html" title=" " alt="" coords="5,120,241,460"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="167,473,177,522,172,523,161,474"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="9,5,237,71"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="126,84,126,120,121,120,121,84"/>
+</map>

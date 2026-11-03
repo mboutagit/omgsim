@@ -1,0 +1,17 @@
+{
+   "define": {
+       "config"   : "scripts/lactel.mac",
+       "nJ"       : 20,
+       "nEv"      : 100000/nJ
+   },
+   "rules": [
+       {
+           "command" : format("./OMGsim -fa %s -r %d", config, A),
+           "outputs" : [ format("run_%d.root", A) ],
+           "inputs"  : []
+       } for A in range(nJ)
+   ]
+}
+
+# makeflow --jx -j 20 makeflow.jx
+# jx2json --pretty makeflow.jx
