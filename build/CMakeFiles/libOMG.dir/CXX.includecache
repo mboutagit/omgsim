@@ -4861,6 +4861,8 @@ dbRoutines.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/dbRoutines.hh
 BLogger.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/BLogger.hh
+TString.h
+/home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/TString.h
 G4ThreeVector.hh
 /home/bouta-mohammed/work/cppm/lactel/trunk/lactel-dataformat/online/include/G4ThreeVector.hh
 G4SystemOfUnits.hh
